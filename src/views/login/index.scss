@@ -1,0 +1,69 @@
+.login-container {
+  height: 100%;
+  background-image: url("@/assets/images/login_bg.svg");
+  background-color: #eeeeee;
+  background-size: 100% 100%;
+  background-size: cover;
+  background-position: 50%;
+  min-width: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .login-box {
+    width: 96%;
+    height: 94%;
+    background-color: hsla(0, 0%, 100%, 0.85);
+    border-radius: 10px;
+    padding: 0 8% 0 50px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .login-left {
+      width: 900px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .login-form {
+      width: 400px;
+      background-color: #fff;
+      padding: 50px 40px 45px 40px;
+      border-radius: 10px;
+      -webkit-box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
+      box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
+      .el-form-item {
+        margin-bottom: 35px;
+      }
+      .login-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 45px;
+        .login-icon {
+          width: 60px;
+          height: 52px;
+        }
+        .logo-text {
+          font-weight: bold;
+          font-size: 42px;
+          padding-left: 25px;
+          white-space: nowrap;
+          color: #181818;
+        }
+      }
+      .login-btns {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        white-space: nowrap;
+        .el-button {
+          width: 180px;
+          margin: 0 20px;
+        }
+      }
+    }
+  }
+}
