@@ -17,18 +17,18 @@ const routes: RouteRecordRaw[] = [
       key: "login"
     }
   },
-  // {
-  //   path: "/layout",
-  //   name: "layout",
-  //   component: () => import(/* webpackChunkName: "layout" */ "@/layout/index.vue"),
-  //   meta: {
-  //     requiresAuth: true,
-  //     title: "layout页",
-  //     key: "layout"
-  //   },
-  //   redirect: { name: "home" },
-  //   children: [...homeRouter]
-  // },
+  {
+    path: "/layout",
+    name: "layout",
+    component: () => import(/* webpackChunkName: "layout" */ "@/layout/index.vue"),
+    meta: {
+      requiresAuth: true,
+      title: "layout页",
+      key: "layout"
+    },
+    redirect: { name: "home" },
+    children: [...homeRouter]
+  },
   ...errorRouter,
   {
     // 找不到路由重定向到404页面

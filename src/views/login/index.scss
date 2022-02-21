@@ -28,14 +28,10 @@
     }
     .login-form {
       width: 400px;
-      background-color: #fff;
       padding: 50px 40px 45px 40px;
       border-radius: 10px;
       -webkit-box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
       box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
-      .el-form-item {
-        margin-bottom: 35px;
-      }
       .login-logo {
         display: flex;
         align-items: center;
@@ -51,17 +47,6 @@
           padding-left: 25px;
           white-space: nowrap;
           color: #181818;
-        }
-      }
-      .login-btns {
-        margin-top: 40px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        white-space: nowrap;
-        .el-button {
-          width: 180px;
-          margin: 0 20px;
         }
       }
     }

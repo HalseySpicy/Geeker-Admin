@@ -9,8 +9,14 @@
           <img class="login-icon" src="@/assets/images/logo.svg" alt="" />
           <p class="logo-text">Geeker-Admin</p>
         </div>
-        <LoginForm ref="loginRef" @clickParent="clickParent" :data="loginForm"></LoginForm>
-        <el-button type="primary" @click="helloClick">登录</el-button>
+        <LoginForm
+          ref="loginRef"
+          @submitParent="submitParent"
+          :age="'20'"
+          :address="['天府三街', '天府四街']"
+          :obj="obj"
+        ></LoginForm>
+        <!-- <el-button @click="consoleRef">打印子组件数据</el-button> -->
       </div>
     </div>
   </div>
@@ -18,35 +24,31 @@
 
 <script setup lang="ts">
 import LoginForm from "./components/LoginForm.vue";
-import { ref, reactive, Ref, toRefs } from "vue";
-type LoginFormExpose = {
-  count: number;
-  consoleNumber: () => void;
-};
-const loginRef = ref<LoginFormExpose | null>(null);
+import { LoginFrom, LoginFormExpose } from "./types/index";
 
-const helloClick = () => {
-  console.log(loginRef.value?.count);
-  loginRef.value!.consoleNumber();
-};
-interface LoginFrom {
-  username: string;
-  password: string;
-}
-const loginForm = reactive<LoginFrom[]>([
-  {
-    username: "111",
-    password: ""
-  }
-]);
+import { ref, reactive, Ref, toRefs } from "vue";
+
+// login
+const submitParent = (LoginFrom: LoginFrom) => {};
+
+// 使用子组件数据
+const loginRef = ref<LoginFormExpose | null>(null);
+// const consoleRef = () => {
+//   console.log(loginRef.value?.count);
+//   loginRef.value?.consoleNumber();
+// };
+
+// 定义数据类型两种方法
 const item: Ref<string> = ref("111");
-const item1 = ref<number>(11);
+const item1 = ref<number>(111);
 console.log(item.value, item1.value);
 
-const clickParent = (number: number) => {
-  console.log(number);
-  console.log(2121212);
-};
+const obj = reactive<LoginFrom>({
+  username: "aa",
+  password: "dd"
+});
+// 使用toRefs解构数据（在template中直接用）
+// const { username, password } = { ...toRefs(obj) };
 </script>
 
 <style scoped lang="scss">

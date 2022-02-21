@@ -12,6 +12,7 @@ import { reactive } from "vue";
 const config = reactive({
   autoInsertSpace: false
 });
+console.log(import.meta.env.VITE_BASE_API);
 </script>
 
 <style scoped lang="scss"></style>
