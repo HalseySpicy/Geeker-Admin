@@ -1,3 +1,39 @@
+/* flex */
+.flx-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flx-justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flx-align-center {
+  display: flex;
+  align-items: center;
+}
+
+/* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.2s;
+}
+
+.fade-transform-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.2s;
+}
+
+.fade-transform-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.2s;
+}
+
 /* 滚动条 */
 // 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸
 ::-webkit-scrollbar {

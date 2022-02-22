@@ -41,6 +41,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   strict: false,
+  // 切换页面，滚动到最顶部
   scrollBehavior: () => ({ left: 0, top: 0 })
 });
 

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "icon": "home-filled",
+    "title": "首页",
+    "path": "/home"
+  },
+  {
+    "id": "2",
+    "icon": "histogram",
+    "title": "数据大屏",
+    "path": "/dataScreen"
+  },
+  {
+    "id": "3",
+    "icon": "tickets",
+    "title": "表单页面",
+    "path": "/form",
+    "children": [
+      {
+        "id": "31",
+        "path": "/form/basicsForm",
+        "title": "基础 Form",
+        "icon": "menu"
+      },
+      {
+        "id": "32",
+        "path": "/form/validateForm",
+        "title": "校验 Form",
+        "icon": "menu"
+      },
+      {
+        "id": "33",
+        "path": "/form/dynamicForm",
+        "title": "动态 Form",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "icon": "paperclip",
+    "title": "外部链接",
+    "path": "/link",
+    "isLink": "http://www.baidu.com"
+  }
+]

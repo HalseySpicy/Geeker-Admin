@@ -16,20 +16,26 @@
     </el-form-item>
   </el-form>
   <div class="login-btn">
-    <!-- <el-button @click="submitParent">触发父组件方法</el-button> -->
     <el-button :icon="CircleClose" round @click="resetForm(loginFormRef)">重置</el-button>
     <el-button type="primary" :loading="loading" :icon="UserFilled" round @click="login(loginFormRef)">登录</el-button>
   </div>
+  <!-- <el-button @click="submitParent">触发父组件方法</el-button> -->
 </template>
 
 <script setup lang="ts">
-import router from "@/router/index";
-import { ref, reactive } from "vue";
-import { LoginFrom } from "../types/index";
+import { ref, reactive, inject } from "vue";
+import { useRouter } from "vue-router";
+import { LoginFrom, InjectProps } from "../types/index";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
-// 定义 form
+
+// inject
+const provideState = inject("provideState") as InjectProps;
+console.log(provideState.age);
+provideState.changeName();
+
+// 定义 formRef（校验规则）
 type FormInstance = InstanceType<typeof ElForm>;
 const loginFormRef = ref<FormInstance>();
 const loginRules = reactive({
@@ -44,13 +50,13 @@ const loginForm = reactive<LoginFrom>({
 });
 const loading = ref<boolean>(false);
 
+const router = useRouter();
 // login
 const login = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(valid => {
     if (valid) {
       loading.value = true;
-      console.log("submit!");
       setTimeout(() => {
         loading.value = false;
         ElMessage.success("登录成功");
@@ -69,7 +75,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
 };
 
 // 接收父组件参数（采用ts专有声明，有默认值）
-interface Props {
+interface ParentProps {
   age?: string;
   address?: string[];
   obj?: {
@@ -77,7 +83,7 @@ interface Props {
     password: string;
   };
 }
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ParentProps>(), {
   age: "18",
   address: () => ["新希望国际", "伏龙小区"],
   obj: () => {
@@ -102,8 +108,8 @@ const submitParent = () => {
 
 // 子组件数据暴露给父组件
 const count = ref<number>(2111);
-const consoleNumber = (): void => {
-  console.log("我是子组件打印的数据");
+const consoleNumber = (name: string): void => {
+  console.log("我是子组件打印的数据", name);
 };
 defineExpose({
   count,

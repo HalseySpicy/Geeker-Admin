@@ -5,5 +5,12 @@ export interface LoginFrom {
 
 export interface LoginFormExpose {
   count: number;
-  consoleNumber: () => void;
+  consoleNumber: (name:string) => void;
+}
+
+export interface InjectProps {
+  name: string;
+  age: string;
+  changeName: () => void;
+  [key: string]: any;
 }
