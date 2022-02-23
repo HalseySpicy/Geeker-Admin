@@ -1,7 +1,7 @@
 <template>
-  <el-config-provider :locale="zhCn" :button="config" :size="size">
-    <router-view></router-view>
-  </el-config-provider>
+	<el-config-provider :locale="zhCn" :button="config" :size="size">
+		<router-view></router-view>
+	</el-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -10,10 +10,10 @@ import { ref, reactive } from "vue";
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 // 配置element按钮文字中间是否有空格
 const config = reactive({
-  autoInsertSpace: false
+	autoInsertSpace: false
 });
-// 配置全局组件大小
-const size = ref<string>("large");
+// 配置全局组件大小（small/default(medium)/large）
+const size = ref<string>("default");
 console.log(import.meta.env.VITE_BASE_API);
 </script>
 

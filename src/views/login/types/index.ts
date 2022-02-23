@@ -5,7 +5,7 @@ export interface LoginFrom {
 
 export interface LoginFormExpose {
   count: number;
-  consoleNumber: (name:string) => void;
+  consoleNumber: (name: string) => void;
 }
 
 export interface InjectProps {

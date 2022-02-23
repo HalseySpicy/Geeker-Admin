@@ -1,76 +1,100 @@
 .menu {
-  transition: all 0.3s ease;
-  background: #20222a;
-  height: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow-x: hidden;
-  .el-menu {
-    flex: 1;
-    overflow: auto;
-    overflow-x: hidden;
-    border-right: none;
-    &::-webkit-scrollbar {
-      background-color: #20222a;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: #41444b;
-    }
-    // 防止 icon 抖动
-    .el-icon {
-      width: auto;
-      height: auto;
-      margin: 0px 8px 0 3px;
-    }
-    .el-menu-item {
-      &.is-active {
-        background-color: #060708 !important;
-      }
-      &.is-active::before {
-        content: "";
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 4px;
-        background: $color;
-        position: absolute;
-      }
-    }
-  }
+	transition: all 0.3s ease;
+	background: #20222a;
+	height: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	.logo {
+		transition: width 0.3s ease;
+		height: 55px;
+		box-sizing: border-box;
+		border-bottom: 2px solid #1d1e26;
+		box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
+		span {
+			font-size: 22px;
+			font-weight: bold;
+			color: #dadada;
+			white-space: nowrap;
+		}
+		img {
+			width: 30px;
+			object-fit: contain;
+			margin-right: 8px;
+		}
+	}
+	.el-menu {
+		flex: 1;
+		overflow: auto;
+		overflow-x: hidden;
+		border-right: none;
+		&::-webkit-scrollbar {
+			background-color: #20222a;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #41444b;
+		}
+		// 防止 icon 抖动
+		.el-icon {
+			width: auto;
+			height: auto;
+			margin: 0px 8px 0 3px;
+		}
+		.el-menu-item {
+			&.is-active {
+				background-color: #060708 !important;
+			}
+			&.is-active::before {
+				content: "";
+				top: 0;
+				left: 0;
+				bottom: 0;
+				width: 4px;
+				background: $color;
+				position: absolute;
+			}
+		}
+		.href {
+			display: inline-block;
+			text-decoration: none;
+			color: #bdbdc0;
+			width: 100%;
+			height: 100%;
+		}
+	}
 }
 
 .el-menu--popup {
-  .el-menu-item {
-    background-color: #20222a;
-    i {
-      margin-right: 5px;
-    }
-    i,
-    span {
-      color: hsla(0, 0%, 100%, 0.7);
-    }
-    &:hover {
-      i,
-      span {
-        color: #fff !important;
-      }
-    }
-    &.is-active {
-      background-color: #060708 !important;
-      &:before {
-        content: "";
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 4px;
-        background: $color;
-        position: absolute;
-      }
-      i,
-      span {
-        color: #fff !important;
-      }
-    }
-  }
+	.el-menu-item {
+		background-color: #20222a;
+		i {
+			margin-right: 5px;
+		}
+		i,
+		span {
+			color: hsla(0, 0%, 100%, 0.7);
+		}
+		&:hover {
+			i,
+			span {
+				color: #fff !important;
+			}
+		}
+		&.is-active {
+			background-color: #060708 !important;
+			&:before {
+				content: "";
+				top: 0;
+				left: 0;
+				bottom: 0;
+				width: 4px;
+				background: $color;
+				position: absolute;
+			}
+			i,
+			span {
+				color: #fff !important;
+			}
+		}
+	}
 }

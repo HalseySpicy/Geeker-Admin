@@ -8,8 +8,8 @@
   {
     "id": "2",
     "icon": "histogram",
-    "title": "数据大屏",
-    "path": "/dataScreen"
+    "title": "超级表格",
+    "path": "/table"
   },
   {
     "id": "3",
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "id": "10",
+    "id": "4",
     "icon": "paperclip",
     "title": "外部链接",
     "path": "/link",

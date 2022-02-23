@@ -25,7 +25,7 @@ pinia.use(piniaPersist);
 
 // 注册element Icons组件
 Object.keys(Icons).forEach(key => {
-  app.component(key, Icons[key as keyof typeof Icons]);
+	app.component(key, Icons[key as keyof typeof Icons]);
 });
 
 app.use(router).use(pinia).use(ElementPlus).mount("#app");
