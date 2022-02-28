@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
+
 // 超级表格模块
 const tableRouter: Array<RouteRecordRaw> = [
 	{

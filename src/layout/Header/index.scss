@@ -1,13 +1,41 @@
 .header {
-  border-bottom: 1px solid #f6f6f6;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px;
-  height: 55px;
-  .collapse-icon {
-    font-size: 22px;
-    cursor: pointer;
-  }
+	border-bottom: 1px solid #f6f6f6;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 15px;
+	height: 55px;
+	.header-lf {
+		.collapse-icon {
+			font-size: 22px;
+			margin-right: 20px;
+			cursor: pointer;
+		}
+	}
+	.header-ri {
+		margin: 0 30px;
+		.icon-style {
+			font-size: 20px;
+			color: rgba(0, 0, 0, 0.75);
+			cursor: pointer;
+			margin: 0 20px 0 0;
+		}
+		.username {
+			font-size: 15px;
+			color: rgba(0, 0, 0, 0.75);
+			margin: 0 20px 0 0;
+		}
+		.avatar {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			overflow: hidden;
+			cursor: pointer;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
 }

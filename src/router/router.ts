@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import homeRouter from "./modules/home";
 import tableRouter from "./modules/table";
+import echartsRouter from "./modules/echarts";
 import errorRouter from "./modules/error";
 
 const routes: RouteRecordRaw[] = [
@@ -28,7 +29,7 @@ const routes: RouteRecordRaw[] = [
 			key: "layout"
 		},
 		redirect: { name: "home" },
-		children: [...homeRouter, ...tableRouter]
+		children: [...homeRouter, ...tableRouter, ...echartsRouter]
 	},
 	...errorRouter,
 	{

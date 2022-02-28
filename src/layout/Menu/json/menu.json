@@ -39,6 +39,188 @@
   },
   {
     "id": "4",
+    "icon": "trend-charts",
+    "title": "Echarts",
+    "path": "/echarts",
+    "children": [
+      {
+        "id": "41",
+        "path": "/echarts/columnChart",
+        "title": "柱状图",
+        "icon": "menu"
+      },
+      {
+        "id": "42",
+        "path": "/echarts/lineChart",
+        "title": "折线图",
+        "icon": "menu"
+      },
+      {
+        "id": "43",
+        "path": "/echarts/pieChart",
+        "title": "饼图",
+        "icon": "menu"
+      },
+      {
+        "id": "44",
+        "path": "/echarts/radarChart",
+        "title": "雷达图",
+        "icon": "menu"
+      },
+      {
+        "id": "85",
+        "path": "/echarts/nestedChart",
+        "title": "嵌套环形图",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "icon": "stamp",
+    "title": "自定义指令",
+    "path": "/directives",
+    "children": [
+      {
+        "id": "51",
+        "path": "/directives/copyDirect",
+        "title": "复制指令",
+        "icon": "menu"
+      },
+      {
+        "id": "52",
+        "path": "/directives/dragDirect",
+        "title": "拖拽指令",
+        "icon": "menu"
+      },
+      {
+        "id": "53",
+        "path": "/directives/watermarkDirect",
+        "title": "水印指令",
+        "icon": "menu"
+      },
+      {
+        "id": "54",
+        "path": "/directives/debounceDirect",
+        "title": "防抖指令",
+        "icon": "menu"
+      },
+      {
+        "id": "55",
+        "path": "/directives/throttleDirect",
+        "title": "节流指令",
+        "icon": "menu"
+      },
+      {
+        "id": "56",
+        "path": "/directives/longpressDirect",
+        "title": "长按指令",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "icon": "list",
+    "title": "菜单嵌套",
+    "path": "/menu",
+    "children": [
+      {
+        "id": "61",
+        "path": "/menu/menu1",
+        "title": "菜单1",
+        "icon": "menu"
+      },
+      {
+        "id": "62",
+        "path": "/menu/menu2",
+        "title": "菜单2",
+        "icon": "menu",
+        "children": [
+          {
+            "id": "621",
+            "path": "/menu/menu2/menu21",
+            "title": "菜单2-1",
+            "icon": "menu"
+          },
+          {
+            "id": "622",
+            "path": "/menu/menu2/menu22",
+            "title": "菜单2-2",
+            "icon": "menu",
+            "children": [
+              {
+                "id": "6221",
+                "path": "/menu/menu2/menu22/menu221",
+                "title": "菜单2-2-1",
+                "icon": "menu"
+              },
+              {
+                "id": "6222",
+                "path": "/menu/menu2/menu22/menu222",
+                "title": "菜单2-2-2",
+                "icon": "menu"
+              }
+            ]
+          },
+          {
+            "id": "623",
+            "path": "/menu/menu2/menu23",
+            "title": "菜单2-3",
+            "icon": "menu"
+          }
+        ]
+      },
+      {
+        "id": "63",
+        "path": "/menu/menu3",
+        "title": "菜单3",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "icon": "warning-filled",
+    "title": "错误页面",
+    "path": "",
+    "children": [
+      {
+        "id": "71",
+        "path": "/404",
+        "title": "404页面",
+        "icon": "menu"
+      },
+      {
+        "id": "72",
+        "path": "/403",
+        "title": "403页面",
+        "icon": "menu"
+      },
+      {
+        "id": "73",
+        "path": "/500",
+        "title": "500页面",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "icon": "tools",
+    "title": "系统管理",
+    "path": "/system",
+    "children": [
+      {
+        "id": "83",
+        "path": "/system/menuManage",
+        "title": "菜单管理",
+        "icon": "menu"
+      }
+    ]
+  },
+  {
+    "id": "9",
     "icon": "paperclip",
     "title": "外部链接",
     "path": "/link",

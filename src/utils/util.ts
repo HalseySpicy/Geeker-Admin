@@ -64,7 +64,6 @@ export function deepCopy<T>(obj: any): T {
  * @param res 当前地址匹配的路由对象
  */
 export function getTabPane<T, U>(menuList: any[], path: U): T {
-	console.log(menuList);
 	let result: any;
 	for (let item of menuList || []) {
 		if (item.path === path) result = item;
