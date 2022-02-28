@@ -61,7 +61,7 @@ const login = (formEl: FormInstance | undefined) => {
 			loading.value = true;
 			setTimeout(() => {
 				loading.value = false;
-				ElMessage.success("登录成功");
+				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			}, 800);
 		} else {
