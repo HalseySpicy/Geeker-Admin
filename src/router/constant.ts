@@ -1,5 +1,3 @@
-export const RedirectName = "Redirect";
-
 /**
  * @description: default layout
  */

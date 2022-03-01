@@ -1,17 +1,24 @@
 import { RouteRecordRaw } from "vue-router";
+import { Layout } from "@/router/constant";
 
 // 首页模块
 const homeRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/home",
-		name: "home",
-		component: () => import(/* webpackChunkName: "home" */ "@/views/home/index.vue"),
-		meta: {
-			keepAlive: true,
-			requiresAuth: true,
-			title: "首页",
-			key: "home"
-		}
+		component: Layout,
+		children: [
+			{
+				path: "index",
+				name: "home",
+				component: () => import(/* webpackChunkName: "home" */ "@/views/home/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "首页",
+					key: "home"
+				}
+			}
+		]
 	}
 ];
 

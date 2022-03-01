@@ -12,8 +12,8 @@ interface TabsState {
 export const TabsStore = defineStore({
 	id: "TabsState",
 	state: (): TabsState => ({
-		tabsMenuValue: "/home",
-		tabsMenuList: [{ title: "首页", path: "/home", icon: "home-filled", close: false }]
+		tabsMenuValue: "/home/index",
+		tabsMenuList: [{ title: "首页", path: "/home/index", icon: "home-filled", close: false }]
 	}),
 	getters: {},
 	actions: {
@@ -78,13 +78,13 @@ export const TabsStore = defineStore({
 		// Close MultipleTab
 		async closeMultipleTab(tabsMenuValue?: string) {
 			this.tabsMenuList = this.tabsMenuList.filter(item => {
-				return item.path === tabsMenuValue || item.path === "/home";
+				return item.path === tabsMenuValue || item.path === "/home/index";
 			});
 		},
 		// Go Home
 		async goHome() {
-			router.push("/home");
-			this.tabsMenuValue = "/home";
+			router.push("/home/index");
+			this.tabsMenuValue = "/home/index";
 		}
 	},
 	persist: piniaPersist("TabsState")

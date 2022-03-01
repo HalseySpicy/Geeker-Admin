@@ -12,8 +12,8 @@ import zhCn from "element-plus/lib/locale/lang/zh-cn";
 const config = reactive({
 	autoInsertSpace: false
 });
-// 配置全局组件大小（small/default(medium)/large）
-const size = ref<string>("default");
+// 配置全局组件大小 (small/default(medium)/large)
+const size = ref<string>("large");
 console.log(import.meta.env.VITE_BASE_API);
 </script>
 

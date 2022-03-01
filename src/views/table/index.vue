@@ -1,13 +1,19 @@
 <template>
-	<el-table :data="tableData" :border="true">
-		<el-table-column prop="date" label="Date" />
-		<el-table-column prop="name" label="Name" />
-		<el-table-column prop="date" label="Date" />
-		<el-table-column prop="name" label="Name" />
-		<el-table-column prop="address" label="Address" />
-	</el-table>
+	<div>
+		<el-table :data="tableData" :border="true">
+			<el-table-column prop="date" label="Date" />
+			<el-table-column prop="name" label="Name" />
+			<el-table-column prop="date" label="Date" />
+			<el-table-column prop="name" label="Name" />
+			<el-table-column prop="address" label="Address" />
+		</el-table>
+		<el-input v-model="value"></el-input>
+	</div>
 </template>
 <script setup lang="ts">
+import { ref } from "vue";
+
+const value = ref<string>("");
 const tableData = [
 	{
 		date: "2016-05-03",

@@ -1,5 +1,5 @@
 <template>
-	<div class="menu" :style="{ width: isCollapse ? '65px' : '250px' }">
+	<div class="menu" :style="{ width: isCollapse ? '65px' : '240px' }">
 		<Logo :isCollapse="isCollapse"></Logo>
 		<el-menu
 			:default-active="activeMenu"

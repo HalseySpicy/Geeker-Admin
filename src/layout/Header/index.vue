@@ -4,20 +4,13 @@
 			<el-icon class="collapse-icon" @click="menuStore.setCollapse()">
 				<component :is="isCollapse ? 'expand' : 'fold'"></component>
 			</el-icon>
-			<el-breadcrumb :separator-icon="ArrowRight">
-				<el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-				<el-breadcrumb-item>超级表格</el-breadcrumb-item>
-			</el-breadcrumb>
+			<Breadcrumb></Breadcrumb>
 		</div>
 		<div class="header-ri flx-center">
 			<!-- Component size -->
-			<el-tooltip effect="dark" :content="'组件大小'" placement="bottom">
-				<i :class="'iconfont icon-contentright'" class="icon-style" @click=""></i>
-			</el-tooltip>
+			<AssemblySize></AssemblySize>
 			<!-- Full screen -->
-			<el-tooltip effect="dark" :content="'全屏'" placement="bottom">
-				<i :class="'iconfont icon-fangda1'" class="icon-style" @click=""></i>
-			</el-tooltip>
+			<Fullscreen></Fullscreen>
 			<!-- username -->
 			<span class="username">Geeker</span>
 			<!-- usercenter -->
@@ -44,17 +37,17 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { ElMessageBox, ElMessage } from "element-plus";
-import { ArrowRight } from "@element-plus/icons-vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { MenuStore } from "@/store/modules/menu";
-import InfoDialog from "./components/infoDialog.vue";
-import PasswordDialog from "./components/passwordDialog.vue";
+import InfoDialog from "./components/InfoDialog.vue";
+import PasswordDialog from "./components/PasswordDialog.vue";
+import Breadcrumb from "./components/Breadcrumb.vue";
+import Fullscreen from "./components/Fullscreen.vue";
+import AssemblySize from "./components/AssemblySize.vue";
 
 const router = useRouter();
 const menuStore = MenuStore();
 const isCollapse = computed((): boolean => menuStore.isCollapse);
-const route = useRoute();
-console.log(route.matched);
 
 // logout
 const logout = () => {

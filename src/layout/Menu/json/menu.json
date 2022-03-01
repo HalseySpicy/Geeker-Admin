@@ -3,13 +3,13 @@
     "id": "1",
     "icon": "home-filled",
     "title": "首页",
-    "path": "/home"
+    "path": "/home/index"
   },
   {
     "id": "2",
     "icon": "histogram",
     "title": "超级表格",
-    "path": "/table"
+    "path": "/table/index"
   },
   {
     "id": "3",
