@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
-import importToCDN from "vite-plugin-cdn-import";
+// import importToCDN from "vite-plugin-cdn-import";
 import { visualizer } from "rollup-plugin-visualizer";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
@@ -46,27 +46,27 @@ export default defineConfig({
 		vue(),
 		// demand import element（如果使用了cdn引入,没必要使用element自动导入了）
 		// AutoImport({
-		//   resolvers: [ElementPlusResolver()]
+		// 	resolvers: [ElementPlusResolver()]
 		// }),
 		// Components({
-		//   resolvers: [ElementPlusResolver()]
+		// 	resolvers: [ElementPlusResolver()]
 		// }),
 		// cdn 引入（vue、element-plus）
-		importToCDN({
-			modules: [
-				{
-					name: "vue",
-					var: "Vue",
-					path: "https://cdn.jsdelivr.net/npm/vue@next"
-				},
-				{
-					name: "element-plus",
-					var: "ElementPlus",
-					path: "https://cdn.jsdelivr.net/npm/element-plus",
-					css: "https://cdn.jsdelivr.net/npm/element-plus/dist/index.css"
-				}
-			]
-		}),
+		// importToCDN({
+		// 	modules: [
+		// 		{
+		// 			name: "vue",
+		// 			var: "Vue",
+		// 			path: "https://unpkg.com/vue@next"
+		// 		},
+		// 		{
+		// 			name: "element-plus",
+		// 			var: "ElementPlus",
+		// 			path: "https://unpkg.com/element-plus",
+		// 			css: "https://unpkg.com/element-plus/dist/index.css"
+		// 		}
+		// 	]
+		// }),
 		// image compress
 		viteImagemin({
 			gifsicle: {

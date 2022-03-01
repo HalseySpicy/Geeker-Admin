@@ -10,7 +10,8 @@ export const GlobalStore = defineStore({
 	// state: 返回对象的函数
 	state: () => ({
 		token: localGet(types.ACCESS_TOKEN),
-		userInfo: localGet(types.USER_INFO)
+		userInfo: localGet(types.USER_INFO),
+		size: "default"
 	}),
 	getters: {},
 	actions: {
@@ -21,6 +22,9 @@ export const GlobalStore = defineStore({
 		// set userInfo
 		setUserInfo(userInfo: any) {
 			this.userInfo = userInfo;
+		},
+		setSize(size: string) {
+			this.size = size;
 		}
 	},
 	persist: piniaPersist("GlobalState")

@@ -27,6 +27,8 @@ import menuListJson from "./json/menu.json";
 const route = useRoute();
 const menuStore = MenuStore();
 
+console.log(menuStore);
+
 // set menuList
 menuStore.setMenuList(menuListJson);
 

@@ -11,7 +11,7 @@ import ElementPlus from "element-plus";
 // Element icons
 import * as Icons from "@element-plus/icons-vue";
 // element css(如果使用了CDN，不需要引入css)
-// import "element-plus/dist/index.css";
+import "element-plus/dist/index.css";
 // vue Router
 import router from "@/router/index";
 // pinia store

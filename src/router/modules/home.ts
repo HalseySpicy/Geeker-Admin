@@ -6,6 +6,7 @@ const homeRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/home",
 		component: Layout,
+		redirect: "/home/index",
 		children: [
 			{
 				path: "index",

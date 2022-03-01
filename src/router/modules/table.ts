@@ -6,6 +6,7 @@ const tableRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/table",
 		component: Layout,
+		redirect: "/table/index",
 		children: [
 			{
 				path: "index",

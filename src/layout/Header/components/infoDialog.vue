@@ -1,6 +1,6 @@
 <template>
-	<el-dialog v-model="dialogVisible" title="个人资料" width="30%">
-		<span>This is a message</span>
+	<el-dialog v-model="dialogVisible" title="个人资料" width="500px">
+		<span>This is User info</span>
 	</el-dialog>
 </template>
 

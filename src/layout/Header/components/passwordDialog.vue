@@ -1,6 +1,6 @@
 <template>
-	<el-dialog v-model="dialogVisible" title="修改密码" width="30%">
-		<span>This is a message</span>
+	<el-dialog v-model="dialogVisible" title="修改密码" width="500px">
+		<span>This is Password</span>
 		<template #footer>
 			<span class="dialog-footer">
 				<el-button @click="dialogVisible = false">Cancel</el-button>
