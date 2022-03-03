@@ -34,8 +34,7 @@ export default defineConfig({
 		// 代理跨域
 		proxy: {
 			"/api": {
-				target: "http://192.168.0.61:21002",
-				// target: "http://test-stgateway.supercharger.com", // 测试环境
+				target: "http://sttmgateway.inspirefutech.com", // 测试环境
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, "")
 			}
@@ -102,9 +101,9 @@ export default defineConfig({
 			threshold: 10240,
 			algorithm: "gzip",
 			ext: ".gz"
-		}),
+		})
 		// 查看打包体积大小
-		visualizer()
+		// visualizer()
 	],
 	// build configure
 	build: {

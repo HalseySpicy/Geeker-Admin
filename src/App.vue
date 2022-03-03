@@ -17,7 +17,6 @@ const config = reactive({
 });
 // 配置全局组件大小 (small/default(medium)/large)
 const size = ref<string>(global.size);
-console.log(import.meta.env.VITE_BASE_API);
 </script>
 
 <style scoped lang="scss"></style>

@@ -87,7 +87,7 @@ interface ParentProps {
 }
 const props = withDefaults(defineProps<ParentProps>(), {
 	age: "18",
-	address: () => ["新希望国际", "伏龙小区"],
+	address: () => ["新希望国际", "天府三街"],
 	obj: () => {
 		return {
 			username: "admin",

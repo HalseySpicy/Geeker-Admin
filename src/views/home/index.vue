@@ -5,11 +5,20 @@
 </template>
 
 <script setup lang="ts">
-import { GlobalStore } from "@/store";
-const store = GlobalStore();
+import { ResultEnum } from "@/enums/httpEnum";
+import { loginApi } from "@/api/modules/home";
+import { onMounted } from "vue";
+
+onMounted(async () => {
+	const res = await loginApi({ username: "", password: "" });
+	console.log(res);
+});
+
 interface Props<T> {
 	username: T;
 }
+
+console.log(ResultEnum[10000]);
 
 const data: Props<string> = {
 	username: "string"

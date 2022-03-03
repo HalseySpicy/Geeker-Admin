@@ -1,27 +1,23 @@
 import { defineStore } from "pinia";
-import piniaPersist from "@/config/piniaPersist";
-import router from "@/router/index";
 import { deepCopy } from "@/utils/util";
 import { TabPaneProps } from "element-plus";
-
-interface TabsState {
-	tabsMenuValue: string;
-	tabsMenuList: Menu.MenuOptions[];
-}
+import { TabsState } from "../interface";
+import piniaPersist from "@/config/piniaPersist";
+import { HOME_URL, TABS_WHITE_LIST } from "@/config";
+import router from "@/router/index";
 
 export const TabsStore = defineStore({
 	id: "TabsState",
 	state: (): TabsState => ({
-		tabsMenuValue: "/home/index",
-		tabsMenuList: [{ title: "首页", path: "/home/index", icon: "home-filled", close: false }]
+		tabsMenuValue: HOME_URL,
+		tabsMenuList: [{ title: "首页", path: HOME_URL, icon: "home-filled", close: false }]
 	}),
 	getters: {},
 	actions: {
 		// Add Tabs
 		async addTabs(tabItem: Menu.MenuOptions) {
 			// not add tabs whiteList
-			let whiteList = ["/403", "/404", "/500", "/layout", "/login"];
-			if (whiteList.includes(tabItem.path)) return;
+			if (TABS_WHITE_LIST.includes(tabItem.path)) return;
 			const tabInfo: Menu.MenuOptions = {
 				title: tabItem.title,
 				path: tabItem.path,
@@ -78,13 +74,13 @@ export const TabsStore = defineStore({
 		// Close MultipleTab
 		async closeMultipleTab(tabsMenuValue?: string) {
 			this.tabsMenuList = this.tabsMenuList.filter(item => {
-				return item.path === tabsMenuValue || item.path === "/home/index";
+				return item.path === tabsMenuValue || item.path === HOME_URL;
 			});
 		},
 		// Go Home
 		async goHome() {
-			router.push("/home/index");
-			this.tabsMenuValue = "/home/index";
+			router.push(HOME_URL);
+			this.tabsMenuValue = HOME_URL;
 		}
 	},
 	persist: piniaPersist("TabsState")

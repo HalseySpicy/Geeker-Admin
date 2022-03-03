@@ -12,6 +12,8 @@ import ElementPlus from "element-plus";
 import * as Icons from "@element-plus/icons-vue";
 // element css(如果使用了CDN，不需要引入css)
 import "element-plus/dist/index.css";
+// Custom directives
+import directives from "@/directives/index";
 // vue Router
 import router from "@/router/index";
 // pinia store
@@ -30,4 +32,4 @@ Object.keys(Icons).forEach(key => {
 	app.component(key, Icons[key as keyof typeof Icons]);
 });
 
-app.use(router).use(pinia).use(ElementPlus).mount("#app");
+app.use(router).use(pinia).use(directives).use(ElementPlus).mount("#app");

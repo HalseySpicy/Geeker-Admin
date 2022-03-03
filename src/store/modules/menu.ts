@@ -1,10 +1,6 @@
 import { defineStore } from "pinia";
+import { MenuState } from "../interface";
 import piniaPersist from "@/config/piniaPersist";
-
-interface MenuState {
-	isCollapse: boolean;
-	menuList: Menu.MenuOptions[];
-}
 
 // MenuStore
 export const MenuStore = defineStore({

@@ -34,6 +34,7 @@
 	transition: all 0.2s;
 }
 
+/* breadcrumb transition */
 .breadcrumb-enter-active,
 .breadcrumb-leave-active {
 	transition: all 0.5s;
@@ -56,15 +57,12 @@
 /* scroll bar */
 ::-webkit-scrollbar {
 	width: 8px;
-	/*滚动条宽度*/
 	height: 8px;
-	/*滚动条高度*/
 	background-color: white;
 }
 ::-webkit-scrollbar-thumb {
 	box-shadow: inset 0 0 0px white;
 	-webkit-box-shadow: inset 0 0 0px white;
 	background-color: #dddee0;
-	/*滚动条的背景颜色*/
 	border-radius: 20px;
 }
