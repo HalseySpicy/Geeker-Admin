@@ -6,13 +6,6 @@
 
 <script setup lang="ts">
 import { ResultEnum } from "@/enums/httpEnum";
-import { loginApi } from "@/api/modules/home";
-import { onMounted } from "vue";
-
-onMounted(async () => {
-	const res = await loginApi({ username: "", password: "" });
-	console.log(res);
-});
 
 interface Props<T> {
 	username: T;

@@ -30,7 +30,7 @@ class RequestHttp {
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
 				const token: string = globalStore.token;
-				return { ...config, headers: { "access-token": token } };
+				return { ...config, headers: { "x-access-token": token } };
 			},
 			(error: AxiosError) => {
 				Promise.reject(error);

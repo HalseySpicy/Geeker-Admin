@@ -17,9 +17,9 @@
 	</el-form>
 	<div class="login-btn">
 		<el-button :icon="CircleClose" round @click="resetForm(loginFormRef)" size="large">重置</el-button>
-		<el-button :icon="UserFilled" round @click="login(loginFormRef)" size="large" type="primary" :loading="loading"
-			>登录</el-button
-		>
+		<el-button :icon="UserFilled" round @click="login(loginFormRef)" size="large" type="primary" :loading="loading">
+			登录
+		</el-button>
 	</div>
 	<!-- <el-button @click="submitParent">触发父组件方法</el-button> -->
 </template>
@@ -31,10 +31,12 @@ import { LoginFrom, InjectProps } from "../types/index";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
+import { loginApi } from "@/api/modules/login";
+import md5 from "js-md5";
 
 // inject
 const provideState = inject("provideState") as InjectProps;
-console.log(provideState.age);
+// console.log(provideState.age);
 provideState.changeName();
 
 // 定义 formRef（校验规则）
@@ -48,7 +50,7 @@ const loginRules = reactive({
 // 登录表单数据
 const loginForm = reactive<LoginFrom>({
 	username: "admin",
-	password: "123456"
+	password: "00000000"
 });
 const loading = ref<boolean>(false);
 
@@ -56,14 +58,23 @@ const router = useRouter();
 // login
 const login = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
-	formEl.validate(valid => {
+	formEl.validate(async valid => {
 		if (valid) {
 			loading.value = true;
-			setTimeout(() => {
-				loading.value = false;
+			try {
+				let requestLoginForm: LoginFrom = {
+					username: loginForm.username,
+					password: md5(loginForm.password)
+				};
+				const res = await loginApi(requestLoginForm);
+				console.log(res);
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
-			}, 800);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				loading.value = false;
+			}
 		} else {
 			return false;
 		}
@@ -95,7 +106,7 @@ const props = withDefaults(defineProps<ParentProps>(), {
 		};
 	}
 });
-console.log(props);
+// console.log(props);
 // 接收父组件参数（采用ts专有声明，无默认值）
 // const props1 = defineProps<{ item: string }>();
 // console.log(props1);
