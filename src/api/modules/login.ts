@@ -15,5 +15,5 @@ export const loginApi = (params: LoginParams) => {
 
 // * 导出系统日志
 export const downLoadFile = () => {
-	return http.post<LoginAPI>(PORT1 + `/web/v1.0/sys/oplog/exportExcel`);
+	return http.post(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, {}, { responseType: "blob" });
 };

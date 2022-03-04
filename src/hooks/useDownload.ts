@@ -5,7 +5,7 @@ import { ElNotification } from "element-plus";
  * @param {string} url 导出表格的api地址(必传)
  * @param {string} tempName 导出的文件名(必传)
  * @param {object} params 导出的参数(默认为空对象)
- * @param {boolean} isNotify 是否有导出消息提示(默认为false)
+ * @param {boolean} isNotify 是否有导出消息提示(默认为 true)
  * @param {string} fileType 导出的文件格式(默认为.xlsx)
  * @return void
  * */
@@ -13,8 +13,8 @@ export const useDownload = async (
 	url: (params: any) => Promise<any>,
 	tempName: string,
 	params: object = {},
-	isNotify: boolean = false,
-	fileType: string = ".xlsx"
+	isNotify: boolean = true,
+	fileType: string = ".xls"
 ) => {
 	/**
 	 * 由生成的链接下载模板
@@ -48,7 +48,8 @@ export const useDownload = async (
 		// });
 		const blob = new Blob([res]);
 		// 兼容edge不支持createObjectURL方法
-		// if ("msSaveOrOpenBlob" in navigator) return window.navigator.msSaveOrOpenBlob(blob, tempName + fileType);
+		// @ts-ignore
+		if ("msSaveOrOpenBlob" in navigator) return window.navigator.msSaveOrOpenBlob(blob, tempName + fileType);
 		const blobUrl = window.URL.createObjectURL(blob);
 		download(blobUrl);
 	} catch (error) {

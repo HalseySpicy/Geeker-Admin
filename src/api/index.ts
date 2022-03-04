@@ -23,10 +23,10 @@ class RequestHttp {
 		this.service = axios.create(config);
 
 		/**
-     * @description：请求拦截器
-       客户端发送请求 -> [请求拦截器] -> 服务器
-      token校验(JWT) : 接受服务器返回的token,存储到vuex/本地储存当中
-    * */
+		 * @description：请求拦截器
+		 * 客户端发送请求 -> [请求拦截器] -> 服务器
+		 * token校验(JWT) : 接受服务器返回的token,存储到vuex/本地储存当中
+		 * */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
 				const token: string = globalStore.token;
@@ -38,9 +38,9 @@ class RequestHttp {
 		);
 
 		/**
-      * @description：响应拦截器
-      服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
-    * */
+		 * @description：响应拦截器
+		 *  服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
+		 * */
 		// serves.defaults.validateStatus = status => {
 		// 自定义响应成功的HTTP状态码
 		//     return /^(2|3)\d{2}$/.test(status);
@@ -48,7 +48,7 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data } = response;
-				if (data.code === 200) {
+				if (response.status === 200) {
 					return data;
 				} else {
 					ElMessage.error(data.msg);

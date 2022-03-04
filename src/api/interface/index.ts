@@ -8,9 +8,8 @@ export interface ResultData<T = any> extends Result {
 }
 
 export interface LoginAPI {
-	id: number;
-	username: string;
-	auth_token: string;
+	firstPasswordReset: boolean;
+	tokenValue: string;
 }
 
 export interface LoginParams {

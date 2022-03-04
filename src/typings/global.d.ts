@@ -12,11 +12,3 @@ declare namespace Menu {
 		children?: MenuOptions[];
 	}
 }
-
-declare global {
-	interface Window {
-		navigator: {
-			[key: string]: any;
-		};
-	}
-}

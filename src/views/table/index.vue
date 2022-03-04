@@ -8,10 +8,17 @@
 			<el-table-column prop="address" label="Address" />
 		</el-table>
 		<el-input v-model="value"></el-input>
+		<el-button @click="downloadFile" type="primary">文件下载</el-button>
 	</div>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import { useDownload } from "@/hooks/useDownload";
+import { downLoadFile } from "@/api/modules/login";
+
+const downloadFile = () => {
+	useDownload(downLoadFile, "系统日志");
+};
 
 const value = ref<string>("");
 const tableData = [
