@@ -18,7 +18,7 @@ const config = {
 
 class RequestHttp {
 	service: AxiosInstance;
-	constructor(public config: AxiosRequestConfig) {
+	public constructor(config: AxiosRequestConfig) {
 		// 实例化axios
 		this.service = axios.create(config);
 

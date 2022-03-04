@@ -11,7 +11,7 @@
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { ArrowRight } from "@element-plus/icons-vue";
-import { HOME_URL } from "@/config";
+import { HOME_URL } from "@/config/config";
 const route = useRoute();
 
 const matched = computed(() =>

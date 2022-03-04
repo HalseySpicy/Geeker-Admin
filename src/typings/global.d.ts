@@ -1,3 +1,7 @@
+declare module "nprogress";
+declare module "js-md5";
+
+// * Menu
 declare namespace Menu {
 	interface MenuOptions {
 		path: string;
@@ -9,10 +13,10 @@ declare namespace Menu {
 	}
 }
 
-interface PropsSay {
-	say<T>(value: T): T;
-}
-
-interface PropsNumber<T, U> {
-	(a: T, b: U): number;
+declare global {
+	interface Window {
+		navigator: {
+			[key: string]: any;
+		};
+	}
 }

@@ -3,7 +3,7 @@ import { deepCopy } from "@/utils/util";
 import { TabPaneProps } from "element-plus";
 import { TabsState } from "../interface";
 import piniaPersist from "@/config/piniaPersist";
-import { HOME_URL, TABS_WHITE_LIST } from "@/config";
+import { HOME_URL, TABS_WHITE_LIST } from "@/config/config";
 import router from "@/router/index";
 
 export const TabsStore = defineStore({

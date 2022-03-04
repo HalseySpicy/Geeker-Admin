@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 /**
  * @description 获取本地时间
  */
-export function useTime() {
+export const useTime = () => {
 	let timer: any; // 定时器
 	const year = ref(0); // 年份
 	const month = ref(0); // 月份
@@ -39,7 +39,6 @@ export function useTime() {
 	//     second: '2-digit',
 	//     hour12: false
 	// }).format(new Date())
-
 	updateTime();
 
 	onMounted(() => {
@@ -52,4 +51,4 @@ export function useTime() {
 	});
 
 	return { month, day, hour, minute, second, week };
-}
+};
