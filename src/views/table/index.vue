@@ -12,13 +12,30 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useDownload } from "@/hooks/useDownload";
-import { downLoadFile } from "@/api/modules/login";
+import { useTime } from "@/hooks/useTime";
+import { useOnline } from "@/hooks/useOnline";
+import { downLoadSystemLog, getSystemLog } from "@/api/modules/system";
+
+onMounted(() => {
+	getTableList();
+});
+
+const getTableList = async () => {
+	// const res = await getSystemLog({});
+	// console.log(res);
+};
+
+const { online } = useOnline();
+// console.log(online.value);
 
 const downloadFile = () => {
-	useDownload(downLoadFile, "系统日志");
+	useDownload(downLoadSystemLog, "系统日志");
 };
+
+const { month, day, hour, minute, second, week } = useTime();
+// console.log(month.value, day.value, hour.value, minute.value, second.value, week.value);
 
 const value = ref<string>("");
 const tableData = [

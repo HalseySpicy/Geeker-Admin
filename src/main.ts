@@ -4,6 +4,8 @@ import App from "./App.vue";
 import "@/styles/reset.scss";
 // CSS common style sheet
 import "@/styles/common.scss";
+// element scc
+import "@/styles/element.scss";
 // iconfont css
 import "@/assets/iconfont/iconfont.css";
 // element plus

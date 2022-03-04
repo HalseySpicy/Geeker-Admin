@@ -1,11 +1,12 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { ResultData } from "@/api/interface";
 import { checkStatus } from "./util/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
-import { useRouter } from "vue-router";
+import router from "@/router";
+
 const globalStore = GlobalStore();
-const router = useRouter();
 
 const config = {
 	// 默认地址
@@ -29,6 +30,7 @@ class RequestHttp {
 		 * */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
+				showFullScreenLoading();
 				const token: string = globalStore.token;
 				return { ...config, headers: { "x-access-token": token } };
 			},
@@ -48,15 +50,26 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data } = response;
-				if (response.status === 200) {
-					return data;
-				} else {
-					ElMessage.error(data.msg);
-					return Promise.reject(response);
+				tryHideFullScreenLoading();
+				// * 登陆失效
+				if (data.code == 599) {
+					ElMessage.error({ message: data.msg, duration: 2000 });
+					globalStore.setToken("");
+					router.replace({
+						path: "/login"
+					});
+					return Promise.reject(data);
 				}
+				// * 全局错误信息拦截（防止下载文件得时候没有code，直接报错）
+				if (data.code && data.code !== 200) {
+					ElMessage.error(data.msg);
+					return Promise.reject(data);
+				}
+				return data;
 			},
 			async (error: AxiosError) => {
 				const { response } = error;
+				tryHideFullScreenLoading();
 				if (response) {
 					checkStatus(response.status, "");
 				} else {
@@ -65,7 +78,7 @@ class RequestHttp {
 					ElMessage.error("请求超时！");
 					if (!window.navigator.onLine) {
 						// 断网处理:可以跳转到断网页面
-						router.push({
+						router.replace({
 							path: "/500"
 						});
 						return;

@@ -1,0 +1,4 @@
+// * 设置 notification 层级在 loading之上
+.el-notification {
+	z-index: 99999 !important;
+}

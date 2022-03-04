@@ -14,7 +14,7 @@ export const useDownload = async (
 	tempName: string,
 	params: object = {},
 	isNotify: boolean = true,
-	fileType: string = ".xls"
+	fileType: string = ".xlsx"
 ) => {
 	/**
 	 * 由生成的链接下载模板
@@ -37,7 +37,7 @@ export const useDownload = async (
 			title: "温馨提示",
 			message: "如果数据庞大会导致下载缓慢哦，请您耐心等待！",
 			type: "info",
-			duration: 3000
+			duration: 0
 		});
 	}
 	try {
@@ -53,6 +53,6 @@ export const useDownload = async (
 		const blobUrl = window.URL.createObjectURL(blob);
 		download(blobUrl);
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 	}
 };
