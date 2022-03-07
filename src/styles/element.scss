@@ -1,4 +1,84 @@
-// * 设置 notification 层级在 loading之上
+// * 设置 notification 层级在 loading 之上
 .el-notification {
 	z-index: 99999 !important;
+}
+
+// * 表格样式
+.table-box {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	// 表格 search 样式
+	.table-search {
+		display: flex;
+		.el-form {
+			max-width: 1260px;
+			.el-form-item {
+				margin-right: 15px;
+				.el-input {
+					width: 200px;
+				}
+			}
+			.more-item {
+				display: inline;
+			}
+		}
+		.search-operation {
+			white-space: nowrap;
+			margin-left: 15px;
+			.search-isOpen {
+				margin-left: 20px;
+				.isOpen-icon {
+					margin-left: 3px;
+				}
+			}
+		}
+	}
+
+	// 表格 header 样式
+	.table-header {
+		padding: 10px 0 20px 0;
+		.header-button {
+			float: left;
+		}
+		.refresh {
+			float: right;
+		}
+	}
+
+	// el-table 表格样式
+	.el-table {
+		flex: 1;
+		.el-table__header th,
+		.el-table__body td {
+			text-align: center;
+		}
+		.el-table__header th {
+			background: #fafafa;
+			color: #252525;
+			font-weight: bold;
+			font-size: 15px;
+			height: 48px;
+		}
+		.el-table__row {
+			height: 46px;
+		}
+		.el-button--text {
+			height: 0;
+		}
+		.table-empty {
+			line-height: 30px;
+		}
+		.el-scrollbar__view {
+			display: flex !important;
+			height: 100%;
+		}
+	}
+
+	// 表格 pagination 样式
+	.el-pagination {
+		display: flex;
+		margin: 25px 0 20px 0;
+		justify-content: flex-end;
+	}
 }

@@ -1,63 +1,123 @@
 <template>
-	<div>
-		<el-table :data="tableData" :border="true">
-			<el-table-column prop="date" label="Date" />
-			<el-table-column prop="name" label="Name" />
-			<el-table-column prop="date" label="Date" />
-			<el-table-column prop="name" label="Name" />
-			<el-table-column prop="address" label="Address" />
+	<div class="table-box">
+		<div class="table-search">
+			<el-form ref="formRef" :model="searchForm" :inline="true" label-width="100px">
+				<el-form-item label="管理员姓名 :">
+					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+				</el-form-item>
+				<el-form-item label="管理员账号 :">
+					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+				</el-form-item>
+				<el-form-item label="IP地址 :">
+					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+				</el-form-item>
+				<el-form-item label="操作内容 :">
+					<el-select v-model="searchForm.region" placeholder="请选择">
+						<el-option label="Zone one" value="shanghai"></el-option>
+						<el-option label="Zone two" value="beijing"></el-option>
+					</el-select>
+				</el-form-item>
+				<div class="more-item" v-show="searchShow">
+					<el-form-item label="IP地址 :">
+						<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+					</el-form-item>
+					<el-form-item label="创建时间 :">
+						<el-date-picker
+							v-model="searchForm.name"
+							type="daterange"
+							start-placeholder="Start Date"
+							end-placeholder="End Date"
+						/>
+					</el-form-item>
+				</div>
+			</el-form>
+			<div class="search-operation">
+				<el-button type="primary" :icon="Search">搜索</el-button>
+				<el-button :icon="Delete">重置</el-button>
+				<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow">
+					{{ searchShow ? "合并" : "展开" }}
+					<el-icon class="isOpen-icon" v-show="!searchShow"><arrow-down /></el-icon>
+					<el-icon class="isOpen-icon" v-show="searchShow"><arrow-up /></el-icon>
+				</el-button>
+			</div>
+		</div>
+		<div class="table-header clearfix">
+			<div class="header-button">
+				<el-button type="primary" :icon="CirclePlus">新增用户</el-button>
+				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+			</div>
+			<el-tooltip effect="dark" content="刷新" placement="top">
+				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"></el-button>
+			</el-tooltip>
+		</div>
+		<el-table height="575" :data="tableData" border>
+			<el-table-column prop="opRealName" label="管理员姓名" show-overflow-tooltip> </el-table-column>
+			<el-table-column prop="opUsername" label="管理员账号" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="opContent" label="操作内容" show-overflow-tooltip> </el-table-column>
+			<el-table-column label="操作" width="400px">
+				<template #default="scope">
+					<el-button type="text" :icon="Edit">编辑</el-button>
+					<el-button type="text" :icon="Delete">删除</el-button>
+				</template>
+			</el-table-column>
+			<template #empty>
+				<div class="table-empty">
+					<img src="@/assets/images/notData.png" alt="notData" />
+					<div>暂无数据</div>
+				</div>
+			</template>
 		</el-table>
-		<el-input v-model="value"></el-input>
-		<el-button @click="downloadFile" type="primary">文件下载</el-button>
+		<el-pagination
+			v-model:currentPage="currentPage"
+			v-model:page-size="pageSize"
+			:page-sizes="[10, 25, 50, 100]"
+			background
+			layout="total, sizes, prev, pager, next, jumper"
+			:total="100"
+			@size-change="handleSizeChange"
+			@current-change="handleCurrentChange"
+		>
+		</el-pagination>
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useDownload } from "@/hooks/useDownload";
-import { useTime } from "@/hooks/useTime";
-import { useOnline } from "@/hooks/useOnline";
 import { downLoadSystemLog, getSystemLog } from "@/api/modules/system";
+import { Refresh, CirclePlus, Delete, Search, Edit, Download } from "@element-plus/icons-vue";
+import { useTable } from "@/hooks/useTable";
+const searchForm = reactive({
+	name: "",
+	region: ""
+});
+let tableData = ref<any[]>([]);
+const searchShow = ref<boolean>(false);
 
 onMounted(() => {
 	getTableList();
 });
 
+// 获取表格数据
 const getTableList = async () => {
 	const res = await getSystemLog({});
-	console.log(res);
-	res.data.datalist.forEach(item => {
-		console.log(item.bfData);
-	});
+	tableData.value = res.data.datalist;
 };
 
-const { online } = useOnline();
-// console.log(online.value);
-
+// 下载文件
 const downloadFile = () => {
-	useDownload(downLoadSystemLog, "系统日志");
+	useDownload(downLoadSystemLog, "用户信息");
 };
 
-const { month, day, hour, minute, second, week } = useTime();
-// console.log(month.value, day.value, hour.value, minute.value, second.value, week.value);
+const currentPage = ref(1);
+const pageSize = ref(10);
 
-const value = ref<string>("");
-const tableData = [
-	{
-		date: "2016-05-03",
-		name: "Tom",
-		address: "No. 189, Grove St, Los Angeles"
-	},
-	{
-		date: "2016-05-02",
-		name: "Tom",
-		address: "No. 189, Grove St, Los Angeles"
-	},
-	{
-		date: "2016-05-04",
-		name: "Tom",
-		address: "No. 189, Grove St, Los Angeles"
-	}
-];
+const handleSizeChange = (val: number) => {
+	console.log(`${val} items per page`);
+};
+
+const handleCurrentChange = (val: number) => {
+	console.log(`current page: ${val}`);
+};
 </script>
 <style scoped lang="scss">
 @import "./index.scss";

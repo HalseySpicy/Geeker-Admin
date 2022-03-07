@@ -21,10 +21,6 @@ export namespace Login {
 		firstPasswordReset: boolean;
 		tokenValue: string;
 	}
-	export interface LoginParams {
-		username: string;
-		password: string;
-	}
 }
 
 export interface SystemLogAPI {

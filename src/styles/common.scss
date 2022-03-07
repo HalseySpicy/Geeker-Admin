@@ -34,24 +34,13 @@
 	transition: all 0.2s;
 }
 
-/* breadcrumb transition */
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-	transition: all 0.5s;
-}
-
-.breadcrumb-enter,
-.breadcrumb-leave-active {
-	opacity: 0;
-	transform: translateX(20px);
-}
-
-.breadcrumb-move {
-	transition: all 0.5s;
-}
-
-.breadcrumb-leave-active {
-	position: absolute;
+/* 清除浮动 */
+.clearfix::after {
+	content: "";
+	display: block;
+	height: 0px;
+	clear: both;
+	overflow: hidden;
 }
 
 /* scroll bar */

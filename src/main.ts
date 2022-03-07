@@ -4,8 +4,6 @@ import App from "./App.vue";
 import "@/styles/reset.scss";
 // CSS common style sheet
 import "@/styles/common.scss";
-// element scc
-import "@/styles/element.scss";
 // iconfont css
 import "@/assets/iconfont/iconfont.css";
 // element plus
@@ -14,6 +12,8 @@ import ElementPlus from "element-plus";
 import * as Icons from "@element-plus/icons-vue";
 // element css(如果使用了CDN，不需要引入css)
 import "element-plus/dist/index.css";
+// element scc
+import "@/styles/element.scss";
 // Custom directives
 import directives from "@/directives/index";
 // vue Router

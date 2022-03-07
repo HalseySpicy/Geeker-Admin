@@ -1,7 +1,7 @@
 import { ElMessage } from "element-plus";
 
 /* checkStatus */
-export function checkStatus(status: number, msg?: string): void {
+export const checkStatus = (status: number, msg?: string): void => {
 	switch (status) {
 		case 400:
 			ElMessage.error(msg ? msg : "请求失败！请您稍后重试");
@@ -34,6 +34,6 @@ export function checkStatus(status: number, msg?: string): void {
 			ElMessage.error(msg ? msg : "网关超时！");
 			break;
 		default:
-			ElMessage.error(msg ? msg : "");
+			ElMessage.error(msg);
 	}
-}
+};
