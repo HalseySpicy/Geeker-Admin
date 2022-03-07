@@ -1,3 +1,4 @@
+import { Page, SystemLogAPI } from "./../interface/index";
 import { ContentTypeEnum } from "@/enums/httpEnum";
 import http from "@/api";
 
@@ -9,10 +10,10 @@ const PORT1 = "/tourmanager";
  */
 // * 获取系统日志列表
 export const getSystemLog = (params?: any) => {
-	return http.post(PORT1 + `/web/v1.0/sys/oplog/list`, params);
+	return http.post<Page<SystemLogAPI>>(PORT1 + `/web/v1.0/sys/oplog/list`, params);
 };
 
 // * 导出系统日志
 export const downLoadSystemLog = () => {
-	return http.post(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, {}, { responseType: "blob" });
+	return http.post<any>(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, {}, { responseType: "blob" });
 };

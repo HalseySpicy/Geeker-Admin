@@ -1,17 +1,20 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
+import { AxiosCanceler } from "./helper/axiosCancel";
 import { ResultData } from "@/api/interface";
-import { checkStatus } from "./util/checkStatus";
+import { checkStatus } from "./helper/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
 import router from "@/router";
 
 const globalStore = GlobalStore();
 
+const axiosCanceler = new AxiosCanceler();
+
 const config = {
 	// 默认地址
 	baseURL: import.meta.env.VITE_API_URL as string,
-	// 设置超时时间（10s）ResultData
+	// 设置超时时间（10s）
 	timeout: 10000,
 	// 跨域时候允许携带凭证
 	withCredentials: true
@@ -30,6 +33,8 @@ class RequestHttp {
 		 * */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
+				// * 将当前请求添加到 pending 中
+				axiosCanceler.addPending(config);
 				showFullScreenLoading();
 				const token: string = globalStore.token;
 				return { ...config, headers: { "x-access-token": token } };
@@ -49,7 +54,9 @@ class RequestHttp {
 		// }
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				const { data } = response;
+				const { data, config } = response;
+				// * 在请求结束后，移除本次请求
+				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
 				// * 登陆失效
 				if (data.code == 599) {
@@ -74,8 +81,6 @@ class RequestHttp {
 					checkStatus(response.status, "");
 				} else {
 					// 服务器结果都没有返回(可能服务器错误可能客户端断网)
-					// 无网络时error无response
-					ElMessage.error("请求超时！");
 					if (!window.navigator.onLine) {
 						// 断网处理:可以跳转到断网页面
 						router.replace({

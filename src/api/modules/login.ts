@@ -1,19 +1,11 @@
-import { LoginAPI, LoginParams } from "@/api/interface/index";
-import { ContentTypeEnum } from "@/enums/httpEnum";
+import { Login } from "@/api/interface/index";
+import { PORT1 } from "@/api/config/servicePort";
 import http from "@/api";
-
-// 后端微服务端口名
-const PORT1 = "/tourmanager";
 
 /**
  * @name 登录模块
  */
 // * 用户登录接口
-export const loginApi = (params: LoginParams) => {
-	return http.post<LoginAPI>(PORT1 + `/web/v1.0/user/login-by-name-passwd`, params);
-};
-
-// * 导出系统日志
-export const downLoadFile = () => {
-	return http.post(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, {}, { responseType: "blob" });
+export const loginApi = (params: Login.LoginParams) => {
+	return http.post<Login.LoginAPI>(PORT1 + `/web/v1.0/user/login-by-name-passwd`, params);
 };
