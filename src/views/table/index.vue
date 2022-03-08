@@ -1,63 +1,80 @@
 <template>
 	<div class="table-box">
 		<div class="table-search">
-			<el-form ref="formRef" :model="searchForm" :inline="true" label-width="100px">
+			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
 				<el-form-item label="管理员姓名 :">
-					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+					<el-input v-model="searchParam.opRealName" placeholder="请输入"></el-input>
 				</el-form-item>
 				<el-form-item label="管理员账号 :">
-					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+					<el-input v-model="searchParam.opUsername" placeholder="请输入"></el-input>
 				</el-form-item>
 				<el-form-item label="IP地址 :">
-					<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
+					<el-input v-model="searchParam.ip" placeholder="请输入"></el-input>
 				</el-form-item>
 				<el-form-item label="操作内容 :">
-					<el-select v-model="searchForm.region" placeholder="请选择">
-						<el-option label="Zone one" value="shanghai"></el-option>
-						<el-option label="Zone two" value="beijing"></el-option>
-					</el-select>
+					<el-input v-model="searchParam.opContent" placeholder="请输入"></el-input>
 				</el-form-item>
 				<div class="more-item" v-show="searchShow">
-					<el-form-item label="IP地址 :">
-						<el-input v-model="searchForm.name" placeholder="请输入"></el-input>
-					</el-form-item>
 					<el-form-item label="创建时间 :">
 						<el-date-picker
-							v-model="searchForm.name"
-							type="daterange"
-							start-placeholder="Start Date"
-							end-placeholder="End Date"
+							v-model="searchParam.daterange"
+							type="datetimerange"
+							value-format="YYYY-MM-DD HH:mm:ss"
+							start-placeholder="开始时间"
+							end-placeholder="结束时间"
 						/>
 					</el-form-item>
 				</div>
 			</el-form>
 			<div class="search-operation">
-				<el-button type="primary" :icon="Search">搜索</el-button>
-				<el-button :icon="Delete">重置</el-button>
+				<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
+				<el-button :icon="Delete" @click="reset">重置</el-button>
 				<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow">
 					{{ searchShow ? "合并" : "展开" }}
-					<el-icon class="isOpen-icon" v-show="!searchShow"><arrow-down /></el-icon>
-					<el-icon class="isOpen-icon" v-show="searchShow"><arrow-up /></el-icon>
+					<el-icon class="isOpen-icon" v-show="!searchShow">
+						<arrow-down />
+					</el-icon>
+					<el-icon class="isOpen-icon" v-show="searchShow">
+						<arrow-up />
+					</el-icon>
 				</el-button>
 			</div>
 		</div>
 		<div class="table-header clearfix">
 			<div class="header-button">
 				<el-button type="primary" :icon="CirclePlus">新增用户</el-button>
-				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出系统日志</el-button>
 			</div>
 			<el-tooltip effect="dark" content="刷新" placement="top">
-				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"></el-button>
+				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"> </el-button>
 			</el-tooltip>
 		</div>
 		<el-table height="575" :data="tableData" border>
-			<el-table-column prop="opRealName" label="管理员姓名" show-overflow-tooltip> </el-table-column>
-			<el-table-column prop="opUsername" label="管理员账号" show-overflow-tooltip></el-table-column>
-			<el-table-column prop="opContent" label="操作内容" show-overflow-tooltip> </el-table-column>
-			<el-table-column label="操作" width="400px">
+			<el-table-column type="selection" width="100" />
+			<el-table-column
+				prop="opRealName"
+				label="管理员姓名"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column
+				prop="opUsername"
+				label="管理员账号"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column prop="ip" label="IP地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
+			<el-table-column
+				prop="opContent"
+				label="操作内容"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column label="操作" width="300px">
 				<template #default="scope">
+					<el-button type="text" :icon="View">编辑</el-button>
 					<el-button type="text" :icon="Edit">编辑</el-button>
-					<el-button type="text" :icon="Delete">删除</el-button>
+					<el-button type="text" :icon="Delete" @click="deleteSysLog()">删除</el-button>
 				</template>
 			</el-table-column>
 			<template #empty>
@@ -68,55 +85,51 @@
 			</template>
 		</el-table>
 		<el-pagination
-			v-model:currentPage="currentPage"
-			v-model:page-size="pageSize"
+			v-model:currentPage="pageable.pageNum"
+			v-model:page-size="pageable.pageSize"
 			:page-sizes="[10, 25, 50, 100]"
 			background
 			layout="total, sizes, prev, pager, next, jumper"
-			:total="100"
+			:total="pageable.total"
 			@size-change="handleSizeChange"
 			@current-change="handleCurrentChange"
-		>
-		</el-pagination>
+		></el-pagination>
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
-import { useDownload } from "@/hooks/useDownload";
+import { onMounted } from "vue";
+import { Refresh, CirclePlus, Delete, Search, Edit, Download, View } from "@element-plus/icons-vue";
 import { downLoadSystemLog, getSystemLog } from "@/api/modules/system";
-import { Refresh, CirclePlus, Delete, Search, Edit, Download } from "@element-plus/icons-vue";
+import { useDownload } from "@/hooks/useDownload";
+import { useHandleData } from "@/hooks/useHandleData";
 import { useTable } from "@/hooks/useTable";
-const searchForm = reactive({
-	name: "",
-	region: ""
-});
-let tableData = ref<any[]>([]);
-const searchShow = ref<boolean>(false);
+
+const {
+	tableData,
+	searchShow,
+	pageable,
+	searchParam,
+	getTableList,
+	search,
+	reset,
+	handleSizeChange,
+	handleCurrentChange,
+	defaultFormat
+} = useTable(getSystemLog);
 
 onMounted(() => {
+	// 获取表格数据
 	getTableList();
 });
 
-// 获取表格数据
-const getTableList = async () => {
-	const res = await getSystemLog({});
-	tableData.value = res.data.datalist;
+// 删除日志
+const deleteSysLog = () => {
+	useHandleData();
 };
 
-// 下载文件
+// 导出系统日志
 const downloadFile = () => {
-	useDownload(downLoadSystemLog, "用户信息");
-};
-
-const currentPage = ref(1);
-const pageSize = ref(10);
-
-const handleSizeChange = (val: number) => {
-	console.log(`${val} items per page`);
-};
-
-const handleCurrentChange = (val: number) => {
-	console.log(`current page: ${val}`);
+	useDownload(downLoadSystemLog, "系统日志", searchParam.value);
 };
 </script>
 <style scoped lang="scss">

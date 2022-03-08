@@ -14,6 +14,6 @@ export const getSystemLog = (params?: any) => {
 };
 
 // * 导出系统日志
-export const downLoadSystemLog = () => {
-	return http.post<any>(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, {}, { responseType: "blob" });
+export const downLoadSystemLog = (params: any) => {
+	return http.post<BlobPart>(PORT1 + `/web/v1.0/sys/oplog/exportExcel`, params, { responseType: "blob" });
 };

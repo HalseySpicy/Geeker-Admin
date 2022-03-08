@@ -65,7 +65,7 @@ const obj = reactive<LoginFrom>({
 	password: "dd"
 });
 // 使用toRefs解构数据（在template中直接用）
-// const { username, password } = { ...toRefs(obj) };
+// const { username, password } = toRefs(obj);
 </script>
 
 <style scoped lang="scss">

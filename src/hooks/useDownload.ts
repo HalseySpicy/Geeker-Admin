@@ -12,7 +12,7 @@ import { ElNotification } from "element-plus";
 export const useDownload = async (
 	url: (params: any) => Promise<any>,
 	tempName: string,
-	params: object = {},
+	params: any,
 	isNotify: boolean = true,
 	fileType: string = ".xlsx"
 ) => {
@@ -53,6 +53,6 @@ export const useDownload = async (
 		const blobUrl = window.URL.createObjectURL(blob);
 		download(blobUrl);
 	} catch (error) {
-		// console.log(error);
+		console.log(error);
 	}
 };
