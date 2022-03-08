@@ -17,7 +17,7 @@ export const useDownload = async (
 	fileType: string = ".xlsx"
 ) => {
 	/**
-	 * 由生成的链接下载模板
+	 * @description 由生成的链接下载模板
 	 * @param {string} blobUrl 二进制流地址(必传)
 	 */
 	const download = (blobUrl: string) => {

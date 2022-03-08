@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { GlobalState } from "./interface";
-import piniaPersist from "@/config/piniaPersist";
-// import * as types from "./mutation-types";
+import { createPinia } from "pinia";
+import piniaPersist from "pinia-plugin-persist";
+import piniaPersistConfig from "@/config/piniaPersist";
 
 // defineStore 调用后返回一个函数，调用该函数获得 Store 实体
 export const GlobalStore = defineStore({
@@ -29,5 +30,11 @@ export const GlobalStore = defineStore({
 			this.size = size;
 		}
 	},
-	persist: piniaPersist("GlobalState")
+	persist: piniaPersistConfig("GlobalState")
 });
+
+// piniaPersist(持久化)
+const pinia = createPinia();
+pinia.use(piniaPersist);
+
+export default pinia;

@@ -19,15 +19,9 @@ import directives from "@/directives/index";
 // vue Router
 import router from "@/router/index";
 // pinia store
-import { createPinia } from "pinia";
-// pinia persist
-import piniaPersist from "pinia-plugin-persist";
+import pinia from "@/store/index";
 
 const app = createApp(App);
-
-// cerate Pinia
-const pinia = createPinia();
-pinia.use(piniaPersist);
 
 // 注册element Icons组件
 Object.keys(Icons).forEach(key => {

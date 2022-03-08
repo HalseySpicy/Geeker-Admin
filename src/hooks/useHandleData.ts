@@ -1,27 +1,32 @@
 import { ElMessageBox, ElMessage } from "element-plus";
-
-interface Props {
-	apiUrl: () => Promise<any>;
-}
+import { HandleData } from "./interface";
 
 /**
- * 操作单条数据信息
+ * @description 操作单条数据信息
  * @param {string} apiUrl 操作数据接口的apiUrl(必传)
- * @param {object} prams 携带的参数 {id,params}
- * @param {string} message 提示信息
- * @param {string} confirmType icon类型(不必传)
- * @param {string} isOperation 是否后续调用接口(不必传)
+ * @param {object} prams 携带的参数 {id,params}(必传)
+ * @param {string} message 提示信息(必传)
+ * @param {string} confirmType icon类型(不必传,默认为 warning)
  * @return void
  */
-export const useHandleData = (params?: Props) => {
-	ElMessageBox.confirm("proxy will permanently delete the file. Continue?", "Warning", {
-		confirmButtonText: "OK",
-		cancelButtonText: "Cancel",
-		type: "warning"
-	}).then(() => {
-		ElMessage({
-			type: "success",
-			message: "Delete completed"
+export const useHandleData = (
+	apiUrl: (params: any) => Promise<any>,
+	params: any,
+	message: string,
+	confirmType: HandleData.MessageType = "warning"
+) => {
+	return new Promise((resolve, reject) => {
+		ElMessageBox.confirm(`是否${message}?`, "温馨提示", {
+			confirmButtonText: "确定",
+			cancelButtonText: "取消",
+			type: confirmType
+		}).then(async () => {
+			await apiUrl(params);
+			ElMessage({
+				type: "success",
+				message: `${message}成功!`
+			});
+			resolve(true);
 		});
 	});
 };

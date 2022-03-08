@@ -29,16 +29,6 @@ export const useTime = () => {
 		second.value = date.getSeconds();
 	};
 
-	// 原生时间格式化
-	// new Intl.DateTimeFormat('zh', {
-	//     year: 'numeric',
-	//     month: '2-digit',
-	//     day: '2-digit',
-	//     hour: '2-digit',
-	//     minute: '2-digit',
-	//     second: '2-digit',
-	//     hour12: false
-	// }).format(new Date())
 	updateTime();
 
 	onMounted(() => {

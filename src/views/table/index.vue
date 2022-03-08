@@ -74,7 +74,7 @@
 				<template #default="scope">
 					<el-button type="text" :icon="View">编辑</el-button>
 					<el-button type="text" :icon="Edit">编辑</el-button>
-					<el-button type="text" :icon="Delete" @click="deleteSysLog()">删除</el-button>
+					<el-button type="text" :icon="Delete" @click="deleteSysLog(scope.row.ip)">删除</el-button>
 				</template>
 			</el-table-column>
 			<template #empty>
@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { Refresh, CirclePlus, Delete, Search, Edit, Download, View } from "@element-plus/icons-vue";
-import { downLoadSystemLog, getSystemLog } from "@/api/modules/system";
+import { downLoadSystemLog, getSystemLogList } from "@/api/modules/system";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useTable } from "@/hooks/useTable";
@@ -115,7 +115,7 @@ const {
 	handleSizeChange,
 	handleCurrentChange,
 	defaultFormat
-} = useTable(getSystemLog);
+} = useTable(getSystemLogList);
 
 onMounted(() => {
 	// 获取表格数据
@@ -123,12 +123,13 @@ onMounted(() => {
 });
 
 // 删除日志
-const deleteSysLog = () => {
-	useHandleData();
+const deleteSysLog = async (id: any) => {
+	await useHandleData(getSystemLogList, { id: id }, "删除该日志");
+	getTableList();
 };
 
 // 导出系统日志
-const downloadFile = () => {
+const downloadFile = async () => {
 	useDownload(downLoadSystemLog, "系统日志", searchParam.value);
 };
 </script>

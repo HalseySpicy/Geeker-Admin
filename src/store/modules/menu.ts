@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { MenuState } from "../interface";
-import piniaPersist from "@/config/piniaPersist";
+import piniaPersistConfig from "@/config/piniaPersist";
 
 // MenuStore
 export const MenuStore = defineStore({
@@ -20,5 +20,5 @@ export const MenuStore = defineStore({
 			this.menuList = menuList;
 		}
 	},
-	persist: piniaPersist("MenuState")
+	persist: piniaPersistConfig("MenuState")
 });

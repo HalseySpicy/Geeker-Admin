@@ -1,4 +1,4 @@
-import { Table } from "./interface/index";
+import { Table } from "./interface";
 import { reactive, computed, toRefs } from "vue";
 
 /**

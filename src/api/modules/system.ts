@@ -9,7 +9,7 @@ const PORT1 = "/tourmanager";
  * @name 系统设置
  */
 // * 获取系统日志列表
-export const getSystemLog = (params?: any) => {
+export const getSystemLogList = (params?: any) => {
 	return http.post<Page<SystemLogAPI>>(PORT1 + `/web/v1.0/sys/oplog/list`, params);
 };
 

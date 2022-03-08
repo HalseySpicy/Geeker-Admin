@@ -1,7 +1,7 @@
 import { PersistOptions } from "pinia-plugin-persist";
 
 // pinia持久化参数配置
-const piniaPersist = (key: string) => {
+const piniaPersistConfig = (key: string) => {
 	const persist: PersistOptions = {
 		enabled: true,
 		strategies: [
@@ -15,4 +15,4 @@ const piniaPersist = (key: string) => {
 	return persist;
 };
 
-export default piniaPersist;
+export default piniaPersistConfig;
