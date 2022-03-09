@@ -2,12 +2,11 @@ import { ElMessageBox, ElMessage } from "element-plus";
 import { HandleData } from "./interface";
 
 /**
- * @description 操作单条数据信息
- * @param {string} apiUrl 操作数据接口的apiUrl(必传)
+ * @description 操作单条数据信息(二次确认【删除、禁用、启用、重置】)
+ * @param {Function} apiUrl 操作数据接口的apiUrl(必传)
  * @param {object} prams 携带的参数 {id,params}(必传)
  * @param {string} message 提示信息(必传)
  * @param {string} confirmType icon类型(不必传,默认为 warning)
- * @return void
  */
 export const useHandleData = (
 	apiUrl: (params: any) => Promise<any>,

@@ -1,14 +1,28 @@
 import { Table } from "./interface";
-import { reactive, computed, toRefs } from "vue";
+import { ref, nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
+import type { ElTable } from "element-plus";
+import {
+	Refresh,
+	CirclePlus,
+	Delete,
+	Search,
+	EditPen,
+	Download,
+	View,
+	Setting,
+	ArrowDown,
+	ArrowUp
+} from "@element-plus/icons-vue";
+import { isArray } from "@/utils/is";
 
 /**
  * @description table 页面操作方法封装
- * @param apiUrl 获取表格数据 ApiUrl
+ * @param apiUrl 获取表格数据 ApiUrl(必传)
+ * @param apiUrl 当前表格的DOM(不必传，默认为“”)
  * @param initParam 获取数据初始化参数(不必传，默认为{})
  * @param isPageable 是否有分页(不必传，默认为true)
- * @return void
  * */
-export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean = true) => {
+export const useTable = (apiUrl: any, tableRef: any = "", initParam: any = {}, isPageable: boolean = true) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],
@@ -16,6 +30,8 @@ export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean 
 		searchShow: false,
 		// 是否点击过查询
 		hasSearched: false,
+		// 当前打开的 Drawer 是否为查看数据
+		isView: false,
 		// 分页数据
 		pageable: {
 			// 当前页数
@@ -31,6 +47,20 @@ export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean 
 		totalParam: {}
 	});
 
+	// * 表格页面所需icon(使用shallowRef/markRaw包裹)
+	const icon = shallowRef({
+		Refresh,
+		CirclePlus,
+		Delete,
+		Search,
+		EditPen,
+		Download,
+		View,
+		Setting,
+		ArrowDown,
+		ArrowUp
+	});
+
 	/**
 	 * @description 分页查询数据(只包括分页和表格字段排序,排序方式可自行配置)
 	 * */
@@ -44,6 +74,15 @@ export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean 
 		set: newVal => {
 			console.log("我是分页更新之后的值", newVal);
 		}
+	});
+
+	/**
+	 * @description 防止 keep-alive 导致 el-table 样式错乱问题
+	 * */
+	onActivated(() => {
+		nextTick(() => {
+			tableRef && tableRef.value.doLayout();
+		});
 	});
 
 	/**
@@ -138,6 +177,8 @@ export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean 
 	 * @return void
 	 * */
 	const defaultFormat = (row: any, col: any, callValue: any) => {
+		// 如果为数组,使用逗号拼接
+		if (isArray(callValue)) return callValue.length ? callValue.join("，") : "--";
 		return callValue ?? "--";
 	};
 
@@ -148,6 +189,7 @@ export const useTable = (apiUrl?: any, initParam: any = {}, isPageable: boolean 
 		reset,
 		handleSizeChange,
 		handleCurrentChange,
-		defaultFormat
+		defaultFormat,
+		icon
 	};
 };

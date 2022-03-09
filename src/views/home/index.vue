@@ -11,8 +11,6 @@ interface Props<T> {
 	username: T;
 }
 
-console.log(ResultEnum[10000]);
-
 const data: Props<string> = {
 	username: "string"
 };

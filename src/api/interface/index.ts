@@ -5,7 +5,7 @@ export interface Result {
 }
 
 export interface ResultData<T = any> extends Result {
-	data: T;
+	data?: T;
 }
 
 // * 分页
@@ -16,6 +16,7 @@ export interface Page<T> {
 	total: number;
 }
 
+// * 登录
 export namespace Login {
 	export interface LoginAPI {
 		firstPasswordReset: boolean;
@@ -23,14 +24,25 @@ export namespace Login {
 	}
 }
 
-export interface SystemLogAPI {
-	createTime: string;
-	opUsername: string;
-	opRealName: string;
-	opTypeName: string;
-	opType: string;
-	ip: string;
-	bfData: string;
-	afData: string;
-	opContent: string;
+// * 系统设置
+export namespace System {
+	export interface GetAccountList {
+		id: string;
+		username: string;
+		realName: string;
+		email: string;
+		mobile: string;
+		status: number;
+		lastLoginTime: string;
+		createId: string;
+		createName: string;
+		createTime: string;
+		deptName?: any;
+		roleIds: string[];
+		roleNames: string[];
+		firstPasswordReset: boolean;
+		idCard: string;
+		spotNames: string[];
+		spotIds: string[];
+	}
 }

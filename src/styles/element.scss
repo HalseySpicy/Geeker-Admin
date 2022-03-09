@@ -25,12 +25,9 @@
 		}
 		.search-operation {
 			white-space: nowrap;
-			margin-left: 15px;
+			margin-left: 10px;
 			.search-isOpen {
 				margin-left: 20px;
-				.isOpen-icon {
-					margin-left: 3px;
-				}
 			}
 		}
 	}
@@ -59,15 +56,15 @@
 			color: #252525;
 			font-weight: bold;
 			font-size: 15px;
-			height: 48px;
+			height: 50px;
 		}
 		.el-table__row {
-			height: 46px;
+			height: 52px;
 		}
 		.el-button--text {
 			height: 0;
 		}
-		// 解决表格空白样式不居中问题(element-plus中)
+		// 解决表格空白样式不居中问题(仅在element-plus中)
 		.table-empty {
 			line-height: 30px;
 			position: absolute;
@@ -80,7 +77,7 @@
 	// 表格 pagination 样式
 	.el-pagination {
 		display: flex;
-		margin: 25px 0 20px 0;
+		margin: 23px 0 10px 0;
 		justify-content: flex-end;
 	}
 }

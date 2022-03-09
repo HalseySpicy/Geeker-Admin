@@ -8,11 +8,15 @@ export namespace Table {
 		tableData: any[];
 		searchShow: boolean;
 		hasSearched: boolean;
+		isView: boolean;
 		pageable: Pageable;
 		searchParam: {
 			[key: string]: any;
 		};
 		totalParam: {
+			[key: string]: any;
+		};
+		icon?: {
 			[key: string]: any;
 		};
 	}

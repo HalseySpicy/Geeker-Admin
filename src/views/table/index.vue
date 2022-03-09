@@ -2,79 +2,98 @@
 	<div class="table-box">
 		<div class="table-search">
 			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
-				<el-form-item label="管理员姓名 :">
-					<el-input v-model="searchParam.opRealName" placeholder="请输入"></el-input>
+				<el-form-item label="账号名称 :">
+					<el-input v-model="searchParam.realName" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="管理员账号 :">
-					<el-input v-model="searchParam.opUsername" placeholder="请输入"></el-input>
+				<el-form-item label="绑定景区 :">
+					<el-input v-model="searchParam.spotIds" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="IP地址 :">
-					<el-input v-model="searchParam.ip" placeholder="请输入"></el-input>
+				<el-form-item label="手机号 :">
+					<el-input v-model="searchParam.mobile" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="操作内容 :">
-					<el-input v-model="searchParam.opContent" placeholder="请输入"></el-input>
+				<el-form-item label="账号角色 :">
+					<el-input v-model="searchParam.roleId" placeholder="请输入"></el-input>
 				</el-form-item>
 				<div class="more-item" v-show="searchShow">
-					<el-form-item label="创建时间 :">
-						<el-date-picker
-							v-model="searchParam.daterange"
-							type="datetimerange"
-							value-format="YYYY-MM-DD HH:mm:ss"
-							start-placeholder="开始时间"
-							end-placeholder="结束时间"
-						/>
+					<el-form-item label="帐号状态 :">
+						<el-input v-model="searchParam.status" placeholder="请输入"></el-input>
 					</el-form-item>
 				</div>
 			</el-form>
 			<div class="search-operation">
-				<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
-				<el-button :icon="Delete" @click="reset">重置</el-button>
+				<el-button type="primary" :icon="icon.Search" @click="search">搜索</el-button>
+				<el-button :icon="icon.Delete" @click="reset">重置</el-button>
 				<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow">
 					{{ searchShow ? "合并" : "展开" }}
-					<el-icon class="isOpen-icon" v-show="!searchShow">
-						<arrow-down />
-					</el-icon>
-					<el-icon class="isOpen-icon" v-show="searchShow">
-						<arrow-up />
+					<el-icon class="el-icon--right">
+						<component :is="searchShow ? icon.ArrowUp : icon.ArrowDown"></component>
 					</el-icon>
 				</el-button>
 			</div>
 		</div>
 		<div class="table-header clearfix">
 			<div class="header-button">
-				<el-button type="primary" :icon="CirclePlus">新增用户</el-button>
-				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出系统日志</el-button>
+				<el-button type="primary" :icon="icon.CirclePlus">新增系统账号</el-button>
+				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出系统日志</el-button>
+				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete"
+					>批量删除</el-button
+				>
 			</div>
 			<el-tooltip effect="dark" content="刷新" placement="top">
-				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"> </el-button>
+				<el-button class="refresh" :icon="icon.Refresh" circle @click="getTableList"> </el-button>
 			</el-tooltip>
 		</div>
-		<el-table height="575" :data="tableData" border>
-			<el-table-column type="selection" width="100" />
+		<el-table
+			ref="tableRef"
+			height="575"
+			:data="tableData"
+			:border="true"
+			@selection-change="selectionChange"
+			:row-key="getRowKeys"
+		>
+			<el-table-column type="selection" reserve-selection width="80" />
 			<el-table-column
-				prop="opRealName"
-				label="管理员姓名"
+				prop="realName"
+				label="账号名称"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
 			<el-table-column
-				prop="opUsername"
-				label="管理员账号"
+				prop="spotNames"
+				label="绑定景区"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
-			<el-table-column prop="ip" label="IP地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
 			<el-table-column
-				prop="opContent"
-				label="操作内容"
+				prop="roleNames"
+				label="账号角色"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
-			<el-table-column label="操作" width="300px">
+			<el-table-column
+				prop="mobile"
+				label="手机号码"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column
+				prop="createName"
+				label="创建人"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column
+				prop="createTime"
+				label="创建时间"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+			></el-table-column>
+			<el-table-column label="操作" width="350px">
 				<template #default="scope">
-					<el-button type="text" :icon="View">编辑</el-button>
-					<el-button type="text" :icon="Edit">编辑</el-button>
-					<el-button type="text" :icon="Delete" @click="deleteSysLog(scope.row.ip)">删除</el-button>
+					<el-button type="text" :icon="icon.View">查看</el-button>
+					<el-button type="text" :icon="icon.EditPen">编辑</el-button>
+					<el-button type="text" :icon="icon.Refresh">重置密码</el-button>
+					<el-button type="text" :icon="icon.Delete" @click="deleteSysLog(scope.row.ip)">删除</el-button>
 				</template>
 			</el-table-column>
 			<template #empty>
@@ -97,34 +116,46 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { onMounted } from "vue";
-import { Refresh, CirclePlus, Delete, Search, Edit, Download, View } from "@element-plus/icons-vue";
-import { downLoadSystemLog, getSystemLogList } from "@/api/modules/system";
+import { ref, onMounted } from "vue";
+import { downLoadSystemLog, getAccountList } from "@/api/modules/system";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
+import { useSelection } from "@/hooks/useSelection";
 import { useTable } from "@/hooks/useTable";
+import type { ElTable } from "element-plus";
 
+// 获取当前页面表格元素
+const tableRef = ref<InstanceType<typeof ElTable>>();
 const {
 	tableData,
 	searchShow,
 	pageable,
 	searchParam,
+	icon,
 	getTableList,
 	search,
 	reset,
 	handleSizeChange,
 	handleCurrentChange,
 	defaultFormat
-} = useTable(getSystemLogList);
+} = useTable(getAccountList, tableRef);
+
+const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
 onMounted(() => {
 	// 获取表格数据
 	getTableList();
 });
 
+// 批量删除
+const batchDelete = async () => {
+	await useHandleData(getAccountList, { ids: selectedListIds.value }, "删除所选系统账号");
+	getTableList();
+};
+
 // 删除日志
 const deleteSysLog = async (id: any) => {
-	await useHandleData(getSystemLogList, { id: id }, "删除该日志");
+	await useHandleData(getAccountList, { id: id }, "删除该系统账号");
 	getTableList();
 };
 
