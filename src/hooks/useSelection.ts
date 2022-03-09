@@ -13,14 +13,14 @@ export const useSelection = () => {
 	const selectedListIds = computed(() => {
 		let ids: string[] = [];
 		selectedList.value.forEach(item => {
-			ids.push(item["createTime"]);
+			ids.push(item["id"]);
 		});
 		return ids;
 	});
 
 	// 获取行数据的 Key,用来优化 Table 的渲染;在使用跨页多选时,该属性是必填的
-	const getRowKeys = (row: any) => {
-		return row.createTime + row.opContent;
+	const getRowKeys = (row: { id: string }) => {
+		return row.id;
 	};
 
 	/**

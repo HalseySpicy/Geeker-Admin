@@ -1,6 +1,5 @@
 import { Table } from "./interface";
-import { ref, nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
-import type { ElTable } from "element-plus";
+import { nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
 import {
 	Refresh,
 	CirclePlus,

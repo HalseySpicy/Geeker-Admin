@@ -14,13 +14,14 @@ export const useHandleData = (
 	message: string,
 	confirmType: HandleData.MessageType = "warning"
 ) => {
-	return new Promise((resolve, reject) => {
+	return new Promise(resolve => {
 		ElMessageBox.confirm(`是否${message}?`, "温馨提示", {
 			confirmButtonText: "确定",
 			cancelButtonText: "取消",
 			type: confirmType
 		}).then(async () => {
-			await apiUrl(params);
+			const res = await apiUrl(params);
+			if (!res) return;
 			ElMessage({
 				type: "success",
 				message: `${message}成功!`
