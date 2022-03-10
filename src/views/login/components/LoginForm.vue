@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref, reactive, inject } from "vue";
 import { useRouter } from "vue-router";
-import { LoginFrom, InjectProps } from "../types/index";
+import { LoginFrom, InjectProps } from "../interface/index";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
@@ -71,7 +71,7 @@ const login = (formEl: FormInstance | undefined) => {
 				};
 				const res = await loginApi(requestLoginForm);
 				console.log(res);
-				globalStore.setToken(res.data.tokenValue);
+				globalStore.setToken(res.data!.tokenValue);
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			} catch (error) {

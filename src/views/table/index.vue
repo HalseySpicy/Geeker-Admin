@@ -33,8 +33,9 @@
 		</div>
 		<div class="table-header clearfix">
 			<div class="header-button">
-				<el-button type="primary" :icon="icon.CirclePlus">新增系统账号</el-button>
-				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出系统日志</el-button>
+				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')">新增系统账号</el-button>
+				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd">批量添加系统账号</el-button>
+				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出系统账号列表</el-button>
 				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete">
 					批量删除
 				</el-button>
@@ -88,11 +89,11 @@
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
-			<el-table-column label="操作" width="350px">
+			<el-table-column label="操作" fixed="right" width="350px">
 				<template #default="scope">
-					<el-button type="text" :icon="icon.View">查看</el-button>
-					<el-button type="text" :icon="icon.EditPen">编辑</el-button>
-					<el-button type="text" :icon="icon.Refresh">重置密码</el-button>
+					<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
+					<el-button type="text" :icon="icon.EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+					<el-button type="text" :icon="icon.Refresh" @click="resetPass(scope.row.id)">重置密码</el-button>
 					<el-button type="text" :icon="icon.Delete" @click="deleteAccount(scope.row.id)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -113,17 +114,22 @@
 			@size-change="handleSizeChange"
 			@current-change="handleCurrentChange"
 		></el-pagination>
+		<Drawer ref="drawerRef"></Drawer>
+		<ImportExcel ref="dialogRef"></ImportExcel>
 	</div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { downLoadSystemLog, getSysAccountList, deleteSysAccount } from "@/api/modules/system";
+import { System } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButton } from "@/hooks/useAuthButton";
 import { useTable } from "@/hooks/useTable";
 import type { ElTable } from "element-plus";
+import Drawer from "./components/Drawer.vue";
+import ImportExcel from "@/components/ImportExcel/index.vue";
 
 // 获取当前页面表格元素
 const tableRef = ref<InstanceType<typeof ElTable>>();
@@ -157,6 +163,12 @@ const deleteAccount = async (id: string) => {
 	getTableList();
 };
 
+// 重置密码
+const resetPass = async (id: string) => {
+	await useHandleData(deleteSysAccount, { id }, "重置该系统账号密码");
+	getTableList();
+};
+
 // 批量删除系统账号
 const batchDelete = async () => {
 	console.log(selectedListIds.value);
@@ -164,11 +176,36 @@ const batchDelete = async () => {
 	getTableList();
 };
 
+interface DialogExpose {
+	acceptParams: (params: any) => void;
+}
+const dialogRef = ref<DialogExpose>();
+// 批量添加系统账号
+const batchAdd = () => {
+	dialogRef.value!.acceptParams("a");
+};
+
 // 导出系统日志
 const downloadFile = async () => {
 	useDownload(downLoadSystemLog, "系统日志", searchParam.value);
 };
+
+interface DrawerExpose {
+	acceptParams: (params: any) => void;
+}
+const drawerRef = ref<DrawerExpose>();
+// 打开 drawer
+const openDrawer = (title: string, rowData?: System.GetAccountList) => {
+	let params = {
+		title: title,
+		rowData: rowData,
+		isView: title === "查看" ? true : false,
+		apiUrl: "aa"
+	};
+	drawerRef.value!.acceptParams(params);
+};
 </script>
+
 <style scoped lang="scss">
 @import "./index.scss";
 </style>

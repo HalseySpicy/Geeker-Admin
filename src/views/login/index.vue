@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import LoginForm from "./components/LoginForm.vue";
-import { LoginFrom, LoginFormExpose } from "./types/index";
+import { LoginFrom, LoginFormExpose } from "./interface/index";
 
 import { ref, reactive, Ref, toRefs, provide } from "vue";
 

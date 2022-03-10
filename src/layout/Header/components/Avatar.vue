@@ -1,7 +1,7 @@
 <template>
 	<el-dropdown trigger="click">
 		<div class="avatar">
-			<img src="@/assets/images/avatar.gif" alt="" />
+			<img src="@/assets/images/avatar.png" alt="avatar" />
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu>
@@ -28,8 +28,8 @@ const router = useRouter();
 // logout
 const logout = () => {
 	ElMessageBox.confirm("您是否确认退出登录?", "温馨提示", {
-		confirmButtonText: "OK",
-		cancelButtonText: "Cancel",
+		confirmButtonText: "确定",
+		cancelButtonText: "取消",
 		type: "warning"
 	}).then(() => {
 		router.push({ name: "login" });

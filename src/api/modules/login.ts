@@ -1,6 +1,6 @@
 import { Login } from "@/api/interface/index";
 import { PORT1 } from "@/api/config/servicePort";
-import { LoginFrom } from "@/views/login/types";
+import { LoginFrom } from "@/views/login/interface";
 
 import http from "@/api";
 
