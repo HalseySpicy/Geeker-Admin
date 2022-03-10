@@ -113,5 +113,10 @@
 	.el-dialog__header {
 		border-bottom: 1px solid #f0f0f0;
 		margin: 0;
+		padding: 15px 20px;
+		.el-dialog__title {
+			font-size: 17px;
+			color: #303133;
+		}
 	}
 }
