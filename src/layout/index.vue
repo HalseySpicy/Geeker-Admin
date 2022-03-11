@@ -12,10 +12,9 @@
 				<section class="main-box">
 					<router-view v-slot="{ Component, route }">
 						<transition appear name="fade-transform" mode="out-in">
-							<keep-alive v-if="route.meta.keepAlive">
+							<keep-alive :include="cacheRouter">
 								<component :is="Component" :key="route.path"></component>
 							</keep-alive>
-							<component v-else :is="Component" :key="route.path"></component>
 						</transition>
 					</router-view>
 				</section>
@@ -32,6 +31,7 @@ import Menu from "./Menu/index.vue";
 import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
 import Footer from "./Footer/index.vue";
+import cacheRouter from "@/router/cacheRouter";
 </script>
 
 <style scoped lang="scss">

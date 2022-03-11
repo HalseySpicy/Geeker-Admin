@@ -4,7 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="home">
 import { ResultEnum } from "@/enums/httpEnum";
 
 interface Props<T> {

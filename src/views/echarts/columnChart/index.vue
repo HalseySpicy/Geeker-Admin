@@ -5,7 +5,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="columnChart">
 import { ref } from "vue";
 
 import { useRoute } from "vue-router";

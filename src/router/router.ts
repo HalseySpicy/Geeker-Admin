@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import homeRouter from "./modules/home";
 import tableRouter from "./modules/table";
 import echartsRouter from "./modules/echarts";
+import menuRouter from "./modules/menu";
 import errorRouter from "./modules/error";
 
 const routes: RouteRecordRaw[] = [
@@ -22,6 +23,7 @@ const routes: RouteRecordRaw[] = [
 	...homeRouter,
 	...tableRouter,
 	...echartsRouter,
+	...menuRouter,
 	...errorRouter,
 	{
 		// 找不到路由重定向到404页面

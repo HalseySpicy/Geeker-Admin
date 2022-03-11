@@ -10,7 +10,7 @@ const tableRouter: Array<RouteRecordRaw> = [
 		children: [
 			{
 				path: "index",
-				name: "table",
+				name: "proTable",
 				component: () => import(/* webpackChunkName: "table" */ "@/views/table/index.vue"),
 				meta: {
 					keepAlive: true,

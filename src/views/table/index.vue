@@ -118,7 +118,7 @@
 		<ImportExcel ref="dialogRef"></ImportExcel>
 	</div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="proTable">
 import { ref, onMounted } from "vue";
 import { downLoadSystemLog, getSysAccountList, deleteSysAccount } from "@/api/modules/system";
 import { System } from "@/api/interface";

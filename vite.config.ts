@@ -7,6 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 const { resolve } = require("path");
 
 // https://vitejs.dev/config/
@@ -66,6 +67,8 @@ export default defineConfig({
 		// 		}
 		// 	]
 		// }),
+		// name 可以写在script上
+		VueSetupExtend(),
 		// image compress
 		viteImagemin({
 			gifsicle: {
@@ -101,9 +104,9 @@ export default defineConfig({
 			threshold: 10240,
 			algorithm: "gzip",
 			ext: ".gz"
-		})
+		}),
 		// 查看打包体积大小
-		// visualizer()
+		visualizer()
 	],
 	// build configure
 	build: {
