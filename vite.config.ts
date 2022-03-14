@@ -35,7 +35,8 @@ export default defineConfig({
 		// 代理跨域
 		proxy: {
 			"/api": {
-				target: "http://sttmgateway.inspirefutech.com", // 测试环境
+				target: "http://sttmgateway.inspirefutech.com", // 景区预约
+				// target: "http://test-stgateway.supercharger.com", // 新能源
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, "")
 			}

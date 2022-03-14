@@ -11,7 +11,7 @@ import { ElNotification } from "element-plus";
 export const useDownload = async (
 	url: (params: any) => Promise<any>,
 	tempName: string,
-	params: any,
+	params?: any,
 	isNotify: boolean = true,
 	fileType: string = ".xlsx"
 ) => {

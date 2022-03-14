@@ -2,7 +2,7 @@
 	<el-dialog v-model="dialogVisible" title="批量添加系统账号" width="580px">
 		<el-form class="drawer-multiColumn-form" label-width="100px">
 			<el-form-item label="模板下载 :">
-				<el-button type="primary" :icon="Download">点击下载</el-button>
+				<el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>
 			</el-form-item>
 			<el-form-item label="文件上传 :">
 				<el-upload
@@ -10,7 +10,11 @@
 					:drag="true"
 					:limit="excelLimit"
 					:multiple="true"
+					:http-request="uploadExcel"
+					:before-upload="beforeExcelUpload"
 					:on-exceed="handleExceed"
+					:on-success="excelUploadSuccess"
+					:on-error="excelUploadError"
 					accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 				>
 					<el-icon class="el-icon--upload"><upload-filled /></el-icon>
@@ -28,9 +32,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref } from "vue";
+import { useDownload } from "@/hooks/useDownload";
 import { Download } from "@element-plus/icons-vue";
 import { ElNotification } from "element-plus";
+
+export interface ExcelParameterProps {
+	tempUrl: (params: any) => Promise<any>;
+	tempName: string;
+	importUrl: (params: any) => Promise<any>;
+}
 
 // 是否覆盖数据
 const isCover = ref(false);
@@ -38,10 +49,51 @@ const isCover = ref(false);
 const excelLimit = ref(1);
 // dialog状态
 const dialogVisible = ref(false);
+// 父组件传过来的参数
+const parameter = ref<Partial<ExcelParameterProps>>({});
 
 // 接收参数
 const acceptParams = (params?: any): void => {
+	console.log(params);
+	parameter.value = params;
 	dialogVisible.value = true;
+};
+
+// 模板下载
+const downloadTemp = () => {
+	if (!parameter.value.tempUrl) return;
+	useDownload(parameter.value.tempUrl, "用户模板", {});
+};
+
+// 文件上传
+const uploadExcel = async (param: any) => {
+	let excelFormData = new FormData();
+	excelFormData.append("file", param.file);
+	excelFormData.append("isCover", isCover.value as unknown as Blob);
+	const res = parameter.value.importUrl && (await parameter.value.importUrl(excelFormData));
+	if (res.code !== 200) return param.onError();
+	dialogVisible.value = false;
+};
+
+// 文件上传之前判断
+const beforeExcelUpload = (file: any) => {
+	const isExcel =
+		file.type === "application/vnd.ms-excel" ||
+		file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+	const isLt5M = file.size / 1024 / 1024 < 5;
+	if (!isExcel)
+		ElNotification({
+			title: "温馨提示",
+			message: "上传文件只能是 xls / xlsx 格式！",
+			type: "warning"
+		});
+	if (!isLt5M)
+		ElNotification({
+			title: "温馨提示",
+			message: "上传文件大小不能超过 5MB！",
+			type: "warning"
+		});
+	return isExcel && isLt5M;
 };
 
 // 文件数超出提示
@@ -62,7 +114,11 @@ const excelUploadError = (): void => {
 };
 // 上传成功提示
 const excelUploadSuccess = (): void => {
-	// this.$message.success("导入数据成功！");
+	ElNotification({
+		title: "温馨提示",
+		message: "导入数据成功！",
+		type: "success"
+	});
 };
 defineExpose({
 	acceptParams

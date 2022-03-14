@@ -1,24 +1,31 @@
-// * 请求结果集
+// * 请求响应参数(不包含data)
 export interface Result {
 	code: string;
 	msg: string;
 }
 
+// * 请求响应参数(包含data)
 export interface ResultData<T = any> extends Result {
 	data?: T;
 }
 
-// * 分页
-export interface Page<T> {
+// * 分页响应参数
+export interface ResPage<T> {
 	datalist: T[];
 	pageNum: number;
 	pageSize: number;
 	total: number;
 }
 
+// * 分页请求参数
+export interface ReqPage {
+	pageNum: number;
+	pageSize: number;
+}
+
 // * 登录
 export namespace Login {
-	export interface LoginAPI {
+	export interface ResLogin {
 		firstPasswordReset: boolean;
 		tokenValue: string;
 	}
@@ -26,6 +33,13 @@ export namespace Login {
 
 // * 系统设置
 export namespace System {
+	export interface ReqGetAccountParams extends ReqPage {
+		realName: string;
+		spotIds: string;
+		mobile: string;
+		roleId: string;
+		status: string;
+	}
 	export interface GetAccountList {
 		id: string;
 		username: string;

@@ -16,7 +16,7 @@ const tableRouter: Array<RouteRecordRaw> = [
 					keepAlive: true,
 					requiresAuth: true,
 					title: "超级表格",
-					key: "table"
+					key: "systemAccount"
 				}
 			}
 		]

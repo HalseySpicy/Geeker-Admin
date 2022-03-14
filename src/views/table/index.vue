@@ -33,7 +33,9 @@
 		</div>
 		<div class="table-header">
 			<div class="header-button">
-				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')">新增系统账号</el-button>
+				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">
+					新增系统账号
+				</el-button>
 				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd">批量添加系统账号</el-button>
 				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出系统账号列表</el-button>
 				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete">
@@ -125,14 +127,13 @@ import { System } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
-import { useAuthButton } from "@/hooks/useAuthButton";
+import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
-import type { ElTable } from "element-plus";
 import Drawer from "./components/Drawer.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 
 // 获取当前页面表格元素
-const tableRef = ref<InstanceType<typeof ElTable>>();
+const tableRef = ref();
 const {
 	tableData,
 	searchShow,
@@ -149,8 +150,9 @@ const {
 
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
-const { key } = useAuthButton();
-console.log(key.value);
+const { nowKey, BUTTONS } = useAuthButtons();
+console.log(nowKey.value);
+console.log(BUTTONS.value);
 
 onMounted(() => {
 	// 获取表格数据
@@ -182,7 +184,12 @@ interface DialogExpose {
 const dialogRef = ref<DialogExpose>();
 // 批量添加系统账号
 const batchAdd = () => {
-	dialogRef.value!.acceptParams("a");
+	let params = {
+		tempUrl: downLoadSystemLog,
+		tempName: "用户模板",
+		importUrl: deleteSysAccount
+	};
+	dialogRef.value!.acceptParams(params);
 };
 
 // 导出系统日志
@@ -200,7 +207,7 @@ const openDrawer = (title: string, rowData?: System.GetAccountList) => {
 		title: title,
 		rowData: rowData,
 		isView: title === "查看" ? true : false,
-		apiUrl: "aa"
+		apiUrl: deleteSysAccount
 	};
 	drawerRef.value!.acceptParams(params);
 };

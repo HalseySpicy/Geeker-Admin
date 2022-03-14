@@ -32,6 +32,17 @@ import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
 import Footer from "./Footer/index.vue";
 import cacheRouter from "@/router/cacheRouter";
+import { onMounted } from "vue";
+import { getAuthorButtons } from "@/api/modules/login";
+import { AuthButtonsStore } from "@/store/modules/authButtons";
+
+const authButtonsStore = AuthButtonsStore();
+
+onMounted(async () => {
+	// 获取按钮权限列表
+	const res = await getAuthorButtons();
+	authButtonsStore.setAuthButtons(res.data);
+});
 </script>
 
 <style scoped lang="scss">

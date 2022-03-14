@@ -22,7 +22,12 @@ import { isArray } from "@/utils/is";
  * @param initParam 获取数据初始化参数(不必传，默认为{})
  * @param isPageable 是否有分页(不必传，默认为true)
  * */
-export const useTable = (apiUrl: any, tableRef: any = "", initParam: any = {}, isPageable: boolean = true) => {
+export const useTable = (
+	apiUrl: (params: any) => Promise<any>,
+	tableRef: any = "",
+	initParam: any = {},
+	isPageable: boolean = true
+) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],

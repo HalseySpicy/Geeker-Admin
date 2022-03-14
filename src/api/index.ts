@@ -27,7 +27,7 @@ class RequestHttp {
 		this.service = axios.create(config);
 
 		/**
-		 * @description：请求拦截器
+		 * @description 请求拦截器
 		 * 客户端发送请求 -> [请求拦截器] -> 服务器
 		 * token校验(JWT) : 接受服务器返回的token,存储到vuex/本地储存当中
 		 * */
@@ -45,7 +45,7 @@ class RequestHttp {
 		);
 
 		/**
-		 * @description：响应拦截器
+		 * @description 响应拦截器
 		 *  服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
 		 * */
 		// serves.defaults.validateStatus = status => {
@@ -78,7 +78,7 @@ class RequestHttp {
 				const { response } = error;
 				tryHideFullScreenLoading();
 				if (response) {
-					checkStatus(response.status, "");
+					checkStatus(response.status);
 				} else {
 					// 服务器结果都没有返回(可能服务器错误可能客户端断网)
 					if (!window.navigator.onLine) {

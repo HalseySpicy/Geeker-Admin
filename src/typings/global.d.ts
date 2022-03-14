@@ -12,3 +12,8 @@ declare namespace Menu {
 		children?: MenuOptions[];
 	}
 }
+
+// * 转化为只读类型
+declare interface MyReadonly<T> {
+	readonly [K in T]: T[K];
+}

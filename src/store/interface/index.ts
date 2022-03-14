@@ -16,3 +16,9 @@ export interface TabsState {
 	tabsMenuValue: string;
 	tabsMenuList: Menu.MenuOptions[];
 }
+
+export interface AuthButtonsState {
+	authorButtons: {
+		[propName: string]: any;
+	};
+}

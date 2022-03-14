@@ -39,7 +39,7 @@ const globalStore = GlobalStore();
 
 // inject
 const provideState = inject("provideState") as InjectProps;
-console.log(provideState.age);
+// console.log(provideState.age);
 provideState.changeName();
 
 // 定义 formRef（校验规则）

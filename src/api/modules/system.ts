@@ -1,15 +1,14 @@
-import { Page, System } from "./../interface/index";
-import http from "@/api";
+import { ResPage, System } from "@/api/interface/index";
+import { PORT1 } from "@/api/config/servicePort";
 
-// 后端微服务端口名
-const PORT1 = "/tourmanager";
+import http from "@/api";
 
 /**
  * @name 系统账号管理模块
  */
 // * 获取系统账号列表
-export const getSysAccountList = (params?: any) => {
-	return http.get<Page<System.GetAccountList>>(PORT1 + `/web/v1.0/sys/user/list`, params);
+export const getSysAccountList = (params: System.ReqGetAccountParams) => {
+	return http.get<ResPage<System.GetAccountList>>(PORT1 + `/web/v1.0/sys/user/list`, params);
 };
 
 // * 删除系统账号
