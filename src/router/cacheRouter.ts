@@ -10,8 +10,6 @@ Object.keys(metaRouters).forEach(item => {
 	});
 });
 
-console.log(routerArray);
-
 // * 过滤需要缓存的路由
 let cacheRouter: any[] = [];
 const filterKeepAlive = (_route: RouteRecordRaw[], _cache: any[]): void => {

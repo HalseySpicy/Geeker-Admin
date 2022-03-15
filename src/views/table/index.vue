@@ -151,8 +151,8 @@ const {
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
 const { nowKey, BUTTONS } = useAuthButtons();
-console.log(nowKey.value);
-console.log(BUTTONS.value);
+// console.log(nowKey.value);
+// console.log(BUTTONS.value);
 
 onMounted(() => {
 	// 获取表格数据
