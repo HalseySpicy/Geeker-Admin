@@ -48,8 +48,8 @@ const authButtonsStore = AuthButtonsStore();
 
 onMounted(async () => {
 	// 获取按钮权限列表
-	const res = await getAuthorButtons();
-	authButtonsStore.setAuthButtons(res.data);
+	// const res = await getAuthorButtons();
+	// authButtonsStore.setAuthButtons(res.data);
 });
 </script>
 

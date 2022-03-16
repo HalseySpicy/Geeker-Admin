@@ -4,7 +4,7 @@
 		:destroy-on-close="true"
 		@close="resetForm()"
 		size="800px"
-		:title="`${drawerData.title}系统账号`"
+		:title="`${drawerData.title}用户`"
 	>
 		<el-form
 			ref="ruleFormRef"

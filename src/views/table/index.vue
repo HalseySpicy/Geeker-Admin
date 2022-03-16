@@ -2,21 +2,29 @@
 	<div class="table-box">
 		<div class="table-search">
 			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
-				<el-form-item label="账号名称 :">
-					<el-input v-model="searchParam.realName" placeholder="请输入"></el-input>
+				<el-form-item label="用户姓名 :">
+					<el-input v-model="searchParam.username" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="绑定景区 :">
-					<el-input v-model="searchParam.spotIds" placeholder="请输入"></el-input>
+				<el-form-item label="用户性别 :">
+					<el-select v-model="searchParam.gender" placeholder="请选择">
+						<el-option v-for="item in genderType" :key="item.value" :label="item.label" :value="item.value" />
+					</el-select>
 				</el-form-item>
-				<el-form-item label="手机号 :">
-					<el-input v-model="searchParam.mobile" placeholder="请输入"></el-input>
+				<el-form-item label="身份证号 :">
+					<el-input v-model="searchParam.idCard" placeholder="请输入"></el-input>
 				</el-form-item>
-				<el-form-item label="账号角色 :">
-					<el-input v-model="searchParam.roleId" placeholder="请输入"></el-input>
+				<el-form-item label="用户邮箱 :">
+					<el-input v-model="searchParam.email" placeholder="请输入"></el-input>
 				</el-form-item>
 				<div class="more-item" v-show="searchShow">
-					<el-form-item label="帐号状态 :">
-						<el-input v-model="searchParam.status" placeholder="请输入"></el-input>
+					<el-form-item label="创建时间 :">
+						<el-date-picker
+							v-model="searchParam.createTime"
+							type="datetimerange"
+							start-placeholder="开始时间"
+							end-placeholder="结束时间"
+							value-format="YYYY-MM-DD HH:mm:ss"
+						/>
 					</el-form-item>
 				</div>
 			</el-form>
@@ -33,13 +41,11 @@
 		</div>
 		<div class="table-header">
 			<div class="header-button">
-				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">
-					新增系统账号
-				</el-button>
-				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd">批量添加系统账号</el-button>
-				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出系统账号列表</el-button>
+				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
+				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd">批量添加用户</el-button>
+				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出用户数据</el-button>
 				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete">
-					批量删除
+					批量删除用户
 				</el-button>
 			</div>
 			<el-tooltip effect="dark" content="刷新" placement="top">
@@ -56,32 +62,35 @@
 		>
 			<el-table-column type="selection" reserve-selection width="80" />
 			<el-table-column
-				prop="realName"
-				label="账号名称"
+				prop="username"
+				label="用户姓名"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+				width="130"
+			></el-table-column>
+			<el-table-column
+				prop="gender"
+				label="用户性别"
+				:formatter="defaultFormat"
+				show-overflow-tooltip
+				width="110"
+			></el-table-column>
+			<el-table-column
+				prop="idCard"
+				label="身份证号"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
 			<el-table-column
-				prop="spotNames"
-				label="绑定景区"
+				prop="email"
+				label="用户邮箱"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
+				width="250"
 			></el-table-column>
 			<el-table-column
-				prop="roleNames"
-				label="账号角色"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-			></el-table-column>
-			<el-table-column
-				prop="mobile"
-				label="手机号码"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-			></el-table-column>
-			<el-table-column
-				prop="createName"
-				label="创建人"
+				prop="address"
+				label="居住地址"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
 			></el-table-column>
@@ -90,13 +99,14 @@
 				label="创建时间"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
+				width="220"
 			></el-table-column>
 			<el-table-column label="操作" fixed="right" width="350px">
 				<template #default="scope">
 					<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
 					<el-button type="text" :icon="icon.EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-					<el-button type="text" :icon="icon.Refresh" @click="resetPass(scope.row.id)">重置密码</el-button>
-					<el-button type="text" :icon="icon.Delete" @click="deleteAccount(scope.row.id)">删除</el-button>
+					<el-button type="text" :icon="icon.Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+					<el-button type="text" :icon="icon.Delete" @click="deleteAccount(scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
 			<template #empty>
@@ -122,8 +132,9 @@
 </template>
 <script setup lang="ts" name="proTable">
 import { ref, onMounted } from "vue";
-import { downLoadSystemLog, getSysAccountList, deleteSysAccount } from "@/api/modules/system";
-import { System } from "@/api/interface";
+import { genderType } from "@/utils/serviceDict";
+import { getUserList, deleteUser, resetUserPassWord, exportUserInfo } from "@/api/modules/user";
+import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
@@ -146,68 +157,67 @@ const {
 	handleSizeChange,
 	handleCurrentChange,
 	defaultFormat
-} = useTable(getSysAccountList, tableRef);
+} = useTable(getUserList, tableRef);
 
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
-
+// 用户按钮权限
 const { nowKey, BUTTONS } = useAuthButtons();
-// console.log(nowKey.value);
-// console.log(BUTTONS.value);
+console.log(nowKey.value);
+console.log(BUTTONS.value);
 
 onMounted(() => {
 	// 获取表格数据
 	getTableList();
 });
 
-// 删除系统账号
-const deleteAccount = async (id: string) => {
-	await useHandleData(deleteSysAccount, { id }, "删除该系统账号");
+// 删除用户信息
+const deleteAccount = async (params: User.ResUserList) => {
+	await useHandleData(deleteUser, { id: [params.id] }, `删除【${params.username}】用户`);
 	getTableList();
 };
 
-// 重置密码
-const resetPass = async (id: string) => {
-	await useHandleData(deleteSysAccount, { id }, "重置该系统账号密码");
+// 重置用户密码
+const resetPass = async (params: User.ResUserList) => {
+	await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
 	getTableList();
 };
 
-// 批量删除系统账号
+// 批量删除用户信息
 const batchDelete = async () => {
-	console.log(selectedListIds.value);
-	await useHandleData(deleteSysAccount, { ids: selectedListIds.value }, "删除所选系统账号");
+	await useHandleData(deleteUser, { id: selectedListIds.value }, "删除所选用户信息");
 	getTableList();
 };
 
+// 导出用户列表
+const downloadFile = async () => {
+	useDownload(exportUserInfo, "用户列表", searchParam.value);
+};
+
+// 批量添加用户
 interface DialogExpose {
 	acceptParams: (params: any) => void;
 }
 const dialogRef = ref<DialogExpose>();
-// 批量添加系统账号
 const batchAdd = () => {
 	let params = {
-		tempUrl: downLoadSystemLog,
+		tempUrl: exportUserInfo,
 		tempName: "用户模板",
-		importUrl: deleteSysAccount
+		importUrl: deleteUser
 	};
 	dialogRef.value!.acceptParams(params);
 };
 
-// 导出系统日志
-const downloadFile = async () => {
-	useDownload(downLoadSystemLog, "系统日志", searchParam.value);
-};
-
+// 打开 drawer(编辑/查看/删除)
 interface DrawerExpose {
 	acceptParams: (params: any) => void;
 }
 const drawerRef = ref<DrawerExpose>();
-// 打开 drawer
-const openDrawer = (title: string, rowData?: System.GetAccountList) => {
+const openDrawer = (title: string, rowData?: User.ResUserList) => {
 	let params = {
 		title: title,
 		rowData: rowData,
 		isView: title === "查看" ? true : false,
-		apiUrl: deleteSysAccount
+		apiUrl: deleteUser
 	};
 	drawerRef.value!.acceptParams(params);
 };

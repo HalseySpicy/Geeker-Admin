@@ -27,7 +27,8 @@
 <script setup lang="ts">
 import { ref, reactive, inject } from "vue";
 import { useRouter } from "vue-router";
-import { LoginFrom, InjectProps } from "../interface/index";
+import { Login } from "@/api/interface";
+import { InjectProps } from "../interface/index";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
@@ -51,9 +52,9 @@ const loginRules = reactive({
 });
 
 // 登录表单数据
-const loginForm = reactive<LoginFrom>({
+const loginForm = reactive<Login.ReqLoginForm>({
 	username: "admin",
-	password: "00000000"
+	password: "123456"
 });
 const loading = ref<boolean>(false);
 
@@ -65,13 +66,13 @@ const login = (formEl: FormInstance | undefined) => {
 		if (valid) {
 			loading.value = true;
 			try {
-				let requestLoginForm: LoginFrom = {
+				let requestLoginForm: Login.ReqLoginForm = {
 					username: loginForm.username,
 					password: md5(loginForm.password)
 				};
 				const res = await loginApi(requestLoginForm);
 				console.log(res);
-				globalStore.setToken(res.data!.tokenValue);
+				globalStore.setToken(res.data!.access_token);
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			} catch (error) {
@@ -117,7 +118,7 @@ const props = withDefaults(defineProps<ParentProps>(), {
 
 // 子组件向父组件传输数据（触发父组件的submitParent方法）
 const emit = defineEmits<{
-	(e: "submitParent", LoginFrom: LoginFrom): void;
+	(e: "submitParent", LoginFrom: Login.ReqLoginForm): void;
 }>();
 
 const submitParent = () => {
@@ -125,7 +126,7 @@ const submitParent = () => {
 };
 
 // 子组件数据暴露给父组件
-const count = ref<number>(2111);
+const count = ref<number>(1);
 const consoleNumber = (name: string): void => {
 	console.log("我是子组件打印的数据", name);
 };

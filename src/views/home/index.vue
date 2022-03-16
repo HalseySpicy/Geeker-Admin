@@ -7,30 +7,15 @@
 <script setup lang="ts" name="home">
 import { ResultEnum } from "@/enums/httpEnum";
 
-interface Props<T> {
-	username: T;
-}
-
-const data: Props<string> = {
-	username: "string"
-};
-
-interface PropsSay {
-	say<T>(value: T): T;
-}
-
-interface PropsNumber<T, U> {
-	(a: T, b: U): number;
-}
-function F1() {
-	let a = 100;
-	return function () {
-		console.log(a);
-	};
-}
-var f1 = F1();
-var a = 200;
-f1(); //100
+// function F1() {
+// 	let a = 100;
+// 	return function () {
+// 		console.log(a);
+// 	};
+// }
+// var f1 = F1();
+// var a = 200;
+// f1();
 
 // const number = () => {
 // 	let a = 1;

@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="dialogVisible" title="批量添加系统账号" width="580px">
+	<el-dialog v-model="dialogVisible" title="批量添加用户" width="580px">
 		<el-form class="drawer-multiColumn-form" label-width="100px">
 			<el-form-item label="模板下载 :">
 				<el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>

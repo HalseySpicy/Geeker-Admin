@@ -25,38 +25,35 @@ export interface ReqPage {
 
 // * 登录
 export namespace Login {
+	export interface ReqLoginForm {
+		username: string;
+		password: string;
+	}
 	export interface ResLogin {
-		firstPasswordReset: boolean;
-		tokenValue: string;
+		access_token: string;
+	}
+	export interface ResButtons {
+		[propName: string]: any;
 	}
 }
 
-// * 系统设置
-export namespace System {
-	export interface ReqGetAccountParams extends ReqPage {
-		realName: string;
-		spotIds: string;
-		mobile: string;
-		roleId: string;
-		status: string;
+// * 用户管理
+export namespace User {
+	export interface ReqGetUserParams extends ReqPage {
+		username: string;
+		gender: number;
+		idCard: string;
+		email: string;
+		createTime: string[];
 	}
-	export interface GetAccountList {
+	export interface ResUserList {
 		id: string;
 		username: string;
-		realName: string;
-		email: string;
-		mobile: string;
-		status: number;
-		lastLoginTime: string;
-		createId: string;
-		createName: string;
-		createTime: string;
-		deptName?: any;
-		roleIds: string[];
-		roleNames: string[];
-		firstPasswordReset: boolean;
+		gender: string;
+		age: number;
 		idCard: string;
-		spotNames: string[];
-		spotIds: string[];
+		email: string;
+		address: string;
+		createTime: string;
 	}
 }

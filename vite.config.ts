@@ -35,8 +35,7 @@ export default defineConfig({
 		// 代理跨域
 		proxy: {
 			"/api": {
-				target: "http://sttmgateway.inspirefutech.com", // 景区预约
-				// target: "http://test-stgateway.supercharger.com", // 新能源
+				target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0",
 				changeOrigin: true,
 				rewrite: path => path.replace(/^\/api/, "")
 			}

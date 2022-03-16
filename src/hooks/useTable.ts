@@ -82,14 +82,21 @@ export const useTable = (
 		}
 	});
 
+	onActivated(() => {
+		doLayout();
+	});
+
 	/**
 	 * @description 防止 keep-alive 导致 el-table 样式错乱问题
 	 * */
-	onActivated(() => {
+	const doLayout = () => {
 		nextTick(() => {
 			tableRef && tableRef.value.doLayout();
+			window.onresize = () => {
+				tableRef && tableRef.value.doLayout();
+			};
 		});
-	});
+	};
 
 	/**
 	 * @description 获取表格数据

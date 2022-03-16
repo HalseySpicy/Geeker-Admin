@@ -34,12 +34,6 @@
 		&::-webkit-scrollbar-thumb {
 			background-color: #41444b;
 		}
-		// 防止 icon 抖动
-		.el-icon {
-			width: auto;
-			height: auto;
-			margin: 0px 8px 0 3px;
-		}
 		.el-menu-item {
 			&.is-active {
 				background-color: #060708 !important;
