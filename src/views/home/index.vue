@@ -6,7 +6,6 @@
 
 <script setup lang="ts" name="home">
 import { ResultEnum } from "@/enums/httpEnum";
-
 // function F1() {
 // 	let a = 100;
 // 	return function () {

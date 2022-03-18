@@ -44,7 +44,9 @@ export namespace User {
 		gender: number;
 		idCard: string;
 		email: string;
+		address: string;
 		createTime: string[];
+		status: number;
 	}
 	export interface ResUserList {
 		id: string;
@@ -55,5 +57,6 @@ export namespace User {
 		email: string;
 		address: string;
 		createTime: string;
+		status: number;
 	}
 }

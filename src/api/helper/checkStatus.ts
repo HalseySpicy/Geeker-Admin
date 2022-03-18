@@ -1,6 +1,9 @@
 import { ElMessage } from "element-plus";
 
-/* checkStatus */
+/**
+ * @description: 校验状态码
+ * @param {number} status
+ */
 export const checkStatus = (status: number): void => {
 	switch (status) {
 		case 400:

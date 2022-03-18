@@ -3,6 +3,11 @@
 	z-index: 99999 !important;
 }
 
+// * 设置 message 层级在 loading 之上
+.el-message {
+	z-index: 99999 !important;
+}
+
 // * el-table 样式
 .table-box {
 	display: flex;
@@ -94,6 +99,9 @@
 	// drawer header 样式
 	.el-drawer__footer {
 		border-top: 1px solid #ebeef5;
+	}
+	.el-select {
+		width: 100%;
 	}
 	// drawer-form 多列
 	.drawer-multiColumn-form {

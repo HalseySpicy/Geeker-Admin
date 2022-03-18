@@ -3,18 +3,18 @@
 		<div class="table-search">
 			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
 				<el-form-item label="用户姓名 :">
-					<el-input v-model="searchParam.username" placeholder="请输入"></el-input>
+					<el-input v-model="searchParam.username" placeholder="请输入" clearable></el-input>
 				</el-form-item>
-				<el-form-item label="用户性别 :">
-					<el-select v-model="searchParam.gender" placeholder="请选择">
+				<el-form-item label="性别 :">
+					<el-select v-model="searchParam.gender" placeholder="请选择" clearable>
 						<el-option v-for="item in genderType" :key="item.value" :label="item.label" :value="item.value" />
 					</el-select>
 				</el-form-item>
 				<el-form-item label="身份证号 :">
-					<el-input v-model="searchParam.idCard" placeholder="请输入"></el-input>
+					<el-input v-model="searchParam.idCard" placeholder="请输入" clearable></el-input>
 				</el-form-item>
-				<el-form-item label="用户邮箱 :">
-					<el-input v-model="searchParam.email" placeholder="请输入"></el-input>
+				<el-form-item label="邮箱 :">
+					<el-input v-model="searchParam.email" placeholder="请输入" clearable></el-input>
 				</el-form-item>
 				<div class="more-item" v-show="searchShow">
 					<el-form-item label="创建时间 :">
@@ -66,15 +66,11 @@
 				label="用户姓名"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
-				width="130"
+				width="140"
 			></el-table-column>
-			<el-table-column
-				prop="gender"
-				label="用户性别"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="110"
-			></el-table-column>
+			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="110" #default="scope">
+				{{ scope.row.gender == 1 ? "男" : "女" }}
+			</el-table-column>
 			<el-table-column
 				prop="idCard"
 				label="身份证号"
@@ -83,10 +79,10 @@
 			></el-table-column>
 			<el-table-column
 				prop="email"
-				label="用户邮箱"
+				label="邮箱"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
-				width="250"
+				width="240"
 			></el-table-column>
 			<el-table-column
 				prop="address"
@@ -99,15 +95,22 @@
 				label="创建时间"
 				:formatter="defaultFormat"
 				show-overflow-tooltip
-				width="220"
+				width="200"
 			></el-table-column>
-			<el-table-column label="操作" fixed="right" width="350px">
-				<template #default="scope">
-					<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
-					<el-button type="text" :icon="icon.EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-					<el-button type="text" :icon="icon.Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-					<el-button type="text" :icon="icon.Delete" @click="deleteAccount(scope.row)">删除</el-button>
-				</template>
+			<el-table-column prop="status" label="用户状态" width="130" #default="scope">
+				<el-switch
+					:value="scope.row.status"
+					:active-text="scope.row.status === 1 ? '启用' : '禁用'"
+					:active-value="1"
+					:inactive-value="0"
+					@change="changeStatus($event, scope.row)"
+				/>
+			</el-table-column>
+			<el-table-column label="操作" fixed="right" width="320" #default="scope">
+				<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
+				<el-button type="text" :icon="icon.EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+				<el-button type="text" :icon="icon.Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+				<el-button type="text" :icon="icon.Delete" @click="deleteAccount(scope.row)">删除</el-button>
 			</el-table-column>
 			<template #empty>
 				<div class="table-empty">
@@ -126,22 +129,31 @@
 			@size-change="handleSizeChange"
 			@current-change="handleCurrentChange"
 		></el-pagination>
-		<Drawer ref="drawerRef"></Drawer>
+		<UserDrawer ref="drawerRef"></UserDrawer>
 		<ImportExcel ref="dialogRef"></ImportExcel>
 	</div>
 </template>
 <script setup lang="ts" name="proTable">
 import { ref, onMounted } from "vue";
 import { genderType } from "@/utils/serviceDict";
-import { getUserList, deleteUser, resetUserPassWord, exportUserInfo } from "@/api/modules/user";
 import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
-import Drawer from "./components/Drawer.vue";
+import UserDrawer from "./components/UserDrawer.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
+import {
+	getUserList,
+	addUser,
+	BatchAddUser,
+	editUser,
+	deleteUser,
+	changeUserStatus,
+	resetUserPassWord,
+	exportUserInfo
+} from "@/api/modules/user";
 
 // 获取当前页面表格元素
 const tableRef = ref();
@@ -159,11 +171,11 @@ const {
 	defaultFormat
 } = useTable(getUserList, tableRef);
 
+// 数据多选
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
+
 // 用户按钮权限
 const { nowKey, BUTTONS } = useAuthButtons();
-console.log(nowKey.value);
-console.log(BUTTONS.value);
 
 onMounted(() => {
 	// 获取表格数据
@@ -180,6 +192,12 @@ const deleteAccount = async (params: User.ResUserList) => {
 const resetPass = async (params: User.ResUserList) => {
 	await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
 	getTableList();
+};
+
+// 改变用户状态
+const changeStatus = async (val: number, params: User.ResUserList) => {
+	await useHandleData(changeUserStatus, { id: params.id, status: val }, `切换【${params.username}】用户状态`);
+	params.status = params.status == 1 ? 0 : 1;
 };
 
 // 批量删除用户信息
@@ -202,22 +220,24 @@ const batchAdd = () => {
 	let params = {
 		tempUrl: exportUserInfo,
 		tempName: "用户模板",
-		importUrl: deleteUser
+		importUrl: BatchAddUser,
+		getTableList: getTableList // 操作成功之后刷新数据
 	};
 	dialogRef.value!.acceptParams(params);
 };
 
-// 打开 drawer(编辑/查看/删除)
+// 打开 drawer(查看/编辑/删除)
 interface DrawerExpose {
 	acceptParams: (params: any) => void;
 }
 const drawerRef = ref<DrawerExpose>();
-const openDrawer = (title: string, rowData?: User.ResUserList) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
 		title: title,
-		rowData: rowData,
+		rowData: { ...rowData }, // 解构让其失去响应式
 		isView: title === "查看" ? true : false,
-		apiUrl: deleteUser
+		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		getTableList: getTableList // 操作成功之后刷新数据
 	};
 	drawerRef.value!.acceptParams(params);
 };

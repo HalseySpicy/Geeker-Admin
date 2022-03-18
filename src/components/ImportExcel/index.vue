@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="dialogVisible" title="批量添加用户" width="580px">
+	<el-dialog v-model="dialogVisible" title="批量添加用户" :destroy-on-close="true" width="580px">
 		<el-form class="drawer-multiColumn-form" label-width="100px">
 			<el-form-item label="模板下载 :">
 				<el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>
@@ -10,6 +10,7 @@
 					:drag="true"
 					:limit="excelLimit"
 					:multiple="true"
+					:show-file-list="true"
 					:http-request="uploadExcel"
 					:before-upload="beforeExcelUpload"
 					:on-exceed="handleExceed"
@@ -41,6 +42,7 @@ export interface ExcelParameterProps {
 	tempUrl: (params: any) => Promise<any>;
 	tempName: string;
 	importUrl: (params: any) => Promise<any>;
+	getTableList: () => Promise<any>;
 }
 
 // 是否覆盖数据
@@ -54,15 +56,14 @@ const parameter = ref<Partial<ExcelParameterProps>>({});
 
 // 接收参数
 const acceptParams = (params?: any): void => {
-	console.log(params);
 	parameter.value = params;
 	dialogVisible.value = true;
 };
 
-// 模板下载
+// Excel模板下载
 const downloadTemp = () => {
 	if (!parameter.value.tempUrl) return;
-	useDownload(parameter.value.tempUrl, "用户模板", {});
+	useDownload(parameter.value.tempUrl, "用户模板");
 };
 
 // 文件上传
@@ -72,6 +73,7 @@ const uploadExcel = async (param: any) => {
 	excelFormData.append("isCover", isCover.value as unknown as Blob);
 	const res = parameter.value.importUrl && (await parameter.value.importUrl(excelFormData));
 	if (res.code !== 200) return param.onError();
+	parameter.value.getTableList && parameter.value.getTableList();
 	dialogVisible.value = false;
 };
 
@@ -108,7 +110,7 @@ const handleExceed = (): void => {
 const excelUploadError = (): void => {
 	ElNotification({
 		title: "温馨提示",
-		message: "导入数据失败，请您稍后重试！",
+		message: "导入数据失败，请您重新上传！",
 		type: "error"
 	});
 };
@@ -120,6 +122,7 @@ const excelUploadSuccess = (): void => {
 		type: "success"
 	});
 };
+
 defineExpose({
 	acceptParams
 });

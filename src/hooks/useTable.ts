@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
+import { nextTick, reactive, computed, toRefs, shallowRef, onActivated, onDeactivated } from "vue";
 import {
 	Refresh,
 	CirclePlus,
@@ -33,10 +33,6 @@ export const useTable = (
 		tableData: [],
 		// 是否展开更多搜索框
 		searchShow: false,
-		// 是否点击过查询
-		hasSearched: false,
-		// 当前打开的 Drawer 是否为查看数据
-		isView: false,
 		// 分页数据
 		pageable: {
 			// 当前页数
@@ -77,7 +73,7 @@ export const useTable = (
 				pageSize: state.pageable.pageSize
 			};
 		},
-		set: newVal => {
+		set: (newVal: any) => {
 			console.log("我是分页更新之后的值", newVal);
 		}
 	});
@@ -86,8 +82,12 @@ export const useTable = (
 		doLayout();
 	});
 
+	onDeactivated(() => {
+		window.onresize = null;
+	});
+
 	/**
-	 * @description 防止 keep-alive 导致 el-table 样式错乱问题
+	 * @description 防止 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
 	 * */
 	const doLayout = () => {
 		nextTick(() => {
@@ -106,7 +106,6 @@ export const useTable = (
 		try {
 			// 更新查询参数
 			updatedTotalParam();
-			// 合并自定义参数
 			Object.assign(state.totalParam, initParam);
 			const { data } = await apiUrl(state.totalParam);
 			state.tableData = isPageable ? data.datalist : data;
@@ -125,9 +124,15 @@ export const useTable = (
 	 * */
 	const updatedTotalParam = () => {
 		state.totalParam = {};
-		// 如果没有点击过搜索，那么就不带查询参数(只需要分页参数)
-		if (!state.hasSearched) return Object.assign(state.totalParam, pageParam.value);
-		Object.assign(state.totalParam, state.searchParam, pageParam.value);
+		let nowSearchParam: any = {};
+		// 防止手动清空输入框携带参数（可以自定义查询参数前缀）
+		for (let key in state.searchParam) {
+			// * 某些情况下参数为 false/0 也应该携带参数
+			if (state.searchParam[key] || state.searchParam[key] === false || state.searchParam[key] === 0) {
+				nowSearchParam[key] = state.searchParam[key];
+			}
+		}
+		Object.assign(state.totalParam, nowSearchParam, isPageable ? pageParam.value : {});
 	};
 
 	/**
@@ -145,7 +150,6 @@ export const useTable = (
 	 * */
 	const search = () => {
 		state.pageable.pageNum = 1;
-		state.hasSearched = true;
 		getTableList();
 	};
 
@@ -155,7 +159,6 @@ export const useTable = (
 	 * */
 	const reset = () => {
 		state.pageable.pageNum = 1;
-		state.hasSearched = false;
 		state.searchParam = {};
 		getTableList();
 	};
@@ -166,7 +169,6 @@ export const useTable = (
 	 * @return void
 	 * */
 	const handleSizeChange = (val: number) => {
-		// 防止调用两次请求
 		state.pageable.pageNum = 1;
 		state.pageable.pageSize = val;
 		getTableList();
@@ -190,8 +192,8 @@ export const useTable = (
 	 * @return void
 	 * */
 	const defaultFormat = (row: any, col: any, callValue: any) => {
-		// 如果为数组,使用逗号拼接
-		if (isArray(callValue)) return callValue.length ? callValue.join("，") : "--";
+		// 如果为数组,使用/拼接
+		if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
 		return callValue ?? "--";
 	};
 

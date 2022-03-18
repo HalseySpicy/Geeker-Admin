@@ -7,8 +7,6 @@ export namespace Table {
 	export interface TableStateProps {
 		tableData: any[];
 		searchShow: boolean;
-		hasSearched: boolean;
-		isView: boolean;
 		pageable: Pageable;
 		searchParam: {
 			[key: string]: any;
