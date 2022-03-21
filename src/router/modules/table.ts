@@ -4,19 +4,19 @@ import { Layout } from "@/router/constant";
 // 超级表格模块
 const tableRouter: Array<RouteRecordRaw> = [
 	{
-		path: "/table",
+		path: "/proTable",
 		component: Layout,
-		redirect: "/table/index",
+		redirect: "/proTable/index",
 		children: [
 			{
 				path: "index",
 				name: "proTable",
-				component: () => import(/* webpackChunkName: "table" */ "@/views/table/index.vue"),
+				component: () => import(/* webpackChunkName: "proTable" */ "@/views/proTable/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
 					title: "超级表格",
-					key: "systemAccount"
+					key: "proTable"
 				}
 			}
 		]

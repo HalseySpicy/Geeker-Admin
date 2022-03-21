@@ -1,9 +1,15 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import homeRouter from "./modules/home";
-import tableRouter from "./modules/table";
-import echartsRouter from "./modules/echarts";
-import menuRouter from "./modules/menu";
-import errorRouter from "./modules/error";
+
+// * 导入所有router
+const metaRouters = import.meta.globEager("./modules/*.ts");
+
+// * 处理路由
+export const routerArray: RouteRecordRaw[] = [];
+Object.keys(metaRouters).forEach(item => {
+	Object.keys(metaRouters[item]).forEach((key: any) => {
+		routerArray.push(...metaRouters[item][key]);
+	});
+});
 
 const routes: RouteRecordRaw[] = [
 	{
@@ -20,11 +26,7 @@ const routes: RouteRecordRaw[] = [
 			key: "login"
 		}
 	},
-	...homeRouter,
-	...tableRouter,
-	...echartsRouter,
-	...menuRouter,
-	...errorRouter,
+	...routerArray,
 	{
 		// 找不到路由重定向到404页面
 		path: "/:pathMatch(.*)",

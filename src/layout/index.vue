@@ -17,14 +17,6 @@
 							</keep-alive>
 						</transition>
 					</router-view>
-					<!-- <router-view v-slot="{ Component, route }">
-						<transition appear name="fade-transform" mode="out-in">
-							<keep-alive v-if="route.meta.keepAlive">
-								<component :is="Component" :key="route.path"></component>
-							</keep-alive>
-							<component :is="Component" :key="route.path" v-else></component>
-						</transition>
-					</router-view> -->
 				</section>
 			</el-main>
 			<el-footer>

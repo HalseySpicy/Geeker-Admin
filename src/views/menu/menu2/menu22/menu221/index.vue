@@ -2,7 +2,7 @@
 	<div></div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="menu221">
 import { ref, reactive } from "vue";
 </script>
 

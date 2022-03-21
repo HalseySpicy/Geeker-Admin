@@ -7,12 +7,8 @@ const echartsRouter: Array<RouteRecordRaw> = [
 		path: "/echarts",
 		component: Layout,
 		redirect: "/echarts/columnChart",
-		name: "echarts",
 		meta: {
-			keepAlive: true,
-			requiresAuth: true,
-			title: "Echarts",
-			key: "echarts"
+			title: "Echarts"
 		},
 		children: [
 			{
