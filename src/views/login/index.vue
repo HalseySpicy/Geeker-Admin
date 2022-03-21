@@ -24,8 +24,8 @@
 
 <script setup lang="ts">
 import LoginForm from "./components/LoginForm.vue";
-import { LoginFrom, LoginFormExpose } from "./interface/index";
-
+import { LoginFormExpose } from "./interface/index";
+import { Login } from "@/api/interface/index";
 import { ref, reactive, Ref, toRefs, provide } from "vue";
 
 // 使用provide传方法
@@ -44,7 +44,7 @@ provide("provideState", {
 });
 
 // login
-const submitParent = (LoginFrom: LoginFrom) => {
+const submitParent = (LoginFrom: Login.ReqLoginForm) => {
 	console.log(LoginFrom);
 };
 
@@ -60,7 +60,7 @@ const item: Ref<string> = ref("111");
 const item1 = ref<number>(111);
 // console.log(item.value, item1.value);
 
-const obj = reactive<LoginFrom>({
+const obj = reactive<Login.ReqLoginForm>({
 	username: "aa",
 	password: "dd"
 });

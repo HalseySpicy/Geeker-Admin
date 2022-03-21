@@ -1,18 +1,21 @@
 import { defineConfig, loadEnv, ConfigEnv, UserConfig } from "vite";
-import { resolve } from "path";
+import { createHtmlPlugin } from "vite-plugin-html";
 import vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
+import { wrapperEnv, isReportMode } from "./src/utils/getEnv";
+import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
+import VueSetupExtend from "vite-plugin-vue-setup-extend";
 // import importToCDN from "vite-plugin-cdn-import";
-import { visualizer } from "rollup-plugin-visualizer";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import VueSetupExtend from "vite-plugin-vue-setup-extend";
 
 // https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv): UserConfig => {
 	const env = loadEnv(mode.mode, process.cwd());
+	const viteEnv = wrapperEnv(env);
 
 	return {
 		resolve: {
@@ -31,10 +34,10 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		// server config
 		server: {
 			host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
-			port: env.VITE_PORT as unknown as number, // 服务器端口号
-			// https: false, // is Https
-			open: true, // 是否自动打开浏览器
-			// cors: true, // 允许跨域
+			port: viteEnv.VITE_PORT,
+			open: viteEnv.VITE_OPEN,
+			cors: true,
+			// https: false,
 			// 代理跨域
 			proxy: {
 				"/api": {
@@ -47,6 +50,13 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 		// plugins
 		plugins: [
 			vue(),
+			createHtmlPlugin({
+				inject: {
+					data: {
+						title: viteEnv.VITE_GLOB_APP_TITLE
+					}
+				}
+			}),
 			// demand import element（如果使用了cdn引入,没必要使用element自动导入了）
 			// AutoImport({
 			// 	resolvers: [ElementPlusResolver()]
@@ -101,25 +111,26 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				}
 			}),
 			// gzip compress
-			viteCompression({
-				verbose: true,
-				disable: false,
-				threshold: 10240,
-				algorithm: "gzip",
-				ext: ".gz"
-			}),
-			// 查看打包体积大小
-			visualizer()
+			viteEnv.VITE_BUILD_GZIP
+				? viteCompression({
+						verbose: true,
+						disable: false,
+						threshold: 10240,
+						algorithm: "gzip",
+						ext: ".gz"
+				  })
+				: "",
+			// 是否生成包预览
+			viteEnv.VITE_REPORT ? visualizer() : ""
 		],
 		// build configure
 		build: {
 			outDir: "dist",
-			// assetsDir: "assets",
 			minify: "terser",
 			terserOptions: {
 				// delete console/debugger
 				compress: {
-					drop_console: true,
+					drop_console: viteEnv.VITE_DROP_CONSOLE,
 					drop_debugger: true
 				}
 			},
