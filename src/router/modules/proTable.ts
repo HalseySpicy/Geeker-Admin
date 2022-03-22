@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/constant";
 
 // 超级表格模块
-const tableRouter: Array<RouteRecordRaw> = [
+const proTableRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/proTable",
 		component: Layout,
@@ -23,4 +23,4 @@ const tableRouter: Array<RouteRecordRaw> = [
 	}
 ];
 
-export default tableRouter;
+export default proTableRouter;

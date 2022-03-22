@@ -30,7 +30,7 @@ class RequestHttp {
 		 * @description 请求拦截器
 		 * 客户端发送请求 -> [请求拦截器] -> 服务器
 		 * token校验(JWT) : 接受服务器返回的token,存储到vuex/本地储存当中
-		 * */
+		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
 				// * 将当前请求添加到 pending 中
@@ -47,11 +47,7 @@ class RequestHttp {
 		/**
 		 * @description 响应拦截器
 		 *  服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
-		 * */
-		// serves.defaults.validateStatus = status => {
-		// 自定义响应成功的HTTP状态码
-		//     return /^(2|3)\d{2}$/.test(status);
-		// }
+		 */
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data, config } = response;
@@ -60,7 +56,7 @@ class RequestHttp {
 				tryHideFullScreenLoading();
 				// * 登陆失效
 				if (data.code == 599) {
-					ElMessage.error({ message: data.msg, duration: 2000 });
+					ElMessage.error(data.msg);
 					globalStore.setToken("");
 					router.replace({
 						path: "/login"

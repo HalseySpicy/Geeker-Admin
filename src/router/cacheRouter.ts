@@ -9,6 +9,7 @@ const filterKeepAlive = (_route: RouteRecordRaw[], _cache: RouteRecordName[]): v
 		item.children && item.children.length !== 0 && filterKeepAlive(item.children, _cache);
 	});
 };
+
 filterKeepAlive(routerArray, cacheRouter);
 
 export default cacheRouter;

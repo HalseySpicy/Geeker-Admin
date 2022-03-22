@@ -82,19 +82,15 @@ export const useTable = (
 		doLayout();
 	});
 
-	onDeactivated(() => {
-		window.onresize = null;
-	});
-
 	/**
 	 * @description 防止 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
 	 * */
 	const doLayout = () => {
 		nextTick(() => {
 			tableRef && tableRef.value.doLayout();
-			window.onresize = () => {
-				tableRef && tableRef.value.doLayout();
-			};
+			// window.onresize = () => {
+			// tableRef && tableRef.value.doLayout();
+			// };
 		});
 	};
 
@@ -191,7 +187,7 @@ export const useTable = (
 	 * @param callValue 当前单元格值
 	 * @return void
 	 * */
-	const defaultFormat = (row: any, col: any, callValue: any) => {
+	const defaultFormat = (row: number, col: number, callValue: any) => {
 		// 如果为数组,使用/拼接
 		if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
 		return callValue ?? "--";

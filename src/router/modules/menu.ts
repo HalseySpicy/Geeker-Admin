@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/constant";
 
-// menu模块
+// menu模块(全部为二级路由，为了做缓存)
 const menuRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/menu",

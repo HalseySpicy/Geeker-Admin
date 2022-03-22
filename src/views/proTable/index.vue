@@ -179,7 +179,7 @@ const { nowKey, BUTTONS } = useAuthButtons();
 
 onMounted(() => {
 	// 获取表格数据
-	// getTableList();
+	getTableList();
 });
 
 // 删除用户信息

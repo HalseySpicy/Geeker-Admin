@@ -1,9 +1,9 @@
 import router from "./router";
 import NProgress from "@/config/nprogress";
+import menuListJson from "@/Layout/Menu/json/menu.json";
 import { GlobalStore } from "@/store";
 import { AxiosCanceler } from "@/api/helper/axiosCancel";
 const axiosCanceler = new AxiosCanceler();
-import menuListJson from "@/Layout/Menu/json/menu.json";
 
 /**
  * 使用递归处理路由菜单
@@ -22,9 +22,11 @@ router.beforeEach((to, from, next) => {
 	NProgress.start();
 	// * 在跳转路由之前，清除所有的请求
 	axiosCanceler.removeAllPending();
+
+	// * 判断当前路由是否需要权限访问
 	if (!to.matched.some(record => record.meta.requiresAuth)) return next();
 
-	// 判断是否有Token
+	// * 判断是否有Token
 	const globalStore = GlobalStore();
 	if (!globalStore.token) {
 		next({
@@ -34,14 +36,11 @@ router.beforeEach((to, from, next) => {
 		return;
 	}
 
-	// 如果访问的地址没有在路由表中重定向到403页面
 	let dynamicRouter = handleRouter(menuListJson);
 	// Static Router
 	let staticRouter = ["/403", "/500"];
 	let routerList = dynamicRouter.concat(staticRouter);
-	console.log(routerList);
-
-	// 如果访问的地址没有在路由表中重定向到403页面
+	// * 如果访问的地址没有在路由表中重定向到403页面
 	if (routerList.indexOf(to.path) === -1) {
 		next({
 			path: "/403"

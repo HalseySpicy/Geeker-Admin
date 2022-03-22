@@ -187,8 +187,8 @@
   },
   {
     "icon": "paperclip",
-    "title": "外部链接",
-    "path": "/link",
-    "isLink": "http://www.baidu.com"
+    "title": "个人博客",
+    "path": "/myBlog/index",
+    "isLink": "http://www.spicyboy.cn"
   }
 ]
