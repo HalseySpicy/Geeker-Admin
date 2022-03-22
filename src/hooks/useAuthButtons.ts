@@ -11,6 +11,7 @@ export const useAuthButtons = () => {
 	const route = useRoute();
 	nowKey.value = route.meta.key as string;
 
+	// 当前页按钮权限列表
 	const BUTTONS = computed(() => {
 		const authButtonsStore = AuthButtonsStore();
 		return authButtonsStore.authorButtonsObj[nowKey.value] || {};

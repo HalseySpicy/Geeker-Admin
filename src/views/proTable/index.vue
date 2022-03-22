@@ -41,10 +41,23 @@
 		</div>
 		<div class="table-header">
 			<div class="header-button">
-				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
-				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd">批量添加用户</el-button>
-				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile">导出用户数据</el-button>
-				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete">
+				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add"
+					>新增用户</el-button
+				>
+				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd"
+					>批量添加用户</el-button
+				>
+				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile" v-if="BUTTONS.export"
+					>导出用户数据</el-button
+				>
+				<el-button
+					type="danger"
+					:icon="icon.Delete"
+					plain
+					:disabled="!isSelected"
+					@click="batchDelete"
+					v-if="BUTTONS.batchDelete"
+				>
 					批量删除用户
 				</el-button>
 			</div>
@@ -104,7 +117,11 @@
 					:active-value="1"
 					:inactive-value="0"
 					@change="changeStatus($event, scope.row)"
+					v-if="BUTTONS.status"
 				/>
+				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
+					{{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag
+				>
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" width="320" #default="scope">
 				<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
@@ -120,8 +137,8 @@
 			</template>
 		</el-table>
 		<el-pagination
-			v-model:currentPage="pageable.pageNum"
-			v-model:page-size="pageable.pageSize"
+			:currentPage="pageable.pageNum"
+			:page-size="pageable.pageSize"
 			:page-sizes="[10, 25, 50, 100]"
 			background
 			layout="total, sizes, prev, pager, next, jumper"
@@ -175,7 +192,7 @@ const {
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
 // 用户按钮权限
-const { nowKey, BUTTONS } = useAuthButtons();
+const { BUTTONS } = useAuthButtons();
 
 onMounted(() => {
 	// 获取表格数据
@@ -194,7 +211,7 @@ const resetPass = async (params: User.ResUserList) => {
 	getTableList();
 };
 
-// 改变用户状态
+// 切换用户状态
 const changeStatus = async (val: number, params: User.ResUserList) => {
 	await useHandleData(changeUserStatus, { id: params.id, status: val }, `切换【${params.username}】用户状态`);
 	params.status = params.status == 1 ? 0 : 1;

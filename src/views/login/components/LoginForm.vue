@@ -75,8 +75,6 @@ const login = (formEl: FormInstance | undefined) => {
 				globalStore.setToken(res.data!.access_token);
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
-			} catch (error) {
-				console.log(error);
 			} finally {
 				loading.value = false;
 			}

@@ -17,7 +17,7 @@ const endLoading = () => {
 	loadingInstance.close();
 };
 
-// 那么 showFullScreenLoading() tryHideFullScreenLoading() 要干的事就是将同一时刻的请求合并。
+// 那么 showFullScreenLoading() tryHideFullScreenLoading() 要做的事就是将同一时刻的请求合并。
 // 声明一个变量 needLoadingRequestCount，每次调用showFullScreenLoading方法 needLoadingRequestCount + 1。
 // 调用tryHideFullScreenLoading()方法，needLoadingRequestCount - 1。needLoadingRequestCount为 0 时，结束 loading。
 let needLoadingRequestCount = 0;

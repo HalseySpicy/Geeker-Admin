@@ -20,5 +20,5 @@ export const AuthButtonsStore = defineStore({
 			this.authorButtons = authorButtonList;
 		}
 	},
-	persist: piniaPersistConfig("AuthButtonsStore")
+	persist: piniaPersistConfig("AuthButtonsState")
 });

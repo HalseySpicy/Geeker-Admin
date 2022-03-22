@@ -17,24 +17,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { MenuStore } from "@/store/modules/menu";
 import Logo from "./components/Logo.vue";
 import SubItem from "./components/SubItem.vue";
-import menuListJson from "./json/menu.json";
+import { getMenuList } from "@/api/modules/login";
 
 const route = useRoute();
 const menuStore = MenuStore();
 
-// console.log(menuStore);
-
-// set menuList
-menuStore.setMenuList(menuListJson);
+onMounted(async () => {
+	const res = await getMenuList();
+	res.data && menuStore.setMenuList(res.data);
+});
 
 const activeMenu = computed((): string => route.path);
 const isCollapse = computed((): boolean => menuStore.isCollapse);
-// const menuList = reactive<Menu.MenuOptions[]>(menuListJson);
 const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList);
 
 const screenWidth = ref<number>(0);
