@@ -46,13 +46,10 @@ router.beforeEach((to, from, next) => {
 	console.log(routerList);
 
 	// * 如果访问的地址没有在路由表中重定向到403页面
-	if (routerList.indexOf(to.path) === -1) {
-		next({
-			path: "/403"
-		});
-	} else {
-		next();
-	}
+	if (routerList.indexOf(to.path) !== -1) return next();
+	next({
+		path: "/403"
+	});
 });
 
 router.afterEach(() => {
