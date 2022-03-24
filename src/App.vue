@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
 
 // 配置element中英文
@@ -16,7 +16,7 @@ const config = reactive({
 	autoInsertSpace: false
 });
 // 配置全局组件大小 (small/default(medium)/large)
-const size = ref<string>(global.size);
+const size = computed((): string => global.size);
 </script>
 
 <style scoped lang="scss"></style>

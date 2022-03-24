@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
-import { ElLoading } from "element-plus";
 
 const globalStore = GlobalStore();
 const size = computed((): string => globalStore.size);
@@ -30,9 +29,7 @@ const assemblySizeList = reactive<string[]>(["default", "large", "small"]);
 
 const setAssemblySize = (item: string) => {
 	if (size.value === item) return;
-	ElLoading.service({ lock: true, text: "Loading", background: "rgba(0, 0, 0, 0.7)" });
 	globalStore.setSize(item);
-	window.location.reload();
 };
 </script>
 
