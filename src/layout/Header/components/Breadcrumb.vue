@@ -1,9 +1,11 @@
 <template>
 	<el-breadcrumb :separator-icon="ArrowRight">
-		<el-breadcrumb-item :to="{ path: HOME_URL }">首页</el-breadcrumb-item>
-		<el-breadcrumb-item v-for="item in matched" :key="item.path" :to="{ path: item.path }">
-			{{ item.meta.title }}
-		</el-breadcrumb-item>
+		<transition-group name="breadcrumb" mode="out-in">
+			<el-breadcrumb-item :to="{ path: HOME_URL }" key="/home">首页</el-breadcrumb-item>
+			<el-breadcrumb-item v-for="item in matched" :key="item.path" :to="{ path: item.path }">
+				{{ item.meta.title }}
+			</el-breadcrumb-item>
+		</transition-group>
 	</el-breadcrumb>
 </template>
 

@@ -21,17 +21,30 @@
 .fade-transform-enter-active {
 	transition: all 0.2s;
 }
-
 .fade-transform-enter-from {
 	opacity: 0;
 	transform: translateX(-30px);
 	transition: all 0.2s;
 }
-
 .fade-transform-leave-to {
 	opacity: 0;
 	transform: translateX(30px);
 	transition: all 0.2s;
+}
+
+/* Breadcrumb */
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+	transition: all 0.2s ease;
+}
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+	opacity: 0;
+	transform: translateX(10px);
+}
+.breadcrumb-leave-active {
+	position: absolute;
+	z-index: -1;
 }
 
 /* 清除浮动 */

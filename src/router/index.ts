@@ -43,7 +43,6 @@ router.beforeEach((to, from, next) => {
 	// * Static Router(静态路由，必须配置首页地址)
 	let staticRouter = [HOME_URL, "/403"];
 	let routerList = dynamicRouter.concat(staticRouter);
-	console.log(routerList);
 
 	// * 如果访问的地址没有在路由表中重定向到403页面
 	if (routerList.indexOf(to.path) !== -1) return next();

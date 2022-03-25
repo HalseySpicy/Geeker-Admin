@@ -23,21 +23,11 @@ export const TabsStore = defineStore({
 				path: tabItem.path,
 				close: tabItem.close
 			};
-			let flag = false;
-			this.tabsMenuList.forEach(item => {
-				if (item.title === tabItem.title) flag = true;
-			});
-			if (flag) {
-				router.push(tabItem.path);
-				this.setTabsMenuValue(tabItem.path);
-			} else {
-				const newTabsMenuList = deepCopy<Menu.MenuOptions[]>(this.tabsMenuList);
-				newTabsMenuList.push(tabInfo);
-				this.tabsMenuList = newTabsMenuList;
-				this.tabsMenuValue = tabItem.path;
-				router.push(tabItem.path);
+			if (this.tabsMenuList.every(item => item.path !== tabItem.path)) {
+				this.tabsMenuList.push(tabInfo);
 			}
-			flag = false;
+			this.setTabsMenuValue(tabItem.path);
+			router.push(tabItem.path);
 		},
 		// Remove Tabs
 		async removeTabs(tabPath: string) {
@@ -45,13 +35,11 @@ export const TabsStore = defineStore({
 			const tabsMenuList = this.tabsMenuList;
 			if (tabsMenuValue === tabPath) {
 				tabsMenuList.forEach((item, index) => {
-					if (item.path === tabPath) {
-						const nextTab = tabsMenuList[index + 1] || tabsMenuList[index - 1];
-						if (nextTab) {
-							tabsMenuValue = nextTab.path;
-							router.push(nextTab.path);
-						}
-					}
+					if (item.path !== tabPath) return;
+					const nextTab = tabsMenuList[index + 1] || tabsMenuList[index - 1];
+					if (!nextTab) return;
+					tabsMenuValue = nextTab.path;
+					router.push(nextTab.path);
 				});
 			}
 			this.tabsMenuValue = tabsMenuValue;
