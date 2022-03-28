@@ -1,8 +1,8 @@
 <template>
-	<div></div>
+	<div class="content-box">饼图 🍓🍇🍈🍉</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="pieChart">
 import { ref, reactive } from "vue";
 </script>
 

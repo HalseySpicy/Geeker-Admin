@@ -1,7 +1,7 @@
 <template>
-	<div>
-		<h1>2222</h1>
-		<el-input v-model="value"></el-input>
+	<div class="content-box">
+		柱状图 🍓🍇🍈🍉
+		<div><el-input v-model="value"></el-input></div>
 	</div>
 </template>
 

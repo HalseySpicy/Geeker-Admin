@@ -1,8 +1,8 @@
 <template>
-	<div class="content-box">嵌套环形图 🍓🍇🍈🍉</div>
+	<div class="content-box">动态 Form 🍓🍇🍈🍉</div>
 </template>
 
-<script setup lang="ts" name="nestedChart">
+<script setup lang="ts" name="dynamicForm">
 import { ref, reactive } from "vue";
 </script>
 

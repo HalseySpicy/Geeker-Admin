@@ -1,8 +1,8 @@
 <template>
-	<div class="content-box">嵌套环形图 🍓🍇🍈🍉</div>
+	<div class="content-box">基础 Form 🍓🍇🍈🍉</div>
 </template>
 
-<script setup lang="ts" name="nestedChart">
+<script setup lang="ts" name="basicForm">
 import { ref, reactive } from "vue";
 </script>
 

@@ -11,7 +11,7 @@ const proTableRouter: Array<RouteRecordRaw> = [
 			{
 				path: "index",
 				name: "proTable",
-				component: () => import(/* webpackChunkName: "proTable" */ "@/views/proTable/index.vue"),
+				component: () => import("@/views/proTable/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

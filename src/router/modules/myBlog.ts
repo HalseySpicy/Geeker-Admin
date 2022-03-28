@@ -11,7 +11,7 @@ const myBlogRouter: Array<RouteRecordRaw> = [
 			{
 				path: "index",
 				name: "myBlog",
-				component: () => import(/* webpackChunkName: "myBlog" */ "@/views/myBlog/index.vue"),
+				component: () => import("@/views/myBlog/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

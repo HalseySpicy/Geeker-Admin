@@ -14,7 +14,7 @@ const menuRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/menu/menu1",
 				name: "menu1",
-				component: () => import(/* webpackChunkName: "menu" */ "@/views/menu/menu1/index.vue"),
+				component: () => import("@/views/menu/menu1/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -25,7 +25,7 @@ const menuRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/menu/menu2/menu21",
 				name: "menu21",
-				component: () => import(/* webpackChunkName: "menu21" */ "@/views/menu/menu2/menu21/index.vue"),
+				component: () => import("@/views/menu/menu2/menu21/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -36,7 +36,7 @@ const menuRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/menu/menu2/menu23",
 				name: "menu23",
-				component: () => import(/* webpackChunkName: "menu23" */ "@/views/menu/menu2/menu23/index.vue"),
+				component: () => import("@/views/menu/menu2/menu23/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -47,7 +47,7 @@ const menuRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/menu/menu3",
 				name: "menu3",
-				component: () => import(/* webpackChunkName: "menu3" */ "@/views/menu/menu3/index.vue"),
+				component: () => import("@/views/menu/menu3/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
