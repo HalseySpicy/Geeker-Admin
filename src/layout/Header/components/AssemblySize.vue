@@ -31,8 +31,6 @@ const assemblySizeListCh = reactive<{ [propName: string]: any }>({
 	small: "小型"
 });
 
-console.log(assemblySizeListCh["default"]);
-
 const assemblySizeList = reactive<string[]>(["default", "large", "small"]);
 
 const setAssemblySize = (item: string) => {
