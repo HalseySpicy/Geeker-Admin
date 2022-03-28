@@ -7,6 +7,8 @@
 		<div class="header-ri flx-center">
 			<!-- Component size -->
 			<AssemblySize></AssemblySize>
+			<!-- Language -->
+			<Language></Language>
 			<!-- Full screen -->
 			<Fullscreen></Fullscreen>
 			<!-- User name -->
@@ -21,6 +23,7 @@
 import CollapseIcon from "./components/CollapseIcon.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Fullscreen from "./components/Fullscreen.vue";
+import Language from "./components/Language.vue";
 import AssemblySize from "./components/AssemblySize.vue";
 import Avatar from "./components/Avatar.vue";
 </script>

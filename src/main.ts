@@ -18,6 +18,8 @@ import "@/styles/element.scss";
 import directives from "@/directives/index";
 // vue Router
 import router from "@/router/index";
+// i18n
+import I18n from "@/language/index";
 // pinia store
 import pinia from "@/store/index";
 
@@ -28,4 +30,4 @@ Object.keys(Icons).forEach(key => {
 	app.component(key, Icons[key as keyof typeof Icons]);
 });
 
-app.use(router).use(pinia).use(directives).use(ElementPlus).mount("#app");
+app.use(router).use(I18n).use(pinia).use(directives).use(ElementPlus).mount("#app");

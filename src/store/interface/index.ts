@@ -2,7 +2,8 @@
 export interface GlobalState {
 	token: string;
 	userInfo: any;
-	size: string;
+	assemblySize: string;
+	language: string;
 }
 
 /* MenuStore */

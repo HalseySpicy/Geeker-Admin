@@ -1,5 +1,5 @@
 <template>
-	<el-config-provider :locale="zhCn" :button="config" :size="size">
+	<el-config-provider :locale="i18nLocale" :button="config" :size="assemblySize">
 		<router-view></router-view>
 	</el-config-provider>
 </template>
@@ -10,13 +10,26 @@ import { GlobalStore } from "@/store";
 
 // 配置element中英文
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
-const global = GlobalStore();
+import en from "element-plus/lib/locale/lang/en";
+
+const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格
 const config = reactive({
 	autoInsertSpace: false
 });
+
+// element 语言配置
+const i18nLocale = computed((): any => {
+	if (globalStore.language && globalStore.language == "zh") {
+		return zhCn;
+	}
+	if (globalStore.language == "en") {
+		return en;
+	}
+});
+
 // 配置全局组件大小 (small/default(medium)/large)
-const size = computed((): string => global.size);
+const assemblySize = computed((): string => globalStore.assemblySize);
 </script>
 
 <style scoped lang="scss"></style>

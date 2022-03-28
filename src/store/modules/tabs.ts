@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { deepCopy } from "@/utils/util";
 import { TabPaneProps } from "element-plus";
 import { TabsState } from "../interface";
 import piniaPersistConfig from "@/config/piniaPersist";

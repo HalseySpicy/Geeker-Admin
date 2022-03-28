@@ -8,7 +8,7 @@
 				<el-dropdown-item
 					v-for="item in assemblySizeList"
 					:key="item"
-					:disabled="size === item"
+					:disabled="assemblySize === item"
 					@click.native="setAssemblySize(item)"
 				>
 					{{ item }}
@@ -23,13 +23,13 @@ import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
 
 const globalStore = GlobalStore();
-const size = computed((): string => globalStore.size);
+const assemblySize = computed((): string => globalStore.assemblySize);
 
 const assemblySizeList = reactive<string[]>(["default", "large", "small"]);
 
 const setAssemblySize = (item: string) => {
-	if (size.value === item) return;
-	globalStore.setSize(item);
+	if (assemblySize.value === item) return;
+	globalStore.setAssemblySizeSize(item);
 };
 </script>
 

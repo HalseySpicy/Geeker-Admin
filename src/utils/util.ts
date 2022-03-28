@@ -83,3 +83,23 @@ export function getTabPane<T, U>(menuList: any[], path: U): T {
 	}
 	return result;
 }
+
+/**
+ * 获取浏览器默认语言
+ * @returns {String}
+ */
+export function getBrowserLang() {
+	//@ts-ignore
+	let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
+	let defaultBrowserLang = "";
+	if (
+		browserLang.toLowerCase() === "cn" ||
+		browserLang.toLowerCase() === "zh" ||
+		browserLang.toLowerCase() === "zh-cn"
+	) {
+		defaultBrowserLang = "zh";
+	} else {
+		defaultBrowserLang = "en";
+	}
+	return defaultBrowserLang;
+}
