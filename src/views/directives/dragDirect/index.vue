@@ -5,7 +5,9 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="dragDirect"></script>
+<script setup lang="ts" name="dragDirect">
+import { ref, reactive } from "vue";
+</script>
 
 <style scoped lang="scss">
 @import "./index.scss";

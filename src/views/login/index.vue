@@ -22,7 +22,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="login">
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";

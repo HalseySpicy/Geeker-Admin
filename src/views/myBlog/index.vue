@@ -4,7 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="myBlog">
 import { ref, reactive } from "vue";
 </script>
 
