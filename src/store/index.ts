@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { GlobalState } from "./interface";
-import { getBrowserLang } from "@/utils/util";
 import { createPinia } from "pinia";
 import piniaPersist from "pinia-plugin-persist";
 import piniaPersistConfig from "@/config/piniaPersist";
@@ -18,7 +17,7 @@ export const GlobalStore = defineStore({
 		// element组件大小
 		assemblySize: "default",
 		// language
-		language: getBrowserLang()
+		language: ""
 	}),
 	getters: {},
 	actions: {

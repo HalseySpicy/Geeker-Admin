@@ -1,5 +1,5 @@
 <template>
-	<el-dropdown trigger="click">
+	<el-dropdown trigger="click" @command="setAssemblySize">
 		<el-tooltip effect="dark" :content="'组件大小'" placement="bottom">
 			<i :class="'iconfont icon-contentright'" class="icon-style"></i>
 		</el-tooltip>
@@ -9,9 +9,9 @@
 					v-for="item in assemblySizeList"
 					:key="item"
 					:disabled="assemblySize === item"
-					@click.native="setAssemblySize(item)"
+					:command="item"
 				>
-					{{ item }}
+					{{ assemblySizeListCh[item] }}
 				</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
@@ -24,6 +24,14 @@ import { GlobalStore } from "@/store";
 
 const globalStore = GlobalStore();
 const assemblySize = computed((): string => globalStore.assemblySize);
+
+const assemblySizeListCh = reactive<{ [propName: string]: any }>({
+	default: "默认",
+	large: "大型",
+	small: "小型"
+});
+
+console.log(assemblySizeListCh["default"]);
 
 const assemblySizeList = reactive<string[]>(["default", "large", "small"]);
 

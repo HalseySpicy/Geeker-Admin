@@ -1,8 +1,5 @@
 <template>
-	<div>
-		<div>我是menu2-3👩👵👶</div>
-		<el-input v-model="value"></el-input>
-	</div>
+	<div class="content-box">我是menu2-3 🍓🍇🍈🍉</div>
 </template>
 
 <script setup lang="ts" name="menu23">

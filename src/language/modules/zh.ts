@@ -3,16 +3,9 @@ export default {
 		welcome: "欢迎使用"
 	},
 	tabs: {
-		more: "更多"
-	},
-	layout: {
-		login: "登录",
-		register: "注册",
-		logout: "退出登录",
-		dropdownLarge: "大型",
-		dropdownDefault: "默认",
-		dropdownSmall: "小型",
-		configTitle: "布局配置",
-		oneTitle: "全局主题"
+		more: "更多",
+		closeCurrent: "关闭当前",
+		closeOther: "关闭其它",
+		closeAll: "关闭所有"
 	}
 };

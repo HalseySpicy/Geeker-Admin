@@ -1,18 +1,9 @@
 <template>
-	<div class="content-box">
-		柱状图 🍓🍇🍈🍉
-		<div><el-input v-model="value"></el-input></div>
-	</div>
+	<div class="content-box">柱状图 🍓🍇🍈🍉</div>
 </template>
 
 <script setup lang="ts" name="columnChart">
-import { ref } from "vue";
-
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-console.log(route.matched);
-const value = ref("");
+import { ref, reactive } from "vue";
 </script>
 
 <style scoped lang="scss">

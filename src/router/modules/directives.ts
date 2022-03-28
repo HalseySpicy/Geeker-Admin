@@ -21,6 +21,28 @@ const directivesRouter: Array<RouteRecordRaw> = [
 					title: "复制指令",
 					key: "copyDirect"
 				}
+			},
+			{
+				path: "/directives/dragDirect",
+				name: "dragDirect",
+				component: () => import("@/views/directives/dragDirect/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "拖拽指令",
+					key: "dragDirect"
+				}
+			},
+			{
+				path: "/directives/longpressDirect",
+				name: "longpressDirect",
+				component: () => import("@/views/directives/longpressDirect/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "长按指令",
+					key: "longpressDirect"
+				}
 			}
 		]
 	}

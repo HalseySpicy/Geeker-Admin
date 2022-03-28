@@ -1,0 +1,15 @@
+.content-box {
+	position: relative;
+	// display: block;
+	.text {
+		text-align: center;
+	}
+	.drag-box {
+		position: absolute;
+		top: 110px;
+		height: 300px;
+		width: 300px;
+		background: rgb(226, 226, 226);
+		color: rgb(165, 165, 165);
+	}
+}

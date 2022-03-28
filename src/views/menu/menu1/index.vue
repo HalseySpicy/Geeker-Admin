@@ -1,13 +1,13 @@
 <template>
-	<div>
-		<div>我是menu1👩👵👶</div>
-		<el-input v-model="value"></el-input>
+	<div class="content-box">
+		我是menu1 🍓🍇🍈🍉
+		<el-input v-model="value" placeholder="测试缓存"></el-input>
 	</div>
 </template>
 
 <script setup lang="ts" name="menu1">
 import { ref, reactive } from "vue";
-const value = ref("");
+const value = ref<string>("");
 </script>
 
 <style scoped lang="scss">

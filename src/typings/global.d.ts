@@ -1,6 +1,3 @@
-declare module "nprogress";
-declare module "js-md5";
-
 // * Menu
 declare namespace Menu {
 	interface MenuOptions {

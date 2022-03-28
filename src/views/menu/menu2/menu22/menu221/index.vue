@@ -1,5 +1,5 @@
 <template>
-	<div></div>
+	<div class="content-box">我是menu2-2-1 🍓🍇🍈🍉</div>
 </template>
 
 <script setup lang="ts" name="menu221">

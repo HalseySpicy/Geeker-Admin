@@ -1,18 +1,11 @@
 export default {
 	home: {
-		welcome: "Welcome to use"
+		welcome: "Welcome"
 	},
 	tabs: {
-		more: "More"
-	},
-	layout: {
-		login: "Login",
-		register: "Register",
-		logout: "Log out",
-		dropdownLarge: "large",
-		dropdownDefault: "default",
-		dropdownSmall: "small",
-		configTitle: "Layout configuration",
-		oneTitle: "Global Themes"
+		more: "More",
+		closeCurrent: "Close current",
+		closeOther: "Close other",
+		closeAll: "Close All"
 	}
 };

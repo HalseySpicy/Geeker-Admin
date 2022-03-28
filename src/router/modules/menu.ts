@@ -34,6 +34,28 @@ const menuRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: "/menu/menu2/menu22/menu221",
+				name: "menu221",
+				component: () => import("@/views/menu/menu2/menu22/menu221/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "菜单2-2-1",
+					key: "menu221"
+				}
+			},
+			{
+				path: "/menu/menu2/menu22/menu222",
+				name: "menu222",
+				component: () => import("@/views/menu/menu2/menu22/menu222/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "菜单2-2-2",
+					key: "menu222"
+				}
+			},
+			{
 				path: "/menu/menu2/menu23",
 				name: "menu23",
 				component: () => import("@/views/menu/menu2/menu23/index.vue"),
