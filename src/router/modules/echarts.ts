@@ -12,9 +12,20 @@ const echartsRouter: Array<RouteRecordRaw> = [
 		},
 		children: [
 			{
+				path: "/echarts/waterChart",
+				name: "waterChart",
+				component: () => import("@/views/echarts/waterChart/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "水型图",
+					key: "waterChart"
+				}
+			},
+			{
 				path: "/echarts/columnChart",
 				name: "columnChart",
-				component: () => import(/* webpackChunkName: "columnChart" */ "@/views/echarts/columnChart/index.vue"),
+				component: () => import("@/views/echarts/columnChart/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -25,7 +36,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/echarts/lineChart",
 				name: "lineChart",
-				component: () => import(/* webpackChunkName: "lineChart" */ "@/views/echarts/lineChart/index.vue"),
+				component: () => import("@/views/echarts/lineChart/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -36,7 +47,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/echarts/pieChart",
 				name: "pieChart",
-				component: () => import(/* webpackChunkName: "pieChart" */ "@/views/echarts/pieChart/index.vue"),
+				component: () => import("@/views/echarts/pieChart/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -47,7 +58,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/echarts/radarChart",
 				name: "radarChart",
-				component: () => import(/* webpackChunkName: "radarChart" */ "@/views/echarts/radarChart/index.vue"),
+				component: () => import("@/views/echarts/radarChart/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
@@ -58,7 +69,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 			{
 				path: "/echarts/nestedChart",
 				name: "nestedChart",
-				component: () => import(/* webpackChunkName: "nestedChart" */ "@/views/echarts/nestedChart/index.vue"),
+				component: () => import("@/views/echarts/nestedChart/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,

@@ -10,8 +10,7 @@
 */
 
 import type { Directive, DirectiveBinding } from "vue";
-
-const addWaterMarker: Directive = (str, parentNode: any, font, textColor) => {
+const addWaterMarker: Directive = (str: string, parentNode: any, font: any, textColor: string) => {
 	// 水印文字，父元素，字体，文字颜色
 	let can: HTMLCanvasElement = document.createElement("canvas");
 	parentNode.appendChild(can);
@@ -20,7 +19,7 @@ const addWaterMarker: Directive = (str, parentNode: any, font, textColor) => {
 	can.style.display = "none";
 	let cans = can.getContext("2d") as CanvasRenderingContext2D;
 	cans.rotate((-20 * Math.PI) / 180);
-	cans.font = (font as any) || ("16px Microsoft JhengHei" as any);
+	cans.font = font || "16px Microsoft JhengHei";
 	cans.fillStyle = textColor || "rgba(180, 180, 180, 0.3)";
 	cans.textAlign = "left";
 	cans.textBaseline = "Middle" as CanvasTextBaseline;

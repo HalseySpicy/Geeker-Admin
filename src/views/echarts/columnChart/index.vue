@@ -1,3 +1,7 @@
+<style scoped lang="scss">
+@import "./index.scss";
+</style>
+
 <template>
 	<div class="content-box">柱状图 🍓🍇🍈🍉</div>
 </template>

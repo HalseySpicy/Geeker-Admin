@@ -34,14 +34,14 @@ const directivesRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
-				path: "/directives/throttleDirect",
-				name: "throttleDirect",
-				component: () => import("@/views/directives/throttleDirect/index.vue"),
+				path: "/directives/dragDirect",
+				name: "dragDirect",
+				component: () => import("@/views/directives/dragDirect/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "节流指令",
-					key: "throttleDirect"
+					title: "拖拽指令",
+					key: "dragDirect"
 				}
 			},
 			{
@@ -56,14 +56,14 @@ const directivesRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
-				path: "/directives/dragDirect",
-				name: "dragDirect",
-				component: () => import("@/views/directives/dragDirect/index.vue"),
+				path: "/directives/throttleDirect",
+				name: "throttleDirect",
+				component: () => import("@/views/directives/throttleDirect/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "拖拽指令",
-					key: "dragDirect"
+					title: "节流指令",
+					key: "throttleDirect"
 				}
 			},
 			{
