@@ -23,6 +23,39 @@ const directivesRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: "/directives/watermarkDirect",
+				name: "watermarkDirect",
+				component: () => import("@/views/directives/watermarkDirect/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "水印指令",
+					key: "watermarkDirect"
+				}
+			},
+			{
+				path: "/directives/throttleDirect",
+				name: "throttleDirect",
+				component: () => import("@/views/directives/throttleDirect/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "节流指令",
+					key: "throttleDirect"
+				}
+			},
+			{
+				path: "/directives/debounceDirect",
+				name: "debounceDirect",
+				component: () => import("@/views/directives/debounceDirect/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "防抖指令",
+					key: "debounceDirect"
+				}
+			},
+			{
 				path: "/directives/dragDirect",
 				name: "dragDirect",
 				component: () => import("@/views/directives/dragDirect/index.vue"),

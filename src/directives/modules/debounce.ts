@@ -19,7 +19,7 @@ const debounce: Directive = {
 			}
 			timer = setTimeout(() => {
 				binding.value();
-			}, 200);
+			}, 500);
 		};
 		el.addEventListener("click", el.__handleClick__);
 	},
