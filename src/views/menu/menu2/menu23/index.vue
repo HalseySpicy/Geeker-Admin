@@ -1,5 +1,8 @@
 <template>
-	<div class="content-box">我是menu2-3 🍓🍇🍈🍉</div>
+	<div class="content-box">
+		我是menu2-3 🍓🍇🍈🍉
+		<el-input v-model="value" placeholder="测试缓存"></el-input>
+	</div>
 </template>
 
 <script setup lang="ts" name="menu23">

@@ -1,20 +1,17 @@
-import { onDeactivated, onUnmounted } from "vue";
+import { onUnmounted } from "vue";
 import * as echarts from "echarts";
 
 export const useEcharts = (myChart: echarts.ECharts, option: echarts.EChartsCoreOption) => {
 	if (option && typeof option === "object") {
 		myChart.setOption(option);
 	}
-
-	window.onresize = () => {
+	const echartsResize = () => {
 		myChart && myChart.resize();
 	};
 
-	onDeactivated(() => {
-		window.onresize = null;
-	});
+	window.addEventListener("resize", echartsResize, false);
 
 	onUnmounted(() => {
-		window.onresize = null;
+		window.removeEventListener("resize", echartsResize);
 	});
 };

@@ -16,7 +16,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "waterChart",
 				component: () => import("@/views/echarts/waterChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "水型图",
 					key: "waterChart"
@@ -27,7 +27,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "columnChart",
 				component: () => import("@/views/echarts/columnChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "柱状图",
 					key: "columnChart"
@@ -38,7 +38,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "lineChart",
 				component: () => import("@/views/echarts/lineChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "折线图",
 					key: "lineChart"
@@ -49,7 +49,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "pieChart",
 				component: () => import("@/views/echarts/pieChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "饼图",
 					key: "pieChart"
@@ -60,7 +60,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "radarChart",
 				component: () => import("@/views/echarts/radarChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "雷达图",
 					key: "radarChart"
@@ -71,7 +71,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 				name: "nestedChart",
 				component: () => import("@/views/echarts/nestedChart/index.vue"),
 				meta: {
-					keepAlive: true,
+					keepAlive: false,
 					requiresAuth: true,
 					title: "嵌套环形图",
 					key: "nestedChart"
