@@ -112,17 +112,16 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 				}
 			}),
 			// gzip compress
-			viteEnv.VITE_BUILD_GZIP
-				? viteCompression({
-						verbose: true,
-						disable: false,
-						threshold: 10240,
-						algorithm: "gzip",
-						ext: ".gz"
-				  })
-				: "",
+			viteEnv.VITE_BUILD_GZIP &&
+				viteCompression({
+					verbose: true,
+					disable: false,
+					threshold: 10240,
+					algorithm: "gzip",
+					ext: ".gz"
+				}),
 			// 是否生成包预览
-			viteEnv.VITE_REPORT ? visualizer() : ""
+			viteEnv.VITE_REPORT && visualizer()
 		],
 		// build configure
 		build: {

@@ -38,11 +38,6 @@ import md5 from "js-md5";
 
 const globalStore = GlobalStore();
 
-// inject
-const provideState = inject("provideState") as InjectProps;
-// console.log(provideState.age);
-provideState.changeName();
-
 // 定义 formRef（校验规则）
 type FormInstance = InstanceType<typeof ElForm>;
 const loginFormRef = ref<FormInstance>();
@@ -90,6 +85,11 @@ const resetForm = (formEl: FormInstance | undefined) => {
 	formEl.resetFields();
 };
 
+// inject
+const provideState = inject("provideState") as InjectProps;
+// console.log(provideState.age);
+provideState.changeName();
+
 // 接收父组件参数（采用ts专有声明，有默认值）
 interface ParentProps {
 	age?: string;
@@ -101,7 +101,7 @@ interface ParentProps {
 }
 const props = withDefaults(defineProps<ParentProps>(), {
 	age: "18",
-	address: () => ["新希望国际", "天府三街"],
+	address: () => ["天府广场", "天府三街"],
 	obj: () => {
 		return {
 			username: "admin",
@@ -109,10 +109,8 @@ const props = withDefaults(defineProps<ParentProps>(), {
 		};
 	}
 });
-// console.log(props);
 // 接收父组件参数（采用ts专有声明，无默认值）
 // const props1 = defineProps<{ item: string }>();
-// console.log(props1);
 
 // 子组件向父组件传输数据（触发父组件的submitParent方法）
 const emit = defineEmits<{
