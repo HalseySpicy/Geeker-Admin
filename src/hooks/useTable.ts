@@ -18,15 +18,15 @@ import { isArray } from "@/utils/is";
 /**
  * @description table 页面操作方法封装
  * @param apiUrl 获取表格数据 ApiUrl(必传)
- * @param apiUrl 当前表格的DOM(不必传，默认为“”)
  * @param initParam 获取数据初始化参数(不必传，默认为{})
  * @param isPageable 是否有分页(不必传，默认为true)
+ * @param tableRef 当前表格的DOM(不必传，默认为“”)
  * */
 export const useTable = (
 	apiUrl: (params: any) => Promise<any>,
-	tableRef: any = "",
 	initParam: any = {},
-	isPageable: boolean = true
+	isPageable: boolean = true,
+	tableRef: any = ""
 ) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
@@ -87,7 +87,7 @@ export const useTable = (
 	 * */
 	const doLayout = () => {
 		nextTick(() => {
-			tableRef && tableRef.value.doLayout();
+			// tableRef && tableRef.value.doLayout();
 			// window.onresize = () => {
 			// tableRef && tableRef.value.doLayout();
 			// };

@@ -172,8 +172,6 @@ import {
 	exportUserInfo
 } from "@/api/modules/user";
 
-// 获取当前页面表格元素
-const tableRef = ref();
 const {
 	tableData,
 	searchShow,
@@ -186,7 +184,7 @@ const {
 	handleSizeChange,
 	handleCurrentChange,
 	defaultFormat
-} = useTable(getUserList, tableRef);
+} = useTable(getUserList);
 
 // 数据多选
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
