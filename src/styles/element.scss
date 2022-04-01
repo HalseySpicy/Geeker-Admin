@@ -70,11 +70,6 @@
 		// 解决表格空白样式不居中问题(仅在element-plus中)
 		.table-empty {
 			line-height: 30px;
-			margin: 15vh 0 0 0;
-			// position: absolute;
-			// left: 50%;
-			// top: 50%;
-			// transform: translate(-50%, -50%);
 		}
 
 		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
@@ -82,7 +77,8 @@
 			height: calc(100% - 50px) !important;
 		}
 		.el-table__inner-wrapper,
-		.el-scrollbar__wrap {
+		.el-scrollbar__wrap,
+		.el-scrollbar__view {
 			height: 100% !important;
 		}
 	}
