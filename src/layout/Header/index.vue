@@ -9,6 +9,8 @@
 			<AssemblySize></AssemblySize>
 			<!-- Language -->
 			<Language></Language>
+			<!-- Theme -->
+			<Theme></Theme>
 			<!-- Full screen -->
 			<Fullscreen></Fullscreen>
 			<!-- User name -->
@@ -25,6 +27,7 @@ import Breadcrumb from "./components/Breadcrumb.vue";
 import Fullscreen from "./components/Fullscreen.vue";
 import Language from "./components/Language.vue";
 import AssemblySize from "./components/AssemblySize.vue";
+import Theme from "./components/Theme.vue";
 import Avatar from "./components/Avatar.vue";
 </script>
 

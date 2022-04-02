@@ -61,6 +61,10 @@
 			font-size: 15px;
 			height: 50px;
 		}
+		// 解决 el-table 中 header 文字换行问题
+		.el-table__header .el-table__cell > .cell {
+			white-space: nowrap;
+		}
 		.el-table__row {
 			height: 52px;
 		}
@@ -71,14 +75,18 @@
 		.table-empty {
 			line-height: 30px;
 		}
-
+		.el-table__empty-block {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
 		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
 		.el-table__body-wrapper {
 			height: calc(100% - 50px) !important;
 		}
 		.el-table__inner-wrapper,
-		.el-scrollbar__wrap,
-		.el-scrollbar__view {
+		.el-scrollbar__wrap {
 			height: 100% !important;
 		}
 	}
@@ -121,6 +129,19 @@
 		}
 	}
 }
+
+// .el-drawer__view {
+// 	.el-input.is-disabled .el-input__inner {
+// 		background-color: #fff;
+// 		color: #606266;
+// 	}
+// 	.el-form-item__label:before {
+// 		content: "" !important;
+// 	}
+// 	.el-switch.is-disabled {
+// 		opacity: 1;
+// 	}
+// }
 
 // * el-dialog 样式
 .el-dialog {

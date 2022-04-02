@@ -23,37 +23,40 @@
 			margin-right: 8px;
 		}
 	}
-	.el-menu {
-		flex: 1;
-		overflow: auto;
-		overflow-x: hidden;
-		border-right: none;
-		&::-webkit-scrollbar {
-			background-color: #20222a;
-		}
-		&::-webkit-scrollbar-thumb {
-			background-color: #41444b;
-		}
-		.el-menu-item {
-			&.is-active {
-				background-color: #060708 !important;
+	.el-scrollbar {
+		height: calc(100% - 55px);
+		.el-menu {
+			flex: 1;
+			overflow: auto;
+			overflow-x: hidden;
+			border-right: none;
+			&::-webkit-scrollbar {
+				background-color: #20222a;
 			}
-			&.is-active::before {
-				content: "";
-				top: 0;
-				left: 0;
-				bottom: 0;
-				width: 4px;
-				background: $bg-color;
-				position: absolute;
+			&::-webkit-scrollbar-thumb {
+				background-color: #41444b;
 			}
-		}
-		.href {
-			display: inline-block;
-			text-decoration: none;
-			color: #bdbdc0;
-			width: 100%;
-			height: 100%;
+			.el-menu-item {
+				&.is-active {
+					background-color: #060708 !important;
+				}
+				&.is-active::before {
+					content: "";
+					top: 0;
+					left: 0;
+					bottom: 0;
+					width: 4px;
+					background: $bg-color;
+					position: absolute;
+				}
+			}
+			.href {
+				display: inline-block;
+				text-decoration: none;
+				color: #bdbdc0;
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 }
