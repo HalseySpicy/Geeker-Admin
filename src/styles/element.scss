@@ -72,14 +72,14 @@
 			height: 0;
 		}
 		// 解决表格空白样式不居中问题(仅在element-plus中)
-		.table-empty {
-			line-height: 30px;
-		}
 		.el-table__empty-block {
 			position: absolute;
 			left: 50%;
 			top: 50%;
 			transform: translate(-50%, -50%);
+		}
+		.table-empty {
+			line-height: 30px;
 		}
 		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
 		.el-table__body-wrapper {
@@ -130,18 +130,19 @@
 	}
 }
 
-// .el-drawer__view {
-// 	.el-input.is-disabled .el-input__inner {
-// 		background-color: #fff;
-// 		color: #606266;
-// 	}
-// 	.el-form-item__label:before {
-// 		content: "" !important;
-// 	}
-// 	.el-switch.is-disabled {
-// 		opacity: 1;
-// 	}
-// }
+// el-drawer 查看数据样式
+.el-drawer__view {
+	.el-input.is-disabled .el-input__inner {
+		background-color: #fff;
+		color: #606266;
+	}
+	.el-form-item__label:before {
+		content: "" !important;
+	}
+	.el-switch.is-disabled {
+		opacity: 1;
+	}
+}
 
 // * el-dialog 样式
 .el-dialog {
