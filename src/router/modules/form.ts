@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/constant";
 
-// 表单 Form模块
+// 表单 Form 模块
 const formRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/form",

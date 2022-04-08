@@ -14,6 +14,7 @@ export const useAuthButtons = () => {
 	// 当前页按钮权限列表
 	const BUTTONS = computed(() => {
 		const authButtonsStore = AuthButtonsStore();
+		// 未获取接口数据前，设为空对象，否则报错
 		return authButtonsStore.authorButtonsObj[nowKey.value] || {};
 	});
 

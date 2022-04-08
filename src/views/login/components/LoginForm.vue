@@ -66,15 +66,12 @@ const login = (formEl: FormInstance | undefined) => {
 					password: md5(loginForm.password)
 				};
 				const res = await loginApi(requestLoginForm);
-				console.log(res);
 				globalStore.setToken(res.data!.access_token);
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			} finally {
 				loading.value = false;
 			}
-		} else {
-			return false;
 		}
 	});
 };

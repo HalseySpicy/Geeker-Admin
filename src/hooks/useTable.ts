@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { nextTick, reactive, computed, toRefs, shallowRef, onActivated, onDeactivated } from "vue";
+import { nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
 import {
 	Refresh,
 	CirclePlus,
@@ -64,7 +64,7 @@ export const useTable = (
 	});
 
 	/**
-	 * @description 分页查询数据(只包括分页和表格字段排序,排序方式可自行配置)
+	 * @description 分页查询数据(只包括分页和表格字段排序,其他排序方式可自行配置)
 	 * */
 	const pageParam = computed({
 		get: () => {
@@ -83,7 +83,7 @@ export const useTable = (
 	});
 
 	/**
-	 * @description 防止 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
+	 * @description 防止 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（目前已通过css解决）
 	 * */
 	const doLayout = () => {
 		nextTick(() => {

@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/constant";
 
-// echarts模块
+// echarts 模块
 const echartsRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/echarts",

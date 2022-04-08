@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/router/constant";
 
-// dashboard模块
+// dashboard 模块
 const dashboardRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/dashboard",

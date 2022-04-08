@@ -117,7 +117,7 @@
 	.el-select {
 		width: 100%;
 	}
-	// drawer-form 多列
+	// drawer-form 多列 form-item
 	.drawer-multiColumn-form {
 		display: flex;
 		flex-wrap: wrap;
@@ -130,7 +130,7 @@
 	}
 }
 
-// el-drawer 查看数据样式
+// * el-drawer 查看数据样式（待完善）
 .el-drawer__view {
 	.el-input.is-disabled .el-input__inner {
 		background-color: #fff;
