@@ -89,7 +89,6 @@ export function getTabPane<T, U>(menuList: any[], path: U): T {
  * @returns {String}
  */
 export function getBrowserLang() {
-	//@ts-ignore
 	let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
 	let defaultBrowserLang = "";
 	if (

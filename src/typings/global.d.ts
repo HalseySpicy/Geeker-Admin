@@ -23,3 +23,13 @@ declare interface ViteEnv {
 	VITE_BUILD_GZIP: boolean;
 	VITE_REPORT: boolean;
 }
+
+// * global
+declare global {
+	interface Navigator {
+		msSaveOrOpenBlob: (blob: Blob, fileName: string) => void;
+		browserLanguage: string;
+	}
+}
+
+export {};
