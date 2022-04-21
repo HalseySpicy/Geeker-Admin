@@ -1,0 +1,266 @@
+.dataScreen-container {
+	width: 100%;
+	height: 100%;
+	background: url("./images/bg.png") no-repeat;
+	background-size: 100% 100%;
+	.dataScreen {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		overflow: hidden;
+		-webkit-transform-origin: left top;
+		transform-origin: left top;
+		z-index: 999;
+		transition: 0.3s;
+		display: flex;
+		flex-direction: column;
+		.dataScreen-header {
+			width: 100%;
+			height: 38px;
+			display: flex;
+			.header-lf,
+			.header-rg {
+				width: 567px;
+				height: 100%;
+				background: url("./images/dataScreen-header-left-bg.png") no-repeat;
+				background-size: 100% 100%;
+				position: relative;
+			}
+			.header-ct {
+				flex: 1;
+				height: 100%;
+				position: relative;
+				.header-ct-title {
+					width: 100%;
+					height: 82px;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background: url("./images/dataScreen-header-center-bg.png") no-repeat;
+					background-size: 100% 100%;
+					color: #05e8fe;
+					font-size: 32px;
+					font-family: YouSheBiaoTiHei;
+					font-weight: 400;
+					line-height: 82px;
+					text-align: center;
+					.header-ct-warning {
+						width: 622px;
+						height: 44px;
+						position: absolute;
+						bottom: -42px;
+						left: 50%;
+						transform: translateX(-50%);
+						background: url("./images/dataScreen-header-warn-bg.png") no-repeat;
+						background-size: 100% 100%;
+						font-size: 14px;
+						font-family: SourceHanSansCN-Bold;
+						line-height: 16px;
+						color: #ffffff;
+						text-align: center;
+						line-height: 44px;
+					}
+				}
+			}
+			.header-screening,
+			.header-download {
+				width: 136px;
+				height: 42px;
+				position: absolute;
+				right: 0;
+				top: 0;
+				background: url("./images/dataScreen-header-btn-bg-l.png") no-repeat;
+				background-size: 100% 100%;
+				font-size: 18px;
+				font-family: YouSheBiaoTiHei;
+				font-weight: 400;
+				line-height: 42px;
+				color: #29fcff;
+				text-align: center;
+				padding-right: 4px;
+				box-sizing: border-box;
+				cursor: pointer;
+			}
+			.header-download {
+				left: 0;
+				background: url("./images/dataScreen-header-btn-bg-r.png") no-repeat;
+				padding-right: 0px;
+			}
+			.header-time {
+				width: 300px;
+				position: absolute;
+				right: 14px;
+				top: 0;
+				font-size: 17px;
+				line-height: 38px;
+				font-family: YouSheBiaoTiHei;
+				font-weight: 400;
+				color: #05e8fe;
+			}
+		}
+		.dataScreen-main {
+			width: 100%;
+			flex: 1;
+			display: flex;
+			padding: 12px 42px 20px;
+			box-sizing: border-box;
+			.dataScreen-lf {
+				width: 394px;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				margin-right: 40px;
+				justify-content: space-between;
+				.dataScreen-top,
+				.dataScreen-center,
+				.dataScreen-bottom {
+					width: 100%;
+					position: relative;
+					padding-top: 54px;
+					box-sizing: border-box;
+				}
+				.dataScreen-top {
+					height: 37%;
+					background: url("./images/dataScreen-main-lt.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.dataScreen-center {
+					height: 30%;
+					background: url("./images/dataScreen-main-lc.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.dataScreen-bottom {
+					height: 27%;
+					margin-bottom: 0px;
+					background: url("./images/dataScreen-main-lb.png") no-repeat;
+					background-size: 100% 100%;
+				}
+			}
+			.dataScreen-ct {
+				flex: 1;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				margin-right: 40px;
+				justify-content: space-between;
+				.dataScreen-map {
+					width: 100%;
+					flex: 1;
+					margin-top: 78px;
+					box-sizing: border-box;
+					position: relative;
+					.dataScreen-map-title {
+						width: 270px;
+						height: 25px;
+						background: url("./images/map-title-bg.png") no-repeat;
+						background-size: 100% 100%;
+						display: flex;
+						align-items: center;
+						color: #fff;
+						padding-left: 30px;
+						box-sizing: border-box;
+						letter-spacing: 5px;
+						font-size: 14px;
+						position: absolute;
+						left: 0;
+						top: 120px;
+						z-index: 99;
+					}
+					.dataScreen-alarm {
+						width: 100%;
+						height: 76px;
+						background: url(./images/dataScreen-warn-bg.png) no-repeat;
+						background-size: 100% 100%;
+						position: absolute;
+						left: 0px;
+						top: 0px;
+						z-index: 99;
+						// display: flex;
+						// flex-direction: column;
+						overflow: hidden;
+						padding: 2px 30px;
+						box-sizing: border-box;
+						.map-item {
+							height: 37px;
+							display: flex;
+							align-items: center;
+							cursor: pointer;
+							img {
+								width: 15px;
+								height: 15px;
+								margin-right: 6px;
+								margin-top: 3px;
+							}
+							span {
+								font-size: 18px;
+								color: rgba(255, 183, 0, 0.6);
+							}
+						}
+					}
+				}
+				.dataScreen-cb {
+					width: 100%;
+					height: 252px;
+					padding-top: 54px;
+					box-sizing: border-box;
+					position: relative;
+					background: url("./images/dataScreen-main-cb.png") no-repeat;
+					background-size: 100% 100%;
+				}
+			}
+			.dataScreen-rg {
+				width: 394px;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				.dataScreen-top,
+				.dataScreen-center,
+				.dataScreen-bottom {
+					width: 100%;
+					position: relative;
+					padding-top: 54px;
+					box-sizing: border-box;
+				}
+				.dataScreen-top {
+					height: 37%;
+					background: url("./images/dataScreen-main-rt.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.dataScreen-center {
+					height: 30%;
+					background: url("./images/dataScreen-main-rc.png") no-repeat;
+					background-size: 100% 100%;
+				}
+				.dataScreen-bottom {
+					height: 27%;
+					margin-bottom: 0px;
+					background: url("./images/dataScreen-main-rb.png") no-repeat;
+					background-size: 100% 100%;
+				}
+			}
+			.dataScreen-main-title {
+				position: absolute;
+				left: 0;
+				top: 1px;
+				display: flex;
+				flex-direction: column;
+				span {
+					font-size: 18px;
+					font-family: SourceHanSansCN-Bold;
+					line-height: 16px;
+					color: #ffffff;
+					margin-bottom: 12px;
+				}
+				img {
+					width: 68px;
+					height: 7px;
+				}
+			}
+			.dataScreen-main-chart {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}

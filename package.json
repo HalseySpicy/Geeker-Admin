@@ -24,7 +24,8 @@
     "qs": "^6.10.3",
     "vue": "^3.2.25",
     "vue-i18n": "^9.1.9",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-seamless-scroll": "^1.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",

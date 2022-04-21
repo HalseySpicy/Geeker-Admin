@@ -16,16 +16,6 @@ const routes: RouteRecordRaw[] = [
 		path: "/",
 		redirect: { name: "login" }
 	},
-	{
-		path: "/login",
-		name: "login",
-		component: () => import("@/views/login/index.vue"),
-		meta: {
-			requiresAuth: false,
-			title: "登录页",
-			key: "login"
-		}
-	},
 	...routerArray,
 	{
 		// 找不到路由重定向到404页面

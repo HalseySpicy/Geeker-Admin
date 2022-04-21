@@ -25,6 +25,29 @@
 	overflow: hidden;
 }
 
+/* 文字单行省略号 */
+.sle {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	-webkit-text-overflow: ellipsis; /*文本溢出时显示省略标记  兼容Safari*/
+	-o-text-overflow: ellipsis; /*文本溢出时显示省略标记  兼容Opera*/
+}
+
+/* 文字多行省略号 */
+.mle {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+/* 文字多了自動換行 */
+.break-word {
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
 /* fade-transform */
 .fade-transform-leave-active,
 .fade-transform-enter-active {
