@@ -3,7 +3,7 @@ import { TabPaneProps } from "element-plus";
 import { TabsState } from "../interface";
 import piniaPersistConfig from "@/config/piniaPersist";
 import { HOME_URL, TABS_WHITE_LIST } from "@/config/config";
-import router from "@/router/index";
+import router from "@/routers/index";
 
 export const TabsStore = defineStore({
 	id: "TabsState",

@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import { Layout } from "@/router/constant";
+import { Layout } from "@/routers/constant";
 
 // 个人博客模块
 const myBlogRouter: Array<RouteRecordRaw> = [

@@ -1,5 +1,5 @@
 import { RouteRecordRaw, RouteRecordName } from "vue-router";
-import { routerArray } from "@/router/router";
+import { routerArray } from "@/routers/router";
 
 // * 过滤需要缓存的路由
 let cacheRouter: any[] = [];

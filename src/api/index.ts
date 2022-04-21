@@ -5,7 +5,7 @@ import { ResultData } from "@/api/interface";
 import { checkStatus } from "./helper/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
-import router from "@/router";
+import router from "@/routers";
 
 const globalStore = GlobalStore();
 

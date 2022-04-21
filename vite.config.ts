@@ -58,6 +58,8 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 					}
 				}
 			}),
+			// * name 可以写在 script 标签上
+			VueSetupExtend(),
 			// * demand import element（如果使用了cdn引入,没必要使用element自动导入了）
 			// AutoImport({
 			// 	resolvers: [ElementPlusResolver()]
@@ -81,8 +83,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			// 		}
 			// 	]
 			// }),
-			// * name 可以写在script上
-			VueSetupExtend(),
+
 			// * image compress(测试了下这个插件，没啥用，反而图片压缩过后变大了，打包的时候还巨慢)
 			// viteImagemin({
 			// 	gifsicle: {
@@ -111,6 +112,8 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			// 		]
 			// 	}
 			// }),
+			// * 是否生成包预览
+			viteEnv.VITE_REPORT && visualizer(),
 			// * gzip compress
 			viteEnv.VITE_BUILD_GZIP &&
 				viteCompression({
@@ -119,9 +122,7 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 					threshold: 10240,
 					algorithm: "gzip",
 					ext: ".gz"
-				}),
-			// * 是否生成包预览
-			viteEnv.VITE_REPORT && visualizer()
+				})
 		],
 		// build configure
 		build: {

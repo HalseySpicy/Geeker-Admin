@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import { Layout } from "@/router/constant";
+import { Layout } from "@/routers/constant";
 
 // dashboard 模块
 const dashboardRouter: Array<RouteRecordRaw> = [

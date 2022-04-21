@@ -19,7 +19,7 @@ import "@/styles/element.scss";
 // Custom directives
 import directives from "@/directives/index";
 // vue Router
-import router from "@/router/index";
+import router from "@/routers/index";
 // i18n
 import I18n from "@/language/index";
 // pinia store

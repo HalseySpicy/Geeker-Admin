@@ -31,7 +31,7 @@ import Menu from "./Menu/index.vue";
 import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
 import Footer from "./Footer/index.vue";
-import cacheRouter from "@/router/cacheRouter";
+import cacheRouter from "@/routers/cacheRouter";
 import { onMounted } from "vue";
 import { getAuthorButtons } from "@/api/modules/login";
 import { AuthButtonsStore } from "@/store/modules/authButtons";

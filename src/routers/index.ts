@@ -1,4 +1,4 @@
-import router from "./router";
+import router from "@/routers/router";
 import NProgress from "@/config/nprogress";
 import { HOME_URL } from "@/config/config";
 import { MenuStore } from "@/store/modules/menu";

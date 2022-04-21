@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import { Layout } from "@/router/constant";
+import { Layout } from "@/routers/constant";
 
 // 表单 Form 模块
 const formRouter: Array<RouteRecordRaw> = [
