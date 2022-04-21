@@ -52,7 +52,7 @@
 				<div class="dataScreen-ct">
 					<div class="dataScreen-map">
 						<div class="dataScreen-map-title">景区实时客流量</div>
-						<!-- <vue3-seamless-scroll :list="alarmData" class="dataScreen-alarm" :step="0.5"> -->
+						<!-- <vue3-seamless-scroll :list="alarmData" class="dataScreen-alarm" :step="0.5" :hover="true"> -->
 						<div class="dataScreen-alarm">
 							<div class="map-item" v-for="item in alarmData" :key="item.id">
 								<img src="./images/dataScreen-alarm.png" alt="" />
@@ -60,7 +60,6 @@
 							</div>
 						</div>
 						<!-- </vue3-seamless-scroll> -->
-
 						<mapChart ref="MapchartRef" />
 					</div>
 					<div class="dataScreen-cb">
@@ -112,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, reactive, onMounted, onDeactivated } from "vue";
+import { ref, Ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { HOME_URL } from "@/config/config";
 import { useRouter } from "vue-router";
 import { ECharts } from "echarts";
@@ -131,14 +130,7 @@ import alarmList from "./utils/alarmList.json";
 const dataScreenRef = ref<HTMLElement | null>(null);
 /* 声明echarts实例 */
 interface ChartProps {
-	chart1: ECharts | null;
-	chart2: ECharts | null;
-	chart3: ECharts | null;
-	chart4: ECharts | null;
-	chart5: ECharts | null;
-	chart6: ECharts | null;
-	chart7: ECharts | null;
-	mapChart: ECharts | null;
+	[key: string]: ECharts | null;
 }
 const dataScreen: ChartProps = reactive({
 	chart1: null,
@@ -162,7 +154,7 @@ const MaleFemaleRatioRef = ref<ChartExpose>();
 const OverNext30Ref = ref<ChartExpose>();
 const PlatformSourceRef = ref<ChartExpose>();
 const MapchartRef = ref<ChartExpose>();
-/* 初始化charts */
+/* 初始化 charts参数 */
 let ageData = [
 	{
 		value: 200,
@@ -330,7 +322,7 @@ let mapData = [
 	}
 ];
 
-/* 初始化echarts */
+/* 初始化 echarts */
 const initCharts = (): void => {
 	dataScreen.chart1 = RealTimeAccessRef.value?.initChart(0.5) as ECharts;
 	dataScreen.chart2 = AgeRatioRef.value?.initChart(ageData) as ECharts;
@@ -369,18 +361,14 @@ const getScale = (width = 1920, height = 1080) => {
 	return ww < wh ? ww : wh;
 };
 
-/* 浏览器监听resize事件 */
+/* 浏览器监听 resize 事件 */
 const resize = () => {
 	if (dataScreenRef.value) {
 		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
 	}
-	dataScreen.chart1 && dataScreen.chart1.resize();
-	dataScreen.chart2 && dataScreen.chart2.resize();
-	dataScreen.chart3 && dataScreen.chart3.resize();
-	dataScreen.chart4 && dataScreen.chart4.resize();
-	dataScreen.chart5 && dataScreen.chart5.resize();
-	dataScreen.chart6 && dataScreen.chart6.resize();
-	dataScreen.chart7 && dataScreen.chart7.resize();
+	Object.values(dataScreen).forEach(chart => {
+		chart && chart.resize();
+	});
 };
 
 /* 跳转home */
@@ -438,9 +426,13 @@ onMounted(() => {
 });
 
 /* 销毁时触发 */
-onDeactivated(() => {
+onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
 	clearInterval(timer);
+	// 每次离开页面时，清空echarts实例，不浪费出现无法显示的问题
+	Object.values(dataScreen).forEach(val => {
+		val?.dispose();
+	});
 });
 </script>
 <style lang="scss" scoped>
