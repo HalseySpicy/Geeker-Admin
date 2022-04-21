@@ -241,6 +241,7 @@ defineExpose({
 		i {
 			color: #ff8100;
 			font-style: normal;
+			font-style: oblique;
 		}
 	}
 }

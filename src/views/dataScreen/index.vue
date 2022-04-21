@@ -63,7 +63,7 @@
 					</div>
 					<div class="dataScreen-cb">
 						<div class="dataScreen-main-title">
-							<span>未来30天访问量趋势预测图</span>
+							<span>未来30天游客量趋势预测图</span>
 							<img src="./images/dataScreen-title.png" alt="" />
 						</div>
 						<!-- chart区域 -->
@@ -75,7 +75,7 @@
 				<div class="dataScreen-rg">
 					<div class="dataScreen-top">
 						<div class="dataScreen-main-title">
-							<span>热门板块排行</span>
+							<span>热门景区排行</span>
 							<img src="./images/dataScreen-title.png" alt="" />
 						</div>
 						<!-- chart区域 -->
@@ -178,14 +178,14 @@ let ageData = [
 		percentage: "12%"
 	},
 	{
-		value: 180,
+		value: 310,
 		name: "30 - 40岁",
-		percentage: "14%"
+		percentage: "24%"
 	},
 	{
-		value: 380,
+		value: 250,
 		name: "40 - 60岁",
-		percentage: "30%"
+		percentage: "20%"
 	},
 	{
 		value: 260,
@@ -195,55 +195,55 @@ let ageData = [
 ];
 let hotData = [
 	{
-		value: 40,
-		name: "数据大屏",
+		value: 79999,
+		name: "峨眉山",
+		percentage: "80%",
+		maxValue: 100000
+	},
+	{
+		value: 59999,
+		name: "稻城亚丁",
+		percentage: "60%",
+		maxValue: 100000
+	},
+	{
+		value: 49999,
+		name: "九寨沟",
+		percentage: "50%",
+		maxValue: 100000
+	},
+	{
+		value: 39999,
+		name: "万里长城",
 		percentage: "40%",
-		maxValue: 100
+		maxValue: 100000
 	},
 	{
-		value: 9,
-		name: "拖拽指令",
-		percentage: "9%",
-		maxValue: 100
-	},
-	{
-		value: 30,
-		name: "表格组件",
+		value: 29999,
+		name: "北京故宫",
 		percentage: "30%",
-		maxValue: 100
-	},
-	{
-		value: 15,
-		name: "from组件",
-		percentage: "15%",
-		maxValue: 100
-	},
-	{
-		value: 6,
-		name: "首页",
-		percentage: "6%",
-		maxValue: 100
+		maxValue: 100000
 	}
 ];
 let platFromData = [
 	{
 		value: 40,
-		name: "掘金",
+		name: "智慧文旅平台",
 		percentage: "40%"
 	},
 	{
 		value: 10,
-		name: "CSDN",
+		name: "携程",
 		percentage: "10%"
 	},
 	{
 		value: 20,
-		name: "百度",
+		name: "飞猪",
 		percentage: "20%"
 	},
 	{
 		value: 30,
-		name: "我的博客",
+		name: "其他渠道",
 		percentage: "30%"
 	}
 ];
@@ -327,6 +327,8 @@ let mapData = [
 		]
 	}
 ];
+
+/* 初始化echarts */
 const initCharts = (): void => {
 	dataScreen.chart1 = RealTimeAccessRef.value?.initChart(0.5) as ECharts;
 	dataScreen.chart2 = AgeRatioRef.value?.initChart(ageData) as ECharts;
