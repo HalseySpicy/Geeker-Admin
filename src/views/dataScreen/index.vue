@@ -125,7 +125,7 @@ import PlatformSourceChart from "./components/PlatformSourceChart.vue";
 import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
 // import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
 /* 引入警告数据 */
-import alarmList from "./utils/alarmList.json";
+import alarmList from "./assets/alarmList.json";
 /* 获取最外层盒子 */
 const dataScreenRef = ref<HTMLElement | null>(null);
 /* 声明echarts实例 */
