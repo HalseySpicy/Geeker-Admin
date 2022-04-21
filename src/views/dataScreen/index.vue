@@ -52,12 +52,14 @@
 				<div class="dataScreen-ct">
 					<div class="dataScreen-map">
 						<div class="dataScreen-map-title">景区实时客流量</div>
-						<vue3-seamless-scroll :list="alarmData" class="dataScreen-alarm" :step="0.5">
+						<!-- <vue3-seamless-scroll :list="alarmData" class="dataScreen-alarm" :step="0.5"> -->
+						<div class="dataScreen-alarm">
 							<div class="map-item" v-for="item in alarmData" :key="item.id">
 								<img src="./images/dataScreen-alarm.png" alt="" />
 								<span class="map-alarm sle">{{ item.label }} 预警：{{ item.warnMsg }}</span>
 							</div>
-						</vue3-seamless-scroll>
+						</div>
+						<!-- </vue3-seamless-scroll> -->
 
 						<mapChart ref="MapchartRef" />
 					</div>
@@ -122,7 +124,7 @@ import MaleFemaleRatioChart from "./components/MaleFemaleRatioChart.vue";
 import OverNext30Chart from "./components/OverNext30Chart.vue";
 import PlatformSourceChart from "./components/PlatformSourceChart.vue";
 import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
-import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
+// import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
 /* 引入警告数据 */
 import alarmList from "./utils/alarmList.json";
 /* 获取最外层盒子 */
