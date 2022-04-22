@@ -10,7 +10,7 @@ export const useTime = () => {
 	const day = ref(0); // 天数
 	const hour = ref<number | string>(0); // 小时
 	const minute = ref<number | string>(0); // 分钟
-	const second = ref(0); // 秒
+	const second = ref<number | string>(0); // 秒
 	const nowTime = ref<string>(""); // 当前时间
 
 	// 更新时间
