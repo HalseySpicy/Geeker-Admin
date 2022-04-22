@@ -1,10 +1,9 @@
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
 
 /**
  * @description 获取本地时间
  */
 export const useTime = () => {
-	let timer: any; // 定时器
 	const year = ref(0); // 年份
 	const month = ref(0); // 月份
 	const week = ref(""); // 星期几
@@ -12,6 +11,7 @@ export const useTime = () => {
 	const hour = ref<number | string>(0); // 小时
 	const minute = ref<number | string>(0); // 分钟
 	const second = ref(0); // 秒
+	const nowTime = ref<string>(""); // 当前时间
 
 	// 更新时间
 	const updateTime = () => {
@@ -26,19 +26,13 @@ export const useTime = () => {
 		minute.value =
 			(date.getMinutes() + "")?.padStart(2, "0") ||
 			new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 }).format(date.getMinutes());
-		second.value = date.getSeconds();
+		second.value =
+			(date.getSeconds() + "")?.padStart(2, "0") ||
+			new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 }).format(date.getSeconds());
+		nowTime.value = `${year.value}年${month.value}月${day.value} ${hour.value}:${minute.value}:${second.value}`;
 	};
 
 	updateTime();
 
-	onMounted(() => {
-		clearInterval(timer);
-		timer = setInterval(() => updateTime(), 1000);
-	});
-
-	onUnmounted(() => {
-		clearInterval(timer);
-	});
-
-	return { month, day, hour, minute, second, week };
+	return { year, month, day, hour, minute, second, week, nowTime };
 };

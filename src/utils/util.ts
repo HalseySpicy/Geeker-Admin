@@ -85,6 +85,17 @@ export function getTabPane<T, U>(menuList: any[], path: U): T {
 }
 
 /**
+ * 生成随机数
+ * @param min 最小值
+ * @param max 最大值
+ * @returns {number}
+ */
+export function randomNum(min: number, max: number): number {
+	let num = Math.floor(Math.random() * (min - max) + max);
+	return num;
+}
+
+/**
  * 获取浏览器默认语言
  * @returns {String}
  */

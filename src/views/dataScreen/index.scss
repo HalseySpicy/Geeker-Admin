@@ -84,6 +84,7 @@
 				padding-right: 4px;
 				box-sizing: border-box;
 				cursor: pointer;
+				z-index: 9;
 			}
 			.header-download {
 				left: 0;
@@ -91,7 +92,7 @@
 				padding-right: 0px;
 			}
 			.header-time {
-				width: 300px;
+				width: 310px;
 				position: absolute;
 				right: 14px;
 				top: 0;
@@ -100,6 +101,7 @@
 				font-family: YouSheBiaoTiHei;
 				font-weight: 400;
 				color: #05e8fe;
+				white-space: nowrap;
 			}
 		}
 		.dataScreen-main {
@@ -167,7 +169,7 @@
 						font-size: 14px;
 						position: absolute;
 						left: 0;
-						top: 120px;
+						top: 10px;
 						z-index: 99;
 					}
 					.dataScreen-alarm {
@@ -197,7 +199,7 @@
 							}
 							span {
 								font-size: 18px;
-								color: rgba(255, 183, 0, 0.685);
+								color: rgba(255, 183, 0, 0.747);
 							}
 						}
 					}

@@ -8,7 +8,7 @@
 				<div class="header-ct">
 					<div class="header-ct-title">
 						智慧景区门票预约综合管控平台
-						<div class="header-ct-warning">平台高峰预警信息（10条）</div>
+						<div class="header-ct-warning">平台高峰预警信息（0条）</div>
 					</div>
 				</div>
 				<div class="header-rg">
@@ -52,14 +52,20 @@
 				<div class="dataScreen-ct">
 					<div class="dataScreen-map">
 						<div class="dataScreen-map-title">景区实时客流量</div>
-						<!-- <vue3-seamless-scroll :list="alarmData" class="dataScreen-alarm" :step="0.5" :hover="true"> -->
-						<div class="dataScreen-alarm">
-							<div class="map-item" v-for="item in alarmData" :key="item.id">
-								<img src="./images/dataScreen-alarm.png" alt="" />
-								<span class="map-alarm sle">{{ item.label }} 预警：{{ item.warnMsg }}</span>
+						<!-- <vue3-seamless-scroll
+							:list="alarmData"
+							class="dataScreen-alarm"
+							:step="0.5"
+							:hover="true"
+							:limitScrollNum="3"
+						>
+							<div class="dataScreen-alarm">
+								<div class="map-item" v-for="item in alarmData" :key="item.id">
+									<img src="./images/dataScreen-alarm.png" alt="" />
+									<span class="map-alarm sle">{{ item.label }} 预警：{{ item.warnMsg }}</span>
+								</div>
 							</div>
-						</div>
-						<!-- </vue3-seamless-scroll> -->
+						</vue3-seamless-scroll> -->
 						<mapChart ref="MapchartRef" />
 					</div>
 					<div class="dataScreen-cb">
@@ -113,7 +119,9 @@
 <script setup lang="ts">
 import { ref, Ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { HOME_URL } from "@/config/config";
+import { randomNum } from "@/utils/util";
 import { useRouter } from "vue-router";
+import { useTime } from "@/hooks/useTime";
 import { ECharts } from "echarts";
 import mapChart from "./components/chinaMapChart.vue";
 import AgeRatioChart from "./components/AgeRatioChart.vue";
@@ -128,6 +136,20 @@ import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
 import alarmList from "./assets/alarmList.json";
 /* 获取最外层盒子 */
 const dataScreenRef = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+	// 初始化时为外层盒子加上缩放属性，防止刷新界面时就已经缩放
+	if (dataScreenRef.value) {
+		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
+		dataScreenRef.value.style.width = `1920px`;
+		dataScreenRef.value.style.height = `1080px`;
+	}
+	/* 初始化echarts */
+	initCharts();
+	// 为浏览器绑定事件
+	window.addEventListener("resize", resize);
+});
+
 /* 声明echarts实例 */
 interface ChartProps {
 	[key: string]: ECharts | null;
@@ -366,10 +388,27 @@ const resize = () => {
 	if (dataScreenRef.value) {
 		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
 	}
+	// 使用了 scale 的echarts其实不需要需要重新计算缩放比例
 	Object.values(dataScreen).forEach(chart => {
 		chart && chart.resize();
 	});
 };
+
+/* 大屏告警数据 */
+interface AlarmProps {
+	id: number;
+	warnMsg: string;
+	label: string;
+}
+const alarmData: AlarmProps[] = reactive(alarmList);
+
+/* 获取当前时间 */
+const { nowTime } = useTime();
+let timer: any = null;
+let time: Ref<string> = ref(nowTime.value);
+timer = setInterval(() => {
+	time.value = useTime().nowTime.value;
+}, 1000);
 
 /* 跳转home */
 const router = useRouter();
@@ -377,59 +416,11 @@ const handleTo = (): void => {
 	router.push(HOME_URL);
 };
 
-/* 生成随机数 */
-const randomNum = (m: number, n: number): number => {
-	let num = Math.floor(Math.random() * (m - n) + n);
-	return num;
-};
-
-/* 大屏告警数据 */
-const alarmData: {
-	id: number;
-	warnMsg: string;
-	label: string;
-}[] = reactive(alarmList);
-
-/* 当前时间 */
-let timer: any = null;
-const myDate = () => {
-	let time = new Date();
-	let year = time.getFullYear();
-	let month: string | number = time.getMonth() + 1;
-	let date: string | number = time.getDate();
-	let hour: string | number = time.getHours();
-	let minute: string | number = time.getMinutes();
-	let second: string | number = time.getSeconds();
-	month = month < 10 ? "0" + month : month;
-	date = date < 10 ? "0" + date : date;
-	hour = hour < 10 ? "0" + hour : hour;
-	minute = minute < 10 ? "0" + minute : minute;
-	second = second < 10 ? "0" + second : second;
-	return year + "年" + month + "月" + date + " " + hour + ":" + minute + ":" + second;
-};
-let time: Ref<string> = ref(myDate());
-timer = setInterval(() => {
-	time.value = myDate();
-}, 1000);
-
-onMounted(() => {
-	// 初始化时为外层盒子加上缩放属性，防止刷新界面时就已经缩放
-	if (dataScreenRef.value) {
-		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
-		dataScreenRef.value.style.width = `1920px`;
-		dataScreenRef.value.style.height = `1080px`;
-	}
-	/* 初始化echarts */
-	initCharts();
-	// 为浏览器绑定事件
-	window.addEventListener("resize", resize);
-});
-
 /* 销毁时触发 */
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
 	clearInterval(timer);
-	// 每次离开页面时，清空echarts实例，不浪费出现无法显示的问题
+	// 每次离开页面时，清空echarts实例，不然会出现无法显示的问题
 	Object.values(dataScreen).forEach(val => {
 		val?.dispose();
 	});
