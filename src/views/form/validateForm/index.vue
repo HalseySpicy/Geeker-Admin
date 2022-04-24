@@ -11,30 +11,18 @@
 				</el-select>
 			</el-form-item>
 			<el-form-item label="Activity time" required>
-				<el-col :span="11">
-					<el-form-item prop="date1">
-						<el-date-picker v-model="ruleForm.date1" type="date" placeholder="Pick a date" style="width: 100%" />
-					</el-form-item>
-				</el-col>
-				<el-col class="text-center" :span="2">
+				<el-form-item prop="date1">
+					<el-date-picker v-model="ruleForm.date1" type="date" placeholder="Pick a date" style="width: 100%" />
+				</el-form-item>
+				<el-col class="text-center" :span="1">
 					<span class="text-gray-500">-</span>
 				</el-col>
-				<el-col :span="11">
-					<el-form-item prop="date2">
-						<el-time-picker v-model="ruleForm.date2" placeholder="Pick a time" style="width: 100%" />
-					</el-form-item>
-				</el-col>
+				<el-form-item prop="date2">
+					<el-time-picker v-model="ruleForm.date2" placeholder="Pick a time" style="width: 100%" />
+				</el-form-item>
 			</el-form-item>
 			<el-form-item label="Instant delivery" prop="delivery">
 				<el-switch v-model="ruleForm.delivery" />
-			</el-form-item>
-			<el-form-item label="Activity type" prop="type">
-				<el-checkbox-group v-model="ruleForm.type">
-					<el-checkbox label="Online activities" name="type" />
-					<el-checkbox label="Promotion activities" name="type" />
-					<el-checkbox label="Offline activities" name="type" />
-					<el-checkbox label="Simple brand exposure" name="type" />
-				</el-checkbox-group>
 			</el-form-item>
 			<el-form-item label="Resources" prop="resource">
 				<el-radio-group v-model="ruleForm.resource">
@@ -56,15 +44,15 @@
 <script setup lang="ts" name="dynamicForm">
 import { reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
-	name: "Hello",
+	name: "Geeker-Admin",
 	region: "",
 	date1: "",
 	date2: "",
 	delivery: false,
-	type: [],
 	resource: "",
 	desc: ""
 });
@@ -97,14 +85,6 @@ const rules = reactive<FormRules>({
 			trigger: "change"
 		}
 	],
-	type: [
-		{
-			type: "array",
-			required: true,
-			message: "Please select at least one activity type",
-			trigger: "change"
-		}
-	],
 	resource: [
 		{
 			required: true,
@@ -119,7 +99,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	await formEl.validate((valid, fields) => {
 		if (valid) {
-			console.log("submit!");
+			ElMessage.success("提交的数据为 : " + JSON.stringify(ruleForm));
 		} else {
 			console.log("error submit!", fields);
 		}
