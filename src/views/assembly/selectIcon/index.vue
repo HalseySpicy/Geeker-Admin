@@ -1,7 +1,7 @@
 <template>
 	<div class="content-box">
 		Icon 选择 🍓🍇🍈🍉
-		<SelectIcon></SelectIcon>
+		<div class="select-icon"><SelectIcon></SelectIcon></div>
 	</div>
 </template>
 
