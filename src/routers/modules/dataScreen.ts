@@ -6,7 +6,7 @@ const dataScreenRouter: Array<RouteRecordRaw> = [
 		path: "/dataScreen",
 		name: "dataScreen",
 		meta: {
-			requireAuth: true,
+			requireAuth: false,
 			title: "数据大屏",
 			key: "dataScreen"
 		},

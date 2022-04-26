@@ -23,7 +23,10 @@ import InfoDialog from "./InfoDialog.vue";
 import PasswordDialog from "./PasswordDialog.vue";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
+import { GlobalStore } from "@/store";
+
 const router = useRouter();
+const globalStore = GlobalStore();
 
 // logout
 const logout = () => {
@@ -33,6 +36,7 @@ const logout = () => {
 		type: "warning"
 	}).then(() => {
 		router.push({ name: "login" });
+		globalStore.setToken("");
 		ElMessage({
 			type: "success",
 			message: "退出登录成功！"
