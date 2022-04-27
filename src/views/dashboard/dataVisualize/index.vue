@@ -1,5 +1,7 @@
 <template>
-	<div class="content-box">数据可视化 🍓🍇🍈🍉</div>
+	<div class="content-box">
+		<span class="text">数据可视化 🍓🍇🍈🍉</span>
+	</div>
 </template>
 
 <script setup lang="ts" name="dataVisualize">

@@ -2,11 +2,11 @@ import { ElNotification } from "element-plus";
 
 /**
  * @description 接收数据流生成blob，创建链接，下载文件
- * @param {Function} url 导出表格的api地址(必传)
- * @param {string} tempName 导出的文件名(必传)
- * @param {object} params 导出的参数(默认为空对象)
- * @param {boolean} isNotify 是否有导出消息提示(默认为 true)
- * @param {string} fileType 导出的文件格式(默认为.xlsx)
+ * @param url 导出表格的api地址(必传)
+ * @param tempName 导出的文件名(必传)
+ * @param params 导出的参数(默认为空对象)
+ * @param isNotify 是否有导出消息提示(默认为 true)
+ * @param fileType 导出的文件格式(默认为.xlsx)
  * */
 export const useDownload = async (
 	url: (params: any) => Promise<any>,

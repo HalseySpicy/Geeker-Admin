@@ -233,8 +233,8 @@ interface DialogExpose {
 const dialogRef = ref<DialogExpose>();
 const batchAdd = () => {
 	let params = {
+		title: "用户",
 		tempUrl: exportUserInfo,
-		tempName: "用户模板",
 		importUrl: BatchAddUser,
 		getTableList: getTableList // 操作成功之后刷新数据
 	};

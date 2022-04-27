@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="dialogVisible" title="批量添加用户" :destroy-on-close="true" width="580px">
+	<el-dialog v-model="dialogVisible" :title="`批量添加${parameter.title}`" :destroy-on-close="true" width="580px">
 		<el-form class="drawer-multiColumn-form" label-width="100px">
 			<el-form-item label="模板下载 :">
 				<el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>
@@ -39,10 +39,10 @@ import { Download } from "@element-plus/icons-vue";
 import { ElNotification } from "element-plus";
 
 export interface ExcelParameterProps {
-	tempUrl: (params: any) => Promise<any>;
-	tempName: string;
-	importUrl: (params: any) => Promise<any>;
-	getTableList: () => Promise<any>;
+	title: string; // 标题
+	tempUrl: (params: any) => Promise<any>; // 下载模板的Api
+	importUrl: (params: any) => Promise<any>; // 批量导入的Api
+	getTableList: () => Promise<any>; // 获取表格数据的Api
 }
 
 // 是否覆盖数据
@@ -54,7 +54,7 @@ const dialogVisible = ref(false);
 // 父组件传过来的参数
 const parameter = ref<Partial<ExcelParameterProps>>({});
 
-// 接收参数
+// 接收父组件参数
 const acceptParams = (params?: any): void => {
 	parameter.value = params;
 	dialogVisible.value = true;
@@ -63,7 +63,7 @@ const acceptParams = (params?: any): void => {
 // Excel模板下载
 const downloadTemp = () => {
 	if (!parameter.value.tempUrl) return;
-	useDownload(parameter.value.tempUrl, "用户模板");
+	useDownload(parameter.value.tempUrl, `${parameter.value.title}模板`);
 };
 
 // 文件上传

@@ -1,6 +1,8 @@
 <template>
 	<div class="content-box">
-		<span>个人博客： <a href="http://www.spicyboy.cn" target="_blank">http://www.spicyboy.cn</a> 🍒🍉🍊</span>
+		<span class="text">
+			个人博客： <a href="http://www.spicyboy.cn" target="_blank">http://www.spicyboy.cn</a> 🍒🍉🍊
+		</span>
 	</div>
 </template>
 

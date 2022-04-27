@@ -1,6 +1,6 @@
 <template>
 	<div class="content-box">
-		<div class="text">长按指令 🍇🍇🍇🍓🍓🍓</div>
+		<span class="text">长按指令 🍇🍇🍇🍓🍓🍓</span>
 		<el-button type="primary" v-longpress="longpress">长按2秒触发事件</el-button>
 	</div>
 </template>
