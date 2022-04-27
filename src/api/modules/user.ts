@@ -18,7 +18,7 @@ export const addUser = (params: { id: string }) => {
 
 // * 批量添加用户
 export const BatchAddUser = (params: any) => {
-	return http.post(PORT1 + `/user/import`, params, { headers: { "Content-Type": "multipart/form-data" } });
+	return http.post(PORT1 + `/user/import`, params);
 };
 
 // * 编辑用户
