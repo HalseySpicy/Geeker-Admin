@@ -1,11 +1,12 @@
 <template>
 	<div class="table-box">
+		<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns"></SearchForm>
 		<div class="table-header">
 			<div class="header-button">
-				<slot name="tableHeader"></slot>
+				<slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
 			</div>
 			<el-tooltip effect="dark" content="刷新" placement="top">
-				<el-button class="refresh" :icon="Refresh" circle> </el-button>
+				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"> </el-button>
 			</el-tooltip>
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
@@ -61,6 +62,7 @@
 			</template>
 		</el-table>
 		<Pagination
+			v-if="pagination"
 			:pageable="pageable"
 			:handleSizeChange="handleSizeChange"
 			:handleCurrentChange="handleCurrentChange"
@@ -69,43 +71,40 @@
 </template>
 
 <script setup lang="ts" name="proTable">
-import { filterEnum } from "@/utils/util";
-import { Refresh } from "@element-plus/icons-vue";
-import Pagination from "@/components/Pagination/index.vue";
 import { onMounted } from "vue";
+import { Refresh } from "@element-plus/icons-vue";
+import { filterEnum } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
+import { useSelection } from "@/hooks/useSelection";
+import { ColumnProps } from "./interface";
+import SearchForm from "@/components/SearchForm/index.vue";
+import Pagination from "@/components/Pagination/index.vue";
 
-const { tableData, pageable, getTableList, handleSizeChange, handleCurrentChange } = useTable(getUserList);
+interface ProTableProps {
+	columns: Partial<ColumnProps>[]; // 列配置项
+	requestApi: (params: any) => Promise<any>; // 请求表格数据的api
+	pagination?: boolean; // 是否需要分页组件
+	operationWidth?: string; // 操作列宽
+}
+
+const props = withDefaults(defineProps<ProTableProps>(), {
+	tableData: () => [],
+	columns: () => [],
+	pagination: true,
+	operationWidth: "250"
+});
+
+const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+	useTable(props.requestApi);
+
+const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
+
+const searchColumns = props.columns.filter(item => item.search);
 
 onMounted(() => {
 	getTableList();
 });
 
-interface EnumProps {
-	label: string;
-	value: any;
-}
-
-interface ColumnProps {
-	type: string; // index | selection
-	prop: string; // 单元格数据（非特殊类型必填）
-	label: string; // 单元格标题（非特殊类型必填）
-	width: string; // 列宽
-	image: boolean; // 是否展示图片
-	enum: EnumProps[]; // 枚举类型（渲染值的字典）
-}
-
-interface ProTableProps {
-	tableData: any[]; // 表格数据
-	columns: Partial<ColumnProps>[]; // 列配置
-	operationWidth?: string; // 操作列宽
-	selectionChange?: (rowArr: any) => void; // 选择框变化时的回调
-	getRowKeys?: (row: { id: string }) => string; // 获取行的唯一标识
-}
-
-withDefaults(defineProps<ProTableProps>(), {
-	tableData: () => [],
-	columns: () => [],
-	operationWidth: "250"
-});
+// 暴露刷新方法给父组件
+defineExpose({ refresh: getTableList });
 </script>

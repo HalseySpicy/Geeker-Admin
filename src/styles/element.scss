@@ -135,20 +135,6 @@
 	}
 }
 
-// * el-drawer 查看数据样式（待完善）
-.el-drawer__view {
-	.el-input.is-disabled .el-input__inner {
-		background-color: #fff;
-		color: #606266;
-	}
-	.el-form-item__label:before {
-		content: "" !important;
-	}
-	.el-switch.is-disabled {
-		opacity: 1;
-	}
-}
-
 // * el-dialog 样式
 .el-dialog {
 	.el-dialog__header {

@@ -179,16 +179,11 @@ export const useTable = (
 		getTableList();
 	};
 
-	const switchSearchShow = () => {
-		state.searchShow = !state.searchShow;
-	};
-
 	return {
 		...toRefs(state),
 		getTableList,
 		search,
 		reset,
-		switchSearchShow,
 		handleSizeChange,
 		handleCurrentChange,
 		icon

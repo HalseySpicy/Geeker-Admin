@@ -30,8 +30,8 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	-webkit-text-overflow: ellipsis; /*文本溢出时显示省略标记  兼容Safari*/
-	-o-text-overflow: ellipsis; /*文本溢出时显示省略标记  兼容Opera*/
+	-webkit-text-overflow: ellipsis; /* 文本溢出时显示省略标记  兼容Safari */
+	-o-text-overflow: ellipsis; /* 文本溢出时显示省略标记  兼容Opera */
 }
 
 /* 文字多行省略号 */
