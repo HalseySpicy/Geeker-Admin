@@ -65,14 +65,7 @@
 				<el-button class="refresh" :icon="icon.Refresh" circle @click="getTableList"> </el-button>
 			</el-tooltip>
 		</div>
-		<el-table
-			ref="tableRef"
-			height="575"
-			:data="tableData"
-			:border="true"
-			@selection-change="selectionChange"
-			:row-key="getRowKeys"
-		>
+		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 			<el-table-column type="selection" reserve-selection width="80" />
 			<el-table-column
 				prop="username"
@@ -153,6 +146,7 @@
 <script setup lang="ts" name="proTable">
 import { ref, onMounted } from "vue";
 import { genderType } from "@/utils/serviceDict";
+import { defaultFormat } from "@/utils/util";
 import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
@@ -182,8 +176,7 @@ const {
 	search,
 	reset,
 	handleSizeChange,
-	handleCurrentChange,
-	defaultFormat
+	handleCurrentChange
 } = useTable(getUserList);
 
 // 数据多选

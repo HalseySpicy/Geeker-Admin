@@ -1,7 +1,9 @@
+import { isArray } from "@/utils/is";
+
 /**
- * 获取localStorage
+ * @description 获取localStorage
  * @param key Storage名称
- * @returns {String}
+ * @returns {String} Storage值
  */
 export function localGet(key: string) {
 	const value = window.localStorage.getItem(key);
@@ -13,7 +15,7 @@ export function localGet(key: string) {
 }
 
 /**
- * 存储localStorage
+ * @description 存储localStorage
  * @param key Storage名称
  * @param value Storage值
  */
@@ -22,7 +24,7 @@ export function localSet(key: string, value: any) {
 }
 
 /**
- * 清除localStorage
+ * @description 清除localStorage
  * @param key Storage名称
  */
 export function localRemove(key: string) {
@@ -38,7 +40,7 @@ export function localClear() {
 }
 
 /**
- * 对象深克隆
+ * @description 对象深克隆
  * @param obj 源对象
  * @returns {obj} 克隆后的对象
  */
@@ -60,7 +62,7 @@ export function deepCopy<T>(obj: any): T {
 }
 
 /**
- * 判断数据类型
+ * @description 判断数据类型
  * @param val 需要判断类型的数据
  * @returns {string} 数据类型
  */
@@ -71,8 +73,10 @@ export function isType(val: any) {
 }
 
 /**
- * 递归查询当前路由所对应的tabPane
- * @param res 当前地址匹配的路由对象
+ * @description 递归查询当前路由所对应的tabPane
+ * @param menuList 菜单列表
+ * @param path 当前地址
+ * @returns {Array} 当前路由所对应的tabPane
  */
 export function getTabPane<T, U>(menuList: any[], path: U): T {
 	let result: any;
@@ -85,7 +89,7 @@ export function getTabPane<T, U>(menuList: any[], path: U): T {
 }
 
 /**
- * 生成随机数
+ * @description 生成随机数
  * @param min 最小值
  * @param max 最大值
  * @returns {number}
@@ -96,8 +100,8 @@ export function randomNum(min: number, max: number): number {
 }
 
 /**
- * 获取浏览器默认语言
- * @returns {String}
+ * @description 获取浏览器默认语言
+ * @returns {String} 语言
  */
 export function getBrowserLang() {
 	let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
@@ -112,4 +116,28 @@ export function getBrowserLang() {
 		defaultBrowserLang = "en";
 	}
 	return defaultBrowserLang;
+}
+
+/**
+ * @description 格式化表格单元格默认值
+ * @param row 行
+ * @param col 列
+ * @param callValue 当前单元格值
+ * @return {String} 格式化后的值
+ * */
+export function defaultFormat(row: number, col: number, callValue: any) {
+	// 如果为数组,使用 / 拼接
+	if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
+	return callValue ?? "--";
+}
+
+/**
+ * @description 根据枚举列表查询当前显示的数据
+ * @param callValue 当前单元格值
+ * @param enumData 枚举列表
+ * @return {String} 格式化后的值
+ * */
+export function filterEnum(callValue: any, enumData: any[] = []): string {
+	let filterData = enumData.find(item => item.value === callValue);
+	return filterData ? filterData.label : "--";
 }

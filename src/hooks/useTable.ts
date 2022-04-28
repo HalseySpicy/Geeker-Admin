@@ -13,7 +13,6 @@ import {
 	ArrowDown,
 	ArrowUp
 } from "@element-plus/icons-vue";
-import { isArray } from "@/utils/is";
 
 /**
  * @description table 页面操作方法封装
@@ -180,17 +179,8 @@ export const useTable = (
 		getTableList();
 	};
 
-	/**
-	 * @description 格式化表格单元格默认值
-	 * @param row 行
-	 * @param col 列
-	 * @param callValue 当前单元格值
-	 * @return void
-	 * */
-	const defaultFormat = (row: number, col: number, callValue: any) => {
-		// 如果为数组,使用/拼接
-		if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
-		return callValue ?? "--";
+	const switchSearchShow = () => {
+		state.searchShow = !state.searchShow;
 	};
 
 	return {
@@ -198,9 +188,9 @@ export const useTable = (
 		getTableList,
 		search,
 		reset,
+		switchSearchShow,
 		handleSizeChange,
 		handleCurrentChange,
-		defaultFormat,
 		icon
 	};
 };
