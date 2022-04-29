@@ -143,7 +143,7 @@
 		<ImportExcel ref="dialogRef"></ImportExcel>
 	</div>
 </template>
-<script setup lang="ts" name="proTable">
+<script setup lang="ts" name="useHooks">
 import { ref, onMounted } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { defaultFormat } from "@/utils/util";
@@ -153,7 +153,7 @@ import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
-import UserDrawer from "./components/UserDrawer.vue";
+import UserDrawer from "../components/UserDrawer.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import {
 	getUserList,

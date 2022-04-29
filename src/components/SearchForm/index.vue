@@ -38,9 +38,11 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	searchParam: {}
 });
 
+// 是否展开搜索项
 const searchShow = ref(false);
 
-const getSearchList = computed((): any => {
+// 根据是否展开配置搜索项长度
+const getSearchList = computed((): Partial<ColumnProps>[] => {
 	if (searchShow.value) return props.columns;
 	return props.columns.slice(0, 4);
 });

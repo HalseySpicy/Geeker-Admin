@@ -34,7 +34,7 @@
 				>
 					<!-- 自定义配置每一列 slot -->
 					<slot :name="item.prop" :row="scope.row">
-						<!-- 图片 -->
+						<!-- 图片(自带预览) -->
 						<el-image
 							v-if="item.image"
 							:src="scope.row[item.prop!]"
@@ -43,7 +43,7 @@
 							class="table-image"
 							preview-teleported
 						/>
-						<!-- 文字格式化 -->
+						<!-- 文字(自带格式化) -->
 						<span v-else>
 							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): scope.row[item.prop!] }}
 						</span>
@@ -84,6 +84,7 @@ interface ProTableProps {
 	columns: Partial<ColumnProps>[]; // 列配置项
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api
 	pagination?: boolean; // 是否需要分页组件
+	initParam?: any; // 初始化请求参数
 	operationWidth?: string; // 操作列宽
 }
 
@@ -91,13 +92,14 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	tableData: () => [],
 	columns: () => [],
 	pagination: true,
+	initParam: {},
 	operationWidth: "250"
 });
 
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
 const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-	useTable(props.requestApi, {}, props.pagination);
+	useTable(props.requestApi, props.initParam, props.pagination);
 
 // 过滤需要搜索的字段
 const searchColumns = props.columns.filter(item => item.search);
@@ -105,14 +107,6 @@ const searchColumns = props.columns.filter(item => item.search);
 onMounted(() => {
 	getTableList();
 });
-
-// const initParams = props.columns.filter(item => {
-// 	return item.initParam ?? item.initParam;
-// });
-
-// initParams.forEach(item => {
-// 	searchParam.value[item.prop!] = item.initParam;
-// });
 
 // 暴露刷新方法给父组件
 defineExpose({ refresh: getTableList });

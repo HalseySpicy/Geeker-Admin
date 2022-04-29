@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { nextTick, reactive, computed, toRefs, shallowRef, onActivated } from "vue";
+import { nextTick, reactive, computed, toRefs, onActivated } from "vue";
 import {
 	Refresh,
 	CirclePlus,
@@ -47,8 +47,8 @@ export const useTable = (
 		totalParam: {}
 	});
 
-	// * 表格页面所需icon(使用shallowRef/markRaw包裹)
-	const icon = shallowRef({
+	// * 表格页面所需icon
+	const icon = {
 		Refresh,
 		CirclePlus,
 		Delete,
@@ -60,7 +60,7 @@ export const useTable = (
 		Setting,
 		ArrowDown,
 		ArrowUp
-	});
+	};
 
 	/**
 	 * @description 分页查询数据(只包括分页和表格字段排序,其他排序方式可自行配置)
@@ -78,7 +78,7 @@ export const useTable = (
 	});
 
 	onActivated(() => {
-		doLayout();
+		// doLayout();
 	});
 
 	/**
