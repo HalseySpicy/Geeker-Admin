@@ -12,12 +12,14 @@
 </template>
 
 <script setup lang="ts" name="pagination">
+interface Pageable {
+	pageNum: number;
+	pageSize: number;
+	total: number;
+}
+
 interface PaginationProps {
-	pageable: {
-		pageNum: number;
-		pageSize: number;
-		total: number;
-	};
+	pageable: Pageable;
 	handleSizeChange: (size: number) => void;
 	handleCurrentChange: (currentPage: number) => void;
 }

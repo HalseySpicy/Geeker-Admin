@@ -1,18 +1,11 @@
 <template>
 	<div class="table-search" v-if="columns.length">
 		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
-			<template v-for="item in columns.slice(0, 4)">
+			<template v-for="item in getSearchList">
 				<el-form-item :label="`${item.label} :`">
-					<el-input v-model="searchParam[item.prop]" placeholder="请输入" clearable></el-input>
+					<SearchFormItem :item="item" :searchParam="searchParam"></SearchFormItem>
 				</el-form-item>
 			</template>
-			<div class="more-item" v-show="searchShow" v-if="columns.length > 4">
-				<template v-for="item in columns.slice(4)">
-					<el-form-item :label="`${item.label} :`">
-						<el-input v-model="searchParam[item.prop]" placeholder="请输入" clearable></el-input>
-					</el-form-item>
-				</template>
-			</div>
 		</el-form>
 		<div class="search-operation">
 			<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
@@ -28,16 +21,16 @@
 </template>
 
 <script setup lang="ts" name="searchForm">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { ColumnProps } from "@/components/ProTable/interface";
+import SearchFormItem from "./components/SearchFormItem.vue";
 import { Delete, Search, ArrowDown, ArrowUp } from "@element-plus/icons-vue";
 
-const searchShow = ref(false);
-
 interface ProTableProps {
-	columns: any[];
+	columns: Partial<ColumnProps>[]; // 搜索配置列
 	searchParam: any; // 搜索参数
-	search(): void; // 搜索
-	reset(): void; // 重置
+	search: (params: any) => void; // 搜索方法
+	reset: (params: any) => void; // 重置方法
 }
 
 const props = withDefaults(defineProps<ProTableProps>(), {
@@ -45,5 +38,10 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	searchParam: {}
 });
 
-console.log(props.columns);
+const searchShow = ref(false);
+
+const getSearchList = computed((): any => {
+	if (searchShow.value) return props.columns;
+	return props.columns.slice(0, 4);
+});
 </script>

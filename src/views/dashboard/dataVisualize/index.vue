@@ -1,5 +1,5 @@
 <template>
-	<ProTable ref="proTable" :requestApi="getUserList" :columns="tableColumns">
+	<ProTable ref="proTable" :requestApi="getUserList" :columns="columns">
 		<!-- 表格 header 按钮 -->
 		<template #tableHeader="scope">
 			<el-button type="primary" :icon="CirclePlus">新增用户</el-button>
@@ -28,16 +28,14 @@
 </template>
 
 <script setup lang="ts" name="dataVisualize">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { getUserList } from "@/api/modules/user";
 import { genderType } from "@/utils/serviceDict";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, EditPen, Download, Upload, View } from "@element-plus/icons-vue";
 import ProTable from "@/components/ProTable/index.vue";
 
-const proTable = ref();
-
-const tableColumns: Partial<ColumnProps>[] = [
+const columns: Partial<ColumnProps>[] = [
 	{
 		type: "selection",
 		width: "100"
@@ -55,7 +53,10 @@ const tableColumns: Partial<ColumnProps>[] = [
 	{
 		prop: "gender",
 		label: "性别",
-		enum: genderType
+		width: "100",
+		enum: genderType,
+		search: true,
+		searchType: "select"
 	},
 	{
 		prop: "idCard",
@@ -76,17 +77,18 @@ const tableColumns: Partial<ColumnProps>[] = [
 		prop: "createTime",
 		label: "创建时间",
 		width: "200",
-		search: true
-	},
-	{
-		prop: "avatar",
-		label: "头像",
-		image: true
+		search: true,
+		searchType: "datetimerange"
 	},
 	{
 		prop: "status",
 		label: "用户状态"
 	}
+	// {
+	// 	prop: "avatar",
+	// 	label: "头像",
+	// 	image: true
+	// },
 ];
 
 // 批量删除
@@ -94,11 +96,21 @@ const batchDelete = async (ids: number[]) => {
 	console.log(ids);
 };
 
+const proTable = ref();
 // 查看 / 编辑
 const openDrawer = (row: any) => {
 	console.log(row);
 	console.log(proTable);
 };
+
+// 初始化参数
+// let initParam = reactive({
+// 	username: "刘涛"
+// });
+
+// const getTableData = (params: any) => {
+// 	return getUserList({ ...params, ...initParam });
+// };
 </script>
 
 <style scoped lang="scss">

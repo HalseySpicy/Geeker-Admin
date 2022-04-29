@@ -76,7 +76,7 @@ import { Refresh } from "@element-plus/icons-vue";
 import { filterEnum } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
-import { ColumnProps } from "./interface";
+import { ColumnProps } from "@/components/ProTable/interface";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
 
@@ -94,16 +94,25 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	operationWidth: "250"
 });
 
-const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-	useTable(props.requestApi);
-
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
+const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+	useTable(props.requestApi, {}, props.pagination);
+
+// 过滤需要搜索的字段
 const searchColumns = props.columns.filter(item => item.search);
 
 onMounted(() => {
 	getTableList();
 });
+
+// const initParams = props.columns.filter(item => {
+// 	return item.initParam ?? item.initParam;
+// });
+
+// initParams.forEach(item => {
+// 	searchParam.value[item.prop!] = item.initParam;
+// });
 
 // 暴露刷新方法给父组件
 defineExpose({ refresh: getTableList });
