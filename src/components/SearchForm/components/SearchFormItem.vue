@@ -1,10 +1,10 @@
 <template>
 	<template v-if="item.searchType == undefined || item.searchType == 'text'">
-		<el-input v-model="searchParam[item.prop]" placeholder="请输入" clearable></el-input>
+		<el-input v-model="searchParam[item.prop!]" placeholder="请输入" clearable></el-input>
 	</template>
 	<template v-if="item.searchType == 'select' || item.searchType == 'multipleSelect'">
 		<el-select
-			v-model="searchParam[item.prop]"
+			v-model="searchParam[item.prop!]"
 			:multiple="item.searchType == 'multipleSelect'"
 			placeholder="请选择"
 			clearable
@@ -18,11 +18,11 @@
 		</el-select>
 	</template>
 	<template v-if="item.searchType == 'date'">
-		<el-date-picker v-model="searchParam[item.prop]" value-format="YYYY-MM-DD" type="date" placeholder="请选择日期" />
+		<el-date-picker v-model="searchParam[item.prop!]" value-format="YYYY-MM-DD" type="date" placeholder="请选择日期" />
 	</template>
 	<template v-if="item.searchType == 'datetimerange'">
 		<el-date-picker
-			v-model="searchParam[item.prop]"
+			v-model="searchParam[item.prop!]"
 			type="datetimerange"
 			value-format="YYYY-MM-DD HH:mm:ss"
 			range-separator="至"

@@ -98,7 +98,7 @@ let initParam = reactive({
 });
 
 // 批量删除
-const batchDelete = async (ids: number[]) => {
+const batchDelete = async (ids: string[]) => {
 	console.log(ids);
 	initParam.type = 2;
 	proTable.value.refresh();

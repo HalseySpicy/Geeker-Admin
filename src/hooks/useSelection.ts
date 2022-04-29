@@ -10,7 +10,7 @@ export const useSelection = () => {
 	const selectedList = ref([]);
 
 	// 当前选中的所有ids(数组)
-	const selectedListIds = computed(() => {
+	const selectedListIds = computed((): string[] => {
 		let ids: string[] = [];
 		selectedList.value.forEach(item => {
 			ids.push(item["id"]);
