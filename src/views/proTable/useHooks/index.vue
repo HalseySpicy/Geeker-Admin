@@ -41,23 +41,10 @@
 		</div>
 		<div class="table-header">
 			<div class="header-button">
-				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add"
-					>新增用户</el-button
-				>
-				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd"
-					>批量添加用户</el-button
-				>
-				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile" v-if="BUTTONS.export"
-					>导出用户数据</el-button
-				>
-				<el-button
-					type="danger"
-					:icon="icon.Delete"
-					plain
-					:disabled="!isSelected"
-					@click="batchDelete"
-					v-if="BUTTONS.batchDelete"
-				>
+				<el-button type="primary" :icon="icon.CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
+				<el-button type="primary" :icon="icon.Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
+				<el-button type="primary" :icon="icon.Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
+				<el-button type="danger" :icon="icon.Delete" plain :disabled="!isSelected" @click="batchDelete" v-if="BUTTONS.batchDelete">
 					批量删除用户
 				</el-button>
 			</div>
@@ -67,42 +54,14 @@
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 			<el-table-column type="selection" reserve-selection width="80" />
-			<el-table-column
-				prop="username"
-				label="用户姓名"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="140"
-			></el-table-column>
+			<el-table-column prop="username" label="用户姓名" :formatter="defaultFormat" show-overflow-tooltip width="140"></el-table-column>
 			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="110" #default="scope">
 				{{ scope.row.gender == 1 ? "男" : "女" }}
 			</el-table-column>
-			<el-table-column
-				prop="idCard"
-				label="身份证号"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-			></el-table-column>
-			<el-table-column
-				prop="email"
-				label="邮箱"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="240"
-			></el-table-column>
-			<el-table-column
-				prop="address"
-				label="居住地址"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-			></el-table-column>
-			<el-table-column
-				prop="createTime"
-				label="创建时间"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="200"
-			></el-table-column>
+			<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="email" label="邮箱" :formatter="defaultFormat" show-overflow-tooltip width="240"></el-table-column>
+			<el-table-column prop="address" label="居住地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
+			<el-table-column prop="createTime" label="创建时间" :formatter="defaultFormat" show-overflow-tooltip width="200"></el-table-column>
 			<el-table-column prop="status" label="用户状态" width="130" #default="scope">
 				<el-switch
 					:value="scope.row.status"
@@ -112,9 +71,7 @@
 					@change="changeStatus($event, scope.row)"
 					v-if="BUTTONS.status"
 				/>
-				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
-					{{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag
-				>
+				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else> {{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag>
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" width="320" #default="scope">
 				<el-button type="text" :icon="icon.View" @click="openDrawer('查看', scope.row)">查看</el-button>
@@ -153,31 +110,12 @@ import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
-import UserDrawer from "../components/UserDrawer.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
-import {
-	getUserList,
-	addUser,
-	BatchAddUser,
-	editUser,
-	deleteUser,
-	changeUserStatus,
-	resetUserPassWord,
-	exportUserInfo
-} from "@/api/modules/user";
+import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
+import { getUserList, addUser, BatchAddUser, editUser, deleteUser, changeUserStatus, resetUserPassWord, exportUserInfo } from "@/api/modules/user";
 
-const {
-	tableData,
-	searchShow,
-	pageable,
-	searchParam,
-	icon,
-	getTableList,
-	search,
-	reset,
-	handleSizeChange,
-	handleCurrentChange
-} = useTable(getUserList);
+const { tableData, searchShow, pageable, searchParam, icon, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+	useTable(getUserList);
 
 // 数据多选
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
@@ -234,7 +172,7 @@ const batchAdd = () => {
 	dialogRef.value!.acceptParams(params);
 };
 
-// 打开 drawer(查看/编辑/删除)
+// 打开 drawer(新增、查看、编辑)
 interface DrawerExpose {
 	acceptParams: (params: any) => void;
 }
@@ -250,7 +188,3 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	drawerRef.value!.acceptParams(params);
 };
 </script>
-
-<style scoped lang="scss">
-@import "./index.scss";
-</style>

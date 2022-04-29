@@ -11,29 +11,19 @@
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 			<template v-for="item in columns">
-				<el-table-column
-					v-if="item.type == 'selection'"
-					:type="item.type"
-					reserve-selection
-					:width="item.width"
-				></el-table-column>
-				<el-table-column
-					v-if="item.type == 'index'"
-					:type="item.type"
-					:label="item.label"
-					:width="item.width"
-				></el-table-column>
-				<el-table-column
-					v-if="item.prop && !item.type"
-					:prop="item.prop"
-					:label="item.label"
-					:width="item.width"
-					:show-overflow-tooltip="true"
-					:resizable="true"
-					#default="scope"
-				>
-					<!-- 自定义配置每一列 slot -->
-					<slot :name="item.prop" :row="scope.row">
+				<el-table-column v-if="item.type == 'selection'" :type="item.type" reserve-selection :width="item.width"></el-table-column>
+				<el-table-column v-if="item.type == 'index'" :type="item.type" :label="item.label" :width="item.width"></el-table-column>
+				<!-- 自定义配置每一列 slot -->
+				<slot :name="item.prop" :row="item">
+					<el-table-column
+						v-if="item.prop && !item.type"
+						:prop="item.prop"
+						:label="item.label"
+						:width="item.width"
+						:show-overflow-tooltip="true"
+						:resizable="true"
+						#default="scope"
+					>
 						<!-- 图片(自带预览) -->
 						<el-image
 							v-if="item.image"
@@ -45,10 +35,10 @@
 						/>
 						<!-- 文字(自带格式化) -->
 						<span v-else>
-							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): scope.row[item.prop!] }}
+							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
 						</span>
-					</slot>
-				</el-table-column>
+					</el-table-column>
+				</slot>
 			</template>
 			<!-- 操作 slot -->
 			<el-table-column fixed="right" label="操作" #default="scope" :width="operationWidth">
@@ -61,19 +51,14 @@
 				</div>
 			</template>
 		</el-table>
-		<Pagination
-			v-if="pagination"
-			:pageable="pageable"
-			:handleSizeChange="handleSizeChange"
-			:handleCurrentChange="handleCurrentChange"
-		></Pagination>
+		<Pagination v-if="pagination" :pageable="pageable" :handleSizeChange="handleSizeChange" :handleCurrentChange="handleCurrentChange"></Pagination>
 	</div>
 </template>
 
 <script setup lang="ts" name="proTable">
 import { onMounted } from "vue";
 import { Refresh } from "@element-plus/icons-vue";
-import { filterEnum } from "@/utils/util";
+import { filterEnum, defaultFormat } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { ColumnProps } from "@/components/ProTable/interface";
@@ -85,23 +70,27 @@ interface ProTableProps {
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api
 	pagination?: boolean; // 是否需要分页组件
 	initParam?: any; // 初始化请求参数
-	operationWidth?: string; // 操作列宽
+	operationWidth?: string | number; // 操作列宽
 }
 
+// 配置默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
 	tableData: () => [],
 	columns: () => [],
 	pagination: true,
 	initParam: {},
-	operationWidth: "250"
+	operationWidth: 250
 });
 
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
-const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-	useTable(props.requestApi, props.initParam, props.pagination);
+const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } = useTable(
+	props.requestApi,
+	props.initParam,
+	props.pagination
+);
 
-// 过滤需要搜索的字段
+// 过滤需要搜索的配置项
 const searchColumns = props.columns.filter(item => item.search);
 
 onMounted(() => {
@@ -109,5 +98,5 @@ onMounted(() => {
 });
 
 // 暴露刷新方法给父组件
-defineExpose({ refresh: getTableList });
+defineExpose({ searchParam, refresh: getTableList });
 </script>
