@@ -4,6 +4,9 @@
 			<el-form-item label="Activity name" prop="name">
 				<el-input v-model="ruleForm.name" />
 			</el-form-item>
+			<el-form-item label="Activity phone" prop="phone">
+				<el-input v-model="ruleForm.phone" placeholder="Activity phone" />
+			</el-form-item>
 			<el-form-item label="Activity zone" prop="region">
 				<el-select v-model="ruleForm.region" placeholder="Activity zone">
 					<el-option label="Zone one" value="shanghai" />
@@ -43,12 +46,14 @@
 
 <script setup lang="ts" name="dynamicForm">
 import { reactive, ref } from "vue";
+import { checkPhoneNumber } from "@/utils/eleValidate";
 import type { FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
 	name: "Geeker-Admin",
+	phone: "",
 	region: "",
 	date1: "",
 	date2: "",
@@ -62,6 +67,7 @@ const rules = reactive<FormRules>({
 		{ required: true, message: "Please input Activity name", trigger: "blur" },
 		{ min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" }
 	],
+	phone: [{ required: true, validator: checkPhoneNumber, trigger: "blur" }],
 	region: [
 		{
 			required: true,

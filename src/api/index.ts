@@ -13,8 +13,6 @@ const globalStore = GlobalStore();
 
 const axiosCanceler = new AxiosCanceler();
 
-console.log(ResultEnum.TIMEOUT);
-
 const config = {
 	// 默认地址
 	baseURL: import.meta.env.VITE_API_URL as string,
