@@ -1,18 +1,5 @@
 import { Table } from "./interface";
 import { nextTick, reactive, computed, toRefs, onActivated } from "vue";
-import {
-	Refresh,
-	CirclePlus,
-	Delete,
-	Search,
-	EditPen,
-	Download,
-	Upload,
-	View,
-	Setting,
-	ArrowDown,
-	ArrowUp
-} from "@element-plus/icons-vue";
 
 /**
  * @description table 页面操作方法封装
@@ -43,24 +30,11 @@ export const useTable = (
 		},
 		// 查询参数(只包括查询)
 		searchParam: {},
+		// 初始化默认的查询参数
+		initSearchParam: {},
 		// 总参数(包含分页和查询参数)
 		totalParam: {}
 	});
-
-	// * 表格页面所需icon
-	const icon = {
-		Refresh,
-		CirclePlus,
-		Delete,
-		Search,
-		EditPen,
-		Download,
-		Upload,
-		View,
-		Setting,
-		ArrowDown,
-		ArrowUp
-	};
 
 	/**
 	 * @description 分页查询数据(只包括分页和表格字段排序,其他排序方式可自行配置)
@@ -155,6 +129,10 @@ export const useTable = (
 	const reset = () => {
 		state.pageable.pageNum = 1;
 		state.searchParam = {};
+		// 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
+		Object.keys(state.initSearchParam).forEach(key => {
+			state.searchParam[key] = state.initSearchParam[key];
+		});
 		getTableList();
 	};
 
@@ -185,7 +163,6 @@ export const useTable = (
 		search,
 		reset,
 		handleSizeChange,
-		handleCurrentChange,
-		icon
+		handleCurrentChange
 	};
 };

@@ -7,6 +7,9 @@ const proTableRouter: Array<RouteRecordRaw> = [
 		path: "/proTable",
 		component: Layout,
 		redirect: "/proTable/useHooks",
+		meta: {
+			title: "超级表格"
+		},
 		children: [
 			{
 				path: "/proTable/useHooks",

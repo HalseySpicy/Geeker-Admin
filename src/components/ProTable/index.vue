@@ -1,6 +1,8 @@
 <template>
 	<div class="table-box">
+		<!-- 查询表单 -->
 		<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns"></SearchForm>
+		<!-- 表格头部操作按钮 -->
 		<div class="table-header">
 			<div class="header-button">
 				<slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
@@ -9,21 +11,27 @@
 				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"> </el-button>
 			</el-tooltip>
 		</div>
+		<!-- 表格主体 -->
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 			<template v-for="item in columns">
-				<el-table-column v-if="item.type == 'selection'" :type="item.type" reserve-selection :width="item.width"></el-table-column>
+				<el-table-column
+					v-if="item.type == 'selection'"
+					:type="item.type"
+					reserve-selection
+					:width="item.width"
+				></el-table-column>
 				<el-table-column v-if="item.type == 'index'" :type="item.type" :label="item.label" :width="item.width"></el-table-column>
-				<!-- 自定义配置每一列 slot -->
-				<slot :name="item.prop" :row="item">
-					<el-table-column
-						v-if="item.prop && !item.type"
-						:prop="item.prop"
-						:label="item.label"
-						:width="item.width"
-						:show-overflow-tooltip="true"
-						:resizable="true"
-						#default="scope"
-					>
+				<el-table-column
+					v-if="item.prop && !item.type"
+					:prop="item.prop"
+					:label="item.label"
+					:width="item.width"
+					:show-overflow-tooltip="true"
+					:resizable="true"
+					#default="scope"
+				>
+					<!-- 自定义配置每一列 slot -->
+					<slot :name="item.prop" :row="scope.row">
 						<!-- 图片(自带预览) -->
 						<el-image
 							v-if="item.image"
@@ -37,8 +45,8 @@
 						<span v-else>
 							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
 						</span>
-					</el-table-column>
-				</slot>
+					</slot>
+				</el-table-column>
 			</template>
 			<!-- 操作 slot -->
 			<el-table-column fixed="right" label="操作" #default="scope" :width="operationWidth">
@@ -51,7 +59,13 @@
 				</div>
 			</template>
 		</el-table>
-		<Pagination v-if="pagination" :pageable="pageable" :handleSizeChange="handleSizeChange" :handleCurrentChange="handleCurrentChange"></Pagination>
+		<!-- 分页 -->
+		<Pagination
+			v-if="pagination"
+			:pageable="pageable"
+			:handleSizeChange="handleSizeChange"
+			:handleCurrentChange="handleCurrentChange"
+		></Pagination>
 	</div>
 </template>
 
@@ -84,14 +98,19 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
-const { tableData, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } = useTable(
-	props.requestApi,
-	props.initParam,
-	props.pagination
-);
+const { tableData, pageable, searchParam, initSearchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+	useTable(props.requestApi, props.initParam, props.pagination);
 
 // 过滤需要搜索的配置项
 const searchColumns = props.columns.filter(item => item.search);
+
+// 设置查询表单的默认值
+searchColumns.forEach(column => {
+	if (column.initSearchParam ?? false) {
+		initSearchParam.value[column.prop!] = column.initSearchParam;
+		searchParam.value[column.prop!] = column.initSearchParam;
+	}
+});
 
 onMounted(() => {
 	getTableList();

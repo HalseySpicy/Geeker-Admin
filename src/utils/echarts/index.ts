@@ -1,4 +1,4 @@
-//Components/VEcharts/echarts.ts 复制来自echarts官网
+// * Echarts 按需引入
 import * as echarts from "echarts/core";
 import {
 	BarChart,

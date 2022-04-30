@@ -23,6 +23,10 @@
 				.el-input {
 					width: 200px;
 				}
+				// 去掉时间选择器的上下边距
+				.el-range-editor.el-input__inner {
+					padding: 0 10px;
+				}
 			}
 			.more-item {
 				display: inline;
@@ -66,6 +70,7 @@
 			width: 50px;
 			height: 50px;
 		}
+
 		// 解决 el-table 中 header 文字换行问题
 		.el-table__header .el-table__cell > .cell {
 			white-space: nowrap;

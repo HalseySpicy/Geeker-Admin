@@ -1,10 +1,10 @@
-// * 暂时没用枚举
 /**
- * @description：请求结果集
+ * @description：请求配置
  */
 export enum ResultEnum {
 	SUCCESS = 200,
-	ERROR = -1,
+	ERROR = 500,
+	OVERDUE = 599,
 	TIMEOUT = 10000,
 	TYPE = "success"
 }
@@ -30,6 +30,6 @@ export enum ContentTypeEnum {
 	TEXT = "text/plain;charset=UTF-8",
 	// form-data 一般配合qs
 	FORM_URLENCODED = "application/x-www-form-urlencoded;charset=UTF-8",
-	// form-data  上传
+	// form-data 上传
 	FORM_DATA = "multipart/form-data;charset=UTF-8"
 }

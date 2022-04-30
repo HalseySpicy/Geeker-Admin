@@ -1,12 +1,6 @@
 <template>
 	<el-drawer v-model="drawerVisible" :destroy-on-close="true" size="600px" :title="`${drawerData.title}用户`">
-		<el-form
-			ref="ruleFormRef"
-			:rules="rules"
-			:disabled="drawerData.isView"
-			:model="drawerData.rowData"
-			label-width="90px"
-		>
+		<el-form ref="ruleFormRef" :rules="rules" :disabled="drawerData.isView" :model="drawerData.rowData" label-width="90px">
 			<el-form-item label="用户姓名 :" prop="username" clearable>
 				<el-input v-model="drawerData.rowData!.username" placeholder="请填写用户姓名"></el-input>
 			</el-form-item>
@@ -32,7 +26,7 @@
 	</el-drawer>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="UserDrawer">
 import { User } from "@/api/interface";
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";

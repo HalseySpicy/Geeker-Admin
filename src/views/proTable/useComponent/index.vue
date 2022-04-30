@@ -6,19 +6,21 @@
 				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
 				<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
 				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-				<el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.ids)">批量删除用户</el-button>
+				<el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.ids)"
+					>批量删除用户</el-button
+				>
 			</template>
 			<!-- 用户状态 slot -->
-			<template #status="item">
-				<el-table-column label="用户状态" width="170" #default="scope">
+			<template #status="scope">
+				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法 -->
+				<div class="switch" @click="changeStatus(scope.row)">
 					<el-switch
 						:value="scope.row.status"
 						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
 						:active-value="1"
 						:inactive-value="0"
-						@change="changeStatus($event, scope.row)"
 					/>
-				</el-table-column>
+				</div>
 			</template>
 			<!-- 表格操作 -->
 			<template #operation="scope">
@@ -44,11 +46,20 @@ import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
-import { getUserList, deleteUser, editUser, addUser, resetUserPassWord, exportUserInfo, BatchAddUser, changeUserStatus } from "@/api/modules/user";
+import {
+	getUserList,
+	deleteUser,
+	editUser,
+	addUser,
+	resetUserPassWord,
+	exportUserInfo,
+	BatchAddUser,
+	changeUserStatus
+} from "@/api/modules/user";
 
 const proTable = ref();
 
-// 如果表格需要初始化参数,直接定义传给 ProTable(之后每次请求都会带上该参数)
+// 如果表格需要初始化参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，更改此参数也会一直带上)
 const initParam = reactive({
 	type: 1
 });
@@ -89,14 +100,16 @@ const columns: Partial<ColumnProps>[] = [
 	},
 	{
 		prop: "address",
-		label: "居住地址"
+		label: "居住地址",
+		search: true
 	},
 	{
 		prop: "createTime",
 		label: "创建时间",
 		width: "200",
 		search: true,
-		searchType: "datetimerange"
+		searchType: "datetimerange",
+		initSearchParam: ["2022-04-05 00:00:00", "2022-05-01 23:59:59"]
 	},
 	{
 		prop: "status",
@@ -128,9 +141,9 @@ const resetPass = async (params: User.ResUserList) => {
 };
 
 // 切换用户状态
-const changeStatus = async (val: number, params: User.ResUserList) => {
-	await useHandleData(changeUserStatus, { id: params.id, status: val }, `切换【${params.username}】用户状态`);
-	params.status = params.status == 1 ? 0 : 1;
+const changeStatus = async (row: User.ResUserList) => {
+	await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
+	proTable.value.refresh();
 };
 
 // 导出用户列表
@@ -159,7 +172,6 @@ interface DrawerExpose {
 }
 const drawerRef = ref<DrawerExpose>();
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
-	console.log(rowData);
 	let params = {
 		title: title,
 		rowData: { ...rowData },

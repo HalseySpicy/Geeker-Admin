@@ -1,6 +1,6 @@
 module.exports = {
 	// 超过最大值换行
-	printWidth: 150,
+	printWidth: 130,
 	// 缩进字节数
 	tabWidth: 2,
 	// 使用制表符而不是空格缩进行
@@ -21,7 +21,7 @@ module.exports = {
 	jsxSingleQuote: false,
 	//  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号 ,always：不省略括号
 	arrowParens: "avoid",
-	// 如果文件顶部已经有一个doclock，这个选项将新建一行注释，并打上@format标记。
+	// 如果文件顶部已经有一个 doclock，这个选项将新建一行注释，并打上@format标记。
 	insertPragma: false,
 	// 指定要使用的解析器，不需要写文件开头的 @prettier
 	requirePragma: false,
