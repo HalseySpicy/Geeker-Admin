@@ -13,7 +13,11 @@
 
 ## 一、在线访问地址：http://admin.spicyboy.cn/
 
-## 二、Gitee 仓库：https://gitee.com/laramie/Geeker-Admin (欢迎 Star⭐⭐⭐)
+## 二、Git 仓库 (欢迎 Star⭐⭐⭐)
+
+### Gitee：https://gitee.com/laramie/Geeker-Admin ✨
+
+### GitHub：https://gitee.com/laramie/Geeker-Admin ✨
 
 ## 三、🔨🔨🔨 项目功能
 

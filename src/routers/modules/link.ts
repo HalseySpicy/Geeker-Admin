@@ -23,6 +23,17 @@ const myBlogRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: "/link/github",
+				name: "github",
+				component: () => import("@/views/link/github/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "GitHub 仓库",
+					key: "github"
+				}
+			},
+			{
 				path: "/link/juejin",
 				name: "juejin",
 				component: () => import("@/views/link/juejin/index.vue"),
