@@ -1,4 +1,4 @@
-# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus管理系统（持续更新中🎉🎉）
+# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus 管理系统（持续更新中 🎉🎉）
 
 ![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
@@ -7,6 +7,8 @@
 ## 前言 📖
 
 > Geeker Admin，是基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开发的一套后台管理模板，目前利用空余时间开发了一个月左右 🕒🕒。项目中很多功能都是借鉴别的管理系统，整个项目还有很多地方不完善，后期会持续更新。项目中有很多地方写得不是很好，希望大家能多提意见。
+
+
 
 ## ？？？为什么开发这个管理系统 🤷‍♂️🤷
 
@@ -25,7 +27,7 @@
 
 ### Gitee：https://gitee.com/laramie/Geeker-Admin ✨
 
-### GitHub：https://gitee.com/laramie/Geeker-Admin ✨
+### GitHub：https://github.com/HalseySpicy/Geeker-Admin ✨
 
 
 
