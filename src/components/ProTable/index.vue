@@ -22,15 +22,9 @@
 		>
 			<template v-for="item in columns">
 				<el-table-column
-					v-if="item.type == 'selection'"
+					v-if="item.type == 'selection' || item.type == 'index'"
 					:type="item.type"
 					reserve-selection
-					:width="item.width"
-					:fixed="item.fixed"
-				></el-table-column>
-				<el-table-column
-					v-if="item.type == 'index'"
-					:type="item.type"
 					:label="item.label"
 					:width="item.width"
 					:fixed="item.fixed"
@@ -40,6 +34,7 @@
 					:prop="item.prop"
 					:label="item.label"
 					:width="item.width"
+					:sortable="item.sortable"
 					:show-overflow-tooltip="true"
 					:resizable="true"
 					:fixed="item.fixed"

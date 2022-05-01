@@ -108,6 +108,7 @@ const columns: Partial<ColumnProps>[] = [
 		prop: "createTime",
 		label: "创建时间",
 		width: 200,
+		sortable: true,
 		search: true,
 		searchType: "datetimerange",
 		initSearchParam: ["2022-04-05 00:00:00", "2022-05-01 23:59:59"]
@@ -115,6 +116,7 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "status",
 		label: "用户状态",
+		sortable: true,
 		width: 180
 	},
 	{
