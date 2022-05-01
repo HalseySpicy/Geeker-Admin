@@ -85,7 +85,7 @@ npm run build:pro
 
 ## 六、文件资源目录 📚
 
-```JavaScript
+```text
 Geeker-Admin
 ├─ public
 ├─ src
