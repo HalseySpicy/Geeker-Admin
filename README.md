@@ -1,4 +1,4 @@
-# Vue 3.2 + TypeScript+ Pinia + Vite2 + Element-Plus 管理系统（持续更新中 🎉🎉）
+# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus 管理系统（持续更新中 🎉🎉）
 
 ## Geeker-Admin 后台管理系统 🍇🍈🍉
 
