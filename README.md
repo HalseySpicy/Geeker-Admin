@@ -1,4 +1,6 @@
-# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus 管理系统（持续更新中 🎉🎉）
+# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus管理系统（持续更新中🎉🎉）
+
+![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
 # Geeker-Admin 后台管理系统 🍇🍈🍉
 
@@ -11,15 +13,21 @@
 > 1、主要是学习下 Vue3 + TypeScript  
 > 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
+
+
 ## 一、在线预览 👀
 
 ### Link：http://admin.spicyboy.cn ✨
+
+
 
 ## 二、Git 仓库地址 (欢迎 Star⭐⭐⭐)
 
 ### Gitee：https://gitee.com/laramie/Geeker-Admin ✨
 
 ### GitHub：https://gitee.com/laramie/Geeker-Admin ✨
+
+
 
 ## 三、🔨🔨🔨 项目功能
 
@@ -35,6 +43,8 @@
 - 🥭 使用 vue-router 进行路由权限拦截、按钮权限设置
 - 🍈 使用 keep-alive 对整个页面进行缓存，支持多级嵌套页面（路由里可配置）
 - 🥥 常用自定义指令开发（复制、水印、拖拽、节流、防抖、长按……）
+
+
 
 ## 四、安装使用步骤
 
@@ -65,23 +75,27 @@ npm run build:dev
 npm run build:pro
 ```
 
+
+
 ## 五、项目截图
 
 ### 登录页：
 
-![login.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df5c3641e8db4983a376104833e0be83~tplv-k3u1fbpfcp-watermark.image?)
+![login](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login.png)
 
 ### 首页：
 
-![home.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d157a3d10fce41188244e10203910167~tplv-k3u1fbpfcp-watermark.image?)
+![home](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home.png)
 
 ### 表格页：
 
-![table.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6ed993a0a940485684efa2554df24d21~tplv-k3u1fbpfcp-watermark.image?)
+![table](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table.png)
 
 ### 数据大屏：
 
-![dataScreen.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef9fbaa4dd30477c92e16ae1ead48ea9~tplv-k3u1fbpfcp-watermark.image?)
+![dataScreen](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen.png)
+
+
 
 ## 六、文件资源目录 📚
 
@@ -121,6 +135,8 @@ Geeker-Admin
 ├─ tsconfig.json
 └─ vite.config.ts
 ```
+
+
 
 ## 七、项目后台接口 🧩
 
