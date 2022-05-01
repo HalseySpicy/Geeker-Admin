@@ -12,15 +12,29 @@
 			</el-tooltip>
 		</div>
 		<!-- 表格主体 -->
-		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
+		<el-table
+			height="575"
+			:data="tableData"
+			:border="border"
+			@selection-change="selectionChange"
+			:row-key="getRowKeys"
+			:stripe="stripe"
+		>
 			<template v-for="item in columns">
 				<el-table-column
 					v-if="item.type == 'selection'"
 					:type="item.type"
 					reserve-selection
 					:width="item.width"
+					:fixed="item.fixed"
 				></el-table-column>
-				<el-table-column v-if="item.type == 'index'" :type="item.type" :label="item.label" :width="item.width"></el-table-column>
+				<el-table-column
+					v-if="item.type == 'index'"
+					:type="item.type"
+					:label="item.label"
+					:width="item.width"
+					:fixed="item.fixed"
+				></el-table-column>
 				<el-table-column
 					v-if="item.prop && !item.type"
 					:prop="item.prop"
@@ -28,6 +42,7 @@
 					:width="item.width"
 					:show-overflow-tooltip="true"
 					:resizable="true"
+					:fixed="item.fixed"
 					#default="scope"
 				>
 					<!-- 自定义配置每一列 slot -->
@@ -48,10 +63,6 @@
 					</slot>
 				</el-table-column>
 			</template>
-			<!-- 操作 slot -->
-			<el-table-column fixed="right" label="操作" #default="scope" :width="operationWidth">
-				<slot name="operation" :row="scope.row"></slot>
-			</el-table-column>
 			<template #empty>
 				<div class="table-empty">
 					<img src="@/assets/images/notData.png" alt="notData" />
@@ -84,38 +95,42 @@ interface ProTableProps {
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api
 	pagination?: boolean; // 是否需要分页组件
 	initParam?: any; // 初始化请求参数
-	operationWidth?: string | number; // 操作列宽
+	border?: boolean; // 表格是否显示边框
+	stripe?: boolean; // 是否带斑马纹表格
 }
 
 // 配置默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
-	tableData: () => [],
 	columns: () => [],
 	pagination: true,
 	initParam: {},
-	operationWidth: 250
+	border: true,
+	stripe: false
 });
 
+// 表格多选 Hooks
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
+// 表格操作 Hooks
 const { tableData, pageable, searchParam, initSearchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(props.requestApi, props.initParam, props.pagination);
 
 // 过滤需要搜索的配置项
 const searchColumns = props.columns.filter(item => item.search);
 
-// 设置查询表单的默认值
+// 设置搜索表单的默认值
 searchColumns.forEach(column => {
-	if (column.initSearchParam ?? false) {
+	if (column.initSearchParam !== undefined && column.initSearchParam !== null) {
 		initSearchParam.value[column.prop!] = column.initSearchParam;
 		searchParam.value[column.prop!] = column.initSearchParam;
 	}
 });
 
+// 获取表格数据
 onMounted(() => {
 	getTableList();
 });
 
-// 暴露刷新方法给父组件
+// 暴露给父组件的参数和方法
 defineExpose({ searchParam, refresh: getTableList });
 </script>

@@ -7,11 +7,14 @@ export type SearchType = "text" | "select" | "multipleSelect" | "date" | "timera
 
 export type TypeProp = "index" | "selection";
 
+export type FixedProp = "left" | "right";
+
 export interface ColumnProps {
 	type: TypeProp; // index | selection（特殊类型）
 	prop: string; // 单元格数据（非特殊类型必填）
 	label: string; // 单元格标题（非特殊类型必填）
-	width: string | number; // 列宽
+	width: number | string; // 列宽
+	fixed: FixedProp; // 固定列
 	image: boolean; // 是否是图片展示
 	search: boolean; // 是否为搜索项
 	searchType: SearchType; // 搜索项类型

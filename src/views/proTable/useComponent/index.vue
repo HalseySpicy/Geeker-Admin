@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<ProTable ref="proTable" :requestApi="getUserList" :initParam="initParam" :columns="columns" :operationWidth="330">
+		<ProTable ref="proTable" :requestApi="getUserList" :initParam="initParam" :columns="columns">
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
 				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
@@ -68,12 +68,13 @@ const initParam = reactive({
 const columns: Partial<ColumnProps>[] = [
 	{
 		type: "selection",
-		width: "80"
+		width: 80,
+		fixed: "left"
 	},
 	{
 		type: "index",
 		label: "#",
-		width: "80"
+		width: 80
 	},
 	{
 		prop: "username",
@@ -106,19 +107,27 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "createTime",
 		label: "创建时间",
-		width: "200",
+		width: 200,
 		search: true,
 		searchType: "datetimerange",
 		initSearchParam: ["2022-04-05 00:00:00", "2022-05-01 23:59:59"]
 	},
 	{
 		prop: "status",
-		label: "用户状态"
+		label: "用户状态",
+		width: 180
 	},
 	{
 		prop: "avatar",
 		label: "头像",
+		width: 180,
 		image: true
+	},
+	{
+		prop: "operation",
+		label: "操作",
+		width: 330,
+		fixed: "right"
 	}
 ];
 
