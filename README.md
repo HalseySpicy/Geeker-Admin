@@ -91,7 +91,7 @@ npm run build:pro
 
 ### 表格页：
 
-![table](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table.png)
+![table1](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table1.png)
 
 ### 数据大屏：
 
