@@ -6,9 +6,9 @@
 				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
 				<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
 				<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-				<el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.ids)"
-					>批量删除用户</el-button
-				>
+				<el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.ids)">
+					批量删除用户
+				</el-button>
 			</template>
 			<!-- 用户状态 slot -->
 			<template #status="scope">
@@ -57,9 +57,10 @@ import {
 	changeUserStatus
 } from "@/api/modules/user";
 
+// 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
-// 如果表格需要初始化参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，更改此参数也会一直带上)
+// 如果表格需要初始化请求参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上)
 const initParam = reactive({
 	type: 1
 });
@@ -87,6 +88,7 @@ const columns: Partial<ColumnProps>[] = [
 		width: "100",
 		enum: genderType,
 		search: true,
+		sortable: true,
 		searchType: "select"
 	},
 	{

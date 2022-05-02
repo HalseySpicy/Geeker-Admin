@@ -1,16 +1,11 @@
 <template>
 	<el-dropdown trigger="click" @command="setAssemblySize">
-		<el-tooltip effect="dark" :content="'组件大小'" placement="bottom">
+		<el-tooltip effect="dark" :content="$t('header.componentSize')" placement="bottom">
 			<i :class="'iconfont icon-contentright'" class="icon-style"></i>
 		</el-tooltip>
 		<template #dropdown>
 			<el-dropdown-menu>
-				<el-dropdown-item
-					v-for="item in assemblySizeList"
-					:key="item"
-					:disabled="assemblySize === item"
-					:command="item"
-				>
+				<el-dropdown-item v-for="item in assemblySizeList" :key="item" :disabled="assemblySize === item" :command="item">
 					{{ assemblySizeListCh[item] }}
 				</el-dropdown-item>
 			</el-dropdown-menu>

@@ -58,5 +58,7 @@ export namespace User {
 		address: string;
 		createTime: string;
 		status: number;
+		avatar: string;
+		children?: ResUserList[];
 	}
 }

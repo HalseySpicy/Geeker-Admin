@@ -40,7 +40,7 @@ export function localClear() {
 }
 
 /**
- * @description 对象深克隆
+ * @description 对象数组深克隆
  * @param obj 源对象
  * @returns {obj} 克隆后的对象
  */
@@ -122,18 +122,20 @@ export function getBrowserLang() {
  * @return {String} 格式化后的值
  * */
 export function defaultFormat(row: number, col: number, callValue: any) {
-	// 如果为数组,使用 / 拼接
+	// 如果当前值为数组,使用 / 拼接（根据需求自定义）
 	if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
 	return callValue ?? "--";
 }
 
 /**
- * @description 根据枚举列表查询当前显示的数据
+ * @description 根据枚举列表查询当需要的数据
  * @param callValue 当前单元格值
  * @param enumData 枚举列表
+ * @param type 过滤类型（目前只有 tag）
  * @return {String} 格式化后的值
  * */
-export function filterEnum(callValue: any, enumData: any[] = []): string {
+export function filterEnum(callValue: any, enumData: any[] = [], type?: string): string {
 	let filterData = enumData.find(item => item.value === callValue);
+	if (type == "tag") return filterData.tagType ? filterData.tagType : "";
 	return filterData ? filterData.label : "--";
 }

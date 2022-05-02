@@ -13,7 +13,13 @@
 			placeholder="请选择"
 			:clearable="item.initSearchParam == null || item.initSearchParam == undefined"
 		>
-			<el-option v-for="itemValue in item.enum" :key="itemValue.value" :label="itemValue.label" :value="itemValue.value" />
+			<el-option
+				v-for="itemValue in item.enum"
+				:key="itemValue.value"
+				:label="itemValue.label"
+				:value="itemValue.value"
+				:disabled="itemValue.disabled"
+			/>
 		</el-select>
 	</template>
 	<template v-if="item.searchType == 'date'">

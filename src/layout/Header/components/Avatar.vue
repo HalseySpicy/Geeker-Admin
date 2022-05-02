@@ -5,9 +5,9 @@
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu>
-				<el-dropdown-item @click.native="openDialog('infoRef')">个人资料</el-dropdown-item>
-				<el-dropdown-item @click.native="openDialog('passwordRef')">修改密码</el-dropdown-item>
-				<el-dropdown-item @click.native="logout" divided>退出登录</el-dropdown-item>
+				<el-dropdown-item @click.native="openDialog('infoRef')">{{ $t("header.personalData") }}</el-dropdown-item>
+				<el-dropdown-item @click.native="openDialog('passwordRef')">{{ $t("header.changePassword") }}</el-dropdown-item>
+				<el-dropdown-item @click.native="logout" divided>{{ $t("header.logout") }}</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
 	</el-dropdown>

@@ -1,6 +1,6 @@
 <template>
-	<el-tooltip effect="dark" :content="isFullscreen ? '退出全屏' : '全屏'" placement="bottom">
-		<i :class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda1']" class="icon-style" @click="toggle"></i>
+	<el-tooltip effect="dark" :content="isFullscreen ? $t('header.exitFullScreen') : $t('header.fullScreen')" placement="bottom">
+		<i :class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']" class="icon-style" @click="toggle"></i>
 	</el-tooltip>
 </template>
 

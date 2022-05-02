@@ -43,7 +43,7 @@ const rules = reactive({
 interface DrawerProps {
 	title: string;
 	isView: boolean;
-	rowData?: User.ReqGetUserParams;
+	rowData?: User.ResUserList;
 	apiUrl?: (params: any) => Promise<any>;
 	getTableList?: () => Promise<any>;
 }

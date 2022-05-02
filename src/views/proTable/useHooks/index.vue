@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div class="table-header">
-			<div class="header-button">
+			<div class="header-button-lf">
 				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
 				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
 				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
@@ -48,9 +48,11 @@
 					批量删除用户
 				</el-button>
 			</div>
-			<el-tooltip effect="dark" content="刷新" placement="top">
-				<el-button class="refresh" :icon="Refresh" circle @click="getTableList"> </el-button>
-			</el-tooltip>
+			<div class="header-button-ri">
+				<el-tooltip effect="dark" content="刷新" placement="top">
+					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+				</el-tooltip>
+			</div>
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 			<el-table-column type="selection" reserve-selection width="80" />

@@ -26,8 +26,9 @@
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";
-import { ref, reactive, Ref, toRefs, provide } from "vue";
+import { ref, reactive, Ref, provide, toRefs } from "vue";
 
+// * 以下数据都为自己测试使用，不参与功能开发
 // 使用provide传方法
 let phone = ref<string>("iphone");
 // provide
@@ -43,7 +44,7 @@ provide("provideState", {
 	}
 });
 
-// login
+// 传给子组件方法（submitParent）
 const submitParent = (LoginFrom: Login.ReqLoginForm) => {
 	console.log(LoginFrom);
 };
@@ -58,11 +59,10 @@ const consoleRef = () => {
 // 定义数据类型两种方法
 const item: Ref<string> = ref("111");
 const item1 = ref<number>(111);
-// console.log(item.value, item1.value);
 
 const obj = reactive<Login.ReqLoginForm>({
-	username: "aa",
-	password: "dd"
+	username: "admin",
+	password: "123456"
 });
 // 使用toRefs解构数据（在template中直接用）
 // const { username, password } = toRefs(obj);

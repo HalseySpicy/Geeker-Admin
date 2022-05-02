@@ -1,11 +1,16 @@
 <template>
 	<div>
-		<el-tooltip effect="dark" :content="'主题'" placement="bottom">
+		<el-tooltip effect="dark" :content="$t('header.theme')" placement="bottom">
 			<i :class="'iconfont icon-zhuti'" class="icon-style" @click="open"></i>
 		</el-tooltip>
-		<el-drawer v-model="drawerVisible" title="主题设置" size="300px">
-			<el-divider content-position="center">主题</el-divider>
-			<el-switch class="theme-switch" v-model="value1" active-text="深色模式" inactive-text="浅色模式" />
+		<el-drawer v-model="drawerVisible" :title="$t('header.themeSetting')" size="300px">
+			<el-divider content-position="center">{{ $t("header.theme") }}</el-divider>
+			<el-switch
+				class="theme-switch"
+				v-model="value1"
+				:active-text="$t('header.darkMode')"
+				:inactive-text="$t('header.lightMode')"
+			/>
 		</el-drawer>
 	</div>
 </template>

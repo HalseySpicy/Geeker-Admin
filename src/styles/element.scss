@@ -16,6 +16,7 @@
 	// 表格 search 样式
 	.table-search {
 		display: flex;
+		margin-bottom: 10px;
 		.el-form {
 			max-width: 1260px;
 			.el-form-item {
@@ -42,12 +43,17 @@
 	}
 	// 表格 header 样式
 	.table-header {
-		padding: 10px 0 20px 0;
-		.header-button {
+		.header-button-lf {
 			float: left;
+			.el-button {
+				margin-bottom: 20px;
+			}
 		}
-		.refresh {
+		.header-button-ri {
 			float: right;
+			.el-button {
+				margin-bottom: 20px;
+			}
 		}
 	}
 	// el-table 表格样式

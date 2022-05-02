@@ -76,12 +76,13 @@ const login = (formEl: FormInstance | undefined) => {
 	});
 };
 
-// reset
+// resetForm
 const resetForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.resetFields();
 };
 
+// * 以下数据都为自己测试使用，不参与功能开发
 // inject
 const provideState = inject("provideState") as InjectProps;
 // console.log(provideState.age);
@@ -106,6 +107,7 @@ const props = withDefaults(defineProps<ParentProps>(), {
 		};
 	}
 });
+
 // 接收父组件参数（采用ts专有声明，无默认值）
 // const props1 = defineProps<{ item: string }>();
 
