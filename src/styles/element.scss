@@ -28,6 +28,11 @@
 				.el-range-editor.el-input__inner {
 					padding: 0 10px;
 				}
+				// el-select 为多选时不换行显示
+				.el-select__tags {
+					white-space: nowrap;
+					overflow: hidden;
+				}
 			}
 			.more-item {
 				display: inline;
@@ -96,7 +101,7 @@
 		.table-empty {
 			line-height: 30px;
 		}
-		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题）
+		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题，目前升级到了2.1.10）
 		// .el-table__body-wrapper {
 		// 	height: calc(100% - 50px) !important;
 		// }

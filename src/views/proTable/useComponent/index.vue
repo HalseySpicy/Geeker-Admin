@@ -17,7 +17,7 @@
 			<!-- 用户状态 slot -->
 			<template #status="scope">
 				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法 -->
-				<div class="switch" @click="changeStatus(scope.row)">
+				<div @click="changeStatus(scope.row)">
 					<el-switch
 						:value="scope.row.status"
 						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
@@ -130,12 +130,12 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		width: 180
 	},
-	// {
-	// 	prop: "avatar",
-	// 	label: "头像",
-	// 	width: 180,
-	// 	image: true
-	// },
+	{
+		prop: "avatar",
+		label: "头像",
+		width: 140,
+		image: true
+	},
 	{
 		prop: "operation",
 		label: "操作",

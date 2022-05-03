@@ -136,6 +136,6 @@ export function defaultFormat(row: number, col: number, callValue: any) {
  * */
 export function filterEnum(callValue: any, enumData: any[] = [], type?: string): string {
 	let filterData = enumData.find(item => item.value === callValue);
-	if (type == "tag") return filterData.tagType ? filterData.tagType : "";
+	if (type == "tag") return filterData?.tagType ? filterData.tagType : "";
 	return filterData ? filterData.label : "--";
 }

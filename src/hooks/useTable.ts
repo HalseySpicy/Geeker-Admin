@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { nextTick, reactive, computed, toRefs, onActivated } from "vue";
+import { reactive, computed, toRefs } from "vue";
 
 /**
  * @description table 页面操作方法封装
@@ -50,22 +50,6 @@ export const useTable = (
 			console.log("我是分页更新之后的值", newVal);
 		}
 	});
-
-	onActivated(() => {
-		// doLayout();
-	});
-
-	/**
-	 * @description 防止 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（目前已通过css解决）
-	 * */
-	const doLayout = () => {
-		nextTick(() => {
-			// tableRef && tableRef.value.doLayout();
-			// window.onresize = () => {
-			// tableRef && tableRef.value.doLayout();
-			// };
-		});
-	};
 
 	/**
 	 * @description 获取表格数据

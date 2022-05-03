@@ -101,7 +101,7 @@
 			:handleCurrentChange="handleCurrentChange"
 		></Pagination>
 		<!-- 列设置 -->
-		<ColSetting ref="colRef" :colSetting="colSetting"></ColSetting>
+		<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting"></ColSetting>
 	</div>
 </template>
 
@@ -150,7 +150,7 @@ const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelectio
 const { tableData, pageable, searchParam, initSearchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(props.requestApi, props.initParam, props.pagination);
 
-// 表格列处理（添加 isShow 属性，控制显示/隐藏）
+// 表格列配置项处理（添加 isShow 属性，控制显示/隐藏）
 const tableColumns = ref<Partial<ColumnProps>[]>();
 tableColumns.value = props.columns.map(item => {
 	return {
@@ -172,11 +172,12 @@ searchColumns.forEach(column => {
 
 // 列设置
 const colRef = ref();
-const colSetting = tableColumns.value.filter((item: any) => {
+// 过滤掉不需要设置显隐的列
+const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
 	return item.type !== "selection" && item.type !== "index" && item.type !== "expand";
 });
 const openColSetting = () => {
-	colRef.value.acceptParams(tableRef.value);
+	colRef.value.openColSetting();
 };
 
 // 获取表格数据

@@ -160,7 +160,6 @@ const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelectio
 const { BUTTONS } = useAuthButtons();
 
 onMounted(() => {
-	// 获取表格数据
 	getTableList();
 });
 

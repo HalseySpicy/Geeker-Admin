@@ -22,6 +22,9 @@
 			/>
 		</el-select>
 	</template>
+	<template v-if="item.searchType == 'treeSelect' || item.searchType == 'multipleTreeSelect'">
+		<el-tree-select v-model="searchParam[item.prop!]" :multiple="item.searchType == 'multipleTreeSelect'" :data="item.enum" />
+	</template>
 	<template v-if="item.searchType == 'date'">
 		<el-date-picker
 			v-model="searchParam[item.prop!]"

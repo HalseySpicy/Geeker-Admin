@@ -22,26 +22,22 @@
 import { ref, nextTick } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 
-defineProps<{ colSetting: Partial<ColumnProps>[] }>();
+const props = defineProps<{ colSetting: Partial<ColumnProps>[]; tableRef: any }>();
 
 const drawerVisible = ref<boolean>(false);
-const tableRef = ref();
-// 打开列设置，并接收参数
-const acceptParams = (ref: any): void => {
-	tableRef.value = ref;
+// 打开列设置
+const openColSetting = (): void => {
 	drawerVisible.value = true;
 };
 
 // 列显隐时重新布局 table
 const switchShow = () => {
 	nextTick(() => {
-		console.log(222);
-
-		tableRef.value.doLayout();
+		props.tableRef.doLayout();
 	});
 };
 
 defineExpose({
-	acceptParams
+	openColSetting
 });
 </script>

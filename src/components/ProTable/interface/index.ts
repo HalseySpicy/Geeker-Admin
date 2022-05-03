@@ -3,9 +3,18 @@ export interface EnumProps {
 	value: any;
 	disabled?: boolean; // 是否禁用此选项
 	tagType?: string; // 当 tag 为 true 时，此选择会指定 tag 显示类型
+	children?: EnumProps[];
 }
 
-export type SearchType = "text" | "select" | "multipleSelect" | "date" | "timerange" | "datetimerange";
+export type SearchType =
+	| "text"
+	| "select"
+	| "multipleSelect"
+	| "treeSelect"
+	| "multipleTreeSelect"
+	| "date"
+	| "timerange"
+	| "datetimerange";
 
 export type TypeProp = "index" | "selection" | "expand";
 
