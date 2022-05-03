@@ -10,6 +10,10 @@
 					批量删除用户
 				</el-button>
 			</template>
+			<!-- expand -->
+			<template #expand="scope">
+				{{ scope.row }}
+			</template>
 			<!-- 用户状态 slot -->
 			<template #status="scope">
 				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法 -->
@@ -78,6 +82,11 @@ const columns: Partial<ColumnProps>[] = [
 		width: 80
 	},
 	{
+		type: "expand",
+		label: "Expand",
+		width: 120
+	},
+	{
 		prop: "username",
 		label: "用户姓名",
 		search: true
@@ -85,7 +94,7 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "gender",
 		label: "性别",
-		width: "100",
+		width: "140",
 		enum: genderType,
 		search: true,
 		sortable: true,
@@ -121,12 +130,12 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		width: 180
 	},
-	{
-		prop: "avatar",
-		label: "头像",
-		width: 180,
-		image: true
-	},
+	// {
+	// 	prop: "avatar",
+	// 	label: "头像",
+	// 	width: 180,
+	// 	image: true
+	// },
 	{
 		prop: "operation",
 		label: "操作",

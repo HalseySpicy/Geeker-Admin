@@ -76,7 +76,6 @@
 			width: 50px;
 			height: 50px;
 		}
-
 		// 解决 el-table 中 header 文字换行问题
 		.el-table__header .el-table__cell > .cell {
 			white-space: nowrap;
@@ -97,14 +96,14 @@
 		.table-empty {
 			line-height: 30px;
 		}
-		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题
-		.el-table__body-wrapper {
-			height: calc(100% - 50px) !important;
-		}
-		.el-table__inner-wrapper,
-		.el-scrollbar__wrap {
-			height: 100% !important;
-		}
+		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题）
+		// .el-table__body-wrapper {
+		// 	height: calc(100% - 50px) !important;
+		// }
+		// .el-table__inner-wrapper,
+		// .el-scrollbar__wrap {
+		// 	height: 100% !important;
+		// }
 	}
 	// 表格 pagination 样式
 	.el-pagination {
@@ -124,6 +123,18 @@
 		span {
 			font-size: 17px;
 			color: #303133;
+		}
+	}
+	// drawer body 样式（给 .el-form-item__label 每项后面添加：）
+	.el-drawer__body {
+		.el-form {
+			.el-form-item {
+				.el-form-item__label {
+					&::after {
+						content: " :";
+					}
+				}
+			}
 		}
 	}
 	// drawer header 样式

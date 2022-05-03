@@ -14,27 +14,23 @@
 				<slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
-				<el-tooltip effect="dark" content="刷新" placement="top">
-					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				</el-tooltip>
-				<el-tooltip effect="dark" content="列显隐" placement="top">
-					<el-button :icon="Operation" circle> </el-button>
-				</el-tooltip>
-				<el-tooltip effect="dark" content="搜索显隐" placement="top">
-					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
-				</el-tooltip>
+				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+				<el-button :icon="Operation" circle @click="openColSetting"> </el-button>
+				<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
 		</div>
 		<!-- 表格主体 -->
 		<el-table
 			height="575"
+			ref="tableRef"
 			:data="tableData"
 			:border="border"
 			@selection-change="selectionChange"
 			:row-key="getRowKeys"
 			:stripe="stripe"
+			:tree-props="{ children: childrenName }"
 		>
-			<template v-for="item in columns">
+			<template v-for="item in tableColumns">
 				<!-- selection || index -->
 				<el-table-column
 					v-if="item.type == 'selection' || item.type == 'index'"
@@ -58,7 +54,7 @@
 				</el-table-column>
 				<!-- other -->
 				<el-table-column
-					v-if="item.prop && !item.type"
+					v-if="item.prop && !item.type && item.isShow"
 					:prop="item.prop"
 					:label="item.label"
 					:width="item.width"
@@ -104,6 +100,8 @@
 			:handleSizeChange="handleSizeChange"
 			:handleCurrentChange="handleCurrentChange"
 		></Pagination>
+		<!-- 列设置 -->
+		<ColSetting ref="colRef" :colSetting="colSetting"></ColSetting>
 	</div>
 </template>
 
@@ -116,6 +114,9 @@ import { ColumnProps } from "@/components/ProTable/interface";
 import { filterEnum, defaultFormat } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
+import ColSetting from "./components/ColSetting.vue";
+
+const tableRef = ref();
 
 // 是否显示搜索模块
 const isShowSearch = ref<boolean>(true);
@@ -149,6 +150,15 @@ const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelectio
 const { tableData, pageable, searchParam, initSearchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(props.requestApi, props.initParam, props.pagination);
 
+// 表格列处理（添加 isShow 属性，控制显示/隐藏）
+const tableColumns = ref<Partial<ColumnProps>[]>();
+tableColumns.value = props.columns.map(item => {
+	return {
+		...item,
+		isShow: true
+	};
+});
+
 // 过滤需要搜索的配置项
 const searchColumns = props.columns.filter(item => item.search);
 
@@ -159,6 +169,15 @@ searchColumns.forEach(column => {
 		searchParam.value[column.prop!] = column.initSearchParam;
 	}
 });
+
+// 列设置
+const colRef = ref();
+const colSetting = tableColumns.value.filter((item: any) => {
+	return item.type !== "selection" && item.type !== "index" && item.type !== "expand";
+});
+const openColSetting = () => {
+	colRef.value.acceptParams(tableRef.value);
+};
 
 // 获取表格数据
 onMounted(() => {

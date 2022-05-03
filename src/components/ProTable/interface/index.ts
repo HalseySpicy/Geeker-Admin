@@ -16,6 +16,7 @@ export interface ColumnProps {
 	prop: string; // 单元格数据（非特殊类型必填）
 	label: string; // 单元格标题（非特殊类型必填）
 	width: number | string; // 列宽
+	isShow: boolean; // 是否显示
 	sortable: boolean; // 是否可排序（静态排序）
 	fixed: FixedProp; // 固定列
 	tag: boolean; // 是否是标签展示

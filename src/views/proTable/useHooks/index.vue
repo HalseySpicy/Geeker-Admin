@@ -49,9 +49,7 @@
 				</el-button>
 			</div>
 			<div class="header-button-ri">
-				<el-tooltip effect="dark" content="刷新" placement="top">
-					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				</el-tooltip>
+				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
 			</div>
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
@@ -63,7 +61,7 @@
 				show-overflow-tooltip
 				width="140"
 			></el-table-column>
-			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="110" #default="scope">
+			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" #default="scope">
 				{{ scope.row.gender == 1 ? "男" : "女" }}
 			</el-table-column>
 			<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
@@ -76,7 +74,7 @@
 				show-overflow-tooltip
 				width="200"
 			></el-table-column>
-			<el-table-column prop="status" label="用户状态" width="130" #default="scope">
+			<el-table-column prop="status" label="用户状态" width="180" #default="scope">
 				<el-switch
 					:value="scope.row.status"
 					:active-text="scope.row.status === 1 ? '启用' : '禁用'"
