@@ -29,6 +29,8 @@
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue": "^2.2.0",
+		"autoprefixer": "^10.4.7",
+		"postcss": "^8.4.13",
 		"rollup-plugin-visualizer": "^5.5.4",
 		"sass": "^1.49.7",
 		"typescript": "^4.5.4",
