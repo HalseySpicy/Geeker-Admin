@@ -10,7 +10,7 @@
 					批量删除用户
 				</el-button>
 			</template>
-			<!-- expand -->
+			<!-- Expand -->
 			<template #expand="scope">
 				{{ scope.row }}
 			</template>
@@ -122,7 +122,7 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		search: true,
 		searchType: "datetimerange",
-		initSearchParam: ["2022-04-05 00:00:00", "2022-05-01 23:59:59"]
+		initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
 	},
 	{
 		prop: "status",

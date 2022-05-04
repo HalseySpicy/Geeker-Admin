@@ -80,6 +80,7 @@
 		.table-image {
 			width: 50px;
 			height: 50px;
+			border-radius: 50%;
 		}
 		// 解决 el-table 中 header 文字换行问题
 		.el-table__header .el-table__cell > .cell {
@@ -101,14 +102,14 @@
 		.table-empty {
 			line-height: 30px;
 		}
-		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题，目前升级到了2.1.10）
-		// .el-table__body-wrapper {
-		// 	height: calc(100% - 50px) !important;
-		// }
-		// .el-table__inner-wrapper,
-		// .el-scrollbar__wrap {
-		// 	height: 100% !important;
-		// }
+		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题）
+		.el-table__body-wrapper {
+			height: calc(100% - 50px) !important;
+		}
+		.el-table__inner-wrapper,
+		.el-scrollbar__wrap {
+			height: 100% !important;
+		}
 	}
 	// 表格 pagination 样式
 	.el-pagination {

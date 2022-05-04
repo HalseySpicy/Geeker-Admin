@@ -1,6 +1,6 @@
 <template>
 	<div class="table-search" v-if="columns.length">
-		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
+		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px" :style="`max-width: ${maxWidth}px`">
 			<template v-for="item in getSearchList">
 				<el-form-item :label="`${item.label} :`">
 					<SearchFormItem :item="item" :searchParam="searchParam"></SearchFormItem>
@@ -10,7 +10,7 @@
 		<div class="search-operation">
 			<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
 			<el-button :icon="Delete" @click="reset">重置</el-button>
-			<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow" v-if="columns.length > 4">
+			<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow" v-if="columns.length > maxLength">
 				{{ searchShow ? "合并" : "展开" }}
 				<el-icon class="el-icon--right">
 					<component :is="searchShow ? ArrowUp : ArrowDown"></component>
@@ -38,12 +38,37 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	searchParam: {}
 });
 
+const maxLength = ref<number>(4);
+const maxWidth = ref<number>(1260);
+
+// * 无用判断，后期通过样式解决
+if (props.columns.length >= 4) {
+	if (props.columns[3].searchType == "datetimerange" || props.columns[3].searchType == "timerange") {
+		maxLength.value = 3;
+		maxWidth.value = 945;
+	} else if (
+		props.columns[0].searchType == "datetimerange" ||
+		props.columns[1].searchType == "datetimerange" ||
+		props.columns[2].searchType == "datetimerange"
+	) {
+		maxLength.value = 3;
+		maxWidth.value = 1145;
+	} else if (
+		props.columns[0].searchType == "timerange" ||
+		props.columns[1].searchType == "timerange" ||
+		props.columns[2].searchType == "timerange"
+	) {
+		maxLength.value = 3;
+		maxWidth.value = 1095;
+	}
+}
+
 // 是否展开搜索项
 const searchShow = ref(false);
 
 // 根据是否展开配置搜索项长度
 const getSearchList = computed((): Partial<ColumnProps>[] => {
 	if (searchShow.value) return props.columns;
-	return props.columns.slice(0, 4);
+	return props.columns.slice(0, maxLength.value);
 });
 </script>
