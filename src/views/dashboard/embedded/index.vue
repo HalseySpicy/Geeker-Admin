@@ -4,9 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="embedded">
-import { ref, reactive } from "vue";
-</script>
+<script setup lang="ts" name="embedded"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

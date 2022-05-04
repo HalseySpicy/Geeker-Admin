@@ -133,7 +133,7 @@ import PlatformSourceChart from "./components/PlatformSourceChart.vue";
 import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
 // import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
 /* 引入警告数据 */
-import alarmList from "./assets/alarmList.json";
+// import alarmList from "./assets/alarmList.json";
 /* 获取最外层盒子 */
 const dataScreenRef = ref<HTMLElement | null>(null);
 
@@ -395,12 +395,12 @@ const resize = () => {
 };
 
 /* 大屏告警数据 */
-interface AlarmProps {
-	id: number;
-	warnMsg: string;
-	label: string;
-}
-const alarmData: AlarmProps[] = reactive(alarmList);
+// interface AlarmProps {
+// 	id: number;
+// 	warnMsg: string;
+// 	label: string;
+// }
+// const alarmData: AlarmProps[] = reactive(alarmList);
 
 /* 获取当前时间 */
 const { nowTime } = useTime();

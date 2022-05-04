@@ -177,10 +177,6 @@ defineExpose({
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	// background: url(../images/dataScreen-map-bg-circle.png) no-repeat;
-	// background-size: 100% 100%;
-	// opacity: 0.3;
-	// animation: rotate1 10s linear infinite;
 	img {
 		width: 500px;
 		height: 500px;

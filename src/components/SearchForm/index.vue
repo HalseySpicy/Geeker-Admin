@@ -1,7 +1,7 @@
 <template>
 	<div class="table-search" v-if="columns.length">
 		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px" :style="`max-width: ${maxWidth}px`">
-			<template v-for="item in getSearchList">
+			<template v-for="item in getSearchList" :key="item.prop">
 				<el-form-item :label="`${item.label} :`">
 					<SearchFormItem :item="item" :searchParam="searchParam"></SearchFormItem>
 				</el-form-item>

@@ -116,7 +116,7 @@ const initChart = (data: any = {}): ECharts => {
 				}
 			};
 		}),
-		series: data.data.map((val: string) => {
+		series: data.data.map(() => {
 			// console.log("30天预计", val);
 			return {
 				name: "",
@@ -182,9 +182,7 @@ const initDate = (): string[] => {
 	startDate.setDate(startDate.getDate() + 1);
 	while (endDate.getTime() - startDate.getTime() >= 0) {
 		let month =
-			(startDate.getMonth() + 1).toString().length === 1
-				? "0" + (startDate.getMonth() + 1).toString()
-				: startDate.getMonth() + 1;
+			(startDate.getMonth() + 1).toString().length === 1 ? "0" + (startDate.getMonth() + 1).toString() : startDate.getMonth() + 1;
 		let day = startDate.getDate().toString().length === 1 ? "0" + startDate.getDate() : startDate.getDate();
 		dateList.push(month + "/" + day);
 		startDate.setDate(startDate.getDate() + 1);

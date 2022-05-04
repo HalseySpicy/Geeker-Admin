@@ -4,9 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="selectIcon">
-import { ref, reactive } from "vue";
-</script>
+<script setup lang="ts" name="selectIcon"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

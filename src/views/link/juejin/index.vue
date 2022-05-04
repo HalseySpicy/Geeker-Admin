@@ -7,9 +7,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="juejin">
-import { ref, reactive } from "vue";
-</script>
+<script setup lang="ts" name="juejin"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

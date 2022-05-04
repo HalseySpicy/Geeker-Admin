@@ -97,7 +97,7 @@ interface ParentProps {
 		password: string;
 	};
 }
-const props = withDefaults(defineProps<ParentProps>(), {
+withDefaults(defineProps<ParentProps>(), {
 	age: "18",
 	address: () => ["天府广场", "天府三街"],
 	obj: () => {
@@ -112,13 +112,13 @@ const props = withDefaults(defineProps<ParentProps>(), {
 // const props1 = defineProps<{ item: string }>();
 
 // 子组件向父组件传输数据（触发父组件的submitParent方法）
-const emit = defineEmits<{
-	(e: "submitParent", LoginFrom: Login.ReqLoginForm): void;
-}>();
+// const emit = defineEmits<{
+// 	(e: "submitParent", LoginFrom: Login.ReqLoginForm): void;
+// }>();
 
-const submitParent = () => {
-	emit("submitParent", loginForm);
-};
+// const submitParent = () => {
+// 	emit("submitParent", loginForm);
+// };
 
 // 子组件数据暴露给父组件
 const count = ref<number>(1);

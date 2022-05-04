@@ -9,28 +9,12 @@ import { ElNotification } from "element-plus";
  * @param fileType 导出的文件格式(默认为.xlsx)
  * */
 export const useDownload = async (
-	url: (params: any) => Promise<any>,
+	url: (param: any) => Promise<any>,
 	tempName: string,
 	params: any = {},
 	isNotify: boolean = true,
 	fileType: string = ".xlsx"
 ) => {
-	/**
-	 * @description 由生成的链接下载模板
-	 * @param {string} blobUrl 二进制流地址(必传)
-	 */
-	const download = (blobUrl: string) => {
-		const exportFile = document.createElement("a");
-		exportFile.style.display = "none";
-		exportFile.download = `${tempName}${fileType}`;
-		exportFile.href = blobUrl;
-		document.body.appendChild(exportFile);
-		exportFile.click();
-		// 去除下载对url的影响
-		document.body.removeChild(exportFile);
-		window.URL.revokeObjectURL(blobUrl);
-	};
-
 	if (isNotify) {
 		ElNotification({
 			title: "温馨提示",
@@ -49,7 +33,15 @@ export const useDownload = async (
 		// 兼容edge不支持createObjectURL方法
 		if ("msSaveOrOpenBlob" in navigator) return window.navigator.msSaveOrOpenBlob(blob, tempName + fileType);
 		const blobUrl = window.URL.createObjectURL(blob);
-		download(blobUrl);
+		const exportFile = document.createElement("a");
+		exportFile.style.display = "none";
+		exportFile.download = `${tempName}${fileType}`;
+		exportFile.href = blobUrl;
+		document.body.appendChild(exportFile);
+		exportFile.click();
+		// 去除下载对url的影响
+		document.body.removeChild(exportFile);
+		window.URL.revokeObjectURL(blobUrl);
 	} catch (error) {
 		console.log(error);
 	}

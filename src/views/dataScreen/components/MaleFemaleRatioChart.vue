@@ -99,7 +99,7 @@ const initChart = (data: ChartProp): ECharts => {
 					position: "insideLeft",
 					offset: [0, -20],
 					fontSize: 12,
-					formatter: params => {
+					formatter: () => {
 						return `男士 ${data.man * 100}%`;
 					}
 				}
@@ -119,7 +119,7 @@ const initChart = (data: ChartProp): ECharts => {
 					position: "insideRight",
 					offset: [0, -20],
 					fontSize: 12,
-					formatter: params => {
+					formatter: () => {
 						return `女士 ${data.woman * 100}%`;
 					}
 				}

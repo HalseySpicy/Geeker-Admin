@@ -30,7 +30,7 @@
 			:stripe="stripe"
 			:tree-props="{ children: childrenName }"
 		>
-			<template v-for="item in tableColumns">
+			<template v-for="item in tableColumns" :key="item">
 				<!-- selection || index -->
 				<el-table-column
 					v-if="item.type == 'selection' || item.type == 'index'"

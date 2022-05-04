@@ -16,7 +16,7 @@
 // Echarts 为init（dom元素后的类型）
 // EChartsOption 为 option 的类型
 import { ref, Ref } from "vue";
-import { ECharts, EChartsOption, init } from "echarts";
+import { ECharts, init } from "echarts";
 import "echarts-liquidfill";
 const actualTotal: Ref<string> = ref("216908");
 const initChart = (data: number = 1): ECharts => {

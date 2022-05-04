@@ -80,8 +80,7 @@ const uploadExcel = async (param: any) => {
 // 文件上传之前判断
 const beforeExcelUpload = (file: any) => {
 	const isExcel =
-		file.type === "application/vnd.ms-excel" ||
-		file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+		file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 	const isLt5M = file.size / 1024 / 1024 < 5;
 	if (!isExcel)
 		ElNotification({

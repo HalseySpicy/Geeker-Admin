@@ -4,9 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="myBlog">
-import { ref, reactive } from "vue";
-</script>
+<script setup lang="ts" name="myBlog"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

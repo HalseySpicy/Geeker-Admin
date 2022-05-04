@@ -8,12 +8,7 @@ import { reactive, computed, toRefs } from "vue";
  * @param isPageable 是否有分页(不必传，默认为true)
  * @param tableRef 当前表格的DOM(不必传，默认为“”)
  * */
-export const useTable = (
-	apiUrl: (params: any) => Promise<any>,
-	initParam: any = {},
-	isPageable: boolean = true,
-	tableRef: any = ""
-) => {
+export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any = {}, isPageable: boolean = true) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],

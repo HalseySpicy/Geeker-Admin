@@ -15,18 +15,7 @@ onMounted(() => {
 			formatter: "{a} <br/>{b}: {c} ({d}%)"
 		},
 		legend: {
-			data: [
-				"Direct",
-				"Marketing",
-				"Search Engine",
-				"Email",
-				"Union Ads",
-				"Video Ads",
-				"Baidu",
-				"Google",
-				"Bing",
-				"Others"
-			]
+			data: ["Direct", "Marketing", "Search Engine", "Email", "Union Ads", "Video Ads", "Baidu", "Google", "Bing", "Others"]
 		},
 		series: [
 			{

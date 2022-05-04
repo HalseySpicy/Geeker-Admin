@@ -8,7 +8,9 @@
 		"dev": "vite",
 		"build:dev": "vue-tsc --noEmit && vite build --mode development",
 		"build:pro": "vue-tsc --noEmit && vite build --mode production",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"lint:eslint": "eslint --fix --ext .js,.ts,.vue ./src",
+		"lint:format": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\""
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^1.1.3",
@@ -28,9 +30,16 @@
 		"vue3-seamless-scroll": "^1.2.0"
 	},
 	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.22.0",
+		"@typescript-eslint/parser": "^5.22.0",
 		"@vitejs/plugin-vue": "^2.2.0",
 		"autoprefixer": "^10.4.7",
+		"eslint": "^8.14.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-vue": "^8.7.1",
 		"postcss": "^8.4.13",
+		"prettier": "^2.6.2",
 		"rollup-plugin-visualizer": "^5.5.4",
 		"sass": "^1.49.7",
 		"typescript": "^4.5.4",

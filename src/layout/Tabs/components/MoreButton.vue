@@ -6,9 +6,9 @@
 		</el-button>
 		<template #dropdown>
 			<el-dropdown-menu>
-				<el-dropdown-item @click.native="closeCurrentTab">{{ $t("tabs.closeCurrent") }}</el-dropdown-item>
-				<el-dropdown-item @click.native="closeOtherTab">{{ $t("tabs.closeOther") }}</el-dropdown-item>
-				<el-dropdown-item @click.native="closeAllTab">{{ $t("tabs.closeAll") }}</el-dropdown-item>
+				<el-dropdown-item @click="closeCurrentTab">{{ $t("tabs.closeCurrent") }}</el-dropdown-item>
+				<el-dropdown-item @click="closeOtherTab">{{ $t("tabs.closeOther") }}</el-dropdown-item>
+				<el-dropdown-item @click="closeAllTab">{{ $t("tabs.closeAll") }}</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
 	</el-dropdown>

@@ -11,7 +11,7 @@
 				</div>
 				<LoginForm
 					ref="loginRef"
-					@submitParent="submitParent"
+					@submit-parent="submitParent"
 					:age="'20'"
 					:address="['天府三街', '天府四街']"
 					:obj="obj"
@@ -26,7 +26,7 @@
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";
-import { ref, reactive, Ref, provide, toRefs } from "vue";
+import { ref, reactive, provide } from "vue";
 
 // * 以下数据都为自己测试使用，不参与功能开发
 // 使用provide传方法
@@ -51,14 +51,14 @@ const submitParent = (LoginFrom: Login.ReqLoginForm) => {
 
 // 使用子组件数据
 const loginRef = ref<LoginFormExpose | null>(null);
-const consoleRef = () => {
-	console.log(loginRef.value?.count);
-	loginRef.value?.consoleNumber("liutao");
-};
+// const consoleRef = () => {
+// 	console.log(loginRef.value?.count);
+// 	loginRef.value?.consoleNumber("liutao");
+// };
 
 // 定义数据类型两种方法
-const item: Ref<string> = ref("111");
-const item1 = ref<number>(111);
+// const item: Ref<string> = ref("111");
+// const item1 = ref<number>(111);
 
 const obj = reactive<Login.ReqLoginForm>({
 	username: "admin",
