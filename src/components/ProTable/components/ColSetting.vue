@@ -4,7 +4,7 @@
 		<div class="table-box">
 			<el-table :data="colSetting" :border="true">
 				<el-table-column prop="label" label="列名" width="180" />
-				<el-table-column prop="name" label="显示" width="180" #default="scope">
+				<el-table-column prop="name" label="显示" width="180" v-slot="scope">
 					<el-switch v-model="scope.row.isShow" @change="switchShow"></el-switch>
 				</el-table-column>
 				<template #empty>

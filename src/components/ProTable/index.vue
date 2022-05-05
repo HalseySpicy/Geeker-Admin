@@ -48,7 +48,7 @@
 					:label="item.label"
 					:width="item.width"
 					:fixed="item.fixed"
-					#default="scope"
+					v-slot="scope"
 				>
 					<slot :name="item.type" :row="scope.row"></slot>
 				</el-table-column>
@@ -62,7 +62,7 @@
 					:show-overflow-tooltip="true"
 					:resizable="true"
 					:fixed="item.fixed"
-					#default="scope"
+					v-slot="scope"
 				>
 					<!-- 自定义配置每一列 slot（作用域插槽） -->
 					<slot :name="item.prop" :row="scope.row">

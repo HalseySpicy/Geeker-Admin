@@ -61,7 +61,7 @@
 				show-overflow-tooltip
 				width="140"
 			></el-table-column>
-			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" #default="scope">
+			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" v-slot="scope">
 				{{ scope.row.gender == 1 ? "男" : "女" }}
 			</el-table-column>
 			<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
@@ -74,7 +74,7 @@
 				show-overflow-tooltip
 				width="200"
 			></el-table-column>
-			<el-table-column prop="status" label="用户状态" width="180" #default="scope">
+			<el-table-column prop="status" label="用户状态" width="180" v-slot="scope">
 				<el-switch
 					:value="scope.row.status"
 					:active-text="scope.row.status === 1 ? '启用' : '禁用'"
@@ -87,7 +87,7 @@
 					{{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag
 				>
 			</el-table-column>
-			<el-table-column label="操作" fixed="right" width="320" #default="scope">
+			<el-table-column label="操作" fixed="right" width="320" v-slot="scope">
 				<el-button type="text" :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
 				<el-button type="text" :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
 				<el-button type="text" :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>

@@ -6,13 +6,13 @@ import { wrapperEnv } from "./src/utils/getEnv";
 import { visualizer } from "rollup-plugin-visualizer";
 import viteCompression from "vite-plugin-compression";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
-// import viteImagemin from "vite-plugin-imagemin";
+import eslintPlugin from "vite-plugin-eslint";
 // import importToCDN from "vite-plugin-cdn-import";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
-// https://vitejs.dev/config/
+// * https://vitejs.dev/config/
 export default defineConfig((mode: ConfigEnv): UserConfig => {
 	const env = loadEnv(mode.mode, process.cwd());
 	const viteEnv = wrapperEnv(env);
@@ -58,6 +58,8 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 					}
 				}
 			}),
+			// * EsLint 报错信息显示在浏览器界面上
+			eslintPlugin(),
 			// * name 可以写在 script 标签上
 			VueSetupExtend(),
 			// * demand import element（如果使用了cdn引入,没必要使用element自动导入了）
@@ -82,35 +84,6 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			// 			css: "https://unpkg.com/element-plus/dist/index.css"
 			// 		}
 			// 	]
-			// }),
-
-			// * image compress(测试了下这个插件，没啥用，反而图片压缩过后变大了，打包的时候还巨慢)
-			// viteImagemin({
-			// 	gifsicle: {
-			// 		optimizationLevel: 7,
-			// 		interlaced: false
-			// 	},
-			// 	optipng: {
-			// 		optimizationLevel: 7
-			// 	},
-			// 	mozjpeg: {
-			// 		quality: 20
-			// 	},
-			// 	pngquant: {
-			// 		quality: [0.8, 0.9],
-			// 		speed: 4
-			// 	},
-			// 	svgo: {
-			// 		plugins: [
-			// 			{
-			// 				name: "removeViewBox"
-			// 			},
-			// 			{
-			// 				name: "removeEmptyAttrs",
-			// 				active: false
-			// 			}
-			// 		]
-			// 	}
 			// }),
 			// * 是否生成包预览
 			viteEnv.VITE_REPORT && visualizer(),
