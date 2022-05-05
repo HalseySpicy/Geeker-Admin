@@ -11,7 +11,7 @@
 		"build:pro": "vue-tsc --noEmit && vite build --mode production",
 		"preview": "vite preview",
 		"lint:eslint": "eslint --fix --ext .js,.ts,.vue ./src",
-		"lint:format": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\""
+		"lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\""
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^1.1.3",

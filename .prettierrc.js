@@ -1,4 +1,4 @@
-// https://www.prettier.cn/
+// https://www.prettier.cn
 
 module.exports = {
 	// 超过最大值换行
@@ -17,8 +17,6 @@ module.exports = {
 	bracketSpacing: true,
 	// 多行时尽可能打印尾随逗号。（例如，单行数组永远不会出现逗号结尾。） 可选值"<none|es5|all>"，默认none
 	trailingComma: "none",
-	// 在jsx中把'>' 单独放一行
-	jsxBracketSameLine: false,
 	// 在JSX中使用单引号而不是双引号
 	jsxSingleQuote: false,
 	//  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号 ,always：不省略括号

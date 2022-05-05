@@ -9,13 +9,7 @@
 					<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
 					<p class="logo-text">Geeker-Admin</p>
 				</div>
-				<LoginForm
-					ref="loginRef"
-					@submit-parent="submitParent"
-					:age="'20'"
-					:address="['天府三街', '天府四街']"
-					:obj="obj"
-				></LoginForm>
+				<LoginForm ref="loginRef" :age="'20'" :address="['天府三街', '天府四街']" :obj="obj"></LoginForm>
 				<!-- <el-button @click="consoleRef">打印子组件数据</el-button> -->
 			</div>
 		</div>
@@ -45,9 +39,9 @@ provide("provideState", {
 });
 
 // 传给子组件方法（submitParent）
-const submitParent = (LoginFrom: Login.ReqLoginForm) => {
-	console.log(LoginFrom);
-};
+// const submitParent = (LoginFrom: Login.ReqLoginForm) => {
+// 	console.log(LoginFrom);
+// };
 
 // 使用子组件数据
 const loginRef = ref<LoginFormExpose | null>(null);
