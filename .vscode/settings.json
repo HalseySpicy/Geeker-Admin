@@ -1,6 +1,7 @@
 {
 	"cSpell.words": [
 		"appkey",
+		"autocrlf",
 		"browserslist",
 		"childrens",
 		"clearfix",
@@ -43,6 +44,7 @@
 		"prettierignore",
 		"prettierrc",
 		"rgba",
+		"safecrlf",
 		"screenfull",
 		"screenutil",
 		"scrollbar",

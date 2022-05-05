@@ -1,4 +1,14 @@
 // https://www.prettier.cn
+/* 
+	<!--统一换行符为 lf-->
+	git config --global core.eol lf
+	
+	<!--将自动转换关闭,避免转换失败不能不同进行提交-->
+	git config --global core.autocrlf false
+	
+	<!--禁止混用 lf 和 crlf 两种换行符-->
+	git config --global core.safecrlf true
+*/
 
 module.exports = {
 	// 超过最大值换行

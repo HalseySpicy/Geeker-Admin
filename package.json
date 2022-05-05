@@ -31,6 +31,7 @@
 		"vue3-seamless-scroll": "^1.2.0"
 	},
 	"devDependencies": {
+		"@types/node": "^17.0.31",
 		"@typescript-eslint/eslint-plugin": "^5.22.0",
 		"@typescript-eslint/parser": "^5.22.0",
 		"@vitejs/plugin-vue": "^2.2.0",
@@ -51,7 +52,7 @@
 		"vite-plugin-compression": "^0.5.1",
 		"vite-plugin-eslint": "^1.6.0",
 		"vite-plugin-html": "^3.2.0",
-		"vite-plugin-vue-setup-extend": "^0.4.0", 
+		"vite-plugin-vue-setup-extend": "^0.4.0",
 		"vue-tsc": "^0.29.8"
 	}
 }
