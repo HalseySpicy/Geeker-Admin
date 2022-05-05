@@ -41,26 +41,27 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 const maxLength = ref<number>(4);
 const maxWidth = ref<number>(1260);
 
-// * 无用判断，后期通过样式解决
+// * 暂时只判断这个
 if (props.columns.length >= 4) {
 	if (props.columns[3].searchType == "datetimerange" || props.columns[3].searchType == "timerange") {
 		maxLength.value = 3;
 		maxWidth.value = 945;
-	} else if (
-		props.columns[0].searchType == "datetimerange" ||
-		props.columns[1].searchType == "datetimerange" ||
-		props.columns[2].searchType == "datetimerange"
-	) {
-		maxLength.value = 3;
-		maxWidth.value = 1145;
-	} else if (
-		props.columns[0].searchType == "timerange" ||
-		props.columns[1].searchType == "timerange" ||
-		props.columns[2].searchType == "timerange"
-	) {
-		maxLength.value = 3;
-		maxWidth.value = 1095;
 	}
+	// } else if (
+	// 	props.columns[0].searchType == "datetimerange" ||
+	// 	props.columns[1].searchType == "datetimerange" ||
+	// 	props.columns[2].searchType == "datetimerange"
+	// ) {
+	// 	maxLength.value = 3;
+	// 	maxWidth.value = 1145;
+	// } else if (
+	// 	props.columns[0].searchType == "timerange" ||
+	// 	props.columns[1].searchType == "timerange" ||
+	// 	props.columns[2].searchType == "timerange"
+	// ) {
+	// 	maxLength.value = 3;
+	// 	maxWidth.value = 1095;
+	// }
 }
 
 // 是否展开搜索项
