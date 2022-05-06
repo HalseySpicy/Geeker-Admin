@@ -11,8 +11,8 @@ const initChart = (data: any): ECharts => {
 	const echarts: ECharts = init(echartsBox);
 	const option = {
 		title: {
-			text: "个人/团队",
-			subtext: "预约占比",
+			text: "Gitee / GitHub",
+			subtext: "访问占比",
 			left: "56%",
 			top: "45%",
 			textAlign: "center",
@@ -59,7 +59,7 @@ const initChart = (data: any): ECharts => {
 		series: [
 			{
 				type: "pie",
-				radius: ["65%", "35%"],
+				radius: ["70%", "40%"],
 				center: ["57%", "52%"],
 				silent: true,
 				clockwise: true,

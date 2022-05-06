@@ -20,33 +20,33 @@
 						<div>
 							<img src="./images/add_person.png" alt="" />
 						</div>
-						<span class="item-value">43458</span>
-						<span>个人预约量</span>
+						<span class="item-value">2222</span>
+						<span>Gitee 访问量</span>
 					</div>
 					<div>
 						<div>
 							<img src="./images/add_team.png" alt="" />
 						</div>
-						<span class="item-value">43458</span>
-						<span>团队预约量</span>
+						<span class="item-value">3333</span>
+						<span>GitHub 访问量</span>
 					</div>
 					<div>
 						<div>
 							<img src="./images/today.png" alt="" />
 						</div>
-						<span class="item-value">43458</span>
-						<span>今日预约量</span>
+						<span class="item-value">4567</span>
+						<span>今日访问量</span>
 					</div>
 					<div>
 						<div>
 							<img src="./images/book_sum.png" alt="" />
 						</div>
-						<span class="item-value">43458</span>
-						<span>昨日预约量</span>
+						<span class="item-value">1234</span>
+						<span>昨日访问量</span>
 					</div>
 				</div>
 				<div class="item-right">
-					<div>个人/团队预约占比</div>
+					<div>Gitee / GitHub 访问量占比</div>
 					<div class="book-echarts">
 						<Pie ref="pie" />
 					</div>
@@ -83,7 +83,7 @@ const pie = ref<ChartExpose>();
 const curve = ref<ChartExpose>();
 const data = reactive({
 	activeName: 1,
-	bookSum: "999.999"
+	bookSum: "848.132w"
 });
 const dataScreen: ChartProps = reactive({
 	chart1: null,
@@ -103,19 +103,19 @@ let tab = [
 ];
 // 模拟数据
 let pieData = [
-	{ value: 10, name: "个人用户订单" },
-	{ value: 90, name: "团体用户订单" }
+	{ value: 5000, name: "Gitee 访问量" },
+	{ value: 5000, name: "GitHub 访问量" }
 ];
 let curveData = [
-	{ value: 30, spotName: "茶卡盐湖" },
-	{ value: 90, spotName: "东大街" },
-	{ value: 10, spotName: "茶卡盐湖" },
-	{ value: 70, spotName: "东大街" },
-	{ value: 20, spotName: "茶卡盐湖" },
-	{ value: 60, spotName: "东大街" },
-	{ value: 55, spotName: "东大街" },
-	{ value: 80, spotName: "东大街" },
-	{ value: 50, spotName: "东大街" }
+	{ value: 30, spotName: "掘金" },
+	{ value: 90, spotName: "CSDN" },
+	{ value: 10, spotName: "Gitee" },
+	{ value: 70, spotName: "GitHub" },
+	{ value: 20, spotName: "知乎" },
+	{ value: 60, spotName: "MyBlog" },
+	{ value: 55, spotName: "简书" },
+	{ value: 80, spotName: "StackOverFlow" },
+	{ value: 50, spotName: "博客园" }
 ];
 
 /* 初始化 echarts */

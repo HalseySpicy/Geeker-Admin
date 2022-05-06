@@ -110,8 +110,8 @@
 			height: 33px;
 		}
 		span {
-			font-size: 14px;
-			font-family: PingFang SC;
+			font-size: 15px;
+			font-family: DIN;
 			font-weight: 400;
 			color: #1a1a37;
 		}
@@ -124,24 +124,24 @@
 		}
 		> :first-child {
 			margin: 0 40px 40px 0;
-			background: url(./images/perpson-bg.png);
+			background: url(./images/1-bg.png);
 			background-size: 100% 100%;
 			background-color: #e8faea;
 		}
 		> :nth-child(2) {
 			margin-bottom: 40px;
-			background: url(./images/team-bg.png);
+			background: url(./images/2-bg.png);
 			background-size: 100% 100%;
 			background-color: #e7e1fb;
 		}
 		> :nth-last-child(2) {
 			margin-right: 40px;
-			background: url(./images/perpson-bg.png);
+			background: url(./images/3-bg.png);
 			background-size: 100% 100%;
 			background-color: #fdf3e9;
 		}
 		> :last-child {
-			background: url(./images/team-bg.png);
+			background: url(./images/4-bg.png);
 			background-size: 100% 100%;
 			background-color: #f0f5fb;
 		}

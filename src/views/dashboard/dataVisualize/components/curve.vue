@@ -1,5 +1,5 @@
 <template>
-	<!-- 个人/团队预约占比 -->
+	<!-- Gitee / GitHub 访问量占比 -->
 	<div class="echarts" id="curve"></div>
 </template>
 <script setup lang="ts" name="cure">
@@ -20,8 +20,8 @@ const initChart = (data: any): ECharts => {
 			formatter: (p: any) => {
 				let dom = `<div style="width:100%; height: 70px !important; display:flex;flex-direction: column;justify-content: space-between;padding:10px;box-sizing: border-box;
       color:#fff; background: #6B9DFE;border-radius: 11px;font-size:14px; ">
-        <div style="display: flex; align-items: center;"> <div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>景区 :  ${p[0].name}</div>        
-        <div style="display: flex;align-items: center;"><div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>预约量 :  ${p[0].value}</div>
+        <div style="display: flex; align-items: center;"> <div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>平台 :  ${p[0].name}</div>        
+        <div style="display: flex;align-items: center;"><div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>数据量 :  ${p[0].value}</div>
       </div>`;
 				return dom;
 			}
@@ -97,7 +97,7 @@ const initChart = (data: any): ECharts => {
 		],
 		yAxis: [
 			{
-				name: "预约数量",
+				name: "数据来源",
 				nameTextStyle: {
 					color: "#282843",
 					fontSize: 18,
