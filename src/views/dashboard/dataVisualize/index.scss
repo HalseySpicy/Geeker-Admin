@@ -1,0 +1,167 @@
+.content-box {
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 10px 15px;
+	box-sizing: border-box;
+	min-width: 1600px;
+	min-height: 650px;
+	> div {
+		width: 100%;
+		height: 580px;
+		background: #ffffff;
+		border-radius: 35px;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+	}
+	.top-box {
+		padding: 20px 50px;
+		margin-bottom: 40px;
+		box-sizing: border-box;
+		.title {
+			font-size: 18px;
+			font-weight: 600;
+			color: #282843;
+			margin-bottom: 10px;
+			font-family: PingFang SC;
+		}
+	}
+	.bottom-box {
+		height: 480px;
+		padding: 20px 0;
+		box-sizing: border-box;
+		.top-item {
+			padding: 0 50px;
+		}
+		.curve-echarts {
+			width: 100%;
+			height: 90%;
+			padding-left: 10px;
+		}
+	}
+}
+
+.bottom-item {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	.item-left {
+		width: 21%;
+		color: #ffffff;
+		background: url(./images/book-bg.png);
+		background-size: 100% 100%;
+		padding: 40px 0 120px 30px;
+		box-sizing: border-box;
+		:first-child {
+			font-size: 20px;
+			font-weight: 500;
+			font-family: PingFang SC;
+		}
+		div {
+			width: 90px;
+			height: 90px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 20px;
+			margin: 40px 0 20px 0;
+			background: #ffffff;
+			background-color: #ffffff;
+			box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.14);
+		}
+		img {
+			width: 60px;
+			height: 65px;
+		}
+		> :last-child {
+			font-size: 62px;
+			font-family: DIN;
+			font-weight: 500;
+		}
+	}
+	.item-center {
+		width: 30%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		> div {
+			width: 43%;
+			height: auto;
+			border-radius: 30px;
+			display: flex;
+			flex-direction: column;
+			padding: 25px;
+			box-sizing: border-box;
+			margin-left: 10px;
+			div {
+				width: 70px;
+				height: 70px;
+				background-color: #ffffff;
+				border-radius: 19px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-bottom: 10px;
+			}
+		}
+		img {
+			width: 33px;
+			height: 33px;
+		}
+		span {
+			font-size: 14px;
+			font-family: PingFang SC;
+			font-weight: 400;
+			color: #1a1a37;
+		}
+		.item-value {
+			font-size: 28px;
+			font-family: DIN;
+			font-weight: bold;
+			color: #1a1a37;
+			margin-bottom: 4px;
+		}
+		> :first-child {
+			margin: 0 40px 40px 0;
+			background: url(./images/perpson-bg.png);
+			background-size: 100% 100%;
+			background-color: #e8faea;
+		}
+		> :nth-child(2) {
+			margin-bottom: 40px;
+			background: url(./images/team-bg.png);
+			background-size: 100% 100%;
+			background-color: #e7e1fb;
+		}
+		> :nth-last-child(2) {
+			margin-right: 40px;
+			background: url(./images/perpson-bg.png);
+			background-size: 100% 100%;
+			background-color: #fdf3e9;
+		}
+		> :last-child {
+			background: url(./images/team-bg.png);
+			background-size: 100% 100%;
+			background-color: #f0f5fb;
+		}
+	}
+	.item-right {
+		width: 40%;
+		border: 1px solid #f4f5f8;
+		border-radius: 25px;
+		margin-right: 20px;
+		> :first-child {
+			font-size: 18px;
+			font-family: PingFang SC;
+			font-weight: 600;
+			color: #282843;
+			padding: 15px 20px;
+			border-bottom: 1px solid #f4f5f8;
+		}
+	}
+	.book-echarts {
+		width: 100%;
+		height: 90%;
+	}
+}
