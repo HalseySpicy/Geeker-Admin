@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts" name="searchForm">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 import SearchFormItem from "./components/SearchFormItem.vue";
 import { Delete, Search, ArrowDown, ArrowUp } from "@element-plus/icons-vue";
@@ -41,28 +41,15 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 const maxLength = ref<number>(4);
 const maxWidth = ref<number>(1260);
 
-// * 暂时只判断这个
-if (props.columns.length >= 4) {
-	if (props.columns[3].searchType == "datetimerange" || props.columns[3].searchType == "timerange") {
-		maxLength.value = 3;
-		maxWidth.value = 945;
+onMounted(() => {
+	// * 暂时只判断这个
+	if (props.columns.length >= 4) {
+		props.columns[3].searchType == "datetimerange" ? ((maxWidth.value = 945), (maxLength.value = 3)) : null;
+		props.columns.slice(0, 3).forEach(item => {
+			item.searchType === "datetimerange" ? ((maxWidth.value = 1135), (maxLength.value = 3)) : null;
+		});
 	}
-	// } else if (
-	// 	props.columns[0].searchType == "datetimerange" ||
-	// 	props.columns[1].searchType == "datetimerange" ||
-	// 	props.columns[2].searchType == "datetimerange"
-	// ) {
-	// 	maxLength.value = 3;
-	// 	maxWidth.value = 1145;
-	// } else if (
-	// 	props.columns[0].searchType == "timerange" ||
-	// 	props.columns[1].searchType == "timerange" ||
-	// 	props.columns[2].searchType == "timerange"
-	// ) {
-	// 	maxLength.value = 3;
-	// 	maxWidth.value = 1095;
-	// }
-}
+});
 
 // 是否展开搜索项
 const searchShow = ref(false);

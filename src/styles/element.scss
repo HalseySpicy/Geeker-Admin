@@ -20,13 +20,11 @@
 		.el-form {
 			max-width: 1260px;
 			.el-form-item {
-				margin-right: 15px;
-				.el-input {
-					width: 200px;
-				}
-				// 去掉时间选择器的上下边距
-				.el-range-editor.el-input__inner {
-					padding: 0 10px;
+				margin-right: 5px;
+				.el-input,
+				.el-select,
+				.el-date-editor--timerange {
+					width: 210px;
 				}
 				// el-select 为多选时不换行显示
 				.el-select__tags {
@@ -40,7 +38,7 @@
 		}
 		.search-operation {
 			white-space: nowrap;
-			margin-left: 10px;
+			margin-left: 15px;
 			.search-isOpen {
 				margin-left: 20px;
 			}
