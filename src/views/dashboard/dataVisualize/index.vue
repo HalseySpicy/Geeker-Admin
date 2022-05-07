@@ -16,37 +16,44 @@
 					<span>{{ data.bookSum }}</span>
 				</div>
 				<div class="item-center">
-					<div>
+					<!-- <div v-for="item in arr" :key="item.name" class="traffic-box">
 						<div>
+							<img :src="item.img" alt="" />
+						</div>
+						<span class="item-value">{{ item.num }}</span>
+						<span>{{ item.name }}</span>
+					</div> -->
+					<div class="gitee-traffic traffic-box">
+						<div class="traffic-img">
 							<img src="./images/add_person.png" alt="" />
 						</div>
 						<span class="item-value">2222</span>
-						<span>Gitee 访问量</span>
+						<span class="traffic-name">Gitee 访问量</span>
 					</div>
-					<div>
-						<div>
+					<div class="gitHub-traffic traffic-box">
+						<div class="traffic-img">
 							<img src="./images/add_team.png" alt="" />
 						</div>
-						<span class="item-value">3333</span>
-						<span>GitHub 访问量</span>
+						<span class="item-value">2222</span>
+						<span class="traffic-name">GitHub 访问量</span>
 					</div>
-					<div>
-						<div>
+					<div class="today-traffic traffic-box">
+						<div class="traffic-img">
 							<img src="./images/today.png" alt="" />
 						</div>
 						<span class="item-value">4567</span>
-						<span>今日访问量</span>
+						<span class="traffic-name">今日访问量</span>
 					</div>
-					<div>
-						<div>
+					<div class="yesterday-traffic traffic-box">
+						<div class="traffic-img">
 							<img src="./images/book_sum.png" alt="" />
 						</div>
 						<span class="item-value">1234</span>
-						<span>昨日访问量</span>
+						<span class="traffic-name">昨日访问量</span>
 					</div>
 				</div>
 				<div class="item-right">
-					<div>Gitee / GitHub 访问量占比</div>
+					<div class="echarts-title">Gitee / GitHub 访问量占比</div>
 					<div class="book-echarts">
 						<Pie ref="pie" />
 					</div>
@@ -92,7 +99,12 @@ const dataScreen: ChartProps = reactive({
 const handleClick = (): void => {
 	console.log(111);
 };
-
+// let arr = [
+// 	{ img: new URL("./images/add_person.png", import.meta.url).href, num: 2222, name: "Gitee 访问量", bgImg: "./images/1-bg.png" },
+// 	{ img: new URL("./images/add_team.png", import.meta.url).href, num: 2222, name: "GitHub 访问量", bgImg: "./images/2-bg.png" },
+// 	{ img: new URL("./images/today.png", import.meta.url).href, num: 4567, name: "今日访问量", bgImg: "./images/3-bg.png" },
+// 	{ img: new URL("./images/book_sum.png", import.meta.url).href, num: 1234, name: "昨日访问量", bgImg: "./images/4-bg.png" }
+// ];
 let tab = [
 	{ label: "未来7日", name: 1 },
 	{ label: "近七日", name: 2 },
