@@ -156,9 +156,9 @@ onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
 	// clearInterval(timer);
 	// 每次离开页面时，清空echarts实例，不然会出现无法显示的问题
-	Object.values(dataScreen).forEach(val => {
-		val?.dispose();
-	});
+	// Object.values(dataScreen).forEach(val => {
+	// 	val?.dispose();
+	// });
 });
 </script>
 
