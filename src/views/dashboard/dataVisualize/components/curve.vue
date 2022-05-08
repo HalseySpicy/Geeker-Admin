@@ -37,7 +37,7 @@ const initChart = (data: any): ECharts => {
 		},
 		dataZoom: [
 			{
-				show: true,
+				show: false,
 				height: 10,
 				xAxisIndex: [0],
 				bottom: 0,
