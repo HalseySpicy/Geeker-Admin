@@ -6,28 +6,20 @@
 
 > Geeker Admin，是基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开发的一套后台管理模板，目前利用空余时间开发了一个月左右 🕒🕒。项目中很多功能都是借鉴别的管理系统，整个项目还有很多地方不完善，后期会持续更新。项目中有很多地方写得不是很好，希望大家能多提意见。
 
-
-
 ## ？为什么开发这个管理系统 🤷‍♂️
 
 > 1、主要是学习下 Vue3 + TypeScript  
 > 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
-
-
 ## 一、在线预览 👀
 
 - Link：http://admin.spicyboy.cn
-
-
 
 ## 二、Git 仓库地址 (欢迎 Star⭐)
 
 - Gitee：https://gitee.com/laramie/Geeker-Admin
 
 - GitHub：https://github.com/HalseySpicy/Geeker-Admin
-
-
 
 ## 三、🔨🔨🔨 项目功能
 
@@ -43,8 +35,6 @@
 - 🥭 使用 vue-router 进行路由权限拦截、按钮权限设置
 - 🍈 使用 keep-alive 对整个页面进行缓存，支持多级嵌套页面（路由里可配置）
 - 🥥 常用自定义指令开发（复制、水印、拖拽、节流、防抖、长按……）
-
-
 
 ## 四、安装使用步骤
 
@@ -86,17 +76,13 @@ npm run build:pro
 
 - **Lint：**
 
-````text
+```text
 # eslint检测
 npm run lint:eslint
 
 # prettier格式化修复
 npm run lint:prettier
-````
-
-
-
-
+```
 
 ## 五、项目截图
 
@@ -116,15 +102,13 @@ npm run lint:prettier
 
 ![dataScreen](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen.png)
 
-
-
 ## 六、文件资源目录 📚
 
 ```text
 Geeker-Admin
 ├─ .vscode                # vscode推荐配置
 ├─ public                 # 静态资源文件（忽略打包）
-├─ src                    
+├─ src
 │  ├─ api                 # API 接口管理
 │  ├─ assets              # 静态资源文件
 │  ├─ components          # 全局组件
@@ -151,7 +135,7 @@ Geeker-Admin
 ├─ .eslintignore          # 忽略 Eslint 校验
 ├─ .eslintrc.js           # Eslint 校验配置
 ├─ .gitignore             # git 提交忽略
-├─ .prettierignore        # 忽略 prettier 格式化 
+├─ .prettierignore        # 忽略 prettier 格式化
 ├─ .prettierrc.js         # prettier 配置
 ├─ index.html             # 入口 html
 ├─ LICENSE                # 开源协议
@@ -159,21 +143,18 @@ Geeker-Admin
 ├─ package.json           # 包管理
 ├─ postcss.config.js      # postcss 配置
 ├─ README.md              # README 介绍
+├─ STANDARD.md            # 项目规范文档
 ├─ tsconfig.json          # typescript 全局配置
 └─ vite.config.ts         # vite 配置
 ```
-
-
 
 ## 七、浏览器支持
 
 > 默认支持以下浏览器，vue3.2 不支持 IE 浏览器。更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ESModule)
 
 | [![ Edge](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](http://godban.github.io/browsers-support-badges/) Edge | [![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](http://godban.github.io/browsers-support-badges/) Firefox | [![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](http://godban.github.io/browsers-support-badges/) Chrome | [![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png)](http://godban.github.io/browsers-support-badges/) Safari |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| last 2 versions                                              | last 2 versions                                              | last 2 versions                                              | last 2 versions                                              |
-
-
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| last 2 versions                                                                                                                                         | last 2 versions                                                                                                                                                    | last 2 versions                                                                                                                                                | last 2 versions                                                                                                                                                |
 
 ## 八、项目后台接口 🧩
 
