@@ -20,7 +20,7 @@ npm install prettier
 
 ### 3、配置 Prettier：
 
-```json
+```javascript
 // https://www.prettier.cn
 
 module.exports = {
@@ -91,7 +91,7 @@ npm install eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-v
 
 ### 3、配置 ESLint：
 
-```json
+```javascript
 module.exports = {
 	root: true,
 	env: {
@@ -106,7 +106,7 @@ module.exports = {
 		parser: "@typescript-eslint/parser",
 		ecmaVersion: 2020,
 		sourceType: "module",
-		jsxPragma: 'React',
+		jsxPragma: "React",
 		ecmaFeatures: {
 			jsx: true
 		}
