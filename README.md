@@ -2,26 +2,32 @@
 
 ![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
-# Geeker-Admin 后台管理系统 🍇🍈🍉
-
 ## 前言 📖
 
 > Geeker Admin，是基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开发的一套后台管理模板，目前利用空余时间开发了一个月左右 🕒🕒。项目中很多功能都是借鉴别的管理系统，整个项目还有很多地方不完善，后期会持续更新。项目中有很多地方写得不是很好，希望大家能多提意见。
 
-## ？？？为什么开发这个管理系统 🤷‍♂️🤷
+
+
+## ？为什么开发这个管理系统 🤷‍♂️🤷
 
 > 1、主要是学习下 Vue3 + TypeScript  
 > 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
+
+
 ## 一、在线预览 👀
 
-### Link：http://admin.spicyboy.cn ✨
+- Link：http://admin.spicyboy.cn  ✨
+
+
 
 ## 二、Git 仓库地址 (欢迎 Star⭐⭐⭐)
 
-### Gitee：https://gitee.com/laramie/Geeker-Admin ✨
+- Gitee：https://gitee.com/laramie/Geeker-Admin  ✨
 
-### GitHub：https://github.com/HalseySpicy/Geeker-Admin ✨
+- GitHub：https://github.com/HalseySpicy/Geeker-Admin  ✨
+
+
 
 ## 三、🔨🔨🔨 项目功能
 
@@ -38,52 +44,79 @@
 - 🍈 使用 keep-alive 对整个页面进行缓存，支持多级嵌套页面（路由里可配置）
 - 🥥 常用自定义指令开发（复制、水印、拖拽、节流、防抖、长按……）
 
+
+
 ## 四、安装使用步骤
 
-- **Clone**
+- **Clone：**
 
 ```text
 git clone https://gitee.com/laramie/Geeker-Admin.git
 git clone https://github.com/HalseySpicy/Geeker-Admin.git
 ```
 
-- **Install**
+- **Install：**
 
 ```text
 npm install
 cnpn install
+
+# npm install 安装失败，请升级 nodejs 到 16 以上，或尝试使用以下命令：
+npm install --registry=https://registry.npm.taobao.org
 ```
 
-- **Run**
+- **Run：**
 
 ```text
 npm run dev
 ```
 
-- **Build**
+- **Build：**
 
 ```text
+# 开发环境
 npm run build:dev
+
+# 测试环境
+npm run build:test
+
+# 生产环境
 npm run build:pro
 ```
 
+- **Lint：**
+
+````text
+# eslint检测
+npm run lint:eslint
+
+# prettier格式化修复
+npm run lint:prettier
+````
+
+
+
+
+
 ## 五、项目截图
 
-### 登录页：
+### 1、登录页：
 
 ![login](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login.png)
 
-### 首页：
+### 2、首页：
 
 ![home](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home.png)
 
-### 表格页：
+### 3、表格页：
 
 ![table1](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table1.png)
 
-### 数据大屏：
+### 4、数据大屏：
 
 ![dataScreen](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen.png)
+
+
 
 ## 六、文件资源目录 📚
 
@@ -129,6 +162,8 @@ Geeker-Admin
 ├─ tsconfig.json
 └─ vite.config.ts
 ```
+
+
 
 ## 七、项目后台接口 🧩
 
