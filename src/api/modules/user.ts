@@ -1,4 +1,5 @@
 import { ResPage, User } from "@/api/interface/index";
+import { ContentTypeEnum } from "@/enums/httpEnum";
 import { PORT1 } from "@/api/config/servicePort";
 
 import http from "@/api";
@@ -18,7 +19,7 @@ export const addUser = (params: { id: string }) => {
 
 // * 批量添加用户
 export const BatchAddUser = (params: any) => {
-	return http.post(PORT1 + `/user/import`, params);
+	return http.post(PORT1 + `/user/import`, params, { headers: { "Content-Type": ContentTypeEnum.FORM_DATA } });
 };
 
 // * 编辑用户
