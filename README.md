@@ -11,15 +11,21 @@
 > 1、主要是学习下 Vue3 + TypeScript  
 > 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
+
+
 ## 一、在线预览 👀
 
 - Link：http://admin.spicyboy.cn
+
+
 
 ## 二、Git 仓库地址 (欢迎 Star⭐)
 
 - Gitee：https://gitee.com/laramie/Geeker-Admin
 
 - GitHub：https://github.com/HalseySpicy/Geeker-Admin
+
+
 
 ## 三、🔨🔨🔨 项目功能
 
@@ -35,6 +41,8 @@
 - 🥭 使用 vue-router 进行路由权限拦截、按钮权限设置
 - 🍈 使用 keep-alive 对整个页面进行缓存，支持多级嵌套页面（路由里可配置）
 - 🥥 常用自定义指令开发（复制、水印、拖拽、节流、防抖、长按……）
+
+
 
 ## 四、安装使用步骤
 
@@ -84,6 +92,8 @@ npm run lint:eslint
 npm run lint:prettier
 ```
 
+
+
 ## 五、项目截图
 
 ### 1、登录页：
@@ -101,6 +111,8 @@ npm run lint:prettier
 ### 4、数据大屏：
 
 ![dataScreen](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen.png)
+
+
 
 ## 六、文件资源目录 📚
 
@@ -148,15 +160,25 @@ Geeker-Admin
 └─ vite.config.ts         # vite 配置
 ```
 
+
+
 ## 七、浏览器支持
 
 > 默认支持以下浏览器，vue3.2 不支持 IE 浏览器。更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ESModule)
 
-| [![ Edge](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](http://godban.github.io/browsers-support-badges/) Edge | [![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](http://godban.github.io/browsers-support-badges/) Firefox | [![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](http://godban.github.io/browsers-support-badges/) Chrome | [![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png)](http://godban.github.io/browsers-support-badges/) Safari |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| last 2 versions                                                                                                                                         | last 2 versions                                                                                                                                                    | last 2 versions                                                                                                                                                | last 2 versions                                                                                                                                                |
+| ![Edge](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Edge.png) | ![Firefox](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Firefox.png) | ![Chrome](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Chrome.png) | ![Safari](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Safari.png) |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                       last 2 versions                        |                       last 2 versions                        |                       last 2 versions                        |                       last 2 versions                        |
+
+
 
 ## 八、项目后台接口 🧩
 
 > 项目后台接口完全采用 Mock 数据  
 > 推荐一个在线 Mock 平台： https://www.fastmock.site/
+
+
+
+## 九、微信交流群
+
+![qrCode](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/qrCode.png)

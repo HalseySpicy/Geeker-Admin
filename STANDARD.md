@@ -6,6 +6,8 @@
 >
 > **Link：** https://v3.cn.vuejs.org/style-guide
 
+
+
 ## 二、代码格式化工具（Prettier）
 
 ### 1、下载安装 prettier：
@@ -60,6 +62,8 @@ module.exports = {
 	vueIndentScriptAndStyle: false
 };
 ```
+
+
 
 ## 三、代码规范工具（ESLint）
 
@@ -157,6 +161,8 @@ module.exports = {
 	}
 };
 ```
+
+
 
 ## 四、样式规范工具（StyleLint）
 
