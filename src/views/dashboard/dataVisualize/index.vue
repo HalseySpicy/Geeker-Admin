@@ -8,48 +8,41 @@
 				</el-tabs>
 			</div>
 			<div class="bottom-item">
-				<div class="item-left">
-					<span>访问总数</span>
-					<div>
+				<div class="item-left sle">
+					<span class="left-title">访问总数</span>
+					<div class="img-box">
 						<img src="./images/book-sum.png" alt="" />
 					</div>
-					<span>{{ data.bookSum }}</span>
+					<span class="left-number">{{ data.bookSum }}</span>
 				</div>
 				<div class="item-center">
-					<!-- <div v-for="item in arr" :key="item.name" class="traffic-box">
-						<div>
-							<img :src="item.img" alt="" />
-						</div>
-						<span class="item-value">{{ item.num }}</span>
-						<span>{{ item.name }}</span>
-					</div> -->
 					<div class="gitee-traffic traffic-box">
 						<div class="traffic-img">
 							<img src="./images/add_person.png" alt="" />
 						</div>
 						<span class="item-value">2222</span>
-						<span class="traffic-name">Gitee 访问量</span>
+						<span class="traffic-name sle">Gitee 访问量</span>
 					</div>
 					<div class="gitHub-traffic traffic-box">
 						<div class="traffic-img">
 							<img src="./images/add_team.png" alt="" />
 						</div>
 						<span class="item-value">2222</span>
-						<span class="traffic-name">GitHub 访问量</span>
+						<span class="traffic-name sle">GitHub 访问量</span>
 					</div>
 					<div class="today-traffic traffic-box">
 						<div class="traffic-img">
 							<img src="./images/today.png" alt="" />
 						</div>
 						<span class="item-value">4567</span>
-						<span class="traffic-name">今日访问量</span>
+						<span class="traffic-name sle">今日访问量</span>
 					</div>
 					<div class="yesterday-traffic traffic-box">
 						<div class="traffic-img">
 							<img src="./images/book_sum.png" alt="" />
 						</div>
 						<span class="item-value">1234</span>
-						<span class="traffic-name">昨日访问量</span>
+						<span class="traffic-name sle">昨日访问量</span>
 					</div>
 				</div>
 				<div class="item-right">

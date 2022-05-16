@@ -6,21 +6,17 @@
 	align-items: center;
 	padding: 10px 15px;
 	box-sizing: border-box;
-	min-width: 1600px;
 	min-height: 650px;
-	& > div {
-		width: 100%;
-		height: 580px;
-		background: #ffffff;
-		border-radius: 35px;
-		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
-		box-sizing: border-box;
-	}
 	.top-box {
+		width: 100%;
 		padding: 20px 50px 30px 50px;
 		margin-bottom: 40px;
 		display: flex;
 		flex-direction: column;
+		background: #ffffff;
+		border-radius: 35px;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+		box-sizing: border-box;
 		.title {
 			font-size: 18px;
 			font-weight: 600;
@@ -40,12 +36,13 @@
 				background-size: 100% 100%;
 				padding: 40px 0 120px 30px;
 				box-sizing: border-box;
-				:first-child {
+				overflow: hidden;
+				.left-title {
 					font-size: 20px;
 					font-weight: 500;
 					font-family: PingFang SC;
 				}
-				div {
+				.img-box {
 					width: 90px;
 					height: 90px;
 					display: flex;
@@ -56,31 +53,34 @@
 					background: #ffffff;
 					background-color: #ffffff;
 					box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.14);
+					img {
+						width: 60px;
+						height: 65px;
+					}
 				}
-				img {
-					width: 60px;
-					height: 65px;
-				}
-				> :last-child {
+				.left-number {
 					font-size: 62px;
 					font-family: DIN;
 					font-weight: 500;
+					overflow: hidden;
 				}
 			}
 			.item-center {
-				width: 30%;
+				flex: 1;
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-around;
+				justify-content: space-between;
+				align-content: space-between;
+				padding: 0 50px;
+				min-width: 250px;
 				.traffic-box {
-					width: 43%;
-					height: auto;
+					width: 47%;
+					height: 48%;
 					border-radius: 30px;
 					display: flex;
 					flex-direction: column;
 					padding: 25px;
 					box-sizing: border-box;
-					margin-left: 10px;
 					.traffic-img {
 						width: 70px;
 						height: 70px;
@@ -96,12 +96,6 @@
 					width: 33px;
 					height: 33px;
 				}
-				.traffic-name {
-					font-size: 15px;
-					font-family: DIN;
-					font-weight: 400;
-					color: #1a1a37;
-				}
 				.item-value {
 					font-size: 28px;
 					font-family: DIN;
@@ -109,20 +103,25 @@
 					color: #1a1a37;
 					margin-bottom: 4px;
 				}
+				.traffic-name {
+					font-size: 15px;
+					font-family: DIN;
+					font-weight: 400;
+					color: #1a1a37;
+					white-space: nowrap;
+					overflow: hidden;
+				}
 				.gitee-traffic {
-					margin: 0 40px 40px 0;
 					background: url(./images/1-bg.png);
 					background-size: 100% 100%;
 					background-color: #e8faea;
 				}
 				.gitHub-traffic {
-					margin-bottom: 40px;
 					background: url(./images/2-bg.png);
 					background-size: 100% 100%;
 					background-color: #e7e1fb;
 				}
 				.today-traffic {
-					margin-right: 40px;
 					background: url(./images/3-bg.png);
 					background-size: 100% 100%;
 					background-color: #fdf3e9;
@@ -159,7 +158,12 @@
 	}
 	.bottom-box {
 		height: 480px;
+		width: 100%;
 		padding: 20px 0;
+		background: #ffffff;
+		border-radius: 35px;
+		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+		box-sizing: border-box;
 		.top-item {
 			padding: 0 50px;
 		}

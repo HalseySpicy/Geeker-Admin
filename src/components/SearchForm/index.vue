@@ -42,7 +42,7 @@ const maxLength = ref<number>(4);
 const maxWidth = ref<number>(1260);
 
 onMounted(() => {
-	// * 暂时只判断这个
+	// * 暂时只判断这两种情况（第四个搜索项为时间范围 || 前三项存在时间范围选择框）
 	if (props.columns.length >= 4) {
 		props.columns[3].searchType == "datetimerange" ? ((maxWidth.value = 945), (maxLength.value = 3)) : null;
 		props.columns.slice(0, 3).forEach(item => {
