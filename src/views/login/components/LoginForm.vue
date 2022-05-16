@@ -21,14 +21,12 @@
 			登录
 		</el-button>
 	</div>
-	<!-- <el-button @click="submitParent">触发父组件方法</el-button> -->
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
-import { InjectProps } from "../interface/index";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
@@ -81,54 +79,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.resetFields();
 };
-
-// * 以下数据都为自己测试使用，不参与功能开发
-// inject
-const provideState = inject("provideState") as InjectProps;
-// console.log(provideState.age);
-provideState.changeName();
-
-// 接收父组件参数（采用ts专有声明，有默认值）
-interface ParentProps {
-	age?: string;
-	address?: string[];
-	obj?: {
-		username: string;
-		password: string;
-	};
-}
-withDefaults(defineProps<ParentProps>(), {
-	age: "18",
-	address: () => ["天府广场", "天府三街"],
-	obj: () => {
-		return {
-			username: "admin",
-			password: "123456"
-		};
-	}
-});
-
-// 接收父组件参数（采用ts专有声明，无默认值）
-// const props1 = defineProps<{ item: string }>();
-
-// 子组件向父组件传输数据（触发父组件的submitParent方法）
-// const emit = defineEmits<{
-// 	(e: "submitParent", LoginFrom: Login.ReqLoginForm): void;
-// }>();
-
-// const submitParent = () => {
-// 	emit("submitParent", loginForm);
-// };
-
-// 子组件数据暴露给父组件
-const count = ref<number>(1);
-const consoleNumber = (name: string): void => {
-	console.log("我是子组件打印的数据", name);
-};
-defineExpose({
-	count,
-	consoleNumber
-});
 </script>
 
 <style scoped lang="scss">
