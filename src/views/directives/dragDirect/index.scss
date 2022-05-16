@@ -1,0 +1,12 @@
+.content-box {
+	position: relative;
+	.drag-box {
+		position: absolute;
+		top: 110px;
+		height: 300px;
+		width: 300px;
+		background: #dfe6e9;
+		color: #b2bec3;
+		border-radius: 50%;
+	}
+}
