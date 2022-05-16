@@ -6,22 +6,11 @@ const proTableRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/proTable",
 		component: Layout,
-		redirect: "/proTable/useHooks",
+		redirect: "/proTable/useComponent",
 		meta: {
 			title: "超级表格"
 		},
 		children: [
-			{
-				path: "/proTable/useHooks",
-				name: "useHooks",
-				component: () => import("@/views/proTable/useHooks/index.vue"),
-				meta: {
-					keepAlive: true,
-					requiresAuth: true,
-					title: "使用 Hooks",
-					key: "useHooks"
-				}
-			},
 			{
 				path: "/proTable/useComponent",
 				name: "useComponent",
