@@ -67,7 +67,6 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 
 	/**
 	 * @description 更新查询参数
-	 * @param resPageable 后台返回的分页数据
 	 * @return void
 	 * */
 	const updatedTotalParam = () => {

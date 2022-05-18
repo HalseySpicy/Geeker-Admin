@@ -42,7 +42,7 @@ class RequestHttp {
 				return { ...config, headers: { "x-access-token": token } };
 			},
 			(error: AxiosError) => {
-				Promise.reject(error);
+				return Promise.reject(error);
 			}
 		);
 
