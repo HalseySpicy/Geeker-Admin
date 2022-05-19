@@ -2,6 +2,8 @@
 
 ![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
+
+
 ## 前言 📖
 
 > Geeker Admin，是基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开发的一套后台管理模板，目前利用空余时间开发了一个月左右 🕒🕒。项目中很多功能都是借鉴别的管理系统，整个项目还有很多地方不完善，后期会持续更新。项目中有很多地方写得不是很好，希望大家能多提意见。
@@ -98,19 +100,19 @@ npm run lint:prettier
 
 ### 1、登录页：
 
-![login](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login.png)
+![login02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login02.png)
 
 ### 2、首页：
 
-![home](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home.png)
+![home02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home02.png)
 
 ### 3、表格页：
 
-![table1](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table1.png)
+![table01](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table01.png)
 
 ### 4、数据大屏：
 
-![dataScreen](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen.png)
+![dataScreen01](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen01.png)
 
 
 
@@ -183,4 +185,4 @@ Geeker-Admin
 
 ## 九、微信交流群
 
-![qrCode](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/qrCode.png)
+![weChat](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/weChat.png)

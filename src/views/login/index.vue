@@ -30,10 +30,10 @@ provide("provideState", {
 	name: "liutao",
 	age: "20",
 	changeName: () => {
-		console.log(phone.value);
+		// console.log(phone.value);
 		setTimeout(() => {
 			phone.value = "huawei";
-			console.log(phone.value);
+			// console.log(phone.value);
 		}, 1000);
 	}
 });
