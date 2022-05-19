@@ -3,8 +3,6 @@
 	<div class="echarts" id="pie"></div>
 </template>
 <script setup lang="ts" name="pie">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, init } from "echarts";
 const initChart = (data: any): ECharts => {
 	const echartsBox = document.getElementById("pie") as HTMLElement;
@@ -16,13 +14,6 @@ const initChart = (data: any): ECharts => {
 			left: "56%",
 			top: "45%",
 			textAlign: "center",
-			textStyle: {
-				rich: {
-					fontSize: 15,
-					color: "#38456A",
-					fontWeight: 400
-				}
-			},
 			subtextStyle: {
 				fontSize: 15,
 				color: "#38456A"
@@ -73,17 +64,12 @@ const initChart = (data: any): ECharts => {
 					}
 				},
 				label: {
-					normal: {
-						position: "outside",
-						show: true,
-						formatter: "{d}%",
-						// position: "inner", //标签的位置
-						textStyle: {
-							fontWeight: 400,
-							fontSize: 19,
-							color: "#282843" //文字的字体大小
-						}
-					}
+					position: "outside",
+					show: true,
+					formatter: "{d}%",
+					fontWeight: 400,
+					fontSize: 19,
+					color: "#282843" //文字的字体大小
 				},
 				color: [
 					{

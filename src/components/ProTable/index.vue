@@ -54,17 +54,17 @@
 				</el-table-column>
 				<!-- other -->
 				<el-table-column
-					v-if="item.prop && !item.type && item.isShow"
+					v-if="!item.type && item.prop && item.isShow"
 					:prop="item.prop"
 					:label="item.label"
 					:width="item.width"
 					:sortable="item.sortable"
-					:show-overflow-tooltip="true"
+					:show-overflow-tooltip="item.prop !== 'operation'"
 					:resizable="true"
 					:fixed="item.fixed"
 					v-slot="scope"
 				>
-					<!-- 自定义配置每一列 slot（作用域插槽） -->
+					<!-- 自定义配置每一列 slot（使用作用域插槽） -->
 					<slot :name="item.prop" :row="scope.row">
 						<!-- 图片(自带预览) -->
 						<el-image
@@ -174,7 +174,7 @@ searchColumns.forEach(column => {
 const colRef = ref();
 // 过滤掉不需要设置显隐的列
 const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
-	return item.type !== "selection" && item.type !== "index" && item.type !== "expand";
+	return item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
 });
 const openColSetting = () => {
 	colRef.value.openColSetting();

@@ -89,15 +89,7 @@ const dataScreen: ChartProps = reactive({
 	chart1: null,
 	chart2: null
 });
-const handleClick = (): void => {
-	console.log(111);
-};
-// let arr = [
-// 	{ img: new URL("./images/add_person.png", import.meta.url).href, num: 2222, name: "Gitee 访问量", bgImg: "./images/1-bg.png" },
-// 	{ img: new URL("./images/add_team.png", import.meta.url).href, num: 2222, name: "GitHub 访问量", bgImg: "./images/2-bg.png" },
-// 	{ img: new URL("./images/today.png", import.meta.url).href, num: 4567, name: "今日访问量", bgImg: "./images/3-bg.png" },
-// 	{ img: new URL("./images/book_sum.png", import.meta.url).href, num: 1234, name: "昨日访问量", bgImg: "./images/4-bg.png" }
-// ];
+const handleClick = (): void => {};
 let tab = [
 	{ label: "未来7日", name: 1 },
 	{ label: "近七日", name: 2 },
@@ -147,11 +139,6 @@ const resize = () => {
 /* 销毁时触发 */
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
-	// clearInterval(timer);
-	// 每次离开页面时，清空echarts实例，不然会出现无法显示的问题
-	// Object.values(dataScreen).forEach(val => {
-	// 	val?.dispose();
-	// });
 });
 </script>
 

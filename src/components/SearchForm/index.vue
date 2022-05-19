@@ -33,6 +33,7 @@ interface ProTableProps {
 	reset: (params: any) => void; // 重置方法
 }
 
+// 默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
 	columns: () => [],
 	searchParam: {}
@@ -42,11 +43,15 @@ const maxLength = ref<number>(4);
 const maxWidth = ref<number>(1260);
 
 onMounted(() => {
-	// * 暂时只判断这两种情况（第四个搜索项为时间范围 || 前三项存在时间范围选择框）
+	// * 暂时只判断这两种情况（第四个搜索项为时间/日期范围 || 前三项存在时间/日期范围选择框）(后期通过css解决)
 	if (props.columns.length >= 4) {
-		props.columns[3].searchType == "datetimerange" ? ((maxWidth.value = 945), (maxLength.value = 3)) : null;
+		props.columns[3].searchType === "datetimerange" || props.columns[3].searchType === "daterange"
+			? ((maxWidth.value = 945), (maxLength.value = 3))
+			: null;
 		props.columns.slice(0, 3).forEach(item => {
-			item.searchType === "datetimerange" ? ((maxWidth.value = 1135), (maxLength.value = 3)) : null;
+			item.searchType === "datetimerange" || item.searchType === "daterange"
+				? ((maxWidth.value = 1135), (maxLength.value = 3))
+				: null;
 		});
 	}
 });

@@ -3,8 +3,6 @@
 	<div class="echarts" id="curve"></div>
 </template>
 <script setup lang="ts" name="cure">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, init } from "echarts";
 const initChart = (data: any): ECharts => {
 	const echartsBox = document.getElementById("curve") as HTMLElement;
@@ -20,7 +18,7 @@ const initChart = (data: any): ECharts => {
 			formatter: (p: any) => {
 				let dom = `<div style="width:100%; height: 70px !important; display:flex;flex-direction: column;justify-content: space-between;padding:10px;box-sizing: border-box;
       color:#fff; background: #6B9DFE;border-radius: 11px;font-size:14px; ">
-        <div style="display: flex; align-items: center;"> <div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>平台 :  ${p[0].name}</div>        
+        <div style="display: flex; align-items: center;"> <div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>平台 :  ${p[0].name}</div>
         <div style="display: flex;align-items: center;"><div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>数据量 :  ${p[0].value}</div>
       </div>`;
 				return dom;
@@ -79,9 +77,7 @@ const initChart = (data: any): ECharts => {
 					margin: 20,
 					interval: 0,
 					color: "#999",
-					textStyle: {
-						fontSize: 14
-					},
+					fontSize: 14,
 					formatter: function (name: string) {
 						undefined;
 						return name.length > 8 ? name.slice(0, 8) + "..." : name;
@@ -120,11 +116,9 @@ const initChart = (data: any): ECharts => {
 					}
 				},
 				axisLabel: {
-					textStyle: {
-						color: "#D3D3D8",
-						fontSize: 16,
-						fontWeight: 400
-					},
+					color: "#D3D3D8",
+					fontSize: 16,
+					fontWeight: 400,
 					formatter: function (value: number) {
 						if (value === 0) {
 							return value;
@@ -148,7 +142,7 @@ const initChart = (data: any): ECharts => {
 				barWidth: "45px",
 				itemStyle: {
 					color: "#C5D8FF",
-					barBorderRadius: [12, 12, 0, 0]
+					borderRadius: [12, 12, 0, 0]
 				},
 				emphasis: {
 					itemStyle: {
