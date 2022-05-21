@@ -35,4 +35,5 @@ export interface ColumnProps {
 	searchType: SearchType; // 搜索项类型
 	initSearchParam: string | number | boolean | any[]; // 搜索项初始值
 	enum: EnumProps[]; // 枚举类型（渲染值的字典）
+	renderHeader: (params: any) => any; // 自定义表头
 }

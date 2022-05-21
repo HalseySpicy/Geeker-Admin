@@ -62,6 +62,7 @@
 					:show-overflow-tooltip="item.prop !== 'operation'"
 					:resizable="true"
 					:fixed="item.fixed"
+					:render-header="item.renderHeader"
 					v-slot="scope"
 				>
 					<!-- 自定义配置每一列 slot（使用作用域插槽） -->

@@ -39,7 +39,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="useComponent">
+<script setup lang="tsx" name="useComponent">
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { User } from "@/api/interface";
@@ -90,6 +90,9 @@ const columns: Partial<ColumnProps>[] = [
 		prop: "username",
 		label: "用户姓名",
 		search: true
+		// renderHeader: (params: any) => {
+		// 	return <div>111</div>;
+		// }
 	},
 	{
 		prop: "gender",
