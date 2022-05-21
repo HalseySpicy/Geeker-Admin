@@ -73,22 +73,6 @@ export function isType(val: any) {
 }
 
 /**
- * @description 递归查询当前路由所对应的tabPane
- * @param menuList 菜单列表
- * @param path 当前地址
- * @returns {Array} 当前路由所对应的tabPane
- */
-export function getTabPane<T, U>(menuList: any[], path: U): T {
-	let result: any;
-	for (let item of menuList || []) {
-		if (item.path === path) result = item;
-		const res = getTabPane(item.children, path);
-		if (res) result = res;
-	}
-	return result;
-}
-
-/**
  * @description 生成随机数
  * @param min 最小值
  * @param max 最大值
@@ -112,6 +96,34 @@ export function getBrowserLang() {
 		defaultBrowserLang = "en";
 	}
 	return defaultBrowserLang;
+}
+
+/**
+ * @description 递归查询当前路由所对应的tabPane（暂时没用了）
+ * @param menuList 菜单列表
+ * @param path 当前地址
+ * @returns {Array} 当前路由所对应的tabPane
+ */
+export function getTabPane<T, U>(menuList: any[], path: U): T {
+	let result: any;
+	for (let item of menuList || []) {
+		if (item.path === path) result = item;
+		const res = getTabPane(item.children, path);
+		if (res) result = res;
+	}
+	return result;
+}
+
+/**
+ * 使用递归处理路由菜单
+ * @param newArr 所有菜单数组
+ */
+export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
+	routerList.forEach((item: Menu.MenuOptions) => {
+		typeof item === "object" && item.path && newArr.push(item.path);
+		item.children && item.children.length && handleRouter(item.children, newArr);
+	});
+	return newArr;
 }
 
 /**

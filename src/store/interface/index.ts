@@ -1,4 +1,4 @@
-/* GlobalStore */
+/* GlobalState */
 export interface GlobalState {
 	token: string;
 	userInfo: any;
@@ -6,20 +6,22 @@ export interface GlobalState {
 	language: string;
 }
 
-/* MenuStore */
+/* MenuState */
 export interface MenuState {
 	isCollapse: boolean;
 	menuList: Menu.MenuOptions[];
 }
 
-/* TabsStore */
+/* TabsState */
 export interface TabsState {
 	tabsMenuValue: string;
 	tabsMenuList: Menu.MenuOptions[];
 }
 
-export interface AuthButtonsState {
-	authorButtons: {
+/* AuthState */
+export interface AuthState {
+	authButtons: {
 		[propName: string]: any;
 	};
+	authRouter: string[];
 }

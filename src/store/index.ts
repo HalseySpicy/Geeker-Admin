@@ -10,7 +10,7 @@ export const GlobalStore = defineStore({
 	id: "GlobalState",
 	// state: 返回对象的函数
 	state: (): GlobalState => ({
-		// Token
+		// token
 		token: "",
 		// userInfo
 		userInfo: "",
@@ -21,15 +21,15 @@ export const GlobalStore = defineStore({
 	}),
 	getters: {},
 	actions: {
-		// set token
+		// setToken
 		setToken(token: string) {
 			this.token = token;
 		},
-		// set userInfo
+		// setUserInfo
 		setUserInfo(userInfo: any) {
 			this.userInfo = userInfo;
 		},
-		// set AssemblySize
+		// setAssemblySizeSize
 		setAssemblySizeSize(assemblySize: string) {
 			this.assemblySize = assemblySize;
 		},

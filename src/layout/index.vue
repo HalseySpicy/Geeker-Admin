@@ -33,15 +33,15 @@ import Tabs from "./Tabs/index.vue";
 import Footer from "./Footer/index.vue";
 import cacheRouter from "@/routers/cacheRouter";
 import { onMounted } from "vue";
-import { getAuthorButtons } from "@/api/modules/login";
-import { AuthButtonsStore } from "@/store/modules/authButtons";
+import { getAuthButtons } from "@/api/modules/login";
+import { AuthStore } from "@/store/modules/auth";
 
-const authButtonsStore = AuthButtonsStore();
+const authStore = AuthStore();
 
 onMounted(async () => {
 	// 获取按钮权限列表
-	const res = await getAuthorButtons();
-	authButtonsStore.setAuthButtons(res.data);
+	const res = await getAuthButtons();
+	res.data && authStore.setAuthButtons(res.data);
 });
 </script>
 

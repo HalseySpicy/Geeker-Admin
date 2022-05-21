@@ -178,7 +178,7 @@ const resetPass = async (params: User.ResUserList) => {
 // 切换用户状态
 const changeStatus = async (val: number, params: User.ResUserList) => {
 	await useHandleData(changeUserStatus, { id: params.id, status: val }, `切换【${params.username}】用户状态`);
-	params.status = params.status == 1 ? 0 : 1;
+	getTableList();
 };
 
 // 批量删除用户信息
