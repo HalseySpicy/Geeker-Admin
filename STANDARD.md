@@ -201,6 +201,18 @@ trim_trailing_whitespace = false # 关闭末尾空格修剪
 
 ## 六、Git 流程规范配置
 
+|              依赖               |                           作用描述                           |
+| :-----------------------------: | :----------------------------------------------------------: |
+|         @commitlint/cli         |               用来在命令行中提示用户提交信息的               |
+| @commitlint/config-conventional |                    **Anglar** 的提交规范                     |
+|           commitizen            |                                                              |
+|           commitlint            |    校验 **git commit** 信息是否符合规范，不符合则提交不了    |
+|             cz-git              |                                                              |
+|              husky              |  操作 **git** 钩子的工具（在 **commit** 之前执行某些命令）   |
+|           lint-staged           | 在提交之前使用 **prettier** 格式化本地暂存区的代码，并进行 **eslint** 校验 |
+
+
+
 ### 1、husky（操作 git 钩子的工具）：
 
 > **安装：**
@@ -272,6 +284,10 @@ module.exports = {
   }
 }
 ````
+
+
+
+
 
 
 
