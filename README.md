@@ -185,4 +185,4 @@ Geeker-Admin
 
 ## 九、微信交流群
 
-![weChat](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/weChat.png)
+![qrCode-wechat](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220525161450.png)
