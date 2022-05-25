@@ -18,7 +18,7 @@ export const useTime = () => {
 		const date = new Date();
 		year.value = date.getFullYear();
 		month.value = date.getMonth() + 1;
-		week.value = "日一二三四五六".charAt(date.getDay());
+		week.value = new Intl.NumberFormat('zh-Hans-CN-u-nu-hanidec').format(date.getDay());
 		day.value = date.getDate();
 		hour.value =
 			(date.getHours() + "")?.padStart(2, "0") ||
