@@ -166,6 +166,8 @@ module.exports = {
 
 ## 四、样式规范工具（StyleLint）
 
+> ……后面补充
+
 
 
 ## 五、EditorConfig 配置
@@ -199,19 +201,19 @@ trim_trailing_whitespace = false # 关闭末尾空格修剪
 
 
 
+
+
 ## 六、Git 流程规范配置
 
 |              依赖               |                           作用描述                           |
 | :-----------------------------: | :----------------------------------------------------------: |
+|              husky              |  操作 **git** 钩子的工具（在 **git xx** 之前执行某些命令）   |
+|           lint-staged           | 在提交之前进行 **eslint** 校验，并使用 **prettier** 格式化本地暂存区的代码， |
+|           commitlint            |    校验 **git commit** 信息是否符合规范，保证团队的一致性    |
 |         @commitlint/cli         |               用来在命令行中提示用户提交信息的               |
 | @commitlint/config-conventional |                    **Anglar** 的提交规范                     |
-|           commitizen            |                                                              |
-|           commitlint            |    校验 **git commit** 信息是否符合规范，不符合则提交不了    |
-|             cz-git              |                                                              |
-|              husky              |  操作 **git** 钩子的工具（在 **commit** 之前执行某些命令）   |
-|           lint-staged           | 在提交之前使用 **prettier** 格式化本地暂存区的代码，并进行 **eslint** 校验 |
-
-
+|           commitizen            | 基于 **Node.js** 的 **git commit** 命令行工具，生成标准化的 **commit message** |
+|             cz-git              | 一款工程性更强，轻量级，高度自定义，标准输出格式的 **commitize** 适配器 |
 
 ### 1、husky（操作 git 钩子的工具）：
 
@@ -229,24 +231,44 @@ npm set-script prepare "husky install"
 npm run prepare
 ````
 
-> **添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）：**
->
-> **作用：通过钩子函数，判断提交的代码是否符合规范，其实就是执行 ESlint 校验**
-
-````text
-npx husky add .husky/pre-commit "npm run lint:eslint"
-````
 
 
-
-### 2、commitlint（commit 信息校验工具，不符合则报错）
+### 2、 lint-staged（本地暂存代码检查工具）
 
 > **安装：**
 
 ````text
-# @commitlint/config-conventional 这是一个规范配置,标识采用什么规范来执行消息校验
+npm install lint-staged --save-dev
+````
 
-npm i commitlint @commitlint/cli @commitlint/config-conventional -D
+> **添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）：**
+>
+> **作用：通过钩子函数，判断提交的代码是否符合规范，并使用 prettier 格式化代码**
+
+````text
+npx husky add .husky/pre-commit "npm run lint:lint-staged"
+````
+
+> 新增 **lint-staged.config.js** 文件：
+
+````text
+module.exports = {
+	"{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": ["prettier --write--parser json"],
+	"*.{scss,less,css,html,md},package.json": ["prettier --write"],
+	"*.{js,jsx,ts,tsx,vue}": ["prettier --write", "eslint --fix"]
+};
+````
+
+
+
+### 3、commitlint（commit 信息校验工具，不符合则报错）
+
+> **安装：**
+
+````text
+// commitlint && @commitlint/cli 其中一个都行
+npm i commitlint @commitlint/config-conventional -D
+npm i @commitlint/cli @commitlint/config-conventional -D
 ````
 
 > **配置命令（在.husky 文件夹下添加 commit-msg 文件）：**
@@ -255,51 +277,18 @@ npm i commitlint @commitlint/cli @commitlint/config-conventional -D
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ````
 
-> **添加 commitlint.config.js 文件：**
-
-````javascript
-module.exports = {
-  extends: ['@commitlint/config-conventional'],
-  // 定义规则类型
-  rules: {
-    // type 类型定义，表示 git 提交的 type 必须在以下类型范围内
-    'type-enum': [
-      2,
-      'always',
-      [
-        'feat', // 新功能
-        'fix', //  修复
-        'docs', // 文档变更
-        'style', // 代码格式（不影响代码运行的变动）
-        'refactor', // 重构（既不是增加feature）,也不是修复bug
-        'pref', // 性能优化
-        'test', // 增加测试
-        'chore', // 构建过程或辅助工具的变动
-        'revert', // 回退
-        'build' // 打包
-      ]
-    ],
-    // subject 大小写不做校验
-    'subject-case': [0]
-  }
-}
-````
 
 
-
-
-
-
-
-### 3、commitizen（辅助 commit 信息，像 Angular 规范，必须安装才能执行 git-cz）
+### 4、commitizen（基于 Node.js 的 git commit 命令行工具，生成标准化的 message）
 
 ````text
+// 全局安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。
 npm install commitizen -g
 ````
 
 
 
-### 4、cz-git（https://cz-git.qbenben.com/zh/）
+### 5、cz-git
 
 > **指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器**
 
@@ -317,158 +306,168 @@ npm install cz-git -D
 }
 ````
 
-> **新建 .commitlintrc.js：**
+> **新建 commitlint.config.js 文件：**
 
 ````javascript
-// .commitlintrc.js
+// @see: https://cz-git.qbenben.com/zh/guide/
 /** @type {import('cz-git').UserConfig} */
+
 module.exports = {
-  rules: {
-    // @see: https://commitlint.js.org/#/reference-rules
-  },
-  prompt: {
-    messages: {
-      type: "Select the type of change that you're committing:",
-      scope: "Denote the SCOPE of this change (optional):",
-      customScope: "Denote the SCOPE of this change:",
-      subject: "Write a SHORT, IMPERATIVE tense description of the change:\n",
-      body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
-      breaking:
-        'List any BREAKING CHANGES (optional). Use "|" to break new line:\n',
-      footerPrefixsSelect:
-        "Select the ISSUES type of changeList by this change (optional):",
-      customFooterPrefixs: "Input ISSUES prefix:",
-      footer: "List any ISSUES by this change. E.g.: #31, #34:\n",
-      confirmCommit: "Are you sure you want to proceed with the commit above?",
-    },
-    types: [
-      {
-        value: "feat",
-        name: "feat:     ✨  A new feature",
-        emoji: ":sparkles:",
-      },
-      { value: "fix", name: "fix:      🐛  A bug fix", emoji: ":bug:" },
-      {
-        value: "docs",
-        name: "docs:     📝  Documentation only changes",
-        emoji: ":memo:",
-      },
-      {
-        value: "style",
-        name: "style:    💄  Changes that do not affect the meaning of the code",
-        emoji: ":lipstick:",
-      },
-      {
-        value: "refactor",
-        name: "refactor: ♻️   A code change that neither fixes a bug nor adds a feature",
-        emoji: ":recycle:",
-      },
-      {
-        value: "perf",
-        name: "perf:     ⚡️  A code change that improves performance",
-        emoji: ":zap:",
-      },
-      {
-        value: "test",
-        name: "test:     ✅  Adding missing tests or correcting existing tests",
-        emoji: ":white_check_mark:",
-      },
-      {
-        value: "build",
-        name: "build:    🏗️   Changes that affect the build system or external dependencies",
-        emoji: ":building_construction:",
-      },
-      {
-        value: "ci",
-        name: "ci:       💚  Changes to our CI configuration files and scripts",
-        emoji: ":green_heart:",
-      },
-      {
-        value: "chore",
-        name: "chore:    🔨  Other changes that don't modify src or test files",
-        emoji: ":hammer:",
-      },
-      {
-        value: "revert",
-        name: "revert:   ⏪️  Reverts a previous commit",
-        emoji: ":rewind:",
-      },
-    ],
-    useEmoji: true,
-    scopes: [],
-    allowCustomScopes: true,
-    allowEmptyScopes: true,
-    customScopesAlign: "bottom",
-    customScopesAlias: "custom",
-    emptyScopesAlias: "empty",
-    upperCaseSubject: false,
-    allowBreakingChanges: ["feat", "fix"],
-    breaklineNumber: 100,
-    breaklineChar: "|",
-    skipQuestions: [],
-    issuePrefixs: [
-      { value: "closed", name: "closed:   ISSUES has been processed" },
-    ],
-    customIssuePrefixsAlign: "top",
-    emptyIssuePrefixsAlias: "skip",
-    customIssuePrefixsAlias: "custom",
-    allowCustomIssuePrefixs: true,
-    allowEmptyIssuePrefixs: true,
-    confirmColorize: true,
-    maxHeaderLength: Infinity,
-    maxSubjectLength: Infinity,
-    minSubjectLength: 0,
-    scopeOverrides: undefined,
-    defaultBody: "",
-    defaultIssues: "",
-    defaultScope: "",
-    defaultSubject: "",
-  },
+	extends: ["@commitlint/config-conventional"],
+	rules: {
+		// @see: https://commitlint.js.org/#/reference-rules
+		"body-leading-blank": [2, "always"],
+		"footer-leading-blank": [1, "always"],
+		"header-max-length": [2, "always", 108],
+		"subject-empty": [2, "never"],
+		"type-empty": [2, "never"],
+		"subject-case": [0],
+		"type-enum": [
+			2,
+			"always",
+			[
+				"feat",
+				"fix",
+				"docs",
+				"style",
+				"refactor",
+				"perf",
+				"test",
+				"build",
+				"ci",
+				"chore",
+				"revert",
+				"wip",
+				"workflow",
+				"types",
+				"release"
+			]
+		]
+	},
+	prompt: {
+		messages: {
+			type: "Select the type of change that you're committing:",
+			scope: "Denote the SCOPE of this change (optional):",
+			customScope: "Denote the SCOPE of this change:",
+			subject: "Write a SHORT, IMPERATIVE tense description of the change:\n",
+			body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
+			breaking: 'List any BREAKING CHANGES (optional). Use "|" to break new line:\n',
+			footerPrefixsSelect: "Select the ISSUES type of changeList by this change (optional):",
+			customFooterPrefixs: "Input ISSUES prefix:",
+			footer: "List any ISSUES by this change. E.g.: #31, #34:\n",
+			confirmCommit: "Are you sure you want to proceed with the commit above?"
+			// 中文版
+			// type: "选择你要提交的类型 :",
+			// scope: "选择一个提交范围（可选）:",
+			// customScope: "请输入自定义的提交范围 :",
+			// subject: "填写简短精炼的变更描述 :\n",
+			// body: '填写更加详细的变更描述（可选）。使用 "|" 换行 :\n',
+			// breaking: '列举非兼容性重大的变更（可选）。使用 "|" 换行 :\n',
+			// footerPrefixsSelect: "选择关联issue前缀（可选）:",
+			// customFooterPrefixs: "输入自定义issue前缀 :",
+			// footer: "列举关联issue (可选) 例如: #31, #I3244 :\n",
+			// confirmCommit: "是否提交或修改commit ?"
+		},
+		types: [
+			{
+				value: "feat",
+				name: "feat:     ✨  A new feature",
+				emoji: ":sparkles:"
+			},
+			{
+				value: "fix",
+				name: "fix:      🐛  A bug fix",
+				emoji: ":bug:"
+			},
+			{
+				value: "docs",
+				name: "docs:     📝  Documentation only changes",
+				emoji: ":memo:"
+			},
+			{
+				value: "style",
+				name: "style:    💄  Changes that do not affect the meaning of the code",
+				emoji: ":lipstick:"
+			},
+			{
+				value: "refactor",
+				name: "refactor: ♻️   A code change that neither fixes a bug nor adds a feature",
+				emoji: ":recycle:"
+			},
+			{
+				value: "perf",
+				name: "perf:     ⚡️  A code change that improves performance",
+				emoji: ":zap:"
+			},
+			{
+				value: "test",
+				name: "test:     ✅  Adding missing tests or correcting existing tests",
+				emoji: ":white_check_mark:"
+			},
+			{
+				value: "build",
+				name: "build:    📦️   Changes that affect the build system or external dependencies",
+				emoji: ":package:"
+			},
+			{
+				value: "ci",
+				name: "ci:       🎡  Changes to our CI configuration files and scripts",
+				emoji: ":ferris_wheel:"
+			},
+			{
+				value: "chore",
+				name: "chore:    🔨  Other changes that don't modify src or test files",
+				emoji: ":hammer:"
+			},
+			{
+				value: "revert",
+				name: "revert:   ⏪️  Reverts a previous commit",
+				emoji: ":rewind:"
+			}
+			// 中文版
+			// { value: "特性", name: "特性:   ✨  新增功能", emoji: ":sparkles:" },
+			// { value: "修复", name: "修复:   🐛  修复缺陷", emoji: ":bug:" },
+			// { value: "文档", name: "文档:   📝  文档变更", emoji: ":memo:" },
+			// { value: "格式", name: "格式:   💄  代码格式（不影响功能，例如空格、分号等格式修正）", emoji: ":lipstick:" },
+			// { value: "重构", name: "重构:   ♻️  代码重构（不包括 bug 修复、功能新增）", emoji: ":recycle:" },
+			// { value: "性能", name: "性能:    ⚡️  性能优化", emoji: ":zap:" },
+			// { value: "测试", name: "测试:   ✅  添加疏漏测试或已有测试改动", emoji: ":white_check_mark:" },
+			// { value: "构建", name: "构建:   📦️  构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）", emoji: ":package:" },
+			// { value: "集成", name: "集成:   🎡  修改 CI 配置、脚本", emoji: ":ferris_wheel:" },
+			// { value: "回退", name: "回退:   ⏪️  回滚 commit", emoji: ":rewind:" },
+			// { value: "其他", name: "其他:   🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）", emoji: ":hammer:" }
+		],
+		useEmoji: true,
+		themeColorCode: "",
+		scopes: [],
+		allowCustomScopes: true,
+		allowEmptyScopes: true,
+		customScopesAlign: "bottom",
+		customScopesAlias: "custom",
+		emptyScopesAlias: "empty",
+		upperCaseSubject: false,
+		allowBreakingChanges: ["feat", "fix"],
+		breaklineNumber: 100,
+		breaklineChar: "|",
+		skipQuestions: [],
+		issuePrefixs: [{ value: "closed", name: "closed:   ISSUES has been processed" }],
+		customIssuePrefixsAlign: "top",
+		emptyIssuePrefixsAlias: "skip",
+		customIssuePrefixsAlias: "custom",
+		allowCustomIssuePrefixs: true,
+		allowEmptyIssuePrefixs: true,
+		confirmColorize: true,
+		maxHeaderLength: Infinity,
+		maxSubjectLength: Infinity,
+		minSubjectLength: 0,
+		scopeOverrides: undefined,
+		defaultBody: "",
+		defaultIssues: "",
+		defaultScope: "",
+		defaultSubject: ""
+	}
 };
 ````
-
-### 5、暂时没用💢 lint-staged（本地暂存代码检查工具，应该暂时没有，因为上面有 ESlint 校验）
-
-> **安装：**
-
-````text
-npm install lint-staged --save-dev
-````
-
-> **配置命令：**
-
-````text
-npx husky add .husky/pre-commit "npx lint-staged"
-````
-
-> **新增 .lintstagedrc.json 文件：**
-
-````text
-{
-    "*.{js,jsx,ts,tsx}": ["prettier --write .", "eslint  --fix"],
-    "*.md": ["prettier --write"]
-}
-````
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
