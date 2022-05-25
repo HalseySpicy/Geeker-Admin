@@ -1,4 +1,4 @@
-// https://www.prettier.cn
+// @see: https://www.prettier.cn
 
 module.exports = {
 	// 超过最大值换行

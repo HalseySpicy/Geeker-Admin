@@ -1,4 +1,5 @@
-/* 安装: npm i eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser prettier -D */
+// @see: http://eslint.cn
+
 module.exports = {
 	root: true,
 	env: {
