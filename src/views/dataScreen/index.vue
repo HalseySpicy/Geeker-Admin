@@ -7,7 +7,7 @@
 				</div>
 				<div class="header-ct">
 					<div class="header-ct-title">
-						智慧景区门票预约综合管控平台
+						智慧景区游客预约综合管控平台
 						<div class="header-ct-warning">平台高峰预警信息（0条）</div>
 					</div>
 				</div>

@@ -1,8 +1,6 @@
 <template>
 	<!-- 中国地图 -->
-	<div class="map-ball">
-		<!-- <img src="../images/dataScreen-map-bg-ball.png" /> -->
-	</div>
+	<div class="map-ball"></div>
 	<div class="echarts" id="mapChart"></div>
 </template>
 
@@ -69,7 +67,7 @@ const initChart = (data: any = []): ECharts => {
 					}
 				}
 			},
-			roam: true,
+			roam: false,
 			itemStyle: {
 				areaColor: {
 					x: 0,
