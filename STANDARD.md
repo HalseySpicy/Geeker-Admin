@@ -18,18 +18,19 @@ npm install prettier
 
 ### 2、安装 Vscode 插件（Prettier）：
 
-![prettier](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220510134626.png)
+![Prettier](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Prettier.png)
 
 ### 3、配置 Prettier：
 
 ```javascript
-// https://www.prettier.cn
+// @see: https://www.prettier.cn
+
 module.exports = {
 	// 超过最大值换行
 	printWidth: 130,
 	// 缩进字节数
 	tabWidth: 2,
-	// 使用制表符而不是空格缩进行(true代表table，false代表space)
+	// 使用制表符而不是空格缩进行
 	useTabs: true,
 	// 结尾不用分号(true有，false没有)
 	semi: true,
@@ -61,6 +62,7 @@ module.exports = {
 	// Vue文件脚本和样式标签缩进
 	vueIndentScriptAndStyle: false
 };
+
 ```
 
 
@@ -86,15 +88,17 @@ npm install eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-v
 
 - **ESLint：**
 
-![eslint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220510135758.png)
+![ESLint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/ESLint.png)
 
 - **TSLint：**
 
-![tslint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220510140124.png)
+![TSLint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/TSLint.png)
 
 ### 3、配置 ESLint：
 
 ```javascript
+// @see: http://eslint.cn
+
 module.exports = {
 	root: true,
 	env: {
@@ -160,13 +164,181 @@ module.exports = {
 		"vue/multi-word-component-names": "off" // 要求组件名称始终为 “-” 链接的单词
 	}
 };
+
 ```
 
 
 
 ## 四、样式规范工具（StyleLint）
 
-> ……后面补充
+### 1、安装 StyleLint 相关插件：
+
+```text
+npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-order postcss postcss-html stylelint-config-prettier -D
+```
+
+|               依赖                |                           作用描述                           |
+| :-------------------------------: | :----------------------------------------------------------: |
+|             stylelint             |                       stylelint 核心库                       |
+|       stylelint-config-html       | Stylelint 的可共享 HTML（和类似 HTML）配置，捆绑 postcss-html 并对其进行配置。 |
+| stylelint-config-recommended-scss | 扩展 stylelint-config-recommended 共享配置，并为 SCSS 配置其规则 |
+| stylelint-config-recommended-vue  | 扩展 stylelint-config-recommended 共享配置，并为 Vue 配置其规则 |
+|     stylelint-config-standard     | 打开额外的规则来执行在规范和一些 CSS 样式指南中发现的通用约定，包括：惯用 CSS 原则，谷歌的 CSS 样式指南，Airbnb 的样式指南，和 @mdo 的代码指南。 |
+|  stylelint-config-standard-scss   | 扩展 stylelint-config-standard 共享配置，并为 SCSS 配置其规则 |
+|              postcss              |                    postcss-html 的依赖包                     |
+|           postcss-html            |         用于解析 HTML（和类似 HTML）的 PostCSS 语法          |
+|          stylelint-order          |                     属性的排序（插件包）                     |
+|     stylelint-config-prettier     |         关闭所有不必要的或可能与 Prettier 冲突的规则         |
+
+### 2、安装 Vscode 插件（Stylelint）：
+
+![Stylelint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/Stylelint.png)
+
+### 3、在目录的 .vscode 文件中新建 settings.json：
+
+```json
+{
+    "stylelint.enable": true,    
+    "editor.codeActionsOnSave": {        
+        "source.fixAll.stylelint": true    
+    },
+    "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass","html"]
+}
+```
+
+> 😎也可以在vscode中全局配置上述json代码😎
+
+
+
+### 4、配置 stylelint.config.js
+
+````javascript
+// @see: https://stylelint.io
+
+module.exports = {
+	/* 继承某些已有的规则 */
+	extends: [
+		"stylelint-config-standard",
+		"stylelint-config-html/vue",
+		"stylelint-config-standard-scss",
+		"stylelint-config-recommended-vue/scss",
+		"stylelint-config-prettier"
+	],
+	/* 使用排序插件 */
+	plugins: ["stylelint-order"],
+	overrides: [
+		// 扫描 .vue/html 文件中的<style>标签内的样式
+		{
+			files: ["**/*.{vue,html}"],
+			customSyntax: "postcss-html"
+		}
+	],
+	/**
+	 * null  => 关闭该规则
+	 */
+	rules: {
+		indentation: null, // 指定缩进空格
+		"no-descending-specificity": null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
+		"function-url-quotes": "always", // 要求或禁止 URL 的引号 "always(必须加上引号)"|"never(没有引号)"
+		"string-quotes": "double", // 指定字符串使用单引号或双引号
+		"unit-case": null, // 指定单位的大小写 "lower(全小写)"|"upper(全大写)"
+		"color-hex-case": "lower", // 指定 16 进制颜色的大小写 "lower(全小写)"|"upper(全大写)"
+		"color-hex-length": "long", // 指定 16 进制颜色的简写或扩写 "short(16进制简写)"|"long(16进制扩写)"
+		"rule-empty-line-before": "never", // 要求或禁止在规则之前的空行 "always(规则之前必须始终有一个空行)"|"never(规则前绝不能有空行)"|"always-multi-line(多行规则之前必须始终有一个空行)"|"never-multi-line(多行规则之前绝不能有空行。)"
+		"font-family-no-missing-generic-family-keyword": null, // 禁止在字体族名称列表中缺少通用字体族关键字
+		"block-opening-brace-space-before": "always", // 要求在块的开大括号之前必须有一个空格或不能有空白符 "always(大括号前必须始终有一个空格)"|"never(左大括号之前绝不能有空格)"|"always-single-line(在单行块中的左大括号之前必须始终有一个空格)"|"never-single-line(在单行块中的左大括号之前绝不能有空格)"|"always-multi-line(在多行块中，左大括号之前必须始终有一个空格)"|"never-multi-line(多行块中的左大括号之前绝不能有空格)"
+		"property-no-unknown": null, // 禁止未知的属性(true 为不允许)
+		"no-empty-source": null, // 禁止空源码
+		"declaration-block-trailing-semicolon": null, // 要求或不允许在声明块中使用尾随分号 string："always(必须始终有一个尾随分号)"|"never(不得有尾随分号)"
+		"selector-pseudo-class-no-unknown": [
+			true,
+			{
+				ignorePseudoClasses: ["deep"]
+			}
+		],
+		// 样式的排序规则
+		"order/properties-order": [
+			"position",
+			"top",
+			"right",
+			"bottom",
+			"left",
+			"z-index",
+			"display",
+			"justify-content",
+			"align-items",
+			"float",
+			"clear",
+			"overflow",
+			"overflow-x",
+			"overflow-y",
+			"margin",
+			"margin-top",
+			"margin-right",
+			"margin-bottom",
+			"margin-left",
+			"padding",
+			"padding-top",
+			"padding-right",
+			"padding-bottom",
+			"padding-left",
+			"width",
+			"min-width",
+			"max-width",
+			"height",
+			"min-height",
+			"max-height",
+			"font-size",
+			"font-family",
+			"font-weight",
+			"border",
+			"border-style",
+			"border-width",
+			"border-color",
+			"border-top",
+			"border-top-style",
+			"border-top-width",
+			"border-top-color",
+			"border-right",
+			"border-right-style",
+			"border-right-width",
+			"border-right-color",
+			"border-bottom",
+			"border-bottom-style",
+			"border-bottom-width",
+			"border-bottom-color",
+			"border-left",
+			"border-left-style",
+			"border-left-width",
+			"border-left-color",
+			"border-radius",
+			"text-align",
+			"text-justify",
+			"text-indent",
+			"text-overflow",
+			"text-decoration",
+			"white-space",
+			"color",
+			"background",
+			"background-position",
+			"background-repeat",
+			"background-size",
+			"background-color",
+			"background-clip",
+			"opacity",
+			"filter",
+			"list-style",
+			"outline",
+			"visibility",
+			"box-shadow",
+			"text-shadow",
+			"resize",
+			"transition"
+		]
+	}
+};
+
+````
 
 
 
@@ -227,6 +399,7 @@ npm install husky -D
 
 ````text
 # 编辑 package.json > prepare 脚本并运行一次
+
 npm set-script prepare "husky install"
 npm run prepare
 ````
@@ -253,9 +426,12 @@ npx husky add .husky/pre-commit "npm run lint:lint-staged"
 
 ````text
 module.exports = {
+	"*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
 	"{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": ["prettier --write--parser json"],
-	"*.{scss,less,css,html,md},package.json": ["prettier --write"],
-	"*.{js,jsx,ts,tsx,vue}": ["prettier --write", "eslint --fix"]
+	"package.json": ["prettier --write"],
+	"*.vue": ["eslint --fix", "prettier --write", "stylelint --fix"],
+	"*.{scss,less,styl,html}": ["stylelint --fix", "prettier --write"],
+	"*.md": ["prettier --write"]
 };
 ````
 
@@ -266,7 +442,7 @@ module.exports = {
 > **安装：**
 
 ````text
-// commitlint && @commitlint/cli 其中一个都行
+// commitlint && @commitlint/cli 其中一个插件都行
 npm i commitlint @commitlint/config-conventional -D
 npm i @commitlint/cli @commitlint/config-conventional -D
 ````
@@ -309,7 +485,7 @@ npm install cz-git -D
 > **新建 commitlint.config.js 文件：**
 
 ````javascript
-// @see: https://cz-git.qbenben.com/zh/guide/
+// @see: https://cz-git.qbenben.com/zh/guide
 /** @type {import('cz-git').UserConfig} */
 
 module.exports = {
@@ -437,7 +613,7 @@ module.exports = {
 			// { value: "回退", name: "回退:   ⏪️  回滚 commit", emoji: ":rewind:" },
 			// { value: "其他", name: "其他:   🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）", emoji: ":hammer:" }
 		],
-		useEmoji: true,
+		useEmoji: false,
 		themeColorCode: "",
 		scopes: [],
 		allowCustomScopes: true,
