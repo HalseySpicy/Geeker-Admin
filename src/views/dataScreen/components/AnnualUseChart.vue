@@ -201,39 +201,39 @@ defineExpose({
 	width: 206px;
 	height: 103px;
 	padding: 5px 20px;
-	box-sizing: border-box;
 	background: url("../images/contrast-bg.png") no-repeat;
 	background-size: 100% 100%;
+	box-sizing: border-box;
 	.annual-month {
-		-webkit-transform: scale(0.9);
+		display: inline-block;
+		margin-bottom: 2px;
 		font-size: 10px;
 		color: #03b8e2;
-		margin-bottom: 2px;
-		display: inline-block;
+		transform: scale(0.9);
 	}
 	.annual-list {
-		width: 100%;
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 		.year-item {
-			width: 100%;
-			height: 22px;
 			display: flex;
 			align-items: center;
+			width: 100%;
+			height: 22px;
 			.year-dot {
 				width: 5px;
 				height: 5px;
+				margin: 0 2px;
 				border-radius: 50%;
-				margin: 0px 2px;
 			}
 			.year-name,
 			.year-value {
-				-webkit-transform: scale(0.8);
 				font-size: 10px;
 				color: #03b8e2;
+				transform: scale(0.8);
 			}
 			.year-name {
-				margin: 0px 2px;
+				margin: 0 2px;
 			}
 			.year-value {
 				display: inline-block;

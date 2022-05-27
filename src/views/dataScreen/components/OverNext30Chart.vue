@@ -202,13 +202,13 @@ defineExpose({
 		align-items: center;
 		width: 180px;
 		height: 60px;
+		padding-left: 20px;
 		background: url("../images/line-bg.png") no-repeat;
 		background-size: 100% 100%;
-		padding-left: 20px;
 		box-sizing: border-box;
 		span {
 			font-size: 12px;
-			color: rgba(255, 255, 255, 0.8);
+			color: rgb(255 255 255 / 80%);
 			i {
 				font-style: normal;
 				color: #f5b348;

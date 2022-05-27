@@ -140,28 +140,28 @@ defineExpose({
 	padding: 40px 65px;
 	box-sizing: border-box;
 	.malefemaleRatio-header {
-		width: 100%;
-		height: 115px;
 		display: flex;
 		justify-content: space-between;
+		width: 100%;
+		height: 115px;
 		.man,
 		.woman {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 			width: 110px;
 			height: 115px;
 			background: url("../images/man-bg.png") no-repeat;
 			background-size: 100% 100%;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
 			img {
 				width: 60px;
 				height: 60px;
 				margin-top: 20px;
 			}
 			span {
-				font-size: 13px;
-				color: #fff;
 				margin-top: 2px;
+				font-size: 13px;
+				color: #ffffff;
 			}
 		}
 		.woman {

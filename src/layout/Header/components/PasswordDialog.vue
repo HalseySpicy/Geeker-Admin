@@ -23,5 +23,3 @@ defineExpose({
 	openDialog
 });
 </script>
-
-<style scoped lang="scss"></style>

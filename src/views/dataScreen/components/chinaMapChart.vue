@@ -169,11 +169,11 @@ defineExpose({
 	height: 100%;
 }
 .map-ball {
+	position: absolute;
+	top: 50%;
+	left: 50%;
 	width: 900px;
 	height: 900px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
 	transform: translate(-50%, -50%);
 	img {
 		width: 500px;

@@ -208,24 +208,24 @@ defineExpose({
 }
 .actual-total {
 	position: relative;
-	height: 50px;
 	display: flex;
-	align-items: center;
 	justify-content: flex-end;
+	align-items: center;
+	height: 50px;
 	margin-top: 10px;
 	margin-right: 4px;
 	.actual-item {
-		width: 52px;
-		height: 50px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: #66ffff;
+		width: 52px;
+		height: 50px;
+		margin-right: 1px;
+		font-family: MetroDF;
 		font-size: 32px;
-		font-family: "MetroDF";
+		color: #66ffff;
 		background: url("../images/total.png") no-repeat;
 		background-size: 100% 100%;
-		margin-right: 1px;
 		&:last-child {
 			margin-right: 0;
 			font-size: 22px;
@@ -233,15 +233,15 @@ defineExpose({
 	}
 	.expect-total {
 		position: absolute;
-		right: 5px;
 		top: -30px;
-		color: #fff;
+		right: 5px;
+		font-family: "PingFang SC";
 		font-size: 14px;
-		font-family: PingFang SC;
+		color: #ffffff;
 		i {
-			color: #ff8100;
 			font-style: normal;
 			font-style: oblique;
+			color: #ff8100;
 		}
 	}
 }

@@ -1,4 +1,9 @@
 {
+	"stylelint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": true
+	},
+	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
 	"cSpell.words": [
 		"appkey",
 		"autocrlf",
@@ -55,6 +60,7 @@
 		"suoxiao",
 		"swiper",
 		"timerange",
+		"topleft",
 		"tourmanager",
 		"usercenter",
 		"vite",

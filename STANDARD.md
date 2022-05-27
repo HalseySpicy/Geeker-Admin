@@ -6,8 +6,6 @@
 >
 > **Link：** https://v3.cn.vuejs.org/style-guide
 
-
-
 ## 二、代码格式化工具（Prettier）
 
 ### 1、下载安装 prettier：
@@ -62,10 +60,7 @@ module.exports = {
 	// Vue文件脚本和样式标签缩进
 	vueIndentScriptAndStyle: false
 };
-
 ```
-
-
 
 ## 三、代码规范工具（ESLint）
 
@@ -164,10 +159,7 @@ module.exports = {
 		"vue/multi-word-component-names": "off" // 要求组件名称始终为 “-” 链接的单词
 	}
 };
-
 ```
-
-
 
 ## 四、样式规范工具（StyleLint）
 
@@ -177,18 +169,18 @@ module.exports = {
 npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-order postcss postcss-html stylelint-config-prettier -D
 ```
 
-|               依赖                |                           作用描述                           |
-| :-------------------------------: | :----------------------------------------------------------: |
-|             stylelint             |                       stylelint 核心库                       |
-|       stylelint-config-html       | Stylelint 的可共享 HTML（和类似 HTML）配置，捆绑 postcss-html 并对其进行配置。 |
-| stylelint-config-recommended-scss | 扩展 stylelint-config-recommended 共享配置，并为 SCSS 配置其规则 |
-| stylelint-config-recommended-vue  | 扩展 stylelint-config-recommended 共享配置，并为 Vue 配置其规则 |
+|               依赖                |                                                                     作用描述                                                                     |
+| :-------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: |
+|             stylelint             |                                                                 stylelint 核心库                                                                 |
+|       stylelint-config-html       |                                  Stylelint 的可共享 HTML（和类似 HTML）配置，捆绑 postcss-html 并对其进行配置。                                  |
+| stylelint-config-recommended-scss |                                         扩展 stylelint-config-recommended 共享配置，并为 SCSS 配置其规则                                         |
+| stylelint-config-recommended-vue  |                                         扩展 stylelint-config-recommended 共享配置，并为 Vue 配置其规则                                          |
 |     stylelint-config-standard     | 打开额外的规则来执行在规范和一些 CSS 样式指南中发现的通用约定，包括：惯用 CSS 原则，谷歌的 CSS 样式指南，Airbnb 的样式指南，和 @mdo 的代码指南。 |
-|  stylelint-config-standard-scss   | 扩展 stylelint-config-standard 共享配置，并为 SCSS 配置其规则 |
-|              postcss              |                    postcss-html 的依赖包                     |
-|           postcss-html            |         用于解析 HTML（和类似 HTML）的 PostCSS 语法          |
-|          stylelint-order          |                     属性的排序（插件包）                     |
-|     stylelint-config-prettier     |         关闭所有不必要的或可能与 Prettier 冲突的规则         |
+|  stylelint-config-standard-scss   |                                          扩展 stylelint-config-standard 共享配置，并为 SCSS 配置其规则                                           |
+|              postcss              |                                                              postcss-html 的依赖包                                                               |
+|           postcss-html            |                                                   用于解析 HTML（和类似 HTML）的 PostCSS 语法                                                    |
+|          stylelint-order          |                                                               属性的排序（插件包）                                                               |
+|     stylelint-config-prettier     |                                                   关闭所有不必要的或可能与 Prettier 冲突的规则                                                   |
 
 ### 2、安装 Vscode 插件（Stylelint）：
 
@@ -198,21 +190,19 @@ npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelin
 
 ```json
 {
-    "stylelint.enable": true,    
-    "editor.codeActionsOnSave": {        
-        "source.fixAll.stylelint": true    
-    },
-    "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass","html"]
+	"stylelint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.stylelint": true
+	},
+	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"]
 }
 ```
 
-> 😎也可以在vscode中全局配置上述json代码😎
-
-
+> 😎 也可以在 vscode 中全局配置上述 json 代码 😎
 
 ### 4、配置 stylelint.config.js
 
-````javascript
+```javascript
 // @see: https://stylelint.io
 
 module.exports = {
@@ -337,10 +327,7 @@ module.exports = {
 		]
 	}
 };
-
-````
-
-
+```
 
 ## 五、EditorConfig 配置
 
@@ -371,60 +358,54 @@ max_line_length = off # 关闭最大行长度限制
 trim_trailing_whitespace = false # 关闭末尾空格修剪
 ```
 
-
-
-
-
 ## 六、Git 流程规范配置
 
-|              依赖               |                           作用描述                           |
-| :-----------------------------: | :----------------------------------------------------------: |
-|              husky              |  操作 **git** 钩子的工具（在 **git xx** 之前执行某些命令）   |
-|           lint-staged           | 在提交之前进行 **eslint** 校验，并使用 **prettier** 格式化本地暂存区的代码， |
-|           commitlint            |    校验 **git commit** 信息是否符合规范，保证团队的一致性    |
-|         @commitlint/cli         |               用来在命令行中提示用户提交信息的               |
-| @commitlint/config-conventional |                    **Anglar** 的提交规范                     |
+|              依赖               |                                    作用描述                                    |
+| :-----------------------------: | :----------------------------------------------------------------------------: |
+|              husky              |           操作 **git** 钩子的工具（在 **git xx** 之前执行某些命令）            |
+|           lint-staged           |  在提交之前进行 **eslint** 校验，并使用 **prettier** 格式化本地暂存区的代码，  |
+|           commitlint            |             校验 **git commit** 信息是否符合规范，保证团队的一致性             |
+|         @commitlint/cli         |                        用来在命令行中提示用户提交信息的                        |
+| @commitlint/config-conventional |                             **Anglar** 的提交规范                              |
 |           commitizen            | 基于 **Node.js** 的 **git commit** 命令行工具，生成标准化的 **commit message** |
-|             cz-git              | 一款工程性更强，轻量级，高度自定义，标准输出格式的 **commitize** 适配器 |
+|             cz-git              |    一款工程性更强，轻量级，高度自定义，标准输出格式的 **commitize** 适配器     |
 
 ### 1、husky（操作 git 钩子的工具）：
 
 > **安装：**
 
-````text
+```text
 npm install husky -D
-````
+```
 
-> **使用（为了添加.husky文件夹）：**
+> **使用（为了添加.husky 文件夹）：**
 
-````text
+```text
 # 编辑 package.json > prepare 脚本并运行一次
 
 npm set-script prepare "husky install"
 npm run prepare
-````
-
-
+```
 
 ### 2、 lint-staged（本地暂存代码检查工具）
 
 > **安装：**
 
-````text
-npm install lint-staged --save-dev
-````
+```text
+npm install lint-staged --D
+```
 
 > **添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）：**
 >
 > **作用：通过钩子函数，判断提交的代码是否符合规范，并使用 prettier 格式化代码**
 
-````text
+```text
 npx husky add .husky/pre-commit "npm run lint:lint-staged"
-````
+```
 
 > 新增 **lint-staged.config.js** 文件：
 
-````text
+```text
 module.exports = {
 	"*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
 	"{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": ["prettier --write--parser json"],
@@ -433,58 +414,52 @@ module.exports = {
 	"*.{scss,less,styl,html}": ["stylelint --fix", "prettier --write"],
 	"*.md": ["prettier --write"]
 };
-````
-
-
+```
 
 ### 3、commitlint（commit 信息校验工具，不符合则报错）
 
 > **安装：**
 
-````text
+```text
 // commitlint && @commitlint/cli 其中一个插件都行
 npm i commitlint @commitlint/config-conventional -D
 npm i @commitlint/cli @commitlint/config-conventional -D
-````
+```
 
 > **配置命令（在.husky 文件夹下添加 commit-msg 文件）：**
 
-````text
+```text
 npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
-````
-
-
+```
 
 ### 4、commitizen（基于 Node.js 的 git commit 命令行工具，生成标准化的 message）
 
-````text
+```text
 // 全局安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。
-npm install commitizen -g
-````
-
-
+npm install commitizen -D
+```
 
 ### 5、cz-git
 
 > **指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器**
 
-````text
+```text
 npm install cz-git -D
-````
+```
 
 > **配置 package.json：**
 
-````text
+```text
 "config": {
   "commitizen": {
     "path": "node_modules/cz-git"
   }
 }
-````
+```
 
 > **新建 commitlint.config.js 文件：**
 
-````javascript
+```javascript
 // @see: https://cz-git.qbenben.com/zh/guide
 /** @type {import('cz-git').UserConfig} */
 
@@ -643,23 +618,4 @@ module.exports = {
 		defaultSubject: ""
 	}
 };
-````
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```

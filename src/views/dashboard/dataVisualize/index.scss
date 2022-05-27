@@ -1,28 +1,28 @@
 .content-box {
-	width: 100%;
-	height: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
+	height: auto;
+	min-height: 650px;
 	padding: 10px 15px;
 	box-sizing: border-box;
-	min-height: 650px;
 	.top-box {
-		width: 100%;
-		padding: 20px 50px 30px 50px;
-		margin-bottom: 40px;
 		display: flex;
 		flex-direction: column;
+		width: 100%;
+		padding: 20px 50px 30px;
+		margin-bottom: 40px;
 		background: #ffffff;
 		border-radius: 35px;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		box-sizing: border-box;
 		.title {
+			margin-bottom: 10px;
+			font-family: "PingFang SC";
 			font-size: 18px;
 			font-weight: 600;
 			color: #282843;
-			margin-bottom: 10px;
-			font-family: PingFang SC;
 		}
 		.bottom-item {
 			flex: 1;
@@ -31,65 +31,65 @@
 			margin-top: 10px;
 			.item-left {
 				width: 21%;
-				color: #ffffff;
-				background: url(./images/book-bg.png);
-				background-size: 100% 100%;
 				padding: 40px 0 120px 30px;
-				box-sizing: border-box;
 				overflow: hidden;
+				color: #ffffff;
+				background: url("./images/book-bg.png");
+				background-size: 100% 100%;
+				box-sizing: border-box;
 				.left-title {
+					font-family: "PingFang SC";
 					font-size: 20px;
 					font-weight: 500;
-					font-family: PingFang SC;
 				}
 				.img-box {
+					display: flex;
+					justify-content: center;
+					align-items: center;
 					width: 90px;
 					height: 90px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					border-radius: 20px;
-					margin: 40px 0 20px 0;
+					margin: 40px 0 20px;
 					background: #ffffff;
 					background-color: #ffffff;
-					box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.14);
+					border-radius: 20px;
+					box-shadow: 0 10px 20px rgb(0 0 0 / 14%);
 					img {
 						width: 60px;
 						height: 65px;
 					}
 				}
 				.left-number {
-					font-size: 62px;
-					font-family: DIN;
-					font-weight: 500;
 					overflow: hidden;
+					font-family: DIN;
+					font-size: 62px;
+					font-weight: 500;
 				}
 			}
 			.item-center {
-				flex: 1;
 				display: flex;
-				flex-wrap: wrap;
 				justify-content: space-between;
-				align-content: space-between;
-				padding: 0 50px;
 				min-width: 250px;
+				padding: 0 50px;
+				flex: 1;
+				flex-wrap: wrap;
+				align-content: space-between;
 				.traffic-box {
-					width: 47%;
-					height: 48%;
-					border-radius: 30px;
 					display: flex;
 					flex-direction: column;
+					width: 47%;
+					height: 48%;
 					padding: 25px;
+					border-radius: 30px;
 					box-sizing: border-box;
 					.traffic-img {
-						width: 70px;
-						height: 70px;
-						background-color: #ffffff;
-						border-radius: 19px;
 						display: flex;
 						justify-content: center;
 						align-items: center;
+						width: 70px;
+						height: 70px;
 						margin-bottom: 10px;
+						background-color: #ffffff;
+						border-radius: 19px;
 					}
 				}
 				img {
@@ -97,56 +97,56 @@
 					height: 33px;
 				}
 				.item-value {
-					font-size: 28px;
+					margin-bottom: 4px;
 					font-family: DIN;
+					font-size: 28px;
 					font-weight: bold;
 					color: #1a1a37;
-					margin-bottom: 4px;
 				}
 				.traffic-name {
-					font-size: 15px;
+					overflow: hidden;
 					font-family: DIN;
+					font-size: 15px;
 					font-weight: 400;
 					color: #1a1a37;
 					white-space: nowrap;
-					overflow: hidden;
 				}
 				.gitee-traffic {
-					background: url(./images/1-bg.png);
-					background-size: 100% 100%;
+					background: url("./images/1-bg.png");
 					background-color: #e8faea;
+					background-size: 100% 100%;
 				}
 				.gitHub-traffic {
-					background: url(./images/2-bg.png);
-					background-size: 100% 100%;
+					background: url("./images/2-bg.png");
 					background-color: #e7e1fb;
+					background-size: 100% 100%;
 				}
 				.today-traffic {
-					background: url(./images/3-bg.png);
-					background-size: 100% 100%;
+					background: url("./images/3-bg.png");
 					background-color: #fdf3e9;
+					background-size: 100% 100%;
 				}
 				.yesterday-traffic {
-					background: url(./images/4-bg.png);
-					background-size: 100% 100%;
+					background: url("./images/4-bg.png");
 					background-color: #f0f5fb;
+					background-size: 100% 100%;
 				}
 			}
 			.item-right {
-				width: 40%;
-				height: 430px;
-				border: 1px solid #f4f5f8;
-				border-radius: 25px;
-				margin-right: 20px;
-				box-sizing: border-box;
 				display: flex;
 				flex-direction: column;
+				width: 40%;
+				height: 430px;
+				margin-right: 20px;
+				border: 1px solid #f4f5f8;
+				border-radius: 25px;
+				box-sizing: border-box;
 				.echarts-title {
+					padding: 15px 20px;
+					font-family: "PingFang SC";
 					font-size: 18px;
-					font-family: PingFang SC;
 					font-weight: 600;
 					color: #282843;
-					padding: 15px 20px;
 					border-bottom: 1px solid #f4f5f8;
 				}
 				.book-echarts {
@@ -157,8 +157,8 @@
 		}
 	}
 	.bottom-box {
-		height: 480px;
 		width: 100%;
+		height: 480px;
 		padding: 20px 0;
 		background: #ffffff;
 		border-radius: 35px;

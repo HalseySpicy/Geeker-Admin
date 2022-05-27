@@ -1,15 +1,15 @@
 .menu {
-	transition: all 0.3s ease;
-	background: #20222a;
-	height: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
+	height: 100%;
+	background: #20222a;
+	transition: all 0.3s ease;
 	.logo {
 		height: 55px;
-		box-sizing: border-box;
 		border-bottom: 2px solid #1d1e26;
 		box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
+		box-sizing: border-box;
 		span {
 			font-size: 22px;
 			font-weight: bold;
@@ -40,19 +40,18 @@
 					background-color: #060708 !important;
 				}
 				&.is-active::before {
-					content: "";
+					position: absolute;
 					top: 0;
-					left: 0;
 					bottom: 0;
+					left: 0;
 					width: 4px;
 					background: $bg-color;
-					position: absolute;
+					content: "";
 				}
 			}
 		}
 	}
 }
-
 .el-menu--popup {
 	.el-menu-item {
 		background-color: #20222a;
@@ -61,37 +60,36 @@
 		}
 		i,
 		span {
-			color: hsla(0, 0%, 100%, 0.7);
+			color: hsl(0deg 0% 100% / 70%);
 		}
 		&:hover {
 			i,
 			span {
-				color: #fff !important;
+				color: #ffffff !important;
 			}
 		}
 		&.is-active {
 			background-color: #060708 !important;
-			&:before {
-				content: "";
+			&::before {
+				position: absolute;
 				top: 0;
-				left: 0;
 				bottom: 0;
+				left: 0;
 				width: 4px;
 				background: $bg-color;
-				position: absolute;
+				content: "";
 			}
 			i,
 			span {
-				color: #fff !important;
+				color: #ffffff !important;
 			}
 		}
 	}
 }
-
 .href {
 	display: inline-block;
-	text-decoration: none;
-	color: #bdbdc0;
 	width: 100%;
 	height: 100%;
+	color: #bdbdc0;
+	text-decoration: none;
 }

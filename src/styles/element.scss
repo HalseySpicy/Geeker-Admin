@@ -13,6 +13,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+
 	// 表格 search 样式
 	.table-search {
 		display: flex;
@@ -30,10 +31,11 @@
 				.el-date-editor--daterange {
 					width: 400px;
 				}
+
 				// el-select 为多选时不换行显示
 				.el-select__tags {
-					white-space: nowrap;
 					overflow: hidden;
+					white-space: nowrap;
 				}
 			}
 			.more-item {
@@ -41,13 +43,14 @@
 			}
 		}
 		.search-operation {
-			white-space: nowrap;
 			margin-left: 15px;
+			white-space: nowrap;
 			.search-isOpen {
 				margin-left: 20px;
 			}
 		}
 	}
+
 	// 表格 header 样式
 	.table-header {
 		.header-button-lf {
@@ -63,6 +66,7 @@
 			}
 		}
 	}
+
 	// el-table 表格样式
 	.el-table {
 		// 表格自适应撑满整个页面(设置了 flex:1,页面上表格必须添加 height 属性)
@@ -72,18 +76,20 @@
 			text-align: center;
 		}
 		.el-table__header th {
-			background: #fafafa;
-			color: #252525;
-			font-weight: bold;
-			font-size: 15px;
 			height: 50px;
+			font-size: 15px;
+			font-weight: bold;
+			color: #252525;
+			background: #fafafa;
 		}
+
 		// table 中 image 图片样式
 		.table-image {
 			width: 50px;
 			height: 50px;
 			border-radius: 50%;
 		}
+
 		// 解决 el-table 中 header 文字换行问题
 		.el-table__header .el-table__cell > .cell {
 			white-space: nowrap;
@@ -91,16 +97,18 @@
 		.el-table__row {
 			height: 52px;
 		}
+
 		// 解决表格空白样式不居中问题(仅在element-plus中)
 		.el-table__empty-block {
 			position: absolute;
-			left: 50%;
 			top: 50%;
+			left: 50%;
 			transform: translate(-50%, -50%);
 		}
 		.table-empty {
 			line-height: 30px;
 		}
+
 		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题，升级之后问题已解决）
 		// .el-table__body-wrapper {
 		// 	height: calc(100% - 50px) !important;
@@ -110,11 +118,12 @@
 		// 	height: 100% !important;
 		// }
 	}
+
 	// 表格 pagination 样式
 	.el-pagination {
 		display: flex;
-		margin: 23px 0 10px 0;
 		justify-content: flex-end;
+		margin: 23px 0 10px;
 	}
 }
 
@@ -122,14 +131,15 @@
 .el-drawer {
 	// drawer header 样式
 	.el-drawer__header {
+		padding: 15px 20px 14px;
+		margin-bottom: 0;
 		border-bottom: 1px solid #ebeef5;
-		padding: 15px 20px 14px 20px;
-		margin-bottom: 0px;
 		span {
 			font-size: 17px;
 			color: #303133;
 		}
 	}
+
 	// drawer body 样式（给 .el-form-item__label 每项后面添加：）
 	.el-drawer__body {
 		.el-form {
@@ -142,6 +152,7 @@
 			}
 		}
 	}
+
 	// drawer header 样式
 	.el-drawer__footer {
 		border-top: 1px solid #ebeef5;
@@ -149,6 +160,7 @@
 	.el-select {
 		width: 100%;
 	}
+
 	// drawer-form 多列 form-item
 	.drawer-multiColumn-form {
 		display: flex;
@@ -165,9 +177,9 @@
 // * el-dialog 样式
 .el-dialog {
 	.el-dialog__header {
-		border-bottom: 1px solid #f0f0f0;
-		margin: 0;
 		padding: 15px 20px;
+		margin: 0;
+		border-bottom: 1px solid #f0f0f0;
 		.el-dialog__title {
 			font-size: 17px;
 			color: #303133;

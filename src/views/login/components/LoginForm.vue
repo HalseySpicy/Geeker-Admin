@@ -136,10 +136,10 @@ defineExpose({
 	margin-bottom: 35px;
 }
 .login-btn {
-	margin-top: 40px;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	margin-top: 40px;
 	white-space: nowrap;
 	.el-button {
 		width: 185px;

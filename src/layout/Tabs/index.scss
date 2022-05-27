@@ -1,11 +1,11 @@
 .tabs-box {
 	:deep(.tabs-menu) {
-		width: 100%;
 		position: relative;
+		width: 100%;
 		.el-dropdown {
 			position: absolute;
-			right: 13px;
 			top: 8px;
+			right: 13px;
 		}
 		.tabs-icon {
 			top: 2px;
@@ -17,14 +17,14 @@
 		.el-tabs--card > .el-tabs__header {
 			height: 40px;
 			padding: 0 10px;
-			box-sizing: border-box;
 			margin: 0;
+			box-sizing: border-box;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__nav {
 			border: none;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__item {
-			color: #ccc;
+			color: #cccccc;
 			border: none;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
