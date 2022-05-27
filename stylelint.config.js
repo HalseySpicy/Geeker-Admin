@@ -37,6 +37,7 @@ module.exports = {
 		"declaration-block-trailing-semicolon": null, // 要求或不允许在声明块中使用尾随分号 string："always(必须始终有一个尾随分号)"|"never(不得有尾随分号)"
 		"selector-class-pattern": null, // 强制选择器类名的格式
 		"scss/at-import-partial-extension": null, // 解决不能引入scss文件
+		"value-no-vendor-prefix": null, // 关闭 vendor-prefix(为了解决多行省略 -webkit-box)
 		"selector-pseudo-class-no-unknown": [
 			true,
 			{
