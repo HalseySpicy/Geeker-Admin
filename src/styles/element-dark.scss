@@ -72,8 +72,9 @@ html.dark {
 
 	// * geeker-admin
 	--geeker-login-shadow-light: 5px 5px 15px rgb(255 255 255 / 20%);
-	--geeker-box-shadow-light: 0 0 15px rgb(255 255 255 / 20%);
+	--geeker-box-shadow-light: 0 0 10px rgb(255 255 255 / 10%);
 	--geeker-border-light: 1px solid #4c4c4d;
+	--geeker-main-bg-color: #0d0d0d;
 	--geeker-popup-color: #060708;
 
 	// * 以下为自定义暗黑模式内容
@@ -182,7 +183,7 @@ html.dark {
 			}
 		}
 		.el-main {
-			background-color: var(--el-bg-color-overlay) !important;
+			background-color: var(--geeker-main-bg-color) !important;
 			.main-box {
 				background-color: var(--el-bg-color) !important;
 			}

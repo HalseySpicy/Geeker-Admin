@@ -1,6 +1,6 @@
 <template>
 	<div class="login-container flx-center">
-		<UseDark class="use-dark"></UseDark>
+		<SwitchDark class="dark"></SwitchDark>
 		<div class="login-box">
 			<div class="login-left">
 				<img src="@/assets/images/login_left.svg" alt="login" />
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts" name="login">
-import UseDark from "@/components/UseDark/index.vue";
+import SwitchDark from "@/components/SwitchDark/index.vue";
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";

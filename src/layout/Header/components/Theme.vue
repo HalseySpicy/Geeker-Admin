@@ -7,15 +7,15 @@
 			<el-divider content-position="center">{{ $t("header.theme") }}</el-divider>
 			<div class="theme-item">
 				<span>{{ $t("header.darkMode") }}</span>
-				<UseDark ref="darkRef"></UseDark>
+				<SwitchDark></SwitchDark>
 			</div>
 		</el-drawer>
 	</div>
 </template>
 
 <script setup lang="ts">
-import UseDark from "@/components/UseDark/index.vue";
 import { ref } from "vue";
+import SwitchDark from "@/components/SwitchDark/index.vue";
 import { useDark } from "@/hooks/useDark";
 
 useDark();

@@ -1,4 +1,4 @@
-import { computed, onMounted } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { GlobalStore } from "@/store";
 
 /**
@@ -14,7 +14,7 @@ export const useDark = () => {
 		else body.setAttribute("class", "");
 	};
 
-	onMounted(() => {
+	onBeforeMount(() => {
 		switchTheme();
 	});
 
