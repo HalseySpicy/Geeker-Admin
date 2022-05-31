@@ -3,7 +3,6 @@
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
-	height: auto;
 	min-height: 650px;
 	padding: 10px 15px;
 	box-sizing: border-box;
@@ -13,24 +12,22 @@
 		width: 100%;
 		padding: 20px 50px 30px;
 		margin-bottom: 40px;
-
-		// background: #ffffff;
 		border-radius: 35px;
 		box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 		box-sizing: border-box;
-		.title {
+		.top-title {
 			margin-bottom: 10px;
 			font-family: "PingFang SC";
 			font-size: 18px;
 			font-weight: 600;
 		}
-		.bottom-item {
+		.top-content {
 			flex: 1;
 			display: flex;
 			justify-content: space-between;
 			margin-top: 10px;
 			.item-left {
-				width: 21%;
+				width: 22%;
 				padding: 40px 0 120px 30px;
 				overflow: hidden;
 				color: #ffffff;
@@ -172,7 +169,7 @@
 			font-size: 18px;
 			font-weight: 600;
 		}
-		.top-item {
+		.bottom-tabs {
 			padding: 0 50px;
 		}
 		.curve-echarts {

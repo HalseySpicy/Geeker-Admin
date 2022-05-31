@@ -6,7 +6,7 @@
 		<el-drawer v-model="drawerVisible" :title="$t('header.themeSetting')" size="300px">
 			<el-divider content-position="center">{{ $t("header.theme") }}</el-divider>
 			<div class="theme-item">
-				<span>深色模式</span>
+				<span>{{ $t("header.darkMode") }}</span>
 				<UseDark ref="darkRef"></UseDark>
 			</div>
 		</el-drawer>
@@ -17,10 +17,10 @@
 import UseDark from "@/components/UseDark/index.vue";
 import { ref } from "vue";
 import { useDark } from "@/hooks/useDark";
-const drawerVisible = ref(false);
 
 useDark();
 
+const drawerVisible = ref(false);
 const open = () => {
 	drawerVisible.value = true;
 };
@@ -28,12 +28,4 @@ const open = () => {
 
 <style scoped lang="scss">
 @import "../index.scss";
-.theme-item {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	span {
-		font-size: 14px;
-	}
-}
 </style>

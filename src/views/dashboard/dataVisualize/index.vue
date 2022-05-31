@@ -1,13 +1,11 @@
 <template>
 	<div class="dataVisualize-box">
 		<div class="top-box">
-			<div class="title">数据可视化</div>
-			<div class="top-item">
-				<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
-					<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
-				</el-tabs>
-			</div>
-			<div class="bottom-item">
+			<div class="top-title">数据可视化</div>
+			<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
+				<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
+			</el-tabs>
+			<div class="top-content">
 				<div class="item-left sle">
 					<span class="left-title">访问总数</span>
 					<div class="img-box">
@@ -55,7 +53,7 @@
 		</div>
 		<div class="bottom-box">
 			<div class="bottom-title">数据来源</div>
-			<div class="top-item">
+			<div class="bottom-tabs">
 				<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
 					<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
 				</el-tabs>

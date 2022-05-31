@@ -21,7 +21,6 @@
 			登录
 		</el-button>
 	</div>
-	<!-- <el-button @click="submitParent">触发父组件方法</el-button> -->
 </template>
 
 <script setup lang="ts">
@@ -132,17 +131,5 @@ defineExpose({
 </script>
 
 <style scoped lang="scss">
-.el-form-item {
-	margin-bottom: 35px;
-}
-.login-btn {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin-top: 40px;
-	white-space: nowrap;
-	.el-button {
-		width: 185px;
-	}
-}
+@import "../index.scss";
 </style>

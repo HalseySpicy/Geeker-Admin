@@ -54,6 +54,19 @@
 					white-space: nowrap;
 				}
 			}
+			.el-form-item {
+				margin-bottom: 35px;
+			}
+			.login-btn {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				margin-top: 40px;
+				white-space: nowrap;
+				.el-button {
+					width: 185px;
+				}
+			}
 		}
 	}
 }

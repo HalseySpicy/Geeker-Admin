@@ -31,7 +31,6 @@ const initChart = (data: any): ECharts => {
 		grid: {
 			left: "5%",
 			right: "6%"
-			// containLabel: true
 		},
 		dataZoom: [
 			{
@@ -41,10 +40,6 @@ const initChart = (data: any): ECharts => {
 				bottom: 0,
 				startValue: 0, //数据窗口范围的起始数值
 				endValue: 9, //数据窗口范围的结束数值
-				// maxSpan:50,
-				// handleIcon:
-				//   "path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z",
-				// handleSize: "110%",
 				handleStyle: {
 					color: "#6b9dfe"
 				},
@@ -56,8 +51,6 @@ const initChart = (data: any): ECharts => {
 				type: "inside",
 				show: true,
 				height: 0,
-				// start: 0,
-				// end: 100,
 				zoomLock: true //控制伸缩
 			}
 		],

@@ -38,6 +38,14 @@
 				height: 100%;
 			}
 		}
+		.theme-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			span {
+				font-size: 14px;
+			}
+		}
 	}
 	.theme-switch {
 		display: flex;

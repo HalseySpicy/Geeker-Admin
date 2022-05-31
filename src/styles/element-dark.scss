@@ -1,5 +1,5 @@
 html.dark {
-	// * element plus
+	// * element plus(可以全部注释掉，只是写在这里方便使用😀)
 	--el-color-primary: #409eff;
 	--el-color-primary-light-3: #3375b9;
 	--el-color-primary-light-5: #2a598a;
@@ -71,10 +71,12 @@ html.dark {
 	--el-mask-color-extra-light: rgb(0 0 0 / 30%);
 
 	// * geeker-admin
-	--geeker-box-shadow-light: 5px 5px 15px rgb(255 255 255 / 20%);
+	--geeker-login-shadow-light: 5px 5px 15px rgb(255 255 255 / 20%);
+	--geeker-box-shadow-light: 0 0 15px rgb(255 255 255 / 20%);
 	--geeker-border-light: 1px solid #4c4c4d;
+	--geeker-popup-color: #060708;
 
-	// * 以下为自定义内容
+	// * 以下为自定义暗黑模式内容
 	// login
 	.login-container {
 		background-color: var(--el-fill-color-extra-light) !important;
@@ -82,7 +84,7 @@ html.dark {
 			background-color: var(--el-mask-color) !important;
 			.login-form {
 				background-color: var(--el-bg-color) !important;
-				box-shadow: var(--geeker-box-shadow-light) !important;
+				box-shadow: var(--geeker-login-shadow-light) !important;
 				.logo-text {
 					color: var(--el-text-color-primary) !important;
 				}
@@ -191,6 +193,21 @@ html.dark {
 				border-top-color: var(--el-border-color-light) !important;
 				a {
 					color: var(--el-text-color-regular) !important;
+				}
+			}
+		}
+	}
+
+	// menu-popup
+	.el-menu--popup-container {
+		.el-menu {
+			background-color: var(--el-bg-color) !important;
+		}
+		.el-menu--popup {
+			.el-menu-item {
+				background-color: var(--el-bg-color) !important;
+				&.is-active {
+					background-color: var(--geeker-popup-color) !important;
 				}
 			}
 		}
