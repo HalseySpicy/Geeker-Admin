@@ -21,7 +21,7 @@ onMounted(() => {
 				y: 30,
 				textAlign: "center",
 				textStyle: {
-					color: "#212b43",
+					color: "#a1a1a1",
 					fontSize: 16,
 					fontFamily: "Microsoft Yahei",
 					fontWeight: "100",
@@ -34,7 +34,7 @@ onMounted(() => {
 				y: 30,
 				textAlign: "center",
 				textStyle: {
-					color: "#212b43",
+					color: "#a1a1a1",
 					fontSize: 16,
 					fontFamily: "Microsoft Yahei",
 					fontWeight: "100",

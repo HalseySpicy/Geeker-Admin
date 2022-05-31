@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="dataVisualize-box">
 		<div class="top-box">
 			<div class="title">数据可视化</div>
 			<div class="top-item">
@@ -54,6 +54,7 @@
 			</div>
 		</div>
 		<div class="bottom-box">
+			<div class="bottom-title">数据来源</div>
 			<div class="top-item">
 				<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
 					<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>

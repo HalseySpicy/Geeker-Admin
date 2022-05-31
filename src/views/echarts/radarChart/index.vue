@@ -11,10 +11,16 @@ onMounted(() => {
 	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
 	let option: echarts.EChartsOption = {
 		title: {
-			text: "Basic Radar Chart"
+			text: "Basic Radar Chart",
+			textStyle: {
+				color: "#a1a1a1"
+			}
 		},
 		legend: {
-			data: ["Allocated Budget", "Actual Spending"]
+			data: ["Allocated Budget", "Actual Spending"],
+			textStyle: {
+				color: "#a1a1a1"
+			}
 		},
 		radar: {
 			// shape: 'circle',

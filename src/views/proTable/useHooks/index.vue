@@ -31,7 +31,7 @@
 			<div class="search-operation">
 				<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
 				<el-button :icon="Delete" @click="reset">重置</el-button>
-				<el-button type="text" class="search-isOpen" @click="searchShow = !searchShow">
+				<el-button type="primary" link class="search-isOpen" @click="searchShow = !searchShow">
 					{{ searchShow ? "合并" : "展开" }}
 					<el-icon class="el-icon--right">
 						<component :is="searchShow ? ArrowUp : ArrowDown"></component>
@@ -88,10 +88,10 @@
 				>
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" width="320" v-slot="scope">
-				<el-button type="text" :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-				<el-button type="text" :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-				<el-button type="text" :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-				<el-button type="text" :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
+				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
 			</el-table-column>
 			<template #empty>
 				<div class="table-empty">

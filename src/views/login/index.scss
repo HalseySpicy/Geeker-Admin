@@ -10,6 +10,11 @@
 	background-position: 50%;
 	background-size: 100% 100%;
 	background-size: cover;
+	.use-dark {
+		position: absolute;
+		top: 4.5%;
+		right: 3.2%;
+	}
 	.login-box {
 		display: flex;
 		justify-content: space-around;

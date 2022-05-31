@@ -4,10 +4,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="home">
-import { ResultEnum } from "@/enums/httpEnum";
-console.log(ResultEnum);
-</script>
+<script setup lang="ts" name="home"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

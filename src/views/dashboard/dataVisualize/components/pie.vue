@@ -1,5 +1,5 @@
 <template>
-	<!-- 个人/团队预约占比 -->
+	<!-- Gitee / GitHub 访问量占比 -->
 	<div class="echarts" id="pie"></div>
 </template>
 <script setup lang="ts" name="pie">
@@ -14,9 +14,13 @@ const initChart = (data: any): ECharts => {
 			left: "56%",
 			top: "45%",
 			textAlign: "center",
+			textStyle: {
+				fontSize: 18,
+				color: "#767676"
+			},
 			subtextStyle: {
 				fontSize: 15,
-				color: "#38456A"
+				color: "#a1a1a1"
 			}
 		},
 		tooltip: {
@@ -31,7 +35,7 @@ const initChart = (data: any): ECharts => {
 			itemGap: 20,
 			textStyle: {
 				fontSize: 13,
-				color: "#38456A",
+				color: "#a1a1a1",
 				fontWeight: 500
 			},
 			formatter: function (name: string) {
@@ -69,7 +73,7 @@ const initChart = (data: any): ECharts => {
 					formatter: "{d}%",
 					fontWeight: 400,
 					fontSize: 19,
-					color: "#282843" //文字的字体大小
+					color: "#a1a1a1"
 				},
 				color: [
 					{

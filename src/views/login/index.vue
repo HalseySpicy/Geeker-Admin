@@ -1,5 +1,6 @@
 <template>
 	<div class="login-container flx-center">
+		<UseDark class="use-dark"></UseDark>
 		<div class="login-box">
 			<div class="login-left">
 				<img src="@/assets/images/login_left.svg" alt="login" />
@@ -10,13 +11,13 @@
 					<p class="logo-text">Geeker-Admin</p>
 				</div>
 				<LoginForm ref="loginRef" :age="'20'" :address="['天府三街', '天府四街']" :obj="obj"></LoginForm>
-				<!-- <el-button @click="consoleRef">打印子组件数据</el-button> -->
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts" name="login">
+import UseDark from "@/components/UseDark/index.vue";
 import LoginForm from "./components/LoginForm.vue";
 import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";

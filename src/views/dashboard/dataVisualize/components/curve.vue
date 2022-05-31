@@ -1,5 +1,5 @@
 <template>
-	<!-- Gitee / GitHub 访问量占比 -->
+	<!-- 数据来源 -->
 	<div class="echarts" id="curve"></div>
 </template>
 <script setup lang="ts" name="cure">
@@ -17,7 +17,7 @@ const initChart = (data: any): ECharts => {
 			padding: 0,
 			formatter: (p: any) => {
 				let dom = `<div style="width:100%; height: 70px !important; display:flex;flex-direction: column;justify-content: space-between;padding:10px;box-sizing: border-box;
-      color:#fff; background: #6B9DFE;border-radius: 11px;font-size:14px; ">
+      color:#fff; background: #6B9DFE;border-radius: 4px;font-size:14px; ">
         <div style="display: flex; align-items: center;"> <div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>平台 :  ${p[0].name}</div>
         <div style="display: flex;align-items: center;"><div style="width:5px;height:5px;background:#ffffff;border-radius: 50%;margin-right:5px"></div>数据量 :  ${p[0].value}</div>
       </div>`;
@@ -76,7 +76,7 @@ const initChart = (data: any): ECharts => {
 					// interval: time > 4 ? 27 : 0,
 					margin: 20,
 					interval: 0,
-					color: "#999",
+					color: "#a1a1a1",
 					fontSize: 14,
 					formatter: function (name: string) {
 						undefined;
@@ -93,13 +93,6 @@ const initChart = (data: any): ECharts => {
 		],
 		yAxis: [
 			{
-				name: "数据来源",
-				nameTextStyle: {
-					color: "#282843",
-					fontSize: 18,
-					fontWeight: 600,
-					padding: [0, 0, 10, 0]
-				},
 				min: 0,
 				axisLine: {
 					show: false
@@ -111,12 +104,12 @@ const initChart = (data: any): ECharts => {
 					show: true,
 					lineStyle: {
 						type: "dashed",
-						color: "#f8f9fe",
+						color: "#edeff5",
 						width: 2
 					}
 				},
 				axisLabel: {
-					color: "#D3D3D8",
+					color: "#a1a1a1",
 					fontSize: 16,
 					fontWeight: 400,
 					formatter: function (value: number) {

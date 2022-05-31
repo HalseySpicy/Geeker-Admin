@@ -10,13 +10,17 @@ import "@/assets/iconfont/iconfont.scss";
 import "@/assets/fonts/font.scss";
 // element plus
 import ElementPlus from "element-plus";
-// Element icons
+// element icons
 import * as Icons from "@element-plus/icons-vue";
-// element css(如果使用了CDN，不需要引入css)
+// element css
 import "element-plus/dist/index.css";
-// element scc
+// element dark
+import "element-plus/theme-chalk/dark/css-vars.css";
+// custom element dark
+import "@/styles/element-dark.scss";
+// custom element css
 import "@/styles/element.scss";
-// Custom directives
+// custom directives
 import directives from "@/directives/index";
 // vue Router
 import router from "@/routers/index";

@@ -11,7 +11,10 @@ onMounted(() => {
 	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
 	let option: echarts.EChartsOption = {
 		title: {
-			text: "Stacked Area Chart"
+			text: "Stacked Area Chart",
+			textStyle: {
+				color: "#a1a1a1"
+			}
 		},
 		tooltip: {
 			trigger: "axis",
@@ -23,7 +26,10 @@ onMounted(() => {
 			}
 		},
 		legend: {
-			data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"]
+			data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
+			textStyle: {
+				color: "#a1a1a1"
+			}
 		},
 		toolbox: {
 			feature: {
@@ -40,12 +46,18 @@ onMounted(() => {
 			{
 				type: "category",
 				boundaryGap: false,
-				data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+				data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+				axisLabel: {
+					color: "#a1a1a1"
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: "value"
+				type: "value",
+				axisLabel: {
+					color: "#a1a1a1"
+				}
 			}
 		],
 		series: [

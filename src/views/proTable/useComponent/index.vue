@@ -28,10 +28,10 @@
 			</template>
 			<!-- 表格操作 -->
 			<template #operation="scope">
-				<el-button type="text" :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-				<el-button type="text" :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-				<el-button type="text" :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-				<el-button type="text" :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
+				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
 			</template>
 		</ProTable>
 		<UserDrawer ref="drawerRef"></UserDrawer>

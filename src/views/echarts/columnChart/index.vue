@@ -16,7 +16,11 @@ onMounted(() => {
 				type: "shadow"
 			}
 		},
-		legend: {},
+		legend: {
+			textStyle: {
+				color: "#a1a1a1"
+			}
+		},
 		grid: {
 			left: "3%",
 			right: "4%",
@@ -26,12 +30,18 @@ onMounted(() => {
 		xAxis: [
 			{
 				type: "category",
-				data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+				data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+				axisLabel: {
+					color: "#a1a1a1"
+				}
 			}
 		],
 		yAxis: [
 			{
-				type: "value"
+				type: "value",
+				axisLabel: {
+					color: "#a1a1a1"
+				}
 			}
 		],
 		series: [
