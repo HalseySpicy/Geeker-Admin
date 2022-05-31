@@ -188,4 +188,4 @@ Geeker-Admin
 
 > **😀 微信大群超过 200 人了，请扫这个二维码，我拉大家进大群。**
 
-![weQrC](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220531093226.png)
+![qcode](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220531095349.png)
