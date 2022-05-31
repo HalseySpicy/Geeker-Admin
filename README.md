@@ -56,6 +56,9 @@ cnpn install
 
 # npm install 安装失败，请升级 nodejs 到 16 以上，或尝试使用以下命令：
 npm install --registry=https://registry.npm.taobao.org
+
+# 这里没用，只是为了指定版本
+npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.2 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 qs@6.10.3 vue@3.2.25 vue-router@4.0.12 vue-i18n@9.1.9 vue3-seamless-scroll@1.2.0 --save
 ```
 
 - **Run：**
@@ -183,4 +186,6 @@ Geeker-Admin
 
 ## 九、微信交流群
 
-![qrCode-wechat](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220525161450.png)
+> **😀 微信大群超过 200 人了，请扫这个二维码，我拉大家进大群。**
+
+![weQrC](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220531093226.png)
