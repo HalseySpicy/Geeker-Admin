@@ -42,6 +42,7 @@
 <script setup lang="tsx" name="useComponent">
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
+import { ElMessage } from "element-plus";
 import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
@@ -84,15 +85,26 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		type: "expand",
 		label: "Expand",
-		width: 120
+		width: 100
 	},
 	{
 		prop: "username",
 		label: "用户姓名",
-		search: true
-		// renderHeader: (params: any) => {
-		// 	return <div>111</div>;
-		// }
+		search: true,
+		width: 135,
+		renderHeader: (scope: Partial<ColumnProps>) => {
+			return (
+				<el-button
+					type="primary"
+					onClick={() => {
+						console.log(scope);
+						ElMessage.success("我是自定义表头");
+					}}
+				>
+					用户姓名
+				</el-button>
+			);
+		}
 	},
 	{
 		prop: "gender",
@@ -142,7 +154,7 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "operation",
 		label: "操作",
-		width: 330,
+		width: 320,
 		fixed: "right"
 	}
 ];

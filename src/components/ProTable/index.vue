@@ -62,29 +62,34 @@
 					:show-overflow-tooltip="item.prop !== 'operation'"
 					:resizable="true"
 					:fixed="item.fixed"
-					:render-header="item.renderHeader"
-					v-slot="scope"
 				>
+					<!-- 自定义 header (使用组件渲染 tsx 语法) -->
+					<template #header v-if="item.renderHeader">
+						<component :is="item.renderHeader" :row="item"> </component>
+					</template>
+
 					<!-- 自定义配置每一列 slot（使用作用域插槽） -->
-					<slot :name="item.prop" :row="scope.row">
-						<!-- 图片(自带预览) -->
-						<el-image
-							v-if="item.image"
-							:src="scope.row[item.prop!]"
-							:preview-src-list="[scope.row[item.prop!]]"
-							fit="cover"
-							class="table-image"
-							preview-teleported
-						/>
-						<!-- tag 标签（自带格式化） -->
-						<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!],item.enum,'tag')">
-							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
-						</el-tag>
-						<!-- 文字（自带格式化） -->
-						<span v-else>
-							{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
-						</span>
-					</slot>
+					<template #default="scope">
+						<slot :name="item.prop" :row="scope.row">
+							<!-- 图片(自带预览) -->
+							<el-image
+								v-if="item.image"
+								:src="scope.row[item.prop!]"
+								:preview-src-list="[scope.row[item.prop!]]"
+								fit="cover"
+								class="table-image"
+								preview-teleported
+							/>
+							<!-- tag 标签（自带格式化内容） -->
+							<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!],item.enum,'tag')">
+								{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
+							</el-tag>
+							<!-- 文字（自带格式化内容） -->
+							<span v-else>
+								{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
+							</span>
+						</slot>
+					</template>
 				</el-table-column>
 			</template>
 			<template #empty>
@@ -117,6 +122,7 @@ import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
 import ColSetting from "./components/ColSetting.vue";
 
+// 表格 DOM 元素
 const tableRef = ref();
 
 // 是否显示搜索模块
@@ -171,7 +177,7 @@ searchColumns.forEach(column => {
 	}
 });
 
-// 列设置
+// * 列设置
 const colRef = ref();
 // 过滤掉不需要设置显隐的列
 const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
