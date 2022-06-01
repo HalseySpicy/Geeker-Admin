@@ -6,22 +6,11 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/assembly",
 		component: Layout,
-		redirect: "/assembly/batchImport",
+		redirect: "/assembly/selectIcon",
 		meta: {
 			title: "assembly"
 		},
 		children: [
-			{
-				path: "/assembly/batchImport",
-				name: "batchImport",
-				component: () => import("@/views/assembly/batchImport/index.vue"),
-				meta: {
-					keepAlive: true,
-					requiresAuth: true,
-					title: "批量导入数据",
-					key: "batchImport"
-				}
-			},
 			{
 				path: "/assembly/selectIcon",
 				name: "selectIcon",
@@ -31,6 +20,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 					requiresAuth: true,
 					title: "Icon 选择",
 					key: "selectIcon"
+				}
+			},
+			{
+				path: "/assembly/batchImport",
+				name: "batchImport",
+				component: () => import("@/views/assembly/batchImport/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "批量导入数据",
+					key: "batchImport"
 				}
 			}
 		]

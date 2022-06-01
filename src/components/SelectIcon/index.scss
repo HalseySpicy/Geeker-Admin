@@ -1,0 +1,31 @@
+.icon-box {
+	width: 100%;
+	.el-button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 18px;
+	}
+	:deep(.el-dialog__body) {
+		display: flex;
+		flex-wrap: wrap;
+		height: 700px;
+		overflow: scroll;
+		.icon-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 3.4%;
+			margin: 20px 26px;
+			cursor: pointer;
+			transition: all 0.2s;
+			&:hover {
+				transform: scale(1.3);
+			}
+			span {
+				line-height: 20px;
+				text-align: center;
+			}
+		}
+	}
+}

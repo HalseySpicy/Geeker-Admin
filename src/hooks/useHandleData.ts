@@ -18,7 +18,8 @@ export const useHandleData = (
 		ElMessageBox.confirm(`是否${message}?`, "温馨提示", {
 			confirmButtonText: "确定",
 			cancelButtonText: "取消",
-			type: confirmType
+			type: confirmType,
+			draggable: true
 		}).then(async () => {
 			const res = await apiUrl(params);
 			if (!res) return reject(false);

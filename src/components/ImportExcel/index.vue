@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="dialogVisible" :title="`批量添加${parameter.title}`" :destroy-on-close="true" width="580px">
+	<el-dialog v-model="dialogVisible" :title="`批量添加${parameter.title}`" :destroy-on-close="true" width="580px" draggable>
 		<el-form class="drawer-multiColumn-form" label-width="100px">
 			<el-form-item label="模板下载 :">
 				<el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>
@@ -128,7 +128,5 @@ defineExpose({
 });
 </script>
 <style lang="scss" scoped>
-.upload {
-	width: 80%;
-}
+@import "./index.scss";
 </style>

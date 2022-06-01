@@ -70,6 +70,21 @@ const initParam = reactive({
 	type: 1
 });
 
+// 自定义渲染头部(使用tsx语法)
+const renderHeader = (scope: any) => {
+	return (
+		<el-button
+			type="primary"
+			onClick={() => {
+				console.log(scope);
+				ElMessage.success("我是自定义表头");
+			}}
+		>
+			{scope.row.label}
+		</el-button>
+	);
+};
+
 // 配置项
 const columns: Partial<ColumnProps>[] = [
 	{
@@ -92,19 +107,7 @@ const columns: Partial<ColumnProps>[] = [
 		label: "用户姓名",
 		search: true,
 		width: 135,
-		renderHeader: (scope: Partial<ColumnProps>) => {
-			return (
-				<el-button
-					type="primary"
-					onClick={() => {
-						console.log(scope);
-						ElMessage.success("我是自定义表头");
-					}}
-				>
-					用户姓名
-				</el-button>
-			);
-		}
+		renderHeader
 	},
 	{
 		prop: "gender",
@@ -136,20 +139,21 @@ const columns: Partial<ColumnProps>[] = [
 		width: 200,
 		sortable: true,
 		search: true,
-		searchType: "datetimerange"
-		// initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
+		searchType: "datetimerange",
+		initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
 	},
 	{
 		prop: "status",
 		label: "用户状态",
 		sortable: true,
-		width: 180
+		width: 160
 	},
 	{
 		prop: "avatar",
 		label: "头像",
-		width: 140,
-		image: true
+		width: 120,
+		image: true,
+		renderHeader
 	},
 	{
 		prop: "operation",
