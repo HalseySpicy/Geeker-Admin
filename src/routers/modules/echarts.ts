@@ -6,7 +6,7 @@ const echartsRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/echarts",
 		component: Layout,
-		redirect: "/echarts/columnChart",
+		redirect: "/echarts/waterChart",
 		meta: {
 			title: "Echarts"
 		},
