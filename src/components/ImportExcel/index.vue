@@ -7,6 +7,7 @@
 			<el-form-item label="文件上传 :">
 				<el-upload
 					action="string"
+					class="upload"
 					:drag="true"
 					:limit="excelLimit"
 					:multiple="true"
@@ -126,3 +127,8 @@ defineExpose({
 	acceptParams
 });
 </script>
+<style lang="scss" scoped>
+.upload {
+	width: 80%;
+}
+</style>

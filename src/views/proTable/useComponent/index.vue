@@ -136,8 +136,8 @@ const columns: Partial<ColumnProps>[] = [
 		width: 200,
 		sortable: true,
 		search: true,
-		searchType: "datetimerange",
-		initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
+		searchType: "datetimerange"
+		// initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
 	},
 	{
 		prop: "status",
