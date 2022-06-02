@@ -11,10 +11,6 @@
 > 1、主要是学习下 Vue3 + TypeScript  
 > 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
-## Vue3 项目推荐 ✨
-
-- gin-vue-admin：https://github.com/flipped-aurora/gin-vue-admin
-
 ## 一、在线预览 👀
 
 - Link：http://admin.spicyboy.cn
@@ -188,7 +184,12 @@ Geeker-Admin
 > 项目后台接口完全采用 Mock 数据  
 > 推荐一个在线 Mock 平台： https://www.fastmock.site/
 
-## 九、微信交流群
+## 九、Vue3 优秀项目推荐 ✨
+
+- gin-vue-admin：https://github.com/flipped-aurora/gin-vue-admin
+- vue-vben-admin：https://github.com/vbenjs/vue-vben-admin
+
+## 十、微信交流群
 
 > **😀 微信群超过 200 人了，请加我好友，我拉大家进群。**
 
