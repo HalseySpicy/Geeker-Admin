@@ -1,16 +1,19 @@
 <template>
 	<div class="login-container flx-center">
 		<SwitchDark class="dark"></SwitchDark>
-		<div class="login-box">
+		<div class="login-content">
 			<div class="login-left">
-				<img src="@/assets/images/login_left.png" alt="login" />
+				<img src="@/assets/images/login_left0.png" alt="login" />
 			</div>
-			<div class="login-form">
-				<div class="login-logo">
-					<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
-					<p class="logo-text">Geeker-Admin</p>
+			<div class="login-box">
+				<img class="login-img" src="@/assets/images/form_icon.png" alt="form_icon" />
+				<div class="login-form">
+					<div class="login-logo">
+						<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
+						<p class="logo-text">Geeker-Admin</p>
+					</div>
+					<LoginForm ref="loginRef" :age="'20'" :address="['天府三街', '天府四街']" :obj="obj"></LoginForm>
 				</div>
-				<LoginForm ref="loginRef" :age="'20'" :address="['天府三街', '天府四街']" :obj="obj"></LoginForm>
 			</div>
 		</div>
 	</div>
