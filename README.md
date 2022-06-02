@@ -123,7 +123,7 @@ npm run commit
 
 ### 4、数据大屏：
 
-![dataScreen01](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/dataScreen01.png)
+![dataScreen02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602170253.png)
 
 ## 六、文件资源目录 📚
 

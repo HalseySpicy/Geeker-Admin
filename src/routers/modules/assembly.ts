@@ -8,7 +8,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 		component: Layout,
 		redirect: "/assembly/selectIcon",
 		meta: {
-			title: "assembly"
+			title: "常用组件"
 		},
 		children: [
 			{
