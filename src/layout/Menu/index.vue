@@ -8,7 +8,7 @@
 				:collapse="isCollapse"
 				:collapse-transition="false"
 				:unique-opened="true"
-				background-color="#20222a"
+				background-color="#191a20"
 				text-color="#bdbdc0"
 				active-text-color="#fff"
 			>

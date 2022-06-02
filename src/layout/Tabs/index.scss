@@ -31,5 +31,8 @@
 			color: $bg-color;
 			border-bottom: 2px solid $bg-color;
 		}
+		.el-tabs__item .is-icon-close svg {
+			margin-top: 0.5px;
+		}
 	}
 }

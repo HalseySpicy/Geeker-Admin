@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	background-color: #20222a;
+	background-color: #191a20;
 	transition: all 0.3s ease;
 	.logo {
 		height: 55px;
@@ -29,12 +29,6 @@
 			overflow: auto;
 			overflow-x: hidden;
 			border-right: none;
-			&::-webkit-scrollbar {
-				background-color: #20222a;
-			}
-			&::-webkit-scrollbar-thumb {
-				background-color: #41444b;
-			}
 			.el-menu-item {
 				&.is-active {
 					background-color: #060708 !important;
@@ -54,13 +48,9 @@
 }
 .el-menu--popup {
 	.el-menu-item {
-		background-color: #20222a;
+		background-color: #191a20;
 		i {
 			margin-right: 5px;
-		}
-		i,
-		span {
-			color: hsl(0deg 0% 100% / 70%);
 		}
 		&:hover {
 			i,
