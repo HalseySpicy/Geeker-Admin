@@ -7,12 +7,12 @@
 				</div>
 				<div class="header-ct">
 					<div class="header-ct-title">
-						智慧景区游客预约综合管控平台
-						<div class="header-ct-warning">平台高峰预警信息（0条）</div>
+						<span>智慧旅游可视化大数据展示平台</span>
+						<div class="header-ct-warning">平台高峰预警信息（2条）</div>
 					</div>
 				</div>
 				<div class="header-rg">
-					<span class="header-download">分析报告</span>
+					<span class="header-download">统计报告</span>
 					<span class="header-time">当前时间：{{ time }}</span>
 				</div>
 			</div>
@@ -20,7 +20,7 @@
 				<div class="dataScreen-lf">
 					<div class="dataScreen-top">
 						<div class="dataScreen-main-title">
-							<span>实时访问量统计</span>
+							<span>实时游客统计</span>
 							<img src="./images/dataScreen-title.png" alt="" />
 						</div>
 						<!-- chart区域 -->
@@ -70,7 +70,7 @@
 					</div>
 					<div class="dataScreen-cb">
 						<div class="dataScreen-main-title">
-							<span>未来30天游客量趋势预测图</span>
+							<span>未来30天游客量趋势图</span>
 							<img src="./images/dataScreen-title.png" alt="" />
 						</div>
 						<!-- chart区域 -->
@@ -102,7 +102,7 @@
 					</div>
 					<div class="dataScreen-bottom">
 						<div class="dataScreen-main-title">
-							<span>销售渠道数据统计</span>
+							<span>预约渠道数据统计</span>
 							<img src="./images/dataScreen-title.png" alt="" />
 						</div>
 						<!-- chart区域 -->
