@@ -22,18 +22,19 @@
 		width: 96%;
 		height: 94%;
 		padding: 0 8% 0 50px;
-		background-color: hsl(0deg 0% 100% / 85%);
+		background-color: hsl(0deg 0% 100% / 80%);
 		border-radius: 10px;
 		box-sizing: border-box;
 		.login-left {
-			width: 900px;
+			// width: 900px;
+			width: 850px;
 			img {
 				width: 100%;
 				height: 100%;
 			}
 		}
 		.login-form {
-			width: 400px;
+			width: 420px;
 			padding: 50px 40px 45px;
 			border-radius: 10px;
 			box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
@@ -50,12 +51,12 @@
 					padding-left: 25px;
 					font-size: 42px;
 					font-weight: bold;
-					color: #181818;
+					color: #34495e;
 					white-space: nowrap;
 				}
 			}
 			.el-form-item {
-				margin-bottom: 35px;
+				margin-bottom: 40px;
 			}
 			.login-btn {
 				display: flex;
