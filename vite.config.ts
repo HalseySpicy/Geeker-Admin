@@ -43,7 +43,8 @@ export default defineConfig((mode: ConfigEnv): UserConfig => {
 			// 代理跨域（mock 不需要配置，这里只是个事列）
 			proxy: {
 				"/api": {
-					target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0",
+					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
+					target: "https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e", // easymock
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
 				}
