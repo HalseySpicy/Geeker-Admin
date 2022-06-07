@@ -1,14 +1,14 @@
 <template>
 	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
 		<el-form-item prop="username">
-			<el-input v-model="loginForm.username" placeholder="用户名">
+			<el-input v-model="loginForm.username" placeholder="用户名：admin / user">
 				<template #prefix>
 					<el-icon class="el-input__icon"><user /></el-icon>
 				</template>
 			</el-input>
 		</el-form-item>
 		<el-form-item prop="password">
-			<el-input type="password" show-password v-model="loginForm.password" placeholder="密码">
+			<el-input type="password" v-model="loginForm.password" placeholder="密码：123456" show-password autocomplete="new-password">
 				<template #prefix>
 					<el-icon class="el-input__icon"><lock /></el-icon>
 				</template>
@@ -51,8 +51,8 @@ const loginRules = reactive({
 
 // 登录表单数据
 const loginForm = reactive<Login.ReqLoginForm>({
-	username: "admin",
-	password: "123456"
+	username: "",
+	password: ""
 });
 
 const loading = ref<boolean>(false);
@@ -64,15 +64,17 @@ const login = (formEl: FormInstance | undefined) => {
 		if (valid) {
 			loading.value = true;
 			try {
-				let requestLoginForm: Login.ReqLoginForm = {
+				const requestLoginForm: Login.ReqLoginForm = {
 					username: loginForm.username,
 					password: md5(loginForm.password)
 				};
 				const res = await loginApi(requestLoginForm);
+				// * 存储 token
 				globalStore.setToken(res.data!.access_token);
-				// * 登录成功之后清除上个账号的 menu 和 tabs 数据
+				// * 登录成功之后清除上个账号的 menulist 和 tabs 数据
 				menuStore.setMenuList([]);
 				tabStore.closeMultipleTab();
+
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			} finally {

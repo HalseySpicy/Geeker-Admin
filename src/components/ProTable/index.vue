@@ -1,3 +1,4 @@
+<!-- Pro-Table 文档: https://juejin.cn/post/7094890833064755208 -->
 <template>
 	<div class="table-box">
 		<!-- 查询表单 -->
