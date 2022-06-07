@@ -6,11 +6,22 @@ const formRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/form",
 		component: Layout,
-		redirect: "/form/basicForm",
+		redirect: "/form/proForm",
 		meta: {
 			title: "表单 Form"
 		},
 		children: [
+			{
+				path: "/form/proForm",
+				name: "proForm",
+				component: () => import("@/views/form/proForm/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "超级 Form",
+					key: "proForm"
+				}
+			},
 			{
 				path: "/form/basicForm",
 				name: "basicForm",

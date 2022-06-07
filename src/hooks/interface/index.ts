@@ -20,6 +20,7 @@ export namespace Table {
 		icon?: {
 			[key: string]: any;
 		};
+		hasSearched: boolean;
 	}
 }
 
