@@ -33,9 +33,13 @@ import type { ElForm } from "element-plus";
 import { ElMessage } from "element-plus";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/store";
+import { MenuStore } from "@/store/modules/menu";
+import { TabsStore } from "@/store/modules/tabs";
 import md5 from "js-md5";
 
 const globalStore = GlobalStore();
+const menuStore = MenuStore();
+const tabStore = TabsStore();
 
 // 定义 formRef（校验规则）
 type FormInstance = InstanceType<typeof ElForm>;
@@ -50,8 +54,8 @@ const loginForm = reactive<Login.ReqLoginForm>({
 	username: "admin",
 	password: "123456"
 });
-const loading = ref<boolean>(false);
 
+const loading = ref<boolean>(false);
 const router = useRouter();
 // login
 const login = (formEl: FormInstance | undefined) => {
@@ -66,6 +70,9 @@ const login = (formEl: FormInstance | undefined) => {
 				};
 				const res = await loginApi(requestLoginForm);
 				globalStore.setToken(res.data!.access_token);
+				// * 登录成功之后清除上个账号的 menu 和 tabs 数据
+				menuStore.setMenuList([]);
+				tabStore.closeMultipleTab();
 				ElMessage.success("登录成功！");
 				router.push({ name: "home" });
 			} finally {

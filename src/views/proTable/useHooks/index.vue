@@ -88,10 +88,11 @@
 				>
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" width="320" v-slot="scope">
-				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
+				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit">编辑</el-button>
+				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)" v-if="BUTTONS.reset">重置密码</el-button>
+				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)" v-if="BUTTONS.delete">删除</el-button>
+				<span v-if="!BUTTONS.view && !BUTTONS.edit && !BUTTONS.reset && !BUTTONS.delete">--</span>
 			</el-table-column>
 			<template #empty>
 				<div class="table-empty">

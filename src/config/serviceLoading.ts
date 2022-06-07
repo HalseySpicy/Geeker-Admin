@@ -8,8 +8,7 @@ const startLoading = () => {
 		fullscreen: true,
 		lock: true,
 		text: "Loading",
-		background: "rgba(0, 0, 0, 0.5)"
-		// spinner: "el-icon-loading",
+		background: "rgba(0, 0, 0, 0.7)"
 	});
 };
 const endLoading = () => {
