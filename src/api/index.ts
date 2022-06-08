@@ -35,9 +35,11 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
+				console.log(config);
 				// * 将当前请求添加到 pending 中
 				axiosCanceler.addPending(config);
-				showFullScreenLoading();
+				// * 如果当前请求不需要显示 loading(在headers中指定 notLoading:true)
+				config.headers!.notLoading || showFullScreenLoading();
 				const token: string = globalStore.token;
 				return { ...config, headers: { "x-access-token": token } };
 			},
