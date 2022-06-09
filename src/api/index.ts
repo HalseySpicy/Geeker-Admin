@@ -35,11 +35,10 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
-				console.log(config);
 				// * 将当前请求添加到 pending 中
 				axiosCanceler.addPending(config);
-				// * 如果当前请求不需要显示 loading(在headers中指定 notLoading:true)
-				config.headers!.notLoading || showFullScreenLoading();
+				// * 如果当前请求不需要显示 loading，在api服务中通过指定的第三个参数： { headers: { noLoading: true } }来控制不显示loading，参见loginApi
+				config.headers!.noLoading || showFullScreenLoading();
 				const token: string = globalStore.token;
 				return { ...config, headers: { "x-access-token": token } };
 			},
@@ -57,7 +56,7 @@ class RequestHttp {
 				const { data, config } = response;
 				// * 在请求结束后，移除本次请求
 				axiosCanceler.removePending(config);
-				tryHideFullScreenLoading();
+				config.headers!.noLoading || tryHideFullScreenLoading();
 				// * 登陆失效（code == 599）
 				if (data.code == ResultEnum.OVERDUE) {
 					ElMessage.error(data.msg);
@@ -77,7 +76,7 @@ class RequestHttp {
 			},
 			async (error: AxiosError) => {
 				const { response } = error;
-				tryHideFullScreenLoading();
+				config.headers!.noLoading || tryHideFullScreenLoading();
 				// 根据响应的错误状态码，做不同的处理
 				if (response) return checkStatus(response.status);
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网)，断网处理:可以跳转到断网页面
