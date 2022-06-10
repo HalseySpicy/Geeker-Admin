@@ -186,10 +186,10 @@ Geeker-Admin
 
 ### 八、项目后台接口 🧩
 
-> 项目后台接口完全采用 Mock 数据，感觉以下 Mock 平台支持：
+> 项目后台接口完全采用 Mock 数据，感谢以下 Mock 平台支持
 
-- fastmock： https://www.fastmock.site/
-- easymock：https://mock.mengxuegu.com/
+- FastMock： https://www.fastmock.site/
+- EasyMock：https://mock.mengxuegu.com/
 
 ### 九、微信交流群
 
