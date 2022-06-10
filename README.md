@@ -2,28 +2,27 @@
 
 ![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
-## 前言 📖
+### 前言 📖
 
-> Geeker Admin，是基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发了三个月左右 🕒🕒。项目中很多功能、样式都是借鉴别的管理系统，但代码是完全自己手写的，整个项目还有很多地方不完善，后期会持续更新。项目中有很多地方写得不是很好，希望大家能多提意见。
+> Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发 🕒🕒。项目中很多功能、样式都是借鉴其它的管理系统，但代码是完全自己编写的，整个项目还有很多地方不完善，后期会持续更新（项目文档），希望大家能多提意见。
 
-## ？为什么开发这个管理系统 🤷‍♂️
+### ？为什么开发这个管理系统 🤷‍♂️
 
-> 1、主要是学习下 Vue3 + TypeScript  
-> 2、目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
+- 主要是学习下 Vue3 + TypeScript
+- 目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
-## 一、在线预览 👀
+### 一、在线预览 👀
 
 - Link：http://admin.spicyboy.cn
 
-## 二、Git 仓库地址 (欢迎 Star⭐)
+### 二、Git 仓库地址 (欢迎 Star⭐)
 
 - Gitee：https://gitee.com/laramie/Geeker-Admin
-
 - GitHub：https://github.com/HalseySpicy/Geeker-Admin
 
-## 三、🔨🔨🔨 项目功能
+### 三、🔨🔨🔨 项目功能
 
-- 🚀 使用 Vue3.2 开发（单文件组件 `＜script setup＞`）
+- 🚀 使用 Vue3.2 开发，单文件组件 `＜script setup＞`
 - 🚀 采用 Vite2 作为项目开发、打包工具（配置了 Gzip 打包、TSX 语法、跨域代理、打包预览工具……）
 - 🚀 整个项目集成了 TypeScript （完全是为了想学习 🤣）
 - 🚀 使用 Pinia🍍 替代 Vuex，轻量、简单、易用（香啊~🤤 集成了持久化插件）
@@ -37,7 +36,7 @@
 - 🚀 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范（STANDARD.md 文件）
 - 🚀 使用 husky、lint-staged、commitlint、commitizen、cz-git 规范提交信息（STANDARD.md 文件）
 
-## 四、安装使用步骤
+### 四、安装使用步骤 📔
 
 - **Clone：**
 
@@ -52,13 +51,13 @@ git clone https://github.com/HalseySpicy/Geeker-Admin.git
 
 ```text
 npm install
-cnpn install
+cnpm install
 
 # npm install 安装失败，请升级 nodejs 到 16 以上，或尝试使用以下命令：
 npm install --registry=https://registry.npm.taobao.org
 
-# 这里没用，只是为了指定版本
-npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.2 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 qs@6.10.3 vue@3.2.25 vue-router@4.0.12 vue-i18n@9.1.9 vue3-seamless-scroll@1.2.0 --save
+# 暂时没用，只是为了指定版本
+npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.5 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persist@1.0.0 qs@6.10.3 vue@3.2.25 vue-router@4.0.12 vue-i18n@9.1.9 vue3-seamless-scroll@1.2.0 --save
 ```
 
 - **Run：**
@@ -90,42 +89,42 @@ npm run lint:eslint
 # prettier 格式化代码
 npm run lint:prettier
 
-# stylelint 格式化 css 样式
+# stylelint 格式化样式
 lint:stylelint
 ```
 
 - **commit：**
 
 ```text
-# 提交代码（会自动执行 lint:lint-staged 命令）
+# 提交代码（提交前会自动执行 lint:lint-staged 命令）
 npm run commit
 ```
 
-## 五、项目截图
+### 五、项目截图 📷
 
-### 1、登录页：
+#### 1、登录页：
 
 ![login_bg03](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login_bg03.png)
 
 ![login_dark01](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login_dark01.png)
 
-### 2、首页：
+#### 2、首页：
 
 ![home_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home_light.png)
 
 ![home-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602145003.png)
 
-### 3、表格页：
+#### 3、表格页：
 
 ![table_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table_light.png)
 
 ![table-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602145016.png)
 
-### 4、数据大屏：
+#### 4、数据大屏：
 
 ![dataScreen02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602170253.png)
 
-## 六、文件资源目录 📚
+### 六、文件资源目录 📚
 
 ```text
 Geeker-Admin
@@ -163,7 +162,7 @@ Geeker-Admin
 ├─ .stylelintignore       # 忽略 stylelint 格式化
 ├─ commitlint.config.js   # git 提交规范配置
 ├─ index.html             # 入口 html
-├─ LICENSE                # 开源协议
+├─ LICENSE                # 开源协议文件
 ├─ lint-staged.config     # lint-staged 配置
 ├─ package-lock.json      # 包版本锁
 ├─ package.json           # 包管理
@@ -175,7 +174,7 @@ Geeker-Admin
 └─ vite.config.ts         # vite 配置
 ```
 
-## 七、浏览器支持
+### 七、浏览器支持
 
 > 默认支持以下浏览器，vue3.2 不支持 IE 浏览器。更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ESModule)
 >
@@ -185,18 +184,29 @@ Geeker-Admin
 | :-----------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
 |                              last 2 versions                              |                                 last 2 versions                                 |                                last 2 versions                                |                                last 2 versions                                |
 
-## 八、项目后台接口 🧩
+### 八、项目后台接口 🧩
 
-> 项目后台接口完全采用 Mock 数据  
-> 推荐一个在线 Mock 平台： https://www.fastmock.site/
+> 项目后台接口完全采用 Mock 数据，感觉以下 Mock 平台支持：
 
-## 九、Vue3 优秀项目推荐 ✨
+- fastmock： https://www.fastmock.site/
+- easymock：https://mock.mengxuegu.com/
 
-- gin-vue-admin：https://github.com/flipped-aurora/gin-vue-admin
-- vue-vben-admin：https://github.com/vbenjs/vue-vben-admin
+### 九、微信交流群
 
-## 十、微信交流群
+> **😀 微信群超过 200 人了，请加我好友，我拉大家进群**
 
-> **😀 微信群超过 200 人了，请加我好友，我拉大家进群。**
+|                                                      微信二维码                                                       |
+| :-------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220610141657.png" alt="Wechat QRcode" width=170> |
 
-![weixina](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220531123001.png)
+### 十、捐赠 🍵
+
+> **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式鼓励我**
+
+- **Star、Fork、Watch** 一键三连 🚀🚀
+
+- 通过 **微信、支付宝** 一次性捐款，够维护访问地址就行 🤣🤣
+
+|                                                         微信                                                          |                                                        支付宝                                                         |
+| :-------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220610144145.png" alt="Wechat QRcode" width=170> | <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220610144200.png" alt="Alipay QRcode" width=170> |
