@@ -28,7 +28,7 @@
 		"js-md5": "^0.7.3",
 		"nprogress": "^0.2.0",
 		"pinia": "^2.0.12",
-		"pinia-plugin-persist": "^1.0.0",
+		"pinia-plugin-persistedstate": "^1.6.1",
 		"qs": "^6.10.3",
 		"vue": "^3.2.25",
 		"vue-i18n": "^9.1.9",

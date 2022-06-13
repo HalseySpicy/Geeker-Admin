@@ -42,6 +42,7 @@
 		"openxmlformats",
 		"pageable",
 		"Parens",
+		"persistedstate",
 		"Pinia",
 		"Prefixs",
 		"singleline",

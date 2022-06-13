@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { GlobalState, ThemeConfigProp } from "./interface";
 import { createPinia } from "pinia";
-import piniaPersist from "pinia-plugin-persist";
 import piniaPersistConfig from "@/config/piniaPersist";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 // defineStore 调用后返回一个函数，调用该函数获得 Store 实体
 export const GlobalStore = defineStore({
@@ -54,6 +54,6 @@ export const GlobalStore = defineStore({
 
 // piniaPersist(持久化)
 const pinia = createPinia();
-pinia.use(piniaPersist);
+pinia.use(piniaPluginPersistedstate);
 
 export default pinia;

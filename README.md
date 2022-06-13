@@ -57,7 +57,7 @@ cnpm install
 npm install --registry=https://registry.npm.taobao.org
 
 # 暂时没用，只是为了指定版本
-npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.5 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persist@1.0.0 qs@6.10.3 vue@3.2.25 vue-router@4.0.12 vue-i18n@9.1.9 vue3-seamless-scroll@1.2.0 --save
+npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.5 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.10.3 vue@3.2.25 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 --save
 ```
 
 - **Run：**

@@ -9,8 +9,8 @@ import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
 
 // 配置element中英文
-import zhCn from "element-plus/lib/locale/lang/zh-cn";
-import en from "element-plus/lib/locale/lang/en";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import en from "element-plus/es/locale/lang/en";
 
 const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格
