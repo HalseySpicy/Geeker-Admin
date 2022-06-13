@@ -1,3 +1,4 @@
+// 自定义 element 暗黑模式样式
 html.dark {
 	// * element plus(可以全部注释掉，只是写在这里方便使用😀)
 	// --el-color-primary: #409eff;
@@ -161,6 +162,9 @@ html.dark {
 			.menu {
 				background-color: var(--el-bg-color) !important;
 				border-right: var(--geeker-border-light) !important;
+				.logo {
+					border-bottom: var(--geeker-border-light) !important;
+				}
 				.el-menu,
 				.el-sub-menu,
 				.el-sub-menu__title {

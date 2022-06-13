@@ -103,7 +103,7 @@
 			height: 52px;
 		}
 
-		// 解决表格空白样式不居中问题(仅在element-plus中)
+		// 解决表格数据为空时样式不居中问题(仅在element-plus中)
 		.el-table__empty-block {
 			position: absolute;
 			top: 50%;

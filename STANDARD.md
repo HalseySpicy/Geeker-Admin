@@ -85,10 +85,6 @@ npm install eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-v
 
 ![ESLint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/ESLint.png)
 
-- **TSLint：**
-
-![TSLint](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/TSLint.png)
-
 ### 3、配置 ESLint：
 
 ```javascript

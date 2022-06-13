@@ -14,9 +14,9 @@ import ElementPlus from "element-plus";
 import * as Icons from "@element-plus/icons-vue";
 // element css
 import "element-plus/dist/index.css";
-// element dark
+// element dark(内置暗黑模式)
 import "element-plus/theme-chalk/dark/css-vars.css";
-// custom element dark
+// custom element dark(自定义暗黑模式)
 import "@/styles/element-dark.scss";
 // custom element css
 import "@/styles/element.scss";
@@ -24,7 +24,7 @@ import "@/styles/element.scss";
 import directives from "@/directives/index";
 // vue Router
 import router from "@/routers/index";
-// i18n
+// vue i18n
 import I18n from "@/language/index";
 // pinia store
 import pinia from "@/store/index";
