@@ -7,4 +7,4 @@ export const HOME_URL: string = "/home/index";
 export const TABS_BLACK_LIST: string[] = ["/403", "/404", "/500", "/layout", "/login", "/dataScreen"];
 
 // * 高德地图key
-export const MAP_KEY: string = "20f12aae660c04de86f993d3eff590a0";
+export const MAP_KEY: string = "";

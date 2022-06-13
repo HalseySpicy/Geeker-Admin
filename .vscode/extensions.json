@@ -3,7 +3,6 @@
 		"vue.volar",
 		"hollowtree.vue-snippets",
 		"vue.vscode-typescript-vue-plugin",
-		"ms-vscode.vscode-typescript-tslint-plugin",
 		"stylelint.vscode-stylelint",
 		"dbaeumer.vscode-eslint",
 		"editorconfig.editorconfig",
