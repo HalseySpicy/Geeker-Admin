@@ -46,10 +46,9 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 		}
 	});
 
-	// 设置表单查询默认值 && 获取表格数据
+	// 设置表单查询默认值 && 获取表格数据(reset函数的作用刚好是这两个功能)
 	onMounted(() => {
-		state.searchParam = state.initSearchParam;
-		getTableList();
+		reset();
 	});
 
 	/**
