@@ -5,7 +5,7 @@
 			<el-table height="575" :data="colSetting" :border="true">
 				<el-table-column prop="label" label="列名" />
 				<el-table-column prop="name" label="显示" v-slot="scope">
-					<el-switch v-model="scope.row.isShow"></el-switch>
+					<el-switch v-model="scope.row.isShow" @click="switchShow"></el-switch>
 				</el-table-column>
 				<template #empty>
 					<div class="table-empty">
@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts" name="colSetting">
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 
-defineProps<{ colSetting: Partial<ColumnProps>[]; tableRef: any }>();
+const props = defineProps<{ colSetting: Partial<ColumnProps>[]; tableRef: any }>();
 
 const drawerVisible = ref<boolean>(false);
 // 打开列设置
@@ -30,12 +30,12 @@ const openColSetting = (): void => {
 	drawerVisible.value = true;
 };
 
-// 列显隐时重新布局 table（虽然切换时表格不抖动了，但是表格会出现横向滚动条，所以还是让它切换抖动吧啊🤣）
-// const switchShow = () => {
-// 	nextTick(() => {
-// 		props.tableRef.doLayout();
-// 	});
-// };
+// 列显隐时重新布局 table（防止表格抖动,隐藏显示之后会出现横向滚动条,element内部问题）
+const switchShow = () => {
+	nextTick(() => {
+		props.tableRef.doLayout();
+	});
+};
 
 defineExpose({
 	openColSetting

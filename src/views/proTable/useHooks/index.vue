@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts" name="useHooks">
-import { ref, onMounted } from "vue";
+import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { defaultFormat } from "@/utils/util";
 import { User } from "@/api/interface";
@@ -151,8 +151,23 @@ import {
 	exportUserInfo
 } from "@/api/modules/user";
 
-const { tableData, searchShow, pageable, searchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-	useTable(getUserList);
+// 如果表格需要初始化请求参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上)
+const initParam = reactive({
+	type: 1
+});
+
+const {
+	tableData,
+	searchShow,
+	pageable,
+	searchParam,
+	initSearchParam,
+	getTableList,
+	search,
+	reset,
+	handleSizeChange,
+	handleCurrentChange
+} = useTable(getUserList, initParam);
 
 // 数据多选
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
@@ -160,9 +175,8 @@ const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelectio
 // 用户按钮权限
 const { BUTTONS } = useAuthButtons();
 
-onMounted(() => {
-	getTableList();
-});
+// 设置搜索表单默认参数
+initSearchParam.value = { createTime: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"] };
 
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {

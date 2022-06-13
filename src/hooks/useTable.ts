@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, onMounted, toRefs } from "vue";
 
 /**
  * @description table 页面操作方法封装
@@ -28,13 +28,11 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 		// 初始化默认的查询参数
 		initSearchParam: {},
 		// 总参数(包含分页和查询参数)
-		totalParam: {},
-		// 是否点击过搜索(解决未点击搜索情况下，输入筛选条件然后点击下一页实际带筛选参数的问题)
-		hasSearched: false
+		totalParam: {}
 	});
 
 	/**
-	 * @description 分页查询数据(只包括分页和表格字段排序,其他排序方式可自行配置)
+	 * @description 分页查询参数(只包括分页和表格字段排序,其他排序方式可自行配置)
 	 * */
 	const pageParam = computed({
 		get: () => {
@@ -46,6 +44,12 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 		set: (newVal: any) => {
 			console.log("我是分页更新之后的值", newVal);
 		}
+	});
+
+	// 设置表单查询默认值 && 获取表格数据
+	onMounted(() => {
+		state.searchParam = state.initSearchParam;
+		getTableList();
 	});
 
 	/**
@@ -73,10 +77,7 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 	 * */
 	const updatedTotalParam = () => {
 		state.totalParam = {};
-		// 如果没有点击过搜索，那么就不带查询参数
-		if (!state.hasSearched) return Object.assign(state.totalParam, pageParam.value);
-
-		// 处理查询参数，可以给查询参数加前缀操作
+		// 处理查询参数，可以给查询参数加自定义前缀操作
 		let nowSearchParam: { [propName: string]: any } = {};
 		// 防止手动清空输入框携带参数（可以自定义查询参数前缀）
 		for (let key in state.searchParam) {
@@ -103,7 +104,6 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 	 * */
 	const search = () => {
 		state.pageable.pageNum = 1;
-		state.hasSearched = true;
 		getTableList();
 	};
 
@@ -113,7 +113,6 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 	 * */
 	const reset = () => {
 		state.pageable.pageNum = 1;
-		state.hasSearched = false;
 		state.searchParam = {};
 		// 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
 		Object.keys(state.initSearchParam).forEach(key => {

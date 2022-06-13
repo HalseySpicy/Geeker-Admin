@@ -148,18 +148,18 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		width: 160
 	},
-	{
-		prop: "avatar",
-		label: "头像",
-		width: 120,
-		image: true,
-		renderHeader
-	},
+	// {
+	// 	prop: "avatar",
+	// 	label: "头像",
+	// 	width: 120,
+	// 	image: true
+	// },
 	{
 		prop: "operation",
 		label: "操作",
 		width: 320,
-		fixed: "right"
+		fixed: "right",
+		renderHeader
 	}
 ];
 

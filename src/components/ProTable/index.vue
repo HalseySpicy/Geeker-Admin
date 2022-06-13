@@ -113,7 +113,7 @@
 </template>
 
 <script setup lang="ts" name="proTable">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { Refresh, Operation, Search } from "@element-plus/icons-vue";
@@ -174,7 +174,6 @@ const searchColumns = props.columns.filter(item => item.search);
 searchColumns.forEach(column => {
 	if (column.initSearchParam !== undefined && column.initSearchParam !== null) {
 		initSearchParam.value[column.prop!] = column.initSearchParam;
-		searchParam.value[column.prop!] = column.initSearchParam;
 	}
 });
 
@@ -187,11 +186,6 @@ const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
 const openColSetting = () => {
 	colRef.value.openColSetting();
 };
-
-// 获取表格数据
-onMounted(() => {
-	getTableList();
-});
 
 // 暴露给父组件的参数和方法
 defineExpose({ searchParam, refresh: getTableList });

@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject } from "vue";
+import { ref, reactive, inject, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import { InjectProps } from "../interface/index";
@@ -89,6 +89,17 @@ const resetForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.resetFields();
 };
+
+onMounted(() => {
+	// 监听enter事件（调用登录）
+	document.onkeydown = (e: any) => {
+		e = window.event || e;
+		if (e.code === "Enter" || e.code === "enter") {
+			if (loading.value) return;
+			login(loginFormRef.value);
+		}
+	};
+});
 
 // * 以下数据都为自己测试使用，不参与功能开发
 // inject
