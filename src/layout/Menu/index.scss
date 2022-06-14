@@ -6,10 +6,10 @@
 	background-color: #191a20;
 	transition: all 0.3s ease;
 	.logo {
-		height: 55px;
-		border-bottom: 2px solid #1d1e26;
-		box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
 		box-sizing: border-box;
+		height: 55px;
+		border-bottom: 1px solid #282a35;
+		box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
 		span {
 			font-size: 22px;
 			font-weight: bold;
@@ -39,8 +39,8 @@
 					bottom: 0;
 					left: 0;
 					width: 4px;
-					background: $primary-color;
 					content: "";
+					background: $primary-color;
 				}
 			}
 		}
@@ -66,8 +66,8 @@
 				bottom: 0;
 				left: 0;
 				width: 4px;
-				background: $primary-color;
 				content: "";
+				background: $primary-color;
 			}
 			i,
 			span {

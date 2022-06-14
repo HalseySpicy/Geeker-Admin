@@ -1,12 +1,12 @@
 .header {
+	box-sizing: border-box;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	height: 55px;
 	padding: 0 15px;
 	background-color: #ffffff;
 	border-bottom: 1px solid #f6f6f6;
-	box-sizing: border-box;
 	.header-lf {
 		.collapse-icon {
 			margin-right: 20px;
@@ -40,8 +40,8 @@
 		}
 		.theme-item {
 			display: flex;
-			justify-content: space-between;
 			align-items: center;
+			justify-content: space-between;
 			span {
 				font-size: 14px;
 			}

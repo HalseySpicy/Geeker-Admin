@@ -210,13 +210,13 @@ defineExpose({
 	height: calc(100% - 56px);
 }
 .echarts-header {
+	box-sizing: border-box;
 	display: flex;
 	height: 36px;
 	margin: 10px 10px 0;
 	line-height: 36px;
 	background: url("../images/rankingChart-bg.png") no-repeat;
 	background-size: 100% 100%;
-	box-sizing: border-box;
 	span {
 		width: 18%;
 		margin-left: 4px;

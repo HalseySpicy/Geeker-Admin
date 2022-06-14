@@ -198,12 +198,12 @@ defineExpose({
 	height: 100%;
 }
 :deep(.annual-tooTip) {
+	box-sizing: border-box;
 	width: 206px;
 	height: 103px;
 	padding: 5px 20px;
 	background: url("../images/contrast-bg.png") no-repeat;
 	background-size: 100% 100%;
-	box-sizing: border-box;
 	.annual-month {
 		display: inline-block;
 		margin-bottom: 2px;

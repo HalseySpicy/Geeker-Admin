@@ -1,13 +1,13 @@
 /* 常用 flex */
 .flx-center {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 }
 .flx-justify-between {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
 .flx-align-center {
 	display: flex;
@@ -51,13 +51,13 @@
 }
 .fade-transform-enter-from {
 	opacity: 0;
-	transform: translateX(-30px);
 	transition: all 0.2s;
+	transform: translateX(-30px);
 }
 .fade-transform-leave-to {
 	opacity: 0;
-	transform: translateX(30px);
 	transition: all 0.2s;
+	transform: translateX(30px);
 }
 
 /* Breadcrumb */

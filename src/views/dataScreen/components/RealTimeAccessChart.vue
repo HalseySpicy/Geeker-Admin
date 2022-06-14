@@ -209,15 +209,15 @@ defineExpose({
 .actual-total {
 	position: relative;
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
+	justify-content: flex-end;
 	height: 50px;
 	margin-top: 10px;
 	margin-right: 4px;
 	.actual-item {
 		display: flex;
-		justify-content: center;
 		align-items: center;
+		justify-content: center;
 		width: 52px;
 		height: 50px;
 		margin-right: 1px;

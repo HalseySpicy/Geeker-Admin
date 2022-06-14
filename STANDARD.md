@@ -162,7 +162,7 @@ module.exports = {
 ### 1、安装 StyleLint 相关插件：
 
 ```text
-npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-order postcss postcss-html stylelint-config-prettier -D
+npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-config-recess-order postcss postcss-html stylelint-config-prettier -D
 ```
 
 |               依赖                |                                                                     作用描述                                                                     |
@@ -175,7 +175,7 @@ npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelin
 |  stylelint-config-standard-scss   |                                          扩展 stylelint-config-standard 共享配置，并为 SCSS 配置其规则                                           |
 |              postcss              |                                                              postcss-html 的依赖包                                                               |
 |           postcss-html            |                                                   用于解析 HTML（和类似 HTML）的 PostCSS 语法                                                    |
-|          stylelint-order          |                                                               属性的排序（插件包）                                                               |
+|   stylelint-config-recess-order   |                                                               属性的排序（插件包）                                                               |
 |     stylelint-config-prettier     |                                                   关闭所有不必要的或可能与 Prettier 冲突的规则                                                   |
 
 ### 2、安装 Vscode 插件（Stylelint）：
@@ -204,14 +204,13 @@ npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelin
 module.exports = {
 	/* 继承某些已有的规则 */
 	extends: [
-		"stylelint-config-standard",
-		"stylelint-config-html/vue",
-		"stylelint-config-standard-scss",
-		"stylelint-config-recommended-vue/scss",
-		"stylelint-config-prettier"
+		"stylelint-config-standard", // 配置stylelint拓展插件
+		"stylelint-config-html/vue", // 配置 vue 中 template 样式格式化
+		"stylelint-config-standard-scss", // 配置stylelint scss插件
+		"stylelint-config-recommended-vue/scss", // 配置 vue 中 scss 样式格式化
+		"stylelint-config-recess-order", // 配置stylelint css属性书写顺序插件,
+		"stylelint-config-prettier" // 配置stylelint和prettier兼容
 	],
-	/* 使用排序插件 */
-	plugins: ["stylelint-order"],
 	overrides: [
 		// 扫描 .vue/html 文件中的<style>标签内的样式
 		{
@@ -236,90 +235,14 @@ module.exports = {
 		"property-no-unknown": null, // 禁止未知的属性(true 为不允许)
 		"no-empty-source": null, // 禁止空源码
 		"declaration-block-trailing-semicolon": null, // 要求或不允许在声明块中使用尾随分号 string："always(必须始终有一个尾随分号)"|"never(不得有尾随分号)"
+		"selector-class-pattern": null, // 强制选择器类名的格式
+		"scss/at-import-partial-extension": null, // 解决不能引入scss文件
+		"value-no-vendor-prefix": null, // 关闭 vendor-prefix(为了解决多行省略 -webkit-box)
 		"selector-pseudo-class-no-unknown": [
 			true,
 			{
-				ignorePseudoClasses: ["deep"]
+				ignorePseudoClasses: ["global", "v-deep", "deep"]
 			}
-		],
-		// 样式的排序规则
-		"order/properties-order": [
-			"position",
-			"top",
-			"right",
-			"bottom",
-			"left",
-			"z-index",
-			"display",
-			"justify-content",
-			"align-items",
-			"float",
-			"clear",
-			"overflow",
-			"overflow-x",
-			"overflow-y",
-			"margin",
-			"margin-top",
-			"margin-right",
-			"margin-bottom",
-			"margin-left",
-			"padding",
-			"padding-top",
-			"padding-right",
-			"padding-bottom",
-			"padding-left",
-			"width",
-			"min-width",
-			"max-width",
-			"height",
-			"min-height",
-			"max-height",
-			"font-size",
-			"font-family",
-			"font-weight",
-			"border",
-			"border-style",
-			"border-width",
-			"border-color",
-			"border-top",
-			"border-top-style",
-			"border-top-width",
-			"border-top-color",
-			"border-right",
-			"border-right-style",
-			"border-right-width",
-			"border-right-color",
-			"border-bottom",
-			"border-bottom-style",
-			"border-bottom-width",
-			"border-bottom-color",
-			"border-left",
-			"border-left-style",
-			"border-left-width",
-			"border-left-color",
-			"border-radius",
-			"text-align",
-			"text-justify",
-			"text-indent",
-			"text-overflow",
-			"text-decoration",
-			"white-space",
-			"color",
-			"background",
-			"background-position",
-			"background-repeat",
-			"background-size",
-			"background-color",
-			"background-clip",
-			"opacity",
-			"filter",
-			"list-style",
-			"outline",
-			"visibility",
-			"box-shadow",
-			"text-shadow",
-			"resize",
-			"transition"
 		]
 	}
 };
@@ -360,8 +283,7 @@ trim_trailing_whitespace = false # 关闭末尾空格修剪
 | :-----------------------------: | :----------------------------------------------------------------------------: |
 |              husky              |           操作 **git** 钩子的工具（在 **git xx** 之前执行某些命令）            |
 |           lint-staged           |  在提交之前进行 **eslint** 校验，并使用 **prettier** 格式化本地暂存区的代码，  |
-|           commitlint            |             校验 **git commit** 信息是否符合规范，保证团队的一致性             |
-|         @commitlint/cli         |                        用来在命令行中提示用户提交信息的                        |
+|         @commitlint/cli         |             校验 **git commit** 信息是否符合规范，保证团队的一致性             |
 | @commitlint/config-conventional |                             **Anglar** 的提交规范                              |
 |           commitizen            | 基于 **Node.js** 的 **git commit** 命令行工具，生成标准化的 **commit message** |
 |             cz-git              |    一款工程性更强，轻量级，高度自定义，标准输出格式的 **commitize** 适配器     |
@@ -417,8 +339,6 @@ module.exports = {
 > **安装：**
 
 ```text
-// commitlint && @commitlint/cli 其中一个插件都行
-npm i commitlint @commitlint/config-conventional -D
 npm i @commitlint/cli @commitlint/config-conventional -D
 ```
 

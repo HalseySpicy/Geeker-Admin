@@ -12,8 +12,8 @@
 				.first-loading-wrap {
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
 					align-items: center;
+					justify-content: center;
 					width: 100%;
 					height: 90vh;
 				}
@@ -22,18 +22,18 @@
 				}
 				.first-loading-wrap .loading-wrap {
 					display: flex;
-					justify-content: center;
 					align-items: center;
+					justify-content: center;
 					padding: 98px;
 				}
 				.dot {
 					position: relative;
+					box-sizing: border-box;
 					display: inline-block;
 					width: 32px;
 					height: 32px;
 					font-size: 32px;
 					transform: rotate(45deg);
-					box-sizing: border-box;
 					animation: ant-rotate 1.2s infinite linear;
 				}
 				.dot i {
@@ -45,8 +45,8 @@
 					border-radius: 100%;
 					opacity: 0.3;
 					transform: scale(0.75);
-					animation: ant-spin-move 1s infinite linear alternate;
 					transform-origin: 50% 50%;
+					animation: ant-spin-move 1s infinite linear alternate;
 				}
 				.dot i:nth-child(1) {
 					top: 0;

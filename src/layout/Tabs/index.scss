@@ -15,10 +15,10 @@
 			width: calc(100% - 120px);
 		}
 		.el-tabs--card > .el-tabs__header {
+			box-sizing: border-box;
 			height: 40px;
 			padding: 0 10px;
 			margin: 0;
-			box-sizing: border-box;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__nav {
 			border: none;

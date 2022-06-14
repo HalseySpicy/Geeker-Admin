@@ -198,6 +198,7 @@ defineExpose({
 	width: 100%;
 	height: 100%;
 	:deep(.lineChart-bg) {
+		box-sizing: border-box;
 		display: flex;
 		align-items: center;
 		width: 180px;
@@ -205,7 +206,6 @@ defineExpose({
 		padding-left: 20px;
 		background: url("../images/line-bg.png") no-repeat;
 		background-size: 100% 100%;
-		box-sizing: border-box;
 		span {
 			font-size: 12px;
 			color: rgb(255 255 255 / 80%);
