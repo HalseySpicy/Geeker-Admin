@@ -15,7 +15,7 @@ const debounce: Directive = {
 		let timer: NodeJS.Timeout | null = null;
 		el.__handleClick__ = function () {
 			if (timer) {
-				clearInterval(timer);
+				setTimeout(timer);
 			}
 			timer = setTimeout(() => {
 				binding.value();
