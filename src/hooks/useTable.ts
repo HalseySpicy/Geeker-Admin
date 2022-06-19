@@ -3,12 +3,11 @@ import { reactive, computed, onMounted, toRefs } from "vue";
 
 /**
  * @description table 页面操作方法封装
- * @param apiUrl 获取表格数据 ApiUrl(必传)
- * @param initParam 获取数据初始化参数(不必传，默认为{})
- * @param isPageable 是否有分页(不必传，默认为true)
- * @param tableRef 当前表格的DOM(不必传，默认为“”)
+ * @param {Function} api 获取表格数据 api 方法(必传)
+ * @param {Object} initParam 获取数据初始化参数(不必传，默认为{})
+ * @param {Boolean} isPageable 是否有分页(不必传，默认为true)
  * */
-export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any = {}, isPageable: boolean = true) => {
+export const useTable = (api: (params: any) => Promise<any>, initParam: object = {}, isPageable: boolean = true) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],
@@ -46,7 +45,7 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 		}
 	});
 
-	// 设置表单查询默认值 && 获取表格数据(reset函数的作用刚好是这两个功能)
+	// 初始化的时候需要做的事情就是 设置表单查询默认值 && 获取表格数据(reset函数的作用刚好是这两个功能)
 	onMounted(() => {
 		reset();
 	});
@@ -57,10 +56,10 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 	 * */
 	const getTableList = async () => {
 		try {
-			// 更新查询参数
+			// 先更新查询参数
 			updatedTotalParam();
 			Object.assign(state.totalParam, initParam);
-			const { data } = await apiUrl(state.totalParam);
+			const { data } = await api(state.totalParam);
 			state.tableData = isPageable ? data.datalist : data;
 			// 解构后台返回的分页数据(如果有分页更新分页信息)
 			const { pageNum, pageSize, total } = data;
@@ -90,7 +89,7 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 
 	/**
 	 * @description 更新分页信息
-	 * @param resPageable 后台返回的分页数据
+	 * @param {Object} resPageable 后台返回的分页数据
 	 * @return void
 	 * */
 	const updatePageable = (resPageable: Table.Pageable) => {
@@ -122,7 +121,7 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 
 	/**
 	 * @description 每页条数改变
-	 * @param val 当前条数
+	 * @param {Number} val 当前条数
 	 * @return void
 	 * */
 	const handleSizeChange = (val: number) => {
@@ -133,7 +132,7 @@ export const useTable = (apiUrl: (params: any) => Promise<any>, initParam: any =
 
 	/**
 	 * @description 当前页改变
-	 * @param val 当前页
+	 * @param {Number} val 当前页
 	 * @return void
 	 * */
 	const handleCurrentChange = (val: number) => {

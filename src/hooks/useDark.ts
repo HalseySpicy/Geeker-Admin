@@ -8,6 +8,7 @@ export const useDark = () => {
 	const globalStore = GlobalStore();
 	const themeConfig = computed(() => globalStore.themeConfig);
 
+	// 切换模式
 	const switchTheme = () => {
 		const body = document.documentElement as HTMLElement;
 		if (themeConfig.value.isDark) body.setAttribute("class", "dark");

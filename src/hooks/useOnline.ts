@@ -1,7 +1,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 
 /**
- * @description 用户网络是否可用
+ * @description 网络是否可用
  * */
 export const useOnline = () => {
 	const online = ref(true);

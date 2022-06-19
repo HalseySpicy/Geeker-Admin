@@ -2,8 +2,8 @@ import { isArray } from "@/utils/is";
 
 /**
  * @description 获取localStorage
- * @param key Storage名称
- * @returns {String} Storage值
+ * @param {String} key Storage名称
+ * @return string
  */
 export function localGet(key: string) {
 	const value = window.localStorage.getItem(key);
@@ -16,8 +16,9 @@ export function localGet(key: string) {
 
 /**
  * @description 存储localStorage
- * @param key Storage名称
- * @param value Storage值
+ * @param {String} key Storage名称
+ * @param {Any} value Storage值
+ * @return void
  */
 export function localSet(key: string, value: any) {
 	window.localStorage.setItem(key, JSON.stringify(value));
@@ -25,15 +26,16 @@ export function localSet(key: string, value: any) {
 
 /**
  * @description 清除localStorage
- * @param key Storage名称
+ * @param {String} key Storage名称
+ * @return void
  */
 export function localRemove(key: string) {
 	window.localStorage.removeItem(key);
 }
 
 /**
- * 清除所有localStorage
- * @returns {String}
+ * @description 清除所有localStorage
+ * @return void
  */
 export function localClear() {
 	window.localStorage.clear();
@@ -41,8 +43,8 @@ export function localClear() {
 
 /**
  * @description 对象数组深克隆
- * @param obj 源对象
- * @returns {obj} 克隆后的对象
+ * @param {Object} obj 源对象
+ * @return object
  */
 export function deepCopy<T>(obj: any): T {
 	let newObj: any;
@@ -63,8 +65,8 @@ export function deepCopy<T>(obj: any): T {
 
 /**
  * @description 判断数据类型
- * @param val 需要判断类型的数据
- * @returns {string} 数据类型
+ * @param {Any} val 需要判断类型的数据
+ * @return string
  */
 export function isType(val: any) {
 	if (val === null) return "null";
@@ -74,9 +76,9 @@ export function isType(val: any) {
 
 /**
  * @description 生成随机数
- * @param min 最小值
- * @param max 最大值
- * @returns {number}
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ * @return number
  */
 export function randomNum(min: number, max: number): number {
 	let num = Math.floor(Math.random() * (min - max) + max);
@@ -85,7 +87,7 @@ export function randomNum(min: number, max: number): number {
 
 /**
  * @description 获取浏览器默认语言
- * @returns {String} 语言
+ * @return string
  */
 export function getBrowserLang() {
 	let browserLang = navigator.language ? navigator.language : navigator.browserLanguage;
@@ -100,9 +102,9 @@ export function getBrowserLang() {
 
 /**
  * @description 递归查询当前路由所对应的tabPane（暂时没用了）
- * @param menuList 菜单列表
- * @param path 当前地址
- * @returns {Array} 当前路由所对应的tabPane
+ * @param {Array} menuList 菜单列表
+ * @param {String} path 当前地址
+ * @return array
  */
 export function getTabPane<T, U>(menuList: any[], path: U): T {
 	let result: any;
@@ -115,8 +117,10 @@ export function getTabPane<T, U>(menuList: any[], path: U): T {
 }
 
 /**
- * 使用递归处理路由菜单
- * @param newArr 所有菜单数组
+ * @description 使用递归处理路由菜单，生成一维数组
+ * @param {Array} menuList 所有菜单列表
+ * @param {Array} newArr 菜单的一维数组
+ * @return array
  */
 export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
 	routerList.forEach((item: Menu.MenuOptions) => {
@@ -128,10 +132,10 @@ export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = 
 
 /**
  * @description 格式化表格单元格默认值
- * @param row 行
- * @param col 列
- * @param callValue 当前单元格值
- * @return {String} 格式化后的值
+ * @param {Number} row 行
+ * @param {Number} col 列
+ * @param {String} callValue 当前单元格值
+ * @return string
  * */
 export function defaultFormat(row: number, col: number, callValue: any) {
 	// 如果当前值为数组,使用 / 拼接（根据需求自定义）
@@ -141,10 +145,10 @@ export function defaultFormat(row: number, col: number, callValue: any) {
 
 /**
  * @description 根据枚举列表查询当需要的数据
- * @param callValue 当前单元格值
- * @param enumData 枚举列表
- * @param type 过滤类型（目前只有 tag）
- * @return {String} 格式化后的值
+ * @param {String} callValue 当前单元格值
+ * @param {Array} enumData 枚举列表
+ * @param {String} type 过滤类型（目前只有 tag）
+ * @return string
  * */
 export function filterEnum(callValue: any, enumData: any[] = [], type?: string): string {
 	let filterData = enumData.find(item => item.value === callValue);

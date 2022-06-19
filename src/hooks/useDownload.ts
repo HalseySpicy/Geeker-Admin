@@ -2,14 +2,15 @@ import { ElNotification } from "element-plus";
 
 /**
  * @description 接收数据流生成blob，创建链接，下载文件
- * @param url 导出表格的api地址(必传)
- * @param tempName 导出的文件名(必传)
- * @param params 导出的参数(默认为空对象)
- * @param isNotify 是否有导出消息提示(默认为 true)
- * @param fileType 导出的文件格式(默认为.xlsx)
+ * @param {Function} api 导出表格的api方法(必传)
+ * @param {String} tempName 导出的文件名(必传)
+ * @param {Object} params 导出的参数(默认为空对象)
+ * @param {Boolean} isNotify 是否有导出消息提示(默认为 true)
+ * @param {String} fileType 导出的文件格式(默认为.xlsx)
+ * @return void
  * */
 export const useDownload = async (
-	url: (param: any) => Promise<any>,
+	api: (param: any) => Promise<any>,
 	tempName: string,
 	params: any = {},
 	isNotify: boolean = true,
@@ -24,7 +25,7 @@ export const useDownload = async (
 		});
 	}
 	try {
-		const res = await url(params);
+		const res = await api(params);
 		// 这个地方的type,经测试不传也没事，因为zip文件不知道type是什么
 		// const blob = new Blob([res], {
 		// 	type: "application/vnd.ms-excel;charset=UTF-8"

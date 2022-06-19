@@ -6,15 +6,13 @@ import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
-
 import router from "@/routers";
 
 const globalStore = GlobalStore();
-
 const axiosCanceler = new AxiosCanceler();
 
 const config = {
-	// 默认地址
+	// 默认地址请求地址，可在 .env 开头文件中修改
 	baseURL: import.meta.env.VITE_API_URL as string,
 	// 设置超时时间（10s）
 	timeout: ResultEnum.TIMEOUT as number,

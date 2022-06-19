@@ -28,7 +28,7 @@ import { GlobalStore } from "@/store";
 const router = useRouter();
 const globalStore = GlobalStore();
 
-// logout
+// 退出登录
 const logout = () => {
 	ElMessageBox.confirm("您是否确认退出登录?", "温馨提示", {
 		confirmButtonText: "确定",
@@ -49,7 +49,7 @@ interface DialogExpose {
 }
 const infoRef = ref<null | DialogExpose>(null);
 const passwordRef = ref<null | DialogExpose>(null);
-// openDialog
+// 打开修改密码和个人信息弹窗
 const openDialog = (refName: string) => {
 	if (refName == "infoRef") return infoRef.value?.openDialog();
 	passwordRef.value?.openDialog();

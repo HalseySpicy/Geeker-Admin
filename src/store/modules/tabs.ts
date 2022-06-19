@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
 import { TabPaneProps } from "element-plus";
 import { TabsState } from "../interface";
-import piniaPersistConfig from "@/config/piniaPersist";
 import { HOME_URL, TABS_BLACK_LIST } from "@/config/config";
+import piniaPersistConfig from "@/config/piniaPersist";
 import router from "@/routers/index";
 
+// TabsStore
 export const TabsStore = defineStore({
 	id: "TabsState",
 	state: (): TabsState => ({

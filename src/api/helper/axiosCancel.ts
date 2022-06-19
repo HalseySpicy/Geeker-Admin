@@ -13,6 +13,7 @@ export class AxiosCanceler {
 	/**
 	 * @description: 添加请求
 	 * @param {Object} config
+	 * @return void
 	 */
 	addPending(config: AxiosRequestConfig) {
 		// * 在请求开始前，对之前的请求做检查取消操作

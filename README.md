@@ -104,9 +104,9 @@ npm run commit
 
 #### 1、登录页：
 
-![login_bg03](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login_bg03.png)
+![login-light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login-light.png)
 
-![login_dark01](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login_dark01.png)
+![login-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login-dark.png)
 
 #### 2、首页：
 

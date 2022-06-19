@@ -9,7 +9,7 @@ export const useSelection = () => {
 	// 选中的数据列表
 	const selectedList = ref([]);
 
-	// 当前选中的所有ids(数组)
+	// 当前选中的所有ids(数组)，可根据项目自行配置id字段
 	const selectedListIds = computed((): string[] => {
 		let ids: string[] = [];
 		selectedList.value.forEach(item => {

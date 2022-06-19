@@ -37,11 +37,12 @@ import { loadingSvg } from "@/utils/svg";
 import Logo from "./components/Logo.vue";
 import SubItem from "./components/SubItem.vue";
 
-const loading = ref(false);
-
 const route = useRoute();
 const menuStore = MenuStore();
 const authStore = AuthStore();
+
+// 菜单加载 loading
+const loading = ref(false);
 
 onMounted(async () => {
 	// 获取菜单列表
@@ -65,7 +66,7 @@ const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList);
 // aside 自适应
 const screenWidth = ref<number>(0);
 const screenHeight = ref<number>(0);
-//监听窗口大小
+// 监听窗口大小变化，合并 aside
 const listeningWindow = () => {
 	window.onresize = () => {
 		return (() => {

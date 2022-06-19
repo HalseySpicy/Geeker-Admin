@@ -1,8 +1,9 @@
 import { ElMessage } from "element-plus";
 
 /**
- * @description: 校验状态码
- * @param {number} status
+ * @description: 校验网络请求状态码
+ * @param {Number} status
+ * @return void
  */
 export const checkStatus = (status: number): void => {
 	switch (status) {

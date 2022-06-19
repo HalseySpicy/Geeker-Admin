@@ -41,8 +41,8 @@ import { ElNotification } from "element-plus";
 
 export interface ExcelParameterProps {
 	title: string; // 标题
-	tempUrl: (params: any) => Promise<any>; // 下载模板的Api
-	importUrl: (params: any) => Promise<any>; // 批量导入的Api
+	tempApi: (params: any) => Promise<any>; // 下载模板的Api
+	importApi: (params: any) => Promise<any>; // 批量导入的Api
 	getTableList: () => Promise<any>; // 获取表格数据的Api
 }
 
@@ -61,10 +61,10 @@ const acceptParams = (params?: any): void => {
 	dialogVisible.value = true;
 };
 
-// Excel模板下载
+// Excel 导入模板下载
 const downloadTemp = () => {
-	if (!parameter.value.tempUrl) return;
-	useDownload(parameter.value.tempUrl, `${parameter.value.title}模板`);
+	if (!parameter.value.tempApi) return;
+	useDownload(parameter.value.tempApi, `${parameter.value.title}模板`);
 };
 
 // 文件上传
@@ -72,13 +72,17 @@ const uploadExcel = async (param: any) => {
 	let excelFormData = new FormData();
 	excelFormData.append("file", param.file);
 	excelFormData.append("isCover", isCover.value as unknown as Blob);
-	const res = parameter.value.importUrl && (await parameter.value.importUrl(excelFormData));
+	if (!parameter.value.importApi) return;
+	const res = await parameter.value.importApi(excelFormData);
 	if (res.code !== 200) return param.onError();
 	parameter.value.getTableList && parameter.value.getTableList();
 	dialogVisible.value = false;
 };
 
-// 文件上传之前判断
+/**
+ * @description 文件上传之前判断
+ * @param file 上传的文件
+ * */
 const beforeExcelUpload = (file: any) => {
 	const isExcel =
 		file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -106,6 +110,7 @@ const handleExceed = (): void => {
 		type: "warning"
 	});
 };
+
 // 上传错误提示
 const excelUploadError = (): void => {
 	ElNotification({
@@ -114,6 +119,7 @@ const excelUploadError = (): void => {
 		type: "error"
 	});
 };
+
 // 上传成功提示
 const excelUploadSuccess = (): void => {
 	ElNotification({
