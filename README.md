@@ -11,11 +11,11 @@
 - 主要是学习下 Vue3 + TypeScript
 - 目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
-### 相关文档 📚
+### 📚 相关文档
 
-- 更新日志：[CHANGELOG.md](./CHANGELOG.md)
+- 项目更新日志：[CHANGELOG.md](./CHANGELOG.md)
 
-- 代码规范：[STANDARD.md](./STANDARD.md)
+- 代码规范文档：[STANDARD.md](./STANDARD.md)
 
 ### 一、在线预览 👀
 
@@ -62,7 +62,7 @@ cnpm install
 # npm install 安装失败，请升级 nodejs 到 16 以上，或尝试使用以下命令：
 npm install --registry=https://registry.npm.taobao.org
 
-# 暂时没用，只是为了指定版本
+# 这里只是为了指定依赖包版本，防止没有版本锁 lock 而安装最新依赖包，导致的项目报错
 npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.6 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.10.3 vue@3.2.25 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 --save
 ```
 
@@ -151,7 +151,7 @@ Geeker-Admin
 │  ├─ styles              # 全局样式
 │  ├─ typings             # 全局 ts 声明
 │  ├─ utils               # 工具库
-│  ├─ views               # 所有页面
+│  ├─ views               # 项目所有页面
 │  ├─ App.vue             # 入口页面
 │  ├─ env.d.ts            # ts 识别 vue 文件
 │  └─ main.ts             # 入口文件
@@ -169,13 +169,13 @@ Geeker-Admin
 ├─ commitlint.config.js   # git 提交规范配置
 ├─ index.html             # 入口 html
 ├─ LICENSE                # 开源协议文件
-├─ lint-staged.config     # lint-staged 配置
-├─ package-lock.json      # 包版本锁
-├─ package.json           # 包管理
+├─ lint-staged.config     # lint-staged 配置文件
+├─ package-lock.json      # 依赖包包版本锁
+├─ package.json           # 依赖包管理
 ├─ postcss.config.js      # postcss 配置
 ├─ README.md              # README 介绍
-├─ STANDARD.md            # 项目规范文档
-├─ stylelint.config.js    # stylelint 格式化配置
+├─ STANDARD.md            # 项目编码规范说明书
+├─ stylelint.config.js    # stylelint 样式格式化配置
 ├─ tsconfig.json          # typescript 全局配置
 └─ vite.config.ts         # vite 配置
 ```
@@ -207,7 +207,7 @@ Geeker-Admin
 
 ### 十、捐赠 🍵
 
-> **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式赞助我**
+> **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式支持我**
 
 - **Star、Fork、Watch** 一键三连 🚀🚀
 

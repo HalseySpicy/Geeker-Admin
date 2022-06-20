@@ -157,7 +157,7 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "operation",
 		label: "操作",
-		width: 320,
+		width: 330,
 		fixed: "right",
 		renderHeader
 	}

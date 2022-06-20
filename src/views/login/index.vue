@@ -23,7 +23,7 @@ import { LoginFormExpose } from "./interface/index";
 import { Login } from "@/api/interface/index";
 import { ref, reactive, provide } from "vue";
 
-// * 以下数据都为自己测试使用，不参与功能开发
+// * 以下数据都为自己测试使用，不参与任何功能开发（可直接删除）
 // 使用provide传方法
 let phone = ref<string>("iphone");
 // provide
@@ -48,7 +48,7 @@ provide("provideState", {
 const loginRef = ref<LoginFormExpose | null>(null);
 // const consoleRef = () => {
 // 	console.log(loginRef.value?.count);
-// 	loginRef.value?.consoleNumber("liutao");
+// 	loginRef.value?.consoleNumber("liu");
 // };
 
 // 定义数据类型两种方法

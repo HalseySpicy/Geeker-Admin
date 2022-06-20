@@ -87,7 +87,7 @@
 					{{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag
 				>
 			</el-table-column>
-			<el-table-column label="操作" fixed="right" width="320" v-slot="scope">
+			<el-table-column label="操作" fixed="right" width="330" v-slot="scope">
 				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
 				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit">编辑</el-button>
 				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)" v-if="BUTTONS.reset">重置密码</el-button>
