@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.2...v0.0.3) (2022-06-20)
+
 ### 0.0.2 (2022-06-20)
 
 ### Features
@@ -16,7 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 - 🧩 去除登陆页默认账号 ([3dda3fe](https://github.com/HalseySpicy/Geeker-Admin/commit/3dda3fee3fef38fdafcfdf3b1bf16e73033c6fe0))
-- 🧩 修复 Pro-Tabel 列设置 bug ([a3b86a0](https://github.com/HalseySpicy/Geeker-Admin/commit/a3b86a06a6d9cd4b6f7ac6e108727a0b4852e9a0))
+- 🧩 修复 Pro-Table 列设置 bug ([a3b86a0](https://github.com/HalseySpicy/Geeker-Admin/commit/a3b86a06a6d9cd4b6f7ac6e108727a0b4852e9a0))
 - 🧩 修复 loading 请求 bug ([a3270ec](https://github.com/HalseySpicy/Geeker-Admin/commit/a3270ecfa2e7c2484729ae6fd599febcc4f7be6b))
 - 🧩 修改 Pro-Table 表头渲染方式 ([aa57294](https://github.com/HalseySpicy/Geeker-Admin/commit/aa5729489942eaa6dca9928b70153af2de753a9c))
 - 🧩 修改 useTable 存在的 bug ([5bb55b3](https://github.com/HalseySpicy/Geeker-Admin/commit/5bb55b32c0b46bbf55fa0d49efe3a15d0b1673a4))
