@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 - 🚀 请求全局 loading 更改为可配置 ([a75d62f](https://github.com/HalseySpicy/Geeker-Admin/commit/a75d62f627195ac420cf24ad7f51245b2e5bf04e))
-- 🚀 升级 element-plus 到 2.25 ([e98c035](https://github.com/HalseySpicy/Geeker-Admin/commit/e98c035caa6d1ab04319673e0db65837c6887126))
+- 🚀 升级 element-plus 到 2.2.5 ([e98c035](https://github.com/HalseySpicy/Geeker-Admin/commit/e98c035caa6d1ab04319673e0db65837c6887126))
 - 🚀 新增暗黑模式 ([215e499](https://github.com/HalseySpicy/Geeker-Admin/commit/215e499634b516234e653eac27a611d5f51ea6da))
 - 🚀 新增图标选择组件 ([ce5e165](https://github.com/HalseySpicy/Geeker-Admin/commit/ce5e165aed842074a9f7ac66ea97290710b541ee))
 - 🚀 修改 pinia 持久化插件 ([a7691ae](https://github.com/HalseySpicy/Geeker-Admin/commit/a7691aea614a035c4d381838149e08ad8477e49f))

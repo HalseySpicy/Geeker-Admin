@@ -11,6 +11,12 @@
 - 主要是学习下 Vue3 + TypeScript
 - 目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
+### 相关文档 📚
+
+- 更新日志：[CHANGELOG.md](./CHANGELOG.md)
+
+- 代码规范：[STANDARD.md](./STANDARD.md)
+
 ### 一、在线预览 👀
 
 - Link：http://admin.spicyboy.cn
@@ -57,7 +63,7 @@ cnpm install
 npm install --registry=https://registry.npm.taobao.org
 
 # 暂时没用，只是为了指定版本
-npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.5 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.10.3 vue@3.2.25 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 --save
+npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.6 js-md5@0.7.3 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.10.3 vue@3.2.25 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 --save
 ```
 
 - **Run：**
@@ -201,7 +207,7 @@ Geeker-Admin
 
 ### 十、捐赠 🍵
 
-> **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式鼓励我**
+> **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式赞助我**
 
 - **Star、Fork、Watch** 一键三连 🚀🚀
 
