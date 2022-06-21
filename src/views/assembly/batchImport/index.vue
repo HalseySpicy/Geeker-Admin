@@ -19,8 +19,8 @@ const importRef = ref<DialogExpose>();
 const batchAdd = () => {
 	let params = {
 		title: "信息",
-		tempUrl: exportUserInfo,
-		importUrl: BatchAddUser
+		tempApi: exportUserInfo,
+		importApi: BatchAddUser
 	};
 	importRef.value!.acceptParams(params);
 };

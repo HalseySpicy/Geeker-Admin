@@ -200,8 +200,8 @@ const dialogRef = ref<DialogExpose>();
 const batchAdd = () => {
 	let params = {
 		title: "用户",
-		tempUrl: exportUserInfo,
-		importUrl: BatchAddUser,
+		tempApi: exportUserInfo,
+		importApi: BatchAddUser,
 		getTableList: proTable.value.refresh
 	};
 	dialogRef.value!.acceptParams(params);

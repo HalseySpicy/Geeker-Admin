@@ -215,8 +215,8 @@ const dialogRef = ref<DialogExpose>();
 const batchAdd = () => {
 	let params = {
 		title: "用户",
-		tempUrl: exportUserInfo,
-		importUrl: BatchAddUser,
+		tempApi: exportUserInfo,
+		importApi: BatchAddUser,
 		getTableList: getTableList // 操作成功之后刷新数据
 	};
 	dialogRef.value!.acceptParams(params);
