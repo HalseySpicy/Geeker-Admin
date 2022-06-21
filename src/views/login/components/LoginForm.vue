@@ -101,7 +101,7 @@ onMounted(() => {
 	};
 });
 
-// * 以下数据都为自己测试使用，不参与功能开发
+// * 以下数据都为自己测试使用，不参与任何功能开发（可直接删除）
 // inject
 const provideState = inject("provideState") as InjectProps;
 // console.log(provideState.age);

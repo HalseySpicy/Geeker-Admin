@@ -1,7 +1,7 @@
 {
 	"name": "geeker-admin",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Geeker-Admin后台管理系统",
 	"author": "SpicyBoy <848130454@qq.com>",
 	"scripts": {
@@ -16,6 +16,7 @@
 		"lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
 		"lint:lint-staged": "lint-staged",
 		"prepare": "husky install",
+		"release": "standard-version",
 		"commit": "git pull && git add -A && git-cz && git push"
 	},
 	"dependencies": {
@@ -57,6 +58,7 @@
 		"prettier": "^2.6.2",
 		"rollup-plugin-visualizer": "^5.5.4",
 		"sass": "^1.49.7",
+		"standard-version": "^9.5.0",
 		"stylelint": "^14.8.5",
 		"stylelint-config-html": "^1.0.0",
 		"stylelint-config-prettier": "^9.0.3",
