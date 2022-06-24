@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 import { Layout } from "@/routers/constant";
 
 // 外部链接模块
-const myBlogRouter: Array<RouteRecordRaw> = [
+const linkRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/link",
 		component: Layout,
@@ -59,4 +59,4 @@ const myBlogRouter: Array<RouteRecordRaw> = [
 	}
 ];
 
-export default myBlogRouter;
+export default linkRouter;

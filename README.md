@@ -26,7 +26,12 @@
 - Gitee：https://gitee.com/laramie/Geeker-Admin
 - GitHub：https://github.com/HalseySpicy/Geeker-Admin
 
-### 三、🔨🔨🔨 项目功能
+### 三、🔥🔥🔥 React 版正在开发中…… 欢迎 Star
+
+- Gitee：https://gitee.com/laramie/Hooks-Admin
+- GitHub：https://github.com/HalseySpicy/Hooks-Admin
+
+### 四、🔨🔨🔨 项目功能
 
 - 🚀 使用 Vue3.2 开发，单文件组件 `＜script setup＞`
 - 🚀 采用 Vite2 作为项目开发、打包工具（配置了 Gzip 打包、TSX 语法、跨域代理、打包预览工具……）
@@ -42,7 +47,7 @@
 - 🚀 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范（STANDARD.md 文件）
 - 🚀 使用 husky、lint-staged、commitlint、commitizen、cz-git 规范提交信息（STANDARD.md 文件）
 
-### 四、安装使用步骤 📔
+### 五、安装使用步骤 📔
 
 - **Clone：**
 
@@ -106,7 +111,7 @@ lint:stylelint
 npm run commit
 ```
 
-### 五、项目截图 📷
+### 六、项目截图 📷
 
 #### 1、登录页：
 
@@ -130,7 +135,7 @@ npm run commit
 
 ![dataScreen02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602170253.png)
 
-### 六、文件资源目录 📚
+### 七、文件资源目录 📚
 
 ```text
 Geeker-Admin
@@ -166,6 +171,8 @@ Geeker-Admin
 ├─ .prettierignore        # 忽略 prettier 格式化
 ├─ .prettierrc.js         # prettier 配置
 ├─ .stylelintignore       # 忽略 stylelint 格式化
+├─ .stylelintrc.js        # stylelint 样式格式化配置
+├─ CHANGELOG.md           # 项目更新日志
 ├─ commitlint.config.js   # git 提交规范配置
 ├─ index.html             # 入口 html
 ├─ LICENSE                # 开源协议文件
@@ -175,12 +182,11 @@ Geeker-Admin
 ├─ postcss.config.js      # postcss 配置
 ├─ README.md              # README 介绍
 ├─ STANDARD.md            # 项目编码规范说明书
-├─ stylelint.config.js    # stylelint 样式格式化配置
 ├─ tsconfig.json          # typescript 全局配置
 └─ vite.config.ts         # vite 配置
 ```
 
-### 七、浏览器支持
+### 八、浏览器支持
 
 > 默认支持以下浏览器，vue3.2 不支持 IE 浏览器。更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ESModule)
 >
@@ -190,14 +196,14 @@ Geeker-Admin
 | :-----------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: | :---------------------------------------------------------------------------: |
 |                              last 2 versions                              |                                 last 2 versions                                 |                                last 2 versions                                |                                last 2 versions                                |
 
-### 八、项目后台接口 🧩
+### 九、项目后台接口 🧩
 
 > 项目后台接口完全采用 Mock 数据，感谢以下 Mock 平台支持
 
 - FastMock： https://www.fastmock.site/
 - EasyMock：https://mock.mengxuegu.com/
 
-### 九、微信交流群
+### 十、微信交流群
 
 > **😀 微信群超过 200 人了，请加我好友，我拉大家进群**
 
@@ -205,7 +211,7 @@ Geeker-Admin
 | :-------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220610141657.png" alt="Wechat QRcode" width=170> |
 
-### 十、捐赠 🍵
+### 十一、捐赠 🍵
 
 > **如果你正在使用这个项目或者喜欢这个项目的，可以通过以下方式支持我**
 
