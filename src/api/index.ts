@@ -7,8 +7,13 @@ import { checkStatus } from "./helper/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
 import router from "@/routers";
-
-const globalStore = GlobalStore();
+/**
+ * 使用错误
+ * https://github.com/vuejs/pinia/discussions/971
+ * https://github.com/vuejs/pinia/discussions/664#discussioncomment-1329898
+ * https://pinia.vuejs.org/core-concepts/outside-component-usage.html#single-page-applications
+ */
+// const globalStore = GlobalStore();
 const axiosCanceler = new AxiosCanceler();
 
 const config = {
@@ -33,6 +38,7 @@ class RequestHttp {
 		 */
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
+				const globalStore = GlobalStore();
 				// * 将当前请求添加到 pending 中
 				axiosCanceler.addPending(config);
 				// * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
@@ -52,6 +58,7 @@ class RequestHttp {
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
 				const { data, config } = response;
+				const globalStore = GlobalStore();
 				// * 在请求结束后，移除本次请求
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
