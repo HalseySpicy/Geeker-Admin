@@ -4,14 +4,14 @@
 
 ### 前言 📖
 
-> Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发 🕒🕒。项目中很多功能、样式都是借鉴其它的管理系统，但代码是完全自己编写的，整个项目还有很多地方不完善，后期会持续更新（项目文档），希望大家能多提意见。
+Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发 🕒🕒。项目中很多功能、样式都是借鉴其它的管理系统，但代码是完全自己编写的，整个项目还有很多地方不完善，后期会持续更新（项目文档），希望大家能多提意见。
 
 ### ？为什么开发这个管理系统 🤷‍♂️
 
 - 主要是学习下 Vue3 + TypeScript
 - 目前看了很多 Vue3 的开源后台管理系统，感觉都非常庞大，很多功能基本上也用不到，所以自己就尝试写了一下这个管理系统（适合自己的才是最好的 🤣）
 
-### 📚 相关文档
+### 项目相关文档 📚
 
 - 项目更新日志：[CHANGELOG.md](./CHANGELOG.md)
 
@@ -26,7 +26,7 @@
 - Gitee：https://gitee.com/laramie/Geeker-Admin
 - GitHub：https://github.com/HalseySpicy/Geeker-Admin
 
-### 三、🔥🔥🔥 React 版正在开发中…… 欢迎 Star
+### 三、🔥🔥🔥 React 最新版本已完成。欢迎 Star
 
 - Gitee：https://gitee.com/laramie/Hooks-Admin
 - GitHub：https://github.com/HalseySpicy/Hooks-Admin
@@ -41,7 +41,7 @@
 - 🚀 对表格的所有操作基本都封装成了 Hooks （表格数据搜索、重置、查询、分页、多选、单条数据操作、文件上传、下载、格式化单元格内容……）
 - 🚀 基于 Element 二次封装 [Pro-Table 组件](https://juejin.cn/post/7094890833064755208) ，表格页面全部传成配置项 Columns
 - 🚀 支持 Element 组件大小切换、暗黑模式、i18n 国际化（i18n 暂时没配置所有文件，根据项目自行配置）
-- 🚀 使用 vue-router 进行路由权限拦截（403 页面）、页面按钮权限配置
+- 🚀 使用 vue-router 进行路由权限拦截（403 页面）、页面按钮权限配置、路由懒加载
 - 🚀 使用 keep-alive 对整个页面进行缓存，支持多级嵌套页面（缓存路由里可配置、页面切换带动画）
 - 🚀 常用自定义指令开发（复制、水印、拖拽、节流、防抖、长按……）
 - 🚀 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范（STANDARD.md 文件）
