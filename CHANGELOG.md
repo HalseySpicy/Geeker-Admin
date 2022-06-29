@@ -9,6 +9,13 @@ All notable changes to this project will be documented in this file. See [standa
 - 🧩 修改文件导出失败 bug ([208e720](https://github.com/HalseySpicy/Geeker-Admin/commit/208e720688969d2bc0fa0a6cc2bae3e3b991c806))
 - 🧩 fix use pinia bug ([609aa69](https://github.com/HalseySpicy/Geeker-Admin/commit/609aa69aa9b3e0bb4e667ee7f76ab44051c2d2e8))
 
+### [0.0.2](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.3...v0.0.2) (2022-06-29)
+
+### Bug Fixes
+
+- 🧩 修改文件导出失败 bug ([208e720](https://github.com/HalseySpicy/Geeker-Admin/commit/208e720688969d2bc0fa0a6cc2bae3e3b991c806))
+- 🧩 fix use pinia bug ([609aa69](https://github.com/HalseySpicy/Geeker-Admin/commit/609aa69aa9b3e0bb4e667ee7f76ab44051c2d2e8))
+
 ### 0.0.2 (2022-06-20)
 
 ### Features
