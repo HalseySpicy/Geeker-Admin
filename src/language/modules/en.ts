@@ -9,10 +9,10 @@ export default {
 		closeAll: "Close All"
 	},
 	header: {
-		componentSize: "Component Size",
+		componentSize: "Component size",
 		language: "Language",
 		theme: "theme",
-		themeSetting: "Theme setting",
+		layoutConfig: "Layout config",
 		primary: "primary",
 		darkMode: "Dark Mode",
 		greyMode: "Grey mode",

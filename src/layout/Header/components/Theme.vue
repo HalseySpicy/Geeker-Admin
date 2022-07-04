@@ -3,8 +3,8 @@
 		<el-tooltip effect="dark" :content="$t('header.theme')" placement="bottom">
 			<i :class="'iconfont icon-zhuti'" class="icon-style" @click="openDrawer"></i>
 		</el-tooltip>
-		<el-drawer v-model="drawerVisible" :title="$t('header.themeSetting')" size="300px">
-			<el-divider content-position="center">{{ $t("header.theme") }}</el-divider>
+		<el-drawer v-model="drawerVisible" :title="$t('header.layoutConfig')" size="300px">
+			<el-divider class="divider" content-position="center">{{ $t("header.theme") }}</el-divider>
 			<div class="theme-item">
 				<span>{{ $t("header.primary") }}</span>
 				<el-color-picker v-model="themeConfig.primary" @change="changePrimary"> </el-color-picker>

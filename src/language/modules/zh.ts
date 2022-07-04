@@ -11,8 +11,8 @@ export default {
 	header: {
 		componentSize: "组件大小",
 		language: "语言",
-		theme: "主题",
-		themeSetting: "主题设置",
+		theme: "全局主题",
+		layoutConfig: "布局配置",
 		primary: "primary",
 		darkMode: "暗黑模式",
 		greyMode: "灰色模式",
