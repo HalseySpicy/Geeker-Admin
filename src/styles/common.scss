@@ -98,3 +98,12 @@
 		color: rgb(88 88 88);
 	}
 }
+
+/* nprogress样式 */
+#nprogress .bar {
+	background: $primary-color !important;
+}
+#nprogress .spinner-icon {
+	border-top-color: $primary-color !important;
+	border-left-color: $primary-color !important;
+}

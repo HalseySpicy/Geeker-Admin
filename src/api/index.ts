@@ -7,13 +7,15 @@ import { checkStatus } from "./helper/checkStatus";
 import { ElMessage } from "element-plus";
 import { GlobalStore } from "@/store";
 import router from "@/routers";
+
 /**
- * 使用错误
+ * pinia 错误使用说明
  * https://github.com/vuejs/pinia/discussions/971
  * https://github.com/vuejs/pinia/discussions/664#discussioncomment-1329898
  * https://pinia.vuejs.org/core-concepts/outside-component-usage.html#single-page-applications
  */
 // const globalStore = GlobalStore();
+
 const axiosCanceler = new AxiosCanceler();
 
 const config = {

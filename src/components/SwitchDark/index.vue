@@ -14,18 +14,14 @@
 import { computed } from "vue";
 import { GlobalStore } from "@/store";
 import { Sunny, Moon } from "@element-plus/icons-vue";
-import { useDark } from "@/hooks/useDark";
+import { useTheme } from "@/hooks/useTheme";
 const globalStore = GlobalStore();
 
-const { switchTheme } = useDark();
+const { switchDark } = useTheme();
 
 const themeConfig = computed(() => globalStore.themeConfig);
 
-const onAddDarkChange = (value: boolean) => {
-	globalStore.setThemeConfig({
-		...themeConfig.value,
-		isDark: value
-	});
-	switchTheme();
+const onAddDarkChange = () => {
+	switchDark();
 };
 </script>

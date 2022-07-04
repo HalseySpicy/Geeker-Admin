@@ -2,6 +2,8 @@
 export interface ThemeConfigProp {
 	primary: string;
 	isDark: boolean;
+	isGrey: boolean;
+	isWeak: boolean;
 }
 
 /* GlobalState */

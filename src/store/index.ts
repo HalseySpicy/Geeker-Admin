@@ -21,9 +21,13 @@ export const GlobalStore = defineStore({
 		// themeConfig
 		themeConfig: {
 			// 默认 primary 主题颜色
-			primary: "#409eff",
-			// 是否开启深色模式
-			isDark: false
+			primary: "#409EFF",
+			// 深色模式
+			isDark: false,
+			// 灰色模式
+			isGrey: false,
+			// 色弱模式
+			isWeak: false
 		}
 	}),
 	getters: {},

@@ -6,20 +6,37 @@
 		<el-drawer v-model="drawerVisible" :title="$t('header.themeSetting')" size="300px">
 			<el-divider content-position="center">{{ $t("header.theme") }}</el-divider>
 			<div class="theme-item">
+				<span>{{ $t("header.primary") }}</span>
+				<el-color-picker v-model="themeConfig.primary" @change="changePrimary"> </el-color-picker>
+			</div>
+			<div class="theme-item">
 				<span>{{ $t("header.darkMode") }}</span>
 				<SwitchDark></SwitchDark>
+			</div>
+			<div class="theme-item">
+				<span>{{ $t("header.greyMode") }}</span>
+				<el-switch v-model="themeConfig.isGrey" @change="changeGreyOrWeak($event, 'grey')" />
+			</div>
+			<div class="theme-item">
+				<span>{{ $t("header.weakMode") }}</span>
+				<el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
 			</div>
 		</el-drawer>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useDark } from "@/hooks/useDark";
+import { ref, computed } from "vue";
+import { useTheme } from "@/hooks/useTheme";
 import SwitchDark from "@/components/SwitchDark/index.vue";
+import { GlobalStore } from "@/store";
 
-useDark();
+// 主题初始化
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
+const { changePrimary, changeGreyOrWeak } = useTheme();
 
+// 打开主题设置
 const drawerVisible = ref(false);
 const openDrawer = () => {
 	drawerVisible.value = true;
