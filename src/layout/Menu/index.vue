@@ -65,13 +65,11 @@ const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList);
 
 // aside 自适应
 const screenWidth = ref<number>(0);
-const screenHeight = ref<number>(0);
 // 监听窗口大小变化，合并 aside
 const listeningWindow = () => {
 	window.onresize = () => {
 		return (() => {
 			screenWidth.value = document.body.clientWidth;
-			screenHeight.value = document.body.clientHeight;
 			if (isCollapse.value === false && screenWidth.value < 1200) menuStore.setCollapse();
 			if (isCollapse.value === true && screenWidth.value > 1200) menuStore.setCollapse();
 		})();

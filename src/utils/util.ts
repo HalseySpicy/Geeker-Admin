@@ -101,7 +101,7 @@ export function getBrowserLang() {
 }
 
 /**
- * @description 递归查询当前路由所对应的tabPane（暂时没用了）
+ * @description 递归查询当前路由所对应的路由
  * @param {Array} menuList 菜单列表
  * @param {String} path 当前地址
  * @return array
@@ -128,6 +128,19 @@ export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = 
 		item.children && item.children.length && handleRouter(item.children, newArr);
 	});
 	return newArr;
+}
+
+/**
+ * @description 扁平化数组对象
+ * @param {Array} arr 数组对象
+ * @return array
+ */
+export function getFlatArr(arr: any) {
+	return arr.reduce((pre: any, current: any) => {
+		let flatArr = [...pre, current];
+		if (current.children) flatArr = [...flatArr, ...getFlatArr(current.children)];
+		return flatArr;
+	}, []);
 }
 
 /**

@@ -1,7 +1,7 @@
 <template>
 	<el-dropdown trigger="click" @command="setAssemblySize">
 		<span>
-			<el-tooltip effect="dark" :content="$t('header.componentSize')" placement="bottom">
+			<el-tooltip effect="dark" content="组件大小" placement="bottom">
 				<i :class="'iconfont icon-contentright'" class="icon-style"></i>
 			</el-tooltip>
 		</span>

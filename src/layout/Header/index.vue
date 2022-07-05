@@ -5,10 +5,12 @@
 			<Breadcrumb></Breadcrumb>
 		</div>
 		<div class="header-ri flx-center">
-			<!-- Component size -->
+			<!-- Assembly size -->
 			<AssemblySize></AssemblySize>
 			<!-- Language -->
 			<Language></Language>
+			<!-- SearchMenu -->
+			<SearchMenu></SearchMenu>
 			<!-- Theme -->
 			<Theme></Theme>
 			<!-- Full screen -->
@@ -24,6 +26,7 @@
 <script setup lang="ts">
 import CollapseIcon from "./components/CollapseIcon.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
+import SearchMenu from "./components/SearchMenu.vue";
 import Fullscreen from "./components/Fullscreen.vue";
 import Language from "./components/Language.vue";
 import AssemblySize from "./components/AssemblySize.vue";

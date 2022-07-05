@@ -1,7 +1,7 @@
 <template>
 	<el-dropdown trigger="click" @command="handleSetLanguage">
 		<span>
-			<el-tooltip effect="dark" :content="$t('header.language')" placement="bottom">
+			<el-tooltip effect="dark" content="国际化" placement="bottom">
 				<i :class="'iconfont icon-zhongyingwen'" class="icon-style"></i>
 			</el-tooltip>
 		</span>

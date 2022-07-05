@@ -1,24 +1,24 @@
 <template>
 	<div>
-		<el-tooltip effect="dark" :content="$t('header.theme')" placement="bottom">
+		<el-tooltip effect="dark" content="布局配置" placement="bottom">
 			<i :class="'iconfont icon-zhuti'" class="icon-style" @click="openDrawer"></i>
 		</el-tooltip>
-		<el-drawer v-model="drawerVisible" :title="$t('header.layoutConfig')" size="300px">
-			<el-divider class="divider" content-position="center">{{ $t("header.theme") }}</el-divider>
+		<el-drawer v-model="drawerVisible" title="布局配置" size="300px">
+			<el-divider class="divider" content-position="center">全局主题</el-divider>
 			<div class="theme-item">
-				<span>{{ $t("header.primary") }}</span>
+				<span>primary</span>
 				<el-color-picker v-model="themeConfig.primary" @change="changePrimary"> </el-color-picker>
 			</div>
 			<div class="theme-item">
-				<span>{{ $t("header.darkMode") }}</span>
+				<span>暗黑模式</span>
 				<SwitchDark></SwitchDark>
 			</div>
 			<div class="theme-item">
-				<span>{{ $t("header.greyMode") }}</span>
+				<span>灰色模式</span>
 				<el-switch v-model="themeConfig.isGrey" @change="changeGreyOrWeak($event, 'grey')" />
 			</div>
 			<div class="theme-item">
-				<span>{{ $t("header.weakMode") }}</span>
+				<span>色弱模式</span>
 				<el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
 			</div>
 		</el-drawer>
