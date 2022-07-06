@@ -83,11 +83,15 @@
 							/>
 							<!-- tag 标签（自带格式化内容） -->
 							<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!],item.enum,'tag')">
-								{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
+								{{
+									item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
+								}}
 							</el-tag>
 							<!-- 文字（自带格式化内容） -->
 							<span v-else>
-								{{ item.enum?.length ? filterEnum(scope.row[item.prop!],item.enum): defaultFormat(0,0,scope.row[item.prop!]) }}
+								{{
+									item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
+								}}
 							</span>
 						</slot>
 					</template>
