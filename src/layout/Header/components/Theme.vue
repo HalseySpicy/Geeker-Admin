@@ -1,10 +1,13 @@
 <template>
 	<div>
-		<el-tooltip effect="dark" content="布局配置" placement="bottom">
+		<el-tooltip effect="dark" content="布局设置" placement="bottom">
 			<i :class="'iconfont icon-zhuti'" class="icon-style" @click="openDrawer"></i>
 		</el-tooltip>
-		<el-drawer v-model="drawerVisible" title="布局配置" size="300px">
-			<el-divider class="divider" content-position="center">全局主题</el-divider>
+		<el-drawer v-model="drawerVisible" title="布局设置" size="300px">
+			<el-divider class="divider">
+				<el-icon><ColdDrink /></el-icon>
+				全局主题
+			</el-divider>
 			<div class="theme-item">
 				<span>primary</span>
 				<el-color-picker v-model="themeConfig.primary" :predefine="colorList" @change="changePrimary"> </el-color-picker>

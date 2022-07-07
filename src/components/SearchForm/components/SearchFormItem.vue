@@ -1,12 +1,18 @@
 <template>
 	<!-- 文本框 -->
 	<template v-if="item.searchType == undefined || item.searchType == 'text'">
-		<el-input v-model="searchParam[item.prop!]" placeholder="请输入" :clearable="clearable(item)"></el-input>
+		<el-input
+			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
+			placeholder="请输入"
+			:clearable="clearable(item)"
+		></el-input>
 	</template>
 	<!-- 下拉选择框 -->
 	<template v-if="item.searchType == 'select' || item.searchType == 'multipleSelect'">
 		<el-select
 			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
 			:multiple="item.searchType == 'multipleSelect'"
 			placeholder="请选择"
 			:clearable="clearable(item)"
@@ -22,12 +28,18 @@
 	</template>
 	<!-- 下拉树形选择框 -->
 	<template v-if="item.searchType == 'treeSelect' || item.searchType == 'multipleTreeSelect'">
-		<el-tree-select v-model="searchParam[item.prop!]" :multiple="item.searchType == 'multipleTreeSelect'" :data="item.enum" />
+		<el-tree-select
+			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
+			:multiple="item.searchType == 'multipleTreeSelect'"
+			:data="item.enum"
+		/>
 	</template>
 	<!-- 日期选择 -->
 	<template v-if="item.searchType == 'date'">
 		<el-date-picker
 			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
 			value-format="YYYY-MM-DD"
 			type="date"
 			placeholder="请选择日期"
@@ -38,6 +50,7 @@
 	<template v-if="item.searchType == 'timerange'">
 		<el-time-picker
 			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
 			is-range
 			value-format="HH:mm:ss"
 			range-separator="至"
@@ -50,6 +63,7 @@
 	<template v-if="item.searchType == 'daterange'">
 		<el-date-picker
 			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
 			type="daterange"
 			value-format="YYYY-MM-DD"
 			range-separator="至"
@@ -62,6 +76,7 @@
 	<template v-if="item.searchType == 'datetimerange'">
 		<el-date-picker
 			v-model="searchParam[item.prop!]"
+			v-bind="item.searchProps"
 			type="datetimerange"
 			value-format="YYYY-MM-DD HH:mm:ss"
 			range-separator="至"
@@ -82,7 +97,7 @@ interface SearchFormItem {
 
 // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
 const clearable = (item: Partial<ColumnProps>) => {
-	return item.initSearchParam == null || item.initSearchParam == undefined;
+	return item.searchInitParam == null || item.searchInitParam == undefined;
 };
 
 defineProps<SearchFormItem>();

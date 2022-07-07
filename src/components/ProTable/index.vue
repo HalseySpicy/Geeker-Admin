@@ -159,7 +159,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
 
 // 表格操作 Hooks
-const { tableData, pageable, searchParam, initSearchParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(props.requestApi, props.initParam, props.pagination);
 
 // 表格列配置项处理（添加 isShow 属性，控制显示/隐藏）
@@ -167,7 +167,7 @@ const tableColumns = ref<Partial<ColumnProps>[]>();
 tableColumns.value = props.columns.map(item => {
 	return {
 		...item,
-		isShow: true
+		isShow: item.isShow ?? true
 	};
 });
 
@@ -176,8 +176,8 @@ const searchColumns = props.columns.filter(item => item.search);
 
 // 设置搜索表单的默认值
 searchColumns.forEach(column => {
-	if (column.initSearchParam !== undefined && column.initSearchParam !== null) {
-		initSearchParam.value[column.prop!] = column.initSearchParam;
+	if (column.searchInitParam !== undefined && column.searchInitParam !== null) {
+		searchInitParam.value[column.prop!] = column.searchInitParam;
 	}
 });
 

@@ -11,7 +11,7 @@ export namespace Table {
 		searchParam: {
 			[key: string]: any;
 		};
-		initSearchParam: {
+		searchInitParam: {
 			[key: string]: any;
 		};
 		totalParam: {

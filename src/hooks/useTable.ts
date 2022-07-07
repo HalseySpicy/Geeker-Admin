@@ -25,7 +25,7 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 		// 查询参数(只包括查询)
 		searchParam: {},
 		// 初始化默认的查询参数
-		initSearchParam: {},
+		searchInitParam: {},
 		// 总参数(包含分页和查询参数)
 		totalParam: {}
 	});
@@ -113,8 +113,8 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 		state.pageable.pageNum = 1;
 		state.searchParam = {};
 		// 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
-		Object.keys(state.initSearchParam).forEach(key => {
-			state.searchParam[key] = state.initSearchParam[key];
+		Object.keys(state.searchInitParam).forEach(key => {
+			state.searchParam[key] = state.searchInitParam[key];
 		});
 		getTableList();
 	};

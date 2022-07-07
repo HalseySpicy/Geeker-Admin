@@ -161,7 +161,7 @@ const {
 	searchShow,
 	pageable,
 	searchParam,
-	initSearchParam,
+	searchInitParam,
 	getTableList,
 	search,
 	reset,
@@ -176,7 +176,7 @@ const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelectio
 const { BUTTONS } = useAuthButtons();
 
 // 设置搜索表单默认参数
-initSearchParam.value = { createTime: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"] };
+searchInitParam.value = { createTime: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"] };
 
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {

@@ -105,18 +105,19 @@ const columns: Partial<ColumnProps>[] = [
 	{
 		prop: "username",
 		label: "用户姓名",
-		search: true,
 		width: 135,
+		search: true,
+		searchProps: { disabled: true },
 		renderHeader
 	},
 	{
 		prop: "gender",
 		label: "性别",
-		width: "140",
-		enum: genderType,
-		search: true,
+		width: 140,
 		sortable: true,
-		searchType: "select"
+		search: true,
+		searchType: "select",
+		enum: genderType
 	},
 	{
 		prop: "idCard",
@@ -140,7 +141,10 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		search: true,
 		searchType: "datetimerange",
-		initSearchParam: ["2022-04-05 00:00:00", "2022-05-10 23:59:59"]
+		searchProps: {
+			disabledDate: (time: Date) => time.getTime() < Date.now() - 8.64e7
+		},
+		searchInitParam: ["2022-07-30 00:00:00", "2022-08-10 23:59:59"]
 	},
 	{
 		prop: "status",

@@ -48,7 +48,13 @@
 			}
 		}
 		.divider {
-			margin-top: 15px;
+			margin-top: 20px;
+			.el-icon {
+				position: relative;
+				top: 2px;
+				right: 5px;
+				font-size: 15px;
+			}
 		}
 	}
 	.theme-switch {
