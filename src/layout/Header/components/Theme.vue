@@ -7,7 +7,7 @@
 			<el-divider class="divider" content-position="center">全局主题</el-divider>
 			<div class="theme-item">
 				<span>primary</span>
-				<el-color-picker v-model="themeConfig.primary" @change="changePrimary"> </el-color-picker>
+				<el-color-picker v-model="themeConfig.primary" :predefine="colorList" @change="changePrimary"> </el-color-picker>
 			</div>
 			<div class="theme-item">
 				<span>暗黑模式</span>
@@ -30,7 +30,8 @@ import { ref, computed } from "vue";
 import { useTheme } from "@/hooks/useTheme";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 import { GlobalStore } from "@/store";
-
+// 预定义主题颜色
+const colorList = ["#409EFF", "#DAA96E", "#0C819F", "#009688", "#27ae60", "#ff5c93", "#e74c3c", "#fd726d", "#f39c12", "#9b59b6"];
 // 主题初始化
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
