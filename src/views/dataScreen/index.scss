@@ -2,9 +2,9 @@
 	width: 100%;
 	height: 100%;
 	background: url("./images/bg.png") no-repeat;
+	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
-	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-size: cover;
 	.dataScreen {
@@ -31,8 +31,8 @@
 			}
 			.header-ct {
 				position: relative;
-				height: 100%;
 				flex: 1;
+				height: 100%;
 				.header-ct-title {
 					position: absolute;
 					top: 0;
@@ -42,9 +42,9 @@
 					font-family: YouSheBiaoTiHei;
 					font-size: 32px;
 					line-height: 78px;
-					letter-spacing: 4px;
 					color: #05e8fe;
 					text-align: center;
+					letter-spacing: 4px;
 					background: url("./images/dataScreen-header-center-bg.png") no-repeat;
 					background-size: 100% 100%;
 					.header-ct-warning {
@@ -57,9 +57,9 @@
 						font-size: 14px;
 						line-height: 16px;
 						line-height: 44px;
-						letter-spacing: 1px;
 						color: #ffffff;
 						text-align: center;
+						letter-spacing: 1px;
 						background: url("./images/dataScreen-header-warn-bg.png") no-repeat;
 						background-size: 100% 100%;
 						transform: translateX(-50%);
@@ -72,6 +72,7 @@
 				top: 0;
 				right: 0;
 				z-index: 9;
+				box-sizing: border-box;
 				width: 136px;
 				height: 42px;
 				padding-right: 4px;
@@ -84,7 +85,6 @@
 				cursor: pointer;
 				background: url("./images/dataScreen-header-btn-bg-l.png") no-repeat;
 				background-size: 100% 100%;
-				box-sizing: border-box;
 			}
 			.header-download {
 				left: 0;
@@ -105,11 +105,11 @@
 			}
 		}
 		.dataScreen-main {
+			box-sizing: border-box;
 			display: flex;
+			flex: 1;
 			width: 100%;
 			padding: 12px 42px 20px;
-			box-sizing: border-box;
-			flex: 1;
 			.dataScreen-lf {
 				display: flex;
 				flex-direction: column;
@@ -121,9 +121,9 @@
 				.dataScreen-center,
 				.dataScreen-bottom {
 					position: relative;
+					box-sizing: border-box;
 					width: 100%;
 					padding-top: 54px;
-					box-sizing: border-box;
 				}
 				.dataScreen-top {
 					height: 37%;
@@ -144,39 +144,40 @@
 			}
 			.dataScreen-ct {
 				display: flex;
+				flex: 1;
 				flex-direction: column;
 				justify-content: space-between;
 				height: 100%;
 				margin-right: 40px;
-				flex: 1;
 				.dataScreen-map {
 					position: relative;
-					width: 100%;
-					margin-top: 78px;
 					box-sizing: border-box;
 					flex: 1;
+					width: 100%;
+					margin-top: 78px;
 					.dataScreen-map-title {
 						position: absolute;
 						top: 10px;
 						left: 0;
 						z-index: 99;
+						box-sizing: border-box;
 						display: flex;
 						align-items: center;
 						width: 270px;
 						height: 25px;
 						padding-left: 30px;
 						font-size: 14px;
-						letter-spacing: 5px;
 						color: #ffffff;
+						letter-spacing: 5px;
 						background: url("./images/map-title-bg.png") no-repeat;
 						background-size: 100% 100%;
-						box-sizing: border-box;
 					}
 					.dataScreen-alarm {
 						position: absolute;
 						top: 0;
 						left: 0;
 						z-index: 99;
+						box-sizing: border-box;
 						width: 100%;
 						height: 76px;
 						padding: 2px 30px;
@@ -186,7 +187,6 @@
 						overflow: hidden;
 						background: url("./images/dataScreen-warn-bg.png") no-repeat;
 						background-size: 100% 100%;
-						box-sizing: border-box;
 						.map-item {
 							display: flex;
 							align-items: center;
@@ -207,12 +207,12 @@
 				}
 				.dataScreen-cb {
 					position: relative;
+					box-sizing: border-box;
 					width: 100%;
 					height: 252px;
 					padding-top: 54px;
 					background: url("./images/dataScreen-main-cb.png") no-repeat;
 					background-size: 100% 100%;
-					box-sizing: border-box;
 				}
 			}
 			.dataScreen-rg {
@@ -225,9 +225,9 @@
 				.dataScreen-center,
 				.dataScreen-bottom {
 					position: relative;
+					box-sizing: border-box;
 					width: 100%;
 					padding-top: 54px;
-					box-sizing: border-box;
 				}
 				.dataScreen-top {
 					height: 37%;
@@ -257,8 +257,8 @@
 					font-family: YouSheBiaoTiHei;
 					font-size: 18px;
 					line-height: 16px;
-					letter-spacing: 1px;
 					color: #ffffff;
+					letter-spacing: 1px;
 				}
 				img {
 					width: 68px;
