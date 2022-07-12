@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.3...v0.0.4) (2022-07-12)
+
+### Features
+
+- 🚀 新增 主题色、灰色模式、色弱模式 配置 ([7821157](https://github.com/HalseySpicy/Geeker-Admin/commit/7821157059ed9c21d2844f75049f8fa999b19944))
+- 🚀 新增 pro-form ([3ab5a5b](https://github.com/HalseySpicy/Geeker-Admin/commit/3ab5a5b4f63fca227944ab6cc7928f6bf1f88ed4))
+- 🚀 新增菜单搜索功能 ([4aa0eef](https://github.com/HalseySpicy/Geeker-Admin/commit/4aa0eefaf427a2aa1aebd2b78dc049ffa776e838))
+- 🚀 新增界面配置功能 ([39ffc5e](https://github.com/HalseySpicy/Geeker-Admin/commit/39ffc5e9a77da3294055f23f8c87a4a44f3622f7))
+- 🚀 预定义主题颜色 ([8219178](https://github.com/HalseySpicy/Geeker-Admin/commit/82191789bcf6d21c623aa61c5a64e502cea44c2c))
+- 🚀 增加 SearchForm 属性透传 ([eadb89b](https://github.com/HalseySpicy/Geeker-Admin/commit/eadb89b687596980a82401f44c53430081078d04))
+
+### Bug Fixes
+
+- 🧩 修复 pro-table 格式报错问题 ([2ef11fd](https://github.com/HalseySpicy/Geeker-Admin/commit/2ef11fda6d373c3214df801ae789cafc1a033dcb))
+- 🧩 修改文件导出失败 bug ([208e720](https://github.com/HalseySpicy/Geeker-Admin/commit/208e720688969d2bc0fa0a6cc2bae3e3b991c806))
+- 🧩 fix use pinia bug ([609aa69](https://github.com/HalseySpicy/Geeker-Admin/commit/609aa69aa9b3e0bb4e667ee7f76ab44051c2d2e8))
+
 ### [0.0.2](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.3...v0.0.2) (2022-06-29)
 
 ### Bug Fixes
