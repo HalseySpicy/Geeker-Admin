@@ -2,7 +2,7 @@
 	<div class="header">
 		<div class="header-lf flx-center">
 			<CollapseIcon></CollapseIcon>
-			<Breadcrumb></Breadcrumb>
+			<Breadcrumb v-if="themeConfig.breadcrumb"></Breadcrumb>
 		</div>
 		<div class="header-ri flx-center">
 			<!-- Assembly size -->
@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import CollapseIcon from "./components/CollapseIcon.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import SearchMenu from "./components/SearchMenu.vue";
@@ -32,6 +33,10 @@ import Language from "./components/Language.vue";
 import AssemblySize from "./components/AssemblySize.vue";
 import Theme from "./components/Theme.vue";
 import Avatar from "./components/Avatar.vue";
+import { GlobalStore } from "@/store";
+
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 </script>
 
 <style scoped lang="scss">

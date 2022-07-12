@@ -17,7 +17,7 @@
 				<span>{{ subItem.title }}</span>
 			</template>
 			<template v-else #title>
-				<a class="href" :href="subItem.isLink" target="_blank">{{ subItem.title }}</a>
+				<a class="menu-href" :href="subItem.isLink" target="_blank">{{ subItem.title }}</a>
 			</template>
 		</el-menu-item>
 	</template>

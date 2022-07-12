@@ -6,7 +6,7 @@
 		<el-container>
 			<el-header>
 				<Header></Header>
-				<Tabs></Tabs>
+				<Tabs v-if="themeConfig.tabs"></Tabs>
 			</el-header>
 			<el-main>
 				<section class="main-box">
@@ -19,7 +19,7 @@
 					</router-view>
 				</section>
 			</el-main>
-			<el-footer>
+			<el-footer v-if="themeConfig.footer">
 				<Footer></Footer>
 			</el-footer>
 		</el-container>
@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
 import Menu from "./Menu/index.vue";
 import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
@@ -35,8 +36,11 @@ import cacheRouter from "@/routers/cacheRouter";
 import { onMounted } from "vue";
 import { getAuthButtons } from "@/api/modules/login";
 import { AuthStore } from "@/store/modules/auth";
+import { GlobalStore } from "@/store";
 
 const authStore = AuthStore();
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 
 onMounted(async () => {
 	// 获取按钮权限列表

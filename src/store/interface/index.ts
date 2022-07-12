@@ -4,6 +4,9 @@ export interface ThemeConfigProp {
 	isDark: boolean;
 	isGrey: boolean;
 	isWeak: boolean;
+	breadcrumb: boolean;
+	tabs: boolean;
+	footer: boolean;
 }
 
 /* GlobalState */

@@ -29,37 +29,14 @@
 			overflow: auto;
 			overflow-x: hidden;
 			border-right: none;
-			.el-menu-item {
-				&.is-active {
-					background-color: #060708 !important;
-				}
-				&.is-active::before {
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					left: 0;
-					width: 4px;
-					content: "";
-					background: $primary-color;
-				}
-			}
 		}
 	}
 }
+.el-menu,
 .el-menu--popup {
 	.el-menu-item {
-		background-color: #191a20;
-		i {
-			margin-right: 5px;
-		}
-		&:hover {
-			i,
-			span {
-				color: #ffffff !important;
-			}
-		}
 		&.is-active {
-			background-color: #060708 !important;
+			background-color: #060708;
 			&::before {
 				position: absolute;
 				top: 0;
@@ -69,14 +46,10 @@
 				content: "";
 				background: $primary-color;
 			}
-			i,
-			span {
-				color: #ffffff !important;
-			}
 		}
 	}
 }
-.href {
+.menu-href {
 	display: inline-block;
 	width: 100%;
 	height: 100%;

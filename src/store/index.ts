@@ -27,7 +27,13 @@ export const GlobalStore = defineStore({
 			// 灰色模式
 			isGrey: false,
 			// 色弱模式
-			isWeak: false
+			isWeak: false,
+			// 面包屑导航
+			breadcrumb: true,
+			// 标签页
+			tabs: true,
+			// 页脚
+			footer: true
 		}
 	}),
 	getters: {},
