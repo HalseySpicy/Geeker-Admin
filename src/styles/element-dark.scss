@@ -211,13 +211,5 @@ html.dark {
 		.el-menu {
 			background-color: var(--el-bg-color) !important;
 		}
-		.el-menu--popup {
-			.el-menu-item {
-				background-color: var(--el-bg-color) !important;
-				&.is-active {
-					background-color: var(--geeker-popup-color) !important;
-				}
-			}
-		}
 	}
 }
