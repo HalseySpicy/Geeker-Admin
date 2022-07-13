@@ -57,11 +57,10 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 	const getTableList = async () => {
 		try {
 			// 先更新查询参数
-			updatedTotalParam();
-			Object.assign(state.totalParam, initParam);
+			Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
 			const { data } = await api(state.totalParam);
 			state.tableData = isPageable ? data.datalist : data;
-			// 解构后台返回的分页数据(如果有分页更新分页信息)
+			// 解构后台返回的分页数据 (如果有分页更新分页信息)
 			const { pageNum, pageSize, total } = data;
 			isPageable && updatePageable({ pageNum, pageSize, total });
 		} catch (error) {
@@ -77,7 +76,7 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 		state.totalParam = {};
 		// 处理查询参数，可以给查询参数加自定义前缀操作
 		let nowSearchParam: { [propName: string]: any } = {};
-		// 防止手动清空输入框携带参数（可以自定义查询参数前缀）
+		// 防止手动清空输入框携带参数（这里可以自定义查询参数前缀）
 		for (let key in state.searchParam) {
 			// * 某些情况下参数为 false/0 也应该携带参数
 			if (state.searchParam[key] || state.searchParam[key] === false || state.searchParam[key] === 0) {
@@ -102,6 +101,7 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 	 * */
 	const search = () => {
 		state.pageable.pageNum = 1;
+		updatedTotalParam();
 		getTableList();
 	};
 
@@ -116,6 +116,7 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 		Object.keys(state.searchInitParam).forEach(key => {
 			state.searchParam[key] = state.searchInitParam[key];
 		});
+		updatedTotalParam();
 		getTableList();
 	};
 
