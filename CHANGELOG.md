@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.4...v0.0.5) (2022-07-21)
+
+### Features
+
+- 🚀 新增请求示例，参见 loginApi ([d49b227](https://github.com/HalseySpicy/Geeker-Admin/commit/d49b227762ae48c3ca08f0dec02a3667daac8532))
+
+### Bug Fixes
+
+- 🧩 解决 useTable 查询参数 bug ([a86e408](https://github.com/HalseySpicy/Geeker-Admin/commit/a86e4089b6da8ab6a55bc84e069d665c06471676))
+- 🧩 修复 axios 请求超时未拦截错误 ([856468e](https://github.com/HalseySpicy/Geeker-Admin/commit/856468e84f8356d35c25097f3115dfe3d496914c))
+- 🧩 修复请求 header 参数丢失 bug ([3598dbc](https://github.com/HalseySpicy/Geeker-Admin/commit/3598dbc2a83aaacf9dada4e2c38a3ca27cbe4cfd))
+
 ### [0.0.4](https://github.com/HalseySpicy/Geeker-Admin/compare/v0.0.3...v0.0.4) (2022-07-12)
 
 ### Features
