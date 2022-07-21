@@ -56,7 +56,7 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 	 * */
 	const getTableList = async () => {
 		try {
-			// 先更新查询参数
+			// 先把初始化参数和分页参数放到总参数里面
 			Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
 			const { data } = await api(state.totalParam);
 			state.tableData = isPageable ? data.datalist : data;
