@@ -1,18 +1,18 @@
 <template>
 	<div class="header">
 		<div class="header-lf flx-center">
-			<CollapseIcon></CollapseIcon>
+			<CollapseIcon id="hamburger-collapse"></CollapseIcon>
 			<Breadcrumb v-if="themeConfig.breadcrumb"></Breadcrumb>
 		</div>
 		<div class="header-ri flx-center">
 			<!-- Assembly size -->
-			<AssemblySize></AssemblySize>
+			<AssemblySize id="size-select"></AssemblySize>
 			<!-- Language -->
-			<Language></Language>
+			<Language id="header-language"></Language>
 			<!-- SearchMenu -->
-			<SearchMenu></SearchMenu>
+			<SearchMenu id="header-search"></SearchMenu>
 			<!-- Theme -->
-			<Theme></Theme>
+			<Theme id="header-layout"></Theme>
 			<!-- Full screen -->
 			<Fullscreen></Fullscreen>
 			<!-- User name -->
