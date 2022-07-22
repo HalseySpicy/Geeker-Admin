@@ -145,19 +145,6 @@
 		}
 	}
 
-	// drawer body 样式（给 .el-form-item__label 每项后面添加：）
-	.el-drawer__body {
-		.el-form {
-			.el-form-item {
-				.el-form-item__label {
-					&::after {
-						content: " :";
-					}
-				}
-			}
-		}
-	}
-
 	// drawer header 样式
 	.el-drawer__footer {
 		border-top: 1px solid #ebeef5;

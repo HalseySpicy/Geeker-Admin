@@ -1,6 +1,13 @@
 <template>
 	<el-drawer v-model="drawerVisible" :destroy-on-close="true" size="600px" :title="`${drawerData.title}用户`">
-		<el-form ref="ruleFormRef" :rules="rules" :disabled="drawerData.isView" :model="drawerData.rowData" label-width="100px">
+		<el-form
+			ref="ruleFormRef"
+			:rules="rules"
+			:disabled="drawerData.isView"
+			:model="drawerData.rowData"
+			label-width="100px"
+			label-suffix=" :"
+		>
 			<el-form-item label="用户姓名" prop="username" clearable>
 				<el-input v-model="drawerData.rowData!.username" placeholder="请填写用户姓名"></el-input>
 			</el-form-item>
@@ -33,11 +40,11 @@ import { genderType } from "@/utils/serviceDict";
 import { ElMessage, FormInstance } from "element-plus";
 
 const rules = reactive({
-	username: [{ required: true, message: "请填写用户姓名", trigger: "blur" }],
+	username: [{ required: true, message: "请填写用户姓名", trigger: "change" }],
 	gender: [{ required: true, message: "请选择性别", trigger: "change" }],
-	idCard: [{ required: true, message: "请填写身份证号", trigger: "blur" }],
-	email: [{ required: true, message: "请填写邮箱", trigger: "blur" }],
-	address: [{ required: true, message: "请填写居住地址", trigger: "blur" }]
+	idCard: [{ required: true, message: "请填写身份证号", trigger: "change" }],
+	email: [{ required: true, message: "请填写邮箱", trigger: "change" }],
+	address: [{ required: true, message: "请填写居住地址", trigger: "change" }]
 });
 
 interface DrawerProps {
@@ -67,10 +74,9 @@ const handleSubmit = () => {
 	ruleFormRef.value!.validate(async valid => {
 		if (!valid) return;
 		try {
-			if (!drawerData.value.apiUrl) return;
-			await drawerData.value.apiUrl(drawerData.value.rowData);
+			await drawerData.value.apiUrl!(drawerData.value.rowData);
 			ElMessage.success({ message: `${drawerData.value.title}用户成功！` });
-			drawerData.value.getTableList && drawerData.value.getTableList();
+			drawerData.value.getTableList!();
 			drawerVisible.value = false;
 		} catch (error) {
 			console.log(error);

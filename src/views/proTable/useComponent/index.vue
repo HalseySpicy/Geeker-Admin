@@ -85,55 +85,16 @@ const renderHeader = (scope: any) => {
 	);
 };
 
-// 配置项
+// 表格配置项
 const columns: Partial<ColumnProps>[] = [
-	{
-		type: "selection",
-		width: 80,
-		fixed: "left"
-	},
-	{
-		type: "index",
-		label: "#",
-		width: 80
-	},
-	{
-		type: "expand",
-		label: "Expand",
-		width: 100
-	},
-	{
-		prop: "username",
-		label: "用户姓名",
-		width: 135,
-		search: true,
-		searchProps: { disabled: true },
-		renderHeader
-	},
-	{
-		prop: "gender",
-		label: "性别",
-		width: 140,
-		sortable: true,
-		search: true,
-		searchType: "select",
-		enum: genderType
-	},
-	{
-		prop: "idCard",
-		label: "身份证号",
-		search: true
-	},
-	{
-		prop: "email",
-		label: "邮箱",
-		search: true
-	},
-	{
-		prop: "address",
-		label: "居住地址",
-		search: true
-	},
+	{ type: "selection", width: 80, fixed: "left" },
+	{ type: "index", label: "#", width: 80 },
+	{ type: "expand", label: "Expand", width: 100 },
+	{ prop: "username", label: "用户姓名", width: 135, search: true, searchProps: { disabled: true }, renderHeader },
+	{ prop: "gender", label: "性别", width: 140, sortable: true, search: true, searchType: "select", enum: genderType },
+	{ prop: "idCard", label: "身份证号", search: true },
+	{ prop: "email", label: "邮箱", search: true },
+	{ prop: "address", label: "居住地址", search: true },
 	{
 		prop: "createTime",
 		label: "创建时间",
@@ -146,25 +107,9 @@ const columns: Partial<ColumnProps>[] = [
 		},
 		searchInitParam: ["2022-07-30 00:00:00", "2022-08-10 23:59:59"]
 	},
-	{
-		prop: "status",
-		label: "用户状态",
-		sortable: true,
-		width: 160
-	},
-	// {
-	// 	prop: "avatar",
-	// 	label: "头像",
-	// 	width: 120,
-	// 	image: true
-	// },
-	{
-		prop: "operation",
-		label: "操作",
-		width: 330,
-		fixed: "right",
-		renderHeader
-	}
+	{ prop: "status", label: "用户状态", sortable: true, width: 160 },
+	{ prop: "avatar", label: "头像", width: 120, image: true },
+	{ prop: "operation", label: "操作", width: 330, fixed: "right", renderHeader }
 ];
 
 // 删除用户信息
@@ -218,9 +163,9 @@ interface DrawerExpose {
 const drawerRef = ref<DrawerExpose>();
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
-		title: title,
+		title,
 		rowData: { ...rowData },
-		isView: title === "查看" ? true : false,
+		isView: title === "查看",
 		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.refresh
 	};

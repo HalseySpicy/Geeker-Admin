@@ -11,8 +11,6 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],
-		// 是否展开更多搜索框
-		searchShow: false,
 		// 分页数据
 		pageable: {
 			// 当前页数
