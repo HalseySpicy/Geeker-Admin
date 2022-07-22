@@ -151,28 +151,21 @@ import {
 	exportUserInfo
 } from "@/api/modules/user";
 
+// 是否展示更多搜索内容
+const searchShow = ref(false);
+
 // 如果表格需要初始化请求参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上)
 const initParam = reactive({
 	type: 1
 });
 
-const {
-	tableData,
-	searchShow,
-	pageable,
-	searchParam,
-	searchInitParam,
-	getTableList,
-	search,
-	reset,
-	handleSizeChange,
-	handleCurrentChange
-} = useTable(getUserList, initParam);
+const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+	useTable(getUserList, initParam);
 
 // 数据多选
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
-// 用户按钮权限
+// 页面按钮权限
 const { BUTTONS } = useAuthButtons();
 
 // 设置搜索表单默认参数
@@ -217,7 +210,7 @@ const batchAdd = () => {
 		title: "用户",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser,
-		getTableList: getTableList // 操作成功之后刷新数据
+		getTableList // 操作成功之后刷新数据
 	};
 	dialogRef.value!.acceptParams(params);
 };
@@ -229,11 +222,11 @@ interface DrawerExpose {
 const drawerRef = ref<DrawerExpose>();
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
-		title: title,
-		rowData: { ...rowData }, // 解构让其失去响应式
-		isView: title === "查看" ? true : false,
+		title,
+		rowData: { ...rowData },
+		isView: title === "查看",
 		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
-		getTableList: getTableList // 操作成功之后刷新数据
+		getTableList
 	};
 	drawerRef.value!.acceptParams(params);
 };

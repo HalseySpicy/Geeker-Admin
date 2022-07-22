@@ -61,7 +61,7 @@ class RequestHttp {
 			(response: AxiosResponse) => {
 				const { data, config } = response;
 				const globalStore = GlobalStore();
-				// * 在请求结束后，移除本次请求
+				// * 在请求结束后，移除本次请求，并关闭请求 loading
 				axiosCanceler.removePending(config);
 				tryHideFullScreenLoading();
 				// * 登陆失效（code == 599）
@@ -78,14 +78,14 @@ class RequestHttp {
 					ElMessage.error(data.msg);
 					return Promise.reject(data);
 				}
-				// * 成功请求
+				// * 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
 				return data;
 			},
 			async (error: AxiosError) => {
 				const { response } = error;
 				tryHideFullScreenLoading();
-				// 请求超时单独判断，请求超时没有 response
-				if (error.message.indexOf("timeout") !== -1) ElMessage.error("请求超时，请稍后再试");
+				// 请求超时单独判断，因为请求超时没有 response
+				if (error.message.indexOf("timeout") !== -1) ElMessage.error("请求超时！请您稍后重试");
 				// 根据响应的错误状态码，做不同的处理
 				if (response) checkStatus(response.status);
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网)，断网处理:可以跳转到断网页面
