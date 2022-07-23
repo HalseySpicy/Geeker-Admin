@@ -12,7 +12,7 @@
 				<UploadImg
 					v-model:imageUrl="drawerData.rowData!.avatar"
 					:disabled="drawerData.isView"
-					:upload-style="{ width: '100px', height: '100px' }"
+					:upload-style="{ width: '120px', height: '120px' }"
 					@check-validate="checkValidate('avatar')"
 				>
 					<template #tip> 头像大小不能超过 3M </template>
