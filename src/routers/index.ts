@@ -12,6 +12,7 @@ const axiosCanceler = new AxiosCanceler();
  * */
 router.beforeEach((to, from, next) => {
 	NProgress.start();
+	 document.title = (to.meta.title as string) || "";
 	// * 在跳转路由之前，清除所有的请求
 	axiosCanceler.removeAllPending();
 
