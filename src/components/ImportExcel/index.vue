@@ -72,10 +72,8 @@ const uploadExcel = async (param: any) => {
 	let excelFormData = new FormData();
 	excelFormData.append("file", param.file);
 	excelFormData.append("isCover", isCover.value as unknown as Blob);
-	if (!parameter.value.importApi) return;
-	const res = await parameter.value.importApi(excelFormData);
-	if (res.code !== 200) return param.onError();
-	parameter.value.getTableList && parameter.value.getTableList();
+	await parameter.value.importApi!(excelFormData);
+	parameter.value.getTableList!();
 	dialogVisible.value = false;
 };
 

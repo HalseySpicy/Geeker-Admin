@@ -9,7 +9,7 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="403">
 import { TabsStore } from "@/store/modules/tabs";
 const tabStore = TabsStore();
 </script>

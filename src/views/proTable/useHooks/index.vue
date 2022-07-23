@@ -220,7 +220,7 @@ interface DrawerExpose {
 	acceptParams: (params: any) => void;
 }
 const drawerRef = ref<DrawerExpose>();
-const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
 	let params = {
 		title,
 		rowData: { ...rowData },

@@ -61,4 +61,7 @@ export namespace User {
 		avatar: string;
 		children?: ResUserList[];
 	}
+	export interface ResFileUrl {
+		fileUrl: string;
+	}
 }

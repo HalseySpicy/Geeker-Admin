@@ -45,3 +45,8 @@ export const resetUserPassWord = (params: { id: string }) => {
 export const exportUserInfo = (params: User.ReqGetUserParams) => {
 	return http.post<BlobPart>(PORT1 + `/user/export`, params, { responseType: "blob" });
 };
+
+// * 图片上传
+export const uploadImg = (params: FormData) => {
+	return http.post<User.ResFileUrl>(PORT1 + `/file/upload`, params);
+};

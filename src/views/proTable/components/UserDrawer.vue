@@ -8,21 +8,31 @@
 			label-width="100px"
 			label-suffix=" :"
 		>
-			<el-form-item label="用户姓名" prop="username" clearable>
+			<el-form-item label="用户头像" prop="avatar">
+				<UploadImg
+					v-model:imageUrl="drawerData.rowData!.avatar"
+					:disabled="drawerData.isView"
+					:upload-style="{ width: '100px', height: '100px' }"
+					@check-validate="checkValidate('avatar')"
+				>
+					<template #tip> 头像大小不能超过 3M </template>
+				</UploadImg>
+			</el-form-item>
+			<el-form-item label="用户姓名" prop="username">
 				<el-input v-model="drawerData.rowData!.username" placeholder="请填写用户姓名"></el-input>
 			</el-form-item>
-			<el-form-item label="性别" prop="gender" clearable>
+			<el-form-item label="性别" prop="gender">
 				<el-select v-model="drawerData.rowData!.gender" placeholder="请选择性别" clearable>
 					<el-option v-for="item in genderType" :key="item.value" :label="item.label" :value="item.value" />
 				</el-select>
 			</el-form-item>
-			<el-form-item label="身份证号" prop="idCard" clearable>
+			<el-form-item label="身份证号" prop="idCard">
 				<el-input v-model="drawerData.rowData!.idCard" placeholder="请填写身份证号"></el-input>
 			</el-form-item>
-			<el-form-item label="邮箱" prop="email" clearable>
+			<el-form-item label="邮箱" prop="email">
 				<el-input v-model="drawerData.rowData!.email" placeholder="请填写邮箱"></el-input>
 			</el-form-item>
-			<el-form-item label="居住地址" prop="address" clearable>
+			<el-form-item label="居住地址" prop="address">
 				<el-input v-model="drawerData.rowData!.address" placeholder="请填写居住地址"></el-input>
 			</el-form-item>
 		</el-form>
@@ -38,8 +48,10 @@ import { User } from "@/api/interface";
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { ElMessage, FormInstance } from "element-plus";
+import UploadImg from "@/components/UploadImg/index.vue";
 
 const rules = reactive({
+	avatar: [{ required: true, message: "请上传用户头像", trigger: "change" }],
 	username: [{ required: true, message: "请填写用户姓名", trigger: "change" }],
 	gender: [{ required: true, message: "请选择性别", trigger: "change" }],
 	idCard: [{ required: true, message: "请填写身份证号", trigger: "change" }],
@@ -82,6 +94,11 @@ const handleSubmit = () => {
 			console.log(error);
 		}
 	});
+};
+
+// 公共校验方法（图片上传成功触发重新校验）
+const checkValidate = (val: string) => {
+	ruleFormRef.value!.validateField(val, () => {});
 };
 
 defineExpose({

@@ -32,6 +32,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 					title: "批量导入数据",
 					key: "batchImport"
 				}
+			},
+			{
+				path: "/assembly/uploadImg",
+				name: "uploadImg",
+				component: () => import("@/views/assembly/uploadImg/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "图片上传",
+					key: "uploadImg"
+				}
 			}
 		]
 	}
