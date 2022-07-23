@@ -1,20 +1,22 @@
 <template>
 	<div class="header">
 		<div class="header-lf flx-center">
-			<CollapseIcon id="hamburger-collapse"></CollapseIcon>
-			<Breadcrumb v-if="themeConfig.breadcrumb"></Breadcrumb>
+			<CollapseIcon id="collapseIcon"></CollapseIcon>
+			<Breadcrumb id="breadcrumb" v-if="themeConfig.breadcrumb"></Breadcrumb>
 		</div>
 		<div class="header-ri flx-center">
-			<!-- Assembly size -->
-			<AssemblySize id="size-select"></AssemblySize>
-			<!-- Language -->
-			<Language id="header-language"></Language>
-			<!-- SearchMenu -->
-			<SearchMenu id="header-search"></SearchMenu>
-			<!-- Theme -->
-			<Theme id="header-layout"></Theme>
-			<!-- Full screen -->
-			<Fullscreen></Fullscreen>
+			<div class="header-icon">
+				<!-- Assembly size -->
+				<AssemblySize id="assemblySize"></AssemblySize>
+				<!-- Language -->
+				<Language id="language"></Language>
+				<!-- SearchMenu -->
+				<SearchMenu id="searchMenu"></SearchMenu>
+				<!-- Theme -->
+				<Theme id="theme"></Theme>
+				<!-- Full screen -->
+				<Fullscreen id="fullscreen"></Fullscreen>
+			</div>
 			<!-- User name -->
 			<span class="username">Geeker</span>
 			<!-- Avatar -->

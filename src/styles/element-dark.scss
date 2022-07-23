@@ -212,4 +212,9 @@ html.dark {
 			background-color: var(--el-bg-color) !important;
 		}
 	}
+
+	// guide
+	#driver-highlighted-element-stage {
+		background-color: var(--el-color-info-light-5) !important;
+	}
 }

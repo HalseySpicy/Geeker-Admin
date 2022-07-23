@@ -43,7 +43,7 @@ export interface ExcelParameterProps {
 	title: string; // 标题
 	tempApi: (params: any) => Promise<any>; // 下载模板的Api
 	importApi: (params: any) => Promise<any>; // 批量导入的Api
-	getTableList: () => Promise<any>; // 获取表格数据的Api
+	getTableList?: () => Promise<any>; // 获取表格数据的Api
 }
 
 // 是否覆盖数据
@@ -73,7 +73,7 @@ const uploadExcel = async (param: any) => {
 	excelFormData.append("file", param.file);
 	excelFormData.append("isCover", isCover.value as unknown as Blob);
 	await parameter.value.importApi!(excelFormData);
-	parameter.value.getTableList!();
+	parameter.value.getTableList && parameter.value.getTableList();
 	dialogVisible.value = false;
 };
 

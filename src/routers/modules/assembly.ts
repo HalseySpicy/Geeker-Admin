@@ -43,6 +43,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 					title: "批量导入数据",
 					key: "batchImport"
 				}
+			},
+			{
+				path: "/assembly/guide",
+				name: "guide",
+				component: () => import("@/views/assembly/guide/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "引导页",
+					key: "guide"
+				}
 			}
 		]
 	}

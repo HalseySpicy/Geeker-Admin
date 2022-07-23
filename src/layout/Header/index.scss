@@ -16,11 +16,17 @@
 	}
 	.header-ri {
 		margin: 0 30px;
-		.icon-style {
-			margin: 0 12px 0;
-			font-size: 20px;
-			color: rgb(0 0 0 / 75%);
-			cursor: pointer;
+		.header-icon {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 190px;
+			margin-right: 22px;
+			.icon-style {
+				font-size: 20px;
+				color: rgb(0 0 0 / 75%);
+				cursor: pointer;
+			}
 		}
 		.username {
 			margin: 0 20px 0 0;
