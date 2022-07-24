@@ -60,25 +60,24 @@ const router = useRouter();
 const login = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.validate(async valid => {
-		if (valid) {
-			loading.value = true;
-			try {
-				const requestLoginForm: Login.ReqLoginForm = {
-					username: loginForm.username,
-					password: md5(loginForm.password)
-				};
-				const res = await loginApi(requestLoginForm);
-				// * 存储 token
-				globalStore.setToken(res.data!.access_token);
-				// * 登录成功之后清除上个账号的 menulist 和 tabs 数据
-				menuStore.setMenuList([]);
-				tabStore.closeMultipleTab();
+		if (!valid) return;
+		loading.value = true;
+		try {
+			const requestLoginForm: Login.ReqLoginForm = {
+				username: loginForm.username,
+				password: md5(loginForm.password)
+			};
+			const res = await loginApi(requestLoginForm);
+			// * 存储 token
+			globalStore.setToken(res.data!.access_token);
+			// * 登录成功之后清除上个账号的 menulist 和 tabs 数据
+			menuStore.setMenuList([]);
+			tabStore.closeMultipleTab();
 
-				ElMessage.success("登录成功！");
-				router.push({ name: "home" });
-			} finally {
-				loading.value = false;
-			}
+			ElMessage.success("登录成功！");
+			router.push({ name: "home" });
+		} finally {
+			loading.value = false;
 		}
 	});
 };

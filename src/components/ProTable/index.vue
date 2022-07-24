@@ -185,7 +185,13 @@ searchColumns.forEach(column => {
 const colRef = ref();
 // 过滤掉不需要设置显隐的列
 const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
-	return item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
+	return (
+		item.type !== "selection" &&
+		item.type !== "index" &&
+		item.type !== "expand" &&
+		item.prop !== "operation" &&
+		item.isShow !== false
+	);
 });
 const openColSetting = () => {
 	colRef.value.openColSetting();

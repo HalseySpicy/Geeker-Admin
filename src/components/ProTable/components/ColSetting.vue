@@ -30,7 +30,7 @@ const openColSetting = (): void => {
 	drawerVisible.value = true;
 };
 
-// 列显隐时重新布局 table（防止表格抖动,隐藏显示之后会出现横向滚动条,element-plus 内部问题，提了 issues）
+// 列显隐时重新布局 table（防止表格抖动,隐藏显示之后会出现横向滚动条,element-plus 内部问题，已经提了 issues）
 const switchShow = () => {
 	nextTick(() => {
 		props.tableRef.doLayout();

@@ -119,8 +119,8 @@ const columns: Partial<ColumnProps>[] = [
 		searchInitParam: ["2022-07-30 00:00:00", "2022-08-10 23:59:59"]
 	},
 	{ prop: "status", label: "用户状态", sortable: true, width: 160 },
-	// { prop: "avatar", label: "头像", width: 120, image: true },
 	{ prop: "operation", label: "操作", width: 330, fixed: "right", renderHeader }
+	// { prop: "avatar", label: "头像", width: 120, image: true },
 ];
 
 // 删除用户信息
