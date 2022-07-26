@@ -6,11 +6,22 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 	{
 		path: "/assembly",
 		component: Layout,
-		redirect: "/assembly/selectIcon",
+		redirect: "/assembly/guide",
 		meta: {
 			title: "常用组件"
 		},
 		children: [
+			{
+				path: "/assembly/guide",
+				name: "guide",
+				component: () => import("@/views/assembly/guide/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "引导页",
+					key: "guide"
+				}
+			},
 			{
 				path: "/assembly/selectIcon",
 				name: "selectIcon",
@@ -40,19 +51,19 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "批量导入数据",
+					title: "批量上传数据",
 					key: "batchImport"
 				}
 			},
 			{
-				path: "/assembly/guide",
-				name: "guide",
-				component: () => import("@/views/assembly/guide/index.vue"),
+				path: "/assembly/wangEditor",
+				name: "wangEditor",
+				component: () => import("@/views/assembly/wangEditor/index.vue"),
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "引导页",
-					key: "guide"
+					title: "富文本编辑器",
+					key: "wangEditor"
 				}
 			}
 		]

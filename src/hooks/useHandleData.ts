@@ -9,9 +9,9 @@ import { HandleData } from "./interface";
  * @param {String} confirmType icon类型(不必传,默认为 warning)
  * @return Promise
  */
-export const useHandleData = (
-	api: (params: any) => Promise<any>,
-	params: any,
+export const useHandleData = <P = any, R = any>(
+	api: (params: P) => Promise<R>,
+	params: Parameters<typeof api>[0],
 	message: string,
 	confirmType: HandleData.MessageType = "warning"
 ) => {
