@@ -27,7 +27,6 @@ export const TabsStore = defineStore({
 				this.tabsMenuList.push(tabInfo);
 			}
 			this.setTabsMenuValue(tabItem.path);
-			router.push(tabItem.path);
 		},
 		// Remove Tabs
 		async removeTabs(tabPath: string) {
