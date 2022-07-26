@@ -37,7 +37,7 @@ export namespace Login {
 	}
 }
 
-// * 用户管理
+// * 用户管理模块
 export namespace User {
 	export interface ReqGetUserParams extends ReqPage {
 		username: string;
@@ -60,6 +60,14 @@ export namespace User {
 		status: number;
 		avatar: string;
 		children?: ResUserList[];
+	}
+	export interface ResStatus {
+		userLabel: string;
+		userValue: number;
+	}
+	export interface ResGender {
+		genderLabel: string;
+		genderValue: number;
 	}
 	export interface ResFileUrl {
 		fileUrl: string;

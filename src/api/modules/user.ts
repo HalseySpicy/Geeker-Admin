@@ -46,6 +46,16 @@ export const exportUserInfo = (params: User.ReqGetUserParams) => {
 	return http.post<BlobPart>(PORT1 + `/user/export`, params, { responseType: "blob" });
 };
 
+// * 获取用户状态
+export const getUserStatus = () => {
+	return http.get<User.ResStatus>(PORT1 + `/user/status`);
+};
+
+// * 获取用户性别字典
+export const getUserGender = () => {
+	return http.get<User.ResGender>(PORT1 + `/user/gender`);
+};
+
 // * 图片上传
 export const uploadImg = (params: FormData) => {
 	return http.post<User.ResFileUrl>(PORT1 + `/file/upload`, params);

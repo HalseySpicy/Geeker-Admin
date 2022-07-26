@@ -46,13 +46,10 @@ onMounted(() => {
 	// * 暂时只判断这两种情况（第四个搜索项为时间/日期范围 || 前三项存在时间/日期范围选择框）
 	// * 后期通过 css 解决文本框自适应宽度变化，已经实现了像 antd 中 pro-table 一样的样式，但自我感觉不太好看，所以没采用😆
 	if (props.columns.length >= 4) {
-		props.columns[3].searchType === "datetimerange" || props.columns[3].searchType === "daterange"
-			? ((maxWidth.value = 945), (maxLength.value = 3))
-			: null;
+		const searchTypeArr = ["datetimerange", "daterange"];
+		searchTypeArr.includes(props.columns[3].searchType!) ? ((maxWidth.value = 945), (maxLength.value = 3)) : null;
 		props.columns.slice(0, 3).forEach(item => {
-			item.searchType === "datetimerange" || item.searchType === "daterange"
-				? ((maxWidth.value = 1135), (maxLength.value = 3))
-				: null;
+			searchTypeArr.includes(item.searchType!) ? ((maxWidth.value = 1155), (maxLength.value = 3)) : null;
 		});
 	}
 });

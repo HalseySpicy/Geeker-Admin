@@ -1,4 +1,6 @@
-<!-- Pro-Table 文档: https://juejin.cn/post/7094890833064755208 -->
+<!-- 📚📚📚 Pro-Table 文档: https://juejin.cn/post/7094890833064755208 -->
+<!-- 💢💢💢 后期会重构 Pro-Table 组件，使用 v-bind 属性透传 -->
+
 <template>
 	<div class="table-box">
 		<!-- 查询表单 -->
@@ -39,6 +41,7 @@
 					:reserve-selection="item.type == 'selection'"
 					:label="item.label"
 					:width="item.width"
+					:min-width="item.minWidth"
 					:fixed="item.fixed"
 				>
 				</el-table-column>
@@ -48,6 +51,7 @@
 					:type="item.type"
 					:label="item.label"
 					:width="item.width"
+					:min-width="item.minWidth"
 					:fixed="item.fixed"
 					v-slot="scope"
 				>
@@ -59,6 +63,7 @@
 					:prop="item.prop"
 					:label="item.label"
 					:width="item.width"
+					:min-width="item.minWidth"
 					:sortable="item.sortable"
 					:show-overflow-tooltip="item.prop !== 'operation'"
 					:resizable="true"
@@ -82,15 +87,19 @@
 								preview-teleported
 							/>
 							<!-- tag 标签（自带格式化内容） -->
-							<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!],item.enum,'tag')">
+							<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps,'tag')">
 								{{
-									item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
+									item.enum?.length
+										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)
+										: formatValue(scope.row[item.prop!])
 								}}
 							</el-tag>
 							<!-- 文字（自带格式化内容） -->
 							<span v-else>
 								{{
-									item.enum?.length ? filterEnum(scope.row[item.prop!], item.enum) : defaultFormat(0, 0, scope.row[item.prop!])
+									item.enum?.length
+										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)
+										: formatValue(scope.row[item.prop!])
 								}}
 							</span>
 						</slot>
@@ -117,12 +126,12 @@
 </template>
 
 <script setup lang="ts" name="proTable">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { Refresh, Operation, Search } from "@element-plus/icons-vue";
 import { ColumnProps } from "@/components/ProTable/interface";
-import { filterEnum, defaultFormat } from "@/utils/util";
+import { filterEnum, formatValue } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "@/components/Pagination/index.vue";
 import ColSetting from "./components/ColSetting.vue";
@@ -136,6 +145,7 @@ const isShowSearch = ref<boolean>(true);
 interface ProTableProps {
 	columns: Partial<ColumnProps>[]; // 列配置项
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
+	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理
 	pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}）
 	border?: boolean; // 表格是否显示边框 ==> 非必传（默认为true）
@@ -160,7 +170,16 @@ const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelectio
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-	useTable(props.requestApi, props.initParam, props.pagination);
+	useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback);
+
+// 监听页面 initParam 改化，重新获取表格数据
+watch(
+	() => props.initParam,
+	() => {
+		getTableList();
+	},
+	{ deep: true }
+);
 
 // 表格列配置项处理（添加 isShow 属性，控制显示/隐藏）
 const tableColumns = ref<Partial<ColumnProps>[]>();
@@ -171,9 +190,16 @@ tableColumns.value = props.columns.map(item => {
 	};
 });
 
-// 过滤需要搜索的配置项
-const searchColumns = props.columns.filter(item => item.search);
+// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，获取enum数据
+tableColumns.value.forEach(async item => {
+	if (item.enum && typeof item.enum === "function") {
+		const { data } = await item.enum();
+		item.enum = data;
+	}
+});
 
+// 过滤需要搜索的配置项
+const searchColumns = tableColumns.value.filter(item => item.search);
 // 设置搜索表单的默认值
 searchColumns.forEach(column => {
 	if (column.searchInitParam !== undefined && column.searchInitParam !== null) {

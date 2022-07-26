@@ -7,7 +7,12 @@ import { reactive, computed, onMounted, toRefs } from "vue";
  * @param {Object} initParam 获取数据初始化参数(不必传，默认为{})
  * @param {Boolean} isPageable 是否有分页(不必传，默认为true)
  * */
-export const useTable = (api: (params: any) => Promise<any>, initParam: object = {}, isPageable: boolean = true) => {
+export const useTable = (
+	api: (params: any) => Promise<any>,
+	initParam: object = {},
+	isPageable: boolean = true,
+	dataCallBack?: (data: any) => any
+) => {
 	const state = reactive<Table.TableStateProps>({
 		// 表格数据
 		tableData: [],
@@ -56,7 +61,8 @@ export const useTable = (api: (params: any) => Promise<any>, initParam: object =
 		try {
 			// 先把初始化参数和分页参数放到总参数里面
 			Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
-			const { data } = await api(state.totalParam);
+			let { data } = await api(state.totalParam);
+			dataCallBack && (data = dataCallBack(data));
 			state.tableData = isPageable ? data.datalist : data;
 			// 解构后台返回的分页数据 (如果有分页更新分页信息)
 			const { pageNum, pageSize, total } = data;

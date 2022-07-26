@@ -19,9 +19,9 @@
 		>
 			<el-option
 				v-for="itemValue in item.enum"
-				:key="itemValue.value"
-				:label="itemValue.label"
-				:value="itemValue.value"
+				:key="itemValue[item.searchProps?.value] ?? itemValue.value"
+				:label="itemValue[item.searchProps?.label] ?? itemValue.label"
+				:value="itemValue[item.searchProps?.value] ?? itemValue.value"
 				:disabled="itemValue.disabled"
 			/>
 		</el-select>
