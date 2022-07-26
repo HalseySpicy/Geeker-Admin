@@ -4,6 +4,7 @@ export interface EnumProps {
 	disabled?: boolean; // 是否禁用此选项
 	tagType?: string; // 当 tag 为 true 时，此选择会指定 tag 显示类型
 	children?: EnumProps[]; // 为树形选择时，可以通过 children 属性指定子选项
+	[key: string]: any;
 }
 
 export type SearchType =
