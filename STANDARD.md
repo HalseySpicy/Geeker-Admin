@@ -186,11 +186,13 @@ npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelin
 
 ```json
 {
+	"editor.formatOnSave": true,
 	"stylelint.enable": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.stylelint": true
 	},
-	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"]
+	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
+	"files.eol": "\n"
 }
 ```
 
@@ -222,7 +224,6 @@ module.exports = {
 	 * null  => 关闭该规则
 	 */
 	rules: {
-		indentation: null, // 指定缩进空格
 		"no-descending-specificity": null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
 		"function-url-quotes": "always", // 要求或禁止 URL 的引号 "always(必须加上引号)"|"never(没有引号)"
 		"string-quotes": "double", // 指定字符串使用单引号或双引号
@@ -351,7 +352,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ### 4、commitizen（基于 Node.js 的 git commit 命令行工具，生成标准化的 message）
 
 ```text
-// 全局安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。
+// 安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。
 npm install commitizen -D
 ```
 
@@ -380,6 +381,7 @@ npm install cz-git -D
 /** @type {import('cz-git').UserConfig} */
 
 module.exports = {
+	ignores: [commit => commit.includes("init")],
 	extends: ["@commitlint/config-conventional"],
 	rules: {
 		// @see: https://commitlint.js.org/#/reference-rules
@@ -438,73 +440,73 @@ module.exports = {
 		types: [
 			{
 				value: "feat",
-				name: "feat:     ✨  A new feature",
-				emoji: ":sparkles:"
+				name: "feat:     🚀  A new feature",
+				emoji: "🚀"
 			},
 			{
 				value: "fix",
-				name: "fix:      🐛  A bug fix",
-				emoji: ":bug:"
+				name: "fix:      🧩  A bug fix",
+				emoji: "🧩"
 			},
 			{
 				value: "docs",
-				name: "docs:     📝  Documentation only changes",
-				emoji: ":memo:"
+				name: "docs:     📚  Documentation only changes",
+				emoji: "📚"
 			},
 			{
 				value: "style",
-				name: "style:    💄  Changes that do not affect the meaning of the code",
-				emoji: ":lipstick:"
+				name: "style:    🎨  Changes that do not affect the meaning of the code",
+				emoji: "🎨"
 			},
 			{
 				value: "refactor",
 				name: "refactor: ♻️   A code change that neither fixes a bug nor adds a feature",
-				emoji: ":recycle:"
+				emoji: "♻️"
 			},
 			{
 				value: "perf",
 				name: "perf:     ⚡️  A code change that improves performance",
-				emoji: ":zap:"
+				emoji: "⚡️"
 			},
 			{
 				value: "test",
 				name: "test:     ✅  Adding missing tests or correcting existing tests",
-				emoji: ":white_check_mark:"
+				emoji: "✅"
 			},
 			{
 				value: "build",
 				name: "build:    📦️   Changes that affect the build system or external dependencies",
-				emoji: ":package:"
+				emoji: "📦️"
 			},
 			{
 				value: "ci",
 				name: "ci:       🎡  Changes to our CI configuration files and scripts",
-				emoji: ":ferris_wheel:"
+				emoji: "🎡"
 			},
 			{
 				value: "chore",
 				name: "chore:    🔨  Other changes that don't modify src or test files",
-				emoji: ":hammer:"
+				emoji: "🔨"
 			},
 			{
 				value: "revert",
 				name: "revert:   ⏪️  Reverts a previous commit",
-				emoji: ":rewind:"
+				emoji: "⏪️"
 			}
 			// 中文版
-			// { value: "特性", name: "特性:   ✨  新增功能", emoji: ":sparkles:" },
-			// { value: "修复", name: "修复:   🐛  修复缺陷", emoji: ":bug:" },
-			// { value: "文档", name: "文档:   📝  文档变更", emoji: ":memo:" },
-			// { value: "格式", name: "格式:   💄  代码格式（不影响功能，例如空格、分号等格式修正）", emoji: ":lipstick:" },
-			// { value: "重构", name: "重构:   ♻️  代码重构（不包括 bug 修复、功能新增）", emoji: ":recycle:" },
-			// { value: "性能", name: "性能:    ⚡️  性能优化", emoji: ":zap:" },
-			// { value: "测试", name: "测试:   ✅  添加疏漏测试或已有测试改动", emoji: ":white_check_mark:" },
-			// { value: "构建", name: "构建:   📦️  构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）", emoji: ":package:" },
-			// { value: "集成", name: "集成:   🎡  修改 CI 配置、脚本", emoji: ":ferris_wheel:" },
-			// { value: "回退", name: "回退:   ⏪️  回滚 commit", emoji: ":rewind:" },
-			// { value: "其他", name: "其他:   🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）", emoji: ":hammer:" }
+			// { value: "特性", name: "特性:   🚀  新增功能", emoji: "🚀" },
+			// { value: "修复", name: "修复:   🧩  修复缺陷", emoji: "🧩" },
+			// { value: "文档", name: "文档:   📚  文档变更", emoji: "📚" },
+			// { value: "格式", name: "格式:   🎨  代码格式（不影响功能，例如空格、分号等格式修正）", emoji: "🎨" },
+			// { value: "重构", name: "重构:   ♻️  代码重构（不包括 bug 修复、功能新增）", emoji: "♻️" },
+			// { value: "性能", name: "性能:   ⚡️  性能优化", emoji: "⚡️" },
+			// { value: "测试", name: "测试:   ✅  添加疏漏测试或已有测试改动", emoji: "✅" },
+			// { value: "构建", name: "构建:   📦️  构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）", emoji: "📦️" },
+			// { value: "集成", name: "集成:   🎡  修改 CI 配置、脚本", emoji: "🎡" },
+			// { value: "回退", name: "回退:   ⏪️  回滚 commit", emoji: "⏪️" },
+			// { value: "其他", name: "其他:   🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）", emoji: "🔨" }
 		],
-		useEmoji: false,
+		useEmoji: true,
 		themeColorCode: "",
 		scopes: [],
 		allowCustomScopes: true,
