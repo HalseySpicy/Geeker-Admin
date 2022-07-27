@@ -27,11 +27,23 @@
 			font-size: 15px;
 			color: rgb(0 0 0 / 75%);
 		}
+		.user {
+			display: flex;
+    	align-items: center;
+			cursor: pointer;
+			&:hover {
+				.arrow-up {
+					visibility: visible;
+				}
+			}
+		}
+		.arrow-up {
+			visibility: hidden;
+		}
 		.avatar {
 			width: 40px;
 			height: 40px;
 			overflow: hidden;
-			cursor: pointer;
 			border-radius: 50%;
 			img {
 				width: 100%;

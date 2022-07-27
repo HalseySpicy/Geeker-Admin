@@ -1,8 +1,15 @@
 <template>
-	<el-dropdown trigger="click">
-		<div class="avatar">
-			<img src="@/assets/images/avatar.gif" alt="avatar" />
+	<el-dropdown trigger="hover">
+		<div class="user">
+			<img class="avatar" src="@/assets/images/avatar.gif" alt="avatar" />
+			<el-icon class="el-icon--right">
+				<arrow-down />
+				<span class="arrow-up">
+					<arrow-up />
+				</span>
+			</el-icon>
 		</div>
+
 		<template #dropdown>
 			<el-dropdown-menu>
 				<el-dropdown-item @click="openDialog('infoRef')">{{ $t("header.personalData") }}</el-dropdown-item>
@@ -24,6 +31,7 @@ import PasswordDialog from "./PasswordDialog.vue";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
 import { GlobalStore } from "@/store";
+import { ArrowDown, ArrowUp } from "@element-plus/icons-vue";
 
 const router = useRouter();
 const globalStore = GlobalStore();
