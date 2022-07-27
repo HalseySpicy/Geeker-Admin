@@ -7,10 +7,12 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
-
 // 配置element中英文
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
+// 使用主题
+import { useTheme } from "@/hooks/useTheme";
+useTheme();
 
 const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格

@@ -49,7 +49,7 @@ withDefaults(defineProps<UploadFileProps>(), {
  * @param options 上传的文件
  * */
 interface UploadEmits {
-	(e: "update:imageUrl", value?: string): void;
+	(e: "update:imageUrl", value: string): void;
 	(e: "checkValidate"): void;
 }
 const emit = defineEmits<UploadEmits>();
@@ -58,7 +58,7 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	formData.append("file", options.file);
 	try {
 		const { data } = await uploadImg(formData);
-		emit("update:imageUrl", data?.fileUrl);
+		emit("update:imageUrl", data!.fileUrl);
 		emit("checkValidate");
 	} catch (error) {
 		options.onError(error as any);
