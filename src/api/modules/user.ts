@@ -55,8 +55,3 @@ export const getUserStatus = () => {
 export const getUserGender = () => {
 	return http.get<User.ResGender>(PORT1 + `/user/gender`);
 };
-
-// * 图片上传
-export const uploadImg = (params: FormData) => {
-	return http.post<User.ResFileUrl>(PORT1 + `/file/upload`, params);
-};

@@ -10,15 +10,19 @@
 	.not-detail {
 		display: flex;
 		flex-direction: column;
+		h2,
+		h4 {
+			padding: 0;
+			margin: 0;
+		}
 		h2 {
-			margin-bottom: 30px;
 			font-size: 60px;
-			font-weight: bold;
 			color: #434e59;
 		}
 		h4 {
-			margin-bottom: 20px;
+			margin: 30px 0 20px;
 			font-size: 19px;
+			font-weight: normal;
 			color: #848587;
 		}
 		.el-button {

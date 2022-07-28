@@ -1,7 +1,11 @@
 <template>
 	<div class="content-box">
 		<span class="text">富文本编辑器 🍓🍇🍈🍉</span>
-		<WangEditor v-model:value="text"></WangEditor>
+		<WangEditor v-model:value="content"></WangEditor>
+		<el-button type="primary" @click="dialogVisible = true">内容预览</el-button>
+		<el-dialog v-model="dialogVisible" title="富文本内容预览" width="1300px" top="50px">
+			<div class="view" v-html="content"></div>
+		</el-dialog>
 	</div>
 </template>
 
@@ -9,7 +13,9 @@
 import { ref } from "vue";
 import WangEditor from "@/components/WangEditor/index.vue";
 
-const text = ref("");
+const content = ref("");
+
+const dialogVisible = ref(false);
 </script>
 
 <style scoped lang="scss">

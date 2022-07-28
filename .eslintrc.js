@@ -50,6 +50,7 @@ module.exports = {
 		"@typescript-eslint/explicit-module-boundary-types": "off", // 要求导出函数和类的公共类方法的显式返回和参数类型
 
 		// vue (https://eslint.vuejs.org/rules)
+		"vue/no-v-html": "off", // 禁止使用 v-html
 		"vue/script-setup-uses-vars": "error", // 防止<script setup>使用的变量<template>被标记为未使用，此规则仅在启用该no-unused-vars规则时有效。
 		"vue/v-slot-style": "error", // 强制执行 v-slot 指令样式
 		"vue/no-mutating-props": "off", // 不允许组件 prop的改变（明天找原因）

@@ -8,19 +8,25 @@
 			:defaultConfig="editorConfig"
 			:mode="mode"
 			@on-created="handleCreated"
+			@on-blur="handleBlur"
 		/>
 	</div>
 </template>
 
 <script setup lang="ts" name="wangEditor">
 import { nextTick, computed, shallowRef, onBeforeUnmount } from "vue";
-import { IToolbarConfig, IEditorConfig } from "@wangeditor/editor";
+import { IDomEditor, IToolbarConfig, IEditorConfig } from "@wangeditor/editor";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import { uploadImg } from "@/api/modules/user";
+import { uploadImg, uploadVideo } from "@/api/modules/upload";
 import "@wangeditor/editor/dist/css/style.css";
 
 // 富文本 DOM 元素
 const editorRef = shallowRef();
+
+// 实列化编辑器
+const handleCreated = (editor: any) => {
+	editorRef.value = editor;
+};
 
 // 接收父组件参数，并设置默认值
 interface RichEditorProps {
@@ -33,7 +39,6 @@ interface RichEditorProps {
 	disabled?: boolean; // 是否禁用编辑器 ==> 非必传（默认为false）
 }
 const props = withDefaults(defineProps<RichEditorProps>(), {
-	value: "",
 	toolbarConfig: () => {
 		return {
 			excludeKeys: []
@@ -42,9 +47,7 @@ const props = withDefaults(defineProps<RichEditorProps>(), {
 	editorConfig: () => {
 		return {
 			placeholder: "请输入内容...",
-			MENU_CONF: {
-				uploadImage: {}
-			}
+			MENU_CONF: {}
 		};
 	},
 	height: "500px",
@@ -56,11 +59,34 @@ const props = withDefaults(defineProps<RichEditorProps>(), {
 // 判断当前富文本编辑器是否禁用
 if (props.disabled) nextTick(() => editorRef.value.disable());
 
-// 图片上传
-type InsertFnType = (url: string) => void;
+// 富文本的内容监听，触发父组件改变，实现双向数据绑定
+type EmitProps = {
+	(e: "update:value", val: string): void;
+	(e: "check-validate"): void;
+};
+const emit = defineEmits<EmitProps>();
+const valueHtml = computed({
+	get() {
+		return props.value;
+	},
+	set(val: string) {
+		// 防止富文本内容为空时，校验失败
+		if (editorRef.value.isEmpty()) val = "";
+		console.log(editorRef.value.getHtml());
+		console.log(val);
+		emit("update:value", val);
+	}
+});
+
+/**
+ * @description 图片自定义上传
+ * @param file 上传的文件
+ * @param insertFn 上传成功后的回调函数（插入到富文本编辑器中）
+ * */
+type InsertFnTypeImg = (url: string, alt?: string, href?: string) => void;
 props.editorConfig.MENU_CONF!["uploadImage"] = {
-	async customUpload(file: File, insertFn: InsertFnType) {
-		console.log(file);
+	async customUpload(file: File, insertFn: InsertFnTypeImg) {
+		if (!uploadImgValidate(file)) return;
 		let formData = new FormData();
 		formData.append("file", file);
 		try {
@@ -72,22 +98,42 @@ props.editorConfig.MENU_CONF!["uploadImage"] = {
 	}
 };
 
-// 富文本的内容监听，触发父组件改变，实现双向数据绑定
-type EmitProps = (e: "update:value", val: string) => void;
-const emit = defineEmits<EmitProps>();
-const valueHtml = computed({
-	get() {
-		return props.value;
-	},
-	set(val: string) {
-		console.log(val);
-		emit("update:value", val);
-	}
-});
+// 图片上传前判断
+const uploadImgValidate = (file: File): boolean => {
+	console.log(file);
+	return true;
+};
 
-// 实列化编辑器
-const handleCreated = (editor: any) => {
-	editorRef.value = editor;
+/**
+ * @description 视频自定义上传
+ * @param file 上传的文件
+ * @param insertFn 上传成功后的回调函数（插入到富文本编辑器中）
+ * */
+type InsertFnTypeVideo = (url: string, poster?: string) => void;
+props.editorConfig.MENU_CONF!["uploadVideo"] = {
+	async customUpload(file: File, insertFn: InsertFnTypeVideo) {
+		if (!uploadVideoValidate(file)) return;
+		let formData = new FormData();
+		formData.append("file", file);
+		try {
+			const { data } = await uploadVideo(formData);
+			insertFn(data!.fileUrl);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+// 视频上传前判断
+const uploadVideoValidate = (file: File): boolean => {
+	console.log(file);
+	return true;
+};
+
+// 编辑框失去焦点时触发
+const handleBlur = (editor: IDomEditor) => {
+	console.log(editor.isEmpty());
+	emit("check-validate");
 };
 
 // 组件销毁时，也及时销毁编辑器

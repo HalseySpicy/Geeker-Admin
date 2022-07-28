@@ -30,7 +30,7 @@
 import { ref } from "vue";
 import { ElNotification } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
-import { uploadImg } from "@/api/modules/user";
+import { uploadImg } from "@/api/modules/upload";
 import type { UploadProps, UploadRequestOptions } from "element-plus";
 
 interface UploadFileProps {
@@ -50,7 +50,7 @@ withDefaults(defineProps<UploadFileProps>(), {
  * */
 interface UploadEmits {
 	(e: "update:imageUrl", value: string): void;
-	(e: "checkValidate"): void;
+	(e: "check-validate"): void;
 }
 const emit = defineEmits<UploadEmits>();
 const handleHttpUpload = async (options: UploadRequestOptions) => {
@@ -59,7 +59,7 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	try {
 		const { data } = await uploadImg(formData);
 		emit("update:imageUrl", data!.fileUrl);
-		emit("checkValidate");
+		emit("check-validate");
 	} catch (error) {
 		options.onError(error as any);
 	}

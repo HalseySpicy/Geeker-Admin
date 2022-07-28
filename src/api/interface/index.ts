@@ -23,7 +23,7 @@ export interface ReqPage {
 	pageSize: number;
 }
 
-// * 登录
+// * 登录模块
 export namespace Login {
 	export interface ReqLoginForm {
 		username: string;
@@ -69,6 +69,10 @@ export namespace User {
 		genderLabel: string;
 		genderValue: number;
 	}
+}
+
+// * 文件上传模块
+export namespace Upload {
 	export interface ResFileUrl {
 		fileUrl: string;
 	}
