@@ -50,8 +50,8 @@ const loginRules = reactive({
 
 // 登录表单数据
 const loginForm = reactive<Login.ReqLoginForm>({
-	username: "",
-	password: ""
+	username: "admin",
+	password: "123456"
 });
 
 const loading = ref<boolean>(false);
