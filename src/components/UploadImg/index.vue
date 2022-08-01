@@ -11,6 +11,7 @@
 			:on-success="uploadSuccess"
 			:on-error="uploadError"
 			:style="uploadStyle"
+			:drag="drag"
 			accept="image/jpeg,image/jpeg,image/png"
 		>
 			<img v-if="imageUrl" :src="imageUrl" class="image" />
@@ -35,12 +36,16 @@ import type { UploadProps, UploadRequestOptions } from "element-plus";
 
 interface UploadFileProps {
 	imageUrl: string; // 图片地址 ==> 必传
+	drag?: boolean; // 是否支持拖拽上传 ==> 非必传（默认为true）
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为false）
+	fileSize?: number; // 单个文件大小限制 ==> 非必传（默认为 5）
 	uploadStyle?: { [key: string]: any }; // 上传组件样式 ==> 非必传
 }
 // 接受父组件参数
-withDefaults(defineProps<UploadFileProps>(), {
+const props = withDefaults(defineProps<UploadFileProps>(), {
+	drag: true,
 	disabled: false,
+	fileSize: 5,
 	uploadStyle: () => ({ width: "175px", height: "175px" })
 });
 
@@ -70,18 +75,18 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
  * @param rawFile 上传的文件
  * */
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
-	const isLt3M = rawFile.size / 1024 / 1024 < 3;
+	const isLt3M = rawFile.size / 1024 / 1024 < props.fileSize;
 	const imgType = ["image/jpg", "image/jpeg", "image/png"];
 	if (!imgType.includes(rawFile.type))
 		ElNotification({
 			title: "温馨提示",
-			message: "上传图片必须是JPG/JPEG/PNG 格式！",
+			message: "上传图片必须是 JPG/JPEG/PNG 格式！",
 			type: "warning"
 		});
 	if (!isLt3M)
 		ElNotification({
 			title: "温馨提示",
-			message: "上传图片大小不能超过 3MB！",
+			message: `上传图片大小不能超过 ${props.fileSize}MB！`,
 			type: "warning"
 		});
 	return imgType.includes(rawFile.type) && isLt3M;
