@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<div class="table-search">
+		<div class="table-search" v-show="isShowSearch">
 			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
 				<el-form-item label="用户姓名 :">
 					<el-input v-model="searchParam.username" placeholder="请输入" clearable></el-input>
@@ -50,6 +50,7 @@
 			</div>
 			<div class="header-button-ri">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+				<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
 		</div>
 		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
@@ -150,6 +151,9 @@ import {
 	resetUserPassWord,
 	exportUserInfo
 } from "@/api/modules/user";
+
+// 是否展示搜索模块
+const isShowSearch = ref(true);
 
 // 是否展示更多搜索内容
 const searchShow = ref(false);

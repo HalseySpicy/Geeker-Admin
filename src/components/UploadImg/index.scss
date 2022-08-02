@@ -30,6 +30,12 @@
 			position: relative;
 			width: 100%;
 			height: 100%;
+			.el-upload-dragger {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				border: none;
+			}
 			.image {
 				width: 100%;
 				height: 100%;
