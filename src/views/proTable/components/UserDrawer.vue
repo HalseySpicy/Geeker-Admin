@@ -7,6 +7,7 @@
 			:model="drawerData.rowData"
 			label-width="100px"
 			label-suffix=" :"
+			:hide-required-asterisk="drawerData.isView"
 		>
 			<el-form-item label="用户头像" prop="avatar">
 				<UploadImg
