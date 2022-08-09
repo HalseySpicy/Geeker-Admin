@@ -4,6 +4,7 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import { wrapperEnv } from "./src/utils/getEnv";
 import { visualizer } from "rollup-plugin-visualizer";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import viteCompression from "vite-plugin-compression";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import eslintPlugin from "vite-plugin-eslint";
@@ -20,14 +21,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 
 	return {
 		// base: "/",
-		// alias config
 		resolve: {
 			alias: {
 				"@": resolve(__dirname, "./src"),
 				"vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
 			}
 		},
-		// global css
 		css: {
 			preprocessorOptions: {
 				scss: {
@@ -35,14 +34,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				}
 			}
 		},
-		// server config
 		server: {
-			host: "0.0.0.0", // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
+			// 服务器主机名，如果允许外部访问，可设置为 "0.0.0.0"
+			host: "0.0.0.0",
 			port: viteEnv.VITE_PORT,
 			open: viteEnv.VITE_OPEN,
 			cors: true,
-			// https: false,
-			// 代理跨域（mock 不需要配置，这里只是个事列）
+			// 代理跨域（mock 不需要配置跨域，直接能访问，这里只是个示例）
 			proxy: {
 				"/api": {
 					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
@@ -52,7 +50,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				}
 			}
 		},
-		// plugins
 		plugins: [
 			vue(),
 			createHtmlPlugin({
@@ -62,23 +59,31 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 					}
 				}
 			}),
+			// * 使用 svg 图标
+			createSvgIconsPlugin({
+				iconDirs: [resolve(process.cwd(), "src/assets/icons")],
+				symbolId: "icon-[dir]-[name]"
+			}),
 			// * EsLint 报错信息显示在浏览器界面上
 			eslintPlugin(),
 			// * vite 可以使用 jsx/tsx 语法
 			vueJsx(),
 			// * name 可以写在 script 标签上
 			VueSetupExtend(),
-			// * demand import element(如果使用了cdn引入,没必要使用element自动导入了)
-			// AutoImport({
-			// 	resolvers: [ElementPlusResolver()]
-			// }),
-			// Components({
-			// 	resolvers: [ElementPlusResolver()]
-			// }),
-			// * cdn 引入（vue、element-plus）
+			// * 是否生成包预览(分析依赖包大小,方便做优化处理)
+			viteEnv.VITE_REPORT && visualizer(),
+			// * gzip compress
+			viteEnv.VITE_BUILD_GZIP &&
+				viteCompression({
+					verbose: true,
+					disable: false,
+					threshold: 10240,
+					algorithm: "gzip",
+					ext: ".gz"
+				}),
+			// * cdn 引入（vue按需引入会导致依赖vue的插件出现问题(列如:pinia/vuex)）
 			importToCDN({
 				modules: [
-					// vue按需引入会导致依赖vue的插件出现问题(列如:pinia/vuex)
 					// {
 					// 	name: "vue",
 					// 	var: "Vue",
@@ -92,27 +97,23 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 					// 	css: "https://unpkg.com/element-plus/dist/index.css"
 					// }
 				]
-			}),
-			// * 是否生成包预览
-			viteEnv.VITE_REPORT && visualizer(),
-			// * gzip compress
-			viteEnv.VITE_BUILD_GZIP &&
-				viteCompression({
-					verbose: true,
-					disable: false,
-					threshold: 10240,
-					algorithm: "gzip",
-					ext: ".gz"
-				})
+			})
+			// * demand import element
+			// AutoImport({
+			// 	resolvers: [ElementPlusResolver()]
+			// }),
+			// Components({
+			// 	resolvers: [ElementPlusResolver()]
+			// }),
 		],
+		// * 打包去除 console.log && debugger
 		esbuild: {
 			pure: viteEnv.VITE_DROP_CONSOLE ? ["console.log", "debugger"] : []
 		},
-		// build configure
 		build: {
 			outDir: "dist",
-			// esbuild 打包更快，但是不能去除 console.log
 			minify: "esbuild",
+			// esbuild 打包更快，但是不能去除 console.log，terser打包慢，但能去除 console.log
 			// minify: "terser",
 			// terserOptions: {
 			// 	compress: {

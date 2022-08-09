@@ -55,9 +55,21 @@ import { useTheme } from "@/hooks/useTheme";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 import { MenuStore } from "@/store/modules/menu";
 import { GlobalStore } from "@/store";
+import { DEFAULT_PRIMARY } from "@/config/config";
 
 // 预定义主题颜色
-const colorList = ["#409EFF", "#DAA96E", "#0C819F", "#009688", "#27ae60", "#ff5c93", "#e74c3c", "#fd726d", "#f39c12", "#9b59b6"];
+const colorList = [
+	DEFAULT_PRIMARY,
+	"#DAA96E",
+	"#0C819F",
+	"#409EFF",
+	"#27ae60",
+	"#ff5c93",
+	"#e74c3c",
+	"#fd726d",
+	"#f39c12",
+	"#9b59b6"
+];
 
 // 主题初始化
 const globalStore = GlobalStore();

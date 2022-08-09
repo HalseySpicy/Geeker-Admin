@@ -85,8 +85,8 @@
 					v-if="BUTTONS.status"
 				/>
 				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
-					{{ scope.row.status === 1 ? "启用" : "禁用" }}</el-tag
-				>
+					{{ scope.row.status === 1 ? "启用" : "禁用" }}
+				</el-tag>
 			</el-table-column>
 			<el-table-column label="操作" fixed="right" width="330" v-slot="scope">
 				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
@@ -158,15 +158,16 @@ const isShowSearch = ref(true);
 // 是否展示更多搜索内容
 const searchShow = ref(false);
 
-// 如果表格需要初始化请求参数,直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上)
+// 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({
 	type: 1
 });
 
+// 表格 hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(getUserList, initParam);
 
-// 数据多选
+// 数据多选 hooks
 const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
 
 // 页面按钮权限

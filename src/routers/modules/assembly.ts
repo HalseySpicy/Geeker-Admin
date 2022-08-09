@@ -34,6 +34,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: "/assembly/svgIcon",
+				name: "svgIcon",
+				component: () => import("@/views/assembly/svgIcon/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "SVG 图标",
+					key: "svgIcon"
+				}
+			},
+			{
 				path: "/assembly/uploadImg",
 				name: "uploadImg",
 				component: () => import("@/views/assembly/uploadImg/index.vue"),

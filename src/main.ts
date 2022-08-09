@@ -28,6 +28,8 @@ import router from "@/routers/index";
 import I18n from "@/language/index";
 // pinia store
 import pinia from "@/store/index";
+// svg icons
+import "virtual:svg-icons-register";
 
 const app = createApp(App);
 
