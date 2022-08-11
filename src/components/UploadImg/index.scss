@@ -6,22 +6,12 @@
 	}
 }
 .upload-box {
-	/* 上传组件禁用样式 */
-	.is-view,
-	.is-view:hover {
-		border-color: var(--el-border-color) !important;
-		:deep(.el-upload) {
-			cursor: not-allowed !important;
-		}
-	}
-
-	/* 上传组件样式 */
 	.upload {
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-		border: 2px dashed var(--el-border-color);
-		border-radius: 6px;
+		border: 1px dashed var(--el-border-color-darker);
+		border-radius: 8px;
 		transition: var(--el-transition-duration-fast);
 		&:hover {
 			border-color: var(--el-color-primary);
@@ -36,7 +26,7 @@
 				padding: 0;
 				border: none;
 			}
-			.image {
+			.upload-image {
 				width: 100%;
 				height: 100%;
 			}
@@ -46,7 +36,7 @@
 				font-size: 28px;
 				color: #8c939d;
 			}
-			.view-icon {
+			.upload-handle {
 				position: absolute;
 				top: 0;
 				right: 0;
@@ -54,15 +44,39 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				width: 35px;
-				height: 25px;
+				width: 100%;
+				height: 100%;
 				cursor: pointer;
-				background: rgb(235 235 235 / 80%);
-				border-bottom-left-radius: 10px;
-				img {
-					width: 17px;
+				background: rgb(0 0 0 / 70%);
+				opacity: 0;
+				transition: var(--el-transition-duration-fast);
+				.handle-icon {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 0 6%;
+					color: aliceblue;
+					.el-icon {
+						margin-bottom: 40%;
+						font-size: 130%;
+						line-height: 130%;
+					}
+					span {
+						font-size: 85%;
+						line-height: 85%;
+					}
+				}
+			}
+			&:hover {
+				.upload-handle {
+					opacity: 1;
 				}
 			}
 		}
+	}
+	.el-upload__tip {
+		line-height: 18px;
+		text-align: center;
 	}
 }

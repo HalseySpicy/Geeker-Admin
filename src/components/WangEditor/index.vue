@@ -15,7 +15,7 @@
 
 <script setup lang="ts" name="wangEditor">
 import { nextTick, computed, shallowRef, onBeforeUnmount } from "vue";
-import { IDomEditor, IToolbarConfig, IEditorConfig } from "@wangeditor/editor";
+import { IToolbarConfig, IEditorConfig } from "@wangeditor/editor";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 import { uploadImg, uploadVideo } from "@/api/modules/upload";
 import "@wangeditor/editor/dist/css/style.css";
@@ -72,8 +72,6 @@ const valueHtml = computed({
 	set(val: string) {
 		// 防止富文本内容为空时，校验失败
 		if (editorRef.value.isEmpty()) val = "";
-		console.log(editorRef.value.getHtml());
-		console.log(val);
 		emit("update:value", val);
 	}
 });
@@ -131,8 +129,7 @@ const uploadVideoValidate = (file: File): boolean => {
 };
 
 // 编辑框失去焦点时触发
-const handleBlur = (editor: IDomEditor) => {
-	console.log(editor.isEmpty());
+const handleBlur = () => {
 	emit("check-validate");
 };
 

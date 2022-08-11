@@ -2,7 +2,8 @@
 	<div class="upload-box">
 		<el-upload
 			action="#"
-			:class="['upload', disabled ? 'is-view' : '']"
+			:id="id"
+			:class="['upload']"
 			:multiple="false"
 			:disabled="disabled"
 			:show-file-list="false"
@@ -14,10 +15,21 @@
 			:drag="drag"
 			accept="image/jpeg,image/jpeg,image/png"
 		>
-			<img v-if="imageUrl" :src="imageUrl" class="image" />
+			<img v-if="imageUrl" :src="imageUrl" class="upload-image" />
 			<el-icon v-else class="upload-icon"><Plus /></el-icon>
-			<div v-if="imageUrl" class="view-icon" @click.stop="imageView">
-				<img src="@/assets/images/enlarge_black.svg" alt="enlarge" />
+			<div v-if="imageUrl" class="upload-handle" @click.stop>
+				<div class="handle-icon" @click="editImg" v-if="!disabled">
+					<el-icon><Edit /></el-icon>
+					<span>编辑</span>
+				</div>
+				<div class="handle-icon" @click="imageView">
+					<el-icon><ZoomIn /></el-icon>
+					<span>查看</span>
+				</div>
+				<div class="handle-icon" @click="deleteImg" v-if="!disabled">
+					<el-icon><Delete /></el-icon>
+					<span>删除</span>
+				</div>
 			</div>
 		</el-upload>
 		<div class="el-upload__tip">
@@ -36,13 +48,15 @@ import type { UploadProps, UploadRequestOptions } from "element-plus";
 
 interface UploadFileProps {
 	imageUrl: string; // 图片地址 ==> 必传
+	id?: string; // 组件id ==> 非必传，当页面存在多个上传组件时必传（默认为upload）
 	drag?: boolean; // 是否支持拖拽上传 ==> 非必传（默认为true）
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为false）
-	fileSize?: number; // 单个文件大小限制 ==> 非必传（默认为 5）
+	fileSize?: number; // 单个文件大小限制 ==> 非必传（默认为 5M）
 	uploadStyle?: { [key: string]: any }; // 上传组件样式 ==> 非必传
 }
 // 接受父组件参数
 const props = withDefaults(defineProps<UploadFileProps>(), {
+	id: "upload",
 	drag: true,
 	disabled: false,
 	fileSize: 5,
@@ -68,6 +82,21 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	} catch (error) {
 		options.onError(error as any);
 	}
+};
+
+/**
+ * @description 删除图片
+ * */
+const deleteImg = () => {
+	emit("update:imageUrl", "");
+};
+
+/**
+ * @description 编辑图片
+ * */
+const editImg = () => {
+	const dom = document.querySelector(`#${props.id} .el-upload__input`);
+	dom!.dispatchEvent(new MouseEvent("click"));
 };
 
 /**

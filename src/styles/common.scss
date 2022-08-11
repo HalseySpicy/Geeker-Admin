@@ -86,18 +86,6 @@
 	border-radius: 20px;
 	box-shadow: inset 0 0 0 white;
 }
-.content-box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100%;
-	.text {
-		margin: 30px 0;
-		font-size: 23px;
-		font-weight: bold;
-		color: rgb(88 88 88);
-	}
-}
 
 /* nprogress样式 */
 #nprogress .bar {
@@ -109,4 +97,28 @@
 }
 #nprogress .peg {
 	box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color !important;
+}
+
+/* content-box */
+.content-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	.text {
+		margin: 30px 0;
+		font-size: 23px;
+		font-weight: bold;
+		color: rgb(88 88 88);
+	}
+	.el-descriptions {
+		width: 100%;
+		padding: 40px 0;
+		.el-descriptions__title {
+			font-size: 18px;
+		}
+		.el-descriptions__label {
+			width: 200px;
+		}
+	}
 }

@@ -8,7 +8,7 @@ import { AxiosCanceler } from "@/api/helper/axiosCancel";
 const axiosCanceler = new AxiosCanceler();
 
 /**
- * @description 路由拦截 beforeEach（路由配置无数种方法，个人觉得最简便）
+ * @description 路由拦截 beforeEach
  * */
 router.beforeEach((to, from, next) => {
 	NProgress.start();

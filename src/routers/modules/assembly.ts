@@ -34,6 +34,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				}
 			},
 			{
+				path: "/assembly/svgIcon",
+				name: "svgIcon",
+				component: () => import("@/views/assembly/svgIcon/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "svg 图标",
+					key: "svgIcon"
+				}
+			},
+			{
 				path: "/assembly/uploadImg",
 				name: "uploadImg",
 				component: () => import("@/views/assembly/uploadImg/index.vue"),
@@ -51,7 +62,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "批量上传数据",
+					title: "批量添加数据",
 					key: "batchImport"
 				}
 			},

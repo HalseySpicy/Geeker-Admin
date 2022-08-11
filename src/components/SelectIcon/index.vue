@@ -5,28 +5,32 @@
 				<el-button :icon="customIcons[iconValue]" />
 			</template>
 		</el-input>
-		<el-dialog v-model="dialogVisible" title="请选择图标" top="50px" width="1280px">
-			<div v-for="(item, index) in Icons" :key="index" class="icon-item" @click="selectIcon(item)">
-				<component :is="item"></component>
-				<span>{{ item.name }}</span>
+		<el-dialog v-model="dialogVisible" title="请选择图标" top="50px" width="66%">
+			<el-input v-model="inputValue" placeholder="搜索" size="large" :prefix-icon="Icons.Search" />
+			<div class="icon-box" v-if="Object.keys(iconsList).length">
+				<div v-for="item in iconsList" :key="item" class="icon-item" @click="selectIcon(item)">
+					<component :is="item"></component>
+					<span>{{ item.name }}</span>
+				</div>
 			</div>
+			<el-empty description="未搜索到您要找的图标~" v-else />
 		</el-dialog>
 	</div>
 </template>
 
 <script setup lang="ts" name="selectIcon">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import * as Icons from "@element-plus/icons-vue";
 
 // 接收参数
 defineProps<{ iconValue: string }>();
 
 const customIcons: { [key: string]: any } = Icons;
-const dialogVisible = ref(false);
 
 // 打开 dialog
+const dialogVisible = ref(false);
 const openDialog = (e: any) => {
-	// 直接让文本框失去焦点，不然会出现显示bug
+	// 直接让文本框失去焦点，不然会出现显示 bug
 	e.srcElement.blur();
 	dialogVisible.value = true;
 };
@@ -38,6 +42,17 @@ const selectIcon = (item: any) => {
 	dialogVisible.value = false;
 	emit("update:iconValue", item.name);
 };
+
+// 监听搜索框值
+const inputValue = ref("");
+const iconsList = computed((): { [key: string]: any } => {
+	if (!inputValue.value) return Icons;
+	let result: { [key: string]: any } = {};
+	for (const key in customIcons) {
+		if (key.toLowerCase().indexOf(inputValue.value.toLowerCase()) > -1) result[key] = customIcons[key];
+	}
+	return result;
+});
 </script>
 
 <style scoped lang="scss">

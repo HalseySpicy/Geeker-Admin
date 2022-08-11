@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div class="content-box">
 		<el-alert
 			title="引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于 driver.js."
 			type="warning"
 			:closable="false"
 		/>
 		<br />
-		<div id="Geeker"><el-button type="primary" @click.prevent.stop="guide">打开引导页</el-button></div>
+		<div id="Geeker"><el-button type="primary" @click.prevent.stop="guide">打开引导页 🤹‍♂️</el-button></div>
 	</div>
 </template>
 
