@@ -40,7 +40,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "SVG 图标",
+					title: "svg 图标",
 					key: "svgIcon"
 				}
 			},
@@ -62,7 +62,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "批量上传数据",
+					title: "批量添加数据",
 					key: "batchImport"
 				}
 			},

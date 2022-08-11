@@ -113,7 +113,7 @@ const handleExceed = (): void => {
 const excelUploadError = (): void => {
 	ElNotification({
 		title: "温馨提示",
-		message: "导入数据失败，请您重新上传！",
+		message: `批量添加${parameter.value.title}失败，请您重新上传！`,
 		type: "error"
 	});
 };
@@ -122,7 +122,7 @@ const excelUploadError = (): void => {
 const excelUploadSuccess = (): void => {
 	ElNotification({
 		title: "温馨提示",
-		message: "导入数据成功！",
+		message: `批量添加${parameter.value.title}成功！`,
 		type: "success"
 	});
 };
