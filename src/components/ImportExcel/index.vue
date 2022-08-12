@@ -84,20 +84,20 @@ const uploadExcel = async (param: any) => {
 const beforeExcelUpload = (file: any) => {
 	const isExcel =
 		file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-	const isLt5M = file.size / 1024 / 1024 < 5;
+	const fileSize = file.size / 1024 / 1024 < 5;
 	if (!isExcel)
 		ElNotification({
 			title: "温馨提示",
 			message: "上传文件只能是 xls / xlsx 格式！",
 			type: "warning"
 		});
-	if (!isLt5M)
+	if (!fileSize)
 		ElNotification({
 			title: "温馨提示",
 			message: "上传文件大小不能超过 5MB！",
 			type: "warning"
 		});
-	return isExcel && isLt5M;
+	return isExcel && fileSize;
 };
 
 // 文件数超出提示

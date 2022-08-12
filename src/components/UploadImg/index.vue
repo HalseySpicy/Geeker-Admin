@@ -104,7 +104,7 @@ const editImg = () => {
  * @param rawFile 上传的文件
  * */
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
-	const isLt3M = rawFile.size / 1024 / 1024 < props.fileSize;
+	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize;
 	const imgType = ["image/jpg", "image/jpeg", "image/png"];
 	if (!imgType.includes(rawFile.type))
 		ElNotification({
@@ -112,13 +112,13 @@ const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 			message: "上传图片必须是 JPG/JPEG/PNG 格式！",
 			type: "warning"
 		});
-	if (!isLt3M)
+	if (!imgSize)
 		ElNotification({
 			title: "温馨提示",
 			message: `上传图片大小不能超过 ${props.fileSize}MB！`,
 			type: "warning"
 		});
-	return imgType.includes(rawFile.type) && isLt3M;
+	return imgType.includes(rawFile.type) && imgSize;
 };
 
 // 图片上传成功提示

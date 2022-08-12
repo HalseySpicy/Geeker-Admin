@@ -77,17 +77,8 @@
 					<!-- 自定义配置每一列 slot（使用作用域插槽） -->
 					<template #default="scope">
 						<slot :name="item.prop" :row="scope.row">
-							<!-- 图片(自带预览) -->
-							<el-image
-								v-if="item.image"
-								:src="scope.row[item.prop!]"
-								:preview-src-list="[scope.row[item.prop!]]"
-								fit="cover"
-								class="table-image"
-								preview-teleported
-							/>
 							<!-- tag 标签（自带格式化内容） -->
-							<el-tag v-else-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps,'tag')">
+							<el-tag v-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps,'tag')">
 								{{
 									item.enum?.length
 										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)

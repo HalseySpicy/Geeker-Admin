@@ -32,7 +32,6 @@ export interface ColumnProps {
 	sortable: boolean; // 是否可排序（静态排序）
 	fixed: FixedProp; // 固定列
 	tag: boolean; // 是否是标签展示
-	image: boolean; // 是否是图片展示
 	search: boolean; // 是否为搜索项
 	searchType: SearchType; // 搜索项类型
 	searchProps: { [key: string]: any }; // 搜索项参数，根据 element 文档来，标签自带属性 > props 属性
