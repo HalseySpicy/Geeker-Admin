@@ -4,13 +4,7 @@
 <template>
 	<div class="table-box">
 		<!-- 查询表单 -->
-		<SearchForm
-			:search="search"
-			:reset="reset"
-			:searchParam="searchParam"
-			:columns="searchColumns"
-			v-show="isShowSearch"
-		></SearchForm>
+		<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns" v-show="isShowSearch" />
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
@@ -110,9 +104,9 @@
 			:pageable="pageable"
 			:handleSizeChange="handleSizeChange"
 			:handleCurrentChange="handleCurrentChange"
-		></Pagination>
+		/>
 		<!-- 列设置 -->
-		<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting"></ColSetting>
+		<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting" />
 	</div>
 </template>
 
@@ -124,7 +118,7 @@ import { Refresh, Operation, Search } from "@element-plus/icons-vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { filterEnum, formatValue } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
-import Pagination from "@/components/Pagination/index.vue";
+import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 
 // 表格 DOM 元素

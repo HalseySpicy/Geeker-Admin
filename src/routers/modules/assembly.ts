@@ -29,8 +29,19 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "Icon 选择",
+					title: "图标选择器",
 					key: "selectIcon"
+				}
+			},
+			{
+				path: "/assembly/selectFilter",
+				name: "selectFilter",
+				component: () => import("@/views/assembly/selectFilter/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "分类筛选器",
+					key: "selectFilter"
 				}
 			},
 			{

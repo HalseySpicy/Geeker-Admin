@@ -44,8 +44,8 @@
 				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
 			</template>
 		</ProTable>
-		<UserDrawer ref="drawerRef"></UserDrawer>
-		<ImportExcel ref="dialogRef"></ImportExcel>
+		<UserDrawer ref="drawerRef" />
+		<ImportExcel ref="dialogRef" />
 	</div>
 </template>
 

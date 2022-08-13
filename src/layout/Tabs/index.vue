@@ -18,7 +18,7 @@
 					</template>
 				</el-tab-pane>
 			</el-tabs>
-			<MoreButton></MoreButton>
+			<MoreButton />
 		</div>
 	</div>
 </template>

@@ -1,6 +1,6 @@
 <template>
 	<div class="login-container flx-center">
-		<SwitchDark class="dark"></SwitchDark>
+		<SwitchDark class="dark" />
 		<div class="login-box">
 			<div class="login-left">
 				<img src="@/assets/images/login_left0.png" alt="login" />
@@ -10,7 +10,7 @@
 					<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
 					<h2 class="logo-text">Geeker-Admin</h2>
 				</div>
-				<LoginForm ref="loginRef"></LoginForm>
+				<LoginForm ref="loginRef" />
 			</div>
 		</div>
 	</div>

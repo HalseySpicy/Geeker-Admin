@@ -3,7 +3,7 @@
 		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px" :style="`max-width: ${maxWidth}px`">
 			<template v-for="item in getSearchList" :key="item.prop">
 				<el-form-item :label="`${item.label} :`">
-					<SearchFormItem :item="item" :searchParam="searchParam"></SearchFormItem>
+					<SearchFormItem :item="item" :searchParam="searchParam" />
 				</el-form-item>
 			</template>
 		</el-form>

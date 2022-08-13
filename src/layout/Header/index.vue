@@ -1,26 +1,26 @@
 <template>
 	<div class="header">
 		<div class="header-lf flx-center">
-			<CollapseIcon id="collapseIcon"></CollapseIcon>
-			<Breadcrumb id="breadcrumb" v-if="themeConfig.breadcrumb"></Breadcrumb>
+			<CollapseIcon id="collapseIcon" />
+			<Breadcrumb id="breadcrumb" v-if="themeConfig.breadcrumb" />
 		</div>
 		<div class="header-ri flx-center">
 			<div class="header-icon">
 				<!-- Assembly size -->
-				<AssemblySize id="assemblySize"></AssemblySize>
+				<AssemblySize id="assemblySize" />
 				<!-- Language -->
-				<Language id="language"></Language>
+				<Language id="language" />
 				<!-- SearchMenu -->
-				<SearchMenu id="searchMenu"></SearchMenu>
+				<SearchMenu id="searchMenu" />
 				<!-- Theme -->
-				<Theme id="theme"></Theme>
+				<Theme id="theme" />
 				<!-- Full screen -->
-				<Fullscreen id="fullscreen"></Fullscreen>
+				<Fullscreen id="fullscreen" />
 			</div>
 			<!-- User name -->
 			<span class="username">Geeker</span>
 			<!-- Avatar -->
-			<Avatar></Avatar>
+			<Avatar />
 		</div>
 	</div>
 </template>

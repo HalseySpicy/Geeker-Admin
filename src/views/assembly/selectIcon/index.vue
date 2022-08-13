@@ -1,7 +1,7 @@
 <template>
 	<div class="content-box">
-		<span class="text">Icon 选择 🍓🍇🍈🍉</span>
-		<SelectIcon v-model:iconValue="iconValue"></SelectIcon>
+		<span class="text"> 图标选择器 🍓🍇🍈🍉</span>
+		<SelectIcon v-model:iconValue="iconValue" />
 		<el-descriptions title="配置项 📚" :column="1" border>
 			<el-descriptions-item label="iconValue"> 双向绑定的icon值，使用示例：v-model:iconValue="iconValue" </el-descriptions-item>
 		</el-descriptions>

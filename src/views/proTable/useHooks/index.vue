@@ -112,8 +112,8 @@
 			@size-change="handleSizeChange"
 			@current-change="handleCurrentChange"
 		></el-pagination>
-		<UserDrawer ref="drawerRef"></UserDrawer>
-		<ImportExcel ref="dialogRef"></ImportExcel>
+		<UserDrawer ref="drawerRef" />
+		<ImportExcel ref="dialogRef" />
 	</div>
 </template>
 

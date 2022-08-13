@@ -1,12 +1,12 @@
 <template>
 	<el-container>
 		<el-aside>
-			<Menu></Menu>
+			<Menu />
 		</el-aside>
 		<el-container>
 			<el-header>
-				<Header></Header>
-				<Tabs v-if="themeConfig.tabs"></Tabs>
+				<Header />
+				<Tabs v-if="themeConfig.tabs" />
 			</el-header>
 			<el-main>
 				<section class="main-box">
@@ -20,7 +20,7 @@
 				</section>
 			</el-main>
 			<el-footer v-if="themeConfig.footer">
-				<Footer></Footer>
+				<Footer />
 			</el-footer>
 		</el-container>
 	</el-container>

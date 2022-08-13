@@ -4,7 +4,9 @@
 
 > **完全采用 Vue 官方推荐的风格指南，请务必查看 💢**
 >
-> **Link：** https://v3.cn.vuejs.org/style-guide
+> **Link（v3）：** https://cn.vuejs.org/style-guide/
+>
+> **Link（v2）：** https://v2.cn.vuejs.org/v2/style-guide/#
 
 ## 二、代码格式化工具（Prettier）
 

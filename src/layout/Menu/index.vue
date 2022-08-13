@@ -8,7 +8,7 @@
 		element-loading-svg-view-box="-10, -10, 50, 50"
 		element-loading-background="rgba(122, 122, 122, 0.01)"
 	>
-		<Logo :isCollapse="isCollapse"></Logo>
+		<Logo :isCollapse="isCollapse" />
 		<el-scrollbar>
 			<el-menu
 				:default-active="activeMenu"
@@ -20,7 +20,7 @@
 				text-color="#bdbdc0"
 				active-text-color="#fff"
 			>
-				<SubItem :menuList="menuList"></SubItem>
+				<SubItem :menuList="menuList" />
 			</el-menu>
 		</el-scrollbar>
 	</div>

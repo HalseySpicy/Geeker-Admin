@@ -46,7 +46,7 @@
 				<div class="item-right">
 					<div class="echarts-title">Gitee / GitHub 访问量占比</div>
 					<div class="book-echarts">
-						<Pie ref="pie" />
+						<Pie ref="pieRef" />
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 				</el-tabs>
 			</div>
 			<div class="curve-echarts">
-				<Curve ref="curve" />
+				<Curve ref="curveRef" />
 			</div>
 		</div>
 	</div>
@@ -78,8 +78,8 @@ interface ChartProps {
 interface ChartExpose {
 	initChart: (params: any) => ECharts;
 }
-const pie = ref<ChartExpose>();
-const curve = ref<ChartExpose>();
+const pieRef = ref<ChartExpose>();
+const curveRef = ref<ChartExpose>();
 const data = reactive({
 	activeName: 1,
 	bookSum: "848.132w"
@@ -116,8 +116,8 @@ let curveData = [
 
 /* 初始化 echarts */
 const initCharts = (): void => {
-	dataScreen.chart1 = pie.value?.initChart(pieData) as ECharts;
-	dataScreen.chart2 = curve.value?.initChart(curveData) as ECharts;
+	dataScreen.chart1 = pieRef.value?.initChart(pieData) as ECharts;
+	dataScreen.chart2 = curveRef.value?.initChart(curveData) as ECharts;
 };
 
 onMounted(() => {

@@ -7,17 +7,17 @@
 		/>
 		<br />
 		<div class="icon-list">
-			<SvgIcon name="xianxingdaoyu"></SvgIcon>
-			<SvgIcon name="xianxingdiqiu"></SvgIcon>
-			<SvgIcon name="xianxingditu"></SvgIcon>
-			<SvgIcon name="xianxingfanchuan"></SvgIcon>
-			<SvgIcon name="xianxingfeiji"></SvgIcon>
-			<SvgIcon name="xianxinglvhangriji"></SvgIcon>
-			<SvgIcon name="xianxingtianqiyubao"></SvgIcon>
-			<SvgIcon name="xianxingxiangjipaizhao"></SvgIcon>
-			<SvgIcon name="xianxingxiarilengyin"></SvgIcon>
-			<SvgIcon name="xianxingyoulun"></SvgIcon>
-			<SvgIcon name="xianxingxiarilengyin"></SvgIcon>
+			<SvgIcon name="xianxingdaoyu" />
+			<SvgIcon name="xianxingdiqiu" />
+			<SvgIcon name="xianxingditu" />
+			<SvgIcon name="xianxingfanchuan" />
+			<SvgIcon name="xianxingfeiji" />
+			<SvgIcon name="xianxinglvhangriji" />
+			<SvgIcon name="xianxingtianqiyubao" />
+			<SvgIcon name="xianxingxiangjipaizhao" />
+			<SvgIcon name="xianxingxiarilengyin" />
+			<SvgIcon name="xianxingyoulun" />
+			<SvgIcon name="xianxingxiarilengyin" />
 		</div>
 		<el-descriptions title="配置项 📚" :column="1" border>
 			<el-descriptions-item label="name"> 图标的名称，svg 图标必须存储在 src/assets/icons 目录下 </el-descriptions-item>

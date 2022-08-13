@@ -27,7 +27,7 @@
 				</el-upload>
 			</el-form-item>
 			<el-form-item label="数据覆盖 :">
-				<el-switch v-model="isCover"> </el-switch>
+				<el-switch v-model="isCover" />
 			</el-form-item>
 		</el-form>
 	</el-dialog>

@@ -21,7 +21,7 @@
 					<el-icon>
 						<component :is="item.icon"></component>
 					</el-icon>
-					<span> {{ item.title }}</span>
+					<span> {{ item.title }} </span>
 				</template>
 			</el-autocomplete>
 		</el-dialog>
