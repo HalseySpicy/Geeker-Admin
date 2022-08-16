@@ -10,6 +10,8 @@ declare namespace Menu {
 	}
 }
 
+declare type TabsOptions = Menu.MenuOptions & {};
+
 // * Vite
 declare type Recordable<T = any> = Record<string, T>;
 

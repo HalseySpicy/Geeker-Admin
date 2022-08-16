@@ -8,9 +8,34 @@
 	z-index: 99999 !important;
 }
 
+// * content-box
+.content-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	.text {
+		margin: 20px 0 30px;
+		font-size: 23px;
+		font-weight: bold;
+		color: rgb(88 88 88);
+	}
+	.el-descriptions {
+		width: 100%;
+		padding: 40px 0;
+		.el-descriptions__title {
+			font-size: 18px;
+		}
+		.el-descriptions__label {
+			width: 200px;
+		}
+	}
+}
+
 // * el-table 样式
 .table-box {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	height: 100%;
 

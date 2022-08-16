@@ -15,10 +15,10 @@ export const TabsStore = defineStore({
 	getters: {},
 	actions: {
 		// Add Tabs
-		async addTabs(tabItem: Menu.MenuOptions) {
+		async addTabs(tabItem: TabsOptions) {
 			// not add tabs black list
 			if (TABS_BLACK_LIST.includes(tabItem.path)) return;
-			const tabInfo: Menu.MenuOptions = {
+			const tabInfo: TabsOptions = {
 				title: tabItem.title,
 				path: tabItem.path,
 				close: tabItem.close
@@ -55,7 +55,7 @@ export const TabsStore = defineStore({
 			this.tabsMenuValue = tabsMenuValue;
 		},
 		// Set TabsMenuList
-		async setTabsMenuList(tabsMenuList: Menu.MenuOptions[]) {
+		async setTabsMenuList(tabsMenuList: TabsOptions[]) {
 			this.tabsMenuList = tabsMenuList;
 		},
 		// Close MultipleTab

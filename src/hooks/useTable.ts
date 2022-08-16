@@ -80,7 +80,7 @@ export const useTable = (
 	const updatedTotalParam = () => {
 		state.totalParam = {};
 		// 处理查询参数，可以给查询参数加自定义前缀操作
-		let nowSearchParam: { [propName: string]: any } = {};
+		let nowSearchParam: { [key: string]: any } = {};
 		// 防止手动清空输入框携带参数（这里可以自定义查询参数前缀）
 		for (let key in state.searchParam) {
 			// * 某些情况下参数为 false/0 也应该携带参数

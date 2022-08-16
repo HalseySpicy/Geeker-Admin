@@ -22,7 +22,7 @@ import { GlobalStore } from "@/store";
 const globalStore = GlobalStore();
 const assemblySize = computed((): string => globalStore.assemblySize);
 
-const assemblySizeListCh = reactive<{ [propName: string]: any }>({
+const assemblySizeListCh = reactive<{ [key: string]: any }>({
 	default: "默认",
 	large: "大型",
 	small: "小型"

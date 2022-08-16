@@ -27,13 +27,13 @@ export interface MenuState {
 /* TabsState */
 export interface TabsState {
 	tabsMenuValue: string;
-	tabsMenuList: Menu.MenuOptions[];
+	tabsMenuList: TabsOptions[];
 }
 
 /* AuthState */
 export interface AuthState {
 	authButtons: {
-		[propName: string]: any;
+		[key: string]: any;
 	};
 	authRouter: string[];
 }

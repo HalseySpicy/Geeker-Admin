@@ -33,7 +33,7 @@ export namespace Login {
 		access_token: string;
 	}
 	export interface ResAuthButtons {
-		[propName: string]: any;
+		[key: string]: any;
 	}
 }
 
