@@ -31,6 +31,16 @@ export const useSelection = () => {
 	const selectionChange = (rowArr: any) => {
 		rowArr.length === 0 ? (isSelected.value = false) : (isSelected.value = true);
 		selectedList.value = rowArr;
+		console.log(selectedList);
+	};
+
+	/**
+	 * @description 清空选中数据列表
+	 * @return void
+	 * */
+	const clearSelection = () => {
+		selectedList.value = [];
+		isSelected.value = false;
 	};
 
 	return {
@@ -38,6 +48,7 @@ export const useSelection = () => {
 		selectedList,
 		selectedListIds,
 		selectionChange,
+		clearSelection,
 		getRowKeys
 	};
 };

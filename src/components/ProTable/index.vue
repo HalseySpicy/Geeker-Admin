@@ -120,9 +120,10 @@ import { filterEnum, formatValue } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
+import { ElTable } from "element-plus";
 
 // 表格 DOM 元素
-const tableRef = ref();
+const tableRef = ref<InstanceType<typeof ElTable>>();
 
 // 是否显示搜索模块
 const isShowSearch = ref<boolean>(true);
@@ -151,7 +152,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 });
 
 // 表格多选 Hooks
-const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
+const { selectionChange, getRowKeys, selectedListIds, isSelected, clearSelection } = useSelection();
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
@@ -209,5 +210,12 @@ const openColSetting = () => {
 };
 
 // 暴露给父组件的参数和方法
-defineExpose({ searchParam, refresh: getTableList });
+defineExpose({
+	searchParam,
+	refresh: () => {
+		getTableList();
+		clearSelection();
+		tableRef.value?.clearSelection();
+	}
+});
 </script>

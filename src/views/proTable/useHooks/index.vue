@@ -53,7 +53,14 @@
 				<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
 		</div>
-		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
+		<el-table
+			ref="tableRef"
+			height="575"
+			:data="tableData"
+			:border="true"
+			@selection-change="selectionChange"
+			:row-key="getRowKeys"
+		>
 			<el-table-column type="selection" reserve-selection width="80" />
 			<el-table-column
 				prop="username"
@@ -151,6 +158,7 @@ import {
 	resetUserPassWord,
 	exportUserInfo
 } from "@/api/modules/user";
+import { ElTable } from "element-plus";
 
 // 是否展示搜索模块
 const isShowSearch = ref(true);
@@ -163,12 +171,15 @@ const initParam = reactive({
 	type: 1
 });
 
+// 表格ref
+const tableRef = ref<InstanceType<typeof ElTable>>();
+
 // 表格 hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(getUserList, initParam);
 
 // 数据多选 hooks
-const { isSelected, selectedListIds, selectionChange, getRowKeys } = useSelection();
+const { isSelected, selectedListIds, selectionChange, getRowKeys, clearSelection } = useSelection();
 
 // 页面按钮权限
 const { BUTTONS } = useAuthButtons();
@@ -198,6 +209,8 @@ const changeStatus = async (val: number, params: User.ResUserList) => {
 const batchDelete = async () => {
 	await useHandleData(deleteUser, { id: selectedListIds.value }, "删除所选用户信息");
 	getTableList();
+	clearSelection();
+	tableRef.value?.clearSelection();
 };
 
 // 导出用户列表
