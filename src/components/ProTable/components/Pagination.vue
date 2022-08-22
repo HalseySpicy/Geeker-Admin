@@ -1,4 +1,5 @@
 <template>
+	<!-- 分页组件 -->
 	<el-pagination
 		:currentPage="pageable.pageNum"
 		:page-size="pageable.pageSize"

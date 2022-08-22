@@ -1,6 +1,6 @@
 .filter {
 	box-sizing: border-box;
-	width: 240px;
+	width: 230px;
 	height: 100%;
 	padding: 18px;
 	margin-right: 10px;
@@ -20,8 +20,12 @@
 		:deep(.el-tree--highlight-current) {
 			.el-tree-node.is-current > .el-tree-node__content {
 				background-color: $primary-color;
-				.el-tree-node__label {
+				.el-tree-node__label,
+				.el-tree-node__expand-icon {
 					color: white;
+				}
+				.is-leaf {
+					color: transparent;
 				}
 			}
 		}

@@ -8,7 +8,7 @@
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
-				<slot name="tableHeader" :ids="selectedListIds" :isSelected="isSelected"></slot>
+				<slot name="tableHeader" :ids="selectedListIds" :selectList="selectedList" :isSelected="isSelected"></slot>
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
@@ -39,7 +39,7 @@
 					:fixed="item.fixed"
 				>
 				</el-table-column>
-				<!-- expand（展开查看详情，请使用作用域插槽） -->
+				<!-- expand（展开自定义详细信息，请使用作用域插槽） -->
 				<el-table-column
 					v-if="item.type == 'expand'"
 					:type="item.type"
@@ -151,7 +151,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 });
 
 // 表格多选 Hooks
-const { selectionChange, getRowKeys, selectedListIds, isSelected } = useSelection();
+const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection();
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
@@ -175,7 +175,7 @@ tableColumns.value = props.columns.map(item => {
 	};
 });
 
-// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，获取enum数据
+// 如果当前 enum 为后台数据 需要请求数据，则调用该请求接口，获取enum数据
 tableColumns.value.forEach(async item => {
 	if (item.enum && typeof item.enum === "function") {
 		const { data } = await item.enum();
