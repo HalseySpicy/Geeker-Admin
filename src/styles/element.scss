@@ -15,7 +15,18 @@
 	box-shadow: 0 0 12px rgb(0 0 0 / 5%);
 }
 
-// * main-box (树型表格页面才会使用到)
+// * 不需要 card 卡片样式（在组件内使用 proTable 会使用到）
+.no-card {
+	.card {
+		padding: 0;
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+	}
+}
+
+// * main-box (树形表格筛选页面会使用)
 .main-box {
 	display: flex;
 	width: 100%;

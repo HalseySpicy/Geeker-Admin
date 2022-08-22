@@ -51,7 +51,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 				meta: {
 					keepAlive: true,
 					requiresAuth: true,
-					title: "svg 图标",
+					title: "SVG 图标",
 					key: "svgIcon"
 				}
 			},

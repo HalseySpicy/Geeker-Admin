@@ -4,12 +4,17 @@
 	height: 100%;
 	padding: 18px;
 	margin-right: 10px;
+	.title {
+		margin: 0 0 15px;
+		font-size: 18px;
+		font-weight: bold;
+		color: var(--el-color-info-dark-2);
+		letter-spacing: 0.5px;
+	}
 	.el-input {
 		margin: 0 0 15px;
 	}
 	.el-scrollbar {
-		/* 47px 为文本框高度 32px + 15px */
-		height: calc(100% - 47px);
 		:deep(.el-tree) {
 			height: 80%;
 			overflow: auto;

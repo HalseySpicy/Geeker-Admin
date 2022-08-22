@@ -1,6 +1,6 @@
 <template>
 	<div class="main-box">
-		<TreeFilter :requestApi="getUserDepartment" @change="changeInitParam" label="name"></TreeFilter>
+		<TreeFilter :requestApi="getUserDepartment" @change="changeInitParam" title="部门列表" label="name"></TreeFilter>
 		<div class="table-box">
 			<ProTable ref="proTable" :columns="columns" :requestApi="getUserList" :initParam="initParam">
 				<!-- 表格 header 按钮 -->
