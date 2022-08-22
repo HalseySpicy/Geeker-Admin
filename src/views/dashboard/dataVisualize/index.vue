@@ -1,6 +1,6 @@
 <template>
 	<div class="dataVisualize-box">
-		<div class="top-box">
+		<div class="card top-box">
 			<div class="top-title">数据可视化</div>
 			<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
 				<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="bottom-box">
+		<div class="card bottom-box">
 			<div class="bottom-title">数据来源</div>
 			<div class="bottom-tabs">
 				<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
@@ -67,9 +67,10 @@
 
 <script setup lang="ts" name="dataVisualize">
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
+import { ECharts } from "echarts";
 import Pie from "./components/pie.vue";
 import Curve from "./components/curve.vue";
-import { ECharts } from "echarts";
+
 /* 声明echarts实例 */
 interface ChartProps {
 	[key: string]: ECharts | null;
@@ -124,12 +125,11 @@ onMounted(() => {
 	/* 初始化echarts */
 	initCharts();
 	// 为浏览器绑定事件
-	window.addEventListener("resize", resize);
+	window.addEventListener("resize", resize, false);
 });
 
 /* 浏览器监听 resize 事件 */
 const resize = () => {
-	// 使用了 scale 的echarts其实不需要需要重新计算缩放比例
 	Object.values(dataScreen).forEach(chart => {
 		chart && chart.resize();
 	});
@@ -138,6 +138,7 @@ const resize = () => {
 /* 销毁时触发 */
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
+	Object.values(dataScreen).forEach(val => val?.dispose());
 });
 </script>
 

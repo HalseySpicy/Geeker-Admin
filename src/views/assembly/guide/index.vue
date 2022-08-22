@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<el-alert
 			title="引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于 driver.js."
 			type="warning"

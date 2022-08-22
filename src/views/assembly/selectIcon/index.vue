@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text"> 图标选择器 🍓🍇🍈🍉</span>
 		<SelectIcon v-model:iconValue="iconValue" />
 		<el-descriptions title="配置项 📚" :column="1" border>

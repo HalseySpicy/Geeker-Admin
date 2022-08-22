@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="140px">
 			<el-form-item label="Activity name" prop="name">
 				<el-input v-model="ruleForm.name" />

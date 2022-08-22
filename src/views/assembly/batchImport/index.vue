@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">批量添加数据 🍓🍇🍈🍉</span>
 		<el-button type="primary" :icon="Upload" @click="batchAdd">批量添加数据</el-button>
 		<ImportExcel ref="importRef" />

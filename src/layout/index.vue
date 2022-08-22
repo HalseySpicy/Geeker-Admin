@@ -9,15 +9,13 @@
 				<Tabs v-if="themeConfig.tabs" />
 			</el-header>
 			<el-main>
-				<section class="main-box">
-					<router-view v-slot="{ Component, route }">
-						<transition appear name="fade-transform" mode="out-in">
-							<keep-alive :include="cacheRouter">
-								<component :is="Component" :key="route.path"></component>
-							</keep-alive>
-						</transition>
-					</router-view>
-				</section>
+				<router-view v-slot="{ Component, route }">
+					<transition appear name="fade-transform" mode="out-in">
+						<keep-alive :include="cacheRouter">
+							<component :is="Component" :key="route.path"></component>
+						</keep-alive>
+					</transition>
+				</router-view>
 			</el-main>
 			<el-footer v-if="themeConfig.footer">
 				<Footer />

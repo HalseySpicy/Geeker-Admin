@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">图片上传组件 🍓🍇🍈🍉</span>
 		<div class="upload-list">
 			<UploadImg id="avatar1" v-model:imageUrl="avatar1">

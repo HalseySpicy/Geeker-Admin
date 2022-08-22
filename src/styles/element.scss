@@ -1,11 +1,28 @@
-// * 设置 notification 层级在 loading 之上
+// * 设置 notification/message 层级在 loading 之上
+.el-message,
 .el-notification {
 	z-index: 99999 !important;
 }
 
-// * 设置 message 层级在 loading 之上
-.el-message {
-	z-index: 99999 !important;
+// * card 卡片样式
+.card {
+	box-sizing: border-box;
+	padding: 20px;
+	overflow-x: hidden;
+	background-color: var(--el-fill-color-blank);
+	border: 1px solid var(--el-border-color-light);
+	border-radius: 4px;
+	box-shadow: 0 0 12px rgb(0 0 0 / 5%);
+}
+
+// * main-box (树型表格页面才会使用到)
+.main-box {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	.table-box {
+		width: calc(100% - 250px);
+	}
 }
 
 // * content-box
@@ -22,7 +39,7 @@
 	}
 	.el-descriptions {
 		width: 100%;
-		padding: 40px 0;
+		padding: 40px 0 0;
 		.el-descriptions__title {
 			font-size: 18px;
 		}
@@ -32,16 +49,19 @@
 	}
 }
 
-// * el-table 样式
-.table-box {
+// * table-box 表格页面样式
+.table-box,
+.table {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	width: 100%;
 	height: 100%;
 
-	// 表格 search 样式
+	// table-search 表格搜索样式
 	.table-search {
 		display: flex;
+		padding: 18px 18px 0;
 		margin-bottom: 10px;
 		.el-form {
 			max-width: 1260px;
@@ -86,13 +106,13 @@
 		.header-button-lf {
 			float: left;
 			.el-button {
-				margin-bottom: 20px;
+				margin-bottom: 15px;
 			}
 		}
 		.header-button-ri {
 			float: right;
 			.el-button {
-				margin-bottom: 20px;
+				margin-bottom: 15px;
 			}
 		}
 	}
@@ -106,26 +126,19 @@
 			text-align: center;
 		}
 		.el-table__header th {
-			height: 50px;
+			height: 45px;
 			font-size: 15px;
 			font-weight: bold;
 			color: #252525;
 			background: #fafafa;
 		}
-
-		// table 中 image 图片样式
-		.table-image {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
+		.el-table__row {
+			height: 45px;
 		}
 
-		// 解决 el-table 中 header 文字换行问题
+		// 设置 el-table 中 header 文字不换行
 		.el-table__header .el-table__cell > .cell {
 			white-space: nowrap;
-		}
-		.el-table__row {
-			height: 52px;
 		}
 
 		// 解决表格数据为空时样式不居中问题(仅在element-plus中)
@@ -134,26 +147,40 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-		}
-		.table-empty {
-			line-height: 30px;
+			.table-empty {
+				line-height: 30px;
+			}
 		}
 
-		// 解决 keep-alive || 浏览器窗口大小变化 导致 el-table 样式错乱问题（2.1.4会出现问题，升级之后问题已解决）
-		// .el-table__body-wrapper {
-		// 	height: calc(100% - 50px) !important;
-		// }
-		// .el-table__inner-wrapper,
-		// .el-scrollbar__wrap {
-		// 	height: 100% !important;
-		// }
+		// table 中 image 图片样式
+		.table-image {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+		}
 	}
 
 	// 表格 pagination 样式
 	.el-pagination {
 		display: flex;
 		justify-content: flex-end;
-		margin: 23px 0 10px;
+		margin-top: 20px;
+	}
+}
+
+// * el-table 组件大小特殊样式
+.el-table--large {
+	.el-table__row,
+	.el-table__header th {
+		height: 52px !important;
+		font-size: 16px !important;
+	}
+}
+.el-table--small {
+	.el-table__row,
+	.el-table__header th {
+		height: 38px !important;
+		font-size: 14px !important;
 	}
 }
 
@@ -178,7 +205,7 @@
 		width: 100%;
 	}
 
-	// drawer-form 多列 form-item
+	// drawer-form 中两列 form-item
 	.drawer-multiColumn-form {
 		display: flex;
 		flex-wrap: wrap;

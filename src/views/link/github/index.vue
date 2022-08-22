@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">
 			GitHub 仓库：
 			<a href="https://github.com/HalseySpicy/Geeker-Admin" target="_blank">https://github.com/HalseySpicy/Geeker-Admin</a> 🍒🍉🍊

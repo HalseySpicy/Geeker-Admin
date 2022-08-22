@@ -114,7 +114,7 @@ const columns: Partial<ColumnProps>[] = [
 	{ type: "selection", width: 80, fixed: "left" },
 	{ type: "index", label: "#", width: 80 },
 	{ type: "expand", label: "Expand", width: 100 },
-	{ prop: "username", label: "用户姓名", width: 130, search: true, searchProps: { disabled: true }, renderHeader },
+	{ prop: "username", label: "用户姓名", width: 130, search: true, renderHeader },
 	// 😄 enum 可以直接是数组对象，也可以是请求方法(proTable 内部会执行获取 enum 的这个方法)，下面用户状态也同理
 	// 😄 enum 为请求方法时，后台返回的数组对象 key 值不是 label 和 value 的情况，可以在 searchProps 中指定 label 和 value 的 key 值
 	{

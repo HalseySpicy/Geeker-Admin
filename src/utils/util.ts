@@ -177,7 +177,8 @@ export function formatValue(callValue: any) {
 export function filterEnum(callValue: any, enumData: any, searchProps?: { [key: string]: any }, type?: string): string {
 	const value = searchProps?.value ?? "value";
 	const label = searchProps?.label ?? "label";
-	let filterData = enumData.find((item: any) => item[value] === callValue);
+	let filterData: any = {};
+	if (Array.isArray(enumData)) filterData = enumData.find((item: any) => item[value] === callValue);
 	if (type == "tag") return filterData?.tagType ? filterData.tagType : "";
 	return filterData ? filterData[label] : "--";
 }

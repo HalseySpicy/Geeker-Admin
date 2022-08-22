@@ -2,9 +2,9 @@
 <!-- 💢💢💢 后期会重构 Pro-Table 组件，使用 v-bind 属性透传 -->
 
 <template>
-	<div class="table-box">
-		<!-- 查询表单 -->
-		<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns" v-show="isShowSearch" />
+	<!-- 查询表单 -->
+	<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns" v-show="isShowSearch" />
+	<div class="card table">
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
@@ -72,7 +72,7 @@
 					<template #default="scope">
 						<slot :name="item.prop" :row="scope.row">
 							<!-- tag 标签（自带格式化内容） -->
-							<el-tag v-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps,'tag')">
+							<el-tag v-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps, 'tag')">
 								{{
 									item.enum?.length
 										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)
@@ -98,16 +98,16 @@
 				</div>
 			</template>
 		</el-table>
-		<!-- 分页 -->
+		<!-- 分页组件 -->
 		<Pagination
 			v-if="pagination"
 			:pageable="pageable"
 			:handleSizeChange="handleSizeChange"
 			:handleCurrentChange="handleCurrentChange"
 		/>
-		<!-- 列设置 -->
-		<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting" />
 	</div>
+	<!-- 列设置 -->
+	<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting" />
 </template>
 
 <script setup lang="ts" name="proTable">

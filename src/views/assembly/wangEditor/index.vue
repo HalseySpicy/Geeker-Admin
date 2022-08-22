@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">富文本编辑器 🍓🍇🍈🍉</span>
 		<WangEditor height="400px" v-model:value="content" />
 		<el-button type="primary" @click="dialogVisible = true">内容预览</el-button>

@@ -131,7 +131,8 @@ html.dark {
 	}
 
 	// el-table
-	.table-box {
+	.table-box,
+	.table {
 		.el-table {
 			.el-table__header th {
 				color: var(--el-text-color-regular) !important;
@@ -192,7 +193,7 @@ html.dark {
 		}
 		.el-main {
 			background-color: var(--geeker-main-bg-color) !important;
-			.main-box {
+			.card {
 				background-color: var(--el-bg-color) !important;
 			}
 		}

@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<el-form :model="formData" label-width="140px">
 			<el-form-item label="Activity name :">
 				<el-input v-model="formData.name" />

@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">复制指令 🍇🍇🍇🍓🍓🍓</span>
 		<div class="box-content">
 			<el-input placeholder="请输入内容" v-model="data" style="width: 500px">

@@ -69,6 +69,11 @@ export namespace User {
 		genderLabel: string;
 		genderValue: number;
 	}
+	export interface ResDepartment {
+		id: string;
+		name: string;
+		children?: ResDepartment[];
+	}
 }
 
 // * 文件上传模块

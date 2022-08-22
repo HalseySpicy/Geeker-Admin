@@ -14,7 +14,7 @@ const addWaterMarker: Directive = (str: string, parentNode: any, font: any, text
 	// 水印文字，父元素，字体，文字颜色
 	let can: HTMLCanvasElement = document.createElement("canvas");
 	parentNode.appendChild(can);
-	can.width = 200;
+	can.width = 210;
 	can.height = 150;
 	can.style.display = "none";
 	let cans = can.getContext("2d") as CanvasRenderingContext2D;

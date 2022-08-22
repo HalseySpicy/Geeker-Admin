@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text"> 分类筛选器 🍓🍇🍈🍉</span>
 		<SelectFilter />
 	</div>

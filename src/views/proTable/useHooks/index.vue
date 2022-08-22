@@ -1,6 +1,6 @@
 <template>
 	<div class="table-box">
-		<div class="table-search" v-show="isShowSearch">
+		<div class="card table-search" v-show="isShowSearch">
 			<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
 				<el-form-item label="用户姓名 :">
 					<el-input v-model="searchParam.username" placeholder="请输入" clearable></el-input>
@@ -39,79 +39,83 @@
 				</el-button>
 			</div>
 		</div>
-		<div class="table-header">
-			<div class="header-button-lf">
-				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
-				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
-				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
-				<el-button type="danger" :icon="Delete" plain :disabled="!isSelected" @click="batchDelete" v-if="BUTTONS.batchDelete">
-					批量删除用户
-				</el-button>
-			</div>
-			<div class="header-button-ri">
-				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
-			</div>
-		</div>
-		<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
-			<el-table-column type="selection" reserve-selection width="80" />
-			<el-table-column
-				prop="username"
-				label="用户姓名"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="140"
-			></el-table-column>
-			<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" v-slot="scope">
-				{{ scope.row.gender == 1 ? "男" : "女" }}
-			</el-table-column>
-			<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
-			<el-table-column prop="email" label="邮箱" :formatter="defaultFormat" show-overflow-tooltip width="240"></el-table-column>
-			<el-table-column prop="address" label="居住地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
-			<el-table-column
-				prop="createTime"
-				label="创建时间"
-				:formatter="defaultFormat"
-				show-overflow-tooltip
-				width="200"
-			></el-table-column>
-			<el-table-column prop="status" label="用户状态" width="180" v-slot="scope">
-				<el-switch
-					:value="scope.row.status"
-					:active-text="scope.row.status === 1 ? '启用' : '禁用'"
-					:active-value="1"
-					:inactive-value="0"
-					@change="changeStatus($event, scope.row)"
-					v-if="BUTTONS.status"
-				/>
-				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
-					{{ scope.row.status === 1 ? "启用" : "禁用" }}
-				</el-tag>
-			</el-table-column>
-			<el-table-column label="操作" fixed="right" width="330" v-slot="scope">
-				<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
-				<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit">编辑</el-button>
-				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)" v-if="BUTTONS.reset">重置密码</el-button>
-				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)" v-if="BUTTONS.delete">删除</el-button>
-				<span v-if="!BUTTONS.view && !BUTTONS.edit && !BUTTONS.reset && !BUTTONS.delete">--</span>
-			</el-table-column>
-			<template #empty>
-				<div class="table-empty">
-					<img src="@/assets/images/notData.png" alt="notData" />
-					<div>暂无数据</div>
+		<div class="card table-box">
+			<div class="table-header">
+				<div class="header-button-lf">
+					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-if="BUTTONS.add">新增用户</el-button>
+					<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-if="BUTTONS.batchAdd">批量添加用户</el-button>
+					<el-button type="primary" :icon="Download" plain @click="downloadFile" v-if="BUTTONS.export">导出用户数据</el-button>
+					<el-button type="danger" :icon="Delete" plain :disabled="!isSelected" @click="batchDelete" v-if="BUTTONS.batchDelete">
+						批量删除用户
+					</el-button>
 				</div>
-			</template>
-		</el-table>
-		<el-pagination
-			:currentPage="pageable.pageNum"
-			:page-size="pageable.pageSize"
-			:page-sizes="[10, 25, 50, 100]"
-			background
-			layout="total, sizes, prev, pager, next, jumper"
-			:total="pageable.total"
-			@size-change="handleSizeChange"
-			@current-change="handleCurrentChange"
-		></el-pagination>
+				<div class="header-button-ri">
+					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
+				</div>
+			</div>
+			<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
+				<el-table-column type="selection" reserve-selection width="80" />
+				<el-table-column
+					prop="username"
+					label="用户姓名"
+					:formatter="defaultFormat"
+					show-overflow-tooltip
+					width="140"
+				></el-table-column>
+				<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" v-slot="scope">
+					{{ scope.row.gender == 1 ? "男" : "女" }}
+				</el-table-column>
+				<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
+				<el-table-column prop="email" label="邮箱" :formatter="defaultFormat" show-overflow-tooltip width="240"></el-table-column>
+				<el-table-column prop="address" label="居住地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
+				<el-table-column
+					prop="createTime"
+					label="创建时间"
+					:formatter="defaultFormat"
+					show-overflow-tooltip
+					width="200"
+				></el-table-column>
+				<el-table-column prop="status" label="用户状态" width="180" v-slot="scope">
+					<el-switch
+						:value="scope.row.status"
+						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
+						:active-value="1"
+						:inactive-value="0"
+						@change="changeStatus($event, scope.row)"
+						v-if="BUTTONS.status"
+					/>
+					<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
+						{{ scope.row.status === 1 ? "启用" : "禁用" }}
+					</el-tag>
+				</el-table-column>
+				<el-table-column label="操作" fixed="right" width="330" v-slot="scope">
+					<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
+					<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit"
+						>编辑</el-button
+					>
+					<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)" v-if="BUTTONS.reset">重置密码</el-button>
+					<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)" v-if="BUTTONS.delete">删除</el-button>
+					<span v-if="!BUTTONS.view && !BUTTONS.edit && !BUTTONS.reset && !BUTTONS.delete">--</span>
+				</el-table-column>
+				<template #empty>
+					<div class="table-empty">
+						<img src="@/assets/images/notData.png" alt="notData" />
+						<div>暂无数据</div>
+					</div>
+				</template>
+			</el-table>
+			<el-pagination
+				:currentPage="pageable.pageNum"
+				:page-size="pageable.pageSize"
+				:page-sizes="[10, 25, 50, 100]"
+				background
+				layout="total, sizes, prev, pager, next, jumper"
+				:total="pageable.total"
+				@size-change="handleSizeChange"
+				@current-change="handleCurrentChange"
+			></el-pagination>
+		</div>
 		<UserDrawer ref="drawerRef" />
 		<ImportExcel ref="dialogRef" />
 	</div>

@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<span class="text">我是menu2-2-1 🍓🍇🍈🍉</span>
 		<el-input v-model="value" placeholder="测试缓存"></el-input>
 	</div>

@@ -6,7 +6,8 @@
 		justify-content: center;
 		font-size: 18px;
 	}
-	.el-dialog__body {
+	:deep(.el-dialog__body) {
+		padding-top: 25px;
 		.el-input {
 			margin-bottom: 10px;
 		}
@@ -14,7 +15,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			align-content: flex-start;
-			height: 650px;
+			max-height: 640px;
 			overflow: auto;
 			overflow-x: hidden;
 			.icon-item {

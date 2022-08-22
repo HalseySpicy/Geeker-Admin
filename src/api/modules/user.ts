@@ -55,3 +55,8 @@ export const getUserStatus = () => {
 export const getUserGender = () => {
 	return http.get<User.ResGender>(PORT1 + `/user/gender`);
 };
+
+// * 获取用户部门列表
+export const getUserDepartment = () => {
+	return http.get<User.ResDepartment>(PORT1 + `/user/department`);
+};

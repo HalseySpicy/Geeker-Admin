@@ -1,5 +1,5 @@
 <template>
-	<div class="content-box">
+	<div class="card content-box">
 		<el-button class="add" type="primary" @click="addDomain" plain>Add Input</el-button>
 		<el-form ref="formRef" :model="dynamicValidateForm" label-width="100px" class="demo-dynamic">
 			<el-form-item

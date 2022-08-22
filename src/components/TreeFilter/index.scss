@@ -1,0 +1,29 @@
+.filter {
+	box-sizing: border-box;
+	width: 240px;
+	height: 100%;
+	padding: 18px;
+	margin-right: 10px;
+	.el-input {
+		margin: 0 0 15px;
+	}
+	.el-scrollbar {
+		/* 47px 为文本框高度 32px + 15px */
+		height: calc(100% - 47px);
+		:deep(.el-tree) {
+			height: 80%;
+			overflow: auto;
+			.el-tree-node__content {
+				height: 33px;
+			}
+		}
+		:deep(.el-tree--highlight-current) {
+			.el-tree-node.is-current > .el-tree-node__content {
+				background-color: $primary-color;
+				.el-tree-node__label {
+					color: white;
+				}
+			}
+		}
+	}
+}
