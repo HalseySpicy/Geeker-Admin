@@ -1,7 +1,7 @@
 {
 	"name": "geeker-admin",
 	"private": true,
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Geeker-Admin后台管理系统",
 	"author": "SpicyBoy <848130454@qq.com>",
 	"scripts": {
