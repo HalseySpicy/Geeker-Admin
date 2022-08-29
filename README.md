@@ -19,7 +19,7 @@ Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源�
 
 ### 一、在线预览 👀
 
-- Link：https://geeker-admin.vercel.app
+- Link：https://admin.spicyboy.cn
 
 ### 二、Git 仓库地址 (欢迎 Star⭐)
 
