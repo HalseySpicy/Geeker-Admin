@@ -11,7 +11,7 @@
 					:icon="Delete"
 					plain
 					:disabled="!scope.isSelected"
-					@click="batchDelete(scope.ids)"
+					@click="batchDelete(scope.selectedListIds)"
 					v-if="BUTTONS.batchDelete"
 				>
 					批量删除用户
@@ -157,25 +157,25 @@ const columns: Partial<ColumnProps>[] = [
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {
 	await useHandleData(deleteUser, { id: [params.id] }, `删除【${params.username}】用户`);
-	proTable.value.refresh();
+	proTable.value.getTableList();
 };
 
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
 	await useHandleData(deleteUser, { id }, "删除所选用户信息");
-	proTable.value.refresh();
+	proTable.value.getTableList();
 };
 
 // 重置用户密码
 const resetPass = async (params: User.ResUserList) => {
 	await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
-	proTable.value.refresh();
+	proTable.value.getTableList();
 };
 
 // 切换用户状态
 const changeStatus = async (row: User.ResUserList) => {
 	await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
-	proTable.value.refresh();
+	proTable.value.getTableList();
 };
 
 // 导出用户列表
@@ -193,7 +193,7 @@ const batchAdd = () => {
 		title: "用户",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser,
-		getTableList: proTable.value.refresh
+		getTableList: proTable.value.getTableList
 	};
 	dialogRef.value!.acceptParams(params);
 };
@@ -209,7 +209,7 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar
 		rowData: { ...rowData },
 		isView: title === "查看",
 		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
-		getTableList: proTable.value.refresh
+		getTableList: proTable.value.getTableList
 	};
 	drawerRef.value!.acceptParams(params);
 };
