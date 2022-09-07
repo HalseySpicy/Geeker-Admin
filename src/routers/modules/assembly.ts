@@ -87,6 +87,17 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 					title: "富文本编辑器",
 					key: "wangEditor"
 				}
+			},
+			{
+				path: "/assembly/draggable",
+				name: "draggable",
+				component: () => import("@/views/assembly/draggable/index.vue"),
+				meta: {
+					keepAlive: true,
+					requiresAuth: true,
+					title: "拖拽组件",
+					key: "draggable"
+				}
 			}
 		]
 	}
