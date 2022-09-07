@@ -90,7 +90,7 @@ const assemblyRouter: Array<RouteRecordRaw> = [
 			},
 			{
 				path: "/assembly/draggable",
-				name: "wangEditor",
+				name: "draggable",
 				component: () => import("@/views/assembly/draggable/index.vue"),
 				meta: {
 					keepAlive: true,
