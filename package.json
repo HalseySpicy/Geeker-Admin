@@ -21,6 +21,7 @@
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^1.1.4",
+		"@types/sortablejs": "^1.13.0",
 		"@vueuse/core": "^8.0.1",
 		"@wangeditor/editor": "^5.1.12",
 		"@wangeditor/editor-for-vue": "^5.1.12",
@@ -36,7 +37,9 @@
 		"vue": "^3.2.25",
 		"vue-i18n": "^9.1.9",
 		"vue-router": "^4.0.12",
-		"vue3-seamless-scroll": "^1.2.0"
+		"vue3-seamless-scroll": "^1.2.0",
+		"sortablejs": "^1.15.0",
+		"vuedraggable": "^4.1.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.1",
