@@ -1,4 +1,4 @@
-/* 常用 flex */
+/* flex */
 .flx-center {
 	display: flex;
 	align-items: center;
@@ -14,7 +14,7 @@
 	align-items: center;
 }
 
-/* 清除浮动 */
+/* clearfix */
 .clearfix::after {
 	display: block;
 	height: 0;

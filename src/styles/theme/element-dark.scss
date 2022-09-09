@@ -1,6 +1,6 @@
 /* 自定义 element 暗黑模式样式 */
 html.dark {
-	// * element plus(可以全部注释掉，只是写在这里方便使用😀)
+	// * element style(可以全部注释掉，写在这里只是方便使用😀)
 	// --el-color-primary: #409eff;
 	// --el-color-primary-light-3: #3375b9;
 	// --el-color-primary-light-5: #2a598a;
@@ -103,21 +103,13 @@ html.dark {
 		background-color: var(--el-scrollbar-bg-color) !important;
 	}
 	::-webkit-scrollbar-thumb {
-		background-color: var(--el-border-color-darker);
+		background-color: var(--el-border-color-darker) !important;
 	}
 
 	// content-box
 	.content-box {
 		.text {
 			color: var(--el-text-color-regular) !important;
-		}
-	}
-
-	// dataVisualize-box
-	.dataVisualize-box {
-		.top-box,
-		.bottom-box {
-			box-shadow: var(--geeker-box-shadow-light) !important;
 		}
 	}
 

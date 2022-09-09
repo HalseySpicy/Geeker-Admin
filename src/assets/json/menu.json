@@ -25,6 +25,16 @@
 					"path": "/proTable/useComponent",
 					"title": "使用 Component",
 					"icon": "menu"
+				},
+				{
+					"path": "/proTable/useTreeFilter",
+					"title": "使用 TreeFilter",
+					"icon": "menu"
+				},
+				{
+					"path": "/proTable/useSelectFilter",
+					"title": "使用 SelectFilter",
+					"icon": "menu"
 				}
 			]
 		},
@@ -121,7 +131,17 @@
 				},
 				{
 					"path": "/assembly/selectIcon",
-					"title": "Icon 选择",
+					"title": "图标选择器",
+					"icon": "menu"
+				},
+				{
+					"path": "/assembly/selectFilter",
+					"title": "分类筛选器",
+					"icon": "menu"
+				},
+				{
+					"path": "/assembly/svgIcon",
+					"title": "SVG 图标",
 					"icon": "menu"
 				},
 				{
@@ -131,12 +151,17 @@
 				},
 				{
 					"path": "/assembly/batchImport",
-					"title": "批量上传数据",
+					"title": "批量添加数据",
 					"icon": "menu"
 				},
 				{
 					"path": "/assembly/wangEditor",
 					"title": "富文本编辑器",
+					"icon": "menu"
+				},
+				{
+					"path": "/assembly/draggable",
+					"title": "拖拽组件",
 					"icon": "menu"
 				}
 			]

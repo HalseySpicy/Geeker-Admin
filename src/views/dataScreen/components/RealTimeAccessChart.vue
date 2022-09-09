@@ -235,7 +235,6 @@ defineExpose({
 		position: absolute;
 		top: -30px;
 		right: 5px;
-		font-family: "PingFang SC";
 		font-size: 14px;
 		color: #ffffff;
 		i {
