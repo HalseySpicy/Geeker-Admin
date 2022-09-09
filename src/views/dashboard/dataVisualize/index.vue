@@ -1,68 +1,70 @@
 <template>
-	<div class="dataVisualize-box">
-		<div class="card top-box">
-			<div class="top-title">数据可视化</div>
-			<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
-				<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
-			</el-tabs>
-			<div class="top-content">
-				<div class="item-left sle">
-					<span class="left-title">访问总数</span>
-					<div class="img-box">
-						<img src="./images/book-sum.png" alt="" />
-					</div>
-					<span class="left-number">{{ data.bookSum }}</span>
-				</div>
-				<div class="item-center">
-					<div class="gitee-traffic traffic-box">
-						<div class="traffic-img">
-							<img src="./images/add_person.png" alt="" />
-						</div>
-						<span class="item-value">2222</span>
-						<span class="traffic-name sle">Gitee 访问量</span>
-					</div>
-					<div class="gitHub-traffic traffic-box">
-						<div class="traffic-img">
-							<img src="./images/add_team.png" alt="" />
-						</div>
-						<span class="item-value">2222</span>
-						<span class="traffic-name sle">GitHub 访问量</span>
-					</div>
-					<div class="today-traffic traffic-box">
-						<div class="traffic-img">
-							<img src="./images/today.png" alt="" />
-						</div>
-						<span class="item-value">4567</span>
-						<span class="traffic-name sle">今日访问量</span>
-					</div>
-					<div class="yesterday-traffic traffic-box">
-						<div class="traffic-img">
-							<img src="./images/book_sum.png" alt="" />
-						</div>
-						<span class="item-value">1234</span>
-						<span class="traffic-name sle">昨日访问量</span>
-					</div>
-				</div>
-				<div class="item-right">
-					<div class="echarts-title">Gitee / GitHub 访问量占比</div>
-					<div class="book-echarts">
-						<Pie ref="pieRef" />
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card bottom-box">
-			<div class="bottom-title">数据来源</div>
-			<div class="bottom-tabs">
+	<el-scrollbar>
+		<div class="dataVisualize-box">
+			<div class="card top-box">
+				<div class="top-title">数据可视化</div>
 				<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
 					<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
 				</el-tabs>
+				<div class="top-content">
+					<div class="item-left sle">
+						<span class="left-title">访问总数</span>
+						<div class="img-box">
+							<img src="./images/book-sum.png" alt="" />
+						</div>
+						<span class="left-number">{{ data.bookSum }}</span>
+					</div>
+					<div class="item-center">
+						<div class="gitee-traffic traffic-box">
+							<div class="traffic-img">
+								<img src="./images/add_person.png" alt="" />
+							</div>
+							<span class="item-value">2222</span>
+							<span class="traffic-name sle">Gitee 访问量</span>
+						</div>
+						<div class="gitHub-traffic traffic-box">
+							<div class="traffic-img">
+								<img src="./images/add_team.png" alt="" />
+							</div>
+							<span class="item-value">2222</span>
+							<span class="traffic-name sle">GitHub 访问量</span>
+						</div>
+						<div class="today-traffic traffic-box">
+							<div class="traffic-img">
+								<img src="./images/today.png" alt="" />
+							</div>
+							<span class="item-value">4567</span>
+							<span class="traffic-name sle">今日访问量</span>
+						</div>
+						<div class="yesterday-traffic traffic-box">
+							<div class="traffic-img">
+								<img src="./images/book_sum.png" alt="" />
+							</div>
+							<span class="item-value">1234</span>
+							<span class="traffic-name sle">昨日访问量</span>
+						</div>
+					</div>
+					<div class="item-right">
+						<div class="echarts-title">Gitee / GitHub 访问量占比</div>
+						<div class="book-echarts">
+							<Pie ref="pieRef" />
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="curve-echarts">
-				<Curve ref="curveRef" />
+			<div class="card bottom-box">
+				<div class="bottom-title">数据来源</div>
+				<div class="bottom-tabs">
+					<el-tabs v-model="data.activeName" class="demo-tabs" @tab-click="handleClick">
+						<el-tab-pane v-for="item in tab" :key="item.name" :label="item.label" :name="item.name"></el-tab-pane>
+					</el-tabs>
+				</div>
+				<div class="curve-echarts">
+					<Curve ref="curveRef" />
+				</div>
 			</div>
 		</div>
-	</div>
+	</el-scrollbar>
 </template>
 
 <script setup lang="ts" name="dataVisualize">

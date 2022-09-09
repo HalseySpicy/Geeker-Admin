@@ -1,6 +1,6 @@
 <template>
 	<div class="card table-search" v-if="columns.length">
-		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px" :style="`max-width: ${maxWidth}px`">
+		<el-form ref="formRef" :model="searchParam" :inline="true" label-width="100px">
 			<template v-for="item in getSearchList" :key="item.prop">
 				<el-form-item :label="`${item.label} :`">
 					<SearchFormItem :item="item" :searchParam="searchParam" />
@@ -40,16 +40,15 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 });
 
 const maxLength = ref<number>(4);
-const maxWidth = ref<number>(1260);
 
 onMounted(() => {
 	// * 暂时只判断这两种情况（第四个搜索项为时间/日期范围 || 前三项存在时间/日期范围选择框）
 	// * 后期通过 css 解决文本框自适应宽度变化，已经实现了像 antd 中 pro-table 一样的样式，但自我感觉不太好看，所以没采用😆
 	if (props.columns.length >= 4) {
 		const searchTypeArr = ["datetimerange", "daterange"];
-		searchTypeArr.includes(props.columns[3].searchType!) ? ((maxWidth.value = 945), (maxLength.value = 3)) : null;
+		searchTypeArr.includes(props.columns[3].searchType!) ? (maxLength.value = 3) : null;
 		props.columns.slice(0, 3).forEach(item => {
-			searchTypeArr.includes(item.searchType!) ? ((maxWidth.value = 1155), (maxLength.value = 3)) : null;
+			searchTypeArr.includes(item.searchType!) ? (maxLength.value = 3) : null;
 		});
 	}
 });

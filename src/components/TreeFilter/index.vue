@@ -30,7 +30,7 @@ interface TreeFilterProps {
 	title?: string; // treeFilter 标题 ==> 非必传
 	id?: string; // 选择的id ==> 非必传，默认为 “id”
 	label?: string; // 显示的label ==> 非必传，默认为 “label”
-	defaultValue: string; // 默认选中的值 ==> 非必穿，默认为 ""
+	defaultValue?: string; // 默认选中的值 ==> 非必传，默认为 ""
 }
 const props = withDefaults(defineProps<TreeFilterProps>(), {
 	id: "id",

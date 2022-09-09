@@ -4,7 +4,7 @@
 		<SelectFilter :data="filterData" @change="changeFilter" :defaultValues="filterResult" />
 		<span class="result">返回值: {{ filterResult }}</span>
 		<el-descriptions title="配置项 📚" :column="1" border>
-			<el-descriptions-item label="data"> 需要筛选的数据列表 </el-descriptions-item>
+			<el-descriptions-item label="data"> 需要筛选的数据列表，详情请查看代码 </el-descriptions-item>
 			<el-descriptions-item label="defaultValues"> 默认选中的值 </el-descriptions-item>
 		</el-descriptions>
 	</div>

@@ -16,8 +16,6 @@
 			grid-template-columns: repeat(auto-fill, 100px);
 			justify-content: space-evenly;
 			max-height: 640px;
-			overflow: auto;
-			overflow-x: hidden;
 			.icon-item {
 				display: flex;
 				flex-direction: column;

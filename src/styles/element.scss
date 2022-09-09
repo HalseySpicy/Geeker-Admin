@@ -75,7 +75,7 @@
 		padding: 18px 18px 0;
 		margin-bottom: 10px;
 		.el-form {
-			max-width: 1260px;
+			flex: 1;
 			.el-form-item {
 				margin-right: 5px;
 				.el-input,
@@ -85,7 +85,7 @@
 				}
 				.el-date-editor--datetimerange,
 				.el-date-editor--daterange {
-					width: 400px;
+					width: 380px;
 				}
 
 				// 去除时间选择器上下 padding
@@ -99,15 +99,12 @@
 					white-space: nowrap;
 				}
 			}
-			.more-item {
-				display: inline;
-			}
 		}
 		.search-operation {
 			margin-left: 15px;
 			white-space: nowrap;
 			.search-isOpen {
-				margin-left: 20px;
+				margin-left: 15px;
 			}
 		}
 	}

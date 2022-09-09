@@ -13,6 +13,7 @@
 				<UploadImg
 					v-model:imageUrl="drawerData.rowData!.avatar"
 					:disabled="drawerData.isView"
+					:file-size="3"
 					:upload-style="{ width: '130px', height: '130px' }"
 					@check-validate="checkValidate('avatar')"
 				>

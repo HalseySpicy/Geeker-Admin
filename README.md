@@ -115,25 +115,25 @@ npm run commit
 
 #### 1、登录页：
 
-![login-light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login-light.png)
+![login-light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224442.png)
 
-![login-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/login-dark.png)
+![login-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224447.png)
 
 #### 2、首页：
 
-![home_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/home_light.png)
+![home_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224501.png)
 
-![home-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602145003.png)
+![home-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224505.png)
 
 #### 3、表格页：
 
-![table_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/table_light.png)
+![table_light](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224703.png)
 
-![table-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602145016.png)
+![table-dark](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224436.png)
 
 #### 4、数据大屏：
 
-![dataScreen02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220602170253.png)
+![dataScreen02](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220909224444.png)
 
 ### 七、文件资源目录 📚
 
