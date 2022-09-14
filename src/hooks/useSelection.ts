@@ -2,8 +2,9 @@ import { ref, computed } from "vue";
 
 /**
  * @description 表格多选数据操作
+ * @param {String} selectId 当表格可以多选时，所指定的 id
  * */
-export const useSelection = () => {
+export const useSelection = (selectId: string = "id") => {
 	// 是否选中数据
 	const isSelected = ref<boolean>(false);
 	// 选中的数据列表
@@ -13,14 +14,14 @@ export const useSelection = () => {
 	const selectedListIds = computed((): string[] => {
 		let ids: string[] = [];
 		selectedList.value.forEach(item => {
-			ids.push(item["id"]);
+			ids.push(item[selectId]);
 		});
 		return ids;
 	});
 
 	// 获取行数据的 Key,用来优化 Table 的渲染;在使用跨页多选时,该属性是必填的
-	const getRowKeys = (row: { id: string }) => {
-		return row.id;
+	const getRowKeys = (row: any) => {
+		return row[selectId];
 	};
 
 	/**

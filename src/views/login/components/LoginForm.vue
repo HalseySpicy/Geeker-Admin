@@ -27,8 +27,8 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
-import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
+import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/store";
@@ -54,7 +54,7 @@ const loginForm = reactive<Login.ReqLoginForm>({
 	password: ""
 });
 
-const loading = ref<boolean>(false);
+const loading = ref(false);
 const router = useRouter();
 // login
 const login = (formEl: FormInstance | undefined) => {
@@ -63,14 +63,11 @@ const login = (formEl: FormInstance | undefined) => {
 		if (!valid) return;
 		loading.value = true;
 		try {
-			const requestLoginForm: Login.ReqLoginForm = {
-				username: loginForm.username,
-				password: md5(loginForm.password)
-			};
-			const res = await loginApi(requestLoginForm);
-			// * 存储 token
+			loginForm.password = md5(loginForm.password);
+			const res = await loginApi(loginForm);
+			// 存储 token
 			globalStore.setToken(res.data!.access_token);
-			// * 登录成功之后清除上个账号的 menulist 和 tabs 数据
+			// 登录成功之后清除上个账号的 menulist 和 tabs 数据
 			menuStore.setMenuList([]);
 			tabStore.closeMultipleTab();
 

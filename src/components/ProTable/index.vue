@@ -137,6 +137,7 @@ interface ProTableProps {
 	stripe?: boolean; // 是否带斑马纹表格 ==> 非必传（默认为false）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
 	childrenName?: string; // 当数据存在 children 时，指定 children key 名字 ==> 非必传（默认为"children"）
+	selectId?: string; // 当表格可以多选时，所指定的 id ==> 非必传（默认为 id）
 }
 
 // 接受父组件参数，配置默认值
@@ -147,11 +148,12 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	border: true,
 	stripe: false,
 	toolButton: true,
-	childrenName: "children"
+	childrenName: "children",
+	selectId: "id"
 });
 
 // 表格多选 Hooks
-const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection();
+const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =

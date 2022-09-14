@@ -176,10 +176,7 @@ const downloadFile = async () => {
 };
 
 // 批量添加用户
-interface DialogExpose {
-	acceptParams: (params: any) => void;
-}
-const dialogRef = ref<DialogExpose>();
+const dialogRef = ref();
 const batchAdd = () => {
 	let params = {
 		title: "用户",
@@ -187,14 +184,11 @@ const batchAdd = () => {
 		importApi: BatchAddUser,
 		getTableList: proTable.value.getTableList
 	};
-	dialogRef.value!.acceptParams(params);
+	dialogRef.value.acceptParams(params);
 };
 
 // 打开 drawer(新增、查看、编辑)
-interface DrawerExpose {
-	acceptParams: (params: any) => void;
-}
-const drawerRef = ref<DrawerExpose>();
+const drawerRef = ref();
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
 	let params = {
 		title,
@@ -203,7 +197,7 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar
 		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value!.acceptParams(params);
+	drawerRef.value.acceptParams(params);
 };
 </script>
 

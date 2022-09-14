@@ -10,7 +10,7 @@
 					<img class="login-icon" src="@/assets/images/logo.svg" alt="" />
 					<h2 class="logo-text">Geeker-Admin</h2>
 				</div>
-				<LoginForm ref="loginRef" />
+				<LoginForm />
 			</div>
 		</div>
 	</div>

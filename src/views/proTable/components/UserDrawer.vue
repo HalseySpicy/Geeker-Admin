@@ -82,8 +82,8 @@ const acceptParams = (params: DrawerProps): void => {
 	drawerVisible.value = true;
 };
 
-const ruleFormRef = ref<FormInstance>();
 // 提交数据（新增/编辑）
+const ruleFormRef = ref<FormInstance>();
 const handleSubmit = () => {
 	ruleFormRef.value!.validate(async valid => {
 		if (!valid) return;
