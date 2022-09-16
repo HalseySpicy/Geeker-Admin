@@ -14,6 +14,8 @@
 				<SearchMenu id="searchMenu" />
 				<!-- Theme -->
 				<Theme id="theme" />
+				<!-- Message -->
+				<Message id="message" />
 				<!-- Full screen -->
 				<Fullscreen id="fullscreen" />
 			</div>
@@ -31,6 +33,7 @@ import CollapseIcon from "./components/CollapseIcon.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import SearchMenu from "./components/SearchMenu.vue";
 import Fullscreen from "./components/Fullscreen.vue";
+import Message from "./components/Message.vue";
 import Language from "./components/Language.vue";
 import AssemblySize from "./components/AssemblySize.vue";
 import Theme from "./components/Theme.vue";

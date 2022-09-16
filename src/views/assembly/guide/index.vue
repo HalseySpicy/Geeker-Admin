@@ -75,6 +75,14 @@ const steps = [
 		}
 	},
 	{
+		element: "#message",
+		popover: {
+			title: "Message Notification",
+			description: "Can receive company information",
+			position: "left"
+		}
+	},
+	{
 		element: "#fullscreen",
 		popover: {
 			title: "Full Screen",

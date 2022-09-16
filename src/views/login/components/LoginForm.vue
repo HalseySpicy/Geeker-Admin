@@ -29,11 +29,12 @@ import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import type { ElForm } from "element-plus";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
-import { ElMessage } from "element-plus";
+import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/store";
 import { MenuStore } from "@/store/modules/menu";
 import { TabsStore } from "@/store/modules/tabs";
+import { getTimeState } from "@/utils/util";
 import md5 from "js-md5";
 
 const globalStore = GlobalStore();
@@ -74,7 +75,12 @@ const login = (formEl: FormInstance | undefined) => {
 			menuStore.setMenuList([]);
 			tabStore.closeMultipleTab();
 
-			ElMessage.success("登录成功！");
+			ElNotification({
+				title: getTimeState(),
+				message: "欢迎登录 Geeker-Admin",
+				type: "success",
+				duration: 3000
+			});
 			router.push({ name: "home" });
 		} finally {
 			loading.value = false;
