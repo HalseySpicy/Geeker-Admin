@@ -1,6 +1,6 @@
 <template>
 	<div class="layout-search-dialog">
-		<el-tooltip effect="dark" content="菜单搜索" placement="bottom">
+		<el-tooltip effect="dark" content="菜单搜索" placement="bottom" :show-after="200">
 			<i @click="handleOpen" :class="'iconfont icon-sousuo'" class="icon-style"></i>
 		</el-tooltip>
 		<el-dialog v-model="isShowSearch" width="300px" destroy-on-close :modal="false" fullscreen :show-close="false">
@@ -83,4 +83,34 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 
 <style scoped lang="scss">
 @import "../index.scss";
+
+/* 菜单搜索样式 */
+.layout-search-dialog {
+	:deep(.el-dialog) {
+		background: rgb(0 0 0 / 50%);
+		border-radius: 0 !important;
+		box-shadow: unset !important;
+		.el-dialog__header {
+			border-bottom: none !important;
+		}
+	}
+	:deep(.el-autocomplete) {
+		position: absolute;
+		top: 100px;
+		left: 50%;
+		width: 560px;
+		transform: translateX(-50%);
+	}
+}
+.el-autocomplete__popper {
+	.el-icon {
+		position: relative;
+		top: 2px;
+		font-size: 16px;
+	}
+	span {
+		margin: 0 0 0 10px;
+		font-size: 14px;
+	}
+}
 </style>

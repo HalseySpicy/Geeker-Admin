@@ -26,15 +26,15 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { onMounted } from "vue";
+import { getAuthButtons } from "@/api/modules/login";
+import { AuthStore } from "@/store/modules/auth";
+import { GlobalStore } from "@/store";
 import Menu from "./Menu/index.vue";
 import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
 import Footer from "./Footer/index.vue";
 import cacheRouter from "@/routers/cacheRouter";
-import { onMounted } from "vue";
-import { getAuthButtons } from "@/api/modules/login";
-import { AuthStore } from "@/store/modules/auth";
-import { GlobalStore } from "@/store";
 
 const authStore = AuthStore();
 const globalStore = GlobalStore();

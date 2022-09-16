@@ -4,6 +4,7 @@ export default {
 	},
 	tabs: {
 		more: "More",
+		refresh: "Refresh",
 		closeCurrent: "Close current",
 		closeOther: "Close other",
 		closeAll: "Close All"

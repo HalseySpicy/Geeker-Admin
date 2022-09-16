@@ -7,11 +7,11 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
-// 配置element中英文
+import { useTheme } from "@/hooks/useTheme";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
+
 // 使用主题
-import { useTheme } from "@/hooks/useTheme";
 useTheme();
 
 const globalStore = GlobalStore();
@@ -21,7 +21,7 @@ const config = reactive({
 });
 
 // element 语言配置
-const i18nLocale = computed((): any => {
+const i18nLocale = computed(() => {
 	if (globalStore.language && globalStore.language == "zh") return zhCn;
 	if (globalStore.language == "en") return en;
 	return "";

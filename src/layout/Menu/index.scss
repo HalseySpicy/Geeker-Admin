@@ -1,6 +1,5 @@
 .menu {
 	position: relative;
-	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -10,7 +9,6 @@
 		box-sizing: border-box;
 		height: 55px;
 		border-bottom: 1px solid #282a35;
-		box-shadow: 2px 0 6px rgb(0 21 41 / 35%);
 		span {
 			font-size: 22px;
 			font-weight: bold;

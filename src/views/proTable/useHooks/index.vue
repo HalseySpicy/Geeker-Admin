@@ -51,6 +51,7 @@
 				</div>
 				<div class="header-button-ri">
 					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+					<el-button :icon="Printer" circle @click="printData"> </el-button>
 					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 				</div>
 			</div>
@@ -131,6 +132,7 @@ import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
+import { ElMessage } from "element-plus";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import {
@@ -138,6 +140,7 @@ import {
 	CirclePlus,
 	Delete,
 	Search,
+	Printer,
 	EditPen,
 	Download,
 	Upload,
@@ -207,6 +210,11 @@ const batchDelete = async () => {
 // 导出用户列表
 const downloadFile = async () => {
 	useDownload(exportUserInfo, "用户列表", searchParam.value);
+};
+
+// 打印表格数据
+const printData = () => {
+	ElMessage.success("打印表格数据 🌈");
 };
 
 // 批量添加用户

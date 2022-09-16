@@ -12,6 +12,7 @@
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
+				<el-button :icon="Printer" circle @click="printData"> </el-button>
 				<el-button :icon="Operation" circle @click="openColSetting"> </el-button>
 				<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
@@ -114,7 +115,8 @@
 import { ref, watch } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
-import { Refresh, Operation, Search } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
+import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { filterEnum, formatValue } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
@@ -208,6 +210,11 @@ const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
 });
 const openColSetting = () => {
 	colRef.value.openColSetting();
+};
+
+// 打印表格数据
+const printData = () => {
+	ElMessage.success("打印表格数据 🌈");
 };
 
 // 暴露给父组件的参数和方法

@@ -117,7 +117,6 @@ const initChart = (data: any = {}): ECharts => {
 			};
 		}),
 		series: data.data.map(() => {
-			// console.log("30天预计", val);
 			return {
 				name: "",
 				type: "line",

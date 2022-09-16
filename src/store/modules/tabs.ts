@@ -9,7 +9,7 @@ import router from "@/routers/index";
 export const TabsStore = defineStore({
 	id: "TabsState",
 	state: (): TabsState => ({
-		tabsMenuValue: HOME_URL,
+		tabsMenuValue: HOME_URL, // 可以直接使用 route.path
 		tabsMenuList: [{ title: "首页", path: HOME_URL, icon: "home-filled", close: false }]
 	}),
 	getters: {},

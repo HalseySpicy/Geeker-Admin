@@ -156,9 +156,9 @@ html.dark {
 	// layout
 	.el-container {
 		.el-aside {
+			border-right: var(--geeker-border-light) !important;
 			.menu {
 				background-color: var(--el-bg-color) !important;
-				border-right: var(--geeker-border-light) !important;
 				.logo {
 					border-bottom: var(--geeker-border-light) !important;
 				}

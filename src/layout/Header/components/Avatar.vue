@@ -5,9 +5,15 @@
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu>
-				<el-dropdown-item @click="openDialog('infoRef')">{{ $t("header.personalData") }}</el-dropdown-item>
-				<el-dropdown-item @click="openDialog('passwordRef')">{{ $t("header.changePassword") }}</el-dropdown-item>
-				<el-dropdown-item @click="logout" divided>{{ $t("header.logout") }}</el-dropdown-item>
+				<el-dropdown-item @click="openDialog('infoRef')">
+					<el-icon><User /></el-icon>{{ $t("header.personalData") }}
+				</el-dropdown-item>
+				<el-dropdown-item @click="openDialog('passwordRef')">
+					<el-icon><Edit /></el-icon>{{ $t("header.changePassword") }}
+				</el-dropdown-item>
+				<el-dropdown-item @click="logout" divided>
+					<el-icon><SwitchButton /></el-icon>{{ $t("header.logout") }}
+				</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
 	</el-dropdown>

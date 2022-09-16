@@ -1,5 +1,6 @@
 /* themeConfigProp */
 export interface ThemeConfigProp {
+	layout: string;
 	primary: string;
 	isDark: boolean;
 	isGrey: boolean;
