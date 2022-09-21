@@ -20,8 +20,8 @@ export const GlobalStore = defineStore({
 		language: "",
 		// themeConfig
 		themeConfig: {
-			// 布局切换 ==> 默认：default | 混合：blend | 横向：transverse | 分栏：columns
-			layout: "default",
+			// 布局切换 ==>  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
+			layout: "vertical",
 			// 默认 primary 主题颜色
 			primary: DEFAULT_PRIMARY,
 			// 深色模式

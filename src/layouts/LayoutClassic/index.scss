@@ -1,0 +1,78 @@
+.el-container {
+	width: 100%;
+	min-width: 970px;
+	height: 100%;
+	.el-header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 55px;
+		padding: 0 15px 0 12px;
+		background-color: #191a20;
+		border-bottom: 1px solid #f6f6f6;
+		.header-lf {
+			display: flex;
+			align-items: center;
+			.logo {
+				span {
+					font-size: 22px;
+					font-weight: bold;
+					color: #e9e9eb;
+					white-space: nowrap;
+				}
+				img {
+					width: 30px;
+					object-fit: contain;
+					margin-right: 8px;
+				}
+			}
+		}
+		:deep(.tool-bar-ri) {
+			.toolBar-icon,
+			.username {
+				color: #e5eaf3;
+			}
+		}
+	}
+	.el-aside {
+		width: auto;
+		overflow: inherit;
+		background-color: #ffffff;
+		border-right: 1px solid var(--el-border-color);
+		transition: all 0.3s ease;
+		.menu {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			transition: all 0.3s ease;
+			:deep(.el-scrollbar) {
+				.el-menu {
+					overflow-x: hidden;
+					border-right: none;
+				}
+				.el-menu,
+				.el-menu--popup {
+					.el-menu-item {
+						&.is-active {
+							background-color: var(--el-color-primary-light-9);
+						}
+					}
+				}
+			}
+		}
+	}
+	.el-footer {
+		height: auto;
+		padding: 0;
+	}
+	.el-main {
+		box-sizing: border-box;
+		padding: 10px 12px;
+		overflow-x: hidden;
+		background: #f0f2f5;
+		&::-webkit-scrollbar {
+			background-color: #f0f2f5;
+		}
+	}
+}

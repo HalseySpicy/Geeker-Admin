@@ -4,13 +4,14 @@
 }
 .iconfont {
 	font-family: iconfont !important;
-	font-size: 16px;
+	font-size: 20px;
 	font-style: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	cursor: pointer;
 }
 .icon-xiaoxi::before {
-	font-size: 21.3px;
+	font-size: 21.2px;
 	content: "\e61f";
 }
 .icon-zhuti::before {

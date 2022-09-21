@@ -198,16 +198,16 @@
 	.el-drawer__header {
 		padding: 15px 20px 14px;
 		margin-bottom: 0;
-		border-bottom: 1px solid #ebeef5;
+		border-bottom: 1px solid var(--el-border-color-lighter);
 		span {
 			font-size: 17px;
-			color: #303133;
+			color: var(--el-text-color-primary) !important;
 		}
 	}
 
 	// drawer header 样式
 	.el-drawer__footer {
-		border-top: 1px solid #ebeef5;
+		border-top: 1px solid var(--el-border-color-lighter);
 	}
 	.el-select {
 		width: 100%;
@@ -231,7 +231,7 @@
 	.el-dialog__header {
 		padding: 15px 20px;
 		margin: 0;
-		border-bottom: 1px solid #f0f0f0;
+		border-bottom: 1px solid var(--el-border-color-lighter);
 		.el-dialog__title {
 			font-size: 17px;
 		}

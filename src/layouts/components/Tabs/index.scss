@@ -1,0 +1,39 @@
+.tabs-box {
+	background-color: #ffffff;
+	:deep(.tabs-menu) {
+		position: relative;
+		width: 100%;
+		.el-dropdown {
+			position: absolute;
+			top: 8px;
+			right: 13px;
+		}
+		.tabs-icon {
+			top: 2px;
+		}
+		.el-tabs__nav-wrap {
+			position: absolute;
+			width: calc(100% - 110px);
+		}
+		.el-tabs--card > .el-tabs__header {
+			box-sizing: border-box;
+			height: 40px;
+			padding: 0 10px;
+			margin: 0;
+		}
+		.el-tabs--card > .el-tabs__header .el-tabs__nav {
+			border: none;
+		}
+		.el-tabs--card > .el-tabs__header .el-tabs__item {
+			color: #cccccc;
+			border: none;
+		}
+		.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+			color: var(--el-color-primary);
+			border-bottom: 2px solid var(--el-color-primary);
+		}
+		.el-tabs__item .is-icon-close svg {
+			margin-top: 0.5px;
+		}
+	}
+}

@@ -29,6 +29,7 @@
 		"echarts-liquidfill": "^3.1.0",
 		"element-plus": "^2.2.6",
 		"js-md5": "^0.7.3",
+		"mitt": "^3.0.0",
 		"nprogress": "^0.2.0",
 		"pinia": "^2.0.12",
 		"pinia-plugin-persistedstate": "^1.6.1",

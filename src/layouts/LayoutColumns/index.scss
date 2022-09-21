@@ -1,0 +1,69 @@
+.el-container {
+	width: 100%;
+	min-width: 970px;
+	height: 100%;
+	.el-aside {
+		width: auto;
+		overflow: inherit;
+		background-color: #191a20;
+		border-right: 1px solid #191a20;
+		.menu {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			transition: all 0.3s ease;
+		}
+		.logo {
+			box-sizing: border-box;
+			height: 55px;
+			border-bottom: 1px solid #282a35;
+			span {
+				font-size: 22px;
+				font-weight: bold;
+				color: #dadada;
+				white-space: nowrap;
+			}
+			img {
+				width: 30px;
+				object-fit: contain;
+				margin-right: 8px;
+			}
+		}
+		.el-scrollbar {
+			height: calc(100% - 55px);
+			.el-menu {
+				overflow-x: hidden;
+				border-right: none;
+			}
+		}
+	}
+	.el-header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 55px;
+		padding: 0 15px;
+		background-color: #ffffff;
+		border-bottom: 1px solid #f6f6f6;
+		:deep(.tool-bar-ri) {
+			.toolBar-icon,
+			.username {
+				color: var(--el-text-color-primary);
+			}
+		}
+	}
+	.el-footer {
+		height: auto;
+		padding: 0;
+	}
+	.el-main {
+		box-sizing: border-box;
+		padding: 10px 12px;
+		overflow-x: hidden;
+		background: #f0f2f5;
+		&::-webkit-scrollbar {
+			background-color: #f0f2f5;
+		}
+	}
+}

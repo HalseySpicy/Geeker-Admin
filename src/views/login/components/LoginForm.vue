@@ -74,14 +74,13 @@ const login = (formEl: FormInstance | undefined) => {
 			// 登录成功之后清除上个账号的 menulist 和 tabs 数据
 			menuStore.setMenuList([]);
 			tabStore.closeMultipleTab();
-
+			router.push({ name: "home" });
 			ElNotification({
 				title: getTimeState(),
 				message: "欢迎登录 Geeker-Admin",
 				type: "success",
 				duration: 3000
 			});
-			router.push({ name: "home" });
 		} finally {
 			loading.value = false;
 		}

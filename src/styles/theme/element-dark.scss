@@ -133,55 +133,18 @@ html.dark {
 		}
 	}
 
-	// el-drawer
-	.el-drawer {
-		.el-drawer__header {
-			border-bottom: var(--geeker-border-light) !important;
-			span {
-				color: var(--el-text-color-primary) !important;
-			}
-		}
-		.el-drawer__footer {
-			border-top: var(--geeker-border-light) !important;
-		}
-	}
-
-	//  el-dialog
-	.el-dialog {
-		.el-dialog__header {
-			border-bottom: var(--geeker-border-light) !important;
-		}
-	}
-
 	// layout
 	.el-container {
 		.el-aside {
+			background-color: var(--el-bg-color) !important;
 			border-right: var(--geeker-border-light) !important;
-			.menu {
-				background-color: var(--el-bg-color) !important;
-				.logo {
-					border-bottom: var(--geeker-border-light) !important;
-				}
-				.el-menu,
-				.el-sub-menu,
-				.el-sub-menu__title {
-					background-color: var(--el-bg-color) !important;
-				}
+			.logo {
+				border-bottom: var(--geeker-border-light) !important;
 			}
 		}
 		.el-header {
-			.header {
-				background-color: var(--el-bg-color) !important;
-				border-bottom-color: var(--el-border-color-light) !important;
-				.header-ri {
-					.icon-style {
-						color: var(--el-text-color-regular) !important;
-					}
-					.username {
-						color: var(--el-text-color-regular) !important;
-					}
-				}
-			}
+			background-color: var(--el-bg-color) !important;
+			border-bottom-color: var(--el-border-color-light) !important;
 		}
 		.el-main {
 			background-color: var(--geeker-main-bg-color) !important;
@@ -203,11 +166,22 @@ html.dark {
 		}
 	}
 
-	// menu-popup
-	.el-menu--popup-container {
-		.el-menu {
-			background-color: var(--el-bg-color) !important;
+	// menu
+	.el-menu,
+	.el-sub-menu,
+	.el-menu-item,
+	.el-sub-menu__title {
+		background-color: var(--el-bg-color) !important;
+		&:not(.is-active) {
+			color: #bdbdc0 !important;
 		}
+		&.is-active {
+			color: #ffffff !important;
+			background-color: #060708 !important;
+		}
+	}
+	.el-menu-item:not(.is-active):hover {
+		background-color: var(--geeker-main-bg-color) !important;
 	}
 
 	// guide

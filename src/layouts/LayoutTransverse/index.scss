@@ -1,0 +1,68 @@
+.el-container {
+	width: 100%;
+	min-width: 970px;
+	height: 100%;
+	.el-header {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 55px;
+		padding: 0 15px 0 12px;
+		background-color: #191a20;
+		border-bottom: 1px solid #f6f6f6;
+		:deep(.tool-bar-ri) {
+			.toolBar-icon,
+			.username {
+				color: #e5eaf3;
+			}
+		}
+		.header-lf {
+			display: flex;
+			flex: 1;
+			align-items: center;
+			height: 100%;
+			margin-right: 70px;
+			overflow: hidden;
+			.logo {
+				margin-right: 50px;
+				span {
+					font-size: 22px;
+					font-weight: bold;
+					color: #e9e9eb;
+					white-space: nowrap;
+				}
+				img {
+					width: 30px;
+					object-fit: contain;
+					margin-right: 8px;
+				}
+			}
+			:deep(.el-menu) {
+				border-bottom: none;
+				.is-active {
+					background-color: var(--el-color-primary) !important;
+					border-bottom-color: var(--el-color-primary) !important;
+					.el-sub-menu__title {
+						color: #ffffff !important;
+						background-color: var(--el-color-primary) !important;
+						border-bottom-color: var(--el-color-primary) !important;
+					}
+				}
+			}
+		}
+	}
+	.el-footer {
+		height: auto;
+		padding: 0;
+	}
+	.el-main {
+		box-sizing: border-box;
+		padding: 10px 12px;
+		overflow-x: hidden;
+		background: #f0f2f5;
+		&::-webkit-scrollbar {
+			background-color: #f0f2f5;
+		}
+	}
+}

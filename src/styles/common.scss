@@ -89,12 +89,12 @@
 
 /* nprogress样式 */
 #nprogress .bar {
-	background: $primary-color !important;
+	background: var(--el-color-primary) !important;
 }
 #nprogress .spinner-icon {
-	border-top-color: $primary-color !important;
-	border-left-color: $primary-color !important;
+	border-top-color: var(--el-color-primary) !important;
+	border-left-color: var(--el-color-primary) !important;
 }
 #nprogress .peg {
-	box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color !important;
+	box-shadow: 0 0 10px var(--el-color-primary), 0 0 5px var(--el-color-primary) !important;
 }

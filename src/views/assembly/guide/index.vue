@@ -67,10 +67,10 @@ const steps = [
 		}
 	},
 	{
-		element: "#theme",
+		element: "#themeSetting",
 		popover: {
-			title: "Setting Layout",
-			description: "Customize settings layout",
+			title: "Setting theme",
+			description: "Customize settings theme",
 			position: "left"
 		}
 	},
