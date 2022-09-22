@@ -1,3 +1,13 @@
+.classic {
+	min-width: 1030px;
+	.classic-bottom {
+		height: calc(100% - 55px);
+		.classic-bottom-right {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+}
 .el-container {
 	width: 100%;
 	height: 100%;
@@ -14,6 +24,7 @@
 			display: flex;
 			align-items: center;
 			.logo {
+				margin-right: 28px;
 				span {
 					font-size: 22px;
 					font-weight: bold;
@@ -25,6 +36,19 @@
 					object-fit: contain;
 					margin-right: 8px;
 				}
+			}
+		}
+		:deep(.tool-bar-lf) {
+			color: #e5eaf3;
+			.el-breadcrumb__inner.is-link {
+				color: #e5eaf3;
+				&:hover {
+					color: var(--el-color-primary);
+				}
+			}
+			.el-breadcrumb__item:last-child .el-breadcrumb__inner,
+			.el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+				color: #cfd3dc;
 			}
 		}
 		:deep(.tool-bar-ri) {

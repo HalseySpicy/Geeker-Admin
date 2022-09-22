@@ -1,6 +1,6 @@
 <!-- 横向布局 -->
 <template>
-	<el-container style="min-width: 970px">
+	<el-container class="transverse">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">

@@ -1,16 +1,17 @@
 <!-- 经典布局 -->
 <template>
-	<el-container style="min-width: 1030px">
+	<el-container class="classic">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">
 					<img src="@/assets/images/logo.svg" alt="logo" />
 					<span>Geeker Admin</span>
 				</div>
+				<ToolBarLeft />
 			</div>
 			<ToolBarRight />
 		</el-header>
-		<el-container style="height: calc(100% - 55px)">
+		<el-container class="classic-bottom">
 			<el-aside>
 				<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
 					<el-scrollbar>
@@ -28,7 +29,7 @@
 					</el-scrollbar>
 				</div>
 			</el-aside>
-			<el-container>
+			<el-container class="classic-bottom-right">
 				<Tabs v-if="themeConfig.tabs" />
 				<el-main>
 					<router-view v-slot="{ Component }">
@@ -47,7 +48,7 @@
 	</el-container>
 </template>
 
-<script setup lang="ts" name="layoutTransverse">
+<script setup lang="ts" name="layoutClassic">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { GlobalStore } from "@/store";
@@ -55,6 +56,7 @@ import { MenuStore } from "@/store/modules/menu";
 import cacheRouter from "@/routers/cacheRouter";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
+import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 

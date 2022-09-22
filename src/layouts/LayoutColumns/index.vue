@@ -1,6 +1,6 @@
 <!-- 分栏布局 -->
 <template>
-	<el-container style="min-width: 970px">
+	<el-container class="columns">
 		<el-aside>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
 				<div class="logo flx-center">
@@ -45,7 +45,7 @@
 	</el-container>
 </template>
 
-<script setup lang="ts" name="layoutCLassic">
+<script setup lang="ts" name="layoutColumns">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { GlobalStore } from "@/store";
