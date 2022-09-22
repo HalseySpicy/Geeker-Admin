@@ -1,6 +1,6 @@
 <!-- 分栏布局 -->
 <template>
-	<el-container>
+	<el-container style="min-width: 970px">
 		<el-aside>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
 				<div class="logo flx-center">
@@ -10,7 +10,7 @@
 				<el-scrollbar>
 					<el-menu
 						:default-active="activeMenu"
-						:router="true"
+						:router="false"
 						:collapse="isCollapse"
 						:collapse-transition="false"
 						:unique-opened="true"

@@ -1,6 +1,6 @@
 <!-- 经典布局 -->
 <template>
-	<el-container>
+	<el-container style="min-width: 1030px">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">
@@ -16,7 +16,7 @@
 					<el-scrollbar>
 						<el-menu
 							:default-active="activeMenu"
-							:router="true"
+							:router="false"
 							:collapse="isCollapse"
 							:collapse-transition="false"
 							:unique-opened="true"

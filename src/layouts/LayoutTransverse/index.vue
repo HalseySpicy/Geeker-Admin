@@ -1,6 +1,6 @@
 <!-- 横向布局 -->
 <template>
-	<el-container>
+	<el-container style="min-width: 970px">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">
@@ -11,7 +11,7 @@
 					<el-menu
 						mode="horizontal"
 						:default-active="activeMenu"
-						:router="true"
+						:router="false"
 						:unique-opened="true"
 						menu-trigger="click"
 						background-color="#191a20"

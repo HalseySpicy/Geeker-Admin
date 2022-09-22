@@ -1,6 +1,6 @@
 <!-- 纵向布局 -->
 <template>
-	<el-container>
+	<el-container style="min-width: 1030px">
 		<el-aside>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
 				<div class="logo flx-center">
