@@ -55,7 +55,7 @@
 					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 				</div>
 			</div>
-			<el-table height="575" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
+			<el-table :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 				<el-table-column type="selection" reserve-selection width="80" />
 				<el-table-column
 					prop="username"
@@ -79,7 +79,7 @@
 				></el-table-column>
 				<el-table-column prop="status" label="用户状态" width="180" v-slot="scope">
 					<el-switch
-						:value="scope.row.status"
+						:model-value="scope.row.status"
 						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
 						:active-value="1"
 						:inactive-value="0"

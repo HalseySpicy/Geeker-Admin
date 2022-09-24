@@ -8,6 +8,7 @@
 import { reactive, computed } from "vue";
 import { GlobalStore } from "@/store";
 import { useTheme } from "@/hooks/useTheme";
+import { getBrowserLang } from "@/utils/util";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
 
@@ -24,7 +25,7 @@ const config = reactive({
 const i18nLocale = computed(() => {
 	if (globalStore.language && globalStore.language == "zh") return zhCn;
 	if (globalStore.language == "en") return en;
-	return "";
+	return getBrowserLang() == "zh" ? zhCn : en;
 });
 
 // 配置全局组件大小 (small/default(medium)/large)

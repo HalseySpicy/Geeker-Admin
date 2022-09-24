@@ -1,5 +1,5 @@
 .columns {
-	min-width: 970px;
+	min-width: 1030px;
 }
 .el-container {
 	width: 100%;
@@ -14,28 +14,28 @@
 			flex-direction: column;
 			height: 100%;
 			transition: all 0.3s ease;
-		}
-		.logo {
-			box-sizing: border-box;
-			height: 55px;
-			border-bottom: 1px solid #282a35;
-			span {
-				font-size: 22px;
-				font-weight: bold;
-				color: #dadada;
-				white-space: nowrap;
+			.el-scrollbar {
+				height: calc(100% - 55px);
+				.el-menu {
+					overflow-x: hidden;
+					border-right: none;
+				}
 			}
-			img {
-				width: 30px;
-				object-fit: contain;
-				margin-right: 8px;
-			}
-		}
-		.el-scrollbar {
-			height: calc(100% - 55px);
-			.el-menu {
-				overflow-x: hidden;
-				border-right: none;
+			.logo {
+				box-sizing: border-box;
+				height: 55px;
+				border-bottom: 1px solid #282a35;
+				span {
+					font-size: 22px;
+					font-weight: bold;
+					color: #dadada;
+					white-space: nowrap;
+				}
+				img {
+					width: 30px;
+					object-fit: contain;
+					margin-right: 8px;
+				}
 			}
 		}
 	}

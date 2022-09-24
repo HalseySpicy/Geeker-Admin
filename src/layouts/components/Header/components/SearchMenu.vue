@@ -1,14 +1,21 @@
 <template>
 	<div class="layout-search-dialog">
 		<i @click="handleOpen" :class="'iconfont icon-sousuo'" class="toolBar-icon"></i>
-		<el-dialog v-model="isShowSearch" width="300px" destroy-on-close :modal="false" fullscreen :show-close="false">
+		<el-dialog
+			@click="closeSearch"
+			v-model="isShowSearch"
+			width="300px"
+			destroy-on-close
+			:modal="false"
+			:show-close="false"
+			fullscreen
+		>
 			<el-autocomplete
 				v-model="searchMenu"
-				:fetch-suggestions="searchMenuList"
 				ref="menuInputRef"
 				placeholder="菜单搜索 ：支持菜单名称、路径"
+				:fetch-suggestions="searchMenuList"
 				@select="handleClickMenu"
-				@blur="closeSearch"
 			>
 				<template #prefix>
 					<el-icon>

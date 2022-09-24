@@ -96,7 +96,7 @@ const columns: Partial<ColumnProps>[] = [
 		sortable: true,
 		search: true,
 		searchType: "datetimerange",
-		searchInitParam: ["2022-08-30 00:00:00", "2022-08-20 23:59:59"]
+		searchInitParam: ["2022-09-30 00:00:00", "2022-09-20 23:59:59"]
 	},
 	{ prop: "operation", label: "操作", width: 330, fixed: "right" }
 ];

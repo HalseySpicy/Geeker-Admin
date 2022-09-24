@@ -17,18 +17,19 @@
 		align-items: center;
 		justify-content: space-between;
 		height: 55px;
-		padding: 0 15px 0 12px;
+		padding: 0 15px 0 0;
 		background-color: #191a20;
 		border-bottom: 1px solid #f6f6f6;
 		.header-lf {
 			display: flex;
 			align-items: center;
 			.logo {
-				margin-right: 28px;
+				width: 220px;
+				margin-right: 16px;
 				span {
 					font-size: 22px;
 					font-weight: bold;
-					color: #e9e9eb;
+					color: #dadada;
 					white-space: nowrap;
 				}
 				img {
@@ -39,7 +40,7 @@
 			}
 		}
 		:deep(.tool-bar-lf) {
-			color: #e5eaf3;
+			color: #ffffff;
 			.el-breadcrumb__inner.is-link {
 				color: #e5eaf3;
 				&:hover {

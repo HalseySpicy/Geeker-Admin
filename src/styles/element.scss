@@ -113,21 +113,17 @@
 	.table-header {
 		.header-button-lf {
 			float: left;
-			.el-button {
-				margin-bottom: 15px;
-			}
 		}
 		.header-button-ri {
 			float: right;
-			.el-button {
-				margin-bottom: 15px;
-			}
+		}
+		.el-button {
+			margin-bottom: 15px;
 		}
 	}
 
 	// el-table 表格样式
 	.el-table {
-		// 表格自适应撑满整个页面(设置了 flex:1,页面上表格必须添加 height 属性)
 		flex: 1;
 		.el-table__header th,
 		.el-table__body td {

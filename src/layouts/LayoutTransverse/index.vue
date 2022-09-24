@@ -2,26 +2,44 @@
 <template>
 	<el-container class="transverse">
 		<el-header>
-			<div class="header-lf">
-				<div class="logo flx-center">
-					<img src="@/assets/images/logo.svg" alt="logo" />
-					<span>Geeker Admin</span>
-				</div>
-				<el-scrollbar v-if="menuList.length">
-					<el-menu
-						mode="horizontal"
-						:default-active="activeMenu"
-						:router="false"
-						:unique-opened="true"
-						menu-trigger="click"
-						background-color="#191a20"
-						text-color="#dadada"
-						active-text-color="#ffffff"
-					>
-						<SubMenu :menuList="menuList" />
-					</el-menu>
-				</el-scrollbar>
+			<div class="logo flx-center">
+				<img src="@/assets/images/logo.svg" alt="logo" />
+				<span>Geeker Admin</span>
 			</div>
+			<el-menu
+				mode="horizontal"
+				:default-active="activeMenu"
+				:router="false"
+				:unique-opened="true"
+				background-color="#191a20"
+				text-color="#dadada"
+				active-text-color="#ffffff"
+			>
+				<!-- 只有在这里写 submenu 才能触发 menu 三个点省略 -->
+				<template v-for="subItem in menuList" :key="subItem.path">
+					<el-sub-menu
+						v-if="subItem.children && subItem.children.length > 0"
+						:index="subItem.path"
+						:key="subItem.path + 'el-sub-menu'"
+					>
+						<template #title>
+							<el-icon>
+								<component :is="subItem.icon"></component>
+							</el-icon>
+							<span>{{ subItem.title }}</span>
+						</template>
+						<SubMenu :menuList="subItem.children" />
+					</el-sub-menu>
+					<el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
+						<el-icon>
+							<component :is="subItem.icon"></component>
+						</el-icon>
+						<template #title>
+							<span>{{ subItem.title }}</span>
+						</template>
+					</el-menu-item>
+				</template>
+			</el-menu>
 			<ToolBarRight />
 		</el-header>
 		<Tabs v-if="themeConfig.tabs" />
@@ -45,11 +63,18 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { GlobalStore } from "@/store";
 import { MenuStore } from "@/store/modules/menu";
+import { useRouter } from "vue-router";
 import cacheRouter from "@/routers/cacheRouter";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
+
+const router = useRouter();
+const handleClickMenu = (subItem: Menu.MenuOptions) => {
+	if (subItem.isLink) window.open(subItem.isLink, "_blank");
+	router.push(subItem.path);
+};
 
 const route = useRoute();
 const menuStore = MenuStore();

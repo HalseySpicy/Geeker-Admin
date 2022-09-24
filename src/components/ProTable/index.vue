@@ -19,7 +19,6 @@
 		</div>
 		<!-- 表格主体 -->
 		<el-table
-			height="575"
 			ref="tableRef"
 			:data="tableData"
 			:border="border"

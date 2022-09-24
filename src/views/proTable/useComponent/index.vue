@@ -26,7 +26,7 @@
 				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法（暂时只能这样解决） -->
 				<div @click="changeStatus(scope.row)" v-if="BUTTONS.status">
 					<el-switch
-						:value="scope.row.status"
+						:model-value="scope.row.status"
 						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
 						:active-value="1"
 						:inactive-value="0"
@@ -149,7 +149,7 @@ const columns: Partial<ColumnProps>[] = [
 		searchProps: {
 			disabledDate: (time: Date) => time.getTime() < Date.now() - 8.64e7
 		},
-		searchInitParam: ["2022-08-30 00:00:00", "2022-08-20 23:59:59"]
+		searchInitParam: ["2022-09-30 00:00:00", "2022-09-20 23:59:59"]
 	},
 	{ prop: "operation", label: "操作", width: 330, fixed: "right", renderHeader }
 ];
