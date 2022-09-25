@@ -24,14 +24,18 @@
 </template>
 
 <script setup lang="ts">
+import { inject } from "vue";
 import { TabsStore } from "@/store/modules/tabs";
 import { HOME_URL } from "@/config/config";
 import { ElMessage } from "element-plus";
-const tabStore = TabsStore();
 
+const tabStore = TabsStore();
+const reload: Function = inject("refresh") as Function;
+
+// refresh current page
 const refresh = () => {
-	console.log(tabStore.tabsMenuValue);
 	ElMessage({ type: "success", message: "刷新当前页面 🚀" });
+	reload();
 };
 
 // Close Current
