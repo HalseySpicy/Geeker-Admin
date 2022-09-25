@@ -31,23 +31,3 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
 	router.push(subItem.path);
 };
 </script>
-
-<style scoped lang="scss">
-.el-menu,
-.el-menu--popup {
-	.el-menu-item {
-		&.is-active {
-			background-color: #060708;
-			&::before {
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				width: 4px;
-				content: "";
-				background: var(--el-color-primary);
-			}
-		}
-	}
-}
-</style>

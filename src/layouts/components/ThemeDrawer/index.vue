@@ -104,7 +104,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useTheme } from "@/hooks/useTheme";
 import { MenuStore } from "@/store/modules/menu";
 import { GlobalStore } from "@/store";
@@ -128,10 +128,6 @@ const colorList = [
 	"#9b59b6"
 ];
 
-// 主题初始化
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-
 // 侧边栏折叠
 const menuStore = MenuStore();
 const isCollapse = computed({
@@ -143,10 +139,24 @@ const isCollapse = computed({
 	}
 });
 
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
+
 // 切换布局方式
 const changeLayout = (val: string) => {
 	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
 };
+
+watch(
+	() => themeConfig.value.layout,
+	() => {
+		const body = document.body as HTMLElement;
+		body.setAttribute("class", themeConfig.value.layout);
+	},
+	{
+		immediate: true
+	}
+);
 
 // 打开主题设置
 const drawerVisible = ref(false);

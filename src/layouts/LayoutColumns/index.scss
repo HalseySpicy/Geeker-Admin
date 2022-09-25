@@ -1,18 +1,73 @@
-.columns {
-	min-width: 1030px;
+.layout-columns {
+	min-width: 1100px;
 }
 .el-container {
 	width: 100%;
 	height: 100%;
+	.aside-split {
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		width: 75px;
+		height: 100%;
+		background-color: #191a20;
+		border-right: 1px solid #ffffff;
+		.logo {
+			box-sizing: border-box;
+			height: 55px;
+			border-bottom: 1px solid #282a35;
+			img {
+				width: 33px;
+				object-fit: contain;
+			}
+		}
+		.el-scrollbar {
+			height: calc(100% - 55px);
+			.split-list {
+				flex: 1;
+				.split-item {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					height: 70px;
+					cursor: pointer;
+					transition: all 0.3s ease;
+					&:hover {
+						background-color: #292b35;
+					}
+					.el-icon {
+						font-size: 21px;
+					}
+					.title {
+						margin-top: 7px;
+						font-size: 12px;
+					}
+					.el-icon,
+					.title {
+						color: #e5eaf3;
+					}
+				}
+				.split-active {
+					background-color: $primary-color !important;
+					.el-icon,
+					.title {
+						color: #ffffff;
+					}
+				}
+			}
+		}
+	}
 	.el-aside {
 		width: auto;
 		overflow: inherit;
-		background-color: #191a20;
-		border-right: 1px solid #191a20;
+		background-color: #ffffff;
+		border-right: 1px solid #f0eded;
 		.menu {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
+			overflow: hidden;
 			transition: all 0.3s ease;
 			.el-scrollbar {
 				height: calc(100% - 55px);
@@ -24,17 +79,12 @@
 			.logo {
 				box-sizing: border-box;
 				height: 55px;
-				border-bottom: 1px solid #282a35;
+				border-bottom: 1px solid #f0eded;
 				span {
-					font-size: 22px;
+					font-size: 24px;
 					font-weight: bold;
-					color: #dadada;
+					color: var(--el-menu-text-color);
 					white-space: nowrap;
-				}
-				img {
-					width: 30px;
-					object-fit: contain;
-					margin-right: 8px;
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 <!-- 经典布局 -->
 <template>
-	<el-container class="classic">
+	<el-container class="layout-classic">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">
@@ -71,4 +71,26 @@ const isCollapse = computed(() => menuStore.isCollapse);
 
 <style scoped lang="scss">
 @import "./index.scss";
+</style>
+
+<style lang="scss">
+.classic {
+	.el-menu,
+	.el-menu--popup {
+		.el-menu-item {
+			&.is-active {
+				background: var(--el-color-primary-light-9);
+				&::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: "";
+					background: var(--el-color-primary);
+				}
+			}
+		}
+	}
+}
 </style>

@@ -1,6 +1,6 @@
 <!-- 横向布局 -->
 <template>
-	<el-container class="transverse">
+	<el-container class="layout-transverse">
 		<el-header>
 			<div class="logo flx-center">
 				<img src="@/assets/images/logo.svg" alt="logo" />
@@ -96,6 +96,25 @@ const themeConfig = computed(() => globalStore.themeConfig);
 		height: 54px !important;
 		.el-sub-menu__title {
 			height: 100%;
+		}
+	}
+}
+.transverse {
+	.el-menu,
+	.el-menu--popup {
+		.el-menu-item {
+			&.is-active {
+				background: #060708;
+				&::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: "";
+					background: var(--el-color-primary);
+				}
+			}
 		}
 	}
 }

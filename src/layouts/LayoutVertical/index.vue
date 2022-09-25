@@ -1,6 +1,6 @@
 <!-- 纵向布局 -->
 <template>
-	<el-container class="vertical">
+	<el-container class="layout-vertical">
 		<el-aside>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
 				<div class="logo flx-center">
@@ -68,4 +68,26 @@ const isCollapse = computed(() => menuStore.isCollapse);
 
 <style scoped lang="scss">
 @import "./index.scss";
+</style>
+
+<style lang="scss">
+.vertical {
+	.el-menu,
+	.el-menu--popup {
+		.el-menu-item {
+			&.is-active {
+				background: #060708;
+				&::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: "";
+					background: var(--el-color-primary);
+				}
+			}
+		}
+	}
+}
 </style>

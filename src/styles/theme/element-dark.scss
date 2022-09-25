@@ -183,6 +183,13 @@ html.dark {
 	.el-menu-item:not(.is-active):hover {
 		background-color: var(--geeker-main-bg-color) !important;
 	}
+	.aside-split {
+		background-color: var(--el-bg-color) !important;
+		border-right: var(--geeker-border-light) !important;
+		.logo {
+			border-bottom: var(--geeker-border-light) !important;
+		}
+	}
 
 	// guide
 	#driver-highlighted-element-stage {

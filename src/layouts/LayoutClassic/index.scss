@@ -1,4 +1,4 @@
-.classic {
+.layout-classic {
 	min-width: 1030px;
 	.classic-bottom {
 		height: calc(100% - 55px);
@@ -70,19 +70,9 @@
 			flex-direction: column;
 			height: 100%;
 			transition: all 0.3s ease;
-			:deep(.el-scrollbar) {
-				.el-menu {
-					overflow-x: hidden;
-					border-right: none;
-				}
-				.el-menu,
-				.el-menu--popup {
-					.el-menu-item {
-						&.is-active {
-							background-color: var(--el-color-primary-light-9);
-						}
-					}
-				}
+			.el-menu {
+				overflow-x: hidden;
+				border-right: none;
 			}
 		}
 	}
