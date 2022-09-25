@@ -56,6 +56,7 @@
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { MenuStore } from "@/store/modules/menu";
+import { TABS_WHITE_LIST } from "@/config/config";
 import Main from "@/layouts/components/Main/index.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
@@ -67,18 +68,22 @@ const menuStore = MenuStore();
 const activeMenu = computed(() => route.path);
 const menuList = computed(() => menuStore.menuList);
 const isCollapse = computed(() => menuStore.isCollapse);
+const watchData = computed(() => [menuList, route]);
 
 const subMenu = ref<Menu.MenuOptions[]>([]);
 const splitActive = ref<string>("");
 watch(
-	() => route.path,
+	() => watchData,
 	() => {
+		// 当前路由存在 tabs 白名单中 || 当前菜单没有数据直接 return
+		if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return;
 		splitActive.value = route.path;
 		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
 		if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
 		subMenu.value = [menuItem[0]];
 	},
 	{
+		deep: true,
 		immediate: true
 	}
 );
