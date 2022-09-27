@@ -4,6 +4,11 @@
 	z-index: 99999 !important;
 }
 
+// * 解决 popup 弹出时宽度会 100%-8px 问题，在浏览器缩放特定的清空下才会出现
+.el-popup-parent--hidden {
+	width: 100% !important;
+}
+
 // * card 卡片样式
 .card {
 	box-sizing: border-box;

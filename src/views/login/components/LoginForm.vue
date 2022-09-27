@@ -64,11 +64,7 @@ const login = (formEl: FormInstance | undefined) => {
 		if (!valid) return;
 		loading.value = true;
 		try {
-			const requestLoginForm: Login.ReqLoginForm = {
-				username: loginForm.username,
-				password: md5(loginForm.password)
-			};
-			const res = await loginApi(requestLoginForm);
+			const res = await loginApi({ ...loginForm, password: md5(loginForm.password) });
 			// 存储 token
 			globalStore.setToken(res.data!.access_token);
 			// 登录成功之后清除上个账号的 menulist 和 tabs 数据

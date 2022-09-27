@@ -75,5 +75,10 @@ const isCollapse = computed(() => menuStore.isCollapse);
 			}
 		}
 	}
+
+	// guide
+	#driver-highlighted-element-stage {
+		background-color: #606266 !important;
+	}
 }
 </style>

@@ -117,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, reactive, onMounted, onBeforeUnmount } from "vue";
+import { ref, Ref, onMounted, onBeforeUnmount } from "vue";
 import { HOME_URL } from "@/config/config";
 import { randomNum } from "@/utils/util";
 import { useRouter } from "vue-router";
@@ -154,7 +154,7 @@ onMounted(() => {
 interface ChartProps {
 	[key: string]: ECharts | null;
 }
-const dataScreen: ChartProps = reactive({
+const dataScreen: ChartProps = {
 	chart1: null,
 	chart2: null,
 	chart3: null,
@@ -163,7 +163,7 @@ const dataScreen: ChartProps = reactive({
 	chart6: null,
 	chart7: null,
 	mapChart: null
-});
+};
 /* 获取子组件的ref */
 interface ChartExpose {
 	initChart: (params: any) => ECharts;

@@ -85,10 +85,10 @@ const data = reactive({
 	activeName: 1,
 	bookSum: "848.132w"
 });
-const dataScreen: ChartProps = reactive({
+const dataScreen: ChartProps = {
 	chart1: null,
 	chart2: null
-});
+};
 const handleClick = (): void => {};
 let tab = [
 	{ label: "未来7日", name: 1 },

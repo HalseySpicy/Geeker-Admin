@@ -72,17 +72,17 @@ const menuList = computed(() => menuStore.menuList);
 </style>
 
 <style lang="scss">
-// 横向菜单布局
-.el-menu--horizontal {
-	.el-menu-item,
-	.el-sub-menu {
-		height: 54px !important;
-		.el-sub-menu__title {
-			height: 100%;
+.transverse {
+	// 横向菜单布局
+	.el-menu--horizontal {
+		.el-menu-item,
+		.el-sub-menu {
+			height: 54px !important;
+			.el-sub-menu__title {
+				height: 100%;
+			}
 		}
 	}
-}
-.transverse {
 	.el-menu,
 	.el-menu--popup {
 		.el-menu-item {
@@ -99,6 +99,11 @@ const menuList = computed(() => menuStore.menuList);
 				}
 			}
 		}
+	}
+
+	// guide
+	#driver-highlighted-element-stage {
+		background-color: #606266 !important;
 	}
 }
 </style>

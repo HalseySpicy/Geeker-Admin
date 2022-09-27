@@ -1,7 +1,7 @@
 <template>
 	<!-- 分页组件 -->
 	<el-pagination
-		:currentPage="pageable.pageNum"
+		:current-page="pageable.pageNum"
 		:page-size="pageable.pageSize"
 		:page-sizes="[10, 25, 50, 100]"
 		:background="true"

@@ -13,22 +13,19 @@
 </template>
 
 <script setup lang="ts" name="batchImport">
-import { exportUserInfo, BatchAddUser } from "@/api/modules/user";
-import ImportExcel from "@/components/ImportExcel/index.vue";
-import { Upload } from "@element-plus/icons-vue";
 import { ref } from "vue";
+import { exportUserInfo, BatchAddUser } from "@/api/modules/user";
+import { Upload } from "@element-plus/icons-vue";
+import ImportExcel from "@/components/ImportExcel/index.vue";
 
-interface DialogExpose {
-	acceptParams: (params: any) => void;
-}
-const importRef = ref<DialogExpose>();
+const importRef = ref();
 const batchAdd = () => {
 	let params = {
 		title: "数据",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser
 	};
-	importRef.value!.acceptParams(params);
+	importRef.value.acceptParams(params);
 };
 </script>
 
