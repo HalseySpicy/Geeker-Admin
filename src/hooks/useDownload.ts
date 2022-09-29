@@ -26,7 +26,7 @@ export const useDownload = async (
 	}
 	try {
 		const res = await api(params);
-		// 这个地方的type,经测试不传也没事，因为zip文件不知道type是什么
+		// 这个地方的 type，经测试不传也没事，因为会自动识别
 		// const blob = new Blob([res], {
 		// 	type: "application/vnd.ms-excel;charset=UTF-8"
 		// });

@@ -23,15 +23,15 @@
 			</template>
 			<!-- 用户状态 slot -->
 			<template #status="scope">
-				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法（暂时只能这样解决） -->
-				<div @click="changeStatus(scope.row)" v-if="BUTTONS.status">
-					<el-switch
-						:model-value="scope.row.status"
-						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
-						:active-value="1"
-						:inactive-value="0"
-					/>
-				</div>
+				<!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所以使用 click 方法（暂时只能这样解决） -->
+				<el-switch
+					:model-value="scope.row.status"
+					:active-text="scope.row.status === 1 ? '启用' : '禁用'"
+					:active-value="1"
+					:inactive-value="0"
+					@click="changeStatus(scope.row)"
+					v-if="BUTTONS.status"
+				/>
 				<el-tag :type="scope.row.status === 1 ? 'success' : 'danger'" v-else>
 					{{ scope.row.status === 1 ? "启用" : "禁用" }}
 				</el-tag>
