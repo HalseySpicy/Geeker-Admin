@@ -51,33 +51,20 @@
 				</div>
 				<div class="header-button-ri">
 					<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-					<el-button :icon="Printer" circle @click="printData"> </el-button>
 					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 				</div>
 			</div>
 			<el-table :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
-				<el-table-column type="selection" reserve-selection width="80" />
-				<el-table-column
-					prop="username"
-					label="用户姓名"
-					:formatter="defaultFormat"
-					show-overflow-tooltip
-					width="140"
-				></el-table-column>
-				<el-table-column prop="gender" label="性别" show-overflow-tooltip width="140" v-slot="scope">
+				<el-table-column type="selection" reserve-selection align="center" width="80" />
+				<el-table-column prop="username" label="用户姓名" align="center" width="120"></el-table-column>
+				<el-table-column prop="gender" label="性别" align="center" width="120" v-slot="scope">
 					{{ scope.row.gender == 1 ? "男" : "女" }}
 				</el-table-column>
-				<el-table-column prop="idCard" label="身份证号" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
-				<el-table-column prop="email" label="邮箱" :formatter="defaultFormat" show-overflow-tooltip width="240"></el-table-column>
-				<el-table-column prop="address" label="居住地址" :formatter="defaultFormat" show-overflow-tooltip></el-table-column>
-				<el-table-column
-					prop="createTime"
-					label="创建时间"
-					:formatter="defaultFormat"
-					show-overflow-tooltip
-					width="200"
-				></el-table-column>
-				<el-table-column prop="status" label="用户状态" width="180" v-slot="scope">
+				<el-table-column prop="idCard" label="身份证号" show-overflow-tooltip align="center"></el-table-column>
+				<el-table-column prop="email" label="邮箱" show-overflow-tooltip align="center"></el-table-column>
+				<el-table-column prop="address" label="居住地址" show-overflow-tooltip align="center"></el-table-column>
+				<el-table-column prop="createTime" label="创建时间" show-overflow-tooltip align="center"></el-table-column>
+				<el-table-column prop="status" label="用户状态" width="180" align="center" v-slot="scope">
 					<el-switch
 						:model-value="scope.row.status"
 						:active-text="scope.row.status === 1 ? '启用' : '禁用'"
@@ -90,7 +77,7 @@
 						{{ scope.row.status === 1 ? "启用" : "禁用" }}
 					</el-tag>
 				</el-table-column>
-				<el-table-column label="操作" fixed="right" width="330" v-slot="scope">
+				<el-table-column label="操作" fixed="right" width="330" align="center" v-slot="scope">
 					<el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)" v-if="BUTTONS.view">查看</el-button>
 					<el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)" v-if="BUTTONS.edit"
 						>编辑</el-button
@@ -125,14 +112,12 @@
 <script setup lang="ts" name="useHooks">
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
-import { defaultFormat } from "@/utils/util";
 import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useSelection } from "@/hooks/useSelection";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
 import { useTable } from "@/hooks/useTable";
-import { ElMessage } from "element-plus";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import {
@@ -140,7 +125,6 @@ import {
 	CirclePlus,
 	Delete,
 	Search,
-	Printer,
 	EditPen,
 	Download,
 	Upload,
@@ -210,11 +194,6 @@ const batchDelete = async () => {
 // 导出用户列表
 const downloadFile = async () => {
 	useDownload(exportUserInfo, "用户列表", searchParam.value);
-};
-
-// 打印表格数据
-const printData = () => {
-	ElMessage.success("打印表格数据 🌈");
 };
 
 // 批量添加用户

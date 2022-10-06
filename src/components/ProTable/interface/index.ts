@@ -22,6 +22,8 @@ export type TypeProp = "index" | "selection" | "expand";
 
 export type FixedProp = "left" | "right";
 
+export type AlignProp = "left" | "center" | "right";
+
 export interface ColumnProps {
 	type: TypeProp; // index | selection | expand（特殊类型）
 	prop: string; // 单元格数据（非特殊类型必填）
@@ -31,6 +33,7 @@ export interface ColumnProps {
 	isShow: boolean; // 是否显示在表格当中
 	sortable: boolean; // 是否可排序（静态排序）
 	fixed: FixedProp; // 固定列
+	align: AlignProp; // 表格列对齐方式（默认为 center）
 	tag: boolean; // 是否是标签展示
 	search: boolean; // 是否为搜索项
 	searchType: SearchType; // 搜索项类型

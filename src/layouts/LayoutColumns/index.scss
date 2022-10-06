@@ -8,7 +8,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
-		width: 75px;
+		width: 72px;
 		height: 100%;
 		background-color: #191a20;
 		border-right: 1px solid #ffffff;
@@ -17,7 +17,7 @@
 			height: 55px;
 			border-bottom: 1px solid #282a35;
 			img {
-				width: 33px;
+				width: 32px;
 				object-fit: contain;
 			}
 		}
@@ -30,7 +30,7 @@
 					flex-direction: column;
 					align-items: center;
 					justify-content: center;
-					height: 70px;
+					height: 71px;
 					cursor: pointer;
 					transition: all 0.3s ease;
 					&:hover {
@@ -42,6 +42,7 @@
 					.title {
 						margin-top: 6px;
 						font-size: 12px;
+						transform: scale(0.97);
 					}
 					.el-icon,
 					.title {

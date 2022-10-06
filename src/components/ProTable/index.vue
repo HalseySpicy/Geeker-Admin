@@ -37,6 +37,7 @@
 					:width="item.width"
 					:min-width="item.minWidth"
 					:fixed="item.fixed"
+					:align="item.align ?? 'center'"
 				>
 				</el-table-column>
 				<!-- expand（展开自定义详细信息，请使用作用域插槽） -->
@@ -47,6 +48,7 @@
 					:width="item.width"
 					:min-width="item.minWidth"
 					:fixed="item.fixed"
+					:align="item.align ?? 'center'"
 					v-slot="scope"
 				>
 					<slot :name="item.type" :row="scope.row"></slot>
@@ -62,6 +64,7 @@
 					:show-overflow-tooltip="item.prop !== 'operation'"
 					:resizable="true"
 					:fixed="item.fixed"
+					:align="item.align ?? 'center'"
 				>
 					<!-- 自定义 header (使用组件渲染 tsx 语法) -->
 					<template #header v-if="item.renderHeader">
@@ -114,13 +117,13 @@
 import { ref, watch } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
-import { ElMessage } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { filterEnum, formatValue } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
+import printJS from "print-js";
 
 // 表格 DOM 元素
 const tableRef = ref();
@@ -213,7 +216,20 @@ const openColSetting = () => {
 
 // 打印表格数据
 const printData = () => {
-	ElMessage.success("打印表格数据 🌈");
+	printJS({
+		printable: tableData.value,
+		header: `<div style="display: flex;flex-direction: column;text-align: center"><h2>用户列表</h2></div>`,
+		properties: colSetting.map((item: Partial<ColumnProps>) => {
+			return {
+				field: item.prop,
+				displayName: item.label
+			};
+		}),
+		type: "json",
+		gridHeaderStyle:
+			"border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
+		gridStyle: "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center"
+	});
 };
 
 // 暴露给父组件的参数和方法
