@@ -8,7 +8,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
-		width: 72px;
+		width: 70px;
 		height: 100%;
 		background-color: #191a20;
 		border-right: 1px solid #ffffff;
@@ -30,7 +30,7 @@
 					flex-direction: column;
 					align-items: center;
 					justify-content: center;
-					height: 71px;
+					height: 70px;
 					cursor: pointer;
 					transition: all 0.3s ease;
 					&:hover {
@@ -42,7 +42,7 @@
 					.title {
 						margin-top: 6px;
 						font-size: 12px;
-						transform: scale(0.97);
+						transform: scale(0.96);
 					}
 					.el-icon,
 					.title {
@@ -60,35 +60,34 @@
 		}
 	}
 	.el-aside {
-		width: auto;
-		overflow: inherit;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow: hidden;
 		background-color: #ffffff;
 		border-right: 1px solid #f0eded;
-		.menu {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			overflow: hidden;
-			transition: all 0.3s ease;
-			.el-scrollbar {
-				height: calc(100% - 55px);
-				.el-menu {
-					overflow-x: hidden;
-					border-right: none;
-				}
-			}
-			.logo {
-				box-sizing: border-box;
-				height: 55px;
-				border-bottom: 1px solid #f0eded;
-				span {
-					font-size: 24px;
-					font-weight: bold;
-					color: var(--el-menu-text-color);
-					white-space: nowrap;
-				}
+		transition: all 0.3s ease;
+		.el-scrollbar {
+			height: calc(100% - 55px);
+			.el-menu {
+				overflow-x: hidden;
+				border-right: none;
 			}
 		}
+		.logo {
+			box-sizing: border-box;
+			height: 55px;
+			border-bottom: 1px solid #f0eded;
+			span {
+				font-size: 24px;
+				font-weight: bold;
+				color: var(--el-menu-text-color);
+				white-space: nowrap;
+			}
+		}
+	}
+	.not-aside {
+		width: 0 !important;
 	}
 	.el-header {
 		box-sizing: border-box;
@@ -98,7 +97,7 @@
 		height: 55px;
 		padding: 0 15px;
 		background-color: #ffffff;
-		border-bottom: 1px solid #f6f6f6;
+		border-bottom: 1px solid #f1f1f1;
 		:deep(.tool-bar-ri) {
 			.toolBar-icon,
 			.username {

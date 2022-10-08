@@ -22,24 +22,22 @@
 				</div>
 			</el-scrollbar>
 		</div>
-		<el-aside>
-			<div class="menu" :style="{ width: isCollapse ? '65px' : '200px' }">
-				<div class="logo flx-center">
-					<span>{{ isCollapse ? "G" : "Geeker Admin" }}</span>
-				</div>
-				<el-scrollbar>
-					<el-menu
-						:default-active="activeMenu"
-						:router="false"
-						:collapse="isCollapse"
-						:collapse-transition="false"
-						:unique-opened="true"
-						background-color="#ffffff"
-					>
-						<SubMenu :menuList="subMenu" />
-					</el-menu>
-				</el-scrollbar>
+		<el-aside :class="{ 'not-aside': !subMenu.length }" :style="{ width: isCollapse ? '65px' : '220px' }">
+			<div class="logo flx-center">
+				<span v-show="subMenu.length">{{ isCollapse ? "G" : "Geeker Admin" }}</span>
 			</div>
+			<el-scrollbar>
+				<el-menu
+					:default-active="activeMenu"
+					:router="false"
+					:collapse="isCollapse"
+					:collapse-transition="false"
+					:unique-opened="true"
+					background-color="#ffffff"
+				>
+					<SubMenu :menuList="subMenu" />
+				</el-menu>
+			</el-scrollbar>
 		</el-aside>
 		<el-container>
 			<el-header>
@@ -79,7 +77,7 @@ watch(
 		splitActive.value = route.path;
 		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
 		if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
-		subMenu.value = [menuItem[0]];
+		subMenu.value = [];
 	},
 	{
 		deep: true,
@@ -90,7 +88,7 @@ watch(
 const changeSubMenu = (item: Menu.MenuOptions) => {
 	splitActive.value = item.path;
 	if (item.children?.length) return (subMenu.value = item.children);
-	subMenu.value = [item];
+	subMenu.value = [];
 	router.push({ path: item.path });
 };
 </script>

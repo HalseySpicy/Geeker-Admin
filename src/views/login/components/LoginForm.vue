@@ -27,7 +27,6 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
-import type { ElForm } from "element-plus";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
@@ -35,6 +34,8 @@ import { GlobalStore } from "@/store";
 import { MenuStore } from "@/store/modules/menu";
 import { TabsStore } from "@/store/modules/tabs";
 import { getTimeState } from "@/utils/util";
+import { HOME_URL } from "@/config/config";
+import type { ElForm } from "element-plus";
 import md5 from "js-md5";
 
 const globalStore = GlobalStore();
@@ -70,7 +71,7 @@ const login = (formEl: FormInstance | undefined) => {
 			// 登录成功之后清除上个账号的 menulist 和 tabs 数据
 			menuStore.setMenuList([]);
 			tabStore.closeMultipleTab();
-			router.push({ name: "home" });
+			router.push(HOME_URL);
 			ElNotification({
 				title: getTimeState(),
 				message: "欢迎登录 Geeker-Admin",

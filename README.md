@@ -1,10 +1,10 @@
-# Vue 3.2 + TypeScript + Pinia + Vite2 + Element-Plus 管理系统（开源啦 🎉🎉）
+# Vue 3.2 + TypeScript + Pinia + Vite3 + Element-Plus 管理系统（开源啦 🎉🎉）
 
 ![banner](https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/md/banner.png)
 
 ### 前言 📖
 
-Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发 🕒🕒。项目中很多样式都是借鉴其它的管理系统，但代码是完全自己编写的，整个项目还有很多地方不完善，后期会持续更新（项目文档），希望大家能多提意见。
+Geeker Admin，基于 Vue3.2、TypeScript、Vite3、Pinia、Element-Plus 开源的一套后台管理模板，目前利用空余时间开发 🕒🕒。项目中很多样式都是借鉴其它的管理系统，但代码是完全自己编写的，整个项目还有很多地方不完善，后期会持续更新（项目文档），希望大家能多提意见。
 
 ### ？为什么开发这个管理系统 🤷‍♂️
 
@@ -34,7 +34,7 @@ Geeker Admin，基于 Vue3.2、TypeScript、Vite2、Pinia、Element-Plus 开源�
 ### 四、🔨🔨🔨 项目功能
 
 - 🚀 使用 Vue3.2 开发，单文件组件 `＜script setup＞`
-- 🚀 采用 Vite2 作为项目开发、打包工具（配置了 Gzip 打包、TSX 语法、跨域代理、打包预览工具……）
+- 🚀 采用 Vite3 作为项目开发、打包工具（配置了 Gzip 打包、TSX 语法、跨域代理、打包预览工具……）
 - 🚀 整个项目集成了 TypeScript （完全是为了想学习 🤣）
 - 🚀 使用 Pinia🍍 替代 Vuex，轻量、简单、易用（香啊~🤤 集成了持久化插件）
 - 🚀 使用 TypeScript 对 Axios 整个二次封装 （全局错误拦截、常用请求封装、全局请求 Loading、取消重复请求……）
@@ -68,7 +68,7 @@ cnpm install
 npm install --registry=https://registry.npm.taobao.org
 
 # 这里只是为了指定依赖包版本，防止没有版本锁 lock 而安装最新依赖包，导致的项目报错
-npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 @wangeditor/editor@5.1.12 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.17 js-md5@0.7.3 mitt@3.0.0 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.11.0 vue@3.2.25 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 vuedraggable@4.1.0 --save
+npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 @wangeditor/editor@5.1.12 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.17 js-md5@0.7.3 mitt@3.0.0 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.11.0 vue@3.2.37 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 vuedraggable@4.1.0 --save
 ```
 
 - **Run：**

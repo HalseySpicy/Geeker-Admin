@@ -18,17 +18,18 @@
 		"jsx": "preserve",
 		"sourceMap": true,
 		"resolveJsonModule": true,
+		"isolatedModules": true,
 		"esModuleInterop": true,
+		// 跳过第三方库检查，解决打包失败
+		"skipLibCheck": true,
 		"lib": ["esnext", "dom"],
 		// 解析非相对模块名的基准目录
 		"baseUrl": "./",
-		// 模块名到基于 baseUrl的路径映射的列表。
+		// 模块名到基于 baseUrl 的路径映射的列表。
 		"paths": {
 			"@": ["src"],
 			"@/*": ["src/*"]
-		},
-		// 跳过库检查，解决打包失败
-		"skipLibCheck": true
+		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "vite.config.ts"],
 	"exclude": ["node_modules", "dist", "**/*.js"]

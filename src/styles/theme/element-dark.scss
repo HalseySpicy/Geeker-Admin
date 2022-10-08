@@ -142,6 +142,9 @@ html.dark {
 				border-bottom: var(--geeker-border-light) !important;
 			}
 		}
+		.not-aside {
+			border-right: none !important;
+		}
 		.el-header {
 			background-color: var(--el-bg-color) !important;
 			border-bottom-color: var(--el-border-color-light) !important;

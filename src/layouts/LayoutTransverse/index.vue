@@ -87,6 +87,7 @@ const menuList = computed(() => menuStore.menuList);
 	.el-menu--popup {
 		.el-menu-item {
 			&.is-active {
+				color: #ffffff;
 				background: #060708;
 				&::before {
 					position: absolute;

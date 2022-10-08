@@ -1,16 +1,15 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
 // * 导入所有router
-const metaRouters = import.meta.globEager("./modules/*.ts");
+const metaRouters = import.meta.glob("./modules/*.ts", { eager: true });
 
 // * 处理路由表
 export const routerArray: RouteRecordRaw[] = [];
 Object.keys(metaRouters).forEach(item => {
-	Object.keys(metaRouters[item]).forEach((key: any) => {
-		routerArray.push(...metaRouters[item][key]);
+	Object.keys(metaRouters[item] as object).forEach(key => {
+		routerArray.push(...(metaRouters[item] as any)[key]);
 	});
 });
-
 /**
  * @description 路由配置简介（💢没有使用动态路由，路由全部配置在本地，需要使用动态路由请自行改造）
  * @param path ==> 路由路径

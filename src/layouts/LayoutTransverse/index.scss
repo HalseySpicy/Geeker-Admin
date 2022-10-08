@@ -12,7 +12,7 @@
 		height: 55px;
 		padding: 0 15px 0 0;
 		background-color: #191a20;
-		border-bottom: 1px solid #f6f6f6;
+		border-bottom: 1px solid #f1f1f1;
 		.logo {
 			width: 220px;
 			margin-right: 30px;
@@ -39,6 +39,9 @@
 					color: #ffffff !important;
 					background-color: var(--el-color-primary) !important;
 					border-bottom-color: var(--el-color-primary) !important;
+				}
+				&:hover {
+					color: #ffffff !important;
 				}
 			}
 		}

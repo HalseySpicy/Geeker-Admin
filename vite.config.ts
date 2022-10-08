@@ -20,7 +20,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 	const viteEnv = wrapperEnv(env);
 
 	return {
-		// base: "/",
+		base: "./",
 		resolve: {
 			alias: {
 				"@": resolve(__dirname, "./src"),
@@ -121,6 +121,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			// 		drop_debugger: true
 			// 	}
 			// },
+			chunkSizeWarningLimit: 1500,
 			rollupOptions: {
 				output: {
 					// Static resource classification and packaging
