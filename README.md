@@ -209,7 +209,7 @@ Geeker-Admin
 
 |                                            微信二维码                                             |
 | :-----------------------------------------------------------------------------------------------: |
-| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220929144759.png" width=170> |
+| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20221008220726.png" width=170> |
 
 ### 十一、捐赠 🍵
 
