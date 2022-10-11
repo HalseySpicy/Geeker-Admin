@@ -21,18 +21,33 @@ const copy: Directive = {
 		el.removeEventListener("click", el.__handleClick__);
 	}
 };
-
-function handleClick(this: any) {
+function normalCopy(copyData: string) {
 	const input = document.createElement("input");
-	input.value = this.copyData.toLocaleString();
+	input.value = copyData;
 	document.body.appendChild(input);
 	input.select();
 	document.execCommand("Copy");
 	document.body.removeChild(input);
+	copySuccess();
+}
+function copySuccess() {
 	ElMessage({
 		type: "success",
 		message: "复制成功"
 	});
+}
+function handleClick(this: any) {
+	const copyData = this.copyData.toLocaleString();
+	if (window.navigator.clipboard) {
+		window.navigator.clipboard
+			.writeText(copyData)
+			.then(copySuccess)
+			.catch(() => {
+				normalCopy(copyData);
+			});
+	} else {
+		normalCopy(copyData);
+	}
 }
 
 export default copy;
