@@ -1,6 +1,6 @@
 import { computed, onBeforeMount } from "vue";
 import { getLightColor, getDarkColor } from "@/utils/theme/tool";
-import { GlobalStore } from "@/store";
+import { GlobalStore } from "@/stores";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import { ElMessage } from "element-plus";
 

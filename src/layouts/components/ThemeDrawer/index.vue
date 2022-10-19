@@ -86,15 +86,23 @@
 		</el-divider>
 		<div class="theme-item">
 			<span>折叠菜单</span>
-			<el-switch v-model="isCollapse" />
+			<el-switch v-model="themeConfig.isCollapse" />
 		</div>
 		<div class="theme-item">
-			<span>面包屑导航</span>
+			<span>面包屑</span>
 			<el-switch v-model="themeConfig.breadcrumb" />
+		</div>
+		<div class="theme-item">
+			<span>面包屑图标</span>
+			<el-switch v-model="themeConfig.breadcrumbIcon" />
 		</div>
 		<div class="theme-item">
 			<span>标签栏</span>
 			<el-switch v-model="themeConfig.tabs" />
+		</div>
+		<div class="theme-item">
+			<span>标签栏图标</span>
+			<el-switch v-model="themeConfig.tabsIcon" />
 		</div>
 		<div class="theme-item">
 			<span>页脚</span>
@@ -106,8 +114,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { useTheme } from "@/hooks/useTheme";
-import { MenuStore } from "@/store/modules/menu";
-import { GlobalStore } from "@/store";
+import { GlobalStore } from "@/stores";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 import mittBus from "@/utils/mittBus";
@@ -128,17 +135,6 @@ const colorList = [
 	"#9b59b6"
 ];
 
-// 侧边栏折叠
-const menuStore = MenuStore();
-const isCollapse = computed({
-	get() {
-		return menuStore.isCollapse;
-	},
-	set() {
-		menuStore.setCollapse();
-	}
-});
-
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 
@@ -147,15 +143,14 @@ const changeLayout = (val: string) => {
 	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
 };
 
+// 监听布局变化，在 body 上添加相对应的 layout class
 watch(
 	() => themeConfig.value.layout,
 	() => {
 		const body = document.body as HTMLElement;
 		body.setAttribute("class", themeConfig.value.layout);
 	},
-	{
-		immediate: true
-	}
+	{ immediate: true }
 );
 
 // 打开主题设置

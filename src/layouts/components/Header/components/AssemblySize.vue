@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import { GlobalStore } from "@/store";
+import { GlobalStore } from "@/stores";
 
 const globalStore = GlobalStore();
 const assemblySize = computed((): string => globalStore.assemblySize);

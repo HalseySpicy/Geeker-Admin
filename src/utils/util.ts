@@ -42,28 +42,6 @@ export function localClear() {
 }
 
 /**
- * @description 对象数组深克隆
- * @param {Object} obj 源对象
- * @return object
- */
-export function deepCopy<T>(obj: any): T {
-	let newObj: any;
-	try {
-		newObj = obj.push ? [] : {};
-	} catch (error) {
-		newObj = {};
-	}
-	for (let attr in obj) {
-		if (typeof obj[attr] === "object") {
-			newObj[attr] = deepCopy(obj[attr]);
-		} else {
-			newObj[attr] = obj[attr];
-		}
-	}
-	return newObj;
-}
-
-/**
  * @description 判断数据类型
  * @param {Any} val 需要判断类型的数据
  * @return string
@@ -72,6 +50,31 @@ export function isType(val: any) {
 	if (val === null) return "null";
 	if (typeof val !== "object") return typeof val;
 	else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+}
+
+/**
+ * 判断两个对象是否相同
+ * @param a 要比较的对象一
+ * @param b 要比较的对象二
+ * @returns 相同返回 true，反之则反
+ */
+export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]: any }) {
+	if (!a || !b) return false;
+	let aProps = Object.getOwnPropertyNames(a);
+	let bProps = Object.getOwnPropertyNames(b);
+	if (aProps.length != bProps.length) return false;
+	for (let i = 0; i < aProps.length; i++) {
+		let propName = aProps[i];
+		let propA = a[propName];
+		let propB = b[propName];
+		if (!b.hasOwnProperty(propName)) return false;
+		if (propA instanceof Object) {
+			if (!isObjectValueEqual(propA, propB)) return false;
+		} else if (propA !== propB) {
+			return false;
+		}
+	}
+	return true;
 }
 
 /**
@@ -119,41 +122,29 @@ export function getBrowserLang() {
 
 /**
  * @description 递归查询当前路由所对应的路由
- * @param {Array} menuList 菜单列表
- * @param {String} path 当前地址
+ * @param {Array} menuList 所有菜单列表
+ * @param {String} path 当前访问地址
  * @return array
  */
-export function getTabPane<T, U>(menuList: any[], path: U): T {
-	let result: any;
-	for (let item of menuList || []) {
-		if (item.path === path) result = item;
-		const res = getTabPane(item.children, path);
-		if (res) result = res;
+export function filterCurrentRoute(menuList: Menu.MenuOptions[], path: string) {
+	let result = {};
+	for (let item of menuList) {
+		if (item.path === path) return item;
+		if (item.children) {
+			const res = filterCurrentRoute(item.children, path);
+			if (Object.keys(res).length) result = res;
+		}
 	}
 	return result;
 }
 
 /**
- * @description 使用递归处理路由菜单，生成一维数组
+ * @description 扁平化数组对象(主要用来处理路由菜单)
  * @param {Array} menuList 所有菜单列表
- * @param {Array} newArr 菜单的一维数组
  * @return array
  */
-export function handleRouter(routerList: Menu.MenuOptions[], newArr: string[] = []) {
-	routerList.forEach((item: Menu.MenuOptions) => {
-		typeof item === "object" && item.path && newArr.push(item.path);
-		item.children && item.children.length && handleRouter(item.children, newArr);
-	});
-	return newArr;
-}
-
-/**
- * @description 扁平化数组对象
- * @param {Array} arr 数组对象
- * @return array
- */
-export function getFlatArr(arr: any) {
-	return arr.reduce((pre: any, current: any) => {
+export function getFlatArr(menulist: Menu.MenuOptions[]) {
+	return menulist.reduce((pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
 		let flatArr = [...pre, current];
 		if (current.children) flatArr = [...flatArr, ...getFlatArr(current.children)];
 		return flatArr;
@@ -161,7 +152,84 @@ export function getFlatArr(arr: any) {
 }
 
 /**
- * @description 格式化表格单元格默认值
+ * @description 使用递归，过滤需要缓存的路由
+ * @param {Array} menuList 所有菜单列表
+ * @param {Array} cacheArr 缓存的路由菜单 name ['**','**']
+ * @return array
+ * */
+export function getKeepAliveRouterPath(menuList: Menu.MenuOptions[], keepAliveArr: string[] = []) {
+	menuList.forEach(item => {
+		item.meta.isKeepAlive && item.name && keepAliveArr.push(item.name);
+		item.children?.length && getKeepAliveRouterPath(item.children, keepAliveArr);
+	});
+	return keepAliveArr;
+}
+
+/**
+ * @description 使用递归，过滤出需要渲染在左侧菜单的列表（剔除 isHide == true 的菜单）
+ * @param {Array} menuList 所有菜单列表
+ * @return array
+ * */
+export function getShowMenuList(menuList: Menu.MenuOptions[]) {
+	menuList = menuList.filter(item => {
+		item.children?.length && (item.children = getShowMenuList(item.children));
+		return !item.meta?.isHide;
+	});
+	return menuList;
+}
+
+/**
+ * @description 使用递归处理路由菜单 path，生成一维数组(第一版本地路由鉴权会用到)
+ * @param {Array} menuList 所有菜单列表
+ * @param {Array} menuPathArr 菜单地址的一维数组 ['**','**']
+ * @return array
+ */
+export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: string[] = []) {
+	menuList.forEach((item: Menu.MenuOptions) => {
+		typeof item === "object" && item.path && menuPathArr.push(item.path);
+		item.children?.length && getMenuListPath(item.children, menuPathArr);
+	});
+	return menuPathArr;
+}
+
+/**
+ * @description 使用递归，过滤出当前路径匹配的面包屑地址
+ * @param {String} path 当前访问地址
+ * @param {Array} menuList 所有菜单列表
+ * @returns array
+ */
+export function getCurrentBreadcrumb(path: string, menuList: Menu.MenuOptions[]) {
+	let tempPath: Menu.MenuOptions[] = [];
+	try {
+		const getNodePath = (node: Menu.MenuOptions) => {
+			tempPath.push(node);
+			if (node.path === path) throw new Error("Find IT!");
+			if (node.children?.length) node.children.forEach(item => getNodePath(item));
+			tempPath.pop();
+		};
+		menuList.forEach(item => getNodePath(item));
+	} catch (e) {
+		return tempPath;
+	}
+}
+
+/**
+ * @description 双重递归找出所有面包屑存储到 pinia/vuex 中
+ * @param {Array} menuList 所有菜单列表
+ * @returns array
+ */
+export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
+	let handleBreadcrumbList: { [key: string]: any } = {};
+	const loop = (menuItem: Menu.MenuOptions) => {
+		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
+		else handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
+	};
+	menuList.forEach(item => loop(item));
+	return handleBreadcrumbList;
+}
+
+/**
+ * @description 格式化表格单元格默认值(el-table-column)
  * @param {Number} row 行
  * @param {Number} col 列
  * @param {String} callValue 当前单元格值

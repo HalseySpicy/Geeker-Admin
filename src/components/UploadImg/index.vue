@@ -77,7 +77,7 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	formData.append("file", options.file);
 	try {
 		const { data } = await uploadImg(formData);
-		emit("update:imageUrl", data!.fileUrl);
+		emit("update:imageUrl", data.fileUrl);
 		emit("check-validate");
 	} catch (error) {
 		options.onError(error as any);

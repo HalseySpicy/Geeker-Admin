@@ -9,14 +9,17 @@
 				<el-dropdown-item @click="refresh">
 					<el-icon><Refresh /></el-icon>{{ $t("tabs.refresh") }}
 				</el-dropdown-item>
-				<el-dropdown-item @click="closeCurrentTab">
+				<el-dropdown-item @click="maximize">
+					<el-icon><FullScreen /></el-icon>{{ $t("tabs.maximize") }}
+				</el-dropdown-item>
+				<el-dropdown-item divided @click="closeCurrentTab">
 					<el-icon><Remove /></el-icon>{{ $t("tabs.closeCurrent") }}
 				</el-dropdown-item>
 				<el-dropdown-item @click="closeOtherTab">
 					<el-icon><CircleClose /></el-icon>{{ $t("tabs.closeOther") }}
 				</el-dropdown-item>
 				<el-dropdown-item @click="closeAllTab">
-					<el-icon><Delete /></el-icon>{{ $t("tabs.closeAll") }}
+					<el-icon><FolderDelete /></el-icon>{{ $t("tabs.closeAll") }}
 				</el-dropdown-item>
 			</el-dropdown-menu>
 		</template>
@@ -24,12 +27,18 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from "vue";
-import { TabsStore } from "@/store/modules/tabs";
-import { HOME_URL } from "@/config/config";
+import { computed, inject } from "vue";
 import { ElMessage } from "element-plus";
+import { HOME_URL } from "@/config/config";
+import { GlobalStore } from "@/stores";
+import { TabsStore } from "@/stores/modules/tabs";
+import { useRoute, useRouter } from "vue-router";
 
+const route = useRoute();
+const router = useRouter();
 const tabStore = TabsStore();
+const globalStore = GlobalStore();
+const themeConfig = computed(() => globalStore.themeConfig);
 const reload: Function = inject("refresh") as Function;
 
 // refresh current page
@@ -38,21 +47,26 @@ const refresh = () => {
 	reload();
 };
 
+// maximize current page
+const maximize = () => {
+	globalStore.setThemeConfig({ ...themeConfig.value, maximize: true });
+};
+
 // Close Current
 const closeCurrentTab = () => {
-	if (tabStore.tabsMenuValue === HOME_URL) return;
-	tabStore.removeTabs(tabStore.tabsMenuValue);
+	if (route.meta.isAffix) return;
+	tabStore.removeTabs(route.path);
 };
 
 // Close Other
 const closeOtherTab = () => {
-	tabStore.closeMultipleTab(tabStore.tabsMenuValue);
+	tabStore.closeMultipleTab(route.path);
 };
 
 // Close All
 const closeAllTab = () => {
 	tabStore.closeMultipleTab();
-	tabStore.goHome();
+	router.push(HOME_URL);
 };
 </script>
 

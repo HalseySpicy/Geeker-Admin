@@ -2,7 +2,7 @@
 	<div ref="echartsRef" class="card content-box"></div>
 </template>
 
-<script setup lang="ts" name="columnChart">
+<script setup lang="ts" name="nestedChart">
 import { ref, onMounted } from "vue";
 import * as echarts from "echarts";
 import { useEcharts } from "@/hooks/useEcharts";

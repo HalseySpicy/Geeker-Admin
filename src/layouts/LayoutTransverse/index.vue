@@ -17,25 +17,21 @@
 			>
 				<!-- 只有在这里写 submenu 才能触发 menu 三个点省略 -->
 				<template v-for="subItem in menuList" :key="subItem.path">
-					<el-sub-menu
-						v-if="subItem.children && subItem.children.length > 0"
-						:index="subItem.path"
-						:key="subItem.path + 'el-sub-menu'"
-					>
+					<el-sub-menu v-if="subItem.children?.length" :index="subItem.path" :key="subItem.path + 'el-sub-menu'">
 						<template #title>
 							<el-icon>
-								<component :is="subItem.icon"></component>
+								<component :is="subItem.meta.icon"></component>
 							</el-icon>
-							<span>{{ subItem.title }}</span>
+							<span>{{ subItem.meta.title }}</span>
 						</template>
 						<SubMenu :menuList="subItem.children" />
 					</el-sub-menu>
 					<el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
 						<el-icon>
-							<component :is="subItem.icon"></component>
+							<component :is="subItem.meta.icon"></component>
 						</el-icon>
 						<template #title>
-							<span>{{ subItem.title }}</span>
+							<span>{{ subItem.meta.title }}</span>
 						</template>
 					</el-menu-item>
 				</template>
@@ -48,23 +44,22 @@
 
 <script setup lang="ts" name="layoutTransverse">
 import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { MenuStore } from "@/store/modules/menu";
-import { useRouter } from "vue-router";
+import { AuthStore } from "@/stores/modules/auth";
+import { useRoute, useRouter } from "vue-router";
 import Main from "@/layouts/components/Main/index.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 
+const route = useRoute();
 const router = useRouter();
+const authStore = AuthStore();
+const activeMenu = computed(() => route.path);
+const menuList = computed(() => authStore.showMenuListGet);
+
 const handleClickMenu = (subItem: Menu.MenuOptions) => {
-	if (subItem.isLink) window.open(subItem.isLink, "_blank");
+	if (subItem.meta.isLink) window.open(subItem.meta.isLink, "_blank");
 	router.push(subItem.path);
 };
-
-const route = useRoute();
-const menuStore = MenuStore();
-const activeMenu = computed(() => route.path);
-const menuList = computed(() => menuStore.menuList);
 </script>
 
 <style scoped lang="scss">

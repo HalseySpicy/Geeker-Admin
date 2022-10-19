@@ -2,11 +2,12 @@
 	<div ref="echartsRef" class="card content-box"></div>
 </template>
 
-<script setup lang="ts" name="columnChart">
+<script setup lang="ts" name="lineChart">
 import { ref, onMounted } from "vue";
 import * as echarts from "echarts";
 import { useEcharts } from "@/hooks/useEcharts";
 const echartsRef = ref<HTMLElement>();
+
 onMounted(() => {
 	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
 	let option: echarts.EChartsOption = {

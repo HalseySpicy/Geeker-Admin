@@ -13,7 +13,7 @@
 		</el-header>
 		<el-container class="classic-bottom">
 			<el-aside>
-				<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }">
+				<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
 					<el-scrollbar>
 						<el-menu
 							:default-active="activeMenu"
@@ -39,17 +39,19 @@
 <script setup lang="ts" name="layoutClassic">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { MenuStore } from "@/store/modules/menu";
+import { GlobalStore } from "@/stores";
+import { AuthStore } from "@/stores/modules/auth";
 import Main from "@/layouts/components/Main/index.vue";
+import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
-import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 
 const route = useRoute();
-const menuStore = MenuStore();
+const authStore = AuthStore();
+const globalStore = GlobalStore();
 const activeMenu = computed(() => route.path);
-const menuList = computed(() => menuStore.menuList);
-const isCollapse = computed(() => menuStore.isCollapse);
+const menuList = computed(() => authStore.showMenuListGet);
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 </script>
 
 <style scoped lang="scss">

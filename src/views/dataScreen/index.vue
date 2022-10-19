@@ -412,7 +412,7 @@ timer = setInterval(() => {
 
 /* 跳转home */
 const router = useRouter();
-const handleTo = (): void => {
+const handleTo = () => {
 	router.push(HOME_URL);
 };
 

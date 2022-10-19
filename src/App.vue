@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-import { GlobalStore } from "@/store";
+import { GlobalStore } from "@/stores";
 import { useTheme } from "@/hooks/useTheme";
 import { getBrowserLang } from "@/utils/util";
 import zhCn from "element-plus/es/locale/lang/zh-cn";

@@ -25,11 +25,12 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { GlobalStore } from "@/stores";
+import { LOGIN_URL } from "@/config/config";
+import { ElMessageBox, ElMessage } from "element-plus";
 import InfoDialog from "./InfoDialog.vue";
 import PasswordDialog from "./PasswordDialog.vue";
-import { ElMessageBox, ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
-import { GlobalStore } from "@/store";
 
 const router = useRouter();
 const globalStore = GlobalStore();
@@ -41,7 +42,7 @@ const logout = () => {
 		cancelButtonText: "取消",
 		type: "warning"
 	}).then(() => {
-		router.push({ name: "login" });
+		router.replace(LOGIN_URL);
 		globalStore.setToken("");
 		ElMessage({
 			type: "success",

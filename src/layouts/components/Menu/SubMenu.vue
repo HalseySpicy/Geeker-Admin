@@ -3,18 +3,18 @@
 		<el-sub-menu v-if="subItem.children && subItem.children.length > 0" :index="subItem.path">
 			<template #title>
 				<el-icon>
-					<component :is="subItem.icon"></component>
+					<component :is="subItem.meta.icon"></component>
 				</el-icon>
-				<span>{{ subItem.title }}</span>
+				<span>{{ subItem.meta.title }}</span>
 			</template>
 			<SubMenu :menuList="subItem.children" />
 		</el-sub-menu>
 		<el-menu-item v-else :index="subItem.path" @click="handleClickMenu(subItem)">
 			<el-icon>
-				<component :is="subItem.icon"></component>
+				<component :is="subItem.meta.icon"></component>
 			</el-icon>
 			<template #title>
-				<span>{{ subItem.title }}</span>
+				<span>{{ subItem.meta.title }}</span>
 			</template>
 		</el-menu-item>
 	</template>
@@ -27,7 +27,7 @@ defineProps<{ menuList: Menu.MenuOptions[] }>();
 
 const router = useRouter();
 const handleClickMenu = (subItem: Menu.MenuOptions) => {
-	if (subItem.isLink) window.open(subItem.isLink, "_blank");
+	if (subItem.meta.isLink) window.open(subItem.meta.isLink, "_blank");
 	router.push(subItem.path);
 };
 </script>

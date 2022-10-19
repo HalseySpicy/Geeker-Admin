@@ -9,15 +9,15 @@
 				<div class="split-list">
 					<div
 						class="split-item"
-						:class="splitActive.includes(item.path) ? 'split-active' : ''"
+						:class="{ 'split-active': splitActive.includes(item.path) }"
 						v-for="item in menuList"
 						:key="item.path"
 						@click="changeSubMenu(item)"
 					>
 						<el-icon>
-							<component :is="item.icon"></component>
+							<component :is="item.meta.icon"></component>
 						</el-icon>
-						<span class="title">{{ item.title }}</span>
+						<span class="title">{{ item.meta.title }}</span>
 					</div>
 				</div>
 			</el-scrollbar>
@@ -52,7 +52,8 @@
 <script setup lang="ts" name="layoutColumns">
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { MenuStore } from "@/store/modules/menu";
+import { GlobalStore } from "@/stores";
+import { AuthStore } from "@/stores/modules/auth";
 import { TABS_WHITE_LIST } from "@/config/config";
 import Main from "@/layouts/components/Main/index.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
@@ -61,10 +62,11 @@ import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 
 const route = useRoute();
 const router = useRouter();
-const menuStore = MenuStore();
+const authStore = AuthStore();
+const globalStore = GlobalStore();
 const activeMenu = computed(() => route.path);
-const menuList = computed(() => menuStore.menuList);
-const isCollapse = computed(() => menuStore.isCollapse);
+const menuList = computed(() => authStore.showMenuListGet);
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const watchData = computed(() => [menuList, route]);
 
 const subMenu = ref<Menu.MenuOptions[]>([]);
@@ -85,11 +87,12 @@ watch(
 	}
 );
 
+// 切换 SubMenu
 const changeSubMenu = (item: Menu.MenuOptions) => {
 	splitActive.value = item.path;
 	if (item.children?.length) return (subMenu.value = item.children);
 	subMenu.value = [];
-	router.push({ path: item.path });
+	router.push(item.path);
 };
 </script>
 

@@ -24,9 +24,9 @@
 				</template>
 				<template #default="{ item }">
 					<el-icon>
-						<component :is="item.icon"></component>
+						<component :is="item.meta.icon"></component>
 					</el-icon>
-					<span> {{ item.title }} </span>
+					<span> {{ item.meta.title }} </span>
 				</template>
 			</el-autocomplete>
 		</el-dialog>
@@ -38,10 +38,10 @@ import { ref, computed, nextTick } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { getFlatArr } from "@/utils/util";
-import { MenuStore } from "@/store/modules/menu";
+import { AuthStore } from "@/stores/modules/auth";
 const router = useRouter();
-const menuStore = MenuStore();
-const menuList = computed((): Menu.MenuOptions[] => getFlatArr(menuStore.menuList));
+const authStore = AuthStore();
+const menuList = computed(() => getFlatArr(authStore.authMenuList));
 
 const searchMenuList = (queryString: string, cb: Function) => {
 	const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
@@ -72,7 +72,7 @@ const filterNodeMethod = (queryString: string) => {
 	return (restaurant: Menu.MenuOptions) => {
 		return (
 			restaurant.path.toLowerCase().indexOf(queryString.toLowerCase()) > -1 ||
-			restaurant.title.toLowerCase().indexOf(queryString.toLowerCase()) > -1
+			restaurant.meta.title.toLowerCase().indexOf(queryString.toLowerCase()) > -1
 		);
 	};
 };
@@ -80,7 +80,7 @@ const filterNodeMethod = (queryString: string) => {
 // 点击菜单跳转
 const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 	searchMenu.value = "";
-	if (menuItem.isLink) window.open(menuItem.isLink, "_blank");
+	if (menuItem.meta.isLink) window.open(menuItem.meta.isLink, "_blank");
 	router.push(menuItem.path);
 	closeSearch();
 };
@@ -101,7 +101,7 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 		position: absolute;
 		top: 100px;
 		left: 50%;
-		width: 560px;
+		width: 550px;
 		transform: translateX(-50%);
 	}
 }

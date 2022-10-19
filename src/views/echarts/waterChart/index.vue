@@ -2,7 +2,7 @@
 	<div ref="echartsRef" class="card content-box"></div>
 </template>
 
-<script setup lang="ts" name="columnChart">
+<script setup lang="ts" name="waterChart">
 import { ref, onMounted } from "vue";
 import { useEcharts } from "@/hooks/useEcharts";
 import * as echarts from "echarts";

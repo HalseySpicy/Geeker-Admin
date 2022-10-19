@@ -149,10 +149,10 @@ Geeker-Admin
 │  ├─ directives          # 全局指令文件
 │  ├─ enums               # 项目枚举
 │  ├─ hooks               # 常用 Hooks
-│  ├─ language            # 语言国际化
-│  ├─ layout              # 框架布局
+│  ├─ languages            # 语言国际化
+│  ├─ layouts              # 框架布局
 │  ├─ routers             # 路由管理
-│  ├─ store               # pinia store
+│  ├─ stores               # pinia store
 │  ├─ styles              # 全局样式
 │  ├─ typings             # 全局 ts 声明
 │  ├─ utils               # 工具库
@@ -205,11 +205,11 @@ Geeker-Admin
 
 ### 十、微信交流群
 
-> \*\*😀 微信群人已超过 500 人，请大家扫码加入二群。
+> **😀 微信群人已超过 500 人，请大家扫码加入二群。**
 
-|                                            微信二维码                                             |
+|                                           微信群二维码                                            |
 | :-----------------------------------------------------------------------------------------------: |
-| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20221008220726.png" width=170> |
+| <img src="https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20221019164906.png" width=170> |
 
 ### 十一、捐赠 🍵
 

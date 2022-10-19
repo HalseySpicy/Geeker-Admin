@@ -27,20 +27,20 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { Login } from "@/api/interface";
-import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
-import { GlobalStore } from "@/store";
-import { MenuStore } from "@/store/modules/menu";
-import { TabsStore } from "@/store/modules/tabs";
+import { GlobalStore } from "@/stores";
+import { TabsStore } from "@/stores/modules/tabs";
 import { getTimeState } from "@/utils/util";
 import { HOME_URL } from "@/config/config";
+import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
+import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import md5 from "js-md5";
 
+const router = useRouter();
+const tabsStore = TabsStore();
 const globalStore = GlobalStore();
-const menuStore = MenuStore();
-const tabStore = TabsStore();
 
 // 定义 formRef（校验规则）
 type FormInstance = InstanceType<typeof ElForm>;
@@ -50,27 +50,25 @@ const loginRules = reactive({
 	password: [{ required: true, message: "请输入密码", trigger: "blur" }]
 });
 
-// 登录表单数据
-const loginForm = reactive<Login.ReqLoginForm>({
-	username: "",
-	password: ""
-});
-
 const loading = ref(false);
-const router = useRouter();
-// login
+const loginForm = reactive<Login.ReqLoginForm>({ username: "", password: "" });
 const login = (formEl: FormInstance | undefined) => {
 	if (!formEl) return;
 	formEl.validate(async valid => {
 		if (!valid) return;
 		loading.value = true;
 		try {
-			const res = await loginApi({ ...loginForm, password: md5(loginForm.password) });
-			// 存储 token
-			globalStore.setToken(res.data!.access_token);
-			// 登录成功之后清除上个账号的 menulist 和 tabs 数据
-			menuStore.setMenuList([]);
-			tabStore.closeMultipleTab();
+			// 1.执行登录接口
+			const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
+			globalStore.setToken(data.access_token);
+
+			// 2.添加动态路由
+			await initDynamicRouter();
+
+			// 3.清除上个账号的 tab 信息
+			tabsStore.closeMultipleTab();
+
+			// 4.跳转到首页
 			router.push(HOME_URL);
 			ElNotification({
 				title: getTimeState(),

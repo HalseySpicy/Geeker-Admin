@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts" name="dataVisualize">
-import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { ECharts } from "echarts";
 import Pie from "./components/pie.vue";
 import Curve from "./components/curve.vue";
@@ -134,12 +134,6 @@ const resize = () => {
 		chart && chart.resize();
 	});
 };
-
-/* 销毁时触发 */
-onBeforeUnmount(() => {
-	window.removeEventListener("resize", resize);
-	Object.values(dataScreen).forEach(val => val?.dispose());
-});
 </script>
 
 <style scoped lang="scss">
