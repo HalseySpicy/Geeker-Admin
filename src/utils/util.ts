@@ -157,10 +157,10 @@ export function getFlatArr(menulist: Menu.MenuOptions[]) {
  * @param {Array} cacheArr 缓存的路由菜单 name ['**','**']
  * @return array
  * */
-export function getKeepAliveRouterPath(menuList: Menu.MenuOptions[], keepAliveArr: string[] = []) {
+export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveArr: string[] = []) {
 	menuList.forEach(item => {
 		item.meta.isKeepAlive && item.name && keepAliveArr.push(item.name);
-		item.children?.length && getKeepAliveRouterPath(item.children, keepAliveArr);
+		item.children?.length && getKeepAliveRouterName(item.children, keepAliveArr);
 	});
 	return keepAliveArr;
 }

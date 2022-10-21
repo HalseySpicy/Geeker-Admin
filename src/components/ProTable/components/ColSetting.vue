@@ -1,11 +1,16 @@
 <template>
-	<!-- 列显隐设置 -->
+	<!-- 列设置 -->
 	<el-drawer title="列设置" v-model="drawerVisible" size="400px">
 		<div class="table">
 			<el-table :data="colSetting" :border="true">
+				<!-- <el-table-column prop="name" align="center" label="排序">
+					<el-tag style="cursor: move">
+						<el-icon style="cursor: move"><DCaret /></el-icon>
+					</el-tag>
+				</el-table-column> -->
 				<el-table-column prop="label" align="center" label="列名" />
 				<el-table-column prop="name" align="center" label="显示" v-slot="scope">
-					<el-switch v-model="scope.row.isShow" @click="switchShow"></el-switch>
+					<el-switch v-model="scope.row.isShow"></el-switch>
 				</el-table-column>
 				<template #empty>
 					<div class="table-empty">
@@ -19,23 +24,15 @@
 </template>
 
 <script setup lang="ts" name="colSetting">
-import { ref, nextTick } from "vue";
+import { ref } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 
-const props = defineProps<{ colSetting: Partial<ColumnProps>[]; tableRef: any }>();
+defineProps<{ colSetting: Partial<ColumnProps>[]; tableRef: any }>();
 
 const drawerVisible = ref<boolean>(false);
 // 打开列设置
-const openColSetting = (): void => {
+const openColSetting = () => {
 	drawerVisible.value = true;
-};
-
-// 列显隐时重新布局 table（防止表格抖动,隐藏显示之后会出现横向滚动条,element-plus 内部问题，已经提了 issues）不使用 doLayout 就不会出现滚动条
-const switchShow = () => {
-	nextTick(() => {
-		console.log(props);
-		// props.tableRef.doLayout();
-	});
 };
 
 defineExpose({

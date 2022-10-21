@@ -17,7 +17,7 @@ import { GlobalStore } from "@/stores";
 import Loading from "@/components/Loading/index.vue";
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 
-const LayoutComponents: any = {
+const LayoutComponents: { [key: string]: any } = {
 	vertical: defineAsyncComponent(() => import("./LayoutVertical/index.vue")),
 	classic: defineAsyncComponent(() => import("./LayoutClassic/index.vue")),
 	transverse: defineAsyncComponent(() => import("./LayoutTransverse/index.vue")),

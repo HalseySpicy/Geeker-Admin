@@ -54,7 +54,7 @@
 					<el-button :icon="Search" circle @click="isShowSearch = !isShowSearch"> </el-button>
 				</div>
 			</div>
-			<el-table :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
+			<el-table ref="tableRef" :data="tableData" :border="true" @selection-change="selectionChange" :row-key="getRowKeys">
 				<el-table-column type="selection" reserve-selection align="center" width="80" />
 				<el-table-column prop="username" label="用户姓名" align="center" width="120"></el-table-column>
 				<el-table-column prop="gender" label="性别" align="center" width="120" v-slot="scope">
@@ -111,6 +111,7 @@
 
 <script setup lang="ts" name="useHooks">
 import { ref, reactive } from "vue";
+import { ElTable } from "element-plus";
 import { genderType } from "@/utils/serviceDict";
 import { User } from "@/api/interface";
 import { useDownload } from "@/hooks/useDownload";
@@ -142,6 +143,9 @@ import {
 	resetUserPassWord,
 	exportUserInfo
 } from "@/api/modules/user";
+
+// 表格 DOM 元素
+const tableRef = ref<InstanceType<typeof ElTable>>();
 
 // 是否展示搜索模块
 const isShowSearch = ref(true);
@@ -188,6 +192,7 @@ const changeStatus = async (val: number, params: User.ResUserList) => {
 // 批量删除用户信息
 const batchDelete = async () => {
 	await useHandleData(deleteUser, { id: selectedListIds.value }, "删除所选用户信息");
+	tableRef.value!.clearSelection();
 	getTableList();
 };
 

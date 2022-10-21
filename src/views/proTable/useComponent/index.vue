@@ -163,6 +163,7 @@ const deleteAccount = async (params: User.ResUserList) => {
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
 	await useHandleData(deleteUser, { id }, "删除所选用户信息");
+	proTable.value.clearSelection();
 	proTable.value.getTableList();
 };
 

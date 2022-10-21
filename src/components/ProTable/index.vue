@@ -12,7 +12,7 @@
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				<el-button :icon="Printer" circle @click="printData"> </el-button>
+				<el-button :icon="Printer" circle @click="handlePrint"> </el-button>
 				<el-button :icon="Operation" circle @click="openColSetting"> </el-button>
 				<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
@@ -114,7 +114,8 @@
 </template>
 
 <script setup lang="ts" name="proTable">
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
+import { ElTable } from "element-plus";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
@@ -126,7 +127,7 @@ import ColSetting from "./components/ColSetting.vue";
 import printJS from "print-js";
 
 // 表格 DOM 元素
-const tableRef = ref();
+const tableRef = ref<InstanceType<typeof ElTable>>();
 
 // 是否显示搜索模块
 const isShowSearch = ref<boolean>(true);
@@ -136,7 +137,7 @@ interface ProTableProps {
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
 	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理
 	pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
-	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}）
+	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}，必须是 reactive 包裹的）
 	border?: boolean; // 表格是否显示边框 ==> 非必传（默认为true）
 	stripe?: boolean; // 是否带斑马纹表格 ==> 非必传（默认为false）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
@@ -158,6 +159,9 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 
 // 表格多选 Hooks
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
+
+// 清空选中数据列表
+const clearSelection = () => tableRef.value!.clearSelection();
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
@@ -198,7 +202,7 @@ searchColumns.forEach(column => {
 	}
 });
 
-// * 列设置
+// 列设置
 const colRef = ref();
 // 过滤掉不需要设置显隐的列
 const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
@@ -214,17 +218,31 @@ const openColSetting = () => {
 	colRef.value.openColSetting();
 };
 
+// 处理打印数据（把后台返回的字典值根据 enum 做转换）
+const printData = computed(() => {
+	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
+	let colEnumList = colSetting.filter(item => item.enum);
+	colEnumList.forEach(colItem => {
+		printDataList.forEach((tableItem: any) => {
+			tableItem[colItem.prop!] = filterEnum(tableItem[colItem.prop!], colItem.enum, colItem.searchProps);
+		});
+	});
+	return printDataList;
+});
+
 // 打印表格数据
-const printData = () => {
+const handlePrint = () => {
 	printJS({
-		printable: tableData.value,
+		printable: printData.value,
 		header: `<div style="display: flex;flex-direction: column;text-align: center"><h2>用户列表</h2></div>`,
-		properties: colSetting.map((item: Partial<ColumnProps>) => {
-			return {
-				field: item.prop,
-				displayName: item.label
-			};
-		}),
+		properties: colSetting
+			.filter(item => item.isShow)
+			.map((item: Partial<ColumnProps>) => {
+				return {
+					field: item.prop,
+					displayName: item.label
+				};
+			}),
 		type: "json",
 		gridHeaderStyle:
 			"border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
@@ -232,6 +250,6 @@ const printData = () => {
 	});
 };
 
-// 暴露给父组件的参数和方法
-defineExpose({ searchParam, getTableList });
+// 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去)
+defineExpose({ searchParam, getTableList, clearSelection });
 </script>

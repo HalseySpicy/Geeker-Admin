@@ -30,9 +30,12 @@ import I18n from "@/languages/index";
 import pinia from "@/stores/index";
 // svg icons
 import "virtual:svg-icons-register";
+// errorHandler
+import errorHandler from "@/utils/errorHandler";
 
 const app = createApp(App);
-console.log(app);
+
+app.config.errorHandler = errorHandler;
 
 // 注册element Icons组件
 Object.keys(Icons).forEach(key => {

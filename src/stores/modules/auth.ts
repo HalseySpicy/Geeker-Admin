@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { AuthState } from "@/stores/interface";
 import { getAuthButtonListApi, getAuthMenuListApi } from "@/api/modules/login";
-import { getKeepAliveRouterPath, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
+import { getKeepAliveRouterName, getShowMenuList, getAllBreadcrumbList } from "@/utils/util";
 import piniaPersistConfig from "@/config/piniaPersist";
 
 // AuthStore
@@ -22,7 +22,7 @@ export const AuthStore = defineStore({
 		// 面包屑导航列表
 		breadcrumbListGet: state => getAllBreadcrumbList(state.authMenuList),
 		// 需要缓存的菜单 name，用作页面 keepAlive
-		keepAliveRouterGet: state => getKeepAliveRouterPath(state.authMenuList)
+		keepAliveRouterGet: state => getKeepAliveRouterName(state.authMenuList)
 	},
 	actions: {
 		// getAuthButtonList
