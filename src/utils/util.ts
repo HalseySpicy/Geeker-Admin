@@ -171,11 +171,11 @@ export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveAr
  * @return array
  * */
 export function getShowMenuList(menuList: Menu.MenuOptions[]) {
-	menuList = menuList.filter(item => {
+	let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
+	return newMenuList.filter(item => {
 		item.children?.length && (item.children = getShowMenuList(item.children));
 		return !item.meta?.isHide;
 	});
-	return menuList;
 }
 
 /**
