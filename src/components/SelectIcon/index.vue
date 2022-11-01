@@ -8,7 +8,7 @@
 		<el-dialog v-model="dialogVisible" title="请选择图标" top="50px" width="66%">
 			<el-input v-model="inputValue" placeholder="搜索" size="large" :prefix-icon="Icons.Search" />
 			<el-scrollbar v-if="Object.keys(iconsList).length">
-				<div class="icon-box">
+				<div class="icon-list">
 					<div v-for="item in iconsList" :key="item" class="icon-item" @click="selectIcon(item)">
 						<component :is="item"></component>
 						<span>{{ item.name }}</span>
