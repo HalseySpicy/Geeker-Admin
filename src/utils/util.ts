@@ -259,7 +259,12 @@ export function formatValue(callValue: any) {
  * @param {String} type 过滤类型（目前只有 tag）
  * @return string
  * */
-export function filterEnum(callValue: any, enumData: any, searchProps?: { [key: string]: any }, type?: string): string {
+export function filterEnum(
+	callValue: any,
+	enumData: { [key: string]: any } | undefined,
+	searchProps?: { [key: string]: any },
+	type?: string
+): string {
 	const value = searchProps?.value ?? "value";
 	const label = searchProps?.label ?? "label";
 	let filterData: any = {};

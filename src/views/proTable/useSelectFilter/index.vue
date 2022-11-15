@@ -1,7 +1,8 @@
 <template>
 	<div class="main-box">
 		<TreeFilter
-			title="部门列表"
+			title="部门列表(多选)"
+			multiple
 			label="name"
 			:requestApi="getUserDepartment"
 			:defaultValue="treeFilterValues.departmentId"
@@ -13,6 +14,7 @@
 			</div>
 			<ProTable
 				ref="proTable"
+				title="用户列表"
 				:columns="columns"
 				:requestApi="getUserList"
 				:initParam="Object.assign(treeFilterValues, selectFilterValues)"
@@ -65,7 +67,7 @@ import {
 const proTable = ref();
 
 // 表格配置项
-const columns: Partial<ColumnProps>[] = [
+const columns: ColumnProps[] = [
 	{ type: "index", label: "#", width: 80 },
 	{ prop: "username", label: "用户姓名", width: 120 },
 	{ prop: "gender", label: "性别", width: 120, sortable: true, enum: genderType },
@@ -147,14 +149,15 @@ const selectFilterData = [
 const selectFilterValues = ref({ userStatus: "2", userRole: ["1", "3"] });
 const changeSelectFilter = (val: any) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
-	val.userStatus = val.userStatus.join("");
-	selectFilterValues.value = val;
+	proTable.value.pageable.pageNum = 1;
+	selectFilterValues.value = { ...val, userStatus: val.userStatus.join("") };
 };
 
 // 默认 treeFilter 参数
-const treeFilterValues = reactive({ departmentId: "1" });
-const changeTreeFilter = (val: string) => {
+const treeFilterValues = reactive({ departmentId: ["11"] });
+const changeTreeFilter = (val: string[]) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
+	proTable.value.pageable.pageNum = 1;
 	treeFilterValues.departmentId = val;
 };
 
@@ -194,7 +197,7 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",
-		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.getTableList
 	};
 	drawerRef.value.acceptParams(params);
@@ -203,7 +206,7 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar
 
 <style scoped lang="scss">
 .select-box {
-	padding: 4px 20px;
+	padding: 0 20px;
 	margin-bottom: 10px;
 }
 </style>

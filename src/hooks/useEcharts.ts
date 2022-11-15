@@ -1,4 +1,4 @@
-import { onDeactivated, onBeforeUnmount } from "vue";
+import { onActivated, onDeactivated, onBeforeUnmount } from "vue";
 import * as echarts from "echarts";
 
 /**
@@ -17,7 +17,10 @@ export const useEcharts = (myChart: echarts.ECharts, options: echarts.EChartsCor
 
 	window.addEventListener("resize", echartsResize);
 
-	// 防止 echarts 页面 keepAlive 时，还在继续监听页面
+	onActivated(() => {
+		window.addEventListener("resize", echartsResize);
+	});
+
 	onDeactivated(() => {
 		window.removeEventListener("resize", echartsResize);
 	});

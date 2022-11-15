@@ -32,7 +32,7 @@
 		{
 			"path": "/proTable",
 			"name": "proTable",
-			"redirect": "/proTable/useHooks",
+			"redirect": "/proTable/useComponent",
 			"meta": {
 				"icon": "MessageBox",
 				"title": "超级表格",
@@ -43,20 +43,6 @@
 				"isKeepAlive": true
 			},
 			"children": [
-				{
-					"path": "/proTable/useHooks",
-					"name": "useHooks",
-					"component": "/proTable/useHooks/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "使用 Hooks",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
 				{
 					"path": "/proTable/useComponent",
 					"name": "useComponent",

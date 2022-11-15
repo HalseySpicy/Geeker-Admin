@@ -39,8 +39,8 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="uploadImg">
-import { ref } from "vue";
+<script setup lang="ts" name="UploadImg">
+import { ref, CSSProperties } from "vue";
 import { ElNotification } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";
@@ -52,7 +52,7 @@ interface UploadFileProps {
 	drag?: boolean; // 是否支持拖拽上传 ==> 非必传（默认为true）
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为false）
 	fileSize?: number; // 单个文件大小限制 ==> 非必传（默认为 5M）
-	uploadStyle?: { [key: string]: any }; // 上传组件样式 ==> 非必传
+	uploadStyle?: CSSProperties; // 上传组件样式 ==> 非必传
 }
 // 接受父组件参数
 const props = withDefaults(defineProps<UploadFileProps>(), {

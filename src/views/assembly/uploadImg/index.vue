@@ -8,7 +8,10 @@
 			<UploadImg id="avatar2" v-model:imageUrl="avatar2" :uploadStyle="uploadStyle">
 				<template #tip> 圆形组件 </template>
 			</UploadImg>
-			<UploadImg id="avatar3" v-model:imageUrl="avatar3" :disabled="true">
+			<UploadImg id="avatar3" v-model:imageUrl="avatar3" :uploadStyle="uploadStyle1">
+				<template #tip> 长方形组件 </template>
+			</UploadImg>
+			<UploadImg id="avatar4" v-model:imageUrl="avatar4" disabled>
 				<template #tip> 禁用上传、删除功能 </template>
 			</UploadImg>
 		</div>
@@ -31,8 +34,10 @@ import UploadImg from "@/components/UploadImg/index.vue";
 
 const avatar1 = ref("");
 const avatar2 = ref("");
-const avatar3 = ref("https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110015.jpg");
+const avatar3 = ref("");
+const avatar4 = ref("https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110015.jpg");
 const uploadStyle = { width: "175px", height: "175px", borderRadius: "50%" };
+const uploadStyle1 = { width: "300px", height: "175px" };
 </script>
 
 <style scoped lang="scss">

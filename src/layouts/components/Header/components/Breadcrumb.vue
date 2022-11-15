@@ -38,6 +38,11 @@ const breadcrumbList = computed(() => authStore.breadcrumbListGet[route.path]);
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 900px) {
+	.el-breadcrumb {
+		display: none;
+	}
+}
 .breadcrumb-item {
 	display: flex;
 	align-items: center;

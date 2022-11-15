@@ -1,6 +1,6 @@
 <!-- 纵向布局 -->
 <template>
-	<el-container class="layout-vertical">
+	<el-container class="layout">
 		<el-aside>
 			<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
 				<div class="logo flx-center">

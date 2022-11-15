@@ -1,8 +1,14 @@
 <template>
 	<div class="main-box">
-		<TreeFilter :requestApi="getUserDepartment" @change="changeInitParam" title="部门列表" label="name" />
+		<TreeFilter
+			label="name"
+			title="部门列表(单选)"
+			:requestApi="getUserDepartment"
+			:defaultValue="initParam.departmentId"
+			@change="changeTreeFilter"
+		/>
 		<div class="table-box">
-			<ProTable ref="proTable" :columns="columns" :requestApi="getUserList" :initParam="initParam">
+			<ProTable ref="proTable" title="用户列表" :columns="columns" :requestApi="getUserList" :initParam="initParam">
 				<!-- 表格 header 按钮 -->
 				<template #tableHeader>
 					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
@@ -52,28 +58,28 @@ const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({
-	departmentId: ""
+	departmentId: "1"
 });
 
 // 树形筛选切换
-const changeInitParam = (val: string) => {
+const changeTreeFilter = (val: string) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
+	proTable.value.pageable.pageNum = 1;
 	initParam.departmentId = val;
 };
 
 // 表格配置项
-const columns: Partial<ColumnProps>[] = [
+const columns: ColumnProps[] = [
 	{ type: "index", label: "#", width: 80 },
-	{ prop: "username", label: "用户姓名", width: 120, search: true },
+	{ prop: "username", label: "用户姓名", width: 120, search: { el: "input" } },
 	{
 		prop: "gender",
 		label: "性别",
 		width: 120,
 		sortable: true,
-		search: true,
-		searchType: "select",
 		enum: getUserGender,
-		searchProps: { label: "genderLabel", value: "genderValue" }
+		search: { el: "select" },
+		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	{ prop: "idCard", label: "身份证号" },
 	{ prop: "email", label: "邮箱" },
@@ -83,21 +89,12 @@ const columns: Partial<ColumnProps>[] = [
 		label: "用户状态",
 		width: 120,
 		sortable: true,
-		search: true,
 		tag: true,
-		searchType: "select",
 		enum: getUserStatus,
-		searchProps: { label: "userLabel", value: "userStatus" }
+		search: { el: "select" },
+		fieldNames: { label: "userLabel", value: "userStatus" }
 	},
-	{
-		prop: "createTime",
-		label: "创建时间",
-		width: 180,
-		sortable: true,
-		search: true,
-		searchType: "datetimerange",
-		searchInitParam: ["2022-09-30 00:00:00", "2022-09-20 23:59:59"]
-	},
+	{ prop: "createTime", label: "创建时间", width: 180 },
 	{ prop: "operation", label: "操作", width: 330, fixed: "right" }
 ];
 
@@ -137,7 +134,7 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",
-		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.getTableList
 	};
 	drawerRef.value.acceptParams(params);

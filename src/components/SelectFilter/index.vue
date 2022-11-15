@@ -35,15 +35,15 @@ interface optionsProps {
 }
 
 interface DataProps {
-	title: string;
-	key: string;
+	title: string; // 列表标题
+	key: string; // 当前筛选项 key 值
 	multiple?: boolean; // 是否为多选
-	options: optionsProps[];
+	options: optionsProps[]; // 筛选数据
 }
 
 interface FilterProps {
 	data?: DataProps[]; // 选择的列表数据
-	defaultValues?: any;
+	defaultValues?: any; // 默认值
 }
 const props = withDefaults(defineProps<FilterProps>(), {
 	data: () => []

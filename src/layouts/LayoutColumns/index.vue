@@ -1,6 +1,6 @@
 <!-- 分栏布局 -->
 <template>
-	<el-container class="layout-columns">
+	<el-container class="layout">
 		<div class="aside-split">
 			<div class="logo flx-center">
 				<img src="@/assets/images/logo.svg" alt="logo" />

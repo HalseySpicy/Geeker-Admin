@@ -1,12 +1,15 @@
 <template>
 	<!-- 数据来源 -->
-	<div class="echarts" id="curve"></div>
+	<div class="echarts" ref="echartsRef"></div>
 </template>
 <script setup lang="ts" name="cure">
-import { ECharts, init } from "echarts";
-const initChart = (data: any): ECharts => {
-	const echartsBox = document.getElementById("curve") as HTMLElement;
-	const echarts: ECharts = init(echartsBox);
+import { ref } from "vue";
+import * as echarts from "echarts";
+import { useEcharts } from "@/hooks/useEcharts";
+
+const echartsRef = ref<HTMLElement>();
+const initChart = (data: any) => {
+	const myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
 	const option = {
 		tooltip: {
 			trigger: "axis",
@@ -138,8 +141,7 @@ const initChart = (data: any): ECharts => {
 			}
 		]
 	};
-	echarts.setOption(option);
-	return echarts;
+	useEcharts(myChart, option);
 };
 defineExpose({
 	initChart

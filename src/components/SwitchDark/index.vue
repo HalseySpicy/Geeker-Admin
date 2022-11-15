@@ -10,7 +10,7 @@
 	/>
 </template>
 
-<script setup lang="ts" name="switchDark">
+<script setup lang="ts" name="SwitchDark">
 import { computed } from "vue";
 import { GlobalStore } from "@/stores";
 import { Sunny, Moon } from "@element-plus/icons-vue";

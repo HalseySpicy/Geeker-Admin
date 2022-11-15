@@ -23,3 +23,9 @@ const LayoutComponents: { [key: string]: any } = {
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 </script>
+
+<style scoped lang="scss">
+.layout {
+	min-width: 740px;
+}
+</style>

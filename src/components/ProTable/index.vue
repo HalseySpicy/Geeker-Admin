@@ -1,9 +1,9 @@
-<!-- 📚📚📚 Pro-Table 文档: https://juejin.cn/post/7094890833064755208 -->
-<!-- 💢💢💢 后期会重构 Pro-Table 组件，使用 v-bind 属性透传 -->
+<!-- 📚📚📚 Pro-Table 文档: https://juejin.cn/post/7166068828202336263 -->
 
 <template>
-	<!-- 查询表单 -->
+	<!-- 查询表单 card -->
 	<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns" v-show="isShowSearch" />
+	<!-- 表格内容 card -->
 	<div class="card table">
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
@@ -12,88 +12,44 @@
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				<el-button :icon="Printer" circle @click="handlePrint"> </el-button>
-				<el-button :icon="Operation" circle @click="openColSetting"> </el-button>
+				<el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint"> </el-button>
+				<el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting"> </el-button>
 				<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
 			</div>
 		</div>
 		<!-- 表格主体 -->
 		<el-table
 			ref="tableRef"
+			v-bind="$attrs"
 			:data="tableData"
 			:border="border"
-			@selection-change="selectionChange"
 			:row-key="getRowKeys"
-			:stripe="stripe"
-			:tree-props="{ children: childrenName }"
+			@selection-change="selectionChange"
 		>
+			<!-- 默认插槽 -->
+			<slot></slot>
 			<template v-for="item in tableColumns" :key="item">
 				<!-- selection || index -->
 				<el-table-column
-					v-if="item.type == 'selection' || item.type == 'index'"
-					:type="item.type"
+					v-bind="item"
+					:align="item.align ?? 'center'"
 					:reserve-selection="item.type == 'selection'"
-					:label="item.label"
-					:width="item.width"
-					:min-width="item.minWidth"
-					:fixed="item.fixed"
-					:align="item.align ?? 'center'"
+					v-if="item.type == 'selection' || item.type == 'index'"
 				>
 				</el-table-column>
-				<!-- expand（展开自定义详细信息，请使用作用域插槽） -->
-				<el-table-column
-					v-if="item.type == 'expand'"
-					:type="item.type"
-					:label="item.label"
-					:width="item.width"
-					:min-width="item.minWidth"
-					:fixed="item.fixed"
-					:align="item.align ?? 'center'"
-					v-slot="scope"
-				>
-					<slot :name="item.type" :row="scope.row"></slot>
+				<!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
+				<el-table-column v-bind="item" :align="item.align ?? 'center'" v-if="item.type == 'expand'" v-slot="scope">
+					<component :is="item.render" :row="scope.row" v-if="item.render"> </component>
+					<slot :name="item.type" :row="scope.row" v-else></slot>
 				</el-table-column>
-				<!-- other -->
-				<el-table-column
-					v-if="!item.type && item.prop && item.isShow"
-					:prop="item.prop"
-					:label="item.label"
-					:width="item.width"
-					:min-width="item.minWidth"
-					:sortable="item.sortable"
-					:show-overflow-tooltip="item.prop !== 'operation'"
-					:resizable="true"
-					:fixed="item.fixed"
-					:align="item.align ?? 'center'"
-				>
-					<!-- 自定义 header (使用组件渲染 tsx 语法) -->
-					<template #header v-if="item.renderHeader">
-						<component :is="item.renderHeader" :row="item"> </component>
+				<!-- other 循环递归 -->
+				<TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
+					<template v-for="slot in Object.keys($slots)" #[slot]="scope">
+						<slot :name="slot" :row="scope.row"></slot>
 					</template>
-
-					<!-- 自定义配置每一列 slot（使用作用域插槽） -->
-					<template #default="scope">
-						<slot :name="item.prop" :row="scope.row">
-							<!-- tag 标签（自带格式化内容） -->
-							<el-tag v-if="item.tag" :type="filterEnum(scope.row[item.prop!], item.enum!, item.searchProps, 'tag')">
-								{{
-									item.enum?.length
-										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)
-										: formatValue(scope.row[item.prop!])
-								}}
-							</el-tag>
-							<!-- 文字（自带格式化内容） -->
-							<span v-else>
-								{{
-									item.enum?.length
-										? filterEnum(scope.row[item.prop!], item.enum!, item.searchProps)
-										: formatValue(scope.row[item.prop!])
-								}}
-							</span>
-						</slot>
-					</template>
-				</el-table-column>
+				</TableColumn>
 			</template>
+			<!-- 无数据 -->
 			<template #empty>
 				<div class="table-empty">
 					<img src="@/assets/images/notData.png" alt="notData" />
@@ -110,20 +66,21 @@
 		/>
 	</div>
 	<!-- 列设置 -->
-	<ColSetting v-if="toolButton" ref="colRef" :tableRef="tableRef" :colSetting="colSetting" />
+	<ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" />
 </template>
 
-<script setup lang="ts" name="proTable">
-import { ref, watch, computed } from "vue";
-import { ElTable } from "element-plus";
+<script setup lang="ts" name="ProTable">
+import { ref, watch, computed, provide } from "vue";
+import { filterEnum } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
-import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
 import { ColumnProps } from "@/components/ProTable/interface";
-import { filterEnum, formatValue } from "@/utils/util";
+import { ElTable, TableProps } from "element-plus";
+import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
+import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
 
 // 表格 DOM 元素
@@ -132,17 +89,16 @@ const tableRef = ref<InstanceType<typeof ElTable>>();
 // 是否显示搜索模块
 const isShowSearch = ref<boolean>(true);
 
-interface ProTableProps {
-	columns: Partial<ColumnProps>[]; // 列配置项
+interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
+	columns: ColumnProps[]; // 列配置项
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
-	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理
+	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
+	title?: string; // 表格标题，目前只在打印的时候用到 ==> 非必传
 	pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}，必须是 reactive 包裹的）
-	border?: boolean; // 表格是否显示边框 ==> 非必传（默认为true）
-	stripe?: boolean; // 是否带斑马纹表格 ==> 非必传（默认为false）
+	border?: boolean; // 是否带有纵向边框 ==> 非必传（默认为true）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
-	childrenName?: string; // 当数据存在 children 时，指定 children key 名字 ==> 非必传（默认为"children"）
-	selectId?: string; // 当表格可以多选时，所指定的 id ==> 非必传（默认为 id）
+	selectId?: string; // 当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
 }
 
 // 接受父组件参数，配置默认值
@@ -151,21 +107,19 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	pagination: true,
 	initParam: {},
 	border: true,
-	stripe: false,
 	toolButton: true,
-	childrenName: "children",
 	selectId: "id"
 });
 
 // 表格多选 Hooks
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
 
-// 清空选中数据列表
-const clearSelection = () => tableRef.value!.clearSelection();
-
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
 	useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback);
+
+// 清空选中数据列表
+const clearSelection = () => tableRef.value!.clearSelection();
 
 // 监听页面 initParam 改化，重新获取表格数据
 watch(
@@ -176,36 +130,53 @@ watch(
 	{ deep: true }
 );
 
-// 表格列配置项处理（添加 isShow 属性，控制显示/隐藏）
-const tableColumns = ref<Partial<ColumnProps>[]>();
-tableColumns.value = props.columns.map(item => {
-	return {
-		...item,
-		isShow: item.isShow ?? true
-	};
-});
+// 接收 columns 并设置为响应式
+const tableColumns = ref<ColumnProps[]>(props.columns);
 
-// 如果当前 enum 为后台数据 需要请求数据，则调用该请求接口，获取enum数据
-tableColumns.value.forEach(async item => {
-	if (item.enum && typeof item.enum === "function") {
-		const { data } = await item.enum();
-		item.enum = data;
-	}
-});
+// 定义 enumMap 存储 enum 值（避免异步请求无法格式化单元格内容 || 无法填充搜索下拉选择）
+const enumMap = ref(new Map<string, { [key: string]: any }[]>());
+provide("enumMap", enumMap);
 
-// 过滤需要搜索的配置项
-const searchColumns = tableColumns.value.filter(item => item.search);
+// 扁平化 columns && 处理 tableColumns 数据
+const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
+	columns.forEach(async col => {
+		if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
+		flatArr.push(col);
+
+		// 给每一项 column 添加 isShow && isFilterEnum 属性
+		col.isShow = col.isShow ?? true;
+		col.isFilterEnum = col.isFilterEnum ?? true;
+
+		if (!col.enum) return;
+		// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
+		if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum);
+		const { data } = await col.enum();
+		enumMap.value.set(col.prop!, data);
+	});
+	return flatArr.filter(item => !item._children?.length);
+};
+
+// 扁平 columns
+const flatColumns = ref<ColumnProps[]>();
+flatColumns.value = flatColumnsFunc(tableColumns.value);
+
+// 过滤需要搜索的配置项 && 处理搜索排序
+const searchColumns = flatColumns.value
+	.filter(item => item.search?.el)
+	.sort((a, b) => (b.search?.order ?? 0) - (a.search?.order ?? 0));
+
 // 设置搜索表单的默认值
 searchColumns.forEach(column => {
-	if (column.searchInitParam !== undefined && column.searchInitParam !== null) {
-		searchInitParam.value[column.prop!] = column.searchInitParam;
+	if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
+		searchInitParam.value[column.search.key ?? column.prop!] = column.search?.defaultValue;
 	}
 });
 
 // 列设置
 const colRef = ref();
-// 过滤掉不需要设置显隐的列
-const colSetting = tableColumns.value.filter((item: Partial<ColumnProps>) => {
+// 过滤掉不需要设置显隐的列（页面直接隐藏的列不需要列设置）
+//@ts-ignore
+const colSetting = tableColumns.value!.filter((item: ColumnProps) => {
 	return (
 		item.type !== "selection" &&
 		item.type !== "index" &&
@@ -218,26 +189,29 @@ const openColSetting = () => {
 	colRef.value.openColSetting();
 };
 
-// 处理打印数据（把后台返回的字典值根据 enum 做转换）
+// 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
-	let colEnumList = colSetting.filter(item => item.enum);
+	let colEnumList = flatColumns.value!.filter(item => item.enum);
 	colEnumList.forEach(colItem => {
 		printDataList.forEach((tableItem: any) => {
-			tableItem[colItem.prop!] = filterEnum(tableItem[colItem.prop!], colItem.enum, colItem.searchProps);
+			tableItem[colItem.prop!] = filterEnum(tableItem[colItem.prop!], enumMap.value.get(colItem.prop!), colItem.fieldNames);
 		});
 	});
 	return printDataList;
 });
 
-// 打印表格数据
+// 打印表格数据（💥 多级表头数据打印时，只能扁平化成一维数组，printJs 不支持多级表头打印）
 const handlePrint = () => {
 	printJS({
 		printable: printData.value,
-		header: `<div style="display: flex;flex-direction: column;text-align: center"><h2>用户列表</h2></div>`,
-		properties: colSetting
-			.filter(item => item.isShow)
-			.map((item: Partial<ColumnProps>) => {
+		header: props.title && `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
+		properties: flatColumns
+			.value!.filter(
+				item =>
+					item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation"
+			)
+			.map((item: ColumnProps) => {
 				return {
 					field: item.prop,
 					displayName: item.label
@@ -251,5 +225,5 @@ const handlePrint = () => {
 };
 
 // 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去)
-defineExpose({ searchParam, getTableList, clearSelection });
+defineExpose({ element: tableRef, tableData, searchParam, pageable, getTableList, clearSelection });
 </script>

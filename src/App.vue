@@ -31,5 +31,3 @@ const i18nLocale = computed(() => {
 // 配置全局组件大小 (small/default(medium)/large)
 const assemblySize = computed((): string => globalStore.assemblySize);
 </script>
-
-<style scoped lang="scss"></style>
