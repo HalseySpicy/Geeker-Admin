@@ -5,7 +5,7 @@
 			:id="id"
 			:class="['upload']"
 			:multiple="false"
-			:disabled="disabled"
+			:disabled="self_disabled"
 			:show-file-list="false"
 			:http-request="handleHttpUpload"
 			:before-upload="beforeUpload"
@@ -18,7 +18,7 @@
 			<img v-if="imageUrl" :src="imageUrl" class="upload-image" />
 			<el-icon v-else class="upload-icon"><Plus /></el-icon>
 			<div v-if="imageUrl" class="upload-handle" @click.stop>
-				<div class="handle-icon" @click="editImg" v-if="!disabled">
+				<div class="handle-icon" @click="editImg" v-if="!self_disabled">
 					<el-icon><Edit /></el-icon>
 					<span>编辑</span>
 				</div>
@@ -26,7 +26,7 @@
 					<el-icon><ZoomIn /></el-icon>
 					<span>查看</span>
 				</div>
-				<div class="handle-icon" @click="deleteImg" v-if="!disabled">
+				<div class="handle-icon" @click="deleteImg" v-if="!self_disabled">
 					<el-icon><Delete /></el-icon>
 					<span>删除</span>
 				</div>
@@ -40,11 +40,12 @@
 </template>
 
 <script setup lang="ts" name="UploadImg">
-import { ref, CSSProperties } from "vue";
+import { ref, CSSProperties, computed, inject } from "vue";
 import { ElNotification } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";
 import type { UploadProps, UploadRequestOptions } from "element-plus";
+import { formContextKey, formItemContextKey } from "element-plus/lib/tokens";
 
 interface UploadFileProps {
 	imageUrl: string; // 图片地址 ==> 必传
@@ -62,6 +63,14 @@ const props = withDefaults(defineProps<UploadFileProps>(), {
 	fileSize: 5,
 	uploadStyle: () => ({ width: "175px", height: "175px" })
 });
+// 获取el-form组件上下文
+const formContext = inject(formContextKey, void 0);
+// 获取el-form-item组件上下文
+const formItemContext = inject(formItemContextKey, void 0);
+
+const self_disabled = computed(() => {
+	return props.disabled || formContext?.disabled;
+});
 
 /**
  * @description 图片上传
@@ -78,6 +87,10 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	try {
 		const { data } = await uploadImg(formData);
 		emit("update:imageUrl", data.fileUrl);
+		// 调用el-form-item的校验
+		if (formItemContext?.prop) {
+			formItemContext?.validate(formItemContext.prop as string);
+		}
 		emit("check-validate");
 	} catch (error) {
 		options.onError(error as any);

@@ -4,7 +4,7 @@
 		:is="`el-${column.search.el}`"
 		v-bind="column.search.props"
 		v-model="searchParam[column.search.key ?? column.prop!]"
-		:data="column.search?.el == 'tree-select' ? columnEnum : []"
+		:data="column.search?.el === 'tree-select' ? columnEnum : []"
 		:placeholder="placeholder(column)"
 		:clearable="clearable(column)"
 		range-separator="至"
@@ -20,6 +20,7 @@
 				:value="col[fieldNames().value]"
 			></component>
 		</template>
+		<slot v-else></slot>
 	</component>
 </template>
 
