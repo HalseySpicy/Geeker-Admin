@@ -5,7 +5,7 @@
 			:id="id"
 			:class="['upload']"
 			:multiple="false"
-			:disabled="self_disabled"
+			:="self_disabled"
 			:show-file-list="false"
 			:http-request="handleHttpUpload"
 			:before-upload="beforeUpload"
@@ -41,11 +41,10 @@
 
 <script setup lang="ts" name="UploadImg">
 import { ref, CSSProperties, computed, inject } from "vue";
-import { ElNotification } from "element-plus";
+import { ElNotification, formContextKey, formItemContextKey } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";
 import type { UploadProps, UploadRequestOptions } from "element-plus";
-import { formContextKey, formItemContextKey } from "element-plus/lib/tokens";
 
 interface UploadFileProps {
 	imageUrl: string; // 图片地址 ==> 必传
