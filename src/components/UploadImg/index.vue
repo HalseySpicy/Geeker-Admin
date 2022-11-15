@@ -5,7 +5,7 @@
 			:id="id"
 			:class="['upload']"
 			:multiple="false"
-			:="self_disabled"
+			:disabled="self_disabled"
 			:show-file-list="false"
 			:http-request="handleHttpUpload"
 			:before-upload="beforeUpload"
