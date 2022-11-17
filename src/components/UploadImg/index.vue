@@ -41,9 +41,9 @@
 
 <script setup lang="ts" name="UploadImg">
 import { ref, CSSProperties, computed, inject } from "vue";
-import { ElNotification, formContextKey, formItemContextKey } from "element-plus";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";
+import { ElNotification, formContextKey, formItemContextKey } from "element-plus";
 import type { UploadProps, UploadRequestOptions } from "element-plus";
 
 interface UploadFileProps {
@@ -62,11 +62,12 @@ const props = withDefaults(defineProps<UploadFileProps>(), {
 	fileSize: 5,
 	uploadStyle: () => ({ width: "175px", height: "175px" })
 });
-// 获取el-form组件上下文
-const formContext = inject(formContextKey, void 0);
-// 获取el-form-item组件上下文
-const formItemContext = inject(formItemContextKey, void 0);
 
+// 获取 el-form 组件上下文
+const formContext = inject(formContextKey, void 0);
+// 获取 el-form-item 组件上下文
+const formItemContext = inject(formItemContextKey, void 0);
+// 判断是否禁用上传和删除
 const self_disabled = computed(() => {
 	return props.disabled || formContext?.disabled;
 });
@@ -86,10 +87,8 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	try {
 		const { data } = await uploadImg(formData);
 		emit("update:imageUrl", data.fileUrl);
-		// 调用el-form-item的校验
-		if (formItemContext?.prop) {
-			formItemContext?.validate(formItemContext.prop as string);
-		}
+		// 调用 el-form 内部的校验方法
+		formItemContext?.prop && formContext?.validateField([formItemContext.prop as string]);
 		emit("check-validate");
 	} catch (error) {
 		options.onError(error as any);

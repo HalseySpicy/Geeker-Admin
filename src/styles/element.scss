@@ -146,9 +146,9 @@
 		}
 
 		// 设置 el-table 中 header 文字不换行，并省略
-		// .el-table__header .el-table__cell > .cell {
-		// 	white-space: nowrap;
-		// }
+		.el-table__header .el-table__cell > .cell {
+			white-space: nowrap;
+		}
 
 		// 解决表格数据为空时样式不居中问题(仅在element-plus中)
 		.el-table__empty-block {

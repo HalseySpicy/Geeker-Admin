@@ -2,7 +2,15 @@
 
 <template>
 	<!-- 查询表单 card -->
-	<SearchForm :search="search" :reset="reset" :searchParam="searchParam" :columns="searchColumns" v-show="isShowSearch" />
+	<SearchForm
+		:search="search"
+		:reset="reset"
+		:searchParam="searchParam"
+		:columns="searchColumns"
+		:colConfig="searchCol"
+		v-show="isShowSearch"
+	/>
+
 	<!-- 表格内容 card -->
 	<div class="card table">
 		<!-- 表格头部 操作按钮 -->
@@ -74,6 +82,7 @@ import { ref, watch, computed, provide } from "vue";
 import { filterEnum } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
+import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { ElTable, TableProps } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
@@ -99,6 +108,7 @@ interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
 	border?: boolean; // 是否带有纵向边框 ==> 非必传（默认为true）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
 	selectId?: string; // 当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
+	searchCol?: number | Record<BreakPoint, number>; // 表格搜索项 每列占比配置 ==> 非必传 { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }
 }
 
 // 接受父组件参数，配置默认值
@@ -108,7 +118,8 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	initParam: {},
 	border: true,
 	toolButton: true,
-	selectId: "id"
+	selectId: "id",
+	searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
 
 // 表格多选 Hooks
@@ -177,13 +188,7 @@ const colRef = ref();
 // 过滤掉不需要设置显隐的列（页面直接隐藏的列不需要列设置）
 //@ts-ignore
 const colSetting = tableColumns.value!.filter((item: ColumnProps) => {
-	return (
-		item.type !== "selection" &&
-		item.type !== "index" &&
-		item.type !== "expand" &&
-		item.prop !== "operation" &&
-		item.isShow !== false
-	);
+	return item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
 });
 const openColSetting = () => {
 	colRef.value.openColSetting();

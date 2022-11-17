@@ -2,13 +2,11 @@
 	<div class="card table-search" v-if="columns.length">
 		<el-form ref="formRef" :model="searchParam" label-width="auto">
 			<Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="colConfig">
-				<template v-for="(item, index) in columns" :key="item.prop">
-					<GridItem v-bind="getResponsive(item)" :index="index">
-						<el-form-item :label="`${item.label} :`">
-							<SearchFormItem :column="item" :searchParam="searchParam" />
-						</el-form-item>
-					</GridItem>
-				</template>
+				<GridItem v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
+					<el-form-item :label="`${item.label} :`">
+						<SearchFormItem :column="item" :searchParam="searchParam" />
+					</el-form-item>
+				</GridItem>
 				<GridItem suffix>
 					<div class="operation">
 						<el-button type="primary" :icon="Search" @click="search">搜索</el-button>
@@ -25,7 +23,7 @@
 		</el-form>
 	</div>
 </template>
-<script setup lang="ts" name="searchForm">
+<script setup lang="ts" name="SearchForm">
 import { computed, ref } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { BreakPoint } from "@/components/Grid/interface";
@@ -35,18 +33,17 @@ import Grid from "@/components/Grid/index.vue";
 import GridItem from "@/components/Grid/components/GridItem.vue";
 
 interface ProTableProps {
-	columns: ColumnProps[]; // 搜索配置列
+	columns?: ColumnProps[]; // 搜索配置列
 	searchParam?: { [key: string]: any }; // 搜索参数
+	colConfig: number | Record<BreakPoint, number>;
 	search: (params: any) => void; // 搜索方法
 	reset: (params: any) => void; // 重置方法
-	colConfig?: number | Record<BreakPoint, number>;
 }
 
 // 默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
 	columns: () => [],
-	searchParam: () => ({}),
-	colConfig: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
+	searchParam: () => ({})
 });
 
 // 获取响应式设置

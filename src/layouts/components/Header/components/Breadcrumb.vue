@@ -10,6 +10,7 @@
 					<span class="breadcrumb-title">首页</span>
 				</div>
 			</el-breadcrumb-item>
+			<!-- other -->
 			<el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="{ path: item.path }">
 				<div class="breadcrumb-item">
 					<el-icon class="breadcrumb-icon" v-if="item.meta.icon && themeConfig.breadcrumbIcon">
@@ -38,7 +39,7 @@ const breadcrumbList = computed(() => authStore.breadcrumbListGet[route.path]);
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 	.el-breadcrumb {
 		display: none;
 	}

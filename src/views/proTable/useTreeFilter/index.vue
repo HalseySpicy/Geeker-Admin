@@ -8,7 +8,14 @@
 			@change="changeTreeFilter"
 		/>
 		<div class="table-box">
-			<ProTable ref="proTable" title="用户列表" :columns="columns" :requestApi="getUserList" :initParam="initParam">
+			<ProTable
+				ref="proTable"
+				title="用户列表"
+				:columns="columns"
+				:requestApi="getUserList"
+				:initParam="initParam"
+				:searchCol="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
+			>
 				<!-- 表格 header 按钮 -->
 				<template #tableHeader>
 					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>

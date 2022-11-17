@@ -16,7 +16,6 @@ type Props = {
 	md?: Responsive;
 	lg?: Responsive;
 	xl?: Responsive;
-	order?: number | undefined;
 };
 
 const props = withDefaults(defineProps<Props>(), {

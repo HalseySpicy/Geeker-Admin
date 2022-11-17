@@ -38,7 +38,7 @@ const refreshCurrentPage = () => {
 };
 provide("refresh", refreshCurrentPage);
 
-// 监听窗口大小变化，折叠侧边栏 && 隐藏面包屑导航
+// 监听窗口大小变化，折叠侧边栏
 const screenWidth = ref<number>(0);
 const listeningWindow = () => {
 	screenWidth.value = document.body.clientWidth;

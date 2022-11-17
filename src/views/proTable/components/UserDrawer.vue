@@ -11,11 +11,9 @@
 		>
 			<el-form-item label="用户头像" prop="avatar">
 				<UploadImg
-					v-model:imageUrl="drawerData.rowData!.avatar"
-					:disabled="drawerData.isView"
-					:file-size="3"
+					v-model:image-url="drawerData.rowData!.avatar"
 					:upload-style="{ width: '130px', height: '130px' }"
-					@check-validate="checkValidate('avatar')"
+					:file-size="3"
 				>
 					<template #tip> 头像大小不能超过 3M </template>
 				</UploadImg>
@@ -96,11 +94,6 @@ const handleSubmit = () => {
 			console.log(error);
 		}
 	});
-};
-
-// 公共校验方法（图片上传成功触发重新校验）
-const checkValidate = (val: string) => {
-	ruleFormRef.value!.validateField(val, () => {});
 };
 
 defineExpose({

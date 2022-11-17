@@ -91,30 +91,50 @@ const cols = computed(() => {
 });
 provide("cols", cols);
 
-const slots = useSlots().default!();
-//寻找需要开始折叠的字段index
+const slots = useSlots().default!() as any;
+
+// 寻找需要开始折叠的字段 index
 const findIndex = () => {
-	let fields = slots[0].children as VNodeArrayChildren;
-	// suffix所占用的列
-	let suffixCols =
-		(slots[1].props![breakPoint.value]?.span ?? slots[1].props?.span ?? 1) +
-		(slots[1].props![breakPoint.value]?.offset ?? slots[1].props?.offset ?? 0);
+	let fields: VNodeArrayChildren = [];
+	let suffix: any = null;
+	slots.forEach((slot: any) => {
+		if (typeof slot.type === "object") {
+			if (slot.type.name === "GridItem" && slot.props?.suffix !== undefined) {
+				suffix = slot;
+			}
+		}
+		if (typeof slot.type === "symbol") {
+			if (Array.isArray(slot.children)) {
+				slot.children.forEach((child: any) => {
+					fields.push(child);
+				});
+			}
+		}
+	});
+
+	// 计算 suffix 所占用的列
+	let suffixCols = 0;
+	if (suffix) {
+		suffixCols =
+			(suffix.props![breakPoint.value]?.span ?? suffix.props?.span ?? 1) +
+			(suffix.props![breakPoint.value]?.offset ?? suffix.props?.offset ?? 0);
+	}
 	try {
 		let find = false;
 		fields.reduce((prev = 0, current, index) => {
-			if ((prev as number) >= props.collapsedRows * cols.value - suffixCols) {
+			prev +=
+				((current as VNode)!.props![breakPoint.value]?.span ?? (current as VNode)!.props?.span ?? 1) +
+				((current as VNode)!.props![breakPoint.value]?.offset ?? (current as VNode)!.props?.offset ?? 0);
+			if ((prev as number) > props.collapsedRows * cols.value - suffixCols) {
 				hiddenIndex.value = index;
 				find = true;
 				throw "find it";
 			}
-			prev +=
-				((current as VNode)!.props![breakPoint.value]?.span ?? (current as VNode)!.props?.span ?? 1) +
-				((current as VNode)!.props![breakPoint.value]?.offset ?? (current as VNode)!.props?.offset ?? 0);
 			return prev;
 		}, 0);
 		if (!find) hiddenIndex.value = -1;
 	} catch (e) {
-		console.warn(e);
+		// console.warn(e);
 	}
 };
 
