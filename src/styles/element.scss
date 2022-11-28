@@ -133,6 +133,9 @@
 	// el-table 表格样式
 	.el-table {
 		flex: 1;
+		table {
+			width: 100%;
+		}
 		.el-table__header th {
 			height: 45px;
 			font-size: 15px;
