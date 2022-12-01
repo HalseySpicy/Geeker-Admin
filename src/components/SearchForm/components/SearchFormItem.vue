@@ -3,7 +3,7 @@
 		v-if="column.search?.el"
 		:is="`el-${column.search.el}`"
 		v-bind="column.search.props"
-		v-model="searchParam[column.search.key ?? column.prop!]"
+		v-model="searchParam[column.search.key ?? handleProp(column.prop!)]"
 		:data="column.search?.el === 'tree-select' ? columnEnum : []"
 		:placeholder="placeholder(column)"
 		:clearable="clearable(column)"
@@ -25,8 +25,9 @@
 </template>
 
 <script setup lang="ts" name="searchFormItem">
-import { ColumnProps } from "@/components/ProTable/interface";
 import { computed, inject, ref } from "vue";
+import { handleProp } from "@/utils/util";
+import { ColumnProps } from "@/components/ProTable/interface";
 
 interface SearchFormItem {
 	column: ColumnProps; // 具体每一个搜索项的配置

@@ -102,7 +102,9 @@ interface FilterEmits {
 }
 const emit = defineEmits<FilterEmits>();
 const change = () => {
-	emit("change", { ...selected.value });
+	let params: { [key: string]: any } = { ...selected.value };
+	props.data.forEach(item => !item.multiple && (params[item.key] = params[item.key].join("")));
+	emit("change", params);
 };
 </script>
 

@@ -98,18 +98,8 @@ const findIndex = () => {
 	let fields: VNodeArrayChildren = [];
 	let suffix: any = null;
 	slots.forEach((slot: any) => {
-		if (typeof slot.type === "object") {
-			if (slot.type.name === "GridItem" && slot.props?.suffix !== undefined) {
-				suffix = slot;
-			}
-		}
-		if (typeof slot.type === "symbol") {
-			if (Array.isArray(slot.children)) {
-				slot.children.forEach((child: any) => {
-					fields.push(child);
-				});
-			}
-		}
+		if (typeof slot.type === "object" && slot.type.name === "GridItem" && slot.props?.suffix !== undefined) suffix = slot;
+		if (typeof slot.type === "symbol" && Array.isArray(slot.children)) slot.children.forEach((child: any) => fields.push(child));
 	});
 
 	// 计算 suffix 所占用的列

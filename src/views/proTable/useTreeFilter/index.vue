@@ -136,7 +136,7 @@ const batchAdd = () => {
 
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref();
-const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
 		title,
 		rowData: { ...rowData },

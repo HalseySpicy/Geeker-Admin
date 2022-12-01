@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
-import { AxiosCanceler } from "./helper/axiosCancel";
 import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
@@ -15,9 +14,6 @@ import router from "@/routers";
  * https://github.com/vuejs/pinia/discussions/664#discussioncomment-1329898
  * https://pinia.vuejs.org/core-concepts/outside-component-usage.html#single-page-applications
  */
-// const globalStore = GlobalStore();
-
-const axiosCanceler = new AxiosCanceler();
 
 const config = {
 	// 默认地址请求地址，可在 .env 开头文件中修改
@@ -42,8 +38,6 @@ class RequestHttp {
 		this.service.interceptors.request.use(
 			(config: AxiosRequestConfig) => {
 				const globalStore = GlobalStore();
-				// * 将当前请求添加到 pending 中
-				axiosCanceler.addPending(config);
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
 				const token: string = globalStore.token;
@@ -60,10 +54,9 @@ class RequestHttp {
 		 */
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				const { data, config } = response;
+				const { data } = response;
 				const globalStore = GlobalStore();
-				// * 在请求结束后，移除本次请求，并关闭请求 loading
-				axiosCanceler.removePending(config);
+				// * 在请求结束后，并关闭请求 loading
 				tryHideFullScreenLoading();
 				// * 登陆失效（code == 599）
 				if (data.code == ResultEnum.OVERDUE) {

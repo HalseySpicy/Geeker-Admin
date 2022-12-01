@@ -1,0 +1,12 @@
+.content-box {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	.descriptions-box {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+	}
+}

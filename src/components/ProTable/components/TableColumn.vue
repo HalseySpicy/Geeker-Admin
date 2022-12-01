@@ -5,7 +5,7 @@
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from "vue";
 import { ElTableColumn, ElTag } from "element-plus";
-import { filterEnum, formatValue } from "@/utils/util";
+import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 import { ColumnProps } from "@/components/ProTable/interface";
 
 const slots = useSlots();
@@ -15,15 +15,15 @@ defineProps<{ column: ColumnProps }>();
 const enumMap = inject("enumMap", ref(new Map()));
 
 // 渲染表格数据
-const renderCellData = (item: ColumnProps, scope: any) => {
+const renderCellData = (item: ColumnProps, scope: { [key: string]: any }) => {
 	return enumMap.value.get(item.prop) && item.isFilterEnum
-		? filterEnum(scope.row[item.prop!], enumMap.value.get(item.prop)!, item.fieldNames)
-		: formatValue(scope.row[item.prop!]);
+		? filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop)!, item.fieldNames)
+		: formatValue(handleRowAccordingToProp(scope.row, item.prop!));
 };
 
 // 获取 tag 类型
-const getTagType = (item: ColumnProps, scope: any) => {
-	return filterEnum(scope.row[item.prop!], enumMap.value.get(item.prop), item.fieldNames, "tag") as any;
+const getTagType = (item: ColumnProps, scope: { [key: string]: any }) => {
+	return filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop), item.fieldNames, "tag") as any;
 };
 
 const renderLoop = (item: ColumnProps) => {

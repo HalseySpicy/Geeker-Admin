@@ -2,13 +2,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
 import { LOGIN_URL } from "@/config/config";
-import { ElNotification } from "element-plus";
-import { AxiosCanceler } from "@/api/helper/axiosCancel";
+import { getFlatArr } from "@/utils/util";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { staticRouter, errorRouter } from "@/routers/modules/staticRouter";
 import NProgress from "@/config/nprogress";
-
-const axiosCanceler = new AxiosCanceler();
 
 /**
  * @description 动态路由参数配置简介
@@ -39,26 +36,36 @@ router.beforeEach(async (to, from, next) => {
 	// 1.NProgress 开始
 	NProgress.start();
 
-	// 2.在跳转路由之前，清除所有的请求
-	axiosCanceler.removeAllPending();
-
-	// 3.如果是访问登陆页，直接放行
+	// 2.如果是访问登陆页，直接放行
 	if (to.path === LOGIN_URL) return next();
 
-	// 4.判断是否有 Token，没有重定向到 login
+	// 3.判断是否有 Token，没有重定向到 login
 	const globalStore = GlobalStore();
 	if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
 
-	// 5.如果没有菜单列表，就重新请求菜单列表并添加动态路由
+	// 4.如果没有菜单列表，就重新请求菜单列表并添加动态路由
 	const authStore = AuthStore();
+	authStore.setRouteName(to.name as string);
 	if (!authStore.authMenuListGet.length) {
 		await initDynamicRouter();
 		return next({ ...to, replace: true });
 	}
 
-	// 6.正常访问页面
+	// 5.正常访问页面
 	next();
 });
+
+/**
+ * @description 重置路由
+ * */
+export const resetRouter = () => {
+	const authStore = AuthStore();
+	let dynamicRouter = getFlatArr(JSON.parse(JSON.stringify(authStore.authMenuListGet)));
+	dynamicRouter.forEach(route => {
+		const { name } = route;
+		if (name && router.hasRoute(name)) router.removeRoute(name);
+	});
+};
 
 /**
  * @description 路由跳转结束
@@ -72,7 +79,7 @@ router.afterEach(() => {
  * */
 router.onError(error => {
 	NProgress.done();
-	ElNotification.error({ title: "路由错误", message: error.message });
+	console.warn("路由错误", error.message);
 });
 
 export default router;

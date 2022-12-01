@@ -128,10 +128,10 @@ module.exports = {
 
 		// typeScript (https://typescript-eslint.io/rules)
 		"@typescript-eslint/no-unused-vars": "error", // 禁止定义未使用的变量
+		"@typescript-eslint/prefer-ts-expect-error": "error", // 禁止使用 @ts-ignore
 		"@typescript-eslint/no-inferrable-types": "off", // 可以轻松推断的显式类型可能会增加不必要的冗长
 		"@typescript-eslint/no-namespace": "off", // 禁止使用自定义 TypeScript 模块和命名空间。
 		"@typescript-eslint/no-explicit-any": "off", // 禁止使用 any 类型
-		"@typescript-eslint/ban-ts-ignore": "off", // 禁止使用 @ts-ignore
 		"@typescript-eslint/ban-types": "off", // 禁止使用特定类型
 		"@typescript-eslint/explicit-function-return-type": "off", // 不允许对初始化为数字、字符串或布尔值的变量或参数进行显式类型声明
 		"@typescript-eslint/no-var-requires": "off", // 不允许在 import 语句中使用 require 语句
@@ -226,6 +226,7 @@ module.exports = {
 	 * null  => 关闭该规则
 	 */
 	rules: {
+		"value-keyword-case": null, // 在 css 中使用 v-bind，不报错
 		"no-descending-specificity": null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
 		"function-url-quotes": "always", // 要求或禁止 URL 的引号 "always(必须加上引号)"|"never(没有引号)"
 		"string-quotes": "double", // 指定字符串使用单引号或双引号

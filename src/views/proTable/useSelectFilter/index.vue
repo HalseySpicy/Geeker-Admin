@@ -150,7 +150,7 @@ const selectFilterValues = ref({ userStatus: "2", userRole: ["1", "3"] });
 const changeSelectFilter = (val: any) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
 	proTable.value.pageable.pageNum = 1;
-	selectFilterValues.value = { ...val, userStatus: val.userStatus.join("") };
+	selectFilterValues.value = val;
 };
 
 // 默认 treeFilter 参数
@@ -192,7 +192,7 @@ const batchAdd = () => {
 
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref();
-const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
 		title,
 		rowData: { ...rowData },

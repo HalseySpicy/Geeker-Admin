@@ -40,11 +40,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			port: viteEnv.VITE_PORT,
 			open: viteEnv.VITE_OPEN,
 			cors: true,
-			// 代理跨域（mock 不需要配置跨域，直接能访问，这里只是个示例）
+			// 跨域代理配置
 			proxy: {
 				"/api": {
-					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
 					target: "https://mock.mengxuegu.com/mock/629d727e6163854a32e8307e", // easymock
+					// target: "https://www.fastmock.site/mock/f81e8333c1a9276214bcdbc170d9e0a0", // fastmock
 					changeOrigin: true,
 					rewrite: path => path.replace(/^\/api/, "")
 				}

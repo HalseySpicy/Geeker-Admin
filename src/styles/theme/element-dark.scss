@@ -72,14 +72,15 @@ html.dark {
 	// --el-mask-color-extra-light: rgb(0 0 0 / 30%);
 
 	// * geeker-admin
-	--geeker-login-shadow-light: 5px 5px 15px rgb(161 161 161 / 20%);
-	--geeker-box-shadow-light: 0 0 10px rgb(255 255 255 / 10%);
-	--geeker-border-light: 1px solid #4c4c4d;
+	--geeker-bg-color: #141414;
 	--geeker-main-bg-color: #0d0d0d;
-	--geeker-popup-color: #060708;
+	--geeker-border-light: 1px solid #4c4c4d;
+	--geeker-login-shadow-light: 5px 5px 15px rgb(161 161 161 / 20%);
 
 	// * wangEditor
-	--w-e-textarea-bg-color: #1b1b1b;
+	--w-e-toolbar-color: #595959;
+	--w-e-toolbar-bg-color: #ffffff;
+	--w-e-textarea-bg-color: #141414;
 	--w-e-textarea-color: #eeeeee;
 
 	// * 以下为自定义暗黑模式内容
@@ -89,7 +90,7 @@ html.dark {
 		.login-box {
 			background-color: var(--el-mask-color) !important;
 			.login-form {
-				background-color: var(--el-bg-color) !important;
+				background-color: var(--geeker-bg-color) !important;
 				box-shadow: var(--geeker-login-shadow-light) !important;
 				.logo-text {
 					color: var(--el-text-color-primary) !important;
@@ -106,13 +107,6 @@ html.dark {
 		background-color: var(--el-border-color-darker) !important;
 	}
 
-	// content-box
-	.content-box {
-		.text {
-			color: var(--el-text-color-regular) !important;
-		}
-	}
-
 	// error-message
 	.not-container {
 		.not-detail {
@@ -122,21 +116,10 @@ html.dark {
 		}
 	}
 
-	// el-table
-	.table-box,
-	.table {
-		.el-table {
-			.el-table__header th {
-				color: var(--el-text-color-regular) !important;
-				background-color: var(--el-bg-color) !important;
-			}
-		}
-	}
-
 	// layout
 	.el-container {
 		.el-aside {
-			background-color: var(--el-bg-color) !important;
+			background-color: var(--geeker-bg-color) !important;
 			border-right: var(--geeker-border-light) !important;
 			.logo {
 				border-bottom: var(--geeker-border-light) !important;
@@ -146,21 +129,21 @@ html.dark {
 			border-right: none !important;
 		}
 		.el-header {
-			background-color: var(--el-bg-color) !important;
+			background-color: var(--geeker-bg-color) !important;
 			border-bottom-color: var(--el-border-color-light) !important;
 		}
 		.el-main {
 			background-color: var(--geeker-main-bg-color) !important;
 			.card {
-				background-color: var(--el-bg-color) !important;
+				background-color: var(--geeker-bg-color) !important;
 			}
 		}
 		.el-tabs {
-			background-color: var(--el-bg-color) !important;
+			background-color: var(--geeker-bg-color) !important;
 		}
 		.el-footer {
 			.footer {
-				background-color: var(--el-bg-color) !important;
+				background-color: var(--geeker-bg-color) !important;
 				border-top-color: var(--el-border-color-light) !important;
 				a {
 					color: var(--el-text-color-regular) !important;
@@ -174,20 +157,20 @@ html.dark {
 	.el-sub-menu,
 	.el-menu-item,
 	.el-sub-menu__title {
-		background-color: var(--el-bg-color) !important;
+		background-color: var(--geeker-bg-color) !important;
 		&:not(.is-active) {
 			color: #bdbdc0 !important;
 		}
 		&.is-active {
 			color: #ffffff !important;
-			background-color: #060708 !important;
+			background-color: #000000 !important;
 		}
 	}
 	.el-menu-item:not(.is-active):hover {
 		background-color: var(--geeker-main-bg-color) !important;
 	}
 	.aside-split {
-		background-color: var(--el-bg-color) !important;
+		background-color: var(--geeker-bg-color) !important;
 		border-right: var(--geeker-border-light) !important;
 		.logo {
 			border-bottom: var(--geeker-border-light) !important;

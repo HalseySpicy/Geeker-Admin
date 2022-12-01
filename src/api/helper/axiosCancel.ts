@@ -1,3 +1,4 @@
+// ? 暂时没使用取消请求，目前全局 loading 已经能控制重复请求了
 import axios, { AxiosRequestConfig, Canceler } from "axios";
 import { isFunction } from "@/utils/is/index";
 import qs from "qs";

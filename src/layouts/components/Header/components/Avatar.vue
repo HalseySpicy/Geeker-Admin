@@ -29,6 +29,7 @@ import { useRouter } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { LOGIN_URL } from "@/config/config";
 import { ElMessageBox, ElMessage } from "element-plus";
+import { resetRouter } from "@/routers/index";
 import InfoDialog from "./InfoDialog.vue";
 import PasswordDialog from "./PasswordDialog.vue";
 
@@ -42,8 +43,9 @@ const logout = () => {
 		cancelButtonText: "取消",
 		type: "warning"
 	}).then(() => {
-		router.replace(LOGIN_URL);
+		resetRouter();
 		globalStore.setToken("");
+		router.replace(LOGIN_URL);
 		ElMessage({
 			type: "success",
 			message: "退出登录成功！"
@@ -58,8 +60,8 @@ const infoRef = ref<null | DialogExpose>(null);
 const passwordRef = ref<null | DialogExpose>(null);
 // 打开修改密码和个人信息弹窗
 const openDialog = (refName: string) => {
-	if (refName == "infoRef") return infoRef.value?.openDialog();
-	passwordRef.value?.openDialog();
+	if (refName == "infoRef") infoRef.value?.openDialog();
+	else passwordRef.value?.openDialog();
 };
 </script>
 

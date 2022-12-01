@@ -81,7 +81,7 @@ const filterNodeMethod = (queryString: string) => {
 const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 	searchMenu.value = "";
 	if (menuItem.meta.isLink) window.open(menuItem.meta.isLink, "_blank");
-	router.push(menuItem.path);
+	else router.push(menuItem.path);
 	closeSearch();
 };
 </script>

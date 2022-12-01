@@ -7,7 +7,7 @@
 		:reset="reset"
 		:searchParam="searchParam"
 		:columns="searchColumns"
-		:colConfig="searchCol"
+		:searchCol="searchCol"
 		v-show="isShowSearch"
 	/>
 
@@ -79,13 +79,13 @@
 
 <script setup lang="ts" name="ProTable">
 import { ref, watch, computed, provide } from "vue";
-import { filterEnum } from "@/utils/util";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { ElTable, TableProps } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
+import { filterEnum, formatValue, handleProp, handleRowAccordingToProp } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
@@ -104,7 +104,7 @@ interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
 	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
 	title?: string; // 表格标题，目前只在打印的时候用到 ==> 非必传
 	pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
-	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}，必须是 reactive 包裹的）
+	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}）
 	border?: boolean; // 是否带有纵向边框 ==> 非必传（默认为true）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
 	selectId?: string; // 当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
@@ -169,7 +169,7 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
 
 // 扁平 columns
 const flatColumns = ref<ColumnProps[]>();
-flatColumns.value = flatColumnsFunc(tableColumns.value);
+flatColumns.value = flatColumnsFunc(tableColumns.value as any);
 
 // 过滤需要搜索的配置项 && 处理搜索排序
 const searchColumns = flatColumns.value
@@ -179,15 +179,13 @@ const searchColumns = flatColumns.value
 // 设置搜索表单的默认值
 searchColumns.forEach(column => {
 	if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
-		searchInitParam.value[column.search.key ?? column.prop!] = column.search?.defaultValue;
+		searchInitParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
 	}
 });
 
-// 列设置
+// 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
-// 过滤掉不需要设置显隐的列（页面直接隐藏的列不需要列设置）
-//@ts-ignore
-const colSetting = tableColumns.value!.filter((item: ColumnProps) => {
+const colSetting = tableColumns.value!.filter(item => {
 	return item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
 });
 const openColSetting = () => {
@@ -197,10 +195,13 @@ const openColSetting = () => {
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
-	let colEnumList = flatColumns.value!.filter(item => item.enum);
+	let colEnumList = flatColumns.value!.filter(item => item.enum || (item.prop && item.prop.split(".").length > 1));
 	colEnumList.forEach(colItem => {
-		printDataList.forEach((tableItem: any) => {
-			tableItem[colItem.prop!] = filterEnum(tableItem[colItem.prop!], enumMap.value.get(colItem.prop!), colItem.fieldNames);
+		printDataList.forEach((tableItem: { [key: string]: any }) => {
+			tableItem[handleProp(colItem.prop!)] =
+				colItem.prop!.split(".").length > 1 && !colItem.enum
+					? formatValue(handleRowAccordingToProp(tableItem, colItem.prop!))
+					: filterEnum(handleRowAccordingToProp(tableItem, colItem.prop!), enumMap.value.get(colItem.prop!), colItem.fieldNames);
 		});
 	});
 	return printDataList;
@@ -218,7 +219,7 @@ const handlePrint = () => {
 			)
 			.map((item: ColumnProps) => {
 				return {
-					field: item.prop,
+					field: handleProp(item.prop!),
 					displayName: item.label
 				};
 			}),

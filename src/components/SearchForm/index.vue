@@ -1,7 +1,7 @@
 <template>
 	<div class="card table-search" v-if="columns.length">
 		<el-form ref="formRef" :model="searchParam" label-width="auto">
-			<Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="colConfig">
+			<Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="searchCol">
 				<GridItem v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
 					<el-form-item :label="`${item.label} :`">
 						<SearchFormItem :column="item" :searchParam="searchParam" />
@@ -35,7 +35,7 @@ import GridItem from "@/components/Grid/components/GridItem.vue";
 interface ProTableProps {
 	columns?: ColumnProps[]; // 搜索配置列
 	searchParam?: { [key: string]: any }; // 搜索参数
-	colConfig: number | Record<BreakPoint, number>;
+	searchCol: number | Record<BreakPoint, number>;
 	search: (params: any) => void; // 搜索方法
 	reset: (params: any) => void; // 重置方法
 }
@@ -73,10 +73,10 @@ const showCollapse = computed(() => {
 		prev +=
 			(current.search![breakPoint.value]?.span ?? current.search?.span ?? 1) +
 			(current.search![breakPoint.value]?.offset ?? current.search?.offset ?? 0);
-		if (typeof props.colConfig !== "number") {
-			if (prev >= props.colConfig[breakPoint.value]) show = true;
+		if (typeof props.searchCol !== "number") {
+			if (prev >= props.searchCol[breakPoint.value]) show = true;
 		} else {
-			if (prev > props.colConfig) show = true;
+			if (prev > props.searchCol) show = true;
 		}
 		return prev;
 	}, 0);

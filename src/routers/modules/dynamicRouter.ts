@@ -13,7 +13,7 @@ const modules = import.meta.glob("@/views/**/*.vue");
  */
 export const initDynamicRouter = async () => {
 	try {
-		// 1.获取菜单列表 && 按钮权限
+		// 1.获取菜单列表 && 按钮权限（可合并到一个接口获取，根据后端不同可自行改造）
 		const authStore = AuthStore();
 		await authStore.getAuthMenuList();
 		await authStore.getAuthButtonList();
@@ -30,7 +30,7 @@ export const initDynamicRouter = async () => {
 			return Promise.reject("No permission");
 		}
 
-		// 3.添加动态路由 (getFlatArr 方法把菜单全部处理成一维数组，方便添加动态路由)
+		// 3.添加动态路由
 		let dynamicRouter = getFlatArr(JSON.parse(JSON.stringify(authStore.authMenuListGet)));
 		dynamicRouter.forEach((item: any) => {
 			if (item.children) delete item.children;

@@ -52,7 +52,7 @@
 		margin: 20px 0 30px;
 		font-size: 23px;
 		font-weight: bold;
-		color: rgb(88 88 88);
+		color: var(--el-text-color-regular);
 	}
 	.el-descriptions {
 		width: 100%;
@@ -133,12 +133,17 @@
 	// el-table 表格样式
 	.el-table {
 		flex: 1;
+
+		// 修复 safari 浏览器表格错位 https://github.com/HalseySpicy/Geeker-Admin/issues/83
+		table {
+			width: 100%;
+		}
 		.el-table__header th {
 			height: 45px;
 			font-size: 15px;
 			font-weight: bold;
-			color: #252525;
-			background: #fafafa;
+			color: var(--el-text-color-primary);
+			background: var(--el-fill-color-light);
 		}
 		.el-table__row {
 			height: 45px;

@@ -44,4 +44,5 @@ export interface AuthState {
 		};
 	};
 	authMenuList: Menu.MenuOptions[];
+	routeName: string;
 }

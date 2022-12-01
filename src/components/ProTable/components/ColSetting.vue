@@ -3,11 +3,6 @@
 	<el-drawer title="列设置" v-model="drawerVisible" size="500px">
 		<div class="table" ref="colTableRef">
 			<el-table :data="colSetting" :border="true" row-key="prop" default-expand-all :tree-props="{ children: '_children' }">
-				<!-- <el-table-column prop="name" align="center" label="#">
-					<el-tag class="cursor-move">
-						<el-icon class="cursor-move"><DCaret /></el-icon>
-					</el-tag>
-				</el-table-column> -->
 				<el-table-column prop="label" align="center" label="列名" />
 				<el-table-column prop="isShow" align="center" label="显示" v-slot="scope">
 					<el-switch v-model="scope.row.isShow"></el-switch>

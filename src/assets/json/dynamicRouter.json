@@ -32,7 +32,7 @@
 		{
 			"path": "/proTable",
 			"name": "proTable",
-			"redirect": "/proTable/useComponent",
+			"redirect": "/proTable/useProTable",
 			"meta": {
 				"icon": "MessageBox",
 				"title": "超级表格",
@@ -44,12 +44,12 @@
 			},
 			"children": [
 				{
-					"path": "/proTable/useComponent",
-					"name": "useComponent",
-					"component": "/proTable/useComponent/index",
+					"path": "/proTable/useProTable",
+					"name": "useProTable",
+					"component": "/proTable/useProTable/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "使用 Component",
+						"title": "使用 ProTable",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,
@@ -78,6 +78,234 @@
 					"meta": {
 						"icon": "Menu",
 						"title": "使用 SelectFilter",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/proTable/complexProTable",
+					"name": "complexProTable",
+					"component": "/proTable/complexProTable/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "复杂 ProTable",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/proTable/document",
+					"name": "document",
+					"component": "/proTable/document/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "ProTable 文档",
+						"isLink": "https://juejin.cn/post/7166068828202336263",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				}
+			]
+		},
+		{
+			"path": "/auth",
+			"name": "auth",
+			"redirect": "/auth/menuList",
+			"meta": {
+				"icon": "Postcard",
+				"title": "权限管理",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": false,
+				"isKeepAlive": true
+			},
+			"children": [
+				{
+					"path": "/auth/menuList",
+					"name": "menuList",
+					"component": "/auth/menuList/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "菜单权限",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/auth/buttonList",
+					"name": "buttonList",
+					"component": "/auth/buttonList/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "按钮权限",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				}
+			]
+		},
+		{
+			"path": "/assembly",
+			"name": "assembly",
+			"redirect": "/assembly/guide",
+			"meta": {
+				"icon": "Briefcase",
+				"title": "常用组件",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": false,
+				"isKeepAlive": true
+			},
+			"children": [
+				{
+					"path": "/assembly/guide",
+					"name": "guide",
+					"component": "/assembly/guide/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "引导页",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/selectIcon",
+					"name": "selectIcon",
+					"component": "/assembly/selectIcon/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "图标选择器",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/selectFilter",
+					"name": "selectFilter",
+					"component": "/assembly/selectFilter/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "分类筛选器",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/treeFilter",
+					"name": "treeFilter",
+					"component": "/assembly/treeFilter/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "树形筛选器",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/svgIcon",
+					"name": "svgIcon",
+					"component": "/assembly/svgIcon/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "SVG 图标",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/cropper",
+					"name": "cropper",
+					"component": "/assembly/cropper/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "图片裁剪",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/uploadFile",
+					"name": "uploadFile",
+					"component": "/assembly/uploadFile/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "文件上传",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/batchImport",
+					"name": "batchImport",
+					"component": "/assembly/batchImport/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "批量添加数据",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/wangEditor",
+					"name": "wangEditor",
+					"component": "/assembly/wangEditor/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "富文本编辑器",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/assembly/draggable",
+					"name": "draggable",
+					"component": "/assembly/draggable/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "拖拽组件",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,
@@ -294,134 +522,6 @@
 					"meta": {
 						"icon": "Menu",
 						"title": "嵌套环形图",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				}
-			]
-		},
-		{
-			"path": "/assembly",
-			"name": "assembly",
-			"redirect": "/assembly/guide",
-			"meta": {
-				"icon": "Briefcase",
-				"title": "常用组件",
-				"isLink": "",
-				"isHide": false,
-				"isFull": false,
-				"isAffix": false,
-				"isKeepAlive": true
-			},
-			"children": [
-				{
-					"path": "/assembly/guide",
-					"name": "guide",
-					"component": "/assembly/guide/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "引导页",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/selectIcon",
-					"name": "selectIcon",
-					"component": "/assembly/selectIcon/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "图标选择器",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/selectFilter",
-					"name": "selectFilter",
-					"component": "/assembly/selectFilter/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "分类筛选器",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/svgIcon",
-					"name": "svgIcon",
-					"component": "/assembly/svgIcon/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "SVG 图标",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/uploadImg",
-					"name": "uploadImg",
-					"component": "/assembly/uploadImg/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "图片上传",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/batchImport",
-					"name": "batchImport",
-					"component": "/assembly/batchImport/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "批量添加数据",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/wangEditor",
-					"name": "wangEditor",
-					"component": "/assembly/wangEditor/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "富文本编辑器",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/draggable",
-					"name": "draggable",
-					"component": "/assembly/draggable/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "拖拽组件",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,

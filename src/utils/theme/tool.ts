@@ -40,7 +40,7 @@ export function getDarkColor(color: string, level: number) {
 	let reg = /^\#?[0-9A-Fa-f]{6}$/;
 	if (!reg.test(color)) return ElMessage.warning("输入错误的hex颜色值");
 	let rgb = hexToRgb(color);
-	for (let i = 0; i < 3; i++) rgb[i] = Math.floor(rgb[i] * (1 - level));
+	for (let i = 0; i < 3; i++) rgb[i] = Math.round(20.5 * level + rgb[i] * (1 - level));
 	return rgbToHex(rgb[0], rgb[1], rgb[2]);
 }
 
@@ -54,6 +54,6 @@ export function getLightColor(color: string, level: number) {
 	let reg = /^\#?[0-9A-Fa-f]{6}$/;
 	if (!reg.test(color)) return ElMessage.warning("输入错误的hex颜色值");
 	let rgb = hexToRgb(color);
-	for (let i = 0; i < 3; i++) rgb[i] = Math.floor((255 - rgb[i]) * level + rgb[i]);
+	for (let i = 0; i < 3; i++) rgb[i] = Math.round(255 * level + rgb[i] * (1 - level));
 	return rgbToHex(rgb[0], rgb[1], rgb[2]);
 }
