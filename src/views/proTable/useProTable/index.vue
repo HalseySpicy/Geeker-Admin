@@ -16,7 +16,7 @@
 				<el-button type="danger" :icon="Delete" plain @click="batchDelete(scope.selectedListIds)" :disabled="!scope.isSelected">
 					批量删除用户
 				</el-button>
-				<el-button type="primary" plain @click="toDetail">页面详情</el-button>
+				<el-button type="primary" plain @click="toDetail">To 详情页面</el-button>
 			</template>
 			<!-- Expand -->
 			<template #expand="scope">

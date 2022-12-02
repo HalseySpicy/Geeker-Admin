@@ -16,6 +16,7 @@ import NProgress from "@/config/nprogress";
  * @param meta ==> 菜单信息
  * @param meta.icon ==> 菜单图标
  * @param meta.title ==> 菜单标题
+ * @param meta.activeMenu ==> 当前路由为详情页时，需要高亮的菜单
  * @param meta.isLink ==> 是否外链
  * @param meta.isHide ==> 是否隐藏
  * @param meta.isFull ==> 是否全屏(示例：数据大屏页面)

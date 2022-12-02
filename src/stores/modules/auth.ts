@@ -22,8 +22,6 @@ export const AuthStore = defineStore({
 		authMenuListGet: state => state.authMenuList,
 		// 后端返回的菜单列表 ==> 左侧菜单栏渲染，需要去除 isHide == true
 		showMenuListGet: state => getShowMenuList(state.authMenuList),
-		// 扁平化成一维数组后的菜单列表 ==> 用来添加动态路由
-		// flatMenuListGet: state => getFlatArr(state.authMenuList),
 		// 面包屑导航列表
 		breadcrumbListGet: state => getAllBreadcrumbList(state.authMenuList),
 		// 需要缓存的菜单 name，用作页面 keepAlive
