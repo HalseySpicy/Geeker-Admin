@@ -64,7 +64,7 @@ const route = useRoute();
 const router = useRouter();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 

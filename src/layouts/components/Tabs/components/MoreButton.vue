@@ -55,12 +55,12 @@ const maximize = () => {
 // Close Current
 const closeCurrentTab = () => {
 	if (route.meta.isAffix) return;
-	tabStore.removeTabs(route.path);
+	tabStore.removeTabs(route.fullPath);
 };
 
 // Close Other
 const closeOtherTab = () => {
-	tabStore.closeMultipleTab(route.path);
+	tabStore.closeMultipleTab(route.fullPath);
 };
 
 // Close All
