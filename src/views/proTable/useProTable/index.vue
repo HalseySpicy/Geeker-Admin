@@ -16,6 +16,7 @@
 				<el-button type="danger" :icon="Delete" plain @click="batchDelete(scope.selectedListIds)" :disabled="!scope.isSelected">
 					批量删除用户
 				</el-button>
+				<el-button type="primary" plain @click="toDetail">页面详情</el-button>
 			</template>
 			<!-- Expand -->
 			<template #expand="scope">
@@ -49,6 +50,7 @@
 <script setup lang="tsx" name="useProTable">
 import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
 import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
@@ -71,6 +73,12 @@ import {
 	getUserGender
 } from "@/api/modules/user";
 
+const router = useRouter();
+
+// 跳转详情页
+const toDetail = () => {
+	router.push(`/proTable/useProTable/detail/${Math.random()}?params=detail-page`);
+};
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 

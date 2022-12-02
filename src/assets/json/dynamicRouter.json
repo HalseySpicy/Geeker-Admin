@@ -55,7 +55,24 @@
 						"isFull": false,
 						"isAffix": false,
 						"isKeepAlive": true
-					}
+					},
+					"children": [
+						{
+							"path": "/proTable/useProTable/detail/:id",
+							"name": "useProTableDetail",
+							"component": "/proTable/useProTable/detail",
+							"meta": {
+								"icon": "Menu",
+								"title": "ProTable 详情",
+								"activeMenu": "/proTable/useProTable",
+								"isLink": "",
+								"isHide": true,
+								"isFull": false,
+								"isAffix": false,
+								"isKeepAlive": true
+							}
+						}
+					]
 				},
 				{
 					"path": "/proTable/useTreeFilter",

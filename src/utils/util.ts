@@ -255,7 +255,7 @@ export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
 	let handleBreadcrumbList: { [key: string]: any } = {};
 	const loop = (menuItem: Menu.MenuOptions) => {
 		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
-		else handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
+		handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
 	};
 	menuList.forEach(item => loop(item));
 	return handleBreadcrumbList;

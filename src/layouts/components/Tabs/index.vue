@@ -29,19 +29,19 @@ const router = useRouter();
 const tabStore = TabsStore();
 const globalStore = GlobalStore();
 
-const tabsMenuValue = ref(route.path);
+const tabsMenuValue = ref(route.fullPath);
 const tabsMenuList = computed(() => tabStore.tabsMenuList);
 const themeConfig = computed(() => globalStore.themeConfig);
 
 // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
 watch(
-	() => route.path,
+	() => route.fullPath,
 	() => {
-		tabsMenuValue.value = route.path;
+		tabsMenuValue.value = route.fullPath;
 		const tabsParams = {
 			icon: route.meta.icon as string,
 			title: route.meta.title as string,
-			path: route.path,
+			path: route.fullPath,
 			close: !route.meta.isAffix
 		};
 		tabStore.addTabs(tabsParams);
@@ -59,7 +59,7 @@ const tabClick = (tabItem: TabsPaneContext) => {
 
 // Remove Tab
 const tabRemove = (activeTabPath: string) => {
-	tabStore.removeTabs(activeTabPath, activeTabPath == route.path);
+	tabStore.removeTabs(activeTabPath, activeTabPath == route.fullPath);
 };
 </script>
 
