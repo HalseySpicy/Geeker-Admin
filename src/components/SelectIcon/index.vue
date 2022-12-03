@@ -1,18 +1,11 @@
 <template>
 	<div class="icon-box">
-		<el-input
-			ref="inputRef"
-			v-model="iconValue"
-			v-bind="$attrs"
-			:placeholder="placeholder"
-			:clearable="clearable"
-			@focus="openDialog"
-		>
+		<el-input ref="inputRef" v-model="props.iconValue" v-bind="$attrs" :placeholder="props.placeholder" @focus="openDialog">
 			<template #append>
-				<el-button :icon="customIcons[iconValue]" />
+				<el-button :icon="customIcons[props.iconValue]" />
 			</template>
 		</el-input>
-		<el-dialog v-model="dialogVisible" :title="placeholder" top="50px" width="66%">
+		<el-dialog v-model="dialogVisible" :title="props.title" top="50px" width="66%">
 			<el-input v-model="inputValue" placeholder="搜索图标" size="large" :prefix-icon="Icons.Search" />
 			<el-scrollbar v-if="Object.keys(iconsList).length">
 				<div class="icon-list">
@@ -34,13 +27,11 @@ import * as Icons from "@element-plus/icons-vue";
 interface SelectIconProps {
 	iconValue: string;
 	title?: string;
-	clearable?: boolean;
 	placeholder?: string;
 }
 
-withDefaults(defineProps<SelectIconProps>(), {
+const props = withDefaults(defineProps<SelectIconProps>(), {
 	title: "请选择图标",
-	clearable: true,
 	placeholder: "请选择图标"
 });
 
