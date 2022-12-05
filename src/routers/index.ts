@@ -34,15 +34,20 @@ const router = createRouter({
  * @description 路由拦截 beforeEach
  * */
 router.beforeEach(async (to, from, next) => {
+	const globalStore = GlobalStore();
+
 	// 1.NProgress 开始
 	NProgress.start();
 
-	// 2.如果是访问登陆页，直接放行
-	if (to.path === LOGIN_URL) return next();
+	// 2.如果是访问登陆页，没有 token 直接放行，有 token 就在当前页
+	if (to.path === LOGIN_URL) {
+		if (!globalStore.token) return next();
+		else return next(from.fullPath);
+	}
 
-	// 3.判断是否有 Token，没有重定向到 login
-	const globalStore = GlobalStore();
-	if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+	// 3.判断是否有 Token，没有重定向到 login，并携带当前退出页地址和参数
+	const path = `${LOGIN_URL}?redirect=${to.path}&params=${JSON.stringify(to.query ? to.query : to.params)}`;
+	if (!globalStore.token) return next(path);
 
 	// 4.如果没有菜单列表，就重新请求菜单列表并添加动态路由
 	const authStore = AuthStore();

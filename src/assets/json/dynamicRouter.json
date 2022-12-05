@@ -89,6 +89,21 @@
 					}
 				},
 				{
+					"path": "/proTable/useTreeFilter/detail/:id",
+					"name": "useTreeFilterDetail",
+					"component": "/proTable/useTreeFilter/detail",
+					"meta": {
+						"icon": "Menu",
+						"title": "TreeFilter 详情",
+						"activeMenu": "/proTable/useTreeFilter",
+						"isLink": "",
+						"isHide": true,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
 					"path": "/proTable/useSelectFilter",
 					"name": "useSelectFilter",
 					"component": "/proTable/useSelectFilter/index",

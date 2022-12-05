@@ -21,6 +21,7 @@
 					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
 					<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
 					<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+					<el-button type="primary" plain @click="toDetail">To 平级详情页面</el-button>
 				</template>
 				<!-- 表格操作 -->
 				<template #operation="scope">
@@ -38,6 +39,7 @@
 <script setup lang="ts" name="useTreeFilter">
 import { ref, reactive } from "vue";
 import { User } from "@/api/interface";
+import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
@@ -59,6 +61,13 @@ import {
 	getUserGender,
 	getUserDepartment
 } from "@/api/modules/user";
+
+const router = useRouter();
+
+// 跳转详情页
+const toDetail = () => {
+	router.push(`/proTable/useTreeFilter/detail/123456?params=detail-page`);
+};
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();

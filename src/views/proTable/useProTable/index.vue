@@ -13,10 +13,10 @@
 				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-auth="['add']">新增用户</el-button>
 				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-auth="['batchAdd']">批量添加用户</el-button>
 				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-auth="['export']">导出用户数据</el-button>
+				<el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
 				<el-button type="danger" :icon="Delete" plain @click="batchDelete(scope.selectedListIds)" :disabled="!scope.isSelected">
 					批量删除用户
 				</el-button>
-				<el-button type="primary" plain @click="toDetail">To 详情页面</el-button>
 			</template>
 			<!-- Expand -->
 			<template #expand="scope">
@@ -79,6 +79,7 @@ const router = useRouter();
 const toDetail = () => {
 	router.push(`/proTable/useProTable/detail/${Math.random()}?params=detail-page`);
 };
+
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
@@ -143,8 +144,8 @@ const columns: ColumnProps[] = [
 		prop: "gender",
 		label: "性别",
 		enum: getUserGender,
-		fieldNames: { label: "genderLabel", value: "genderValue" },
-		search: { el: "select" }
+		search: { el: "select" },
+		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	// 多级 prop
 	{ prop: "user.detail.age", label: "年龄", search: { el: "input" } },
@@ -186,8 +187,8 @@ const columns: ColumnProps[] = [
 		search: {
 			el: "date-picker",
 			span: 2,
-			defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"],
-			props: { type: "datetimerange" }
+			props: { type: "datetimerange" },
+			defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"]
 		}
 	},
 	{ prop: "operation", label: "操作", fixed: "right", width: 330 }

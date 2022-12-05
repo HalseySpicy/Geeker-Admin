@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { Login } from "@/api/interface";
 import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
@@ -38,6 +38,7 @@ import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
 import md5 from "js-md5";
 
+const route = useRoute();
 const router = useRouter();
 const tabsStore = TabsStore();
 const globalStore = GlobalStore();
@@ -68,8 +69,10 @@ const login = (formEl: FormInstance | undefined) => {
 			// 3.清除上个账号的 tab 信息
 			tabsStore.closeMultipleTab();
 
-			// 4.跳转到首页
-			router.push(HOME_URL);
+			// 4.跳转页面，如果没有 redirect 跳转到首页，有就携带参数跳转到 redirect
+			if (!route.query?.redirect) router.push(HOME_URL);
+			else router.push({ path: route.query?.redirect as string, query: JSON.parse(route.query?.params as string) });
+
 			ElNotification({
 				title: getTimeState(),
 				message: "欢迎登录 Geeker-Admin",

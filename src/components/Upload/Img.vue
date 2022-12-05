@@ -215,6 +215,9 @@ const uploadError = () => {
 	:deep(.upload) {
 		.el-upload {
 			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			width: v-bind(width);
 			height: v-bind(height);
 			overflow: hidden;

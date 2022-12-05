@@ -5,12 +5,16 @@
 		v-bind="column.search.props"
 		v-model="searchParam[column.search.key ?? handleProp(column.prop!)]"
 		:data="column.search?.el === 'tree-select' ? columnEnum : []"
+		:options="column.search?.el === 'cascader' ? columnEnum : []"
 		:placeholder="placeholder(column)"
 		:clearable="clearable(column)"
 		range-separator="至"
 		start-placeholder="开始时间"
 		end-placeholder="结束时间"
 	>
+		<template #default="{ data }" v-if="column.search.el === 'cascader'">
+			<span>{{ data[fieldNames().label] }}</span>
+		</template>
 		<template v-if="column.search.el === 'select'">
 			<component
 				:is="`el-option`"
