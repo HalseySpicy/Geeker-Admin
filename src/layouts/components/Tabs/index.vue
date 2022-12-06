@@ -17,10 +17,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import Sortable from "sortablejs";
+import { ref, computed, watch, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
+import { AuthStore } from "@/stores/modules/auth";
 import { TabsPaneContext } from "element-plus";
 import MoreButton from "./components/MoreButton.vue";
 
@@ -28,6 +30,7 @@ const route = useRoute();
 const router = useRouter();
 const tabStore = TabsStore();
 const globalStore = GlobalStore();
+const authStore = AuthStore();
 
 const tabsMenuValue = ref(route.fullPath);
 const tabsMenuList = computed(() => tabStore.tabsMenuList);
@@ -37,6 +40,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 watch(
 	() => route.fullPath,
 	() => {
+		if (route.meta.isFull) return;
 		tabsMenuValue.value = route.fullPath;
 		const tabsParams = {
 			icon: route.meta.icon as string,
@@ -51,15 +55,43 @@ watch(
 	}
 );
 
+onMounted(() => {
+	tabsDrop();
+	initTabs();
+});
+
+// 标签拖拽排序
+const tabsDrop = () => {
+	Sortable.create(document.querySelector(".el-tabs__nav") as HTMLElement, {
+		draggable: ".el-tabs__item",
+		animation: 300
+	});
+};
+
+// 初始化需要固定的标签
+const initTabs = () => {
+	authStore.flatMenuListGet.forEach(item => {
+		if (item.meta.isAffix && !item.meta.isHide && !item.meta.isFull) {
+			const tabsParams = {
+				icon: item.meta.icon,
+				title: item.meta.title,
+				path: item.path,
+				close: !item.meta.isAffix
+			};
+			tabStore.addTabs(tabsParams);
+		}
+	});
+};
+
 // Tab Click
 const tabClick = (tabItem: TabsPaneContext) => {
-	let path = tabItem.props.name as string;
-	router.push(path);
+	const fullPath = tabItem.props.name as string;
+	router.push(fullPath);
 };
 
 // Remove Tab
-const tabRemove = (activeTabPath: string) => {
-	tabStore.removeTabs(activeTabPath, activeTabPath == route.fullPath);
+const tabRemove = (fullPath: string) => {
+	tabStore.removeTabs(fullPath, fullPath == route.fullPath);
 };
 </script>
 

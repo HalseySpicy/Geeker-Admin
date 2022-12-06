@@ -29,12 +29,11 @@ import { GlobalStore } from "@/stores";
 import { LOGIN_URL } from "@/config/config";
 import { resetRouter } from "@/routers/index";
 import { logoutApi } from "@/api/modules/login";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
 import InfoDialog from "./InfoDialog.vue";
 import PasswordDialog from "./PasswordDialog.vue";
 
-const route = useRoute();
 const router = useRouter();
 const globalStore = GlobalStore();
 
@@ -51,9 +50,8 @@ const logout = () => {
 		globalStore.setToken("");
 		// 3.重置路由
 		resetRouter();
-		// 4.重定向到登陆页，并携带当前退出页地址和参数
-		const path = `${LOGIN_URL}?redirect=${route.path}&params=${JSON.stringify(route.query ? route.query : route.params)}`;
-		router.replace(path);
+		// 4.重定向到登陆页
+		router.replace(LOGIN_URL);
 		ElMessage.success("退出登录成功！");
 	});
 };

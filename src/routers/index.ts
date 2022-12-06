@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
 import { LOGIN_URL } from "@/config/config";
-import { getFlatArr } from "@/utils/util";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { staticRouter, errorRouter } from "@/routers/modules/staticRouter";
 import NProgress from "@/config/nprogress";
@@ -45,9 +44,8 @@ router.beforeEach(async (to, from, next) => {
 		else return next(from.fullPath);
 	}
 
-	// 3.判断是否有 Token，没有重定向到 login，并携带当前退出页地址和参数
-	const path = `${LOGIN_URL}?redirect=${to.path}&params=${JSON.stringify(to.query ? to.query : to.params)}`;
-	if (!globalStore.token) return next(path);
+	// 3.判断是否有 Token，没有重定向到 login
+	if (!globalStore.token) return next(LOGIN_URL);
 
 	// 4.如果没有菜单列表，就重新请求菜单列表并添加动态路由
 	const authStore = AuthStore();
@@ -66,8 +64,7 @@ router.beforeEach(async (to, from, next) => {
  * */
 export const resetRouter = () => {
 	const authStore = AuthStore();
-	let dynamicRouter = getFlatArr(JSON.parse(JSON.stringify(authStore.authMenuListGet)));
-	dynamicRouter.forEach(route => {
+	authStore.flatMenuListGet.forEach(route => {
 		const { name } = route;
 		if (name && router.hasRoute(name)) router.removeRoute(name);
 	});

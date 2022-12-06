@@ -19,13 +19,13 @@
 				</UploadImg>
 			</el-form-item>
 			<el-form-item label="用户照片" prop="photo">
-				<UploadImgMultiple v-model:fileList="drawerProps.rowData!.photo" height="140px" width="140px" border-radius="50%">
+				<UploadImgs v-model:fileList="drawerProps.rowData!.photo" height="140px" width="140px" border-radius="50%">
 					<template #empty>
 						<el-icon><Picture /></el-icon>
 						<span>请上传照片</span>
 					</template>
 					<template #tip> 照片大小不能超过 5M </template>
-				</UploadImgMultiple>
+				</UploadImgs>
 			</el-form-item>
 			<el-form-item label="用户姓名" prop="username">
 				<el-input v-model="drawerProps.rowData!.username" placeholder="请填写用户姓名" clearable></el-input>
@@ -57,7 +57,7 @@ import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { ElMessage, FormInstance } from "element-plus";
 import UploadImg from "@/components/Upload/Img.vue";
-import UploadImgMultiple from "@/components/Upload/ImgMultiple.vue";
+import UploadImgs from "@/components/Upload/Imgs.vue";
 
 const rules = reactive({
 	avatar: [{ required: true, message: "请上传用户头像", trigger: "change" }],

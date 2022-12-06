@@ -4,20 +4,20 @@
 		<div class="card img-box">
 			<span class="text">多图片上传组件 🍓🍇🍈🍉</span>
 			<div class="upload-list">
-				<UploadImgMultiple v-model:fileList="fileList" :drag="false" borderRadius="50%">
+				<UploadImgs v-model:fileList="fileList" :drag="false" borderRadius="50%">
 					<template #empty>
 						<el-icon><Picture /></el-icon>
 						<span>请上传照片</span>
 					</template>
 					<template #tip> 圆形组件，图片最大为 5M（禁止拖拽上传）</template>
-				</UploadImgMultiple>
-				<UploadImgMultiple v-model:fileList="fileList1" width="250px">
+				</UploadImgs>
+				<UploadImgs v-model:fileList="fileList1" width="250px">
 					<template #empty>
 						<el-icon><Picture /></el-icon>
 						<span>请上传照片</span>
 					</template>
 					<template #tip> 长方形组件（可拖拽上传）</template>
-				</UploadImgMultiple>
+				</UploadImgs>
 			</div>
 			<el-descriptions title="配置项 📚（其它参数和单图上传组件相同）" :column="1" border>
 				<el-descriptions-item label="fileList">
@@ -30,17 +30,17 @@
 		<div class="card img-box">
 			<span class="text">单图片上传组件 🍓🍇🍈🍉</span>
 			<div class="upload-list">
-				<UploadImg v-model:imageUrl="avatar1" :fileSize="3" borderRadius="50%">
+				<UploadImg v-model:imageUrl="avatar1" :fileSize="3">
 					<template #tip> 上传图片最大为 3M </template>
 				</UploadImg>
-				<UploadImg v-model:imageUrl="avatar2" :drag="false">
+				<UploadImg v-model:imageUrl="avatar2" :drag="false" borderRadius="50%">
 					<template #empty>
 						<el-icon><Avatar /></el-icon>
 						<span>请上传头像</span>
 					</template>
 					<template #tip> 圆形组件（禁止拖拽上传） </template>
 				</UploadImg>
-				<UploadImg v-model:imageUrl="avatar3">
+				<UploadImg v-model:imageUrl="avatar3" width="250px">
 					<template #empty>
 						<el-icon><Picture /></el-icon>
 						<span>请上传 Banner 图</span>
@@ -94,13 +94,13 @@
 						</UploadImg>
 					</el-form-item>
 					<el-form-item label="用户照片" prop="photo">
-						<UploadImgMultiple v-model:fileList="fromModel.photo" :limit="3" height="140px" width="140px" border-radius="50%">
+						<UploadImgs v-model:fileList="fromModel.photo" :limit="3" height="140px" width="140px" border-radius="50%">
 							<template #empty>
 								<el-icon><Picture /></el-icon>
 								<span>请上传照片</span>
 							</template>
 							<template #tip> 最多上传 3 张照片 </template>
-						</UploadImgMultiple>
+						</UploadImgs>
 					</el-form-item>
 					<el-form-item label="用户姓名" prop="username">
 						<el-input v-model="fromModel.username" placeholder="请填写用户姓名" clearable></el-input>
@@ -136,13 +136,13 @@
 						</UploadImg>
 					</el-form-item>
 					<el-form-item label="用户照片" prop="photo">
-						<UploadImgMultiple v-model:fileList="fromModel1.photo" height="140px" width="140px" border-radius="50%">
+						<UploadImgs v-model:fileList="fromModel1.photo" height="140px" width="140px" border-radius="50%">
 							<template #empty>
 								<el-icon><Picture /></el-icon>
 								<span>请上传照片</span>
 							</template>
 							<template #tip> 照片大小不能超过 5M </template>
-						</UploadImgMultiple>
+						</UploadImgs>
 					</el-form-item>
 					<el-form-item label="用户姓名" prop="username">
 						<el-input v-model="fromModel1.username" placeholder="请填写用户姓名" clearable></el-input>
@@ -167,7 +167,7 @@
 import { ref, reactive } from "vue";
 import { FormInstance } from "element-plus";
 import UploadImg from "@/components/Upload/Img.vue";
-import UploadImgMultiple from "@/components/Upload/ImgMultiple.vue";
+import UploadImgs from "@/components/Upload/Imgs.vue";
 
 const fileList = ref([{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110013.jpg" }]);
 const fileList1 = ref([]);
