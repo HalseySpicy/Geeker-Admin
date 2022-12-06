@@ -16,6 +16,7 @@
 				placeholder="菜单搜索 ：支持菜单名称、路径"
 				:fetch-suggestions="searchMenuList"
 				@select="handleClickMenu"
+				@click.stop
 			>
 				<template #prefix>
 					<el-icon>
