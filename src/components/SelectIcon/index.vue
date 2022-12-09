@@ -2,10 +2,11 @@
 	<div class="icon-box">
 		<el-input
 			ref="inputRef"
-			v-model="iconValue"
+			v-model="valueIcon"
 			v-bind="$attrs"
 			:placeholder="placeholder"
 			:clearable="clearable"
+			@clear="clearIcon"
 			@focus="openDialog"
 		>
 			<template #append>
@@ -38,11 +39,15 @@ interface SelectIconProps {
 	placeholder?: string;
 }
 
-withDefaults(defineProps<SelectIconProps>(), {
+const props = withDefaults(defineProps<SelectIconProps>(), {
+	iconValue: "",
 	title: "请选择图标",
 	clearable: true,
 	placeholder: "请选择图标"
 });
+
+// 重新接收一下，防止打包后 clearable 报错
+const valueIcon = ref(props.iconValue);
 
 const customIcons: { [key: string]: any } = Icons;
 
@@ -58,7 +63,13 @@ const emit = defineEmits(["update:iconValue"]);
 // 选择图标(触发更新父组件数据)
 const selectIcon = (item: any) => {
 	dialogVisible.value = false;
+	valueIcon.value = item.name;
 	emit("update:iconValue", item.name);
+};
+
+const clearIcon = () => {
+	valueIcon.value = "";
+	emit("update:iconValue", "");
 };
 
 // 监听搜索框值

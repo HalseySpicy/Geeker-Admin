@@ -1,5 +1,5 @@
 <template>
-	<el-drawer v-model="drawerVisible" :destroy-on-close="true" size="500px" :title="`${drawerProps.title}用户`">
+	<el-drawer v-model="drawerVisible" :destroy-on-close="true" size="450px" :title="`${drawerProps.title}用户`">
 		<el-form
 			ref="ruleFormRef"
 			label-width="100px"

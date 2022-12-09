@@ -23,6 +23,7 @@ import { useRoute, useRouter } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
 import { AuthStore } from "@/stores/modules/auth";
+import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import { TabsPaneContext } from "element-plus";
 import MoreButton from "./components/MoreButton.vue";
 
@@ -31,29 +32,11 @@ const router = useRouter();
 const tabStore = TabsStore();
 const globalStore = GlobalStore();
 const authStore = AuthStore();
+const keepAliveStore = KeepAliveStore();
 
 const tabsMenuValue = ref(route.fullPath);
 const tabsMenuList = computed(() => tabStore.tabsMenuList);
 const themeConfig = computed(() => globalStore.themeConfig);
-
-// 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
-watch(
-	() => route.fullPath,
-	() => {
-		if (route.meta.isFull) return;
-		tabsMenuValue.value = route.fullPath;
-		const tabsParams = {
-			icon: route.meta.icon as string,
-			title: route.meta.title as string,
-			path: route.fullPath,
-			close: !route.meta.isAffix
-		};
-		tabStore.addTabs(tabsParams);
-	},
-	{
-		immediate: true
-	}
-);
 
 onMounted(() => {
 	tabsDrop();
@@ -76,12 +59,34 @@ const initTabs = () => {
 				icon: item.meta.icon,
 				title: item.meta.title,
 				path: item.path,
+				name: item.name,
 				close: !item.meta.isAffix
 			};
 			tabStore.addTabs(tabsParams);
 		}
 	});
 };
+
+// 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
+watch(
+	() => route.fullPath,
+	() => {
+		if (route.meta.isFull) return;
+		tabsMenuValue.value = route.fullPath;
+		const tabsParams = {
+			icon: route.meta.icon as string,
+			title: route.meta.title as string,
+			path: route.fullPath,
+			name: route.name as string,
+			close: !route.meta.isAffix
+		};
+		tabStore.addTabs(tabsParams);
+		route.meta.isKeepAlive && keepAliveStore.addKeepLiveName(route.name as string);
+	},
+	{
+		immediate: true
+	}
+);
 
 // Tab Click
 const tabClick = (tabItem: TabsPaneContext) => {
@@ -91,6 +96,8 @@ const tabClick = (tabItem: TabsPaneContext) => {
 
 // Remove Tab
 const tabRemove = (fullPath: string) => {
+	const name = tabStore.tabsMenuList.filter(item => item.path == fullPath)[0]?.name;
+	keepAliveStore.removeKeepLiveName(name);
 	tabStore.removeTabs(fullPath, fullPath == route.fullPath);
 };
 </script>

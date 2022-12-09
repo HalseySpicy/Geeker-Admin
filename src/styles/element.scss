@@ -4,6 +4,11 @@
 	z-index: 99999 !important;
 }
 
+// * 设置 el-alert 边框
+.el-alert {
+	border: 1px solid;
+}
+
 // * 解决 popup 弹出时宽度会 100%-8px 问题，在浏览器缩放 特定的情况下才会出现
 .el-popup-parent--hidden {
 	width: 100% !important;

@@ -4,8 +4,8 @@
 	<el-main>
 		<router-view v-slot="{ Component, route }">
 			<transition appear name="fade-transform" mode="out-in">
-				<keep-alive :include="authStore.keepAliveRouterGet" v-if="isRouterRefresh">
-					<component :is="Component" :key="route.path" />
+				<keep-alive :include="keepAliveStore.keepLiveName">
+					<component :is="Component" :key="route.path" v-if="isRouterShow" />
 				</keep-alive>
 			</transition>
 		</router-view>
@@ -16,25 +16,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, provide, onBeforeUnmount } from "vue";
+import { ref, computed, onBeforeUnmount, provide } from "vue";
 import { GlobalStore } from "@/stores";
-import { AuthStore } from "@/stores/modules/auth";
+import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import Maximize from "./components/Maximize.vue";
 import Tabs from "@/layouts/components/Tabs/index.vue";
 import Footer from "@/layouts/components/Footer/index.vue";
 
-const authStore = AuthStore();
 const globalStore = GlobalStore();
+const keepAliveStore = KeepAliveStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 
 // 刷新当前页面
-const isRouterRefresh = ref(true);
-const refreshCurrentPage = () => {
-	isRouterRefresh.value = false;
-	nextTick(function () {
-		isRouterRefresh.value = true;
-	});
+const isRouterShow = ref(true);
+const refreshCurrentPage = (val: boolean) => {
+	isRouterShow.value = val;
 };
 provide("refresh", refreshCurrentPage);
 

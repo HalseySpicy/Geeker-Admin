@@ -28,6 +28,7 @@ export interface TabsMenuProps {
 	icon: string;
 	title: string;
 	path: string;
+	name: string;
 	close: boolean;
 }
 
@@ -45,4 +46,9 @@ export interface AuthState {
 		};
 	};
 	authMenuList: Menu.MenuOptions[];
+}
+
+/* keepAliveState */
+export interface keepAliveState {
+	keepLiveName: string[];
 }

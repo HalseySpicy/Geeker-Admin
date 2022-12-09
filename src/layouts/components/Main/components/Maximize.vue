@@ -30,22 +30,21 @@ watch(
 .maximize {
 	position: fixed;
 	top: -25px;
-	left: 50%;
+	right: -25px;
 	z-index: 999;
-	width: 45px;
-	height: 45px;
+	width: 52px;
+	height: 52px;
 	cursor: pointer;
-	background-color: var(--el-color-info-light-3);
+	background-color: var(--el-color-info);
 	border-radius: 50%;
 	opacity: 0.7;
-	transform: translateX(-50%);
 	&:hover {
-		background-color: var(--el-color-info);
+		background-color: var(--el-color-info-dark-2);
 	}
 	.el-icon {
 		position: relative;
-		top: 70%;
-		left: 50%;
+		top: 68%;
+		left: 32%;
 		font-size: 16px;
 		color: #ffffff;
 		transform: translate(-50%, -50%);
