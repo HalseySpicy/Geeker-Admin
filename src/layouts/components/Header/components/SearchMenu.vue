@@ -38,11 +38,10 @@
 import { ref, computed, nextTick } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
-import { getFlatArr } from "@/utils/util";
 import { AuthStore } from "@/stores/modules/auth";
 const router = useRouter();
 const authStore = AuthStore();
-const menuList = computed(() => getFlatArr(authStore.authMenuList));
+const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
 
 const searchMenuList = (queryString: string, cb: Function) => {
 	const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
