@@ -2,7 +2,7 @@
 	<div class="icon-box">
 		<el-input
 			ref="inputRef"
-			v-model="iconValue"
+			:value="iconValue"
 			v-bind="$attrs"
 			:placeholder="placeholder"
 			:clearable="clearable"
