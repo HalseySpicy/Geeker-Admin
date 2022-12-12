@@ -138,7 +138,7 @@
 					"meta": {
 						"icon": "Menu",
 						"title": "ProTable 文档",
-						"isLink": "https://juejin.cn/post/7166068828202336263",
+						"isLink": "https://juejin.cn/post/7166068828202336263/#heading-14",
 						"isHide": false,
 						"isFull": false,
 						"isAffix": false,
@@ -150,9 +150,9 @@
 		{
 			"path": "/auth",
 			"name": "auth",
-			"redirect": "/auth/menuList",
+			"redirect": "/auth/menu",
 			"meta": {
-				"icon": "Postcard",
+				"icon": "Lock",
 				"title": "权限管理",
 				"isLink": "",
 				"isHide": false,
@@ -162,9 +162,9 @@
 			},
 			"children": [
 				{
-					"path": "/auth/menuList",
-					"name": "menuList",
-					"component": "/auth/menuList/index",
+					"path": "/auth/menu",
+					"name": "authMenu",
+					"component": "/auth/menu/index",
 					"meta": {
 						"icon": "Menu",
 						"title": "菜单权限",
@@ -176,9 +176,9 @@
 					}
 				},
 				{
-					"path": "/auth/buttonList",
-					"name": "buttonList",
-					"component": "/auth/buttonList/index",
+					"path": "/auth/button",
+					"name": "authButton",
+					"component": "/auth/button/index",
 					"meta": {
 						"icon": "Menu",
 						"title": "按钮权限",

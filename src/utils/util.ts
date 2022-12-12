@@ -185,7 +185,7 @@ export function getFlatArr(menuList: Menu.MenuOptions[]) {
 }
 
 /**
- * @description 使用递归，过滤需要缓存的路由
+ * @description 使用递归，过滤需要缓存的路由（暂时没有使用）
  * @param {Array} menuList 所有菜单列表
  * @param {Array} cacheArr 缓存的路由菜单 name ['**','**']
  * @return array
@@ -226,40 +226,19 @@ export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: strin
 }
 
 /**
- * @description 使用递归，过滤出当前路径匹配的面包屑地址
- * @param {String} path 当前访问地址
- * @param {Array} menuList 所有菜单列表
- * @returns array
- */
-export function getCurrentBreadcrumb(path: string, menuList: Menu.MenuOptions[]) {
-	let tempPath: Menu.MenuOptions[] = [];
-	try {
-		const getNodePath = (node: Menu.MenuOptions) => {
-			tempPath.push(node);
-			if (node.path === path) throw new Error("Find IT!");
-			if (node.children?.length) node.children.forEach(item => getNodePath(item));
-			tempPath.pop();
-		};
-		menuList.forEach(item => getNodePath(item));
-	} catch (e) {
-		return tempPath;
-	}
-}
-
-/**
  * @description 双重递归找出所有面包屑存储到 pinia/vuex 中
  * @param {Array} menuList 所有菜单列表
- * @returns array
+ * @param {Object} result 输出的结果
+ * @param {String} path 当前递归的路径
+ * @returns object
  */
-export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
-	let handleBreadcrumbList: { [key: string]: any } = {};
-	const loop = (menuItem: Menu.MenuOptions) => {
-		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
-		handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
-	};
-	menuList.forEach(item => loop(item));
-	return handleBreadcrumbList;
-}
+export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [key: string]: any } = {}, path = []) => {
+	for (const item of menuList) {
+		result[item.path] = [...path, item];
+		if (item.children) getAllBreadcrumbList(item.children, result, result[item.path]);
+	}
+	return result;
+};
 
 /**
  * @description 格式化表格单元格默认值(el-table-column)

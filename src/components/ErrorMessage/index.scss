@@ -17,13 +17,13 @@
 		}
 		h2 {
 			font-size: 60px;
-			color: #434e59;
+			color: var(--el-text-color-primary);
 		}
 		h4 {
 			margin: 30px 0 20px;
 			font-size: 19px;
 			font-weight: normal;
-			color: #848587;
+			color: var(--el-text-color-regular);
 		}
 		.el-button {
 			width: 100px;

@@ -6,6 +6,7 @@
 			highlight-current-row
 			:columns="columns"
 			:requestApi="getUserList"
+			:row-class-name="tableRowClassName"
 			:span-method="objectSpanMethod"
 			:show-summary="true"
 			:summary-method="getSummaries"
@@ -14,7 +15,7 @@
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
 				<el-button type="primary" :icon="CirclePlus" @click="proTable.element.toggleAllSelection()">全选 / 全不选</el-button>
-				<el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第三行</el-button>
+				<el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第五行</el-button>
 				<el-button type="danger" :icon="Delete" plain @click="batchDelete(scope.selectedListIds)" :disabled="!scope.isSelected">
 					批量删除用户
 				</el-button>
@@ -29,7 +30,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="complexProTable">
+<script setup lang="tsx" name="complexProTable">
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { User } from "@/api/interface";
@@ -44,6 +45,20 @@ import { getUserList, deleteUser, resetUserPassWord, getUserStatus, getUserGende
 // 获取 ProTable DOM
 const proTable = ref();
 
+// 自定义渲染表头（使用tsx语法）
+const headerRender = (row: ColumnProps) => {
+	return (
+		<el-button
+			type="primary"
+			onClick={() => {
+				ElMessage.success("我是通过 tsx 语法渲染的表头");
+			}}
+		>
+			{row.label}
+		</el-button>
+	);
+};
+
 // 表格配置项
 const columns: ColumnProps[] = [
 	{ type: "selection", fixed: "left", width: 80 },
@@ -51,6 +66,7 @@ const columns: ColumnProps[] = [
 	{
 		prop: "base",
 		label: "基本信息",
+		headerRender,
 		_children: [
 			{ prop: "username", label: "用户姓名" },
 			{ prop: "user.detail.age", label: "年龄", width: 100 },
@@ -85,7 +101,7 @@ const columns: ColumnProps[] = [
 
 // 选择行
 const setCurrent = () => {
-	proTable.value.element.setCurrentRow(proTable.value.tableData[2]);
+	proTable.value.element.setCurrentRow(proTable.value.tableData[4]);
 };
 
 // 表尾合计行（自行根据条件计算）
@@ -117,6 +133,13 @@ const objectSpanMethod = ({ rowIndex, columnIndex }: SpanMethodProps) => {
 	}
 };
 
+// 设置列样式
+const tableRowClassName = ({ rowIndex }: { row: User.ResUserList; rowIndex: number }) => {
+	if (rowIndex === 2) return "warning-row";
+	if (rowIndex === 6) return "success-row";
+	return "";
+};
+
 // 单击行
 const rowClick = (row: User.ResUserList, column: TableColumnCtx<User.ResUserList>) => {
 	console.log(row);
@@ -143,3 +166,16 @@ const resetPass = async (params: User.ResUserList) => {
 	proTable.value.getTableList();
 };
 </script>
+
+<style lang="scss">
+.el-table .warning-row,
+.el-table .warning-row .el-table-fixed-column--right,
+.el-table .warning-row .el-table-fixed-column--left {
+	background-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row,
+.el-table .success-row .el-table-fixed-column--right,
+.el-table .success-row .el-table-fixed-column--left {
+	background-color: var(--el-color-success-light-9);
+}
+</style>

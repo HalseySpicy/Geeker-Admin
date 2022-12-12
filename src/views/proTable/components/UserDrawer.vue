@@ -60,13 +60,13 @@ import UploadImg from "@/components/Upload/Img.vue";
 import UploadImgs from "@/components/Upload/Imgs.vue";
 
 const rules = reactive({
-	avatar: [{ required: true, message: "请上传用户头像", trigger: "change" }],
-	photo: [{ required: true, message: "请上传用户照片", trigger: "change" }],
-	username: [{ required: true, message: "请填写用户姓名", trigger: "change" }],
-	gender: [{ required: true, message: "请选择性别", trigger: "change" }],
-	idCard: [{ required: true, message: "请填写身份证号", trigger: "change" }],
-	email: [{ required: true, message: "请填写邮箱", trigger: "change" }],
-	address: [{ required: true, message: "请填写居住地址", trigger: "change" }]
+	avatar: [{ required: true, message: "请上传用户头像" }],
+	photo: [{ required: true, message: "请上传用户照片" }],
+	username: [{ required: true, message: "请填写用户姓名" }],
+	gender: [{ required: true, message: "请选择性别" }],
+	idCard: [{ required: true, message: "请填写身份证号" }],
+	email: [{ required: true, message: "请填写邮箱" }],
+	address: [{ required: true, message: "请填写居住地址" }]
 });
 
 interface DrawerProps {

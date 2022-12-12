@@ -5,7 +5,7 @@ import { keepAliveState } from "@/stores/interface";
 export const KeepAliveStore = defineStore({
 	id: "keepAliveStore",
 	state: (): keepAliveState => ({
-		// 当前缓存的 routerName ==> 不做持久化
+		// 当前缓存的 routerName
 		keepLiveName: []
 	}),
 	getters: {},

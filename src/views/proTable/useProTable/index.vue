@@ -10,9 +10,9 @@
 		>
 			<!-- 表格 header 按钮 -->
 			<template #tableHeader="scope">
-				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-auth="['add']">新增用户</el-button>
-				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-auth="['batchAdd']">批量添加用户</el-button>
-				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-auth="['export']">导出用户数据</el-button>
+				<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')" v-auth="'add'">新增用户</el-button>
+				<el-button type="primary" :icon="Upload" plain @click="batchAdd" v-auth="'batchAdd'">批量添加用户</el-button>
+				<el-button type="primary" :icon="Download" plain @click="downloadFile" v-auth="'export'">导出用户数据</el-button>
 				<el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
 				<el-button type="danger" :icon="Delete" plain @click="batchDelete(scope.selectedListIds)" :disabled="!scope.isSelected">
 					批量删除用户
@@ -49,7 +49,7 @@
 
 <script setup lang="tsx" name="useProTable">
 import { ref, reactive } from "vue";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { useRouter } from "vue-router";
 import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
@@ -221,7 +221,9 @@ const changeStatus = async (row: User.ResUserList) => {
 
 // 导出用户列表
 const downloadFile = async () => {
-	useDownload(exportUserInfo, "用户列表", proTable.value.searchParam);
+	ElMessageBox.confirm("确认导出用户数据?", "温馨提示", { type: "warning" }).then(() =>
+		useDownload(exportUserInfo, "用户列表", proTable.value.searchParam)
+	);
 };
 
 // 批量添加用户

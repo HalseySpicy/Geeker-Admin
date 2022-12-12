@@ -41,9 +41,7 @@ export interface TabsState {
 export interface AuthState {
 	routeName: string;
 	authButtonList: {
-		[key: string]: {
-			[key: string]: boolean;
-		};
+		[key: string]: string[];
 	};
 	authMenuList: Menu.MenuOptions[];
 }

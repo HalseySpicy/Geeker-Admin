@@ -79,10 +79,9 @@
 ::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;
-	background-color: white;
 }
 ::-webkit-scrollbar-thumb {
-	background-color: #dddee0;
+	background-color: #d3d3d3;
 	border-radius: 20px;
 	box-shadow: inset 0 0 0 white;
 }
@@ -97,4 +96,32 @@
 }
 #nprogress .peg {
 	box-shadow: 0 0 10px var(--el-color-primary), 0 0 5px var(--el-color-primary) !important;
+}
+
+/* 外边距、内边距全局样式 */
+@for $i from 0 through 40 {
+	.mt#{$i} {
+		margin-top: #{$i}px !important;
+	}
+	.mr#{$i} {
+		margin-right: #{$i}px !important;
+	}
+	.mb#{$i} {
+		margin-bottom: #{$i}px !important;
+	}
+	.ml#{$i} {
+		margin-left: #{$i}px !important;
+	}
+	.pt#{$i} {
+		padding-top: #{$i}px !important;
+	}
+	.pr#{$i} {
+		padding-right: #{$i}px !important;
+	}
+	.pb#{$i} {
+		padding-bottom: #{$i}px !important;
+	}
+	.pl#{$i} {
+		padding-left: #{$i}px !important;
+	}
 }

@@ -12,6 +12,10 @@ export const TabsStore = defineStore({
 	}),
 	getters: {},
 	actions: {
+		// Set Tabs
+		async setTabs(tabsMenuList: TabsMenuProps[]) {
+			this.tabsMenuList = tabsMenuList;
+		},
 		// Add Tabs
 		async addTabs(tabItem: TabsMenuProps) {
 			// not add tabs white list

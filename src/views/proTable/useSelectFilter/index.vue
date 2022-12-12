@@ -9,7 +9,7 @@
 			@change="changeTreeFilter"
 		/>
 		<div class="table-box">
-			<div class="card select-box">
+			<div class="card mb10 pt0 pb0">
 				<SelectFilter :data="selectFilterData" :defaultValues="selectFilterValues" @change="changeSelectFilter" />
 			</div>
 			<ProTable
@@ -41,7 +41,7 @@
 <script setup lang="ts" name="useSelectFilter">
 import { ref, reactive } from "vue";
 import { User } from "@/api/interface";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
@@ -175,9 +175,10 @@ const resetPass = async (params: User.ResUserList) => {
 
 // 导出用户列表
 const downloadFile = async () => {
-	useDownload(exportUserInfo, "用户列表", proTable.value.searchParam);
+	ElMessageBox.confirm("确认导出用户数据?", "温馨提示", { type: "warning" }).then(() =>
+		useDownload(exportUserInfo, "用户列表", proTable.value.searchParam)
+	);
 };
-
 // 批量添加用户
 const dialogRef = ref();
 const batchAdd = () => {
@@ -203,10 +204,3 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	drawerRef.value.acceptParams(params);
 };
 </script>
-
-<style scoped lang="scss">
-.select-box {
-	padding: 0 20px;
-	margin-bottom: 10px;
-}
-</style>
