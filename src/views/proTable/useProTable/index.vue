@@ -145,7 +145,10 @@ const columns: ColumnProps[] = [
 		label: "性别",
 		enum: getUserGender,
 		search: { el: "select" },
-		fieldNames: { label: "genderLabel", value: "genderValue" }
+		fieldNames: { label: "genderLabel", value: "genderValue" },
+		filterParam: (data: User.ResGender) => {
+			return data.genderLabel;
+		}
 	},
 	// 多级 prop
 	{ prop: "user.detail.age", label: "年龄", search: { el: "input" } },

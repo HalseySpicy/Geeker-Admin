@@ -42,4 +42,5 @@ export interface ColumnProps<T = any> extends Partial<Omit<TableColumnCtx<T>, "c
 	headerRender?: (row: ColumnProps) => any; // 自定义表头内容渲染（tsx语法）
 	render?: (scope: { row: T }) => any; // 自定义单元格内容渲染（tsx语法）
 	_children?: ColumnProps<T>[]; // 多级表头
+	filterParam?: (data: any) => any; // Filter parameters, the return value is the parameter object
 }

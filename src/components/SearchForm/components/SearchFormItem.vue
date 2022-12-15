@@ -8,6 +8,8 @@
 		:options="column.search?.el === 'cascader' ? columnEnum : []"
 		:placeholder="placeholder(column)"
 		:clearable="clearable(column)"
+		:filterable="(column.search?.el === 'select' || column.search?.el === 'tree-select') && filterable(column)"
+		:filter-node-method="(d: any, v: any) => filterNodeMethod(d, column.filterParam!(v))"
 		range-separator="至"
 		start-placeholder="开始时间"
 		end-placeholder="结束时间"
@@ -63,5 +65,14 @@ const placeholder = (column: ColumnProps) => {
 // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
 const clearable = (column: ColumnProps) => {
 	return column.search?.props?.clearable ?? (column.search?.defaultValue == null || column.search?.defaultValue == undefined);
+};
+
+// Whether there is a clear button (when the search item has the default value, the removal button does not display)
+const filterable = (column: ColumnProps) => {
+	return typeof column.filterParam === "function";
+};
+// TreeSelect search function
+const filterNodeMethod = (value: string, data: string) => {
+	return data.toLowerCase().includes(value.toLowerCase());
 };
 </script>
