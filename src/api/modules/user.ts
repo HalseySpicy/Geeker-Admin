@@ -6,7 +6,7 @@ import http from "@/api";
  * @name 用户管理模块
  */
 // * 获取用户列表
-export const getUserList = (params: User.ReqGetUserParams) => {
+export const getUserList = (params: User.ReqUserParams) => {
 	return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
 };
 
@@ -41,7 +41,7 @@ export const resetUserPassWord = (params: { id: string }) => {
 };
 
 // * 导出用户数据
-export const exportUserInfo = (params: User.ReqGetUserParams) => {
+export const exportUserInfo = (params: User.ReqUserParams) => {
 	return http.post<BlobPart>(PORT1 + `/user/export`, params, { responseType: "blob" });
 };
 

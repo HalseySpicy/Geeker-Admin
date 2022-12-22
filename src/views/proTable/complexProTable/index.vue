@@ -20,13 +20,19 @@
 					批量删除用户
 				</el-button>
 			</template>
+			<!-- Expand -->
+			<template #expand="scope">
+				{{ scope.row }}
+			</template>
 			<!-- 表格操作 -->
 			<template #operation="scope">
 				<el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
 				<el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
 			</template>
+			<template #append>
+				<span style="color: var(--el-color-primary)">我是插入在表格最后的内容。若表格有合计行，该内容会位于合计行之上。</span>
+			</template>
 		</ProTable>
-		<UserDrawer ref="drawerRef" />
 	</div>
 </template>
 
@@ -37,7 +43,6 @@ import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import ProTable from "@/components/ProTable/index.vue";
-import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import type { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { CirclePlus, Pointer, Delete, Refresh } from "@element-plus/icons-vue";
 import { getUserList, deleteUser, resetUserPassWord, getUserStatus, getUserGender } from "@/api/modules/user";
@@ -63,12 +68,13 @@ const headerRender = (row: ColumnProps) => {
 const columns: ColumnProps[] = [
 	{ type: "selection", fixed: "left", width: 80 },
 	{ type: "index", label: "#", width: 80 },
+	{ type: "expand", label: "Expand", width: 100 },
 	{
 		prop: "base",
 		label: "基本信息",
 		headerRender,
 		_children: [
-			{ prop: "username", label: "用户姓名" },
+			{ prop: "username", label: "用户姓名", width: 110 },
 			{ prop: "user.detail.age", label: "年龄", width: 100 },
 			{
 				prop: "gender",

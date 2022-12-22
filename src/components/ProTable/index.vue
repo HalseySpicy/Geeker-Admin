@@ -57,11 +57,17 @@
 					</template>
 				</TableColumn>
 			</template>
+			<!-- 插入表格最后一行之后的插槽 -->
+			<template #append>
+				<slot name="append"> </slot>
+			</template>
 			<!-- 无数据 -->
 			<template #empty>
 				<div class="table-empty">
-					<img src="@/assets/images/notData.png" alt="notData" />
-					<div>暂无数据</div>
+					<slot name="empty">
+						<img src="@/assets/images/notData.png" alt="notData" />
+						<div>暂无数据</div>
+					</slot>
 				</div>
 			</template>
 		</el-table>

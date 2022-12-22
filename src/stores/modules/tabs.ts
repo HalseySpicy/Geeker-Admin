@@ -12,10 +12,6 @@ export const TabsStore = defineStore({
 	}),
 	getters: {},
 	actions: {
-		// Set Tabs
-		async setTabs(tabsMenuList: TabsMenuProps[]) {
-			this.tabsMenuList = tabsMenuList;
-		},
 		// Add Tabs
 		async addTabs(tabItem: TabsMenuProps) {
 			// not add tabs white list
@@ -41,6 +37,17 @@ export const TabsStore = defineStore({
 		async closeMultipleTab(tabsMenuValue?: string) {
 			this.tabsMenuList = this.tabsMenuList.filter(item => {
 				return item.path === tabsMenuValue || !item.close;
+			});
+		},
+		// Set Tabs
+		async setTabs(tabsMenuList: TabsMenuProps[]) {
+			this.tabsMenuList = tabsMenuList;
+		},
+		// Set Tabs Title
+		async setTabsTitle(title: string) {
+			const nowFullPath = location.hash.substring(1);
+			this.tabsMenuList.forEach(item => {
+				if (item.path == nowFullPath) item.title = title;
 			});
 		}
 	},
