@@ -105,7 +105,7 @@ npm run lint:eslint
 npm run lint:prettier
 
 # stylelint 格式化样式
-lint:stylelint
+npm run lint:stylelint
 ```
 
 - **commit：**
