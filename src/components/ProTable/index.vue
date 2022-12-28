@@ -192,11 +192,9 @@ searchColumns.forEach(column => {
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
 const colSetting = tableColumns.value!.filter(item => {
-	return item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
+	return item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
 });
-const openColSetting = () => {
-	colRef.value.openColSetting();
-};
+const openColSetting = () => colRef.value.openColSetting();
 
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {

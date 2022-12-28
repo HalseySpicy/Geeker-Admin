@@ -42,7 +42,7 @@ export const resetUserPassWord = (params: { id: string }) => {
 
 // * 导出用户数据
 export const exportUserInfo = (params: User.ReqUserParams) => {
-	return http.post<BlobPart>(PORT1 + `/user/export`, params, { responseType: "blob" });
+	return http.download(PORT1 + `/user/export`, params, { responseType: "blob" });
 };
 
 // * 获取用户状态
@@ -58,4 +58,9 @@ export const getUserGender = () => {
 // * 获取用户部门列表
 export const getUserDepartment = () => {
 	return http.get<User.ResDepartment>(PORT1 + `/user/department`);
+};
+
+// * 获取用户角色字典
+export const getUserRole = () => {
+	return http.get<User.ResRole>(PORT1 + `/user/role`);
 };

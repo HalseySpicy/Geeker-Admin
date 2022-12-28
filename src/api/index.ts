@@ -100,6 +100,9 @@ class RequestHttp {
 	delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
 		return this.service.delete(url, { params, ..._object });
 	}
+	download(url: string, params?: object, _object = {}): Promise<BlobPart> {
+		return this.service.post(url, params, _object);
+	}
 }
 
 export default new RequestHttp(config);

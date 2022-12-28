@@ -39,7 +39,7 @@
 	</div>
 </template>
 <script setup lang="ts" name="useSelectFilter">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { User } from "@/api/interface";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { ColumnProps } from "@/components/ProTable/interface";
@@ -60,7 +60,8 @@ import {
 	resetUserPassWord,
 	exportUserInfo,
 	BatchAddUser,
-	getUserDepartment
+	getUserDepartment,
+	getUserRole
 } from "@/api/modules/user";
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
@@ -79,8 +80,8 @@ const columns: ColumnProps[] = [
 	{ prop: "operation", label: "操作", width: 330, fixed: "right" }
 ];
 
-// selectFilter 数据
-const selectFilterData = [
+// selectFilter 数据（用户角色为后台数据）
+const selectFilterData = ref([
 	{
 		title: "用户状态(单)",
 		key: "userStatus",
@@ -120,30 +121,16 @@ const selectFilterData = [
 		title: "用户角色(多)",
 		key: "userRole",
 		multiple: true,
-		options: [
-			{
-				label: "全部",
-				value: ""
-			},
-			{
-				label: "超级管理员",
-				value: "1"
-			},
-			{
-				label: "公司CEO",
-				value: "2"
-			},
-			{
-				label: "部门主管",
-				value: "3"
-			},
-			{
-				label: "人事经理",
-				value: "4"
-			}
-		]
+		options: []
 	}
-];
+]);
+
+// 获取用户角色字典
+onMounted(() => getUserRoleDict());
+const getUserRoleDict = async () => {
+	const { data } = await getUserRole();
+	selectFilterData.value[1].options = data as any;
+};
 
 // 默认 selectFilter 参数
 const selectFilterValues = ref({ userStatus: "2", userRole: ["1", "3"] });

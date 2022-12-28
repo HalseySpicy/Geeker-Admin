@@ -45,10 +45,10 @@ const refreshCurrentPage: Function = inject("refresh") as Function;
 // refresh current page
 const refresh = () => {
 	setTimeout(() => {
-		keepAliveStore.removeKeepLiveName(route.name as string);
+		keepAliveStore.removeKeepAliveName(route.name as string);
 		refreshCurrentPage(false);
 		nextTick(() => {
-			keepAliveStore.addKeepLiveName(route.name as string);
+			keepAliveStore.addKeepAliveName(route.name as string);
 			refreshCurrentPage(true);
 		});
 	}, 0);
@@ -63,19 +63,19 @@ const maximize = () => {
 const closeCurrentTab = () => {
 	if (route.meta.isAffix) return;
 	tabStore.removeTabs(route.fullPath);
-	keepAliveStore.removeKeepLiveName(route.name as string);
+	keepAliveStore.removeKeepAliveName(route.name as string);
 };
 
 // Close Other
 const closeOtherTab = () => {
 	tabStore.closeMultipleTab(route.fullPath);
-	keepAliveStore.clearMultipleKeepAlive([route.name] as string[]);
+	keepAliveStore.setKeepAliveName([route.name] as string[]);
 };
 
 // Close All
 const closeAllTab = () => {
 	tabStore.closeMultipleTab();
-	keepAliveStore.clearMultipleKeepAlive();
+	keepAliveStore.setKeepAliveName([]);
 	router.push(HOME_URL);
 };
 </script>
