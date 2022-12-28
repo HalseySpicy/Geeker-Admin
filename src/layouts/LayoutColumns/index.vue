@@ -9,7 +9,7 @@
 				<div class="split-list">
 					<div
 						class="split-item"
-						:class="{ 'split-active': splitActive == item.path || `/${splitActive.split('/')[1]}` == item.path }"
+						:class="{ 'split-active': splitActive === item.path || `/${splitActive.split('/')[1]}` === item.path }"
 						v-for="item in menuList"
 						:key="item.path"
 						@click="changeSubMenu(item)"
@@ -76,7 +76,9 @@ watch(
 		// 当前路由存在 tabs 白名单中 || 当前菜单没有数据直接 return
 		if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return;
 		splitActive.value = route.path;
-		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
+		const menuItem = menuList.value.filter(
+			(item: Menu.MenuOptions) => route.path === item.path || `/${route.path.split("/")[1]}` === item.path
+		);
 		if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
 		subMenu.value = [];
 	},
