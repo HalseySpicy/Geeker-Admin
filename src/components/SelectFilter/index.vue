@@ -30,7 +30,7 @@
 import { ref, onBeforeMount } from "vue";
 
 interface OptionsProps {
-	value: string;
+	value: string | number;
 	label: string;
 	icon?: string;
 }
@@ -62,7 +62,7 @@ onBeforeMount(() => {
 });
 
 interface FilterEmits {
-	(e: "change", value: { [key: string]: any }): void;
+	(e: "change", value: any): void;
 }
 const emit = defineEmits<FilterEmits>();
 

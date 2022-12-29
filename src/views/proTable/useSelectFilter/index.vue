@@ -134,10 +134,10 @@ const getUserRoleDict = async () => {
 
 // 默认 selectFilter 参数
 const selectFilterValues = ref({ userStatus: "2", userRole: ["1", "3"] });
-const changeSelectFilter = (val: any) => {
+const changeSelectFilter = (value: typeof selectFilterValues.value) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
 	proTable.value.pageable.pageNum = 1;
-	selectFilterValues.value = val;
+	selectFilterValues.value = value;
 };
 
 // 默认 treeFilter 参数
