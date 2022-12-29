@@ -800,7 +800,7 @@
 			"name": "system",
 			"redirect": "/system/accountManage",
 			"meta": {
-				"icon": "Setting",
+				"icon": "Tools",
 				"title": "系统管理",
 				"isLink": "",
 				"isHide": false,

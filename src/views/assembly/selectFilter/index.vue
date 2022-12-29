@@ -16,7 +16,7 @@ import SelectFilter from "@/components/SelectFilter/index.vue";
 
 const filterResult = ref({ state: "1", type: ["1", "3"] });
 
-const changeFilter = (val: any) => {
+const changeFilter = (val: typeof filterResult.value) => {
 	filterResult.value = val;
 };
 

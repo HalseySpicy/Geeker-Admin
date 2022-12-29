@@ -85,4 +85,9 @@ export namespace User {
 		name: string;
 		children?: ResDepartment[];
 	}
+	export interface ResRole {
+		id: string;
+		name: string;
+		children?: ResDepartment[];
+	}
 }

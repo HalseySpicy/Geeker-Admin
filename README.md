@@ -72,7 +72,7 @@ cnpm install
 npm install --registry=https://registry.npm.taobao.org
 
 # 这里只是为了指定依赖包版本，防止没有版本锁 lock 而安装最新依赖包，导致的项目报错
-npm i @element-plus/icons-vue@1.1.4 @vueuse/core@8.0.1 @wangeditor/editor@5.1.12 axios@0.27.2 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.17 js-md5@0.7.3 mitt@3.0.0 nprogress@0.2.0 pinia@2.0.12 pinia-plugin-persistedstate@1.6.1 qs@6.11.0 vue@3.2.37 vue-i18n@9.1.9 vue-router@4.0.12 vue3-seamless-scroll@1.2.0 vuedraggable@4.1.0 --save
+npm i @element-plus/icons-vue@2.0.10 @vueuse/core@8.0.1 @wangeditor/editor@5.1.12 axios@1.2.1 echarts@5.3.0 echarts-liquidfill@3.1.0 element-plus@2.2.27 js-md5@0.7.3 mitt@3.0.0 nprogress@0.2.0 pinia@2.0.28 pinia-plugin-persistedstate@3.0.1 print-js@1.6.0 qs@6.11.0 sortablejs@1.15.0 vue@3.2.45 vue-i18n@9.1.9 vue-router@4.1.6 vue3-seamless-scroll@1.2.0 vuedraggable@4.1.0 --save
 ```
 
 - **Run：**

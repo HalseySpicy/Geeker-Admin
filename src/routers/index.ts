@@ -42,10 +42,11 @@ router.beforeEach(async (to, from, next) => {
 	const title = import.meta.env.VITE_GLOB_APP_TITLE;
 	document.title = to.meta.title ? `${to.meta.title} - ${title}` : title;
 
-	// 3.如果是访问登陆页，没有 token 直接放行，有 token 就在当前页
+	// 3.判断是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由并放行到登陆页
 	if (to.path === LOGIN_URL) {
-		if (!globalStore.token) return next();
-		else return next(from.fullPath);
+		if (globalStore.token) return next(from.fullPath);
+		resetRouter();
+		return next();
 	}
 
 	// 4.判断是否有 Token，没有重定向到 login

@@ -48,5 +48,5 @@ export interface AuthState {
 
 /* keepAliveState */
 export interface keepAliveState {
-	keepLiveName: string[];
+	keepAliveName: string[];
 }

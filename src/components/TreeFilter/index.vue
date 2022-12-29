@@ -7,16 +7,16 @@
 				ref="treeRef"
 				default-expand-all
 				:node-key="id"
-				:data="treeData"
+				:data="multiple ? treeData : treeAllData"
 				:show-checkbox="multiple"
 				:check-strictly="false"
-				:current-node-key="!multiple ? defaultValue : ''"
+				:current-node-key="!multiple ? selected : ''"
 				:highlight-current="!multiple"
 				:expand-on-click-node="false"
 				:check-on-click-node="multiple"
 				:props="defaultProps"
 				:filter-node-method="filterNode"
-				:default-checked-keys="multiple ? defaultValue : []"
+				:default-checked-keys="multiple ? selected : []"
 				@node-click="handleNodeClick"
 				@check="handleCheckChange"
 			/>
@@ -52,12 +52,24 @@ const defaultProps = {
 const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
+const treeAllData = ref<{ [key: string]: any }[]>([]);
+// 选中的值
+const selected = ref();
 
 onBeforeMount(async () => {
-	if (props.data?.length) return (treeData.value = props.data);
+	// 重新接收一下默认值
+	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+
+	// 有数据就直接赋值，没有数据就执行请求函数
+	if (props.data?.length) {
+		treeData.value = props.data;
+		treeAllData.value = props.data;
+		return;
+	}
 	const { data } = await props.requestApi!();
-	if (props.multiple) return (treeData.value = data);
-	treeData.value = [{ id: "", [props.label]: "全部" }, ...data];
+	treeData.value = data;
+	treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 });
 
 watch(filterText, val => {
@@ -93,6 +105,9 @@ const handleNodeClick = (data: { [key: string]: any }) => {
 const handleCheckChange = () => {
 	emit("change", treeRef.value?.getCheckedKeys());
 };
+
+// 暴露给父组件使用
+defineExpose({ treeData, treeAllData });
 </script>
 
 <style scoped lang="scss">

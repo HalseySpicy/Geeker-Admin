@@ -148,7 +148,7 @@ const columns: ColumnProps[] = [
 		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	// 多级 prop
-	{ prop: "user.detail.age", label: "年龄", isShow: false, search: { el: "input" } },
+	{ prop: "user.detail.age", label: "年龄", search: { el: "input" } },
 	{ prop: "idCard", label: "身份证号", search: { el: "input" } },
 	{ prop: "email", label: "邮箱" },
 	{ prop: "address", label: "居住地址" },
@@ -187,7 +187,7 @@ const columns: ColumnProps[] = [
 		search: {
 			el: "date-picker",
 			span: 2,
-			props: { type: "datetimerange" },
+			props: { type: "datetimerange", valueFormat: "YYYY-MM-DD HH:mm:ss" },
 			defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"]
 		}
 	},

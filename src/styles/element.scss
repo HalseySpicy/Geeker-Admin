@@ -9,11 +9,6 @@
 	border: 1px solid;
 }
 
-// * 解决 popup 弹出时宽度会 100%-8px 问题，在浏览器缩放 特定的情况下才会出现
-.el-popup-parent--hidden {
-	width: 100% !important;
-}
-
 // * 当前页面最大化 css
 .main-maximize {
 	.aside-split,

@@ -77,6 +77,9 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
 				height: 100%;
 			}
 		}
+		.el-sub-menu__hide-arrow {
+			width: 54px !important;
+		}
 	}
 	.el-menu,
 	.el-menu--popup {
