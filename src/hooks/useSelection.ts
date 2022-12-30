@@ -3,7 +3,6 @@ import { ref, computed } from "vue";
 /**
  * @description 表格多选数据操作
  * @param {String} selectId 当表格可以多选时，所指定的 id
- * @param {Any} tableRef 当表格 ref
  * */
 export const useSelection = (selectId: string = "id") => {
 	// 是否选中数据

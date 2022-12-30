@@ -98,12 +98,6 @@ import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
 
-// 表格 DOM 元素
-const tableRef = ref<InstanceType<typeof ElTable>>();
-
-// 是否显示搜索模块
-const isShowSearch = ref<boolean>(true);
-
 interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
 	columns: ColumnProps[]; // 列配置项
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
@@ -128,6 +122,12 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
 
+// 是否显示搜索模块
+const isShowSearch = ref(true);
+
+// 表格 DOM 元素
+const tableRef = ref<InstanceType<typeof ElTable>>();
+
 // 表格多选 Hooks
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
 
@@ -139,13 +139,7 @@ const { tableData, pageable, searchParam, searchInitParam, getTableList, search,
 const clearSelection = () => tableRef.value!.clearSelection();
 
 // 监听页面 initParam 改化，重新获取表格数据
-watch(
-	() => props.initParam,
-	() => {
-		getTableList();
-	},
-	{ deep: true }
-);
+watch(() => props.initParam, getTableList, { deep: true });
 
 // 接收 columns 并设置为响应式
 const tableColumns = ref<ColumnProps[]>(props.columns);
@@ -154,18 +148,18 @@ const tableColumns = ref<ColumnProps[]>(props.columns);
 const enumMap = ref(new Map<string, { [key: string]: any }[]>());
 provide("enumMap", enumMap);
 
-// 扁平化 columns && 处理 tableColumns 数据
+// 扁平化 columns
 const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
 	columns.forEach(async col => {
 		if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
 		flatArr.push(col);
 
-		// 给每一项 column 添加 isShow && isFilterEnum 属性
+		// 给每一项 column 添加 isShow && isFilterEnum 默认属性
 		col.isShow = col.isShow ?? true;
 		col.isFilterEnum = col.isFilterEnum ?? true;
 
-		if (!col.enum) return;
 		// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
+		if (!col.enum) return;
 		if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum);
 		const { data } = await col.enum();
 		enumMap.value.set(col.prop!, data);
@@ -173,9 +167,9 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
 	return flatArr.filter(item => !item._children?.length);
 };
 
-// 扁平 columns
+// flat columns
 const flatColumns = ref<ColumnProps[]>();
-flatColumns.value = flatColumnsFunc(tableColumns.value as any);
+flatColumns.value = flatColumnsFunc(tableColumns.value);
 
 // 过滤需要搜索的配置项 && 处理搜索排序
 const searchColumns = flatColumns.value
@@ -199,8 +193,11 @@ const openColSetting = () => colRef.value.openColSetting();
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
-	let colEnumList = flatColumns.value!.filter(item => item.enum || (item.prop && item.prop.split(".").length > 1));
-	colEnumList.forEach(colItem => {
+	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
+	let needTransformCol = flatColumns.value!.filter(
+		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum
+	);
+	needTransformCol.forEach(colItem => {
 		printDataList.forEach((tableItem: { [key: string]: any }) => {
 			tableItem[handleProp(colItem.prop!)] =
 				colItem.prop!.split(".").length > 1 && !colItem.enum

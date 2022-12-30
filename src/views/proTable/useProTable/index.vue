@@ -144,7 +144,7 @@ const columns: ColumnProps[] = [
 		prop: "gender",
 		label: "性别",
 		enum: getUserGender,
-		search: { el: "select" },
+		search: { el: "select", props: { filterable: true } },
 		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	// 多级 prop

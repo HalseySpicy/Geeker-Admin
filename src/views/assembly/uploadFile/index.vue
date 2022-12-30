@@ -81,8 +81,8 @@
 					type="warning"
 					effect="dark"
 					:closable="false"
+					class="mb20"
 				/>
-				<br />
 				<el-form ref="ruleFormRef" label-width="100px" label-suffix=" :" :rules="rules" :model="fromModel">
 					<el-form-item label="用户头像" prop="avatar">
 						<UploadImg v-model:imageUrl="fromModel.avatar" width="135px" height="135px" :file-size="3">
@@ -123,8 +123,8 @@
 					type="warning"
 					effect="dark"
 					:closable="false"
+					class="mb20"
 				/>
-				<br />
 				<el-form label-width="100px" label-suffix=" :" disabled :model="fromModel1">
 					<el-form-item label="用户头像" prop="avatar">
 						<UploadImg v-model:imageUrl="fromModel1.avatar" width="135px" height="135px" :file-size="3">

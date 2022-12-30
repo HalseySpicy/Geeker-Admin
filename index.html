@@ -46,7 +46,7 @@
 					display: block;
 					width: 14px;
 					height: 14px;
-					background-color: #1890ff;
+					background-color: #409eff;
 					border-radius: 100%;
 					opacity: 0.3;
 					transform: scale(0.75);
@@ -89,6 +89,14 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			const color = JSON.parse(window.localStorage.getItem("GlobalState")).themeConfig.primary;
+			const isDark = JSON.parse(window.localStorage.getItem("GlobalState")).themeConfig.isDark;
+			const dot = document.querySelectorAll(".dot i");
+			const html = document.querySelector("html");
+			dot.forEach(item => (item.style.background = color));
+			if (isDark) html.style.background = "#141414";
+		</script>
 		<script type="module" src="/src/main.ts"></script>
 	</body>
 </html>
