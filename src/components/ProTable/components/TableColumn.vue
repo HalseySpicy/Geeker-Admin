@@ -2,15 +2,15 @@
 	<component :is="renderLoop(column)"></component>
 </template>
 
-<script lang="tsx" setup>
+<script lang="tsx" setup name="tableColumn">
 import { inject, ref, useSlots } from "vue";
 import { ElTableColumn, ElTag } from "element-plus";
-import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 import { ColumnProps } from "@/components/ProTable/interface";
-
-const slots = useSlots();
+import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 
 defineProps<{ column: ColumnProps }>();
+
+const slots = useSlots();
 
 const enumMap = inject("enumMap", ref(new Map()));
 

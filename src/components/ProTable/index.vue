@@ -61,7 +61,7 @@
 			<template #append>
 				<slot name="append"> </slot>
 			</template>
-			<!-- 无数据 -->
+			<!-- 表格无数据情况 -->
 			<template #empty>
 				<div class="table-empty">
 					<slot name="empty">
@@ -72,12 +72,14 @@
 			</template>
 		</el-table>
 		<!-- 分页组件 -->
-		<Pagination
-			v-if="pagination"
-			:pageable="pageable"
-			:handleSizeChange="handleSizeChange"
-			:handleCurrentChange="handleCurrentChange"
-		/>
+		<slot name="pagination">
+			<Pagination
+				v-if="pagination"
+				:pageable="pageable"
+				:handleSizeChange="handleSizeChange"
+				:handleCurrentChange="handleCurrentChange"
+			/>
+		</slot>
 	</div>
 	<!-- 列设置 -->
 	<ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" />
@@ -147,6 +149,13 @@ const tableColumns = ref<ColumnProps[]>(props.columns);
 // 定义 enumMap 存储 enum 值（避免异步请求无法格式化单元格内容 || 无法填充搜索下拉选择）
 const enumMap = ref(new Map<string, { [key: string]: any }[]>());
 provide("enumMap", enumMap);
+const setEnumMap = async (col: ColumnProps) => {
+	if (!col.enum) return;
+	// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
+	if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum!);
+	const { data } = await col.enum();
+	enumMap.value.set(col.prop!, data);
+};
 
 // 扁平化 columns
 const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
@@ -158,16 +167,13 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
 		col.isShow = col.isShow ?? true;
 		col.isFilterEnum = col.isFilterEnum ?? true;
 
-		// 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
-		if (!col.enum) return;
-		if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum);
-		const { data } = await col.enum();
-		enumMap.value.set(col.prop!, data);
+		// 设置 enumMap
+		setEnumMap(col);
 	});
 	return flatArr.filter(item => !item._children?.length);
 };
 
-// flat columns
+// flatColumns
 const flatColumns = ref<ColumnProps[]>();
 flatColumns.value = flatColumnsFunc(tableColumns.value);
 
@@ -190,6 +196,7 @@ const colSetting = tableColumns.value!.filter(item => {
 });
 const openColSetting = () => colRef.value.openColSetting();
 
+// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理非常复杂）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
@@ -203,6 +210,9 @@ const printData = computed(() => {
 				colItem.prop!.split(".").length > 1 && !colItem.enum
 					? formatValue(handleRowAccordingToProp(tableItem, colItem.prop!))
 					: filterEnum(handleRowAccordingToProp(tableItem, colItem.prop!), enumMap.value.get(colItem.prop!), colItem.fieldNames);
+			for (const key in tableItem) {
+				if (tableItem[key] === null || tableItem[key] === undefined) tableItem[key] = formatValue(tableItem[key]);
+			}
 		});
 	});
 	return printDataList;
@@ -218,12 +228,7 @@ const handlePrint = () => {
 				item =>
 					item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation"
 			)
-			.map((item: ColumnProps) => {
-				return {
-					field: handleProp(item.prop!),
-					displayName: item.label
-				};
-			}),
+			.map((item: ColumnProps) => ({ field: handleProp(item.prop!), displayName: item.label })),
 		type: "json",
 		gridHeaderStyle:
 			"border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
@@ -232,5 +237,16 @@ const handlePrint = () => {
 };
 
 // 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去)
-defineExpose({ element: tableRef, tableData, searchParam, pageable, getTableList, clearSelection, enumMap });
+defineExpose({
+	element: tableRef,
+	tableData,
+	searchParam,
+	pageable,
+	getTableList,
+	clearSelection,
+	enumMap,
+	isSelected,
+	selectedList,
+	selectedListIds
+});
 </script>

@@ -1,28 +1,30 @@
 <template>
-	<el-breadcrumb :separator-icon="ArrowRight">
-		<transition-group name="breadcrumb" mode="out-in">
-			<template v-if="breadcrumbList">
-				<!-- 首页面包屑不要可以直接删除 🙅‍♀️ -->
-				<el-breadcrumb-item :key="HOME_URL" :to="{ path: HOME_URL }" v-if="breadcrumbList[0].meta.title !== '首页'">
-					<div class="breadcrumb-item">
-						<el-icon class="breadcrumb-icon" v-if="themeConfig.breadcrumbIcon">
-							<HomeFilled />
-						</el-icon>
-						<span class="breadcrumb-title">首页</span>
-					</div>
-				</el-breadcrumb-item>
-				<!-- other -->
-				<el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
-					<div class="breadcrumb-item el-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
-						<el-icon class="breadcrumb-icon" v-if="item.meta.icon && themeConfig.breadcrumbIcon">
-							<component :is="item.meta.icon"></component>
-						</el-icon>
-						<span class="breadcrumb-title">{{ item.meta.title }}</span>
-					</div>
-				</el-breadcrumb-item>
-			</template>
-		</transition-group>
-	</el-breadcrumb>
+	<div class="breadcrumb-box">
+		<el-breadcrumb :separator-icon="ArrowRight">
+			<transition-group name="breadcrumb" mode="out-in">
+				<template v-if="breadcrumbList">
+					<!-- 首页面包屑不要可以直接删除 🙅‍♀️ -->
+					<el-breadcrumb-item :key="HOME_URL" :to="{ path: HOME_URL }" v-if="breadcrumbList[0].meta.title !== '首页'">
+						<div class="el-breadcrumb__inner is-link">
+							<el-icon class="breadcrumb-icon" v-if="themeConfig.breadcrumbIcon">
+								<HomeFilled />
+							</el-icon>
+							<span class="breadcrumb-title">首页</span>
+						</div>
+					</el-breadcrumb-item>
+					<!-- other -->
+					<el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
+						<div class="el-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
+							<el-icon class="breadcrumb-icon" v-if="item.meta.icon && themeConfig.breadcrumbIcon">
+								<component :is="item.meta.icon"></component>
+							</el-icon>
+							<span class="breadcrumb-title">{{ item.meta.title }}</span>
+						</div>
+					</el-breadcrumb-item>
+				</template>
+			</transition-group>
+		</el-breadcrumb>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -46,17 +48,33 @@ const onBreadcrumbClick = (item: any, index: number) => {
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 1000px) {
-	.el-breadcrumb {
-		display: none;
-	}
-}
-.breadcrumb-item {
+.breadcrumb-box {
 	display: flex;
 	align-items: center;
-	.breadcrumb-icon {
-		margin-right: 6px;
-		font-size: 16px;
+	padding-right: 50px;
+	overflow: hidden;
+	mask-image: linear-gradient(90deg, #000000 0%, #000000 calc(100% - 50px), transparent);
+	.el-breadcrumb {
+		white-space: nowrap;
+		.el-breadcrumb__item {
+			display: inline-block;
+			float: none;
+			.el-breadcrumb__inner {
+				display: inline-flex;
+				.breadcrumb-icon {
+					margin-top: 2px;
+					margin-right: 6px;
+					font-size: 16px;
+				}
+				.breadcrumb-title {
+					margin-top: 2.5px;
+				}
+			}
+			:deep(.el-breadcrumb__separator) {
+				position: relative;
+				top: -1px;
+			}
+		}
 	}
 }
 </style>

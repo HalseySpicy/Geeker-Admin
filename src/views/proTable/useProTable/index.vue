@@ -156,11 +156,8 @@ const columns: ColumnProps[] = [
 		prop: "status",
 		label: "用户状态",
 		enum: getUserStatus,
+		search: { el: "tree-select", props: { filterable: true } },
 		fieldNames: { label: "userLabel", value: "userStatus" },
-		search: {
-			el: "tree-select",
-			props: { props: { label: "userLabel" }, nodeKey: "userStatus" }
-		},
 		render: (scope: { row: User.ResUserList }) => {
 			return (
 				<>

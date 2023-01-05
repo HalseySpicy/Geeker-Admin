@@ -14,13 +14,16 @@ export type TypeProp = "index" | "selection" | "expand";
 
 export type SearchType =
 	| "input"
+	| "input-number"
 	| "select"
+	| "select-v2"
 	| "tree-select"
 	| "cascader"
 	| "date-picker"
 	| "time-picker"
 	| "time-select"
-	| "switch";
+	| "switch"
+	| "slider";
 
 export type SearchProps = {
 	el: SearchType; // 当前项搜索框的类型

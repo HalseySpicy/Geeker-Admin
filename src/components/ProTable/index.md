@@ -23,7 +23,7 @@
 |    属性名    |        类型        | 是否必传 | 默认值 |                                            属性描述                                             |
 | :----------: | :----------------: | :------: | :----: | :---------------------------------------------------------------------------------------------: |
 |     tag      |      Boolean       |    ❌    | false  |                                   当前单元格值是否为标签展示                                    |
-|    isShow    |      Boolean       |    ❌    |  true  |                                     当前列是否显示在表格内                                      |
+|    isShow    |      Boolean       |    ❌    |  true  |                            当前列是否显示在表格内(只对 prop 列生效)                             |
 |    search    |    SearchProps     |    ❌    |   —    |                                 搜索项配置，详情见 SearchProps                                  |
 |     enum     | Object \| Function |    ❌    |   —    | 字典，可格式化单元格内容，还可以作为搜索框的下拉选项（字典可以为 API 请求函数，内部会自动执行） |
 | isFilterEnum |      Boolean       |    ❌    |  true  |        当前单元格值是否根据 enum 格式化（例如 enum 只作为搜索项数据，不参与内容格式化）         |
@@ -58,15 +58,18 @@
 >
 > [el-table 方法文档链接](https://element-plus.org/zh-CN/component/table.html#table-%E6%96%B9%E6%B3%95)
 
-|     方法名     |                                 描述                                  |
-| :------------: | :-------------------------------------------------------------------: |
-|    element     | `el-table` 实例，可以通过`element.方法名`来调用 `el-table` 的所有方法 |
-|   tableData    |                         当前页面所展示的数据                          |
-|  searchParam   |                      所有的搜索参数，不包含分页                       |
-|    pageable    |                          当前表格的分页数据                           |
-|  getTableList  |               获取、刷新表格数据的方法（携带所有参数）                |
-| clearSelection | 清空表格所选择的数据，除此方法之外还可使用 `element.clearSelection()` |
-|    enumMap     |              当前表格使用的所有字典数据（Map 数据结构）               |
+|     方法名      |                                 描述                                  |
+| :-------------: | :-------------------------------------------------------------------: |
+|     element     | `el-table` 实例，可以通过`element.方法名`来调用 `el-table` 的所有方法 |
+|    tableData    |                         当前页面所展示的数据                          |
+|   searchParam   |                      所有的搜索参数，不包含分页                       |
+|    pageable     |                          当前表格的分页数据                           |
+|  getTableList   |               获取、刷新表格数据的方法（携带所有参数）                |
+| clearSelection  | 清空表格所选择的数据，除此方法之外还可使用 `element.clearSelection()` |
+|     enumMap     |              当前表格使用的所有字典数据（Map 数据结构）               |
+|   isSelected    |                           表格是否选中数据                            |
+|  selectedList   |                          表格选中的数据列表                           |
+| selectedListIds |                        表格选中的数据列表的 id                        |
 
 ### 6、ProTable 插槽：
 
@@ -76,5 +79,6 @@
 |       tableHeader        |                                         自定义表格头部左侧区域的插槽，一般情况该区域放操作按钮                                          |
 |          append          | 插入至表格最后一行之后的内容， 如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。 若表格有合计行，该 slot 会位于合计行之上。 |
 |          empty           |                                                      当表格数据为空时自定义的内容                                                       |
+|        pagination        |                                                              分页组件插槽                                                               |
 |      `column.prop`       |                                                           单元格的作用域插槽                                                            |
 | `column.prop` + "Header" |                                                            表头的作用域插槽                                                             |

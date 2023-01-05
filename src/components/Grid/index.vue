@@ -91,7 +91,7 @@ const cols = computed(() => {
 });
 provide("cols", cols);
 
-const slots = useSlots().default!() as any;
+const slots = useSlots().default!();
 
 // 寻找需要开始折叠的字段 index
 const findIndex = () => {

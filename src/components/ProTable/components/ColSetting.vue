@@ -1,6 +1,6 @@
 <template>
 	<!-- 列设置 -->
-	<el-drawer title="列设置" v-model="drawerVisible" size="500px">
+	<el-drawer title="列设置" v-model="drawerVisible" size="450px">
 		<div class="table" ref="colTableRef">
 			<el-table :data="colSetting" :border="true" row-key="prop" default-expand-all :tree-props="{ children: '_children' }">
 				<el-table-column prop="label" align="center" label="列名" />
