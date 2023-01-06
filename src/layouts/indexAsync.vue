@@ -30,6 +30,6 @@ const themeConfig = computed(() => globalStore.themeConfig);
 
 <style scoped lang="scss">
 .layout {
-	min-width: 740px;
+	min-width: 760px;
 }
 </style>

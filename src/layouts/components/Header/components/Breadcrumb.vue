@@ -1,5 +1,5 @@
 <template>
-	<div class="breadcrumb-box">
+	<div :class="['breadcrumb-box', !themeConfig.breadcrumbIcon && 'no-icon']">
 		<el-breadcrumb :separator-icon="ArrowRight">
 			<transition-group name="breadcrumb" mode="out-in">
 				<template v-if="breadcrumbList">
@@ -57,6 +57,7 @@ const onBreadcrumbClick = (item: any, index: number) => {
 	.el-breadcrumb {
 		white-space: nowrap;
 		.el-breadcrumb__item {
+			position: relative;
 			display: inline-block;
 			float: none;
 			.el-breadcrumb__inner {
@@ -67,12 +68,22 @@ const onBreadcrumbClick = (item: any, index: number) => {
 					font-size: 16px;
 				}
 				.breadcrumb-title {
-					margin-top: 2.5px;
+					margin-top: 3px;
 				}
 			}
 			:deep(.el-breadcrumb__separator) {
 				position: relative;
 				top: -1px;
+			}
+		}
+	}
+}
+.no-icon {
+	.el-breadcrumb {
+		.el-breadcrumb__item {
+			top: -2px;
+			:deep(.el-breadcrumb__separator) {
+				top: 2px;
 			}
 		}
 	}
