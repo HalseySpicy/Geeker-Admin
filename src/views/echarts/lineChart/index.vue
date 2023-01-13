@@ -24,6 +24,11 @@ onMounted(() => {
 				label: {
 					backgroundColor: "#6a7985"
 				}
+			},
+			backgroundColor: "white",
+			borderColor: "white",
+			textStyle: {
+				color: "black"
 			}
 		},
 		legend: {
@@ -118,7 +123,16 @@ onMounted(() => {
 			}
 		]
 	};
-	useEcharts(myChart, option);
+	const darkOption: echarts.EChartsOption = {
+		tooltip: {
+			backgroundColor: "black",
+			borderColor: "black",
+			textStyle: {
+				color: "white"
+			}
+		}
+	};
+	useEcharts(myChart, option, darkOption);
 });
 </script>
 

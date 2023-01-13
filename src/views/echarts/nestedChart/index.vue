@@ -12,7 +12,12 @@ onMounted(() => {
 	let option: echarts.EChartsOption = {
 		tooltip: {
 			trigger: "item",
-			formatter: "{a} <br/>{b}: {c} ({d}%)"
+			formatter: "{a} <br/>{b}: {c} ({d}%)",
+			backgroundColor: "white",
+			borderColor: "white",
+			textStyle: {
+				color: "black"
+			}
 		},
 		legend: {
 			data: ["Direct", "Marketing", "Search Engine", "Email", "Union Ads", "Video Ads", "Baidu", "Google", "Bing", "Others"],
@@ -91,7 +96,40 @@ onMounted(() => {
 			}
 		]
 	};
-	useEcharts(myChart, option);
+	const darkOption: echarts.EChartsOption = {
+		tooltip: {
+			backgroundColor: "black",
+			borderColor: "black",
+			textStyle: {
+				color: "white"
+			}
+		},
+		series: [
+			{},
+			{
+				label: {
+					backgroundColor: "black",
+					borderColor: "black",
+					rich: {
+						a: {
+							color: "white"
+						},
+						hr: {
+							borderColor: "black"
+						},
+						b: {
+							color: "white"
+						},
+						per: {
+							color: "white",
+							backgroundColor: "#4C5058"
+						}
+					}
+				}
+			}
+		]
+	};
+	useEcharts(myChart, option, darkOption);
 });
 </script>
 

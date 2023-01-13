@@ -296,7 +296,64 @@ onMounted(() => {
 			}
 		]
 	};
-	useEcharts(myChart, option);
+	const darkOption: echarts.EChartsOption = {
+		title: {
+			textStyle: {
+				color: "white"
+			}
+		},
+		series: [
+			{},
+			{
+				data: [
+					{
+						value: 100,
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgb(90,90,90)"
+									},
+									{
+										offset: 1,
+										color: "rgb(10,10,10)"
+									}
+								])
+							}
+						}
+					},
+					{}
+				]
+			},
+			{},
+			{},
+			{
+				data: [
+					{
+						value: 100,
+						itemStyle: {
+							normal: {
+								color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+									{
+										offset: 0,
+										color: "rgb(90,90,90)"
+									},
+									{
+										offset: 1,
+										color: "rgb(10,10,10)"
+									}
+								])
+							}
+						}
+					},
+					{}
+				]
+			},
+			{}
+		]
+	};
+	useEcharts(myChart, option, darkOption);
 });
 </script>
 
