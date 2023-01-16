@@ -10,6 +10,6 @@ indent_style = tab # 缩进风格（tab | space）
 indent_size = 2 # 缩进大小
 max_line_length = 130 # 最大行长度
 
-[*.md] # 表示仅 md 文件适用以下规则
+[*.md] # 表示仅对 md 文件适用以下规则
 max_line_length = off # 关闭最大行长度限制
 trim_trailing_whitespace = false # 关闭末尾空格修剪

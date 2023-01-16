@@ -3,9 +3,8 @@ import { keepAliveState } from "@/stores/interface";
 
 // KeepAliveStore
 export const KeepAliveStore = defineStore({
-	id: "keepAliveStore",
+	id: "KeepAliveStore",
 	state: (): keepAliveState => ({
-		// 当前缓存的 routerName
 		keepAliveName: []
 	}),
 	actions: {
@@ -18,8 +17,8 @@ export const KeepAliveStore = defineStore({
 			this.keepAliveName = this.keepAliveName.filter(item => item !== name);
 		},
 		// setKeepAliveName
-		async setKeepAliveName(nameArr: string[] = []) {
-			this.keepAliveName = nameArr;
+		async setKeepAliveName(keepAliveName: string[] = []) {
+			this.keepAliveName = keepAliveName;
 		}
 	}
 });

@@ -276,20 +276,6 @@
 					}
 				},
 				{
-					"path": "/assembly/cropper",
-					"name": "cropper",
-					"component": "/assembly/cropper/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "图片裁剪",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
 					"path": "/assembly/uploadFile",
 					"name": "uploadFile",
 					"component": "/assembly/uploadFile/index",

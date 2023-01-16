@@ -43,7 +43,7 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="UploadImgMultiple">
+<script setup lang="ts" name="UploadImgs">
 import { ref, computed, inject } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";

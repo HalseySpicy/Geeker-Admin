@@ -16,7 +16,7 @@
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
-				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectList="selectedList" :isSelected="isSelected"></slot>
+				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
 			</div>
 			<div class="header-button-ri" v-if="toolButton">
 				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
@@ -177,17 +177,19 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
 const flatColumns = ref<ColumnProps[]>();
 flatColumns.value = flatColumnsFunc(tableColumns.value);
 
-// 过滤需要搜索的配置项 && 处理搜索排序
-const searchColumns = flatColumns.value
-	.filter(item => item.search?.el)
-	.sort((a, b) => (b.search?.order ?? 0) - (a.search?.order ?? 0));
+// 过滤需要搜索的配置项
+const searchColumns = flatColumns.value.filter(item => item.search?.el);
 
-// 设置搜索表单的默认值
-searchColumns.forEach(column => {
+// 设置搜索表单排序默认值 && 设置搜索表单项的默认值
+searchColumns.forEach((column, index) => {
+	column.search!.order = column.search!.order ?? index + 2;
 	if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
 		searchInitParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
 	}
 });
+
+// 排序搜索表单项
+searchColumns.sort((a, b) => a.search!.order! - b.search!.order!);
 
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
@@ -196,7 +198,7 @@ const colSetting = tableColumns.value!.filter(item => {
 });
 const openColSetting = () => colRef.value.openColSetting();
 
-// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理非常复杂）
+// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
@@ -211,7 +213,7 @@ const printData = computed(() => {
 					? formatValue(handleRowAccordingToProp(tableItem, colItem.prop!))
 					: filterEnum(handleRowAccordingToProp(tableItem, colItem.prop!), enumMap.value.get(colItem.prop!), colItem.fieldNames);
 			for (const key in tableItem) {
-				if (tableItem[key] === null || tableItem[key] === undefined) tableItem[key] = formatValue(tableItem[key]);
+				if (tableItem[key] === null) tableItem[key] = formatValue(tableItem[key]);
 			}
 		});
 	});
@@ -243,6 +245,7 @@ defineExpose({
 	searchParam,
 	pageable,
 	getTableList,
+	reset,
 	clearSelection,
 	enumMap,
 	isSelected,

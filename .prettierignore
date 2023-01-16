@@ -1,4 +1,5 @@
 /dist/*
+/html/*
 .local
 /node_modules/**
 

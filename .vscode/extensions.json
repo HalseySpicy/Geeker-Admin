@@ -1,11 +1,14 @@
 {
 	"recommendations": [
 		"vue.volar",
-		"hollowtree.vue-snippets",
 		"vue.vscode-typescript-vue-plugin",
-		"stylelint.vscode-stylelint",
+		"hollowtree.vue-snippets",
 		"dbaeumer.vscode-eslint",
+		"stylelint.vscode-stylelint",
+		"esbenp.prettier-vscode",
 		"editorconfig.editorconfig",
-		"esbenp.prettier-vscode"
+		"streetsidesoftware.code-spell-checker",
+		"syler.sass-indented",
+		"mikestead.dotenv"
 	]
 }

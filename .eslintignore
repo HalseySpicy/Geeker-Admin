@@ -6,6 +6,7 @@ node_modules
 .vscode
 .idea
 dist
+html
 /public
 /docs
 .husky

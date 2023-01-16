@@ -11,7 +11,7 @@ export interface ResultData<T = any> extends Result {
 
 // * 分页响应参数
 export interface ResPage<T> {
-	datalist: T[];
+	list: T[];
 	pageNum: number;
 	pageSize: number;
 	total: number;

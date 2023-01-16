@@ -115,6 +115,7 @@
 import { ref, computed, watch } from "vue";
 import { useTheme } from "@/hooks/useTheme";
 import { GlobalStore } from "@/stores";
+import { LayoutType } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import SwitchDark from "@/components/SwitchDark/index.vue";
 import mittBus from "@/utils/mittBus";
@@ -139,7 +140,7 @@ const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
 
 // 切换布局方式
-const changeLayout = (val: string) => {
+const changeLayout = (val: LayoutType) => {
 	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
 };
 

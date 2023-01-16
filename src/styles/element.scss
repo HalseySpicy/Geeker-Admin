@@ -40,6 +40,10 @@
 		border-radius: 0;
 		box-shadow: none;
 	}
+	.table-search {
+		padding: 18px 0 0 !important;
+		margin-bottom: 0 !important;
+	}
 }
 
 // * content-box (常用内容盒子)
@@ -97,12 +101,6 @@
 			// 去除时间选择器上下 padding
 			.el-range-editor.el-input__wrapper {
 				padding: 0 10px;
-			}
-
-			// el-select 为多选时不换行显示
-			.el-select__tags {
-				overflow: hidden;
-				white-space: nowrap;
 			}
 		}
 		.operation {
@@ -220,7 +218,7 @@
 		width: 100%;
 	}
 
-	// drawer-form 中两列 form-item
+	// drawer-form 中存在两列 form-item
 	.drawer-multiColumn-form {
 		display: flex;
 		flex-wrap: wrap;

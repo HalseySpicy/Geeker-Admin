@@ -28,7 +28,7 @@
 	</component>
 </template>
 
-<script setup lang="ts" name="searchFormItem">
+<script setup lang="ts" name="SearchFormItem">
 import { computed, inject, ref } from "vue";
 import { handleProp } from "@/utils/util";
 import { ColumnProps } from "@/components/ProTable/interface";

@@ -32,12 +32,12 @@ import Avatar from "./components/Avatar.vue";
 	.header-icon {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		width: 230px;
-		margin-right: 22px;
+		& > * {
+			margin-left: 21px;
+		}
 	}
 	.username {
-		margin: 0 20px 0 0;
+		margin: 0 20px;
 		font-size: 15px;
 	}
 }

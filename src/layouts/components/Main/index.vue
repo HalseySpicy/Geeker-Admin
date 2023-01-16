@@ -17,6 +17,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onBeforeUnmount, provide } from "vue";
+import { useDebounceFn } from "@vueuse/core";
 import { GlobalStore } from "@/stores";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import Maximize from "./components/Maximize.vue";
@@ -30,19 +31,17 @@ const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 
 // 刷新当前页面
 const isRouterShow = ref(true);
-const refreshCurrentPage = (val: boolean) => {
-	isRouterShow.value = val;
-};
+const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 provide("refresh", refreshCurrentPage);
 
 // 监听窗口大小变化，折叠侧边栏
-const screenWidth = ref<number>(0);
+const screenWidth = ref(0);
 const listeningWindow = () => {
 	screenWidth.value = document.body.clientWidth;
 	if (!isCollapse.value && screenWidth.value < 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
 	if (isCollapse.value && screenWidth.value > 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
 };
-window.addEventListener("resize", listeningWindow);
+window.addEventListener("resize", useDebounceFn(listeningWindow, 100), false);
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", listeningWindow);
 });

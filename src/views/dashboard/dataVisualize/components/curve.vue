@@ -32,8 +32,8 @@ const initChart = (data: any) => {
 			orient: "horizontal"
 		},
 		grid: {
-			left: "5%",
-			right: "6%"
+			left: "0",
+			right: "0"
 		},
 		dataZoom: [
 			{

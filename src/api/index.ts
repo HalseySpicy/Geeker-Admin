@@ -8,15 +8,8 @@ import { GlobalStore } from "@/stores";
 import { LOGIN_URL } from "@/config/config";
 import router from "@/routers";
 
-/**
- * pinia 错误使用说明示例
- * https://github.com/vuejs/pinia/discussions/971
- * https://github.com/vuejs/pinia/discussions/664#discussioncomment-1329898
- * https://pinia.vuejs.org/core-concepts/outside-component-usage.html#single-page-applications
- */
-
 const config = {
-	// 默认地址请求地址，可在 .env 开头文件中修改
+	// 默认地址请求地址，可在 .env.*** 文件中修改
 	baseURL: import.meta.env.VITE_API_URL as string,
 	// 设置超时时间（10s）
 	timeout: ResultEnum.TIMEOUT as number,
@@ -40,7 +33,7 @@ class RequestHttp {
 				const globalStore = GlobalStore();
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
-				const token: string = globalStore.token;
+				const token = globalStore.token;
 				return { ...config, headers: { ...config.headers, "x-access-token": token } };
 			},
 			(error: AxiosError) => {
@@ -58,7 +51,7 @@ class RequestHttp {
 				const globalStore = GlobalStore();
 				// * 在请求结束后，并关闭请求 loading
 				tryHideFullScreenLoading();
-				// * 登陆失效（code == 599）
+				// * 登陆失效（code == 401）
 				if (data.code == ResultEnum.OVERDUE) {
 					ElMessage.error(data.msg);
 					globalStore.setToken("");
@@ -70,7 +63,7 @@ class RequestHttp {
 					ElMessage.error(data.msg);
 					return Promise.reject(data);
 				}
-				// * 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
+				// * 成功请求（在页面上除非特殊情况，否则不用在页面处理失败逻辑）
 				return data;
 			},
 			async (error: AxiosError) => {

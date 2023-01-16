@@ -19,7 +19,15 @@
 				:default-checked-keys="multiple ? selected : []"
 				@node-click="handleNodeClick"
 				@check="handleCheckChange"
-			/>
+			>
+				<template #default="scope">
+					<span class="el-tree-node__label">
+						<slot :row="scope">
+							{{ scope.node.label }}
+						</slot>
+					</span>
+				</template>
+			</el-tree>
 		</el-scrollbar>
 	</div>
 </template>

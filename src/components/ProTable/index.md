@@ -36,15 +36,15 @@
 
 > 使用 `v-bind="column.search.props“` 通过属性透传将 **search.props** 属性全部透传到每一项搜索组件上，所以我们支持 **input、select、tree-select、date-packer、time-picker、time-select、switch** 大部分属性，并在其基础上还扩展了以下 **Props：**
 
-|    属性名    |  类型  | 是否必传 | 默认值 |                                                   属性描述                                                    |
-| :----------: | :----: | :------: | :----: | :-----------------------------------------------------------------------------------------------------------: |
-|      el      | String |    ✅    |   —    | 当前项搜索框的类型，支持：input、select、tree-select、cascader、date-packer、time-picker、time-select、switch |
-|    props     | Object |    ❌    |   —    |                          根据 element plus 官方文档来传递，该属性所有值会透传到组件                           |
-| defaultValue |  Any   |    ❌    |   —    |                                                 搜索项默认值                                                  |
-|     key      | String |    ❌    |   —    |                                当搜索项 key 不为 prop 属性时，可通过 key 指定                                 |
-|    order     | Number |    ❌    |   —    |                                            搜索项排序（从大到小）                                             |
-|     span     | Number |    ❌    |   1    |                                        搜索项所占用的列数，默认为 1 列                                        |
-|    offset    | Number |    ❌    |   —    |                                             搜索字段左侧偏移列数                                              |
+|    属性名    |  类型  | 是否必传 | 默认值 |                                                                    属性描述                                                                    |
+| :----------: | :----: | :------: | :----: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
+|      el      | String |    ✅    |   —    | 当前项搜索框的类型，支持：input、input-number、select、select-v2、tree-select、cascader、date-packer、time-picker、time-select、switch、slider |
+|    props     | Object |    ❌    |   —    |                                           根据 element plus 官方文档来传递，该属性所有值会透传到组件                                           |
+| defaultValue |  Any   |    ❌    |   —    |                                                                  搜索项默认值                                                                  |
+|     key      | String |    ❌    |   —    |                                                 当搜索项 key 不为 prop 属性时，可通过 key 指定                                                 |
+|    order     | Number |    ❌    |   —    |                                                             搜索项排序（从小到大）                                                             |
+|     span     | Number |    ❌    |   1    |                                                        搜索项所占用的列数，默认为 1 列                                                         |
+|    offset    | Number |    ❌    |   —    |                                                              搜索字段左侧偏移列数                                                              |
 
 ### 4、ProTable 事件：
 
@@ -65,6 +65,7 @@
 |   searchParam   |                      所有的搜索参数，不包含分页                       |
 |    pageable     |                          当前表格的分页数据                           |
 |  getTableList   |               获取、刷新表格数据的方法（携带所有参数）                |
+|      reset      |               重置表格查询参数，相当于点击重置搜索按钮                |
 | clearSelection  | 清空表格所选择的数据，除此方法之外还可使用 `element.clearSelection()` |
 |     enumMap     |              当前表格使用的所有字典数据（Map 数据结构）               |
 |   isSelected    |                           表格是否选中数据                            |

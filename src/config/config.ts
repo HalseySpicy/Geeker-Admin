@@ -9,8 +9,11 @@ export const LOGIN_URL: string = "/login";
 // * 默认主题颜色
 export const DEFAULT_PRIMARY: string = "#009688";
 
-// * 路由白名单地址，不需要权限就可以访问（必须是本地存在的路由 staticRouter.ts）
+// * 路由白名单地址（必须是本地存在的路由 staticRouter.ts）
 export const ROUTER_WHITE_LIST: string[] = ["/500"];
 
 // * 高德地图 key
-export const MAP_KEY: string = "";
+export const AMAP_MAP_KEY: string = "";
+
+// * 百度地图 key
+export const BAIDU_MAP_KEY: string = "";
