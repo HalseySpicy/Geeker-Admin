@@ -13,8 +13,9 @@ import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
 
-// 使用主题
-useTheme();
+// 初始化主题配置
+const { initTheme } = useTheme();
+initTheme();
 
 const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格

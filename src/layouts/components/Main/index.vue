@@ -38,14 +38,8 @@ provide("refresh", refreshCurrentPage);
 const screenWidth = ref(0);
 const listeningWindow = useDebounceFn(() => {
 	screenWidth.value = document.body.clientWidth;
-	if (!isCollapse.value && screenWidth.value < 1200) {
-		console.log("折叠", themeConfig.value);
-		globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
-	}
-	if (isCollapse.value && screenWidth.value > 1200) {
-		console.log("展开", themeConfig.value);
-		globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
-	}
+	if (!isCollapse.value && screenWidth.value < 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
+	if (isCollapse.value && screenWidth.value > 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
 }, 100);
 window.addEventListener("resize", listeningWindow, false);
 onBeforeUnmount(() => {

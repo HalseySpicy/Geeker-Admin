@@ -1,11 +1,10 @@
 .login-container {
 	position: relative;
-	min-width: 550px;
+	min-width: 520px;
 	height: 100%;
-	min-height: 500px;
+	min-height: 520px;
 	background-color: #eeeeee;
 	background-image: url("@/assets/images/login_bg.svg");
-	background-position: 50%;
 	background-size: 100% 100%;
 	background-size: cover;
 	.dark {
@@ -33,6 +32,7 @@
 		.login-form {
 			width: 420px;
 			padding: 50px 40px 45px;
+			background-color: #ffffff;
 			border-radius: 10px;
 			box-shadow: 2px 3px 7px rgb(0 0 0 / 20%);
 			.login-logo {
@@ -67,5 +67,11 @@
 				}
 			}
 		}
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.login-left {
+		display: none;
 	}
 }

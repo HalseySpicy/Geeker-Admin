@@ -133,7 +133,7 @@
 				},
 				{
 					"path": "/proTable/document",
-					"name": "document",
+					"name": "proTableDocument",
 					"component": "/proTable/document/index",
 					"meta": {
 						"icon": "Menu",
@@ -938,13 +938,13 @@
 					}
 				},
 				{
-					"path": "/link/juejin",
-					"name": "juejin",
-					"component": "/link/juejin/index",
+					"path": "/link/geekerDocs",
+					"name": "geekerDocs",
+					"component": "/link/geekerDocs/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "掘金文档",
-						"isLink": "https://juejin.cn/post/7080820051422478366",
+						"title": "项目文档",
+						"isLink": "https://docs.spicyboy.cn",
 						"isHide": false,
 						"isFull": false,
 						"isAffix": false,
@@ -952,13 +952,13 @@
 					}
 				},
 				{
-					"path": "/link/myBlog",
-					"name": "myBlog",
-					"component": "/link/myBlog/index",
+					"path": "/link/juejin",
+					"name": "juejin",
+					"component": "/link/juejin/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "个人博客",
-						"isLink": "http://www.spicyboy.cn",
+						"title": "掘金主页",
+						"isLink": "https://juejin.cn/user/3263814531551816/posts",
 						"isHide": false,
 						"isFull": false,
 						"isAffix": false,

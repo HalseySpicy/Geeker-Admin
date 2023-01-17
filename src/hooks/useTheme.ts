@@ -1,4 +1,4 @@
-import { computed, onBeforeMount } from "vue";
+import { computed } from "vue";
 import { getLightColor, getDarkColor } from "@/utils/theme/tool";
 import { GlobalStore } from "@/stores";
 import { DEFAULT_PRIMARY } from "@/config/config";
@@ -55,14 +55,16 @@ export const useTheme = () => {
 		globalStore.setThemeConfig({ ...themeConfig.value, [propName]: false });
 	};
 
-	onBeforeMount(() => {
+	// 初始化 theme 配置
+	const initTheme = () => {
 		switchDark();
 		changePrimary(themeConfig.value.primary);
 		if (themeConfig.value.isGrey) changeGreyOrWeak(true, "grey");
 		if (themeConfig.value.isWeak) changeGreyOrWeak(true, "weak");
-	});
+	};
 
 	return {
+		initTheme,
 		switchDark,
 		changePrimary,
 		changeGreyOrWeak
