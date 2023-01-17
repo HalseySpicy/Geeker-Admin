@@ -150,7 +150,7 @@ const columns: ColumnProps[] = [
 		enum: getUserGender,
 		// 字典请求携带参数
 		// enum: () => getUserGender({ id: 1 }),
-		search: { el: "select", props: { filterable: true, multiple: true } },
+		search: { el: "select", props: { filterable: true } },
 		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	// 多级 prop
@@ -162,7 +162,7 @@ const columns: ColumnProps[] = [
 		prop: "status",
 		label: "用户状态",
 		enum: getUserStatus,
-		search: { el: "tree-select", props: { filterable: true, multiple: true } },
+		search: { el: "tree-select", props: { filterable: true } },
 		fieldNames: { label: "userLabel", value: "userStatus" },
 		render: (scope: { row: User.ResUserList }) => {
 			return (

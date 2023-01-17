@@ -23,7 +23,7 @@ Geeker-Admin 一款基于 Vue3.2、TypeScript、Vite3、Pinia、Element-Plus 开
 
 - 使用 Vue3.2 + TypeScript 开发，单文件组件**＜ script setup ＞**
 - 采用 Vite3 作为项目开发、打包工具（配置 Gzip 打包、TSX 语法、跨域代理……）
-- 使用 Pinia🍍 替代 Vuex，轻量、简单、易用， 集成 Pinia 持久化插件
+- 使用 Pinia 替代 Vuex，轻量、简单、易用， 集成 Pinia 持久化插件
 - 使用 TypeScript 对 Axios 整个二次封装 （请求拦截、常用请求封装……）
 - 基于 Element 二次封装 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，表格页面全部传成配置项 columns
 - 支持 Element 组件大小切换、暗黑模式、i18n 国际化
