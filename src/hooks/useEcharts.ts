@@ -12,18 +12,18 @@ export const useEcharts = (myChart: echarts.ECharts, options: echarts.EChartsCor
 	if (options && typeof options === "object") {
 		myChart.setOption(options);
 	}
-	const echartsResize = () => {
+	const echartsResize = useDebounceFn(() => {
 		myChart && myChart.resize();
-	};
+	}, 100);
 
-	window.addEventListener("resize", useDebounceFn(echartsResize, 100));
+	window.addEventListener("resize", echartsResize);
 
 	onBeforeUnmount(() => {
 		window.removeEventListener("resize", echartsResize);
 	});
 
 	onActivated(() => {
-		window.addEventListener("resize", useDebounceFn(echartsResize, 100));
+		window.addEventListener("resize", echartsResize);
 	});
 
 	onDeactivated(() => {

@@ -36,12 +36,18 @@ provide("refresh", refreshCurrentPage);
 
 // 监听窗口大小变化，折叠侧边栏
 const screenWidth = ref(0);
-const listeningWindow = () => {
+const listeningWindow = useDebounceFn(() => {
 	screenWidth.value = document.body.clientWidth;
-	if (!isCollapse.value && screenWidth.value < 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
-	if (isCollapse.value && screenWidth.value > 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
-};
-window.addEventListener("resize", useDebounceFn(listeningWindow, 100), false);
+	if (!isCollapse.value && screenWidth.value < 1200) {
+		console.log("折叠", themeConfig.value);
+		globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
+	}
+	if (isCollapse.value && screenWidth.value > 1200) {
+		console.log("展开", themeConfig.value);
+		globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
+	}
+}, 100);
+window.addEventListener("resize", listeningWindow, false);
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", listeningWindow);
 });
