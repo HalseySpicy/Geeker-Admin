@@ -46,9 +46,9 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 .breadcrumb-box {
 	display: flex;
 	align-items: center;
-	padding-right: 80px;
+	padding-right: 50px;
 	overflow: hidden;
-	mask-image: linear-gradient(90deg, #000000 0%, #000000 calc(100% - 80px), transparent);
+	mask-image: linear-gradient(90deg, #000000 0%, #000000 calc(100% - 50px), transparent);
 	.el-breadcrumb {
 		white-space: nowrap;
 		.el-breadcrumb__item {
