@@ -169,14 +169,14 @@ import { FormInstance } from "element-plus";
 import UploadImg from "@/components/Upload/Img.vue";
 import UploadImgs from "@/components/Upload/Imgs.vue";
 
-const fileList = ref([{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110013.jpg" }]);
+const fileList = ref([{ name: "img", url: "https://i.imgtg.com/2023/01/16/QRBHS.jpg" }]);
 const fileList1 = ref([]);
 
 const avatar1 = ref("");
 const avatar2 = ref("");
 const avatar3 = ref("");
 const avatar4 = ref("");
-const avatar5 = ref("https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110015.jpg");
+const avatar5 = ref("https://i.imgtg.com/2023/01/16/QRqMK.jpg");
 
 const rules = reactive({
 	avatar: [{ required: true, message: "请上传用户头像" }],
@@ -188,14 +188,14 @@ const rules = reactive({
 
 const fromModel = ref({
 	avatar: "",
-	photo: [{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110012.jpg" }],
+	photo: [{ name: "img", url: "https://i.imgtg.com/2023/01/16/QR57a.jpg" }],
 	username: "",
 	idCard: "",
 	email: ""
 });
 const fromModel1 = ref({
 	avatar: "",
-	photo: [{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110032.jpg" }],
+	photo: [{ name: "img", url: "https://i.imgtg.com/2023/01/16/QR57a.jpg" }],
 	username: "",
 	idCard: "",
 	email: ""

@@ -42,7 +42,7 @@ export const resetUserPassWord = (params: { id: string }) => {
 
 // * 导出用户数据
 export const exportUserInfo = (params: User.ReqUserParams) => {
-	return http.download(PORT1 + `/user/export`, params, { responseType: "blob" });
+	return http.download(PORT1 + `/user/export`, params);
 };
 
 // * 获取用户状态

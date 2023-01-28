@@ -94,7 +94,7 @@ class RequestHttp {
 		return this.service.delete(url, { params, ..._object });
 	}
 	download(url: string, params?: object, _object = {}): Promise<BlobPart> {
-		return this.service.post(url, params, _object);
+		return this.service.post(url, params, { ..._object, responseType: "blob" });
 	}
 }
 
