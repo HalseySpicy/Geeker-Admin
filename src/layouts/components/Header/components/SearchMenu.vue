@@ -1,15 +1,7 @@
 <template>
 	<div class="layout-search-dialog">
 		<i @click="handleOpen" :class="'iconfont icon-sousuo'" class="toolBar-icon"></i>
-		<el-dialog
-			v-model="isShowSearch"
-			width="300px"
-			destroy-on-close
-			:modal="false"
-			:show-close="false"
-			fullscreen
-			@click="closeSearch"
-		>
+		<el-dialog v-model="isShowSearch" destroy-on-close :modal="false" :show-close="false" fullscreen @click="closeSearch">
 			<el-autocomplete
 				v-model="searchMenu"
 				ref="menuInputRef"
@@ -103,6 +95,9 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 		left: 50%;
 		width: 550px;
 		transform: translateX(-50%);
+		.el-input__wrapper {
+			background-color: var(--el-bg-color);
+		}
 	}
 }
 .el-autocomplete__popper {
