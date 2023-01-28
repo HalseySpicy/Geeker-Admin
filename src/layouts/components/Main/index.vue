@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount, provide } from "vue";
+import { ref, computed, onBeforeUnmount, provide, watch } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import { GlobalStore } from "@/stores";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
@@ -33,6 +33,17 @@ const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const isRouterShow = ref(true);
 const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 provide("refresh", refreshCurrentPage);
+
+// 监听当前页是否最大化，动态添加 class
+watch(
+	() => themeConfig.value.maximize,
+	() => {
+		const app = document.getElementById("app") as HTMLElement;
+		if (themeConfig.value.maximize) app.classList.add("main-maximize");
+		else app.classList.remove("main-maximize");
+	},
+	{ immediate: true }
+);
 
 // 监听窗口大小变化，折叠侧边栏
 const screenWidth = ref(0);
