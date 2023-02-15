@@ -1,7 +1,7 @@
 <template>
 	<!-- 列设置 -->
 	<el-drawer title="列设置" v-model="drawerVisible" size="450px">
-		<div class="table">
+		<div class="table-main">
 			<el-table :data="colSetting" :border="true" row-key="prop" default-expand-all :tree-props="{ children: '_children' }">
 				<el-table-column prop="label" align="center" label="列名" />
 				<el-table-column prop="isShow" align="center" label="显示" v-slot="scope">

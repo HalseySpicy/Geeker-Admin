@@ -12,7 +12,7 @@
 	/>
 
 	<!-- 表格内容 card -->
-	<div class="card table">
+	<div class="card table-main">
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">

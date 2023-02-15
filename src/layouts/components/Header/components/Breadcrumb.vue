@@ -1,7 +1,7 @@
 <template>
 	<div :class="['breadcrumb-box', !themeConfig.breadcrumbIcon && 'no-icon']">
 		<el-breadcrumb :separator-icon="ArrowRight">
-			<transition-group name="breadcrumb" mode="out-in">
+			<transition-group name="breadcrumb">
 				<el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
 					<div class="el-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
 						<el-icon class="breadcrumb-icon" v-show="item.meta.icon && themeConfig.breadcrumbIcon">

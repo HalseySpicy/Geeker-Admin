@@ -4,17 +4,17 @@
 
 > 使用 `v-bind="$attrs"` 通过属性透传将 **ProTable** 组件属性全部透传到 **el-table** 上，所以我们支持 **el-table** 的所有 **Props** 属性。在此基础上，还扩展了以下 **Props：**
 
-|    属性名    |    类型     | 是否必传 |                默认值                 |                             属性描述                              |
-| :----------: | :---------: | :------: | :-----------------------------------: | :---------------------------------------------------------------: |
-|   columns    | ColumnProps |    ✅    |                   —                   | ProTable 组件会根据此字段渲染搜索表单与表格列，详情见 ColumnProps |
-|  requestApi  |  Function   |    ✅    |                   —                   |                      获取表格数据的请求 API                       |
-| dataCallback |  Function   |    ❌    |                   —                   |         后台返回数据的回调函数，可对后台返回数据进行处理          |
-|    title     |   String    |    ❌    |                   —                   |                 表格标题，目前只在打印的时候用到                  |
-|  pagination  |   Boolean   |    ❌    |                 true                  |                         是否显示分页组件                          |
-|  initParam   |   Object    |    ❌    |                  {}                   |                       表格请求的初始化参数                        |
-|  toolButton  |   Boolean   |    ❌    |                 true                  |                       是否显示表格功能按钮                        |
-|   selectId   |   String    |    ❌    |                 'id'                  |                   当表格数据多选时，所指定的 id                   |
-|  searchCol   |   Object    |    ❌    | { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 } |                      表格搜索项每列占比配置                       |
+|    属性名    |    类型     | 是否必传 |                默认值                 |                                               属性描述                                                |
+| :----------: | :---------: | :------: | :-----------------------------------: | :---------------------------------------------------------------------------------------------------: |
+|   columns    | ColumnProps |    ✅    |                   —                   |                   ProTable 组件会根据此字段渲染搜索表单与表格列，详情见 ColumnProps                   |
+|  requestApi  |  Function   |    ✅    |                   —                   |                                        获取表格数据的请求 API                                         |
+| dataCallback |  Function   |    ❌    |                   —                   |                           后台返回数据的回调函数，可对后台返回数据进行处理                            |
+|    title     |   String    |    ❌    |                   —                   |                                   表格标题，目前只在打印的时候用到                                    |
+|  pagination  |   Boolean   |    ❌    |                 true                  | 是否显示分页组件，pagination 为 false 后台返回数据应该没有 分页信息 和 list，直接 data 就是 list 数据 |
+|  initParam   |   Object    |    ❌    |                  {}                   |                                         表格请求的初始化参数                                          |
+|  toolButton  |   Boolean   |    ❌    |                 true                  |                                         是否显示表格功能按钮                                          |
+|   selectId   |   String    |    ❌    |                 'id'                  |                                     当表格数据多选时，所指定的 id                                     |
+|  searchCol   |   Object    |    ❌    | { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 } |                                        表格搜索项每列占比配置                                         |
 
 ### 2、Column 配置（ColumnProps）：
 

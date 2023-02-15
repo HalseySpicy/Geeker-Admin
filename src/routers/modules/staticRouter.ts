@@ -54,14 +54,9 @@ export const errorRouter = [
 		meta: {
 			title: "500页面"
 		}
+	},
+	{
+		path: "/:pathMatch(.*)*",
+		component: () => import("@/components/ErrorMessage/404.vue")
 	}
 ];
-
-/**
- * notFoundRouter(找不到路由)
- */
-export const notFoundRouter = {
-	path: "/:pathMatch(.*)*",
-	name: "notFound",
-	redirect: { name: "404" }
-};

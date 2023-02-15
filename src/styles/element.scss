@@ -76,13 +76,14 @@
 	width: 100%;
 	height: 100%;
 	.table-box {
+		/* 这里减去的是 treeFilter 组件宽度 */
 		width: calc(100% - 230px);
 	}
 }
 
-// * table-box 表格页面样式
-.table,
-.table-box {
+// * table 表格页面样式
+.table-box,
+.table-main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
