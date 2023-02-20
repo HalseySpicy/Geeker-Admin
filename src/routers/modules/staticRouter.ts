@@ -55,6 +55,7 @@ export const errorRouter = [
 			title: "500页面"
 		}
 	},
+	// 解决刷新页面，路由警告
 	{
 		path: "/:pathMatch(.*)*",
 		component: () => import("@/components/ErrorMessage/404.vue")
