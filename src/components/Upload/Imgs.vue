@@ -60,7 +60,11 @@ type FileTypes =
 	| "image/svg+xml"
 	| "image/tiff"
 	| "image/webp"
-	| "image/x-icon";
+	| "image/x-icon"
+	| "video/mp4"
+	| "video/avi"
+	| "video/wmv"
+	| "video/rm";
 
 interface UploadFileProps {
 	fileList: UploadUserFile[];
@@ -69,7 +73,7 @@ interface UploadFileProps {
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为 false）
 	limit?: number; // 最大图片上传数 ==> 非必传（默认为 5张）
 	fileSize?: number; // 图片大小限制 ==> 非必传（默认为 5M）
-	fileType?: FileTypes[]; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
+	fileType?: Array<FileTypes | string>; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
 	height?: string; // 组件高度 ==> 非必传（默认为 150px）
 	width?: string; // 组件宽度 ==> 非必传（默认为 150px）
 	borderRadius?: string; // 组件边框圆角 ==> 非必传（默认为 8px）
@@ -105,7 +109,11 @@ const fileList = ref<UploadUserFile[]>(props.fileList);
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize;
 	const imgType = props.fileType;
-	if (!imgType.includes(rawFile.type as FileTypes))
+	// 验证fileType传入'image/*','video/*'等参数格式
+	if (
+		!imgType.includes(rawFile.type as FileTypes) ||
+		!imgType.some(_ => _.indexOf("/*") > -1 && _.split("/*")[0] === rawFile.type.split("/")[0])
+	)
 		ElNotification({
 			title: "温馨提示",
 			message: "上传图片不符合所需的格式！",
