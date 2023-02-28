@@ -154,7 +154,6 @@ const editImg = () => {
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize;
 	const imgType = props.fileType;
-
 	// 验证fileType传入'image/*','video/*'等参数格式
 	if (
 		!imgType.includes(rawFile.type as FileTypes) ||
