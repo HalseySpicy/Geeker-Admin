@@ -111,8 +111,10 @@ const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 	const imgType = props.fileType;
 	// 验证fileType传入'image/*','video/*'等参数格式
 	if (
-		!imgType.includes(rawFile.type as FileTypes) ||
-		!imgType.some(_ => _.indexOf("/*") > -1 && _.split("/*")[0] === rawFile.type.split("/")[0])
+		!imgType.some(
+			_ =>
+				imgType.includes(rawFile.type as FileTypes) || (_.indexOf("/*") > -1 && _.split("/*")[0] === rawFile.type.split("/")[0])
+		)
 	)
 		ElNotification({
 			title: "温馨提示",
