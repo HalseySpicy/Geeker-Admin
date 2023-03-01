@@ -8,7 +8,7 @@
 			border-bottom: none;
 		}
 		.select-filter-item-title {
-			margin-top: -5px;
+			margin-top: -2px;
 			span {
 				font-size: 14px;
 				color: var(--el-text-color-regular);
@@ -16,7 +16,7 @@
 			}
 		}
 		.select-filter-notData {
-			margin: 12px 0 13px;
+			margin: 18px 0;
 			font-size: 14px;
 			color: var(--el-text-color-regular);
 		}
@@ -31,18 +31,23 @@
 				padding: 5px 15px;
 				margin-right: 16px;
 				font-size: 13px;
-				color: #303133;
+				color: var(--el-color-primary);
 				list-style: none;
 				cursor: pointer;
-				background: var(--el-color-primary-light-8);
+				background: var(--el-color-primary-light-9);
+				border: 1px solid var(--el-color-primary-light-5);
 				border-radius: 32px;
 				&:hover {
-					color: var(--el-color-primary);
+					color: #ffffff;
+					background: var(--el-color-primary);
+					border-color: var(--el-color-primary);
+					transition: 0.1s;
 				}
 				&.active {
 					font-weight: bold;
 					color: #ffffff;
 					background: var(--el-color-primary);
+					border-color: var(--el-color-primary);
 				}
 				.el-icon {
 					margin-right: 4px;

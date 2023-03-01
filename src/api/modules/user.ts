@@ -1,13 +1,12 @@
 import { ResPage, User } from "@/api/interface/index";
 import { PORT1 } from "@/api/config/servicePort";
-
 import http from "@/api";
 
 /**
  * @name 用户管理模块
  */
 // * 获取用户列表
-export const getUserList = (params: User.ReqGetUserParams) => {
+export const getUserList = (params: User.ReqUserParams) => {
 	return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
 };
 
@@ -42,8 +41,8 @@ export const resetUserPassWord = (params: { id: string }) => {
 };
 
 // * 导出用户数据
-export const exportUserInfo = (params: User.ReqGetUserParams) => {
-	return http.post<BlobPart>(PORT1 + `/user/export`, params, { responseType: "blob" });
+export const exportUserInfo = (params: User.ReqUserParams) => {
+	return http.download(PORT1 + `/user/export`, params);
 };
 
 // * 获取用户状态
@@ -59,4 +58,9 @@ export const getUserGender = () => {
 // * 获取用户部门列表
 export const getUserDepartment = () => {
 	return http.get<User.ResDepartment>(PORT1 + `/user/department`);
+};
+
+// * 获取用户角色字典
+export const getUserRole = () => {
+	return http.get<User.ResRole>(PORT1 + `/user/role`);
 };

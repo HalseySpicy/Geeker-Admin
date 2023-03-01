@@ -6,17 +6,50 @@
 	},
 	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
 	"files.eol": "\n",
+	"[vue]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[less]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"cSpell.words": [
 		"acroutes",
 		"adcode",
 		"Alipay",
+		"AMAP",
 		"Anglar",
 		"antd",
+		"apng",
 		"Biao",
 		"bottomleft",
 		"bottomright",
 		"breakline",
 		"browserslist",
+		"cascader",
 		"cnpm",
 		"commitize",
 		"commitlint",
@@ -27,7 +60,9 @@
 		"daterange",
 		"datetimerange",
 		"doclock",
+		"dragover",
 		"easymock",
+		"echarts",
 		"esbuild",
 		"fangda",
 		"fastmock",
@@ -50,7 +85,9 @@
 		"Parens",
 		"persistedstate",
 		"Pinia",
+		"pjpeg",
 		"Prefixs",
+		"protable",
 		"singleline",
 		"sortablejs",
 		"sousuo",
@@ -65,6 +102,7 @@
 		"topleft",
 		"topright",
 		"truetype",
+		"Uncapitalize",
 		"unplugin",
 		"unref",
 		"vite",
@@ -85,6 +123,7 @@
 		"xianxingyoulun",
 		"xianxingzijiayou",
 		"xiaoxi",
+		"yxxx",
 		"zhongyingwen",
 		"zhuti",
 		"zlevel"

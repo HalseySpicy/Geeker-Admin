@@ -9,8 +9,8 @@ import { PersistedStateOptions } from "pinia-plugin-persistedstate";
 const piniaPersistConfig = (key: string, paths?: string[]) => {
 	const persist: PersistedStateOptions = {
 		key,
-		storage: window.localStorage,
-		// storage: window.sessionStorage,
+		storage: localStorage,
+		// storage: sessionStorage,
 		paths
 	};
 	return persist;

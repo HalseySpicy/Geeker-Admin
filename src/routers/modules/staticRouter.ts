@@ -7,20 +7,21 @@ import { HOME_URL, LOGIN_URL } from "@/config/config";
 export const staticRouter: RouteRecordRaw[] = [
 	{
 		path: "/",
-		redirect: LOGIN_URL
+		redirect: HOME_URL
 	},
 	{
 		path: LOGIN_URL,
 		name: "login",
 		component: () => import("@/views/login/index.vue"),
 		meta: {
-			title: "登录页"
+			title: "登录"
 		}
 	},
 	{
 		path: "/layout",
 		name: "layout",
 		component: () => import("@/layouts/index.vue"),
+		// component: () => import("@/layouts/indexAsync.vue"),
 		redirect: HOME_URL,
 		children: []
 	}
@@ -53,14 +54,10 @@ export const errorRouter = [
 		meta: {
 			title: "500页面"
 		}
+	},
+	// 解决刷新页面，路由警告
+	{
+		path: "/:pathMatch(.*)*",
+		component: () => import("@/components/ErrorMessage/404.vue")
 	}
 ];
-
-/**
- * notFoundRouter(找不到路由)
- */
-export const notFoundRouter = {
-	path: "/:pathMatch(.*)*",
-	name: "notFound",
-	redirect: { name: "404" }
-};

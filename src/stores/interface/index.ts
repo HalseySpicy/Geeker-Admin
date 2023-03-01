@@ -1,6 +1,16 @@
+/* GlobalState */
+export interface GlobalState {
+	token: string;
+	userInfo: any;
+	assemblySize: AssemblySizeType;
+	language: string;
+	themeConfig: ThemeConfigProps;
+}
+
 /* themeConfigProp */
 export interface ThemeConfigProps {
-	layout: string;
+	maximize: boolean;
+	layout: LayoutType;
 	primary: string;
 	isDark: boolean;
 	isGrey: boolean;
@@ -11,23 +21,18 @@ export interface ThemeConfigProps {
 	tabs: boolean;
 	tabsIcon: boolean;
 	footer: boolean;
-	maximize: boolean;
 }
 
-/* GlobalState */
-export interface GlobalState {
-	token: string;
-	userInfo: any;
-	assemblySize: string;
-	language: string;
-	themeConfig: ThemeConfigProps;
-}
+export type AssemblySizeType = "default" | "small" | "large";
+
+export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 
 /* tabsMenuProps */
 export interface TabsMenuProps {
 	icon: string;
 	title: string;
 	path: string;
+	name: string;
 	close: boolean;
 }
 
@@ -38,10 +43,14 @@ export interface TabsState {
 
 /* AuthState */
 export interface AuthState {
+	routeName: string;
 	authButtonList: {
-		[key: string]: {
-			[key: string]: boolean;
-		};
+		[key: string]: string[];
 	};
 	authMenuList: Menu.MenuOptions[];
+}
+
+/* keepAliveState */
+export interface keepAliveState {
+	keepAliveName: string[];
 }

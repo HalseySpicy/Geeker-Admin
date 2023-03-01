@@ -1,6 +1,6 @@
 <!-- 横向布局 -->
 <template>
-	<el-container class="layout-transverse">
+	<el-container class="layout">
 		<el-header>
 			<div class="logo flx-center">
 				<img src="@/assets/images/logo.svg" alt="logo" />
@@ -53,11 +53,11 @@ import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
 const route = useRoute();
 const router = useRouter();
 const authStore = AuthStore();
-const activeMenu = computed(() => route.path);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 
 const handleClickMenu = (subItem: Menu.MenuOptions) => {
-	if (subItem.meta.isLink) window.open(subItem.meta.isLink, "_blank");
+	if (subItem.meta.isLink) return window.open(subItem.meta.isLink, "_blank");
 	router.push(subItem.path);
 };
 </script>
@@ -76,6 +76,9 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
 			.el-sub-menu__title {
 				height: 100%;
 			}
+		}
+		.el-sub-menu__hide-arrow {
+			width: 54px !important;
 		}
 	}
 	.el-menu,

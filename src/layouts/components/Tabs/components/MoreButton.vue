@@ -1,5 +1,5 @@
 <template>
-	<el-dropdown trigger="click">
+	<el-dropdown trigger="click" :teleported="false">
 		<el-button size="small" type="primary">
 			<span>{{ $t("tabs.more") }}</span>
 			<el-icon class="el-icon--right"><arrow-down /></el-icon>
@@ -27,24 +27,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from "vue";
-import { ElMessage } from "element-plus";
+import { computed, inject, nextTick } from "vue";
 import { HOME_URL } from "@/config/config";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
+import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
 const router = useRouter();
 const tabStore = TabsStore();
 const globalStore = GlobalStore();
+const keepAliveStore = KeepAliveStore();
 const themeConfig = computed(() => globalStore.themeConfig);
-const reload: Function = inject("refresh") as Function;
 
+const refreshCurrentPage: Function = inject("refresh") as Function;
 // refresh current page
 const refresh = () => {
-	ElMessage({ type: "success", message: "刷新当前页面 🚀" });
-	reload();
+	setTimeout(() => {
+		keepAliveStore.removeKeepAliveName(route.name as string);
+		refreshCurrentPage(false);
+		nextTick(() => {
+			keepAliveStore.addKeepAliveName(route.name as string);
+			refreshCurrentPage(true);
+		});
+	}, 0);
 };
 
 // maximize current page
@@ -55,17 +62,20 @@ const maximize = () => {
 // Close Current
 const closeCurrentTab = () => {
 	if (route.meta.isAffix) return;
-	tabStore.removeTabs(route.path);
+	tabStore.removeTabs(route.fullPath);
+	keepAliveStore.removeKeepAliveName(route.name as string);
 };
 
 // Close Other
 const closeOtherTab = () => {
-	tabStore.closeMultipleTab(route.path);
+	tabStore.closeMultipleTab(route.fullPath);
+	keepAliveStore.setKeepAliveName([route.name] as string[]);
 };
 
 // Close All
 const closeAllTab = () => {
 	tabStore.closeMultipleTab();
+	keepAliveStore.setKeepAliveName();
 	router.push(HOME_URL);
 };
 </script>

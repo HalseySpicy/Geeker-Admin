@@ -1,21 +1,14 @@
 <template>
 	<div class="layout-search-dialog">
 		<i @click="handleOpen" :class="'iconfont icon-sousuo'" class="toolBar-icon"></i>
-		<el-dialog
-			@click="closeSearch"
-			v-model="isShowSearch"
-			width="300px"
-			destroy-on-close
-			:modal="false"
-			:show-close="false"
-			fullscreen
-		>
+		<el-dialog v-model="isShowSearch" destroy-on-close :modal="false" :show-close="false" fullscreen @click="closeSearch">
 			<el-autocomplete
 				v-model="searchMenu"
 				ref="menuInputRef"
 				placeholder="菜单搜索 ：支持菜单名称、路径"
 				:fetch-suggestions="searchMenuList"
 				@select="handleClickMenu"
+				@click.stop
 			>
 				<template #prefix>
 					<el-icon>
@@ -37,11 +30,10 @@
 import { ref, computed, nextTick } from "vue";
 import { Search } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
-import { getFlatArr } from "@/utils/util";
 import { AuthStore } from "@/stores/modules/auth";
 const router = useRouter();
 const authStore = AuthStore();
-const menuList = computed(() => getFlatArr(authStore.authMenuList));
+const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
 
 const searchMenuList = (queryString: string, cb: Function) => {
 	const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
@@ -81,7 +73,7 @@ const filterNodeMethod = (queryString: string) => {
 const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 	searchMenu.value = "";
 	if (menuItem.meta.isLink) window.open(menuItem.meta.isLink, "_blank");
-	router.push(menuItem.path);
+	else router.push(menuItem.path);
 	closeSearch();
 };
 </script>
@@ -103,6 +95,9 @@ const handleClickMenu = (menuItem: Menu.MenuOptions) => {
 		left: 50%;
 		width: 550px;
 		transform: translateX(-50%);
+		.el-input__wrapper {
+			background-color: var(--el-bg-color);
+		}
 	}
 }
 .el-autocomplete__popper {

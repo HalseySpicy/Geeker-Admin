@@ -53,6 +53,38 @@ export function isType(val: any) {
 }
 
 /**
+ * @description 生成唯一 uuid
+ * @return string
+ */
+export function generateUUID() {
+	if (typeof crypto === "object") {
+		if (typeof crypto.randomUUID === "function") {
+			return crypto.randomUUID();
+		}
+		if (typeof crypto.getRandomValues === "function" && typeof Uint8Array === "function") {
+			const callback = (c: any) => {
+				const num = Number(c);
+				return (num ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (num / 4)))).toString(16);
+			};
+			return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, callback);
+		}
+	}
+	let timestamp = new Date().getTime();
+	let performanceNow = (typeof performance !== "undefined" && performance.now && performance.now() * 1000) || 0;
+	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+		let random = Math.random() * 16;
+		if (timestamp > 0) {
+			random = (timestamp + random) % 16 | 0;
+			timestamp = Math.floor(timestamp / 16);
+		} else {
+			random = (performanceNow + random) % 16 | 0;
+			performanceNow = Math.floor(performanceNow / 16);
+		}
+		return (c === "x" ? random : (random & 0x3) | 0x8).toString(16);
+	});
+}
+
+/**
  * 判断两个对象是否相同
  * @param a 要比较的对象一
  * @param b 要比较的对象二
@@ -89,7 +121,7 @@ export function randomNum(min: number, max: number): number {
 }
 
 /**
- * @description 获取当前时间
+ * @description 获取当前时间对应的提示语
  * @return string
  */
 export function getTimeState() {
@@ -143,8 +175,9 @@ export function filterCurrentRoute(menuList: Menu.MenuOptions[], path: string) {
  * @param {Array} menuList 所有菜单列表
  * @return array
  */
-export function getFlatArr(menulist: Menu.MenuOptions[]) {
-	return menulist.reduce((pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
+export function getFlatArr(menuList: Menu.MenuOptions[]) {
+	let newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
+	return newMenuList.reduce((pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
 		let flatArr = [...pre, current];
 		if (current.children) flatArr = [...flatArr, ...getFlatArr(current.children)];
 		return flatArr;
@@ -152,7 +185,7 @@ export function getFlatArr(menulist: Menu.MenuOptions[]) {
 }
 
 /**
- * @description 使用递归，过滤需要缓存的路由
+ * @description 使用递归，过滤需要缓存的路由（暂时没有使用）
  * @param {Array} menuList 所有菜单列表
  * @param {Array} cacheArr 缓存的路由菜单 name ['**','**']
  * @return array
@@ -193,40 +226,19 @@ export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: strin
 }
 
 /**
- * @description 使用递归，过滤出当前路径匹配的面包屑地址
- * @param {String} path 当前访问地址
+ * @description 递归找出所有面包屑存储到 pinia/vuex 中
  * @param {Array} menuList 所有菜单列表
- * @returns array
+ * @param {Object} result 输出的结果
+ * @param {Array} parent 父级菜单
+ * @returns object
  */
-export function getCurrentBreadcrumb(path: string, menuList: Menu.MenuOptions[]) {
-	let tempPath: Menu.MenuOptions[] = [];
-	try {
-		const getNodePath = (node: Menu.MenuOptions) => {
-			tempPath.push(node);
-			if (node.path === path) throw new Error("Find IT!");
-			if (node.children?.length) node.children.forEach(item => getNodePath(item));
-			tempPath.pop();
-		};
-		menuList.forEach(item => getNodePath(item));
-	} catch (e) {
-		return tempPath;
+export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [key: string]: any } = {}, parent = []) => {
+	for (const item of menuList) {
+		result[item.path] = [...parent, item];
+		if (item.children) getAllBreadcrumbList(item.children, result, result[item.path]);
 	}
-}
-
-/**
- * @description 双重递归找出所有面包屑存储到 pinia/vuex 中
- * @param {Array} menuList 所有菜单列表
- * @returns array
- */
-export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
-	let handleBreadcrumbList: { [key: string]: any } = {};
-	const loop = (menuItem: Menu.MenuOptions) => {
-		if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
-		else handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
-	};
-	menuList.forEach(item => loop(item));
-	return handleBreadcrumbList;
-}
+	return result;
+};
 
 /**
  * @description 格式化表格单元格默认值(el-table-column)
@@ -253,16 +265,45 @@ export function formatValue(callValue: any) {
 }
 
 /**
+ * @description 处理 prop 为多级嵌套的情况(列如: prop:user.name)
+ * @param {Object} row 当前行数据
+ * @param {String} prop 当前 prop
+ * @return any
+ * */
+export function handleRowAccordingToProp(row: { [key: string]: any }, prop: string) {
+	if (!prop.includes(".")) return row[prop] ?? "--";
+	prop.split(".").forEach(item => (row = row[item] ?? "--"));
+	return row;
+}
+
+/**
+ * @description 处理 prop，当 prop 为多级嵌套时 ==> 返回最后一级 prop
+ * @param {String} prop 当前 prop
+ * @return string
+ * */
+export function handleProp(prop: string) {
+	const propArr = prop.split(".");
+	if (propArr.length == 1) return prop;
+	return propArr[propArr.length - 1];
+}
+
+/**
  * @description 根据枚举列表查询当需要的数据（如果指定了 label 和 value 的 key值，会自动识别格式化）
  * @param {String} callValue 当前单元格值
- * @param {Array} enumData 枚举列表
+ * @param {Array} enumData 字典列表
+ * @param {Array} fieldNames 指定 label && value 的 key 值
  * @param {String} type 过滤类型（目前只有 tag）
  * @return string
  * */
-export function filterEnum(callValue: any, enumData: any, searchProps?: { [key: string]: any }, type?: string): string {
-	const value = searchProps?.value ?? "value";
-	const label = searchProps?.label ?? "label";
-	let filterData: any = {};
+export function filterEnum(
+	callValue: any,
+	enumData: any[] | undefined,
+	fieldNames?: { label: string; value: string },
+	type?: string
+): string {
+	const value = fieldNames?.value ?? "value";
+	const label = fieldNames?.label ?? "label";
+	let filterData: { [key: string]: any } = {};
 	if (Array.isArray(enumData)) filterData = enumData.find((item: any) => item[value] === callValue);
 	if (type == "tag") return filterData?.tagType ? filterData.tagType : "";
 	return filterData ? filterData[label] : "--";

@@ -31,6 +31,7 @@ import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
+import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import { getTimeState } from "@/utils/util";
 import { HOME_URL } from "@/config/config";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
@@ -40,6 +41,7 @@ import md5 from "js-md5";
 
 const router = useRouter();
 const tabsStore = TabsStore();
+const keepAlive = KeepAliveStore();
 const globalStore = GlobalStore();
 
 // 定义 formRef（校验规则）
@@ -65,8 +67,9 @@ const login = (formEl: FormInstance | undefined) => {
 			// 2.添加动态路由
 			await initDynamicRouter();
 
-			// 3.清除上个账号的 tab 信息
+			// 3.清空 tabs、keepAlive 保留的数据
 			tabsStore.closeMultipleTab();
+			keepAlive.setKeepAliveName();
 
 			// 4.跳转到首页
 			router.push(HOME_URL);

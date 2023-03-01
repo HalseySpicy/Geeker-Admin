@@ -20,5 +20,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
+	white-space: nowrap;
 }
 </style>

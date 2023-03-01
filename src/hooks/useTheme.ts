@@ -1,4 +1,4 @@
-import { computed, onBeforeMount } from "vue";
+import { computed } from "vue";
 import { getLightColor, getDarkColor } from "@/utils/theme/tool";
 import { GlobalStore } from "@/stores";
 import { DEFAULT_PRIMARY } from "@/config/config";
@@ -16,6 +16,7 @@ export const useTheme = () => {
 		const body = document.documentElement as HTMLElement;
 		if (themeConfig.value.isDark) body.setAttribute("class", "dark");
 		else body.setAttribute("class", "");
+		changePrimary(themeConfig.value.primary);
 	};
 
 	// 修改主题颜色
@@ -25,14 +26,21 @@ export const useTheme = () => {
 			ElMessage({ type: "success", message: `主题颜色已重置为 ${DEFAULT_PRIMARY}` });
 		}
 		globalStore.setThemeConfig({ ...themeConfig.value, primary: val });
-		// 颜色加深
-		document.documentElement.style.setProperty("--el-color-primary-dark-2", `${getDarkColor(themeConfig.value.primary, 0.1)}`);
+		// 为了兼容暗黑模式下主题颜色也正常，以下方法计算主题颜色 由深到浅 的具体颜色
 		document.documentElement.style.setProperty("--el-color-primary", themeConfig.value.primary);
-		// 颜色变浅
+		document.documentElement.style.setProperty(
+			"--el-color-primary-dark-2",
+			themeConfig.value.isDark
+				? `${getLightColor(themeConfig.value.primary, 0.2)}`
+				: `${getDarkColor(themeConfig.value.primary, 0.3)}`
+		);
+		// 颜色加深或变浅
 		for (let i = 1; i <= 9; i++) {
 			document.documentElement.style.setProperty(
 				`--el-color-primary-light-${i}`,
-				`${getLightColor(themeConfig.value.primary, i / 10)}`
+				themeConfig.value.isDark
+					? `${getDarkColor(themeConfig.value.primary, i / 10)}`
+					: `${getLightColor(themeConfig.value.primary, i / 10)}`
 			);
 		}
 	};
@@ -47,14 +55,16 @@ export const useTheme = () => {
 		globalStore.setThemeConfig({ ...themeConfig.value, [propName]: false });
 	};
 
-	onBeforeMount(() => {
+	// 初始化 theme 配置
+	const initTheme = () => {
 		switchDark();
 		changePrimary(themeConfig.value.primary);
 		if (themeConfig.value.isGrey) changeGreyOrWeak(true, "grey");
 		if (themeConfig.value.isWeak) changeGreyOrWeak(true, "weak");
-	});
+	};
 
 	return {
+		initTheme,
 		switchDark,
 		changePrimary,
 		changeGreyOrWeak

@@ -1,5 +1,5 @@
 import { defineStore, createPinia } from "pinia";
-import { GlobalState, ThemeConfigProps } from "./interface";
+import { GlobalState, ThemeConfigProps, AssemblySizeType } from "./interface";
 import { DEFAULT_PRIMARY } from "@/config/config";
 import piniaPersistConfig from "@/config/piniaPersist";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
@@ -20,6 +20,8 @@ export const GlobalStore = defineStore({
 		language: "",
 		// themeConfig
 		themeConfig: {
+			// 当前页面是否全屏
+			maximize: false,
 			// 布局切换 ==>  纵向：vertical | 经典：classic | 横向：transverse | 分栏：columns
 			layout: "vertical",
 			// 默认 primary 主题颜色
@@ -41,9 +43,7 @@ export const GlobalStore = defineStore({
 			// 标签页图标
 			tabsIcon: true,
 			// 页脚
-			footer: true,
-			// 当前页面是否全屏
-			maximize: false
+			footer: true
 		}
 	}),
 	getters: {},
@@ -57,7 +57,7 @@ export const GlobalStore = defineStore({
 			this.userInfo = userInfo;
 		},
 		// setAssemblySizeSize
-		setAssemblySizeSize(assemblySize: string) {
+		setAssemblySizeSize(assemblySize: AssemblySizeType) {
 			this.assemblySize = assemblySize;
 		},
 		// updateLanguage

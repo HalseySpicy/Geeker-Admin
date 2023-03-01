@@ -4,8 +4,6 @@
 </template>
 
 <script setup lang="ts">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, EChartsOption, init } from "echarts";
 interface ChartProp {
 	name: string;
@@ -284,7 +282,7 @@ const initChart = (data: any = {}): ECharts => {
 						name: "r3",
 						value: 25,
 						itemStyle: {
-							//线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+							// 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
 							color: {
 								type: "linear",
 								x: 0,
@@ -309,7 +307,7 @@ const initChart = (data: any = {}): ECharts => {
 						name: "r4",
 						value: 25,
 						itemStyle: {
-							//线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+							// 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
 							color: {
 								type: "linear",
 								x: 0,

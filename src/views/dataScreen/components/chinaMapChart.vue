@@ -5,8 +5,6 @@
 </template>
 
 <script setup lang="ts">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, EChartsOption, init } from "echarts";
 import echarts from "@/utils/echarts";
 import mapJson from "../assets/china.json";
@@ -122,7 +120,7 @@ const initChart = (data: any = []): ECharts => {
 					show: true,
 					period: 6,
 					trailLength: 0.7,
-					color: "red", //arrow箭头的颜色
+					color: "red", // arrow箭头的颜色
 					symbolSize: 3
 				},
 				lineStyle: {

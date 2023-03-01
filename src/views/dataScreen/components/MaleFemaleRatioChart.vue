@@ -17,17 +17,13 @@
 </template>
 
 <script setup lang="ts">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, EChartsOption, init } from "echarts";
 interface ChartProp {
 	man: number;
 	woman: number;
 }
 const initChart = (data: ChartProp): ECharts => {
-	/* 获取容器 */
 	const charEle = document.getElementById("MaleFemaleRatioChart") as HTMLElement;
-	/* 生成echarts */
 	const charEch: ECharts = init(charEle);
 	const option: EChartsOption = {
 		xAxis: {

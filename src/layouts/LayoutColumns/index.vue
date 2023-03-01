@@ -1,6 +1,6 @@
 <!-- 分栏布局 -->
 <template>
-	<el-container class="layout-columns">
+	<el-container class="layout">
 		<div class="aside-split">
 			<div class="logo flx-center">
 				<img src="@/assets/images/logo.svg" alt="logo" />
@@ -9,7 +9,7 @@
 				<div class="split-list">
 					<div
 						class="split-item"
-						:class="{ 'split-active': splitActive.includes(item.path) }"
+						:class="{ 'split-active': splitActive === item.path || `/${splitActive.split('/')[1]}` === item.path }"
 						v-for="item in menuList"
 						:key="item.path"
 						@click="changeSubMenu(item)"
@@ -54,7 +54,6 @@ import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
-import { TABS_WHITE_LIST } from "@/config/config";
 import Main from "@/layouts/components/Main/index.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
@@ -64,20 +63,21 @@ const route = useRoute();
 const router = useRouter();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
-const watchData = computed(() => [menuList, route]);
 
 const subMenu = ref<Menu.MenuOptions[]>([]);
 const splitActive = ref<string>("");
 watch(
-	() => watchData,
+	() => [menuList, route],
 	() => {
-		// 当前路由存在 tabs 白名单中 || 当前菜单没有数据直接 return
-		if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return;
+		// 当前菜单没有数据直接 return
+		if (!menuList.value.length) return;
 		splitActive.value = route.path;
-		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
+		const menuItem = menuList.value.filter(
+			(item: Menu.MenuOptions) => route.path === item.path || `/${route.path.split("/")[1]}` === item.path
+		);
 		if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
 		subMenu.value = [];
 	},

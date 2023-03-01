@@ -1,13 +1,27 @@
 <template>
 	<div class="main-box">
-		<TreeFilter :requestApi="getUserDepartment" @change="changeInitParam" title="部门列表" label="name" />
+		<TreeFilter
+			label="name"
+			title="部门列表(单选)"
+			:requestApi="getUserDepartment"
+			:defaultValue="initParam.departmentId"
+			@change="changeTreeFilter"
+		/>
 		<div class="table-box">
-			<ProTable ref="proTable" :columns="columns" :requestApi="getUserList" :initParam="initParam">
+			<ProTable
+				ref="proTable"
+				title="用户列表"
+				:columns="columns"
+				:requestApi="getUserList"
+				:initParam="initParam"
+				:searchCol="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
+			>
 				<!-- 表格 header 按钮 -->
 				<template #tableHeader>
 					<el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
 					<el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
 					<el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+					<el-button type="primary" plain @click="toDetail">To 平级详情页面</el-button>
 				</template>
 				<!-- 表格操作 -->
 				<template #operation="scope">
@@ -25,7 +39,8 @@
 <script setup lang="ts" name="useTreeFilter">
 import { ref, reactive } from "vue";
 import { User } from "@/api/interface";
-import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
@@ -47,33 +62,40 @@ import {
 	getUserDepartment
 } from "@/api/modules/user";
 
+const router = useRouter();
+
+// 跳转详情页
+const toDetail = () => {
+	router.push(`/proTable/useTreeFilter/detail/123456?params=detail-page`);
+};
+
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({
-	departmentId: ""
+	departmentId: "1"
 });
 
 // 树形筛选切换
-const changeInitParam = (val: string) => {
+const changeTreeFilter = (val: string) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
+	proTable.value.pageable.pageNum = 1;
 	initParam.departmentId = val;
 };
 
 // 表格配置项
-const columns: Partial<ColumnProps>[] = [
+const columns: ColumnProps[] = [
 	{ type: "index", label: "#", width: 80 },
-	{ prop: "username", label: "用户姓名", width: 120, search: true },
+	{ prop: "username", label: "用户姓名", width: 120, search: { el: "input" } },
 	{
 		prop: "gender",
 		label: "性别",
 		width: 120,
 		sortable: true,
-		search: true,
-		searchType: "select",
 		enum: getUserGender,
-		searchProps: { label: "genderLabel", value: "genderValue" }
+		search: { el: "select" },
+		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	{ prop: "idCard", label: "身份证号" },
 	{ prop: "email", label: "邮箱" },
@@ -83,21 +105,12 @@ const columns: Partial<ColumnProps>[] = [
 		label: "用户状态",
 		width: 120,
 		sortable: true,
-		search: true,
 		tag: true,
-		searchType: "select",
 		enum: getUserStatus,
-		searchProps: { label: "userLabel", value: "userStatus" }
+		search: { el: "select" },
+		fieldNames: { label: "userLabel", value: "userStatus" }
 	},
-	{
-		prop: "createTime",
-		label: "创建时间",
-		width: 180,
-		sortable: true,
-		search: true,
-		searchType: "datetimerange",
-		searchInitParam: ["2022-09-30 00:00:00", "2022-09-20 23:59:59"]
-	},
+	{ prop: "createTime", label: "创建时间", width: 180 },
 	{ prop: "operation", label: "操作", width: 330, fixed: "right" }
 ];
 
@@ -115,7 +128,9 @@ const resetPass = async (params: User.ResUserList) => {
 
 // 导出用户列表
 const downloadFile = async () => {
-	useDownload(exportUserInfo, "用户列表", proTable.value.searchParam);
+	ElMessageBox.confirm("确认导出用户数据?", "温馨提示", { type: "warning" }).then(() =>
+		useDownload(exportUserInfo, "用户列表", proTable.value.searchParam)
+	);
 };
 
 // 批量添加用户
@@ -132,12 +147,12 @@ const batchAdd = () => {
 
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref();
-const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",
-		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.getTableList
 	};
 	drawerRef.value.acceptParams(params);

@@ -4,9 +4,9 @@
 	z-index: 99999 !important;
 }
 
-// * 解决 popup 弹出时宽度会 100%-8px 问题，在浏览器缩放 特定的情况下才会出现
-.el-popup-parent--hidden {
-	width: 100% !important;
+// * 设置 el-alert 边框
+.el-alert {
+	border: 1px solid;
 }
 
 // * 当前页面最大化 css
@@ -40,6 +40,10 @@
 		border-radius: 0;
 		box-shadow: none;
 	}
+	.table-search {
+		padding: 18px 0 0 !important;
+		margin-bottom: 0 !important;
+	}
 }
 
 // * content-box (常用内容盒子)
@@ -52,7 +56,7 @@
 		margin: 20px 0 30px;
 		font-size: 23px;
 		font-weight: bold;
-		color: rgb(88 88 88);
+		color: var(--el-text-color-regular);
 	}
 	.el-descriptions {
 		width: 100%;
@@ -72,13 +76,14 @@
 	width: 100%;
 	height: 100%;
 	.table-box {
+		/* 这里减去的是 treeFilter 组件宽度 */
 		width: calc(100% - 230px);
 	}
 }
 
-// * table-box 表格页面样式
-.table,
-.table-box {
+// * table 表格页面样式
+.table-box,
+.table-main {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
@@ -87,41 +92,23 @@
 
 	// table-search 表格搜索样式
 	.table-search {
-		display: flex;
 		padding: 18px 18px 0;
 		margin-bottom: 10px;
 		.el-form {
-			flex: 1;
-			.el-form-item {
-				margin-right: 5px;
-				.el-input,
-				.el-select,
-				.el-date-editor--timerange {
-					width: 210px;
-				}
-				.el-date-editor--datetimerange,
-				.el-date-editor--daterange {
-					width: 380px;
-				}
+			.el-form-item__content > * {
+				width: 100%;
+			}
 
-				// 去除时间选择器上下 padding
-				.el-range-editor.el-input__wrapper {
-					padding: 0 10px;
-				}
-
-				// el-select 为多选时不换行显示
-				.el-select__tags {
-					overflow: hidden;
-					white-space: nowrap;
-				}
+			// 去除时间选择器上下 padding
+			.el-range-editor.el-input__wrapper {
+				padding: 0 10px;
 			}
 		}
-		.search-operation {
-			margin-left: 15px;
-			white-space: nowrap;
-			.search-isOpen {
-				margin-left: 15px;
-			}
+		.operation {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			margin-bottom: 18px;
 		}
 	}
 
@@ -141,19 +128,24 @@
 	// el-table 表格样式
 	.el-table {
 		flex: 1;
+
+		// 修复 safari 浏览器表格错位 https://github.com/HalseySpicy/Geeker-Admin/issues/83
+		table {
+			width: 100%;
+		}
 		.el-table__header th {
 			height: 45px;
 			font-size: 15px;
 			font-weight: bold;
-			color: #252525;
-			background: #fafafa;
+			color: var(--el-text-color-primary);
+			background: var(--el-fill-color-light);
 		}
 		.el-table__row {
 			height: 45px;
 			font-size: 14px;
 		}
 
-		// 设置 el-table 中 header 文字不换行
+		// 设置 el-table 中 header 文字不换行，并省略
 		.el-table__header .el-table__cell > .cell {
 			white-space: nowrap;
 		}
@@ -209,7 +201,6 @@
 
 // * el-drawer 样式
 .el-drawer {
-	// drawer header 样式
 	.el-drawer__header {
 		padding: 15px 20px 14px;
 		margin-bottom: 0;
@@ -219,8 +210,6 @@
 			color: var(--el-text-color-primary) !important;
 		}
 	}
-
-	// drawer footer 样式
 	.el-drawer__footer {
 		border-top: 1px solid var(--el-border-color-lighter);
 	}
@@ -230,7 +219,7 @@
 		width: 100%;
 	}
 
-	// drawer-form 中两列 form-item
+	// drawer-form 中存在两列 form-item
 	.drawer-multiColumn-form {
 		display: flex;
 		flex-wrap: wrap;

@@ -4,6 +4,8 @@
 		"useDefineForClassFields": true,
 		"module": "esnext",
 		"moduleResolution": "node",
+		// element 类型提示
+		// "types": ["element-plus/global"],
 
 		/* Strict Type-Checking Options */
 		"strict": true /* Enable all strict type-checking options. */,

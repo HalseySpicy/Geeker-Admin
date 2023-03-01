@@ -1,18 +1,20 @@
 <template>
 	<div class="main-box">
 		<TreeFilter
-			title="部门列表"
+			title="部门列表(多选)"
+			multiple
 			label="name"
 			:requestApi="getUserDepartment"
 			:defaultValue="treeFilterValues.departmentId"
 			@change="changeTreeFilter"
 		/>
 		<div class="table-box">
-			<div class="card select-box">
+			<div class="card mb10 pt0 pb0">
 				<SelectFilter :data="selectFilterData" :defaultValues="selectFilterValues" @change="changeSelectFilter" />
 			</div>
 			<ProTable
 				ref="proTable"
+				title="用户列表"
 				:columns="columns"
 				:requestApi="getUserList"
 				:initParam="Object.assign(treeFilterValues, selectFilterValues)"
@@ -37,9 +39,9 @@
 	</div>
 </template>
 <script setup lang="ts" name="useSelectFilter">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { User } from "@/api/interface";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
@@ -58,14 +60,15 @@ import {
 	resetUserPassWord,
 	exportUserInfo,
 	BatchAddUser,
-	getUserDepartment
+	getUserDepartment,
+	getUserRole
 } from "@/api/modules/user";
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
 // 表格配置项
-const columns: Partial<ColumnProps>[] = [
+const columns: ColumnProps[] = [
 	{ type: "index", label: "#", width: 80 },
 	{ prop: "username", label: "用户姓名", width: 120 },
 	{ prop: "gender", label: "性别", width: 120, sortable: true, enum: genderType },
@@ -77,8 +80,8 @@ const columns: Partial<ColumnProps>[] = [
 	{ prop: "operation", label: "操作", width: 330, fixed: "right" }
 ];
 
-// selectFilter 数据
-const selectFilterData = [
+// selectFilter 数据（用户角色为后台数据）
+const selectFilterData = ref([
 	{
 		title: "用户状态(单)",
 		key: "userStatus",
@@ -118,43 +121,30 @@ const selectFilterData = [
 		title: "用户角色(多)",
 		key: "userRole",
 		multiple: true,
-		options: [
-			{
-				label: "全部",
-				value: ""
-			},
-			{
-				label: "超级管理员",
-				value: "1"
-			},
-			{
-				label: "公司CEO",
-				value: "2"
-			},
-			{
-				label: "部门主管",
-				value: "3"
-			},
-			{
-				label: "人事经理",
-				value: "4"
-			}
-		]
+		options: []
 	}
-];
+]);
+
+// 获取用户角色字典
+onMounted(() => getUserRoleDict());
+const getUserRoleDict = async () => {
+	const { data } = await getUserRole();
+	selectFilterData.value[1].options = data as any;
+};
 
 // 默认 selectFilter 参数
 const selectFilterValues = ref({ userStatus: "2", userRole: ["1", "3"] });
-const changeSelectFilter = (val: any) => {
+const changeSelectFilter = (value: typeof selectFilterValues.value) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
-	val.userStatus = val.userStatus.join("");
-	selectFilterValues.value = val;
+	proTable.value.pageable.pageNum = 1;
+	selectFilterValues.value = value;
 };
 
 // 默认 treeFilter 参数
-const treeFilterValues = reactive({ departmentId: "1" });
-const changeTreeFilter = (val: string) => {
+const treeFilterValues = reactive({ departmentId: ["11"] });
+const changeTreeFilter = (val: string[]) => {
 	ElMessage.success("请注意查看请求参数变化 🤔");
+	proTable.value.pageable.pageNum = 1;
 	treeFilterValues.departmentId = val;
 };
 
@@ -172,7 +162,9 @@ const resetPass = async (params: User.ResUserList) => {
 
 // 导出用户列表
 const downloadFile = async () => {
-	useDownload(exportUserInfo, "用户列表", proTable.value.searchParam);
+	ElMessageBox.confirm("确认导出用户数据?", "温馨提示", { type: "warning" }).then(() =>
+		useDownload(exportUserInfo, "用户列表", proTable.value.searchParam)
+	);
 };
 
 // 批量添加用户
@@ -189,21 +181,14 @@ const batchAdd = () => {
 
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref();
-const openDrawer = (title: string, rowData: Partial<User.ResUserList> = { avatar: "" }) => {
+const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	let params = {
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",
-		apiUrl: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
 		getTableList: proTable.value.getTableList
 	};
 	drawerRef.value.acceptParams(params);
 };
 </script>
-
-<style scoped lang="scss">
-.select-box {
-	padding: 4px 20px;
-	margin-bottom: 10px;
-}
-</style>

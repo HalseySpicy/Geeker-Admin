@@ -7,35 +7,49 @@
 				ref="treeRef"
 				default-expand-all
 				:node-key="id"
-				:data="treeData"
-				:current-node-key="defaultValue"
-				:highlight-current="true"
+				:data="multiple ? treeData : treeAllData"
+				:show-checkbox="multiple"
+				:check-strictly="false"
+				:current-node-key="!multiple ? selected : ''"
+				:highlight-current="!multiple"
 				:expand-on-click-node="false"
+				:check-on-click-node="multiple"
 				:props="defaultProps"
 				:filter-node-method="filterNode"
+				:default-checked-keys="multiple ? selected : []"
 				@node-click="handleNodeClick"
-			/>
+				@check="handleCheckChange"
+			>
+				<template #default="scope">
+					<span class="el-tree-node__label">
+						<slot :row="scope">
+							{{ scope.node.label }}
+						</slot>
+					</span>
+				</template>
+			</el-tree>
 		</el-scrollbar>
 	</div>
 </template>
 
-<script setup lang="ts" name="treeFilter">
+<script setup lang="ts" name="TreeFilter">
 import { ref, watch, onBeforeMount } from "vue";
 import { ElTree } from "element-plus";
 
 // 接收父组件参数并设置默认值
 interface TreeFilterProps {
 	requestApi?: (data?: any) => Promise<any>; // 请求分类数据的 api ==> 非必传
-	data?: { [key: string]: any }[]; // 分类数据，如果有分类数据，则大于 api 请求 ==> 非必传
+	data?: { [key: string]: any }[]; // 分类数据，如果有分类数据，则不会执行 api 请求 ==> 非必传
 	title?: string; // treeFilter 标题 ==> 非必传
 	id?: string; // 选择的id ==> 非必传，默认为 “id”
 	label?: string; // 显示的label ==> 非必传，默认为 “label”
-	defaultValue?: string; // 默认选中的值 ==> 非必传，默认为 ""
+	multiple?: boolean; // 是否为多选 ==> 非必传，默认为 false
+	defaultValue?: any; // 默认选中的值 ==> 非必传
 }
 const props = withDefaults(defineProps<TreeFilterProps>(), {
 	id: "id",
 	label: "label",
-	defaultValue: ""
+	multiple: false
 });
 
 const defaultProps = {
@@ -46,29 +60,62 @@ const defaultProps = {
 const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
+const treeAllData = ref<{ [key: string]: any }[]>([]);
+// 选中的值
+const selected = ref();
 
 onBeforeMount(async () => {
-	if (props.data?.length) return (treeData.value = props.data);
+	// 重新接收一下默认值
+	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+
+	// 有数据就直接赋值，没有数据就执行请求函数
+	if (props.data?.length) {
+		treeData.value = props.data;
+		treeAllData.value = props.data;
+		return;
+	}
 	const { data } = await props.requestApi!();
-	treeData.value = [{ id: "", [props.label]: "全部" }, ...data];
+	treeData.value = data;
+	treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 });
 
 watch(filterText, val => {
 	treeRef.value!.filter(val);
 });
 
-const filterNode = (value: string, data: { [key: string]: any }) => {
+// 过滤
+const filterNode = (value: string, data: { [key: string]: any }, node: any) => {
 	if (!value) return true;
-	return data[props.label].includes(value);
+	let parentNode = node.parent,
+		labels = [node.label],
+		level = 1;
+	while (level < node.level) {
+		labels = [...labels, parentNode.label];
+		parentNode = parentNode.parent;
+		level++;
+	}
+	return labels.some(label => label.indexOf(value) !== -1);
 };
 
 interface FilterEmits {
-	(e: "change", value: string): void;
+	(e: "change", value: any): void;
 }
 const emit = defineEmits<FilterEmits>();
+
+// 单选
 const handleNodeClick = (data: { [key: string]: any }) => {
+	if (props.multiple) return;
 	emit("change", data[props.id]);
 };
+
+// 多选
+const handleCheckChange = () => {
+	emit("change", treeRef.value?.getCheckedKeys());
+};
+
+// 暴露给父组件使用
+defineExpose({ treeData, treeAllData });
 </script>
 
 <style scoped lang="scss">

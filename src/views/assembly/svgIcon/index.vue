@@ -5,7 +5,6 @@
 			type="warning"
 			:closable="false"
 		/>
-		<br />
 		<div class="icon-list">
 			<SvgIcon name="xianxingdaoyu" />
 			<SvgIcon name="xianxingdiqiu" />

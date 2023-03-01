@@ -1,6 +1,6 @@
 <!-- 经典布局 -->
 <template>
-	<el-container class="layout-classic">
+	<el-container class="layout">
 		<el-header>
 			<div class="header-lf">
 				<div class="logo flx-center">
@@ -11,7 +11,7 @@
 			</div>
 			<ToolBarRight />
 		</el-header>
-		<el-container class="classic-bottom">
+		<el-container class="classic-content">
 			<el-aside>
 				<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
 					<el-scrollbar>
@@ -29,7 +29,7 @@
 					</el-scrollbar>
 				</div>
 			</el-aside>
-			<el-container class="classic-bottom-right">
+			<el-container class="classic-main">
 				<Main />
 			</el-container>
 		</el-container>
@@ -49,7 +49,7 @@ import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 const route = useRoute();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 </script>
@@ -60,6 +60,13 @@ const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 
 <style lang="scss">
 .classic {
+	.classic-content {
+		height: calc(100% - 55px); // 减去头部高度
+		.classic-main {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 	.el-menu,
 	.el-menu--popup {
 		.el-menu-item {
