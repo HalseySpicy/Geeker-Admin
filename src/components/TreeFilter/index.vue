@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts" name="TreeFilter">
-import { ref, watch, onBeforeMount } from "vue";
+import { ref, watch, onBeforeMount, nextTick } from "vue";
 import { ElTree } from "element-plus";
 
 // 接收父组件参数并设置默认值
@@ -74,8 +74,10 @@ onBeforeMount(async () => {
 watch(
 	() => props.defaultValue,
 	() => {
-		if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
-		else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+		nextTick(() => {
+			if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+			else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+		});
 	},
 	{ deep: true, immediate: true }
 );
