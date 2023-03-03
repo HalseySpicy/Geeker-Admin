@@ -58,7 +58,7 @@ export namespace User {
 	export interface ResUserList {
 		id: string;
 		username: string;
-		gender: string;
+		gender: number;
 		user: {
 			detail: {
 				age: number;

@@ -125,7 +125,7 @@ const headerRender = (row: ColumnProps) => {
 };
 
 // 表格配置项
-const columns: ColumnProps[] = [
+const columns: ColumnProps<User.ResUserList>[] = [
 	{ type: "selection", fixed: "left", width: 80 },
 	{ type: "index", label: "#", width: 80 },
 	{ type: "expand", label: "Expand", width: 100 },
@@ -164,7 +164,7 @@ const columns: ColumnProps[] = [
 		enum: getUserStatus,
 		search: { el: "tree-select", props: { filterable: true } },
 		fieldNames: { label: "userLabel", value: "userStatus" },
-		render: (scope: { row: User.ResUserList }) => {
+		render: scope => {
 			return (
 				<>
 					{BUTTONS.value.status ? (
@@ -232,7 +232,7 @@ const downloadFile = async () => {
 // 批量添加用户
 const dialogRef = ref();
 const batchAdd = () => {
-	let params = {
+	const params = {
 		title: "用户",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser,
@@ -244,7 +244,7 @@ const batchAdd = () => {
 // 打开 drawer(新增、查看、编辑)
 const drawerRef = ref();
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
-	let params = {
+	const params = {
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",

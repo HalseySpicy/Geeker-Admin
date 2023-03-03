@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
@@ -11,7 +11,7 @@ import router from "@/routers";
 const config = {
 	// 默认地址请求地址，可在 .env.*** 文件中修改
 	baseURL: import.meta.env.VITE_API_URL as string,
-	// 设置超时时间（10s）
+	// 设置超时时间（30s）
 	timeout: ResultEnum.TIMEOUT as number,
 	// 跨域时候允许携带凭证
 	withCredentials: true
@@ -29,12 +29,13 @@ class RequestHttp {
 		 * token校验(JWT) : 接受服务器返回的token,存储到vuex/pinia/本地储存当中
 		 */
 		this.service.interceptors.request.use(
-			(config: AxiosRequestConfig) => {
+			(config: InternalAxiosRequestConfig) => {
 				const globalStore = GlobalStore();
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				config.headers!.noLoading || showFullScreenLoading();
 				const token = globalStore.token;
-				return { ...config, headers: { ...config.headers, "x-access-token": token } };
+				if (config.headers && typeof config.headers?.set === "function") config.headers.set("x-access-token", token);
+				return config;
 			},
 			(error: AxiosError) => {
 				return Promise.reject(error);

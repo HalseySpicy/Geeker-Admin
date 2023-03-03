@@ -299,7 +299,7 @@ export function filterEnum(
 	callValue: any,
 	enumData: any[] | undefined,
 	fieldNames?: { label: string; value: string },
-	type?: string
+	type?: "tag"
 ): string {
 	const value = fieldNames?.value ?? "value";
 	const label = fieldNames?.label ?? "label";

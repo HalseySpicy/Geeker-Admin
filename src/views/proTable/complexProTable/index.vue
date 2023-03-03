@@ -65,7 +65,7 @@ const headerRender = (row: ColumnProps) => {
 };
 
 // 表格配置项
-const columns: ColumnProps[] = [
+const columns: ColumnProps<User.ResUserList>[] = [
 	{ type: "selection", fixed: "left", width: 80 },
 	{ type: "index", label: "#", width: 80 },
 	{ type: "expand", label: "Expand", width: 100 },

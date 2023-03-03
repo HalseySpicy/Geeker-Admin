@@ -61,24 +61,35 @@ const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
 const treeAllData = ref<{ [key: string]: any }[]>([]);
-// 选中的值
 const selected = ref();
 
 onBeforeMount(async () => {
-	// 重新接收一下默认值
-	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
-	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
-
-	// 有数据就直接赋值，没有数据就执行请求函数
-	if (props.data?.length) {
-		treeData.value = props.data;
-		treeAllData.value = props.data;
-		return;
+	if (props.requestApi) {
+		const { data } = await props.requestApi!();
+		treeData.value = data;
+		treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 	}
-	const { data } = await props.requestApi!();
-	treeData.value = data;
-	treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 });
+
+watch(
+	() => props.defaultValue,
+	() => {
+		if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+		else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+	},
+	{ deep: true, immediate: true }
+);
+
+watch(
+	() => props.data,
+	() => {
+		if (props.data?.length) {
+			treeData.value = props.data;
+			treeAllData.value = [{ id: "", [props.label]: "全部" }, ...props.data];
+		}
+	},
+	{ deep: true, immediate: true }
+);
 
 watch(filterText, val => {
 	treeRef.value!.filter(val);
@@ -115,7 +126,7 @@ const handleCheckChange = () => {
 };
 
 // 暴露给父组件使用
-defineExpose({ treeData, treeAllData });
+defineExpose({ treeData, treeAllData, treeRef });
 </script>
 
 <style scoped lang="scss">
