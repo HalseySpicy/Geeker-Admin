@@ -63,7 +63,13 @@ const treeData = ref<{ [key: string]: any }[]>([]);
 const treeAllData = ref<{ [key: string]: any }[]>([]);
 const selected = ref();
 
+const setSelected = () => {
+	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+};
+
 onBeforeMount(async () => {
+	setSelected();
 	if (props.requestApi) {
 		const { data } = await props.requestApi!();
 		treeData.value = data;
@@ -73,12 +79,7 @@ onBeforeMount(async () => {
 
 watch(
 	() => props.defaultValue,
-	() => {
-		nextTick(() => {
-			if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
-			else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
-		});
-	},
+	() => nextTick(() => setSelected()),
 	{ deep: true, immediate: true }
 );
 

@@ -209,10 +209,10 @@ const openColSetting = () => colRef.value.openColSetting();
 // 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂 201-238）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
-	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
-	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
-	let needTransformCol = flatColumns.value!.filter(
-		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum
+	const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
+	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化 && 没有 render）
+	const needTransformCol = flatColumns.value!.filter(
+		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum && !item.render
 	);
 	needTransformCol.forEach(colItem => {
 		printDataList.forEach((tableItem: { [key: string]: any }) => {
