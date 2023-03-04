@@ -210,9 +210,9 @@ const openColSetting = () => colRef.value.openColSetting();
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
-	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化 && 没有 render）
+	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
 	const needTransformCol = flatColumns.value!.filter(
-		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum && !item.render
+		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum
 	);
 	needTransformCol.forEach(colItem => {
 		printDataList.forEach((tableItem: { [key: string]: any }) => {
