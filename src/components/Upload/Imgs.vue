@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts" name="UploadImgs">
-import { ref, computed, inject } from "vue";
+import { ref, computed, inject, watch } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import { uploadImg } from "@/api/modules/upload";
 import type { UploadProps, UploadFile, UploadUserFile, UploadRequestOptions } from "element-plus";
@@ -97,6 +97,14 @@ const self_disabled = computed(() => {
 });
 
 const fileList = ref<UploadUserFile[]>(props.fileList);
+
+// 监听 props.fileList 列表默认值改变
+watch(
+	() => props.fileList,
+	(n: UploadUserFile[]) => {
+		fileList.value = n;
+	}
+);
 
 /**
  * @description 文件上传之前判断
