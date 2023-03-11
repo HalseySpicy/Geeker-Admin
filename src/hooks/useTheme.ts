@@ -58,7 +58,6 @@ export const useTheme = () => {
 	// 初始化 theme 配置
 	const initTheme = () => {
 		switchDark();
-		changePrimary(themeConfig.value.primary);
 		if (themeConfig.value.isGrey) changeGreyOrWeak(true, "grey");
 		if (themeConfig.value.isWeak) changeGreyOrWeak(true, "weak");
 	};

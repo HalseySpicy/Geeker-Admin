@@ -73,9 +73,7 @@ const toDetail = () => {
 const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
-const initParam = reactive({
-	departmentId: "1"
-});
+const initParam = reactive({ departmentId: "1" });
 
 // 树形筛选切换
 const changeTreeFilter = (val: string) => {
@@ -134,7 +132,7 @@ const downloadFile = async () => {
 };
 
 // 批量添加用户
-const dialogRef = ref();
+const dialogRef = ref<InstanceType<typeof ImportExcel> | null>(null);
 const batchAdd = () => {
 	const params = {
 		title: "用户",
@@ -142,19 +140,19 @@ const batchAdd = () => {
 		importApi: BatchAddUser,
 		getTableList: proTable.value.getTableList
 	};
-	dialogRef.value.acceptParams(params);
+	dialogRef.value?.acceptParams(params);
 };
 
 // 打开 drawer(新增、查看、编辑)
-const drawerRef = ref();
+const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	const params = {
 		title,
-		rowData: { ...rowData },
 		isView: title === "查看",
-		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		rowData: { ...rowData },
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value.acceptParams(params);
+	drawerRef.value?.acceptParams(params);
 };
 </script>

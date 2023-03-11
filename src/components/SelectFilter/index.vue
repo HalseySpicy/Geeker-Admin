@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts" name="selectFilter">
-import { ref, onBeforeMount } from "vue";
+import { ref, watch } from "vue";
 
 interface OptionsProps {
 	value: string | number;
@@ -56,12 +56,16 @@ const props = withDefaults(defineProps<SelectFilterProps>(), {
 
 // 重新接收默认值
 const selected = ref<{ [key: string]: any }>({});
-onBeforeMount(() => {
-	props.data.forEach(item => {
-		if (item.multiple) selected.value[item.key] = props.defaultValues[item.key] ?? [""];
-		else selected.value[item.key] = props.defaultValues[item.key] ?? "";
-	});
-});
+watch(
+	() => props.defaultValues,
+	() => {
+		props.data.forEach(item => {
+			if (item.multiple) selected.value[item.key] = props.defaultValues[item.key] ?? [""];
+			else selected.value[item.key] = props.defaultValues[item.key] ?? "";
+		});
+	},
+	{ deep: true, immediate: true }
+);
 
 interface FilterEmits {
 	(e: "change", value: any): void;

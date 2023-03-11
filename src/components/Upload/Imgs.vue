@@ -50,18 +50,6 @@ import { uploadImg } from "@/api/modules/upload";
 import type { UploadProps, UploadFile, UploadUserFile, UploadRequestOptions } from "element-plus";
 import { ElNotification, formContextKey, formItemContextKey } from "element-plus";
 
-type FileTypes =
-	| "image/apng"
-	| "image/bmp"
-	| "image/gif"
-	| "image/jpeg"
-	| "image/pjpeg"
-	| "image/png"
-	| "image/svg+xml"
-	| "image/tiff"
-	| "image/webp"
-	| "image/x-icon";
-
 interface UploadFileProps {
 	fileList: UploadUserFile[];
 	api?: (params: any) => Promise<any>; // 上传图片的 api 方法，一般项目上传都是同一个 api 方法，在组件里直接引入即可 ==> 非必传
@@ -69,7 +57,7 @@ interface UploadFileProps {
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为 false）
 	limit?: number; // 最大图片上传数 ==> 非必传（默认为 5张）
 	fileSize?: number; // 图片大小限制 ==> 非必传（默认为 5M）
-	fileType?: FileTypes[]; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
+	fileType?: File.ImageMimeType[]; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
 	height?: string; // 组件高度 ==> 非必传（默认为 150px）
 	width?: string; // 组件宽度 ==> 非必传（默认为 150px）
 	borderRadius?: string; // 组件边框圆角 ==> 非必传（默认为 8px）
@@ -108,29 +96,31 @@ watch(
 
 /**
  * @description 文件上传之前判断
- * @param rawFile 上传的文件
+ * @param rawFile 选择的文件
  * */
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize;
-	const imgType = props.fileType;
-	if (!imgType.includes(rawFile.type as FileTypes))
+	const imgType = props.fileType.includes(rawFile.type as File.ImageMimeType);
+	if (!imgType)
 		ElNotification({
 			title: "温馨提示",
 			message: "上传图片不符合所需的格式！",
 			type: "warning"
 		});
 	if (!imgSize)
-		ElNotification({
-			title: "温馨提示",
-			message: `上传图片大小不能超过 ${props.fileSize}M！`,
-			type: "warning"
-		});
-	return imgType.includes(rawFile.type as FileTypes) && imgSize;
+		setTimeout(() => {
+			ElNotification({
+				title: "温馨提示",
+				message: `上传图片大小不能超过 ${props.fileSize}M！`,
+				type: "warning"
+			});
+		}, 0);
+	return imgType && imgSize;
 };
 
 /**
  * @description 图片上传
- * @param options 上传的文件
+ * @param options upload 所有配置项
  * */
 const handleHttpUpload = async (options: UploadRequestOptions) => {
 	let formData = new FormData();
@@ -144,7 +134,11 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 	}
 };
 
-// 图片上传成功
+/**
+ * @description 图片上传成功
+ * @param response 上传响应结果
+ * @param uploadFile 上传的文件
+ * */
 interface UploadEmits {
 	(e: "update:fileList", value: UploadUserFile[]): void;
 }
@@ -162,13 +156,18 @@ const uploadSuccess = (response: { fileUrl: string } | undefined, uploadFile: Up
 	});
 };
 
-// 删除图片
-const handleRemove = (uploadFile: UploadFile) => {
-	fileList.value = fileList.value.filter(item => item.url !== uploadFile.url || item.name !== uploadFile.name);
+/**
+ * @description 删除图片
+ * @param file 删除的文件
+ * */
+const handleRemove = (file: UploadFile) => {
+	fileList.value = fileList.value.filter(item => item.url !== file.url || item.name !== file.name);
 	emit("update:fileList", fileList.value);
 };
 
-// 图片上传错误提示
+/**
+ * @description 图片上传错误
+ * */
 const uploadError = () => {
 	ElNotification({
 		title: "温馨提示",
@@ -177,7 +176,9 @@ const uploadError = () => {
 	});
 };
 
-// 文件数超出提示
+/**
+ * @description 文件数超出
+ * */
 const handleExceed = () => {
 	ElNotification({
 		title: "温馨提示",
@@ -186,11 +187,14 @@ const handleExceed = () => {
 	});
 };
 
-// 图片预览
+/**
+ * @description 图片预览
+ * @param file 预览的文件
+ * */
 const viewImageUrl = ref("");
 const imgViewVisible = ref(false);
-const handlePictureCardPreview: UploadProps["onPreview"] = uploadFile => {
-	viewImageUrl.value = uploadFile.url!;
+const handlePictureCardPreview: UploadProps["onPreview"] = file => {
+	viewImageUrl.value = file.url!;
 	imgViewVisible.value = true;
 };
 </script>

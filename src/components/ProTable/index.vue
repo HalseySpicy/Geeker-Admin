@@ -206,7 +206,7 @@ const colSetting = tableColumns.value!.filter(
 );
 const openColSetting = () => colRef.value.openColSetting();
 
-// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂 201-238）
+// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂 209-246）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
 	const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));

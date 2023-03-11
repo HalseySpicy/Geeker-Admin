@@ -57,12 +57,11 @@ const defaultProps = {
 	label: props.label
 };
 
-const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
 const treeAllData = ref<{ [key: string]: any }[]>([]);
-const selected = ref();
 
+const selected = ref();
 const setSelected = () => {
 	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
 	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
@@ -77,6 +76,7 @@ onBeforeMount(async () => {
 	}
 });
 
+// 使用 nextTick 防止打包后赋值不生效
 watch(
 	() => props.defaultValue,
 	() => nextTick(() => setSelected()),
@@ -94,6 +94,7 @@ watch(
 	{ deep: true, immediate: true }
 );
 
+const filterText = ref("");
 watch(filterText, val => {
 	treeRef.value!.filter(val);
 });

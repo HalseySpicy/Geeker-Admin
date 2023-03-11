@@ -77,16 +77,14 @@ const router = useRouter();
 
 // 跳转详情页
 const toDetail = () => {
-	router.push(`/proTable/useProTable/detail/${Math.random()}?params=detail-page`);
+	router.push(`/proTable/useProTable/detail/${Math.random().toFixed(3)}?params=detail-page`);
 };
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
-const initParam = reactive({
-	type: 1
-});
+const initParam = reactive({ type: 1 });
 
 // dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total && pageNum && pageSize 这些字段，那么你可以在这里进行处理成这些字段
 // 或者直接去 hooks/useTable.ts 文件中把字段改为你后端对应的就行
@@ -144,7 +142,7 @@ const columns: ColumnProps<User.ResUserList>[] = [
 	{
 		prop: "gender",
 		label: "性别",
-		// 直接放字典数据
+		// 字典数据
 		// enum: genderType,
 		// 字典请求不带参数
 		enum: getUserGender,
@@ -230,7 +228,7 @@ const downloadFile = async () => {
 };
 
 // 批量添加用户
-const dialogRef = ref();
+const dialogRef = ref<InstanceType<typeof ImportExcel> | null>(null);
 const batchAdd = () => {
 	const params = {
 		title: "用户",
@@ -238,19 +236,19 @@ const batchAdd = () => {
 		importApi: BatchAddUser,
 		getTableList: proTable.value.getTableList
 	};
-	dialogRef.value.acceptParams(params);
+	dialogRef.value?.acceptParams(params);
 };
 
 // 打开 drawer(新增、查看、编辑)
-const drawerRef = ref();
+const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	const params = {
 		title,
-		rowData: { ...rowData },
 		isView: title === "查看",
-		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		rowData: { ...rowData },
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value.acceptParams(params);
+	drawerRef.value?.acceptParams(params);
 };
 </script>

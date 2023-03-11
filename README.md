@@ -191,7 +191,7 @@ Geeker-Admin
 
 |                          微信群二维码                          |
 | :------------------------------------------------------------: |
-| <img src="https://i.imgtg.com/2023/03/03/V95jD.png" width=170> |
+| <img src="https://i.imgtg.com/2023/03/10/Y3Fkr.png" width=170> |
 
 ### 捐赠 🍵
 

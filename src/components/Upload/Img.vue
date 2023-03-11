@@ -54,25 +54,13 @@ import { generateUUID } from "@/utils/util";
 import { ElNotification, formContextKey, formItemContextKey } from "element-plus";
 import type { UploadProps, UploadRequestOptions } from "element-plus";
 
-type FileTypes =
-	| "image/apng"
-	| "image/bmp"
-	| "image/gif"
-	| "image/jpeg"
-	| "image/pjpeg"
-	| "image/png"
-	| "image/svg+xml"
-	| "image/tiff"
-	| "image/webp"
-	| "image/x-icon";
-
 interface UploadFileProps {
 	imageUrl: string; // 图片地址 ==> 必传
 	api?: (params: any) => Promise<any>; // 上传图片的 api 方法，一般项目上传都是同一个 api 方法，在组件里直接引入即可 ==> 非必传
 	drag?: boolean; // 是否支持拖拽上传 ==> 非必传（默认为 true）
 	disabled?: boolean; // 是否禁用上传组件 ==> 非必传（默认为 false）
 	fileSize?: number; // 图片大小限制 ==> 非必传（默认为 5M）
-	fileType?: FileTypes[]; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
+	fileType?: File.ImageMimeType[]; // 图片类型限制 ==> 非必传（默认为 ["image/jpeg", "image/png", "image/gif"]）
 	height?: string; // 组件高度 ==> 非必传（默认为 150px）
 	width?: string; // 组件宽度 ==> 非必传（默认为 150px）
 	borderRadius?: string; // 组件边框圆角 ==> 非必传（默认为 8px）
@@ -106,11 +94,10 @@ const self_disabled = computed(() => {
 
 /**
  * @description 图片上传
- * @param options 上传的文件
+ * @param options upload 所有配置项
  * */
 interface UploadEmits {
 	(e: "update:imageUrl", value: string): void;
-	(e: "check-validate"): void;
 }
 const emit = defineEmits<UploadEmits>();
 const handleHttpUpload = async (options: UploadRequestOptions) => {
@@ -122,7 +109,6 @@ const handleHttpUpload = async (options: UploadRequestOptions) => {
 		emit("update:imageUrl", data.fileUrl);
 		// 调用 el-form 内部的校验方法（可自动校验）
 		formItemContext?.prop && formContext?.validateField([formItemContext.prop as string]);
-		emit("check-validate");
 	} catch (error) {
 		options.onError(error as any);
 	}
@@ -145,27 +131,31 @@ const editImg = () => {
 
 /**
  * @description 文件上传之前判断
- * @param rawFile 上传的文件
+ * @param rawFile 选择的文件
  * */
 const beforeUpload: UploadProps["beforeUpload"] = rawFile => {
 	const imgSize = rawFile.size / 1024 / 1024 < props.fileSize;
-	const imgType = props.fileType;
-	if (!imgType.includes(rawFile.type as FileTypes))
+	const imgType = props.fileType.includes(rawFile.type as File.ImageMimeType);
+	if (!imgType)
 		ElNotification({
 			title: "温馨提示",
 			message: "上传图片不符合所需的格式！",
 			type: "warning"
 		});
 	if (!imgSize)
-		ElNotification({
-			title: "温馨提示",
-			message: `上传图片大小不能超过 ${props.fileSize}M！`,
-			type: "warning"
-		});
-	return imgType.includes(rawFile.type as FileTypes) && imgSize;
+		setTimeout(() => {
+			ElNotification({
+				title: "温馨提示",
+				message: `上传图片大小不能超过 ${props.fileSize}M！`,
+				type: "warning"
+			});
+		}, 0);
+	return imgType && imgSize;
 };
 
-// 图片上传成功提示
+/**
+ * @description 图片上传成功
+ * */
 const uploadSuccess = () => {
 	ElNotification({
 		title: "温馨提示",
@@ -174,7 +164,9 @@ const uploadSuccess = () => {
 	});
 };
 
-// 图片上传错误提示
+/**
+ * @description 图片上传错误
+ * */
 const uploadError = () => {
 	ElNotification({
 		title: "温馨提示",

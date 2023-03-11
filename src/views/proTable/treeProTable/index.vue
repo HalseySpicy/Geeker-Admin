@@ -72,9 +72,7 @@ onMounted(() => {
 const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
-const initParam = reactive({
-	departmentId: ""
-});
+const initParam = reactive({ departmentId: "" });
 
 // 获取 treeFilter 数据
 // 当 proTable 的 requestAuto 属性为 false，不会自动请求表格数据，等待 treeFilter 数据回来之后，更改 initParam.departmentId 的值，才会触发请求 proTable 数据
@@ -113,6 +111,7 @@ const columns: ColumnProps<User.ResUserList>[] = [
 		prop: "gender",
 		label: "性别",
 		sortable: true,
+		isFilterEnum: false,
 		enum: filterGenderEnum.value,
 		search: {
 			el: "select",
@@ -132,7 +131,7 @@ const columns: ColumnProps<User.ResUserList>[] = [
 		search: { el: "tree-select" },
 		fieldNames: { label: "userLabel", value: "userStatus" }
 	},
-	{ prop: "createTime", label: "创建时间" },
+	{ prop: "createTime", label: "创建时间", width: 180 },
 	{ prop: "operation", label: "操作", width: 300, fixed: "right" }
 ];
 
@@ -143,15 +142,15 @@ const deleteAccount = async (params: User.ResUserList) => {
 };
 
 // 打开 drawer(新增、查看、编辑)
-const drawerRef = ref();
+const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
 	const params = {
 		title,
 		rowData: { ...rowData },
 		isView: title === "查看",
-		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value.acceptParams(params);
+	drawerRef.value?.acceptParams(params);
 };
 </script>
