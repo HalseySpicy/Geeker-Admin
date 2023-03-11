@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
-import { LOGIN_URL } from "@/config/config";
+import { LOGIN_URL, ROUTER_WHITE_LIST } from "@/config/config";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { staticRouter, errorRouter } from "@/routers/modules/staticRouter";
 import NProgress from "@/config/nprogress";
 
 /**
- * @description 动态路由参数配置简介
+ * @description 动态路由参数配置简介 📚
  * @param path ==> 菜单路径
  * @param name ==> 菜单别名
  * @param redirect ==> 重定向地址
@@ -42,16 +42,20 @@ router.beforeEach(async (to, from, next) => {
 	const title = import.meta.env.VITE_GLOB_APP_TITLE;
 	document.title = to.meta.title ? `${to.meta.title} - ${title}` : title;
 
-	// 3.如果是访问登陆页，没有 token 直接放行，有 token 就在当前页
-	if (to.path === LOGIN_URL) {
-		if (!globalStore.token) return next();
-		else return next(from.fullPath);
+	// 3.判断是访问登陆页，有 Token 就在当前页面，没有 Token 重置路由并放行到登陆页
+	if (to.path.toLocaleLowerCase() === LOGIN_URL) {
+		if (globalStore.token) return next(from.fullPath);
+		resetRouter();
+		return next();
 	}
 
-	// 4.判断是否有 Token，没有重定向到 login
-	if (!globalStore.token) return next(LOGIN_URL);
+	// 4.判断访问页面是否在路由白名单地址中，如果存在直接放行
+	if (ROUTER_WHITE_LIST.includes(to.path)) return next();
 
-	// 5.如果没有菜单列表，就重新请求菜单列表并添加动态路由
+	// 5.判断是否有 Token，没有重定向到 login
+	if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
+
+	// 6.如果没有菜单列表，就重新请求菜单列表并添加动态路由
 	const authStore = AuthStore();
 	authStore.setRouteName(to.name as string);
 	if (!authStore.authMenuListGet.length) {
@@ -59,7 +63,7 @@ router.beforeEach(async (to, from, next) => {
 		return next({ ...to, replace: true });
 	}
 
-	// 6.正常访问页面
+	// 7.正常访问页面
 	next();
 });
 

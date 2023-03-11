@@ -4,8 +4,6 @@
 </template>
 
 <script setup lang="ts">
-// Echarts 为init（dom元素后的类型）
-// EChartsOption 为 option 的类型
 import { ECharts, EChartsOption, init } from "echarts";
 interface ChartProp {
 	label: string;
@@ -72,14 +70,14 @@ const initChart = (data: any = {}): ECharts => {
 				type: "category",
 				boundaryGap: false,
 				axisLine: {
-					//坐标轴轴线相关设置。数学上的x轴
+					// 坐标轴轴线相关设置。数学上的x轴
 					show: true,
 					lineStyle: {
 						color: "#233653"
 					}
 				},
 				axisLabel: {
-					//坐标轴刻度标签的相关设置
+					// 坐标轴刻度标签的相关设置
 					color: "#7ec7ff",
 					padding: 0,
 					fontSize: 12,
@@ -158,8 +156,8 @@ const initChart = (data: any = {}): ECharts => {
 					show: true
 				},
 				areaStyle: {
-					//区域填充样式
-					//线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
+					// 区域填充样式
+					// 线性渐变，前4个参数分别是x0,y0,x2,y2(范围0~1);相当于图形包围盒中的百分比。如果最后一个参数是‘true’，则该四个值是绝对像素位置。
 					color: {
 						type: "linear",
 						x: 0,
@@ -179,7 +177,7 @@ const initChart = (data: any = {}): ECharts => {
 						global: false // 缺省为 false
 					},
 					shadowColor: "rgba(25,163,223, 0.3)", //阴影颜色
-					shadowBlur: 20 //shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
+					shadowBlur: 20 // shadowBlur设图形阴影的模糊大小。配合shadowColor,shadowOffsetX/Y, 设置图形的阴影效果。
 				},
 				data: val.value
 			};

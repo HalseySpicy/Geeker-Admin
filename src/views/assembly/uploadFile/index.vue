@@ -81,8 +81,8 @@
 					type="warning"
 					effect="dark"
 					:closable="false"
+					class="mb20"
 				/>
-				<br />
 				<el-form ref="ruleFormRef" label-width="100px" label-suffix=" :" :rules="rules" :model="fromModel">
 					<el-form-item label="用户头像" prop="avatar">
 						<UploadImg v-model:imageUrl="fromModel.avatar" width="135px" height="135px" :file-size="3">
@@ -123,8 +123,8 @@
 					type="warning"
 					effect="dark"
 					:closable="false"
+					class="mb20"
 				/>
-				<br />
 				<el-form label-width="100px" label-suffix=" :" disabled :model="fromModel1">
 					<el-form-item label="用户头像" prop="avatar">
 						<UploadImg v-model:imageUrl="fromModel1.avatar" width="135px" height="135px" :file-size="3">
@@ -169,14 +169,14 @@ import { FormInstance } from "element-plus";
 import UploadImg from "@/components/Upload/Img.vue";
 import UploadImgs from "@/components/Upload/Imgs.vue";
 
-const fileList = ref([{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110013.jpg" }]);
+const fileList = ref([{ name: "img", url: "https://i.imgtg.com/2023/01/16/QRBHS.jpg" }]);
 const fileList1 = ref([]);
 
 const avatar1 = ref("");
 const avatar2 = ref("");
 const avatar3 = ref("");
 const avatar4 = ref("");
-const avatar5 = ref("https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110015.jpg");
+const avatar5 = ref("https://i.imgtg.com/2023/01/16/QRqMK.jpg");
 
 const rules = reactive({
 	avatar: [{ required: true, message: "请上传用户头像" }],
@@ -188,14 +188,14 @@ const rules = reactive({
 
 const fromModel = ref({
 	avatar: "",
-	photo: [{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110012.jpg" }],
+	photo: [{ name: "img", url: "https://i.imgtg.com/2023/01/16/QR57a.jpg" }],
 	username: "",
 	idCard: "",
 	email: ""
 });
 const fromModel1 = ref({
 	avatar: "",
-	photo: [{ name: "img", url: "https://iamge-1259297738.cos.ap-chengdu.myqcloud.com/img/20220728110032.jpg" }],
+	photo: [{ name: "img", url: "https://i.imgtg.com/2023/01/16/QR57a.jpg" }],
 	username: "",
 	idCard: "",
 	email: ""

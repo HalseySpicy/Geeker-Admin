@@ -3,7 +3,7 @@
 		<div class="dataScreen" ref="dataScreenRef">
 			<div class="dataScreen-header">
 				<div class="header-lf">
-					<span class="header-screening" @click="handleTo">首页</span>
+					<span class="header-screening" @click="router.push(HOME_URL)">首页</span>
 				</div>
 				<div class="header-ct">
 					<div class="header-ct-title">
@@ -132,9 +132,9 @@ import OverNext30Chart from "./components/OverNext30Chart.vue";
 import PlatformSourceChart from "./components/PlatformSourceChart.vue";
 import RealTimeAccessChart from "./components/RealTimeAccessChart.vue";
 // import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
-/* 引入警告数据 */
 // import alarmList from "./assets/alarmList.json";
-/* 获取最外层盒子 */
+
+const router = useRouter();
 const dataScreenRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
@@ -144,13 +144,13 @@ onMounted(() => {
 		dataScreenRef.value.style.width = `1920px`;
 		dataScreenRef.value.style.height = `1080px`;
 	}
-	/* 初始化echarts */
+	// 初始化echarts
 	initCharts();
 	// 为浏览器绑定事件
 	window.addEventListener("resize", resize);
 });
 
-/* 声明echarts实例 */
+// 声明echarts实例
 interface ChartProps {
 	[key: string]: ECharts | null;
 }
@@ -164,7 +164,8 @@ const dataScreen: ChartProps = {
 	chart7: null,
 	mapChart: null
 };
-/* 获取子组件的ref */
+
+// 获取子组件的ref
 interface ChartExpose {
 	initChart: (params: any) => ECharts;
 }
@@ -176,7 +177,8 @@ const MaleFemaleRatioRef = ref<ChartExpose>();
 const OverNext30Ref = ref<ChartExpose>();
 const PlatformSourceRef = ref<ChartExpose>();
 const MapchartRef = ref<ChartExpose>();
-/* 初始化 charts参数 */
+
+// 初始化 charts参数
 let ageData = [
 	{
 		value: 200,
@@ -344,7 +346,7 @@ let mapData = [
 	}
 ];
 
-/* 初始化 echarts */
+// 初始化 echarts
 const initCharts = (): void => {
 	dataScreen.chart1 = RealTimeAccessRef.value?.initChart(0.5) as ECharts;
 	dataScreen.chart2 = AgeRatioRef.value?.initChart(ageData) as ECharts;
@@ -376,14 +378,22 @@ const initCharts = (): void => {
 	dataScreen.mapChart = MapchartRef.value?.initChart(mapData) as ECharts;
 };
 
-/* 根据浏览器大小推断缩放比例 */
+// 大屏告警数据
+// interface AlarmProps {
+// 	id: number;
+// 	warnMsg: string;
+// 	label: string;
+// }
+// const alarmData: AlarmProps[] = reactive(alarmList);
+
+// 根据浏览器大小推断缩放比例
 const getScale = (width = 1920, height = 1080) => {
 	let ww = window.innerWidth / width;
 	let wh = window.innerHeight / height;
 	return ww < wh ? ww : wh;
 };
 
-/* 浏览器监听 resize 事件 */
+// 监听浏览器 resize 事件
 const resize = () => {
 	if (dataScreenRef.value) {
 		dataScreenRef.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
@@ -394,36 +404,19 @@ const resize = () => {
 	});
 };
 
-/* 大屏告警数据 */
-// interface AlarmProps {
-// 	id: number;
-// 	warnMsg: string;
-// 	label: string;
-// }
-// const alarmData: AlarmProps[] = reactive(alarmList);
-
-/* 获取当前时间 */
+// 获取当前时间
 const { nowTime } = useTime();
-let timer: any = null;
+let timer: NodeJS.Timer | null = null;
 let time: Ref<string> = ref(nowTime.value);
 timer = setInterval(() => {
 	time.value = useTime().nowTime.value;
 }, 1000);
 
-/* 跳转home */
-const router = useRouter();
-const handleTo = () => {
-	router.push(HOME_URL);
-};
-
-/* 销毁时触发 */
+// 销毁时触发
 onBeforeUnmount(() => {
 	window.removeEventListener("resize", resize);
-	clearInterval(timer);
-	// 每次离开页面时，清空echarts实例，不然会出现无法显示的问题
-	Object.values(dataScreen).forEach(val => {
-		val?.dispose();
-	});
+	clearInterval(timer!);
+	Object.values(dataScreen).forEach(val => val?.dispose());
 });
 </script>
 <style lang="scss" scoped>

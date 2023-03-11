@@ -11,7 +11,7 @@ export interface ResultData<T = any> extends Result {
 
 // * 分页响应参数
 export interface ResPage<T> {
-	datalist: T[];
+	list: T[];
 	pageNum: number;
 	pageSize: number;
 	total: number;
@@ -21,6 +21,13 @@ export interface ResPage<T> {
 export interface ReqPage {
 	pageNum: number;
 	pageSize: number;
+}
+
+// * 文件上传模块
+export namespace Upload {
+	export interface ResFileUrl {
+		fileUrl: string;
+	}
 }
 
 // * 登录模块
@@ -39,7 +46,7 @@ export namespace Login {
 
 // * 用户管理模块
 export namespace User {
-	export interface ReqGetUserParams extends ReqPage {
+	export interface ReqUserParams extends ReqPage {
 		username: string;
 		gender: number;
 		idCard: string;
@@ -51,7 +58,7 @@ export namespace User {
 	export interface ResUserList {
 		id: string;
 		username: string;
-		gender: string;
+		gender: number;
 		user: {
 			detail: {
 				age: number;
@@ -63,6 +70,7 @@ export namespace User {
 		createTime: string;
 		status: number;
 		avatar: string;
+		photo: any[];
 		children?: ResUserList[];
 	}
 	export interface ResStatus {
@@ -78,11 +86,9 @@ export namespace User {
 		name: string;
 		children?: ResDepartment[];
 	}
-}
-
-// * 文件上传模块
-export namespace Upload {
-	export interface ResFileUrl {
-		fileUrl: string;
+	export interface ResRole {
+		id: string;
+		name: string;
+		children?: ResDepartment[];
 	}
 }

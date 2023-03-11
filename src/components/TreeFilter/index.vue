@@ -7,25 +7,33 @@
 				ref="treeRef"
 				default-expand-all
 				:node-key="id"
-				:data="treeData"
+				:data="multiple ? treeData : treeAllData"
 				:show-checkbox="multiple"
 				:check-strictly="false"
-				:current-node-key="!multiple ? defaultValue : ''"
+				:current-node-key="!multiple ? selected : ''"
 				:highlight-current="!multiple"
 				:expand-on-click-node="false"
 				:check-on-click-node="multiple"
 				:props="defaultProps"
 				:filter-node-method="filterNode"
-				:default-checked-keys="multiple ? defaultValue : []"
+				:default-checked-keys="multiple ? selected : []"
 				@node-click="handleNodeClick"
 				@check="handleCheckChange"
-			/>
+			>
+				<template #default="scope">
+					<span class="el-tree-node__label">
+						<slot :row="scope">
+							{{ scope.node.label }}
+						</slot>
+					</span>
+				</template>
+			</el-tree>
 		</el-scrollbar>
 	</div>
 </template>
 
 <script setup lang="ts" name="TreeFilter">
-import { ref, watch, onBeforeMount } from "vue";
+import { ref, watch, onBeforeMount, nextTick } from "vue";
 import { ElTree } from "element-plus";
 
 // 接收父组件参数并设置默认值
@@ -49,17 +57,44 @@ const defaultProps = {
 	label: props.label
 };
 
-const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
+const treeAllData = ref<{ [key: string]: any }[]>([]);
+
+const selected = ref();
+const setSelected = () => {
+	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
+	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+};
 
 onBeforeMount(async () => {
-	if (props.data?.length) return (treeData.value = props.data);
-	const { data } = await props.requestApi!();
-	if (props.multiple) return (treeData.value = data);
-	treeData.value = [{ id: "", [props.label]: "全部" }, ...data];
+	setSelected();
+	if (props.requestApi) {
+		const { data } = await props.requestApi!();
+		treeData.value = data;
+		treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
+	}
 });
 
+// 使用 nextTick 防止打包后赋值不生效
+watch(
+	() => props.defaultValue,
+	() => nextTick(() => setSelected()),
+	{ deep: true, immediate: true }
+);
+
+watch(
+	() => props.data,
+	() => {
+		if (props.data?.length) {
+			treeData.value = props.data;
+			treeAllData.value = [{ id: "", [props.label]: "全部" }, ...props.data];
+		}
+	},
+	{ deep: true, immediate: true }
+);
+
+const filterText = ref("");
 watch(filterText, val => {
 	treeRef.value!.filter(val);
 });
@@ -93,6 +128,9 @@ const handleNodeClick = (data: { [key: string]: any }) => {
 const handleCheckChange = () => {
 	emit("change", treeRef.value?.getCheckedKeys());
 };
+
+// 暴露给父组件使用
+defineExpose({ treeData, treeAllData, treeRef });
 </script>
 
 <style scoped lang="scss">

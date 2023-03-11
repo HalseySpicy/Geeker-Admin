@@ -13,7 +13,10 @@
 		.header-lf {
 			display: flex;
 			align-items: center;
+			overflow: hidden;
+			white-space: nowrap;
 			.logo {
+				flex-shrink: 0;
 				width: 210px;
 				margin-right: 16px;
 				span {

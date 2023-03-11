@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { reactive, computed, onMounted, toRefs } from "vue";
+import { reactive, computed, toRefs } from "vue";
 
 /**
  * @description table 页面操作方法封装
@@ -49,11 +49,6 @@ export const useTable = (
 		}
 	});
 
-	// 初始化的时候需要做的事情就是 设置表单查询默认值 && 获取表格数据(reset函数的作用刚好是这两个功能)
-	onMounted(() => {
-		reset();
-	});
-
 	/**
 	 * @description 获取表格数据
 	 * @return void
@@ -62,9 +57,9 @@ export const useTable = (
 		try {
 			// 先把初始化参数和分页参数放到总参数里面
 			Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
-			let { data } = await api(state.totalParam);
+			let { data } = await api({ ...state.searchInitParam, ...state.totalParam });
 			dataCallBack && (data = dataCallBack(data));
-			state.tableData = isPageable ? data.datalist : data;
+			state.tableData = isPageable ? data.list : data;
 			// 解构后台返回的分页数据 (如果有分页更新分页信息)
 			const { pageNum, pageSize, total } = data;
 			isPageable && updatePageable({ pageNum, pageSize, total });
@@ -152,6 +147,7 @@ export const useTable = (
 		search,
 		reset,
 		handleSizeChange,
-		handleCurrentChange
+		handleCurrentChange,
+		updatedTotalParam
 	};
 };

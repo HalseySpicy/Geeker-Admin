@@ -226,15 +226,15 @@ export function getMenuListPath(menuList: Menu.MenuOptions[], menuPathArr: strin
 }
 
 /**
- * @description 双重递归找出所有面包屑存储到 pinia/vuex 中
+ * @description 递归找出所有面包屑存储到 pinia/vuex 中
  * @param {Array} menuList 所有菜单列表
  * @param {Object} result 输出的结果
- * @param {String} path 当前递归的路径
+ * @param {Array} parent 父级菜单
  * @returns object
  */
-export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [key: string]: any } = {}, path = []) => {
+export const getAllBreadcrumbList = (menuList: Menu.MenuOptions[], result: { [key: string]: any } = {}, parent = []) => {
 	for (const item of menuList) {
-		result[item.path] = [...path, item];
+		result[item.path] = [...parent, item];
 		if (item.children) getAllBreadcrumbList(item.children, result, result[item.path]);
 	}
 	return result;
@@ -271,10 +271,8 @@ export function formatValue(callValue: any) {
  * @return any
  * */
 export function handleRowAccordingToProp(row: { [key: string]: any }, prop: string) {
-	if (!prop.includes(".")) return row[prop];
-	prop.split(".").forEach(item => {
-		row = row[item] ?? "--";
-	});
+	if (!prop.includes(".")) return row[prop] ?? "--";
+	prop.split(".").forEach(item => (row = row[item] ?? "--"));
 	return row;
 }
 
@@ -292,17 +290,18 @@ export function handleProp(prop: string) {
 /**
  * @description 根据枚举列表查询当需要的数据（如果指定了 label 和 value 的 key值，会自动识别格式化）
  * @param {String} callValue 当前单元格值
- * @param {Array} enumData 枚举列表
+ * @param {Array} enumData 字典列表
+ * @param {Array} fieldNames 指定 label && value 的 key 值
  * @param {String} type 过滤类型（目前只有 tag）
  * @return string
  * */
 export function filterEnum(
 	callValue: any,
-	enumData: { [key: string]: any } | undefined,
-	searchProps?: { [key: string]: any },
-	type?: string
+	enumData: any[] | undefined,
+	fieldNames?: { label: string; value: string },
+	type?: "tag"
 ): string {
-	const value = searchProps?.value ?? "value";
+const value = searchProps?.value ?? "value";
 	const label = searchProps?.label ?? "label";
 	const childrenKey = searchProps?.childrenKey ?? "children";
 	let filterData: any = {};

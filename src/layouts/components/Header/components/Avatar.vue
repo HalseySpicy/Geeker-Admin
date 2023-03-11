@@ -27,7 +27,6 @@
 import { ref } from "vue";
 import { GlobalStore } from "@/stores";
 import { LOGIN_URL } from "@/config/config";
-import { resetRouter } from "@/routers/index";
 import { logoutApi } from "@/api/modules/login";
 import { useRouter } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
@@ -48,9 +47,7 @@ const logout = () => {
 		await logoutApi();
 		// 2.清除 Token
 		globalStore.setToken("");
-		// 3.重置路由
-		resetRouter();
-		// 4.重定向到登陆页
+		// 3.重定向到登陆页
 		router.replace(LOGIN_URL);
 		ElMessage.success("退出登录成功！");
 	});

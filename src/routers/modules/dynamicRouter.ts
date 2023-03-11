@@ -4,7 +4,6 @@ import { LOGIN_URL } from "@/config/config";
 import { ElNotification } from "element-plus";
 import { GlobalStore } from "@/stores";
 import { AuthStore } from "@/stores/modules/auth";
-import { notFoundRouter } from "@/routers/modules/staticRouter";
 
 // 引入 views 文件夹下所有 vue 文件
 const modules = import.meta.glob("@/views/**/*.vue");
@@ -45,9 +44,6 @@ export const initDynamicRouter = async () => {
 				router.addRoute("layout", item);
 			}
 		});
-
-		// 4.最后添加 notFoundRouter
-		router.addRoute(notFoundRouter);
 	} catch (error) {
 		// 💢 当按钮 || 菜单请求出错时，重定向到登陆页
 		globalStore.setToken("");

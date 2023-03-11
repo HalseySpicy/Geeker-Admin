@@ -2,15 +2,14 @@
 	<component :is="renderLoop(column)"></component>
 </template>
 
-<script lang="tsx" setup>
+<script lang="tsx" setup name="TableColumn">
 import { inject, ref, useSlots } from "vue";
-import { ElTableColumn, ElTag } from "element-plus";
-import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 import { ColumnProps } from "@/components/ProTable/interface";
-
-const slots = useSlots();
+import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 
 defineProps<{ column: ColumnProps }>();
+
+const slots = useSlots();
 
 const enumMap = inject("enumMap", ref(new Map()));
 
@@ -30,7 +29,7 @@ const renderLoop = (item: ColumnProps) => {
 	return (
 		<>
 			{item.isShow && (
-				<ElTableColumn
+				<el-table-column
 					{...item}
 					align={item.align ?? "center"}
 					showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "operation"}
@@ -40,7 +39,7 @@ const renderLoop = (item: ColumnProps) => {
 							if (item._children) return item._children.map(child => renderLoop(child));
 							if (item.render) return item.render(scope);
 							if (slots[item.prop!]) return slots[item.prop!]!(scope);
-							if (item.tag) return <ElTag type={getTagType(item, scope)}>{renderCellData(item, scope)}</ElTag>;
+							if (item.tag) return <el-tag type={getTagType(item, scope)}>{renderCellData(item, scope)}</el-tag>;
 							return renderCellData(item, scope);
 						},
 						header: () => {
@@ -49,7 +48,7 @@ const renderLoop = (item: ColumnProps) => {
 							return item.label;
 						}
 					}}
-				</ElTableColumn>
+				</el-table-column>
 			)}
 		</>
 	);

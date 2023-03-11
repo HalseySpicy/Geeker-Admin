@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts" name="layout">
-import { computed } from "vue";
+import { computed, type Component } from "vue";
 import { GlobalStore } from "@/stores";
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 import LayoutVertical from "./LayoutVertical/index.vue";
@@ -13,7 +13,7 @@ import LayoutClassic from "./LayoutClassic/index.vue";
 import LayoutTransverse from "./LayoutTransverse/index.vue";
 import LayoutColumns from "./LayoutColumns/index.vue";
 
-const LayoutComponents: { [key: string]: any } = {
+const LayoutComponents: { [key: string]: Component } = {
 	vertical: LayoutVertical,
 	classic: LayoutClassic,
 	transverse: LayoutTransverse,
@@ -26,6 +26,6 @@ const themeConfig = computed(() => globalStore.themeConfig);
 
 <style scoped lang="scss">
 .layout {
-	min-width: 740px;
+	min-width: 760px;
 }
 </style>

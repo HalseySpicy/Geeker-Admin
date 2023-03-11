@@ -7,7 +7,7 @@
 			:placeholder="placeholder"
 			:clearable="clearable"
 			@clear="clearIcon"
-			@focus="openDialog"
+			@click="openDialog"
 		>
 			<template #append>
 				<el-button :icon="customIcons[iconValue]" />
@@ -49,31 +49,29 @@ const props = withDefaults(defineProps<SelectIconProps>(), {
 // 重新接收一下，防止打包后 clearable 报错
 const valueIcon = ref(props.iconValue);
 
-const customIcons: { [key: string]: any } = Icons;
-
-// 打开 dialog
+// open Dialog
 const dialogVisible = ref(false);
-const openDialog = (e: any) => {
-	e.srcElement.blur();
-	dialogVisible.value = true;
-};
-
-const emit = defineEmits(["update:iconValue"]);
+const openDialog = () => (dialogVisible.value = true);
 
 // 选择图标(触发更新父组件数据)
+const emit = defineEmits(["update:iconValue"]);
 const selectIcon = (item: any) => {
 	dialogVisible.value = false;
 	valueIcon.value = item.name;
 	emit("update:iconValue", item.name);
 };
 
+// 清空图标
+const inputRef = ref();
 const clearIcon = () => {
 	valueIcon.value = "";
 	emit("update:iconValue", "");
+	setTimeout(() => inputRef.value.blur(), 0);
 };
 
 // 监听搜索框值
 const inputValue = ref("");
+const customIcons: { [key: string]: any } = Icons;
 const iconsList = computed((): { [key: string]: any } => {
 	if (!inputValue.value) return Icons;
 	let result: { [key: string]: any } = {};

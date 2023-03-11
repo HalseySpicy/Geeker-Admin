@@ -4,7 +4,7 @@
 			<el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @tab-remove="tabRemove">
 				<el-tab-pane v-for="item in tabsMenuList" :key="item.path" :label="item.title" :name="item.path" :closable="item.close">
 					<template #label>
-						<el-icon class="tabs-icon" v-if="item.icon && themeConfig.tabsIcon">
+						<el-icon class="tabs-icon" v-show="item.icon && themeConfig.tabsIcon">
 							<component :is="item.icon"></component>
 						</el-icon>
 						{{ item.title }}
@@ -87,7 +87,7 @@ watch(
 			close: !route.meta.isAffix
 		};
 		tabStore.addTabs(tabsParams);
-		route.meta.isKeepAlive && keepAliveStore.addKeepLiveName(route.name as string);
+		route.meta.isKeepAlive && keepAliveStore.addKeepAliveName(route.name as string);
 	},
 	{
 		immediate: true
@@ -103,7 +103,7 @@ const tabClick = (tabItem: TabsPaneContext) => {
 // Remove Tab
 const tabRemove = (fullPath: string) => {
 	const name = tabStore.tabsMenuList.filter(item => item.path == fullPath)[0].name || "";
-	keepAliveStore.removeKeepLiveName(name);
+	keepAliveStore.removeKeepAliveName(name);
 	tabStore.removeTabs(fullPath, fullPath == route.fullPath);
 };
 </script>

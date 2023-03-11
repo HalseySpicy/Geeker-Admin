@@ -118,6 +118,20 @@
 					}
 				},
 				{
+					"path": "/proTable/treeProTable",
+					"name": "treeProTable",
+					"component": "/proTable/treeProTable/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "树形 ProTable",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
 					"path": "/proTable/complexProTable",
 					"name": "complexProTable",
 					"component": "/proTable/complexProTable/index",
@@ -133,7 +147,7 @@
 				},
 				{
 					"path": "/proTable/document",
-					"name": "document",
+					"name": "proTableDocument",
 					"component": "/proTable/document/index",
 					"meta": {
 						"icon": "Menu",
@@ -268,20 +282,6 @@
 					"meta": {
 						"icon": "Menu",
 						"title": "SVG 图标",
-						"isLink": "",
-						"isHide": false,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				},
-				{
-					"path": "/assembly/cropper",
-					"name": "cropper",
-					"component": "/assembly/cropper/index",
-					"meta": {
-						"icon": "Menu",
-						"title": "图片裁剪",
 						"isLink": "",
 						"isHide": false,
 						"isFull": false,
@@ -796,6 +796,120 @@
 			]
 		},
 		{
+			"path": "/system",
+			"name": "system",
+			"redirect": "/system/accountManage",
+			"meta": {
+				"icon": "Tools",
+				"title": "系统管理",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": false,
+				"isKeepAlive": true
+			},
+			"children": [
+				{
+					"path": "/system/accountManage",
+					"name": "accountManage",
+					"component": "/system/accountManage/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "账号管理",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/roleManage",
+					"name": "roleManage",
+					"component": "/system/roleManage/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "角色管理",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/menuMange",
+					"name": "menuMange",
+					"component": "/system/menuMange/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "菜单管理",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/departmentManage",
+					"name": "departmentManage",
+					"component": "/system/departmentManage/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "部门管理",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/dictManage",
+					"name": "dictManage",
+					"component": "/system/dictManage/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "字典管理",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/timingTask",
+					"name": "timingTask",
+					"component": "/system/timingTask/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "定时任务",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				},
+				{
+					"path": "/system/systemLog",
+					"name": "systemLog",
+					"component": "/system/systemLog/index",
+					"meta": {
+						"icon": "Menu",
+						"title": "系统日志",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					}
+				}
+			]
+		},
+		{
 			"path": "/link",
 			"name": "link",
 			"redirect": "/link/gitee",
@@ -838,13 +952,13 @@
 					}
 				},
 				{
-					"path": "/link/juejin",
-					"name": "juejin",
-					"component": "/link/juejin/index",
+					"path": "/link/geekerDocs",
+					"name": "geekerDocs",
+					"component": "/link/geekerDocs/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "掘金文档",
-						"isLink": "https://juejin.cn/post/7080820051422478366",
+						"title": "项目文档",
+						"isLink": "https://docs.spicyboy.cn",
 						"isHide": false,
 						"isFull": false,
 						"isAffix": false,
@@ -852,13 +966,13 @@
 					}
 				},
 				{
-					"path": "/link/myBlog",
-					"name": "myBlog",
-					"component": "/link/myBlog/index",
+					"path": "/link/juejin",
+					"name": "juejin",
+					"component": "/link/juejin/index",
 					"meta": {
 						"icon": "Menu",
-						"title": "个人博客",
-						"isLink": "http://www.spicyboy.cn",
+						"title": "掘金主页",
+						"isLink": "https://juejin.cn/user/3263814531551816/posts",
 						"isHide": false,
 						"isFull": false,
 						"isAffix": false,

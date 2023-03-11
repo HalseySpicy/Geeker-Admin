@@ -3,24 +3,22 @@ import { keepAliveState } from "@/stores/interface";
 
 // KeepAliveStore
 export const KeepAliveStore = defineStore({
-	id: "keepAliveStore",
+	id: "KeepAliveStore",
 	state: (): keepAliveState => ({
-		// 当前缓存的 routerName
-		keepLiveName: []
+		keepAliveName: []
 	}),
-	getters: {},
 	actions: {
-		// addKeepLiveName
-		async addKeepLiveName(name: string) {
-			!this.keepLiveName.includes(name) && this.keepLiveName.push(name);
+		// addKeepAliveName
+		async addKeepAliveName(name: string) {
+			!this.keepAliveName.includes(name) && this.keepAliveName.push(name);
 		},
-		// removeKeepLiveName
-		async removeKeepLiveName(name: string) {
-			this.keepLiveName = this.keepLiveName.filter(item => item !== name);
+		// removeKeepAliveName
+		async removeKeepAliveName(name: string) {
+			this.keepAliveName = this.keepAliveName.filter(item => item !== name);
 		},
-		// clearMultipleKeepAlive
-		async clearMultipleKeepAlive(keepLiveName: string[] = []) {
-			this.keepLiveName = keepLiveName;
+		// setKeepAliveName
+		async setKeepAliveName(keepAliveName: string[] = []) {
+			this.keepAliveName = keepAliveName;
 		}
 	}
 });

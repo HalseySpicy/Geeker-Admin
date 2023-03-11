@@ -61,24 +61,19 @@
 }
 
 /* Breadcrumb */
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-	transition: all 0.2s ease;
+.breadcrumb-enter-active {
+	transition: all 0.2s;
 }
 .breadcrumb-enter-from,
 .breadcrumb-leave-active {
 	opacity: 0;
 	transform: translateX(10px);
 }
-.breadcrumb-leave-active {
-	position: absolute;
-	z-index: -1;
-}
 
 /* scroll bar */
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+	width: 6px;
+	height: 6px;
 }
 ::-webkit-scrollbar-thumb {
 	background-color: #d3d3d3;

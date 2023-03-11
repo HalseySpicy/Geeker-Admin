@@ -1,4 +1,5 @@
-import { onActivated, onDeactivated, onBeforeUnmount } from "vue";
+import { onBeforeUnmount, onActivated, onDeactivated } from "vue";
+import { useDebounceFn } from "@vueuse/core";
 import * as echarts from "echarts";
 
 /**
@@ -11,21 +12,21 @@ export const useEcharts = (myChart: echarts.ECharts, options: echarts.EChartsCor
 	if (options && typeof options === "object") {
 		myChart.setOption(options);
 	}
-	const echartsResize = () => {
+	const echartsResize = useDebounceFn(() => {
 		myChart && myChart.resize();
-	};
+	}, 100);
 
 	window.addEventListener("resize", echartsResize);
+
+	onBeforeUnmount(() => {
+		window.removeEventListener("resize", echartsResize);
+	});
 
 	onActivated(() => {
 		window.addEventListener("resize", echartsResize);
 	});
 
 	onDeactivated(() => {
-		window.removeEventListener("resize", echartsResize);
-	});
-
-	onBeforeUnmount(() => {
 		window.removeEventListener("resize", echartsResize);
 	});
 };

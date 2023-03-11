@@ -77,21 +77,20 @@ const router = useRouter();
 
 // 跳转详情页
 const toDetail = () => {
-	router.push(`/proTable/useProTable/detail/${Math.random()}?params=detail-page`);
+	router.push(`/proTable/useProTable/detail/${Math.random().toFixed(3)}?params=detail-page`);
 };
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
-const initParam = reactive({
-	type: 1
-});
+const initParam = reactive({ type: 1 });
 
-// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 datalist && total && pageNum && pageSize 这些字段，那么你可以在这里进行处理成这些字段
+// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total && pageNum && pageSize 这些字段，那么你可以在这里进行处理成这些字段
+// 或者直接去 hooks/useTable.ts 文件中把字段改为你后端对应的就行
 const dataCallback = (data: any) => {
 	return {
-		datalist: data.datalist,
+		list: data.list,
 		total: data.total,
 		pageNum: data.pageNum,
 		pageSize: data.pageSize
@@ -101,7 +100,7 @@ const dataCallback = (data: any) => {
 // 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
 // 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
 const getTableList = (params: any) => {
-	let newParams = { ...params };
+	let newParams = JSON.parse(JSON.stringify(params));
 	newParams.username && (newParams.username = "custom-" + newParams.username);
 	return getUserList(newParams);
 };
@@ -124,7 +123,7 @@ const headerRender = (row: ColumnProps) => {
 };
 
 // 表格配置项
-const columns: ColumnProps[] = [
+const columns: ColumnProps<User.ResUserList>[] = [
 	{ type: "selection", fixed: "left", width: 80 },
 	{ type: "index", label: "#", width: 80 },
 	{ type: "expand", label: "Expand", width: 100 },
@@ -143,8 +142,13 @@ const columns: ColumnProps[] = [
 	{
 		prop: "gender",
 		label: "性别",
+		// 字典数据
+		// enum: genderType,
+		// 字典请求不带参数
 		enum: getUserGender,
-		search: { el: "select" },
+		// 字典请求携带参数
+		// enum: () => getUserGender({ id: 1 }),
+		search: { el: "select", props: { filterable: true } },
 		fieldNames: { label: "genderLabel", value: "genderValue" }
 	},
 	// 多级 prop
@@ -156,12 +160,9 @@ const columns: ColumnProps[] = [
 		prop: "status",
 		label: "用户状态",
 		enum: getUserStatus,
+		search: { el: "tree-select", props: { filterable: true } },
 		fieldNames: { label: "userLabel", value: "userStatus" },
-		search: {
-			el: "tree-select",
-			props: { props: { label: "userLabel" }, nodeKey: "userStatus" }
-		},
-		render: (scope: { row: User.ResUserList }) => {
+		render: scope => {
 			return (
 				<>
 					{BUTTONS.value.status ? (
@@ -183,11 +184,11 @@ const columns: ColumnProps[] = [
 		prop: "createTime",
 		label: "创建时间",
 		headerRender,
-		width: 200,
+		width: 180,
 		search: {
 			el: "date-picker",
 			span: 2,
-			props: { type: "datetimerange" },
+			props: { type: "datetimerange", valueFormat: "YYYY-MM-DD HH:mm:ss" },
 			defaultValue: ["2022-11-12 11:35:00", "2022-12-12 11:35:00"]
 		}
 	},
@@ -227,27 +228,27 @@ const downloadFile = async () => {
 };
 
 // 批量添加用户
-const dialogRef = ref();
+const dialogRef = ref<InstanceType<typeof ImportExcel> | null>(null);
 const batchAdd = () => {
-	let params = {
+	const params = {
 		title: "用户",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser,
 		getTableList: proTable.value.getTableList
 	};
-	dialogRef.value.acceptParams(params);
+	dialogRef.value?.acceptParams(params);
 };
 
 // 打开 drawer(新增、查看、编辑)
-const drawerRef = ref();
+const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
-	let params = {
+	const params = {
 		title,
-		rowData: { ...rowData },
 		isView: title === "查看",
-		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		rowData: { ...rowData },
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value.acceptParams(params);
+	drawerRef.value?.acceptParams(params);
 };
 </script>
