@@ -257,6 +257,7 @@ defineExpose({
 	enumMap,
 	isSelected,
 	selectedList,
-	selectedListIds
+	selectedListIds,
+	handleSizeChange
 });
 </script>
