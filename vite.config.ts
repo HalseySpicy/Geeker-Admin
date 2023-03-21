@@ -13,6 +13,7 @@ import importToCDN from "vite-plugin-cdn-import";
 // import AutoImport from "unplugin-auto-import/vite";
 // import Components from "unplugin-vue-components/vite";
 // import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import electron from "vite-plugin-electron";
 
 // @see: https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -51,6 +52,9 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			}
 		},
 		plugins: [
+			electron({
+				entry: "electron/main.ts"
+			}),
 			vue(),
 			createHtmlPlugin({
 				inject: {
