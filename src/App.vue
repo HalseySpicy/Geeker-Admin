@@ -13,23 +13,20 @@ import { ElConfigProvider } from "element-plus";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
 
-// 初始化主题配置
+const globalStore = GlobalStore();
 const { initTheme } = useTheme();
 initTheme();
 
-const globalStore = GlobalStore();
-// 配置element按钮文字中间是否有空格
-const config = reactive({
-	autoInsertSpace: false
-});
+// element config
+const config = reactive({ autoInsertSpace: false });
 
-// element 语言配置
+// element language
 const i18nLocale = computed(() => {
-	if (globalStore.language && globalStore.language == "zh") return zhCn;
+	if (globalStore.language == "zh") return zhCn;
 	if (globalStore.language == "en") return en;
 	return getBrowserLang() == "zh" ? zhCn : en;
 });
 
-// 配置全局组件大小
+// element assemblySize
 const assemblySize = computed(() => globalStore.assemblySize);
 </script>

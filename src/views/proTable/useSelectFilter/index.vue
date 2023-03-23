@@ -81,7 +81,7 @@ const columns: ColumnProps[] = [
 ];
 
 // selectFilter 数据（用户角色为后台数据）
-const selectFilterData = ref([
+const selectFilterData = reactive([
 	{
 		title: "用户状态(单)",
 		key: "userStatus",
@@ -129,7 +129,7 @@ const selectFilterData = ref([
 onMounted(() => getUserRoleDict());
 const getUserRoleDict = async () => {
 	const { data } = await getUserRole();
-	selectFilterData.value[1].options = data as any;
+	selectFilterData[1].options = data as any;
 };
 
 // 默认 selectFilter 参数
@@ -168,27 +168,27 @@ const downloadFile = async () => {
 };
 
 // 批量添加用户
-const dialogRef = ref();
+const dialogRef = ref<InstanceType<typeof ImportExcel> | null>(null);
 const batchAdd = () => {
-	let params = {
+	const params = {
 		title: "用户",
 		tempApi: exportUserInfo,
 		importApi: BatchAddUser,
 		getTableList: proTable.value.getTableList
 	};
-	dialogRef.value.acceptParams(params);
+	dialogRef.value?.acceptParams(params);
 };
 
 // 打开 drawer(新增、查看、编辑)
-const drawerRef = ref();
+const drawerRef = ref<InstanceType<typeof UserDrawer> | null>(null);
 const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
-	let params = {
+	const params = {
 		title,
-		rowData: { ...rowData },
 		isView: title === "查看",
-		api: title === "新增" ? addUser : title === "编辑" ? editUser : "",
+		rowData: { ...rowData },
+		api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
 		getTableList: proTable.value.getTableList
 	};
-	drawerRef.value.acceptParams(params);
+	drawerRef.value?.acceptParams(params);
 };
 </script>

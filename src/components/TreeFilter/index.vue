@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts" name="TreeFilter">
-import { ref, watch, onBeforeMount } from "vue";
+import { ref, watch, onBeforeMount, nextTick } from "vue";
 import { ElTree } from "element-plus";
 
 // 接收父组件参数并设置默认值
@@ -57,29 +57,44 @@ const defaultProps = {
 	label: props.label
 };
 
-const filterText = ref<string>("");
 const treeRef = ref<InstanceType<typeof ElTree>>();
 const treeData = ref<{ [key: string]: any }[]>([]);
 const treeAllData = ref<{ [key: string]: any }[]>([]);
-// 选中的值
-const selected = ref();
 
-onBeforeMount(async () => {
-	// 重新接收一下默认值
+const selected = ref();
+const setSelected = () => {
 	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
 	else selected.value = typeof props.defaultValue === "string" ? props.defaultValue : "";
+};
 
-	// 有数据就直接赋值，没有数据就执行请求函数
-	if (props.data?.length) {
-		treeData.value = props.data;
-		treeAllData.value = props.data;
-		return;
+onBeforeMount(async () => {
+	setSelected();
+	if (props.requestApi) {
+		const { data } = await props.requestApi!();
+		treeData.value = data;
+		treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 	}
-	const { data } = await props.requestApi!();
-	treeData.value = data;
-	treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
 });
 
+// 使用 nextTick 防止打包后赋值不生效
+watch(
+	() => props.defaultValue,
+	() => nextTick(() => setSelected()),
+	{ deep: true, immediate: true }
+);
+
+watch(
+	() => props.data,
+	() => {
+		if (props.data?.length) {
+			treeData.value = props.data;
+			treeAllData.value = [{ id: "", [props.label]: "全部" }, ...props.data];
+		}
+	},
+	{ deep: true, immediate: true }
+);
+
+const filterText = ref("");
 watch(filterText, val => {
 	treeRef.value!.filter(val);
 });
@@ -115,7 +130,7 @@ const handleCheckChange = () => {
 };
 
 // 暴露给父组件使用
-defineExpose({ treeData, treeAllData });
+defineExpose({ treeData, treeAllData, treeRef });
 </script>
 
 <style scoped lang="scss">

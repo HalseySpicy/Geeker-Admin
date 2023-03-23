@@ -56,6 +56,7 @@
 import { ref, reactive } from "vue";
 import { genderType } from "@/utils/serviceDict";
 import { ElMessage, FormInstance } from "element-plus";
+import { User } from "@/api/interface";
 import UploadImg from "@/components/Upload/Img.vue";
 import UploadImgs from "@/components/Upload/Imgs.vue";
 
@@ -72,20 +73,20 @@ const rules = reactive({
 interface DrawerProps {
 	title: string;
 	isView: boolean;
-	rowData?: any;
+	rowData: Partial<User.ResUserList>;
 	api?: (params: any) => Promise<any>;
-	getTableList?: () => Promise<any>;
+	getTableList?: () => void;
 }
 
-// drawer框状态
 const drawerVisible = ref(false);
 const drawerProps = ref<DrawerProps>({
 	isView: false,
-	title: ""
+	title: "",
+	rowData: {}
 });
 
 // 接收父组件传过来的参数
-const acceptParams = (params: DrawerProps): void => {
+const acceptParams = (params: DrawerProps) => {
 	drawerProps.value = params;
 	drawerVisible.value = true;
 };

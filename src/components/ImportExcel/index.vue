@@ -6,7 +6,7 @@
 			</el-form-item>
 			<el-form-item label="文件上传 :">
 				<el-upload
-					action="string"
+					action="#"
 					class="upload"
 					:drag="true"
 					:limit="excelLimit"
@@ -17,12 +17,16 @@
 					:on-exceed="handleExceed"
 					:on-success="excelUploadSuccess"
 					:on-error="excelUploadError"
-					accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+					:accept="parameter.fileType!.join(',')"
 				>
-					<el-icon class="el-icon--upload"><upload-filled /></el-icon>
-					<div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+					<slot name="empty">
+						<el-icon class="el-icon--upload"><upload-filled /></el-icon>
+						<div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+					</slot>
 					<template #tip>
-						<div class="el-upload__tip">请上传 .xls , .xlsx 标准格式文件</div>
+						<slot name="tip">
+							<div class="el-upload__tip">请上传 .xls , .xlsx 标准格式文件，文件最大为 {{ parameter.fileSize }}M</div>
+						</slot>
 					</template>
 				</el-upload>
 			</el-form-item>
@@ -37,13 +41,15 @@
 import { ref } from "vue";
 import { useDownload } from "@/hooks/useDownload";
 import { Download } from "@element-plus/icons-vue";
-import { ElNotification } from "element-plus";
+import { ElNotification, UploadRequestOptions, UploadRawFile } from "element-plus";
 
 export interface ExcelParameterProps {
 	title: string; // 标题
-	tempApi: (params: any) => Promise<any>; // 下载模板的Api
-	importApi: (params: any) => Promise<any>; // 批量导入的Api
-	getTableList?: () => Promise<any>; // 获取表格数据的Api
+	fileSize?: number; // 上传文件的大小
+	fileType?: File.ExcelMimeType[]; // 上传文件的类型
+	tempApi?: (params: any) => Promise<any>; // 下载模板的Api
+	importApi?: (params: any) => Promise<any>; // 批量导入的Api
+	getTableList?: () => void; // 获取表格数据的Api
 }
 
 // 是否覆盖数据
@@ -53,11 +59,15 @@ const excelLimit = ref(1);
 // dialog状态
 const dialogVisible = ref(false);
 // 父组件传过来的参数
-const parameter = ref<Partial<ExcelParameterProps>>({});
+const parameter = ref<ExcelParameterProps>({
+	title: "",
+	fileSize: 5,
+	fileType: ["application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
+});
 
 // 接收父组件参数
-const acceptParams = (params?: any): void => {
-	parameter.value = params;
+const acceptParams = (params: ExcelParameterProps) => {
+	parameter.value = { ...parameter.value, ...params };
 	dialogVisible.value = true;
 };
 
@@ -68,7 +78,7 @@ const downloadTemp = () => {
 };
 
 // 文件上传
-const uploadExcel = async (param: any) => {
+const uploadExcel = async (param: UploadRequestOptions) => {
 	let excelFormData = new FormData();
 	excelFormData.append("file", param.file);
 	excelFormData.append("isCover", isCover.value as unknown as Blob);
@@ -81,10 +91,9 @@ const uploadExcel = async (param: any) => {
  * @description 文件上传之前判断
  * @param file 上传的文件
  * */
-const beforeExcelUpload = (file: any) => {
-	const isExcel =
-		file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-	const fileSize = file.size / 1024 / 1024 < 5;
+const beforeExcelUpload = (file: UploadRawFile) => {
+	const isExcel = parameter.value.fileType!.includes(file.type as File.ExcelMimeType);
+	const fileSize = file.size / 1024 / 1024 < parameter.value.fileSize!;
 	if (!isExcel)
 		ElNotification({
 			title: "温馨提示",
@@ -92,16 +101,18 @@ const beforeExcelUpload = (file: any) => {
 			type: "warning"
 		});
 	if (!fileSize)
-		ElNotification({
-			title: "温馨提示",
-			message: "上传文件大小不能超过 5MB！",
-			type: "warning"
-		});
+		setTimeout(() => {
+			ElNotification({
+				title: "温馨提示",
+				message: `上传文件大小不能超过 ${parameter.value.fileSize}MB！`,
+				type: "warning"
+			});
+		}, 0);
 	return isExcel && fileSize;
 };
 
 // 文件数超出提示
-const handleExceed = (): void => {
+const handleExceed = () => {
 	ElNotification({
 		title: "温馨提示",
 		message: "最多只能上传一个文件！",
@@ -110,7 +121,7 @@ const handleExceed = (): void => {
 };
 
 // 上传错误提示
-const excelUploadError = (): void => {
+const excelUploadError = () => {
 	ElNotification({
 		title: "温馨提示",
 		message: `批量添加${parameter.value.title}失败，请您重新上传！`,
@@ -119,7 +130,7 @@ const excelUploadError = (): void => {
 };
 
 // 上传成功提示
-const excelUploadSuccess = (): void => {
+const excelUploadSuccess = () => {
 	ElNotification({
 		title: "温馨提示",
 		message: `批量添加${parameter.value.title}成功！`,

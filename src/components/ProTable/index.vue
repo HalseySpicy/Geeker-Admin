@@ -16,13 +16,15 @@
 		<!-- 表格头部 操作按钮 -->
 		<div class="table-header">
 			<div class="header-button-lf">
-				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected"></slot>
+				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected" />
 			</div>
-			<div class="header-button-ri" v-if="toolButton">
-				<el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-				<el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint"> </el-button>
-				<el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting"> </el-button>
-				<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
+			<div class="header-button-ri">
+				<slot name="toolButton">
+					<el-button :icon="Refresh" circle @click="getTableList" />
+					<el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint" />
+					<el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting" />
+					<el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch" />
+				</slot>
 			</div>
 		</div>
 		<!-- 表格主体 -->
@@ -31,7 +33,7 @@
 			v-bind="$attrs"
 			:data="tableData"
 			:border="border"
-			:row-key="getRowKeys"
+			:row-key="rowKey"
 			@selection-change="selectionChange"
 		>
 			<!-- 默认插槽 -->
@@ -86,7 +88,7 @@
 </template>
 
 <script setup lang="ts" name="ProTable">
-import { ref, watch, computed, provide } from "vue";
+import { ref, watch, computed, provide, onMounted } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
@@ -103,24 +105,26 @@ import printJS from "print-js";
 interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
 	columns: ColumnProps[]; // 列配置项
 	requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
+	requestAuto?: boolean;
 	dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
 	title?: string; // 表格标题，目前只在打印的时候用到 ==> 非必传
 	pagination?: boolean; // 是否需要分页组件 ==> 非必传（默认为true）
 	initParam?: any; // 初始化请求参数 ==> 非必传（默认为{}）
 	border?: boolean; // 是否带有纵向边框 ==> 非必传（默认为true）
 	toolButton?: boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
-	selectId?: string; // 当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
+	rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
 	searchCol?: number | Record<BreakPoint, number>; // 表格搜索项 每列占比配置 ==> 非必传 { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }
 }
 
 // 接受父组件参数，配置默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
+	requestAuto: true,
 	columns: () => [],
 	pagination: true,
 	initParam: {},
 	border: true,
 	toolButton: true,
-	selectId: "id",
+	rowKey: "id",
 	searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
 
@@ -131,7 +135,7 @@ const isShowSearch = ref(true);
 const tableRef = ref<InstanceType<typeof ElTable>>();
 
 // 表格多选 Hooks
-const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
+const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 
 // 表格操作 Hooks
 const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
@@ -139,6 +143,9 @@ const { tableData, pageable, searchParam, searchInitParam, getTableList, search,
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
+
+// 初始化请求
+onMounted(() => props.requestAuto && getTableList());
 
 // 监听页面 initParam 改化，重新获取表格数据
 watch(() => props.initParam, getTableList, { deep: true });
@@ -185,6 +192,7 @@ searchColumns.forEach((column, index) => {
 	column.search!.order = column.search!.order ?? index + 2;
 	if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
 		searchInitParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
+		searchParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
 	}
 });
 
@@ -193,17 +201,17 @@ searchColumns.sort((a, b) => a.search!.order! - b.search!.order!);
 
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
-const colSetting = tableColumns.value!.filter(item => {
-	return item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
-});
+const colSetting = tableColumns.value!.filter(
+	item => !["selection", "index", "expand"].includes(item.type!) && item.prop !== "operation"
+);
 const openColSetting = () => colRef.value.openColSetting();
 
-// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂）
+// 🙅‍♀️ 不需要打印可以把以下方法删除（目前数据处理比较复杂 209-246）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
-	let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
+	const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
 	// 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
-	let needTransformCol = flatColumns.value!.filter(
+	const needTransformCol = flatColumns.value!.filter(
 		item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum
 	);
 	needTransformCol.forEach(colItem => {
@@ -222,19 +230,18 @@ const printData = computed(() => {
 
 // 打印表格数据（💥 多级表头数据打印时，只能扁平化成一维数组，printJs 不支持多级表头打印）
 const handlePrint = () => {
+	const header = `<div style="text-align: center"><h2>${props.title}</h2></div>`;
+	const gridHeaderStyle = "border: 1px solid #ebeef5;height: 45px;color: #232425;text-align: center;background-color: #fafafa;";
+	const gridStyle = "border: 1px solid #ebeef5;height: 40px;color: #494b4e;text-align: center";
 	printJS({
 		printable: printData.value,
-		header: props.title && `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
+		header: props.title && header,
 		properties: flatColumns
-			.value!.filter(
-				item =>
-					item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation"
-			)
+			.value!.filter(item => !["selection", "index", "expand"].includes(item.type!) && item.isShow && item.prop !== "operation")
 			.map((item: ColumnProps) => ({ field: handleProp(item.prop!), displayName: item.label })),
 		type: "json",
-		gridHeaderStyle:
-			"border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
-		gridStyle: "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center"
+		gridHeaderStyle,
+		gridStyle
 	});
 };
 

@@ -10,6 +10,11 @@ export const getUserList = (params: User.ReqUserParams) => {
 	return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
 };
 
+// * 获取树形用户列表
+export const getUserTreeList = (params: User.ReqUserParams) => {
+	return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/tree/list`, params);
+};
+
 // * 新增用户
 export const addUser = (params: { id: string }) => {
 	return http.post(PORT1 + `/user/add`, params);
