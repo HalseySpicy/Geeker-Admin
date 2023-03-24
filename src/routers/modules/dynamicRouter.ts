@@ -19,6 +19,7 @@ export const initDynamicRouter = async () => {
 		await authStore.getAuthMenuList();
 		await authStore.getAuthButtonList();
 
+		console.log("authStore.authMenuListGet", authStore.authMenuListGet);
 		// 2.判断当前用户有没有菜单权限
 		if (!authStore.authMenuListGet.length) {
 			ElNotification({

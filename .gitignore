@@ -26,3 +26,5 @@ stats.html
 *.njsproj
 *.sln
 *.sw?
+
+out/

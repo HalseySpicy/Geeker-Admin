@@ -19,7 +19,10 @@
 		"lint:lint-staged": "lint-staged",
 		"prepare": "husky install",
 		"release": "standard-version",
-		"commit": "git pull && git add -A && git-cz && git push"
+		"commit": "git pull && git add -A && git-cz && git push",
+		"start": "electron-forge start",
+		"package": "electron-forge package",
+		"make": "electron-forge make"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
@@ -30,6 +33,7 @@
 		"driver.js": "^0.9.8",
 		"echarts": "^5.3.0",
 		"echarts-liquidfill": "^3.1.0",
+		"electron-squirrel-startup": "^1.0.0",
 		"element-plus": "^2.2.30",
 		"js-md5": "^0.7.3",
 		"mitt": "^3.0.0",
@@ -48,6 +52,11 @@
 	"devDependencies": {
 		"@commitlint/cli": "^17.0.1",
 		"@commitlint/config-conventional": "^17.0.0",
+		"@electron-forge/cli": "^6.0.5",
+		"@electron-forge/maker-deb": "^6.0.5",
+		"@electron-forge/maker-rpm": "^6.0.5",
+		"@electron-forge/maker-squirrel": "^6.0.5",
+		"@electron-forge/maker-zip": "^6.0.5",
 		"@types/node": "^17.0.31",
 		"@types/sortablejs": "^1.15.0",
 		"@typescript-eslint/eslint-plugin": "^5.22.0",
