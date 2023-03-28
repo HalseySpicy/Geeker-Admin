@@ -1,0 +1,36 @@
+.filter {
+	box-sizing: border-box;
+	width: 220px;
+	height: 100%;
+	padding: 18px;
+	margin-right: 10px;
+	.title {
+		margin: 0 0 15px;
+		font-size: 18px;
+		font-weight: bold;
+		color: var(--el-color-info-dark-2);
+		letter-spacing: 0.5px;
+	}
+	.text {
+		margin: 10px;
+		margin-right: 0;
+		margin-left: 0;
+		color: var(--el-color-info-dark-2);
+	}
+	.box-card {
+		width: 180px;
+		height: 300px;
+		border: 1px solid #dcdfe6;
+		border-radius: 4px;
+		.text {
+			font-size: 14px;
+		}
+		.item {
+			margin: 5px;
+		}
+	}
+
+	// /deep/ .el-card__body {
+	// 	padding: 0;
+	// }
+}
