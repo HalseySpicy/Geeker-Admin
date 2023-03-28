@@ -16,35 +16,32 @@
 			}
 		},
 		{
-			"path": "/proTable/useProTable",
-			"name": "useProTable",
-			"component": "/proTable/useProTable/index",
+			"path": "/home2/index",
+			"name": "home2",
+			"component": "/home2/index",
 			"meta": {
-				"icon": "Menu",
-				"title": "使用 ProTable",
+				"icon": "HomeFilled",
+				"title": "打包操作",
 				"isLink": "",
 				"isHide": false,
 				"isFull": false,
-				"isAffix": false,
+				"isAffix": true,
 				"isKeepAlive": true
-			},
-			"children": [
-				{
-					"path": "/proTable/useProTable/detail/:id",
-					"name": "useProTableDetail",
-					"component": "/proTable/useProTable/detail",
-					"meta": {
-						"icon": "Menu",
-						"title": "ProTable 详情",
-						"activeMenu": "/proTable/useProTable",
-						"isLink": "",
-						"isHide": true,
-						"isFull": false,
-						"isAffix": false,
-						"isKeepAlive": true
-					}
-				}
-			]
+			}
+		},
+		{
+			"path": "/home3/index",
+			"name": "home3",
+			"component": "/home3/index",
+			"meta": {
+				"icon": "HomeFilled",
+				"title": "等等...",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": true,
+				"isKeepAlive": true
+			}
 		}
 	],
 	"msg": "成功"

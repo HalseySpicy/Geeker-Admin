@@ -6,8 +6,140 @@ import http from "@/api";
  * @name 用户管理模块
  */
 // * 获取用户列表
-export const getUserList = (params: User.ReqUserParams) => {
-	return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
+// export const getUserList = (params: User.ReqUserParams) => {
+export const getUserList = () => {
+	// return http.post<ResPage<User.ResUserList>>(PORT1 + `/user/list`, params);
+	return {
+		code: 200,
+		msg: "成功",
+		data: {
+			list: [
+				{
+					id: "711004534162869480",
+					username: "姚明",
+					gender: 1,
+					user: { detail: { age: 29 } },
+					idCard: "711004534162869480",
+					email: "k.hvgkcjl@owijsnzea.pw",
+					address: "江苏省 扬州市",
+					createTime: "1990-04-23 23:05:10",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QRqMK.jpg"
+				},
+				{
+					id: "782006880400322105",
+					username: "白军",
+					gender: 2,
+					user: { detail: { age: 17 } },
+					idCard: "782006880400322105",
+					email: "p.ugwkkwznik@hqvx.lb",
+					address: "湖南省 衡阳市",
+					createTime: "1973-12-17 14:11:27",
+					status: 1,
+					avatar: "https://i.imgtg.com/2023/01/16/QRBHS.jpg"
+				},
+				{
+					id: "521367273518806063",
+					username: "魏娜",
+					gender: 2,
+					user: { detail: { age: 27 } },
+					idCard: "521367273518806063",
+					email: "v.fqrgrlzrt@qdurb.tr",
+					address: "重庆 重庆市",
+					createTime: "1973-09-30 12:01:20",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QRBHS.jpg"
+				},
+				{
+					id: "868033251346626941",
+					username: "石静",
+					gender: 2,
+					user: { detail: { age: 24 } },
+					idCard: "868033251346626941",
+					email: "j.xoex@gldrm.zr",
+					address: "贵州省 遵义市",
+					createTime: "2011-11-16 10:50:36",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QRBHS.jpg"
+				},
+				{
+					id: "254751415214918964",
+					username: "曾明",
+					gender: 2,
+					user: { detail: { age: 17 } },
+					idCard: "254751415214918964",
+					email: "t.qygcws@cymmw.it",
+					address: "云南省 昭通市",
+					createTime: "1984-03-10 14:51:02",
+					status: 1,
+					avatar: "https://i.imgtg.com/2023/01/16/QRqMK.jpg"
+				},
+				{
+					id: "393656311892581370",
+					username: "尹强",
+					gender: 1,
+					user: { detail: { age: 21 } },
+					idCard: "393656311892581370",
+					email: "a.vgrpulk@gyf.ru",
+					address: "湖南省 益阳市",
+					createTime: "1983-01-24 13:58:56",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QRqMK.jpg"
+				},
+				{
+					id: "454638647851458416",
+					username: "杨杰",
+					gender: 1,
+					user: { detail: { age: 27 } },
+					idCard: "454638647851458416",
+					email: "u.pgrvqxy@dhtnisgkbs.cn",
+					address: "山西省 运城市",
+					createTime: "2002-12-13 08:42:41",
+					status: 1,
+					avatar: "https://i.imgtg.com/2023/01/16/QRqMK.jpg"
+				},
+				{
+					id: "165275516387393583",
+					username: "袁秀英",
+					gender: 1,
+					user: { detail: { age: 21 } },
+					idCard: "165275516387393583",
+					email: "h.hpogitmgnw@ateok.cl",
+					address: "山西省 晋城市",
+					createTime: "1992-04-09 22:39:29",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QR57a.jpg"
+				},
+				{
+					id: "692643639425196255",
+					username: "朱勇",
+					gender: 1,
+					user: { detail: { age: 28 } },
+					idCard: "692643639425196255",
+					email: "m.tnvtb@vhra.edu",
+					address: "河南省 郑州市",
+					createTime: "1991-02-12 04:35:56",
+					status: 1,
+					avatar: "https://i.imgtg.com/2023/01/16/QRa0s.jpg"
+				},
+				{
+					id: "019387974263614815",
+					username: "苏磊",
+					gender: 2,
+					user: { detail: { age: 19 } },
+					idCard: "019387974263614815",
+					email: "b.sjo@kkfxtox.hk",
+					address: "上海 上海市",
+					createTime: "2013-07-01 05:11:53",
+					status: 0,
+					avatar: "https://i.imgtg.com/2023/01/16/QR57a.jpg"
+				}
+			],
+			pageNum: 1,
+			pageSize: 10,
+			total: 2000
+		}
+	};
 };
 
 // * 获取树形用户列表

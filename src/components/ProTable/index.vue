@@ -19,7 +19,7 @@
 				<slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected" />
 			</div>
 			<div class="header-button-ri">
-				<slot name="toolButton">
+				<slot name="toolButton" v-if="toolButton">
 					<el-button :icon="Refresh" circle @click="getTableList" />
 					<el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint" />
 					<el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting" />
@@ -84,7 +84,7 @@
 		</slot>
 	</div>
 	<!-- 列设置 -->
-	<ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" />
+	<ColSetting ref="colRef" v-model:colSetting="colSetting" />
 </template>
 
 <script setup lang="ts" name="ProTable">
@@ -123,7 +123,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 	pagination: true,
 	initParam: {},
 	border: true,
-	toolButton: true,
+	toolButton: false,
 	rowKey: "id",
 	searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
