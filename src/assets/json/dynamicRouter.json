@@ -2,20 +2,6 @@
 	"code": 200,
 	"data": [
 		{
-			"path": "/home/index",
-			"name": "home",
-			"component": "/home/index",
-			"meta": {
-				"icon": "HomeFilled",
-				"title": "首页",
-				"isLink": "",
-				"isHide": false,
-				"isFull": false,
-				"isAffix": true,
-				"isKeepAlive": true
-			}
-		},
-		{
 			"path": "/home1/index",
 			"name": "home1",
 			"component": "/home1/index",

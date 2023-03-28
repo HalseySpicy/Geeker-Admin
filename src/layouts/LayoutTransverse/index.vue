@@ -2,10 +2,10 @@
 <template>
 	<el-container class="layout">
 		<el-header>
-			<div class="logo flx-center">
-				<img src="@/assets/images/logo.svg" alt="logo" />
-				<span>Geeker Admin</span>
-			</div>
+			<!-- <div class="logo flx-center"> -->
+			<!-- <img src="@/assets/images/logo.svg" alt="logo" /> -->
+			<!-- <span>Geeker Admin</span> -->
+			<!-- </div> -->
 			<el-menu
 				mode="horizontal"
 				:default-active="activeMenu"
@@ -27,9 +27,9 @@
 						<SubMenu :menuList="subItem.children" />
 					</el-sub-menu>
 					<el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
-						<el-icon>
+						<!-- <el-icon>
 							<component :is="subItem.meta.icon"></component>
-						</el-icon>
+						</el-icon> -->
 						<template #title>
 							<span>{{ subItem.meta.title }}</span>
 						</template>
