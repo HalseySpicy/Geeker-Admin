@@ -22,7 +22,8 @@
 		"commit": "git pull && git add -A && git-cz && git push",
 		"start": "electron-forge start",
 		"package": "electron-forge package",
-		"make": "electron-forge make"
+		"make": "electron-forge make",
+		"package-linux": "electron-packager . HelloWorld --platform=linux --electron-version=10.0.0 -no-sandbox --arch=x64 --download.mirrorOptions.mirror=https://npm.taobao.org/mirrors/electron/ --asar --app-version=0.0.0 --build-version=0.0.0 --out=HelloWorld --overwrite --no-package-manager --ignore='(.git)' --icon=assets/img/logo.png"
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^2.0.10",
@@ -67,6 +68,7 @@
 		"commitizen": "^4.2.4",
 		"cz-git": "^1.3.2",
 		"electron": "^23.1.4",
+		"electron-packager": "^17.1.1",
 		"eslint": "^8.14.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.0.0",
