@@ -1,7 +1,7 @@
 // @see: https://cz-git.qbenben.com/zh/guide
 /** @type {import('cz-git').UserConfig} */
 
-// lhq husky
+// 书签 husky
 module.exports = {
 	ignores: [commit => commit === "init"],
 	extends: ["@commitlint/config-conventional"],

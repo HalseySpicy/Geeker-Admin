@@ -1,3 +1,4 @@
+<!-- 标签栏 -->
 <template>
 	<div class="tabs-box">
 		<div class="tabs-menu">
@@ -11,7 +12,8 @@
 					</template>
 				</el-tab-pane>
 			</el-tabs>
-			<MoreButton />
+			<!-- <MoreButton /> -->
+			<!-- <ThemeSetting id="themeSetting" /> -->
 		</div>
 	</div>
 </template>
@@ -25,7 +27,8 @@ import { TabsStore } from "@/stores/modules/tabs";
 import { AuthStore } from "@/stores/modules/auth";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
 import { TabsPaneContext } from "element-plus";
-import MoreButton from "./components/MoreButton.vue";
+// import MoreButton from "./components/MoreButton.vue";
+// import ThemeSetting from "../Header/components/ThemeSetting.vue";
 
 const route = useRoute();
 const router = useRouter();

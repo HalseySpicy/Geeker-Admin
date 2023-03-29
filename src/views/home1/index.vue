@@ -141,6 +141,11 @@ const getTableList = (params: any) => {
 
 // 表格配置项
 const columns: ColumnProps<gzh.ResUserList>[] = [
+	// { type: "selection", fixed: "left", width: 80 },
+	{ type: "index", label: "序号", width: 80 },
+	// 详情信息
+	// { type: "expand", label: "Expand", width: 100 },
+	{ prop: "address", label: "不会显示的数据" },
 	{
 		prop: "createTime",
 		label: "创建时间",
@@ -272,11 +277,7 @@ const columns: ColumnProps<gzh.ResUserList>[] = [
 		// 		</el-button>
 		// 	);
 		// }
-	},
-	// { type: "selection", fixed: "left", width: 80 },
-	// { type: "index", label: "#", width: 80 },
-	// 详情信息
-	{ type: "expand", label: "Expand", width: 100 }
+	}
 	// {
 	// 	prop: "username",
 	// 	label: "用户姓名",

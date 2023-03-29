@@ -26,7 +26,9 @@
 			border: none;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__item {
-			color: #cccccc;
+			color: var(--el-color-info-dark-2);
+
+			// color: #cccccc;
 			border: none;
 		}
 		.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {

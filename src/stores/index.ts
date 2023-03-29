@@ -4,7 +4,7 @@ import { DEFAULT_PRIMARY } from "@/config/config";
 import piniaPersistConfig from "@/config/piniaPersist";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-// TODO默认配置
+// 书签 默认配置
 // defineStore 调用后返回一个函数，调用该函数获得 Store 实体
 export const GlobalStore = defineStore({
 	// id: 必须的，在所有 Store 中唯一
@@ -40,9 +40,9 @@ export const GlobalStore = defineStore({
 			// 面包屑导航图标
 			breadcrumbIcon: true,
 			// 标签页
-			tabs: false,
+			tabs: true,
 			// 标签页图标
-			tabsIcon: true,
+			tabsIcon: false,
 			// 页脚
 			footer: false
 		}

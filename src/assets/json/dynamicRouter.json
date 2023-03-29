@@ -35,6 +35,20 @@
 			"component": "/home3/index",
 			"meta": {
 				"icon": "HomeFilled",
+				"title": "等等..",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": true,
+				"isKeepAlive": true
+			}
+		},
+		{
+			"path": "/home4/index",
+			"name": "home4",
+			"component": "/home4/index",
+			"meta": {
+				"icon": "HomeFilled",
 				"title": "等等...",
 				"isLink": "",
 				"isHide": false,
