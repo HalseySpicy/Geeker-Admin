@@ -1,7 +1,8 @@
 <!-- 书签 横向布局 -->
 <template>
 	<el-container class="layout">
-		<el-header>
+		<!-- 禁用了HEAD -->
+		<el-header style="display: none">
 			<!-- <div class="logo flx-center"> -->
 			<!-- <img src="@/assets/images/logo.svg" alt="logo" /> -->
 			<!-- <span>Geeker Admin</span> -->
@@ -17,7 +18,6 @@
 			>
 				<!-- 只有在这里写 submenu 才能触发 menu 三个点省略 -->
 				<template v-for="subItem in menuList" :key="subItem.path">
-					<!-- 二级目录 -->
 					<el-sub-menu v-if="subItem.children?.length" :index="subItem.path" :key="subItem.path + 'el-sub-menu'">
 						<template #title>
 							<el-icon>
@@ -27,11 +27,10 @@
 						</template>
 						<SubMenu :menuList="subItem.children" />
 					</el-sub-menu>
-					<!-- 一级目录 -->
 					<el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
-						<!-- <el-icon>
+						<el-icon>
 							<component :is="subItem.meta.icon"></component>
-						</el-icon> -->
+						</el-icon>
 						<template #title>
 							<span>{{ subItem.meta.title }}</span>
 						</template>
