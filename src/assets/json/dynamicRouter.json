@@ -23,7 +23,7 @@
 				"icon": "Histogram",
 				"title": "数据大屏",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": true,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -37,7 +37,7 @@
 				"icon": "MessageBox",
 				"title": "超级表格",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -169,7 +169,7 @@
 				"icon": "Lock",
 				"title": "权限管理",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -213,7 +213,7 @@
 				"icon": "Briefcase",
 				"title": "常用组件",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -399,7 +399,7 @@
 				"icon": "Tickets",
 				"title": "表单 Form",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -471,7 +471,7 @@
 				"icon": "TrendCharts",
 				"title": "Echarts",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -571,7 +571,7 @@
 				"icon": "Stamp",
 				"title": "自定义指令",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -671,7 +671,7 @@
 				"icon": "List",
 				"title": "菜单嵌套",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -803,7 +803,7 @@
 				"icon": "Tools",
 				"title": "系统管理",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -917,7 +917,7 @@
 				"icon": "Paperclip",
 				"title": "外部链接",
 				"isLink": "",
-				"isHide": false,
+				"isHide": true,
 				"isFull": false,
 				"isAffix": false,
 				"isKeepAlive": true
@@ -978,6 +978,52 @@
 						"isAffix": false,
 						"isKeepAlive": true
 					}
+				}
+			]
+		},
+		{
+			"path": "/demo",
+			"name": "demo",
+			"redirect": "/demo/echarts",
+			"meta": {
+				"icon": "Paperclip",
+				"title": "demo演示",
+				"isLink": "",
+				"isHide": false,
+				"isFull": false,
+				"isAffix": false,
+				"isKeepAlive": true
+			},
+			"children": [
+				{
+					"path": "/demo/echarts",
+					"name": "echarts",
+					"redirect": "/demo/echarts/graph",
+					"meta": {
+						"icon": "Menu",
+						"title": "echarts图",
+						"isLink": "",
+						"isHide": false,
+						"isFull": false,
+						"isAffix": false,
+						"isKeepAlive": true
+					},
+					"children": [
+						{
+							"path": "/demo/echarts/graph",
+							"name": "graph",
+							"component": "/demo/echarts/graph/index",
+							"meta": {
+								"icon": "Menu",
+								"title": "关系图",
+								"isLink": "",
+								"isHide": false,
+								"isFull": false,
+								"isAffix": false,
+								"isKeepAlive": true
+							}
+						}
+					]
 				}
 			]
 		}
