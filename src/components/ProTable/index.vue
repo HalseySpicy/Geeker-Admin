@@ -49,13 +49,13 @@
 				</el-table-column>
 				<!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
 				<el-table-column v-bind="item" :align="item.align ?? 'center'" v-if="item.type == 'expand'" v-slot="scope">
-					<component :is="item.render" :row="scope.row" v-if="item.render"> </component>
-					<slot :name="item.type" :row="scope.row" v-else></slot>
+					<component :is="item.render" v-bind="scope" v-if="item.render"> </component>
+					<slot :name="item.type" v-bind="scope" v-else></slot>
 				</el-table-column>
 				<!-- other 循环递归 -->
 				<TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
 					<template v-for="slot in Object.keys($slots)" #[slot]="scope">
-						<slot :name="slot" :row="scope.row"></slot>
+						<slot :name="slot" v-bind="scope"></slot>
 					</template>
 				</TableColumn>
 			</template>
