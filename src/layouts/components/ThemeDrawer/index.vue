@@ -63,7 +63,7 @@
 		</el-divider>
 		<div class="theme-item">
 			<span>主题颜色</span>
-			<el-color-picker v-model="themeConfig.primary" :predefine="colorList" @change="changePrimary" />
+			<el-color-picker v-model="themeConfig.primary" :predefine="colorList" @change="$event !== null && changePrimary($event)" />
 		</div>
 		<div class="theme-item">
 			<span>暗黑模式</span>
@@ -71,11 +71,17 @@
 		</div>
 		<div class="theme-item">
 			<span>灰色模式</span>
-			<el-switch v-model="themeConfig.isGrey" @change="changeGreyOrWeak($event, 'grey')" />
+			<el-switch
+				v-model="themeConfig.isGrey"
+				@change="$event => typeof $event === 'boolean' && changeGreyOrWeak($event, 'grey')"
+			/>
 		</div>
 		<div class="theme-item">
 			<span>色弱模式</span>
-			<el-switch v-model="themeConfig.isWeak" @change="changeGreyOrWeak($event, 'weak')" />
+			<el-switch
+				v-model="themeConfig.isWeak"
+				@change="$event => typeof $event === 'boolean' && changeGreyOrWeak($event, 'weak')"
+			/>
 		</div>
 		<br />
 

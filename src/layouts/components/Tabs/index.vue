@@ -24,7 +24,7 @@ import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
 import { AuthStore } from "@/stores/modules/auth";
 import { KeepAliveStore } from "@/stores/modules/keepAlive";
-import { TabsPaneContext } from "element-plus";
+import { TabPaneName, TabsPaneContext } from "element-plus";
 import MoreButton from "./components/MoreButton.vue";
 
 const route = useRoute();
@@ -101,7 +101,8 @@ const tabClick = (tabItem: TabsPaneContext) => {
 };
 
 // Remove Tab
-const tabRemove = (fullPath: string) => {
+const tabRemove = (fullPath: TabPaneName) => {
+	if (typeof fullPath === "number") return;
 	const name = tabStore.tabsMenuList.filter(item => item.path == fullPath)[0].name || "";
 	keepAliveStore.removeKeepAliveName(name);
 	tabStore.removeTabs(fullPath, fullPath == route.fullPath);

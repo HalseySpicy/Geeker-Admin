@@ -7,7 +7,7 @@
 				ref="menuInputRef"
 				placeholder="菜单搜索 ：支持菜单名称、路径"
 				:fetch-suggestions="searchMenuList"
-				@select="handleClickMenu"
+				@select="$event => handleClickMenu($event as Menu.MenuOptions)"
 				@click.stop
 			>
 				<template #prefix>

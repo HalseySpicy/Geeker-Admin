@@ -49,7 +49,7 @@ import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 const route = useRoute();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
-const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
+const activeMenu = computed(() => (route.meta.activeMenu ? (route.meta.activeMenu as string) : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 </script>
