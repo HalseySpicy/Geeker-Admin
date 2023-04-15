@@ -1,7 +1,7 @@
 <template>
-	<div class="fullscreen">
-		<i :class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']" class="toolBar-icon" @click="toggle"></i>
-	</div>
+  <div class="fullscreen">
+    <i :class="['iconfont', isFullscreen ? 'icon-suoxiao' : 'icon-fangda']" class="toolBar-icon" @click="toggle"></i>
+  </div>
 </template>
 
 <script setup lang="ts">

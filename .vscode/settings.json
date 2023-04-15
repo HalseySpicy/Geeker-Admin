@@ -1,131 +1,88 @@
 {
-	"editor.formatOnSave": true,
-	"stylelint.enable": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": true
-	},
-	"stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
-	"files.eol": "\n",
-	"[vue]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[scss]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[less]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"cSpell.words": [
-		"acroutes",
-		"adcode",
-		"Alipay",
-		"AMAP",
-		"Anglar",
-		"antd",
-		"apng",
-		"Biao",
-		"bottomleft",
-		"bottomright",
-		"breakline",
-		"browserslist",
-		"cascader",
-		"cnpm",
-		"commitize",
-		"commitlint",
-		"contentleft",
-		"contentright",
-		"CSDN",
-		"curveness",
-		"daterange",
-		"datetimerange",
-		"doclock",
-		"dragover",
-		"easymock",
-		"echarts",
-		"esbuild",
-		"fangda",
-		"fastmock",
-		"Geeker",
-		"Gitee",
-		"hexs",
-		"iconfont",
-		"Jheng",
-		"juejin",
-		"liquidfill",
-		"liutao",
-		"loglevel",
-		"longpress",
-		"malefemale",
-		"Mapchart",
-		"nprogress",
-		"officedocument",
-		"openxmlformats",
-		"pageable",
-		"Parens",
-		"persistedstate",
-		"Pinia",
-		"pjpeg",
-		"Prefixs",
-		"protable",
-		"singleline",
-		"sortablejs",
-		"sousuo",
-		"spreadsheetml",
-		"styl",
-		"stylelint",
-		"stylelintignore",
-		"stylelintrc",
-		"suoxiao",
-		"sysmbol",
-		"timerange",
-		"topleft",
-		"topright",
-		"truetype",
-		"Uncapitalize",
-		"unplugin",
-		"unref",
-		"vite",
-		"vuedraggable",
-		"vueuse",
-		"Vuex",
-		"wangeditor",
-		"Wechat",
-		"xianxingdaoyu",
-		"xianxingdiqiu",
-		"xianxingditu",
-		"xianxingfanchuan",
-		"xianxingfeiji",
-		"xianxinglvhangriji",
-		"xianxingtianqiyubao",
-		"xianxingxiangjipaizhao",
-		"xianxingxiarilengyin",
-		"xianxingyoulun",
-		"xianxingzijiayou",
-		"xiaoxi",
-		"yxxx",
-		"zhongyingwen",
-		"zhuti",
-		"zlevel"
-	]
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": true
+  },
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
+  "files.eol": "\n",
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "AMAP",
+    "apng",
+    "axios",
+    "Biao",
+    "brotli",
+    "cascader",
+    "commitlint",
+    "contentleft",
+    "contentright",
+    "daterange",
+    "datetimerange",
+    "echarts",
+    "fangda",
+    "geeker",
+    "Gitee",
+    "hexs",
+    "iconfont",
+    "juejin",
+    "liquidfill",
+    "longpress",
+    "monthrange",
+    "nprogress",
+    "officedocument",
+    "openxmlformats",
+    "Pageable",
+    "persistedstate",
+    "pinia",
+    "pjpeg",
+    "Prefixs",
+    "sortablejs",
+    "sousuo",
+    "spreadsheetml",
+    "styl",
+    "stylelint",
+    "stylelintignore",
+    "stylelintrc",
+    "suoxiao",
+    "truetype",
+    "unplugin",
+    "VITE",
+    "vuedraggable",
+    "vueuse",
+    "Vuex",
+    "wangeditor",
+    "xiaoxi",
+    "zhongyingwen",
+    "zhuti"
+  ]
 }

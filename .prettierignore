@@ -1,5 +1,4 @@
 /dist/*
-/html/*
 .local
 /node_modules/**
 
@@ -7,3 +6,4 @@
 **/*.sh
 
 /public/*
+stats.html

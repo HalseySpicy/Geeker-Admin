@@ -1,6 +1,6 @@
 /* Reset style sheet */
 
-/* 因为使用富文本编辑器才注释掉，如果你项目没有使用富文本编辑器，可以取消注释 */
+/* 目前项目中使用富文本编辑器需要注释，如果你项目中没有使用富文本编辑器，可以取消注释 */
 // html,
 // body,
 // div,
@@ -130,13 +130,13 @@
 html,
 body,
 #app {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 /* 解决 h1 标签在 webkit 内核浏览器中文字大小失效问题 */
 :-webkit-any(article, aside, nav, section) h1 {
-	font-size: 2em;
+  font-size: 2em;
 }

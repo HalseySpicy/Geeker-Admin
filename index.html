@@ -1,105 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%- title %></title>
-	</head>
-	<body>
-		<div id="app">
-			<style>
-				html,
-				body,
-				#app {
-					width: 100%;
-					height: 100%;
-					padding: 0;
-					margin: 0;
-				}
-				.loading-box {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					justify-content: center;
-					width: 100%;
-					height: 100%;
-				}
-				.loading-box .loading-wrap {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					padding: 98px;
-				}
-				.dot {
-					position: relative;
-					box-sizing: border-box;
-					display: inline-block;
-					width: 32px;
-					height: 32px;
-					font-size: 32px;
-					transform: rotate(45deg);
-					animation: ant-rotate 1.2s infinite linear;
-				}
-				.dot i {
-					position: absolute;
-					display: block;
-					width: 14px;
-					height: 14px;
-					background-color: #409eff;
-					border-radius: 100%;
-					opacity: 0.3;
-					transform: scale(0.75);
-					transform-origin: 50% 50%;
-					animation: ant-spin-move 1s infinite linear alternate;
-				}
-				.dot i:nth-child(1) {
-					top: 0;
-					left: 0;
-				}
-				.dot i:nth-child(2) {
-					top: 0;
-					right: 0;
-					animation-delay: 0.4s;
-				}
-				.dot i:nth-child(3) {
-					right: 0;
-					bottom: 0;
-					animation-delay: 0.8s;
-				}
-				.dot i:nth-child(4) {
-					bottom: 0;
-					left: 0;
-					animation-delay: 1.2s;
-				}
-				@keyframes ant-rotate {
-					to {
-						transform: rotate(405deg);
-					}
-				}
-				@keyframes ant-spin-move {
-					to {
-						opacity: 1;
-					}
-				}
-			</style>
-			<div class="loading-box">
-				<div class="loading-wrap">
-					<span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
-				</div>
-			</div>
-		</div>
-		<script>
-			const globalState = JSON.parse(window.localStorage.getItem("GlobalState"));
-			if (globalState) {
-				const color = globalState.themeConfig.primary;
-				const isDark = globalState.themeConfig.isDark;
-				const dot = document.querySelectorAll(".dot i");
-				const html = document.querySelector("html");
-				dot.forEach(item => (item.style.background = color));
-				if (isDark) html.style.background = "#141414";
-			}
-		</script>
-		<script type="module" src="/src/main.ts"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vue.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- title %></title>
+  </head>
+  <body>
+    <div id="app">
+      <style>
+        html,
+        body,
+        #app {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          margin: 0;
+        }
+        .loading-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
+        .loading-box .loading-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 98px;
+        }
+        .dot {
+          position: relative;
+          box-sizing: border-box;
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          font-size: 32px;
+          transform: rotate(45deg);
+          animation: ant-rotate 1.2s infinite linear;
+        }
+        .dot i {
+          position: absolute;
+          display: block;
+          width: 14px;
+          height: 14px;
+          background-color: #409eff;
+          border-radius: 100%;
+          opacity: 0.3;
+          transform: scale(0.75);
+          transform-origin: 50% 50%;
+          animation: ant-spin-move 1s infinite linear alternate;
+        }
+        .dot i:nth-child(1) {
+          top: 0;
+          left: 0;
+        }
+        .dot i:nth-child(2) {
+          top: 0;
+          right: 0;
+          animation-delay: 0.4s;
+        }
+        .dot i:nth-child(3) {
+          right: 0;
+          bottom: 0;
+          animation-delay: 0.8s;
+        }
+        .dot i:nth-child(4) {
+          bottom: 0;
+          left: 0;
+          animation-delay: 1.2s;
+        }
+        @keyframes ant-rotate {
+          to {
+            transform: rotate(405deg);
+          }
+        }
+        @keyframes ant-spin-move {
+          to {
+            opacity: 1;
+          }
+        }
+      </style>
+      <div class="loading-box">
+        <div class="loading-wrap">
+          <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const globalState = JSON.parse(window.localStorage.getItem("geeker-global"));
+      if (globalState) {
+        const dot = document.querySelectorAll(".dot i");
+        const html = document.querySelector("html");
+        dot.forEach(item => (item.style.background = globalState.primary));
+        if (globalState.isDark) html.style.background = "#141414";
+      }
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

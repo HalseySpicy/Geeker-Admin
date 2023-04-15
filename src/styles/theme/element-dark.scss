@@ -1,103 +1,36 @@
-/* 自定义 element 暗黑模式样式 */
+/* 自定义 element 暗黑模式 */
 html.dark {
-	// * geeker-admin
-	--geeker-bg-color: #141414;
-	--geeker-main-bg-color: #0d0d0d;
-	--geeker-border-light: 1px solid #4c4c4d;
+  /* wangEditor */
+  --w-e-toolbar-color: #eeeeee;
+  --w-e-toolbar-bg-color: #141414;
+  --w-e-textarea-bg-color: #141414;
+  --w-e-textarea-color: #eeeeee;
 
-	// * wangEditor
-	--w-e-toolbar-color: #595959;
-	--w-e-toolbar-bg-color: #eeeeee;
-	--w-e-textarea-bg-color: #141414;
-	--w-e-textarea-color: #eeeeee;
+  /* login */
+  .login-container {
+    background-color: #191919 !important;
+    .login-box {
+      background-color: rgb(0 0 0 / 80%) !important;
+      .login-form {
+        box-shadow: rgb(255 255 255 / 12%) 0 2px 10px 2px !important;
+        .logo-text {
+          color: var(--el-text-color-primary) !important;
+        }
+      }
+    }
+  }
 
-	// * 以下为自定义暗黑模式内容
-	// login
-	.login-container {
-		background-color: var(--el-fill-color-extra-light) !important;
-		.login-box {
-			background-color: var(--el-mask-color) !important;
-			.login-form {
-				background-color: var(--el-bg-color) !important;
-				box-shadow: 5px 5px 15px rgb(161 161 161 / 20%) !important;
-				.logo-text {
-					color: var(--el-text-color-primary) !important;
-				}
-			}
-		}
-	}
-
-	// scroll-bar
-	::-webkit-scrollbar {
-		background-color: var(--el-scrollbar-bg-color) !important;
-	}
-	::-webkit-scrollbar-thumb {
-		background-color: var(--el-border-color-darker) !important;
-	}
-
-	// layout
-	.el-container {
-		.el-aside {
-			background-color: var(--geeker-bg-color) !important;
-			border-right: var(--geeker-border-light) !important;
-			.logo {
-				border-bottom: var(--geeker-border-light) !important;
-			}
-		}
-		.not-aside {
-			border-right: none !important;
-		}
-		.el-header {
-			background-color: var(--geeker-bg-color) !important;
-			border-bottom-color: var(--el-border-color-light) !important;
-		}
-		.el-main {
-			background-color: var(--geeker-main-bg-color) !important;
-			.card {
-				background-color: var(--geeker-bg-color) !important;
-			}
-		}
-		.el-tabs {
-			background-color: var(--geeker-bg-color) !important;
-		}
-		.el-footer {
-			.footer {
-				background-color: var(--geeker-bg-color) !important;
-				border-top-color: var(--el-border-color-light) !important;
-				a {
-					color: var(--el-text-color-regular) !important;
-				}
-			}
-		}
-	}
-
-	// menu
-	.el-menu,
-	.el-sub-menu,
-	.el-menu-item,
-	.el-sub-menu__title {
-		background-color: var(--geeker-bg-color) !important;
-		&:not(.is-active) {
-			color: #bdbdc0 !important;
-		}
-		&.is-active {
-			color: #ffffff !important;
-			background-color: #000000 !important;
-		}
-	}
-	.el-menu-item:not(.is-active):hover {
-		background-color: var(--geeker-main-bg-color) !important;
-	}
-	.aside-split {
-		background-color: var(--geeker-bg-color) !important;
-		border-right: var(--geeker-border-light) !important;
-		.logo {
-			border-bottom: var(--geeker-border-light) !important;
-		}
-	}
-
-	// guide
-	#driver-highlighted-element-stage {
-		background-color: var(--el-color-info-light-5) !important;
-	}
+  /* layout */
+  .el-container {
+    // columns layout
+    .aside-split {
+      background-color: var(--el-bg-color) !important;
+      .logo {
+        border-bottom: 1px solid var(--el-border-color-light) !important;
+      }
+    }
+    .el-header {
+      background-color: var(--el-bg-color) !important;
+    }
+  }
 }

@@ -1,38 +1,38 @@
 @font-face {
-	font-family: iconfont; /* Project id 2667653 */
-	src: url("iconfont.ttf?t=1663324025864") format("truetype");
+  font-family: iconfont; /* Project id 2667653 */
+  src: url("iconfont.ttf?t=1663324025864") format("truetype");
 }
 .iconfont {
-	font-family: iconfont !important;
-	font-size: 20px;
-	font-style: normal;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	cursor: pointer;
+  font-family: iconfont !important;
+  font-size: 20px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
 }
 .icon-xiaoxi::before {
-	font-size: 21.2px;
-	content: "\e61f";
+  font-size: 21.2px;
+  content: "\e61f";
 }
 .icon-zhuti::before {
-	font-size: 22.4px;
-	content: "\e638";
+  font-size: 22.4px;
+  content: "\e638";
 }
 .icon-sousuo::before {
-	content: "\e611";
+  content: "\e611";
 }
 .icon-contentright::before {
-	content: "\e8c9";
+  content: "\e8c9";
 }
 .icon-contentleft::before {
-	content: "\e8ca";
+  content: "\e8ca";
 }
 .icon-fangda::before {
-	content: "\e826";
+  content: "\e826";
 }
 .icon-suoxiao::before {
-	content: "\e641";
+  content: "\e641";
 }
 .icon-zhongyingwen::before {
-	content: "\e8cb";
+  content: "\e8cb";
 }

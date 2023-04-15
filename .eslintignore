@@ -6,13 +6,10 @@ node_modules
 .vscode
 .idea
 dist
-html
 /public
 /docs
 .husky
 .local
 /bin
-.eslintrc.js
-.prettierrc.js
 /src/mock/*
-
+stats.html

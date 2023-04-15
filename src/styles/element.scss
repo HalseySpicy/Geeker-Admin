@@ -1,248 +1,249 @@
-// * 设置 notification/message 层级在 loading 之上
+/* 设置 notification、message 层级在 loading 之上 */
 .el-message,
 .el-notification {
-	z-index: 99999 !important;
+  z-index: 2058 !important;
 }
 
-// * 设置 el-alert 边框
+/* el-alert */
 .el-alert {
-	border: 1px solid;
+  border: 1px solid;
 }
 
-// * 当前页面最大化 css
+/* 当前页面最大化 css */
 .main-maximize {
-	.aside-split,
-	.el-aside,
-	.el-header,
-	.el-footer,
-	.tabs-box {
-		display: none !important;
-	}
+  .aside-split,
+  .el-aside,
+  .el-header,
+  .el-footer,
+  .tabs-box {
+    display: none !important;
+  }
 }
 
-// * card 卡片样式
+/* custom card */
 .card {
-	box-sizing: border-box;
-	padding: 20px;
-	overflow-x: hidden;
-	background-color: var(--el-fill-color-blank);
-	border: 1px solid var(--el-border-color-light);
-	border-radius: 4px;
-	box-shadow: 0 0 12px rgb(0 0 0 / 5%);
+  box-sizing: border-box;
+  padding: 20px;
+  overflow-x: hidden;
+  background-color: var(--el-bg-color);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgb(0 0 0 / 5%);
 }
 
-// * 不需要 card 卡片样式（在组件内使用 proTable 会使用到）
+/* ProTable 不需要 card 样式（在组件内使用 ProTable 会使用到） */
 .no-card {
-	.card {
-		padding: 0;
-		background-color: transparent;
-		border: none;
-		border-radius: 0;
-		box-shadow: none;
-	}
-	.table-search {
-		padding: 18px 0 0 !important;
-		margin-bottom: 0 !important;
-	}
+  .card {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .table-search {
+    padding: 18px 0 0 !important;
+    margin-bottom: 0 !important;
+  }
 }
 
-// * content-box (常用内容盒子)
+/* content-box (常用内容盒子) */
 .content-box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	height: 100%;
-	.text {
-		margin: 20px 0 30px;
-		font-size: 23px;
-		font-weight: bold;
-		color: var(--el-text-color-regular);
-	}
-	.el-descriptions {
-		width: 100%;
-		padding: 40px 0 0;
-		.el-descriptions__title {
-			font-size: 18px;
-		}
-		.el-descriptions__label {
-			width: 200px;
-		}
-	}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  .text {
+    margin: 20px 0 30px;
+    font-size: 23px;
+    font-weight: bold;
+    color: var(--el-text-color-regular);
+  }
+  .el-descriptions {
+    width: 100%;
+    padding: 40px 0 0;
+    .el-descriptions__title {
+      font-size: 18px;
+    }
+    .el-descriptions__label {
+      width: 200px;
+    }
+  }
 }
 
-// * main-box (树形表格 treeFilter 页面会使用，左右布局 flex)
+/* main-box (树形表格 treeFilter 页面会使用，左右布局 flex) */
 .main-box {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	.table-box {
-		/* 这里减去的是 treeFilter 组件宽度 */
-		width: calc(100% - 230px);
-	}
+  display: flex;
+  width: 100%;
+  height: 100%;
+  .table-box {
+    // 这里减去的是 treeFilter 组件宽度
+    width: calc(100% - 230px);
+  }
 }
 
-// * table 表格页面样式
+/* proTable */
 .table-box,
 .table-main {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	width: 100%;
-	height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 
-	// table-search 表格搜索样式
-	.table-search {
-		padding: 18px 18px 0;
-		margin-bottom: 10px;
-		.el-form {
-			.el-form-item__content > * {
-				width: 100%;
-			}
+  // table-search 表格搜索样式
+  .table-search {
+    padding: 18px 18px 0;
+    margin-bottom: 10px;
+    .el-form {
+      .el-form-item__content > * {
+        width: 100%;
+      }
 
-			// 去除时间选择器上下 padding
-			.el-range-editor.el-input__wrapper {
-				padding: 0 10px;
-			}
-		}
-		.operation {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			margin-bottom: 18px;
-		}
-	}
+      // 去除时间选择器上下 padding
+      .el-range-editor.el-input__wrapper {
+        padding: 0 10px;
+      }
+    }
+    .operation {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 18px;
+    }
+  }
 
-	// 表格 header 样式
-	.table-header {
-		.header-button-lf {
-			float: left;
-		}
-		.header-button-ri {
-			float: right;
-		}
-		.el-button {
-			margin-bottom: 15px;
-		}
-	}
+  // 表格 header 样式
+  .table-header {
+    .header-button-lf {
+      float: left;
+    }
+    .header-button-ri {
+      float: right;
+    }
+    .el-button {
+      margin-bottom: 15px;
+    }
+  }
 
-	// el-table 表格样式
-	.el-table {
-		flex: 1;
+  // el-table 表格样式
+  .el-table {
+    flex: 1;
 
-		// 修复 safari 浏览器表格错位 https://github.com/HalseySpicy/Geeker-Admin/issues/83
-		table {
-			width: 100%;
-		}
-		.el-table__header th {
-			height: 45px;
-			font-size: 15px;
-			font-weight: bold;
-			color: var(--el-text-color-primary);
-			background: var(--el-fill-color-light);
-		}
-		.el-table__row {
-			height: 45px;
-			font-size: 14px;
-			.el-table__placeholder {
-				display: inline;
-			}
-		}
+    // 修复 safari 浏览器表格错位 https://github.com/HalseySpicy/Geeker-Admin/issues/83
+    table {
+      width: 100%;
+    }
+    .el-table__header th {
+      height: 45px;
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--el-text-color-primary);
+      background: var(--el-fill-color-light);
+    }
+    .el-table__row {
+      height: 45px;
+      font-size: 14px;
+      .el-table__placeholder {
+        display: inline;
+      }
+    }
 
-		// 设置 el-table 中 header 文字不换行，并省略
-		.el-table__header .el-table__cell > .cell {
-			white-space: nowrap;
-		}
+    // 设置 el-table 中 header 文字不换行，并省略
+    .el-table__header .el-table__cell > .cell {
+      white-space: nowrap;
+    }
 
-		// 解决表格数据为空时样式不居中问题(仅在element-plus中)
-		.el-table__empty-block {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			.table-empty {
-				line-height: 30px;
-			}
-		}
+    // 解决表格数据为空时样式不居中问题(仅在element-plus中)
+    .el-table__empty-block {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      .table-empty {
+        line-height: 30px;
+      }
+    }
 
-		// table 中 image 图片样式
-		.table-image {
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-		}
-	}
+    // table 中 image 图片样式
+    .table-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
 
-	// 表格 pagination 样式
-	.el-pagination {
-		display: flex;
-		justify-content: flex-end;
-		margin-top: 20px;
-	}
+  // 表格 pagination 样式
+  .el-pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
 }
 
-// * el-table 组件大小切换样式
+/* el-table 组件大小 */
 .el-table--small {
-	.el-table__header th {
-		height: 40px !important;
-		font-size: 14px !important;
-	}
-	.el-table__row {
-		height: 40px !important;
-		font-size: 13px !important;
-	}
+  .el-table__header th {
+    height: 40px !important;
+    font-size: 14px !important;
+  }
+  .el-table__row {
+    height: 40px !important;
+    font-size: 13px !important;
+  }
 }
 .el-table--large {
-	.el-table__header th {
-		height: 50px !important;
-		font-size: 16px !important;
-	}
-	.el-table__row {
-		height: 50px !important;
-		font-size: 15px !important;
-	}
+  .el-table__header th {
+    height: 50px !important;
+    font-size: 16px !important;
+  }
+  .el-table__row {
+    height: 50px !important;
+    font-size: 15px !important;
+  }
 }
 
-// * el-drawer 样式
+/* el-drawer */
 .el-drawer {
-	.el-drawer__header {
-		padding: 15px 20px 14px;
-		margin-bottom: 0;
-		border-bottom: 1px solid var(--el-border-color-lighter);
-		span {
-			font-size: 17px;
-			color: var(--el-text-color-primary) !important;
-		}
-	}
-	.el-drawer__footer {
-		border-top: 1px solid var(--el-border-color-lighter);
-	}
+  .el-drawer__header {
+    padding: 16px 20px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    span {
+      font-size: 17px;
+      line-height: 17px;
+      color: var(--el-text-color-primary) !important;
+    }
+  }
+  .el-drawer__footer {
+    border-top: 1px solid var(--el-border-color-lighter);
+  }
 
-	// drawer select 样式
-	.el-select {
-		width: 100%;
-	}
+  // select 样式
+  .el-select {
+    width: 100%;
+  }
 
-	// drawer-form 中存在两列 form-item
-	.drawer-multiColumn-form {
-		display: flex;
-		flex-wrap: wrap;
-		.el-form-item {
-			width: 47%;
-			&:nth-child(2n-1) {
-				margin-right: 5%;
-			}
-		}
-	}
+  // drawer-form 中存在两列 form-item 样式
+  .drawer-multiColumn-form {
+    display: flex;
+    flex-wrap: wrap;
+    .el-form-item {
+      width: 47%;
+      &:nth-child(2n-1) {
+        margin-right: 5%;
+      }
+    }
+  }
 }
 
-// * el-dialog 样式
+/* el-dialog */
 .el-dialog {
-	.el-dialog__header {
-		padding: 15px 20px;
-		margin: 0;
-		border-bottom: 1px solid var(--el-border-color-lighter);
-		.el-dialog__title {
-			font-size: 17px;
-		}
-	}
+  .el-dialog__header {
+    padding: 15px 20px;
+    margin: 0;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    .el-dialog__title {
+      font-size: 17px;
+    }
+  }
 }

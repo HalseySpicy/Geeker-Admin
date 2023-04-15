@@ -1,55 +1,54 @@
 .el-container {
-	width: 100%;
-	height: 100%;
-	.el-aside {
-		width: auto;
-		overflow: inherit;
-		background-color: #191a20;
-		border-right: 1px solid #191a20;
-		.menu {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			transition: all 0.3s ease;
-			.el-scrollbar {
-				height: calc(100% - 55px);
-				.el-menu {
-					overflow-x: hidden;
-					border-right: none;
-				}
-			}
-			.logo {
-				box-sizing: border-box;
-				height: 55px;
-				border-bottom: 1px solid #282a35;
-				span {
-					font-size: 21.5px;
-					font-weight: bold;
-					color: #dadada;
-					white-space: nowrap;
-				}
-				img {
-					width: 28px;
-					object-fit: contain;
-					margin-right: 6px;
-				}
-			}
-		}
-	}
-	.el-header {
-		box-sizing: border-box;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 55px;
-		padding: 0 15px;
-		background-color: #ffffff;
-		border-bottom: 1px solid #f1f1f1;
-		:deep(.tool-bar-ri) {
-			.toolBar-icon,
-			.username {
-				color: var(--el-text-color-primary);
-			}
-		}
-	}
+  width: 100%;
+  height: 100%;
+  :deep(.el-aside) {
+    width: auto;
+    background-color: var(--el-menu-bg-color);
+    border-right: 1px solid var(--el-border-color-light);
+    .aside-box {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: width 0.3s ease;
+      .el-scrollbar {
+        height: calc(100% - 55px);
+        .el-menu {
+          width: 100%;
+          overflow-x: hidden;
+          border-right: none;
+        }
+      }
+      .logo {
+        box-sizing: border-box;
+        height: 55px;
+        .logo-img {
+          width: 28px;
+          object-fit: contain;
+          margin-right: 6px;
+        }
+        .logo-text {
+          font-size: 21.5px;
+          font-weight: bold;
+          color: var(--el-logo-text-color);
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+  .el-header {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 55px;
+    padding: 0 15px;
+    background-color: var(--el-bg-color);
+    border-bottom: 1px solid var(--el-border-color-light);
+    :deep(.tool-bar-ri) {
+      .toolBar-icon,
+      .username {
+        color: var(--el-text-color-primary);
+      }
+    }
+  }
 }
