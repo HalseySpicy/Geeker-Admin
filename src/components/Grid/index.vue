@@ -37,11 +37,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 onBeforeMount(() => props.collapsed && findIndex());
 onMounted(() => {
-  resize({ target: { innerWidth: window.innerWidth } } as any);
+  resize({ target: { innerWidth: window.innerWidth } } as unknown as UIEvent);
   window.addEventListener("resize", resize);
 });
 onActivated(() => {
-  resize({ target: { innerWidth: window.innerWidth } } as any);
+  resize({ target: { innerWidth: window.innerWidth } } as unknown as UIEvent);
   window.addEventListener("resize", resize);
 });
 onUnmounted(() => {

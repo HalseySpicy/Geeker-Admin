@@ -59,6 +59,7 @@ const selectIcon = (item: any) => {
   dialogVisible.value = false;
   valueIcon.value = item.name;
   emit("update:iconValue", item.name);
+  setTimeout(() => inputRef.value.blur(), 0);
 };
 
 // 清空图标
