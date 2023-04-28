@@ -9,9 +9,11 @@ interface ElType extends HTMLElement {
 }
 const debounce: Directive = {
   mounted(el: ElType, binding: DirectiveBinding) {
+    console.log(binding.arg);
     if (typeof binding.value !== "function") {
       throw "callback must be a function";
     }
+    const wait = binding.arg ? ~~binding.arg : 500;
     let timer: NodeJS.Timeout | null = null;
     el.__handleClick__ = function () {
       if (timer) {
@@ -19,7 +21,7 @@ const debounce: Directive = {
       }
       timer = setTimeout(() => {
         binding.value();
-      }, 500);
+      }, wait);
     };
     el.addEventListener("click", el.__handleClick__);
   },
