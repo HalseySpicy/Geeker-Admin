@@ -9,7 +9,6 @@ interface ElType extends HTMLElement {
 }
 const debounce: Directive = {
   mounted(el: ElType, binding: DirectiveBinding) {
-    console.log(binding.arg);
     if (typeof binding.value !== "function") {
       throw "callback must be a function";
     }
