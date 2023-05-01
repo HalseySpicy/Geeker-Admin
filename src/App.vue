@@ -10,6 +10,7 @@ import { useI18n } from "vue-i18n";
 import { getBrowserLang } from "@/utils";
 import { useTheme } from "@/hooks/useTheme";
 import { ElConfigProvider } from "element-plus";
+import { LanguageType } from "./stores/interface";
 import { useGlobalStore } from "@/stores/modules/global";
 
 import en from "element-plus/es/locale/lang/en";
@@ -26,7 +27,7 @@ const i18n = useI18n();
 onMounted(() => {
   const language = globalStore.language ?? getBrowserLang();
   i18n.locale.value = language;
-  globalStore.setGlobalState("language", language);
+  globalStore.setGlobalState("language", language as LanguageType);
 });
 
 // element language

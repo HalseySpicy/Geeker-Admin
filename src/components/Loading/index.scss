@@ -53,11 +53,13 @@
   left: 0;
   animation-delay: 1.2s;
 }
+
 @keyframes ant-rotate {
   to {
     transform: rotate(405deg);
   }
 }
+
 @keyframes ant-spin-move {
   to {
     opacity: 1;

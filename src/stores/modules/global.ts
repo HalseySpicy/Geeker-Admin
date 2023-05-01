@@ -41,8 +41,8 @@ export const useGlobalStore = defineStore({
   getters: {},
   actions: {
     // Set GlobalState
-    setGlobalState(key: keyof GlobalState, val: GlobalState[keyof GlobalState]) {
-      this.$patch({ [key]: val });
+    setGlobalState(...args: ObjToKeyValArray<GlobalState>) {
+      this.$patch({ [args[0]]: args[1] });
     }
   },
   persist: piniaPersistConfig("geeker-global")
