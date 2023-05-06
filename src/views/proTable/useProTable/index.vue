@@ -111,12 +111,7 @@ const { BUTTONS } = useAuthButtons();
 // 自定义渲染表头（使用tsx语法）
 const headerRender = (row: ColumnProps) => {
   return (
-    <el-button
-      type="primary"
-      onClick={() => {
-        ElMessage.success("我是通过 tsx 语法渲染的表头");
-      }}
-    >
+    <el-button type="primary" onClick={() => ElMessage.success("我是通过 tsx 语法渲染的表头")}>
       {row.label}
     </el-button>
   );
@@ -152,7 +147,22 @@ const columns: ColumnProps<User.ResUserList>[] = [
     fieldNames: { label: "genderLabel", value: "genderValue" }
   },
   // 多级 prop
-  { prop: "user.detail.age", label: "年龄", search: { el: "input" } },
+  {
+    prop: "user.detail.age",
+    label: "年龄",
+    search: {
+      // 自定义 search 组件
+      render: ({ searchParam }) => {
+        return (
+          <div class="flx-center">
+            <el-input vModel_trim={searchParam.minAge} placeholder="最小年龄" style={{ width: "50%" }} />
+            <span class="mr10 ml10">-</span>
+            <el-input vModel_trim={searchParam.maxAge} placeholder="最大年龄" style={{ width: "50%" }} />
+          </div>
+        );
+      }
+    }
+  },
   { prop: "idCard", label: "身份证号", search: { el: "input" } },
   { prop: "email", label: "邮箱" },
   { prop: "address", label: "居住地址" },

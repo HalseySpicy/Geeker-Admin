@@ -186,7 +186,7 @@ const flatColumns = ref<ColumnProps[]>();
 flatColumns.value = flatColumnsFunc(tableColumns.value);
 
 // 过滤需要搜索的配置项
-const searchColumns = flatColumns.value.filter(item => item.search?.el);
+const searchColumns = flatColumns.value.filter(item => item.search?.el || item.search?.render);
 
 // 设置搜索表单排序默认值 && 设置搜索表单项的默认值
 searchColumns.forEach((column, index) => {
