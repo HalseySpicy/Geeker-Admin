@@ -6,6 +6,7 @@
   "stylelint.enable": true,
   "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass", "html"],
   "files.eol": "\n",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
