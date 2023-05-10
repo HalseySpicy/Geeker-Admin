@@ -10,7 +10,7 @@ import { HandleData } from "./interface";
  * @returns {Promise}
  */
 export const useHandleData = (
-  api: (params: any) => Promise<any> | any,
+  api: (params: any) => Promise<any>,
   params: any = {},
   message: string,
   confirmType: HandleData.MessageType = "warning"

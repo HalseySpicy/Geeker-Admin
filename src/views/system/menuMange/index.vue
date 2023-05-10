@@ -1,14 +1,6 @@
 <template>
   <div class="table-box">
-    <ProTable
-      ref="proTable"
-      title="菜单列表"
-      row-key="path"
-      :indent="30"
-      :columns="columns"
-      :request-api="getAuthMenuListApi"
-      :pagination="false"
-    >
+    <ProTable ref="proTable" title="菜单列表" row-key="path" :indent="30" :columns="columns" :data="menuData" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader>
         <el-button type="primary" :icon="CirclePlus">新增菜单</el-button>
@@ -20,9 +12,9 @@
         </el-icon>
       </template>
       <!-- 菜单操作 -->
-      <template #operation="scope">
+      <template #operation>
         <el-button type="primary" link :icon="EditPen">编辑</el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteMenu(scope.row)">删除</el-button>
+        <el-button type="primary" link :icon="Delete">删除</el-button>
       </template>
     </ProTable>
   </div>
@@ -31,12 +23,13 @@
 <script setup lang="ts" name="menuMange">
 import { ref } from "vue";
 import { ColumnProps } from "@/components/ProTable/interface";
-import { getAuthMenuListApi } from "@/api/modules/login";
 import { Delete, EditPen, CirclePlus } from "@element-plus/icons-vue";
-import { useHandleData } from "@/hooks/useHandleData";
+import authMenuList from "@/assets/json/authMenuList.json";
 import ProTable from "@/components/ProTable/index.vue";
 
 const proTable = ref();
+
+const menuData = ref(authMenuList.data);
 
 // 表格配置项
 const columns: ColumnProps[] = [
@@ -48,10 +41,4 @@ const columns: ColumnProps[] = [
   { prop: "component", label: "组件路径", width: 300 },
   { prop: "operation", label: "操作", width: 250, fixed: "right" }
 ];
-
-// 删除菜单（示例、根据自己后端接口来）
-const deleteMenu = async (params: Menu.MenuOptions) => {
-  await useHandleData(getAuthMenuListApi, { path: [params.path] }, `删除【${params.meta.title}】菜单`);
-  proTable.value.getTableList();
-};
 </script>

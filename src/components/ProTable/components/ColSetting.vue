@@ -28,7 +28,7 @@ import { ColumnProps } from "@/components/ProTable/interface";
 defineProps<{ colSetting: ColumnProps[] }>();
 
 const drawerVisible = ref<boolean>(false);
-// 打开列设置
+
 const openColSetting = () => {
   drawerVisible.value = true;
 };

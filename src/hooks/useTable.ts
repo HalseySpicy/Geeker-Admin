@@ -9,7 +9,7 @@ import { reactive, computed, toRefs } from "vue";
  * @param {Function} dataCallBack 对后台返回的数据进行处理的方法 (非必传)
  * */
 export const useTable = (
-  api: (params: any) => Promise<any> | any,
+  api?: (params: any) => Promise<any>,
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: any) => any,
@@ -55,6 +55,7 @@ export const useTable = (
    * @return void
    * */
   const getTableList = async () => {
+    if (!api) return;
     try {
       // 先把初始化参数和分页参数放到总参数里面
       Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});

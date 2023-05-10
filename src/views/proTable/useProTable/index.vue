@@ -101,7 +101,9 @@ const dataCallback = (data: any) => {
 // 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
 const getTableList = (params: any) => {
   let newParams = JSON.parse(JSON.stringify(params));
-  newParams.username && (newParams.username = "custom-" + newParams.username);
+  newParams.createTime && (newParams.startTime = newParams.createTime[0]);
+  newParams.createTime && (newParams.endTime = newParams.createTime[1]);
+  delete newParams.createTime;
   return getUserList(newParams);
 };
 
@@ -146,18 +148,18 @@ const columns: ColumnProps<User.ResUserList>[] = [
     search: { el: "select", props: { filterable: true } },
     fieldNames: { label: "genderLabel", value: "genderValue" }
   },
-  // 多级 prop
   {
+    // 多级 prop
     prop: "user.detail.age",
     label: "年龄",
     search: {
-      // 自定义 search 组件
+      // 自定义 search 显示内容
       render: ({ searchParam }) => {
         return (
           <div class="flx-center">
-            <el-input vModel_trim={searchParam.minAge} placeholder="最小年龄" style={{ width: "50%" }} />
+            <el-input vModel_trim={searchParam.minAge} placeholder="最小年龄" />
             <span class="mr10 ml10">-</span>
-            <el-input vModel_trim={searchParam.maxAge} placeholder="最大年龄" style={{ width: "50%" }} />
+            <el-input vModel_trim={searchParam.maxAge} placeholder="最大年龄" />
           </div>
         );
       }

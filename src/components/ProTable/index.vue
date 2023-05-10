@@ -5,8 +5,8 @@
   <SearchForm
     :search="search"
     :reset="reset"
-    :search-param="searchParam"
     :columns="searchColumns"
+    :search-param="searchParam"
     :search-col="searchCol"
     v-show="isShowSearch"
   />
@@ -31,7 +31,7 @@
     <el-table
       ref="tableRef"
       v-bind="$attrs"
-      :data="tableData"
+      :data="data ?? tableData"
       :border="border"
       :row-key="rowKey"
       @selection-change="selectionChange"
@@ -39,20 +39,19 @@
       <!-- 默认插槽 -->
       <slot></slot>
       <template v-for="item in tableColumns" :key="item">
-        <!-- selection || index -->
+        <!-- selection || index || expand -->
         <el-table-column
           v-bind="item"
           :align="item.align ?? 'center'"
           :reserve-selection="item.type == 'selection'"
-          v-if="item.type == 'selection' || item.type == 'index'"
+          v-if="item.type && ['selection', 'index', 'expand'].includes(item.type)"
         >
+          <template #default="scope" v-if="item.type == 'expand'">
+            <component :is="item.render" v-bind="scope" v-if="item.render"> </component>
+            <slot :name="item.type" v-bind="scope" v-else></slot>
+          </template>
         </el-table-column>
-        <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
-        <el-table-column v-bind="item" :align="item.align ?? 'center'" v-if="item.type == 'expand'" v-slot="scope">
-          <component :is="item.render" v-bind="scope" v-if="item.render"> </component>
-          <slot :name="item.type" v-bind="scope" v-else></slot>
-        </el-table-column>
-        <!-- other 循环递归 -->
+        <!-- other -->
         <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" v-bind="scope"></slot>
@@ -63,7 +62,7 @@
       <template #append>
         <slot name="append"> </slot>
       </template>
-      <!-- 表格无数据情况 -->
+      <!-- 无数据 -->
       <template #empty>
         <div class="table-empty">
           <slot name="empty">
@@ -102,9 +101,10 @@ import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
 
-interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
-  columns: ColumnProps[]; // 列配置项
-  requestApi: (params: any) => Promise<any> | any; // 请求表格数据的 api ==> 非必传
+interface ProTableProps extends Partial<TableProps<any>> {
+  columns: ColumnProps[]; // 列配置项  ==> 必传
+  data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
+  requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
   requestAuto?: boolean; // 是否自动执行请求 api ==> 非必传（默认为true）
   requestError?: (params: any) => void; // 表格 api 请求错误监听 ==> 非必传
   dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
@@ -207,10 +207,11 @@ const colSetting = tableColumns.value!.filter(
 );
 const openColSetting = () => colRef.value.openColSetting();
 
-// 🙅‍♀️ 不需要打印可以把以下方法删除，打印功能目前存在很多 bug（目前数据处理比较复杂 209-246 行）
+// 🙅‍♀️ 不需要打印可以把以下方法删除，打印功能目前存在很多 bug（目前数据处理比较复杂 210-248 行）
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
-  const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
+  const handleData = props.data ?? tableData.value;
+  const printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : handleData));
   // 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
   const needTransformCol = flatColumns.value!.filter(
     item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum

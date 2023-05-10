@@ -9,7 +9,7 @@ import { ElNotification } from "element-plus";
  * @param {String} fileType 导出的文件格式 (默认为.xlsx)
  * */
 export const useDownload = async (
-  api: (param: any) => Promise<any> | any,
+  api: (param: any) => Promise<any>,
   tempName: string,
   params: any = {},
   isNotify: boolean = true,
