@@ -50,7 +50,7 @@ export const exportUserInfo = (params: User.ReqUserParams) => {
   return http.download(PORT1 + `/user/export`, params);
 };
 
-// 获取用户状态
+// 获取用户状态字典
 export const getUserStatus = () => {
   return http.get<User.ResStatus>(PORT1 + `/user/status`);
 };
