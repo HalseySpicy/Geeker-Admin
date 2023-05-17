@@ -13,7 +13,8 @@ export const useTable = (
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: any) => any,
-  requestError?: (error: any) => void
+  requestError?: (error: any) => void,
+  pageParamCallBack?: (pageNum: number, pageSize: number) => any
 ) => {
   const state = reactive<Table.TableStateProps>({
     // 表格数据
@@ -57,8 +58,14 @@ export const useTable = (
   const getTableList = async () => {
     if (!api) return;
     try {
+      // 初始化分页参数
+      const pageParam_ = isPageable
+        ? pageParamCallBack
+          ? pageParamCallBack(pageParam.value.pageNum, pageParam.value.pageSize)
+          : pageParam.value
+        : {};
       // 先把初始化参数和分页参数放到总参数里面
-      Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
+      Object.assign(state.totalParam, initParam, pageParam_);
       let { data } = await api({ ...state.searchInitParam, ...state.totalParam });
       dataCallBack && (data = dataCallBack(data));
       state.tableData = isPageable ? data.list : data;
