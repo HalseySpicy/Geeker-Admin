@@ -20,6 +20,10 @@
           批量删除用户
         </el-button>
       </template>
+      <!-- 单选 -->
+      <template #radio="scope">
+        <el-radio :label="scope.row.id" v-model="radio"><i></i></el-radio>
+      </template>
       <!-- Expand -->
       <template #expand="scope">
         {{ scope.row }}
@@ -50,6 +54,9 @@ import { getUserList, deleteUser, resetUserPassWord, getUserStatus, getUserGende
 // 获取 ProTable DOM
 const proTable = ref();
 
+// 单选
+const radio = ref();
+
 // 自定义渲染表头（使用tsx语法）
 const headerRender = (row: ColumnProps) => {
   return (
@@ -61,7 +68,7 @@ const headerRender = (row: ColumnProps) => {
 
 // 表格配置项
 const columns: ColumnProps<User.ResUserList>[] = [
-  { type: "selection", fixed: "left", width: 80 },
+  { prop: "radio", label: "单选", width: 80 },
   { type: "index", label: "#", width: 80 },
   { type: "expand", label: "Expand", width: 100 },
   {
@@ -143,8 +150,8 @@ const tableRowClassName = ({ rowIndex }: { row: User.ResUserList; rowIndex: numb
 
 // 单击行
 const rowClick = (row: User.ResUserList, column: TableColumnCtx<User.ResUserList>) => {
+  if (column.property == "radio" || column.property == "operation") return;
   console.log(row);
-  if (column.property == "operation") return;
   ElMessage.success("当前行被点击了！");
 };
 
