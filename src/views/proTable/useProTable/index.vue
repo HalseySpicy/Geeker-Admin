@@ -25,7 +25,7 @@
       <!-- usernameHeader -->
       <template #usernameHeader="scope">
         <el-button type="primary" @click="ElMessage.success('我是通过作用域插槽渲染的表头')">
-          {{ scope.row.label }}
+          {{ scope.column.label }}
         </el-button>
       </template>
       <!-- createTime -->
@@ -51,7 +51,6 @@
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { User } from "@/api/interface";
-import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
@@ -59,6 +58,7 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
+import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
 import { CirclePlus, Delete, EditPen, Download, Upload, View, Refresh } from "@element-plus/icons-vue";
 import {
   getUserList,
@@ -81,7 +81,7 @@ const toDetail = () => {
 };
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
-const proTable = ref();
+const proTable = ref<ProTableInstance>();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({ type: 1 });
@@ -111,10 +111,10 @@ const getTableList = (params: any) => {
 const { BUTTONS } = useAuthButtons();
 
 // 自定义渲染表头（使用tsx语法）
-const headerRender = (row: ColumnProps) => {
+const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
   return (
     <el-button type="primary" onClick={() => ElMessage.success("我是通过 tsx 语法渲染的表头")}>
-      {row.label}
+      {scope.column.label}
     </el-button>
   );
 };
@@ -210,32 +210,32 @@ const columns: ColumnProps<User.ResUserList>[] = [
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {
   await useHandleData(deleteUser, { id: [params.id] }, `删除【${params.username}】用户`);
-  proTable.value.getTableList();
+  proTable.value?.getTableList();
 };
 
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
   await useHandleData(deleteUser, { id }, "删除所选用户信息");
-  proTable.value.clearSelection();
-  proTable.value.getTableList();
+  proTable.value?.clearSelection();
+  proTable.value?.getTableList();
 };
 
 // 重置用户密码
 const resetPass = async (params: User.ResUserList) => {
   await useHandleData(resetUserPassWord, { id: params.id }, `重置【${params.username}】用户密码`);
-  proTable.value.getTableList();
+  proTable.value?.getTableList();
 };
 
 // 切换用户状态
 const changeStatus = async (row: User.ResUserList) => {
   await useHandleData(changeUserStatus, { id: row.id, status: row.status == 1 ? 0 : 1 }, `切换【${row.username}】用户状态`);
-  proTable.value.getTableList();
+  proTable.value?.getTableList();
 };
 
 // 导出用户列表
 const downloadFile = async () => {
   ElMessageBox.confirm("确认导出用户数据?", "温馨提示", { type: "warning" }).then(() =>
-    useDownload(exportUserInfo, "用户列表", proTable.value.searchParam)
+    useDownload(exportUserInfo, "用户列表", proTable.value?.searchParam)
   );
 };
 
@@ -246,7 +246,7 @@ const batchAdd = () => {
     title: "用户",
     tempApi: exportUserInfo,
     importApi: BatchAddUser,
-    getTableList: proTable.value.getTableList
+    getTableList: proTable.value?.getTableList
   };
   dialogRef.value?.acceptParams(params);
 };
@@ -259,7 +259,7 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     isView: title === "查看",
     row: { ...row },
     api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
-    getTableList: proTable.value.getTableList
+    getTableList: proTable.value?.getTableList
   };
   drawerRef.value?.acceptParams(params);
 };

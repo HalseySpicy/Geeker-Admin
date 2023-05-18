@@ -101,7 +101,7 @@ import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import printJS from "print-js";
 
-interface ProTableProps {
+export interface ProTableProps {
   columns: ColumnProps[]; // 列配置项  ==> 必传
   data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
   requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
@@ -119,8 +119,8 @@ interface ProTableProps {
 
 // 接受父组件参数，配置默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
-  requestAuto: true,
   columns: () => [],
+  requestAuto: true,
   pagination: true,
   initParam: {},
   border: true,
@@ -207,7 +207,7 @@ const colSetting = tableColumns.value!.filter(
 );
 const openColSetting = () => colRef.value.openColSetting();
 
-// 🙅‍♀️ 不需要打印可以把以下方法删除，打印功能目前存在很多 bug（目前数据处理比较复杂 210-248 行）
+// 🙅‍♀️ 不需要打印可以把以下方法删除，打印功能目前存在很多 bug
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
   const handleData = props.data ?? tableData.value;
