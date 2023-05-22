@@ -1,5 +1,6 @@
 import router from "@/routers/index";
 import { LOGIN_URL } from "@/config";
+import { RouteRecordRaw } from "vue-router";
 import { ElNotification } from "element-plus";
 import { useUserStore } from "@/stores/modules/user";
 import { useAuthStore } from "@/stores/modules/auth";
@@ -33,15 +34,15 @@ export const initDynamicRouter = async () => {
     }
 
     // 3.添加动态路由
-    authStore.flatMenuListGet.forEach((item: any) => {
+    authStore.flatMenuListGet.forEach(item => {
       item.children && delete item.children;
       if (item.component && typeof item.component == "string") {
         item.component = modules["/src/views" + item.component + ".vue"];
       }
       if (item.meta.isFull) {
-        router.addRoute(item);
+        router.addRoute(item as unknown as RouteRecordRaw);
       } else {
-        router.addRoute("layout", item);
+        router.addRoute("layout", item as unknown as RouteRecordRaw);
       }
     });
   } catch (error) {

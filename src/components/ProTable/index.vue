@@ -21,7 +21,7 @@
       <div class="header-button-ri" v-if="toolButton">
         <slot name="toolButton">
           <el-button :icon="Refresh" circle @click="getTableList" />
-          <el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint" />
+          <el-button :icon="Printer" circle v-if="columns.length" @click="print" />
           <el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting" />
           <el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch" />
         </slot>
@@ -231,7 +231,7 @@ const printData = computed(() => {
 });
 
 // 打印表格数据（💥 多级表头数据打印时，只能扁平化成一维数组，printJs 不支持多级表头打印）
-const handlePrint = () => {
+const print = () => {
   const header = `<div style="text-align: center"><h2>${props.title}</h2></div>`;
   const gridHeaderStyle = "border: 1px solid #ebeef5;height: 45px;color: #232425;text-align: center;background-color: #fafafa;";
   const gridStyle = "border: 1px solid #ebeef5;height: 40px;color: #494b4e;text-align: center";
@@ -251,10 +251,14 @@ const handlePrint = () => {
 defineExpose({
   element: tableRef,
   tableData,
-  searchParam,
   pageable,
+  searchParam,
+  searchInitParam,
   getTableList,
+  search,
   reset,
+  handleSizeChange,
+  handleCurrentChange,
   clearSelection,
   enumMap,
   isSelected,
