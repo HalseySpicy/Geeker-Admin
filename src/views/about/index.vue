@@ -28,7 +28,7 @@
           <el-link type="primary" href="https://docs.spicyboy.cn" target="_blank">文档地址</el-link>
         </el-descriptions-item>
         <el-descriptions-item label="预览地址" label-align="left">
-          <el-link type="primary" href="http://admin.spicyboy.cn" target="_blank">预览地址</el-link>
+          <el-link type="primary" href="https://admin.spicyboy.cn" target="_blank">预览地址</el-link>
         </el-descriptions-item>
       </el-descriptions>
     </div>
