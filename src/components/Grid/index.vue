@@ -85,29 +85,31 @@ const hiddenIndex = ref(-1);
 provide("shouldHiddenIndex", hiddenIndex);
 
 // 注入 cols
-const cols = computed(() => {
+const gridCols = computed(() => {
   if (typeof props.cols === "object") return props.cols[breakPoint.value] ?? props.cols;
   return props.cols;
 });
-provide("cols", cols);
-
-const slots = useSlots().default!();
+provide("cols", gridCols);
 
 // 寻找需要开始折叠的字段 index
+const slots = useSlots().default!();
+
 const findIndex = () => {
   let fields: VNodeArrayChildren = [];
-  let suffix: any = null;
+  let suffix: VNode | null = null;
   slots.forEach((slot: any) => {
+    // suffix
     if (typeof slot.type === "object" && slot.type.name === "GridItem" && slot.props?.suffix !== undefined) suffix = slot;
-    if (typeof slot.type === "symbol" && Array.isArray(slot.children)) slot.children.forEach((child: any) => fields.push(child));
+    // slot children
+    if (typeof slot.type === "symbol" && Array.isArray(slot.children)) fields.push(...slot.children);
   });
 
   // 计算 suffix 所占用的列
   let suffixCols = 0;
   if (suffix) {
     suffixCols =
-      (suffix.props![breakPoint.value]?.span ?? suffix.props?.span ?? 1) +
-      (suffix.props![breakPoint.value]?.offset ?? suffix.props?.offset ?? 0);
+      ((suffix as VNode).props![breakPoint.value]?.span ?? (suffix as VNode).props?.span ?? 1) +
+      ((suffix as VNode).props![breakPoint.value]?.offset ?? (suffix as VNode).props?.offset ?? 0);
   }
   try {
     let find = false;
@@ -115,7 +117,7 @@ const findIndex = () => {
       prev +=
         ((current as VNode)!.props![breakPoint.value]?.span ?? (current as VNode)!.props?.span ?? 1) +
         ((current as VNode)!.props![breakPoint.value]?.offset ?? (current as VNode)!.props?.offset ?? 0);
-      if ((prev as number) > props.collapsedRows * cols.value - suffixCols) {
+      if (Number(prev) > props.collapsedRows * gridCols.value - suffixCols) {
         hiddenIndex.value = index;
         find = true;
         throw "find it";
@@ -146,7 +148,7 @@ watch(
 );
 
 // 设置间距
-const gap = computed(() => {
+const gridGap = computed(() => {
   if (typeof props.gap === "number") return `${props.gap}px`;
   if (Array.isArray(props.gap)) return `${props.gap[1]}px ${props.gap[0]}px`;
   return "unset";
@@ -156,8 +158,8 @@ const gap = computed(() => {
 const style = computed(() => {
   return {
     display: "grid",
-    gridGap: gap.value,
-    gridTemplateColumns: `repeat(${cols.value}, minmax(0, 1fr))`
+    gridGap: gridGap.value,
+    gridTemplateColumns: `repeat(${gridCols.value}, minmax(0, 1fr))`
   };
 });
 
