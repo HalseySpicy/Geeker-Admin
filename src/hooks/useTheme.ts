@@ -58,10 +58,10 @@ export const useTheme = () => {
   const setAsideTheme = () => {
     // 默认所有侧边栏为 light 模式
     let type: AsideThemeType = "light";
-    // transverse 布局下菜单栏为 inverted 模式
-    if (layout.value == "transverse") type = "inverted";
-    // 侧边栏反转色目前只支持在 vertical 布局模式下生效
-    if (layout.value == "vertical" && asideInverted.value) type = "inverted";
+    // 侧边栏反转色目前只支持在 vertical、classic 布局模式下生效 || transverse 布局下菜单栏默认为 inverted 模式
+    if ((["vertical", "classic"].includes(layout.value) && asideInverted.value) || layout.value == "transverse") {
+      type = "inverted";
+    }
     // 侧边栏 dark 模式
     if (isDark.value) type = "dark";
     const theme = asideTheme[type!];

@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" v-show="isShow">
+  <div v-show="isShow" :style="style">
     <slot></slot>
   </div>
 </template>

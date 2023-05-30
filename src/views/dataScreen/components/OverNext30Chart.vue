@@ -1,6 +1,6 @@
 <template>
   <!-- 未来30天访问量趋势预测图 -->
-  <div class="echarts" id="OverNext30Chart"></div>
+  <div id="OverNext30Chart" class="echarts"></div>
 </template>
 
 <script setup lang="ts">

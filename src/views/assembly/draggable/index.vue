@@ -1,11 +1,11 @@
 <template>
   <draggable
-    class="card grid-container"
     v-model="gridList"
+    class="card grid-container"
     item-key="id"
     animation="300"
-    chosenClass="chosen"
-    forceFallback="true"
+    chosen-class="chosen"
+    force-fallback="true"
   >
     <template #item="{ element }">
       <div :class="'item' + ' ' + 'item-' + element.num">

@@ -62,8 +62,8 @@ dependencies:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.3.4)
   vue-router:
-    specifier: ^4.2.1
-    version: registry.npmmirror.com/vue-router@4.2.1(vue@3.3.4)
+    specifier: ^4.2.2
+    version: registry.npmmirror.com/vue-router@4.2.2(vue@3.3.4)
   vuedraggable:
     specifier: ^4.1.0
     version: 4.1.0(vue@3.3.4)
@@ -95,10 +95,10 @@ devDependencies:
     version: registry.npmmirror.com/@typescript-eslint/parser@5.59.7(eslint@8.41.0)(typescript@5.0.4)
   '@vitejs/plugin-vue':
     specifier: ^4.2.3
-    version: registry.npmmirror.com/@vitejs/plugin-vue@4.2.3(vite@4.3.8)(vue@3.3.4)
+    version: registry.npmmirror.com/@vitejs/plugin-vue@4.2.3(vite@4.3.9)(vue@3.3.4)
   '@vitejs/plugin-vue-jsx':
     specifier: ^3.0.1
-    version: 3.0.1(vite@4.3.8)(vue@3.3.4)
+    version: 3.0.1(vite@4.3.9)(vue@3.3.4)
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.23)
@@ -172,23 +172,23 @@ devDependencies:
     specifier: ^1.0.0
     version: 1.0.0
   vite:
-    specifier: ^4.3.8
-    version: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+    specifier: ^4.3.9
+    version: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
   vite-plugin-compression:
     specifier: ^0.5.1
-    version: 0.5.1(vite@4.3.8)
+    version: 0.5.1(vite@4.3.9)
   vite-plugin-eslint:
     specifier: ^1.8.1
-    version: 1.8.1(eslint@8.41.0)(vite@4.3.8)
+    version: 1.8.1(eslint@8.41.0)(vite@4.3.9)
   vite-plugin-html:
     specifier: ^3.2.0
-    version: 3.2.0(vite@4.3.8)
+    version: 3.2.0(vite@4.3.9)
   vite-plugin-pwa:
     specifier: ^0.15.0
-    version: registry.npmmirror.com/vite-plugin-pwa@0.15.0(vite@4.3.8)(workbox-build@6.5.4)(workbox-window@6.5.4)
+    version: registry.npmmirror.com/vite-plugin-pwa@0.15.0(vite@4.3.9)(workbox-build@6.5.4)(workbox-window@6.5.4)
   vite-plugin-svg-icons:
     specifier: ^2.0.1
-    version: 2.0.1(vite@4.3.8)
+    version: 2.0.1(vite@4.3.9)
   vue-tsc:
     specifier: ^1.6.5
     version: registry.npmmirror.com/vue-tsc@1.6.5(typescript@5.0.4)
@@ -665,7 +665,7 @@ packages:
       nanoid: registry.npmmirror.com/nanoid@3.3.6
     dev: false
 
-  /@vitejs/plugin-vue-jsx@3.0.1(vite@4.3.8)(vue@3.3.4):
+  /@vitejs/plugin-vue-jsx@3.0.1(vite@4.3.9)(vue@3.3.4):
     resolution: {integrity: sha512-+Jb7ggL48FSPS1uhPnJbJwWa9Sr90vQ+d0InW+AhBM22n+cfuYqJZDckBc+W3QSHe1WDvewMZfa4wZOtk5pRgw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -675,7 +675,7 @@ packages:
       '@babel/core': 7.21.3
       '@babel/plugin-transform-typescript': 7.21.3(@babel/core@7.21.3)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.21.3)
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
       vue: registry.npmmirror.com/vue@3.3.4
     transitivePeerDependencies:
       - supports-color
@@ -2901,7 +2901,7 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /vite-plugin-compression@0.5.1(vite@4.3.8):
+  /vite-plugin-compression@0.5.1(vite@4.3.9):
     resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -2909,12 +2909,12 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-eslint@1.8.1(eslint@8.41.0)(vite@4.3.8):
+  /vite-plugin-eslint@1.8.1(eslint@8.41.0)(vite@4.3.9):
     resolution: {integrity: sha512-PqdMf3Y2fLO9FsNPmMX+//2BF5SF8nEWspZdgl4kSt7UvHDRHVVfHvxsD7ULYzZrJDGRxR81Nq7TOFgwMnUang==}
     peerDependencies:
       eslint: '>=7'
@@ -2924,10 +2924,10 @@ packages:
       '@types/eslint': 8.21.2
       eslint: registry.npmmirror.com/eslint@8.41.0
       rollup: 2.79.1
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
     dev: true
 
-  /vite-plugin-html@3.2.0(vite@4.3.8):
+  /vite-plugin-html@3.2.0(vite@4.3.9):
     resolution: {integrity: sha512-2VLCeDiHmV/BqqNn5h2V+4280KRgQzCFN47cst3WiNK848klESPQnzuC3okH5XHtgwHH/6s1Ho/YV6yIO0pgoQ==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -2944,10 +2944,10 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
     dev: true
 
-  /vite-plugin-svg-icons@2.0.1(vite@4.3.8):
+  /vite-plugin-svg-icons@2.0.1(vite@4.3.9):
     resolution: {integrity: sha512-6ktD+DhV6Rz3VtedYvBKKVA2eXF+sAQVaKkKLDSqGUfnhqXl3bj5PPkVTl3VexfTuZy66PmINi8Q6eFnVfRUmA==}
     peerDependencies:
       vite: '>=2.0.0'
@@ -2960,7 +2960,7 @@ packages:
       pathe: 0.2.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5558,7 +5558,7 @@ packages:
       eslint-visitor-keys: registry.npmmirror.com/eslint-visitor-keys@3.4.1
     dev: true
 
-  registry.npmmirror.com/@vitejs/plugin-vue@4.2.3(vite@4.3.8)(vue@3.3.4):
+  registry.npmmirror.com/@vitejs/plugin-vue@4.2.3(vite@4.3.9)(vue@3.3.4):
     resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vitejs/plugin-vue/-/plugin-vue-4.2.3.tgz}
     id: registry.npmmirror.com/@vitejs/plugin-vue/4.2.3
     name: '@vitejs/plugin-vue'
@@ -5568,7 +5568,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
       vue: registry.npmmirror.com/vue@3.3.4
     dev: true
 
@@ -10423,7 +10423,7 @@ packages:
       spdx-expression-parse: registry.npmmirror.com/spdx-expression-parse@3.0.1
     dev: true
 
-  registry.npmmirror.com/vite-plugin-pwa@0.15.0(vite@4.3.8)(workbox-build@6.5.4)(workbox-window@6.5.4):
+  registry.npmmirror.com/vite-plugin-pwa@0.15.0(vite@4.3.9)(workbox-build@6.5.4)(workbox-window@6.5.4):
     resolution: {integrity: sha512-gpmx3BeubsRIXRBkjPToOTJbo8fknNmZFQs24i0TPZyaNVa0n27YHDo0Y72amnO70WvHKGE3e1fn8SYUP7e8SA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-pwa/-/vite-plugin-pwa-0.15.0.tgz}
     id: registry.npmmirror.com/vite-plugin-pwa/0.15.0
     name: vite-plugin-pwa
@@ -10436,18 +10436,18 @@ packages:
       debug: registry.npmmirror.com/debug@4.3.4
       fast-glob: registry.npmmirror.com/fast-glob@3.2.12
       pretty-bytes: registry.npmmirror.com/pretty-bytes@6.1.0
-      vite: registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1)
+      vite: registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1)
       workbox-build: registry.npmmirror.com/workbox-build@6.5.4
       workbox-window: registry.npmmirror.com/workbox-window@6.5.4
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/vite@4.3.8(@types/node@18.15.3)(sass@1.62.1):
-    resolution: {integrity: sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite/-/vite-4.3.8.tgz}
-    id: registry.npmmirror.com/vite/4.3.8
+  registry.npmmirror.com/vite@4.3.9(@types/node@18.15.3)(sass@1.62.1):
+    resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite/-/vite-4.3.9.tgz}
+    id: registry.npmmirror.com/vite/4.3.9
     name: vite
-    version: 4.3.8
+    version: 4.3.9
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -10519,11 +10519,11 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/vue-router@4.2.1(vue@3.3.4):
-    resolution: {integrity: sha512-nW28EeifEp8Abc5AfmAShy5ZKGsGzjcnZ3L1yc2DYUo+MqbBClrRP9yda3dIekM4I50/KnEwo1wkBLf7kHH5Cw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.1.tgz}
-    id: registry.npmmirror.com/vue-router/4.2.1
+  registry.npmmirror.com/vue-router@4.2.2(vue@3.3.4):
+    resolution: {integrity: sha512-cChBPPmAflgBGmy3tBsjeoe3f3VOSG6naKyY5pjtrqLGbNEXdzCigFUHgBvp9e3ysAtFtEx7OLqcSDh/1Cq2TQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.2.tgz}
+    id: registry.npmmirror.com/vue-router/4.2.2
     name: vue-router
-    version: 4.2.1
+    version: 4.2.2
     peerDependencies:
       vue: ^3.2.0
     dependencies:

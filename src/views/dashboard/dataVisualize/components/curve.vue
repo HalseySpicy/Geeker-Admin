@@ -1,6 +1,6 @@
 <template>
   <!-- 数据来源 -->
-  <div class="echarts" ref="echartsRef"></div>
+  <div ref="echartsRef" class="echarts"></div>
 </template>
 <script setup lang="ts" name="cure">
 import { ref } from "vue";
@@ -81,8 +81,7 @@ const initChart = (data: any) => {
         },
         axisLine: {
           lineStyle: {
-            color: "#F6F6F7",
-            width: 2
+            color: "#c0c0c0"
           }
         }
       }
@@ -99,9 +98,7 @@ const initChart = (data: any) => {
         splitLine: {
           show: true,
           lineStyle: {
-            type: "dashed",
-            color: "#edeff5",
-            width: 2
+            color: "#c0c0c0"
           }
         },
         axisLabel: {

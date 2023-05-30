@@ -15,7 +15,7 @@ export const useTable = (
   dataCallBack?: (data: any) => any,
   requestError?: (error: any) => void
 ) => {
-  const state = reactive<Table.TableStateProps>({
+  const state = reactive<Table.StateProps>({
     // 表格数据
     tableData: [],
     // 分页数据
@@ -63,8 +63,10 @@ export const useTable = (
       dataCallBack && (data = dataCallBack(data));
       state.tableData = isPageable ? data.list : data;
       // 解构后台返回的分页数据 (如果有分页更新分页信息)
-      const { pageNum, pageSize, total } = data;
-      isPageable && updatePageable({ pageNum, pageSize, total });
+      if (isPageable) {
+        const { pageNum, pageSize, total } = data;
+        updatePageable({ pageNum, pageSize, total });
+      }
     } catch (error) {
       requestError && requestError(error);
     }
@@ -77,7 +79,7 @@ export const useTable = (
   const updatedTotalParam = () => {
     state.totalParam = {};
     // 处理查询参数，可以给查询参数加自定义前缀操作
-    let nowSearchParam: { [key: string]: any } = {};
+    let nowSearchParam: Table.StateProps["searchParam"] = {};
     // 防止手动清空输入框携带参数（这里可以自定义查询参数前缀）
     for (let key in state.searchParam) {
       // * 某些情况下参数为 false/0 也应该携带参数
@@ -90,11 +92,11 @@ export const useTable = (
 
   /**
    * @description 更新分页信息
-   * @param {Object} resPageable 后台返回的分页数据
+   * @param {Object} pageable 后台返回的分页数据
    * @return void
    * */
-  const updatePageable = (resPageable: Table.Pageable) => {
-    Object.assign(state.pageable, resPageable);
+  const updatePageable = (pageable: Table.Pageable) => {
+    Object.assign(state.pageable, pageable);
   };
 
   /**

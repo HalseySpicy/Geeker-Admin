@@ -52,7 +52,6 @@ const createCompression = (viteEnv: ViteEnv): PluginOption | PluginOption[] => {
   const { VITE_BUILD_COMPRESS = "none", VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv;
   const compressList = VITE_BUILD_COMPRESS.split(",");
   const plugins: PluginOption[] = [];
-
   if (compressList.includes("gzip")) {
     plugins.push(
       viteCompression({

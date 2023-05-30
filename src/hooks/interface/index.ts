@@ -4,7 +4,7 @@ export namespace Table {
     pageSize: number;
     total: number;
   }
-  export interface TableStateProps {
+  export interface StateProps {
     tableData: any[];
     pageable: Pageable;
     searchParam: {

@@ -192,7 +192,7 @@ Geeker-Admin
 
 |                           微信二维码                            |
 | :-------------------------------------------------------------: |
-| <img src="https://i.imgtg.com/2023/05/24/Oa7LoB.png" width=170> |
+| <img src="https://i.imgtg.com/2023/05/30/OoV44t.png" width=170> |
 
 ### 捐赠 🍵
 

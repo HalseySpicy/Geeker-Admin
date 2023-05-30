@@ -1,10 +1,10 @@
 <template>
   <div class="upload-box">
     <el-upload
+      v-model:file-list="_fileList"
       action="#"
       list-type="picture-card"
       :class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '']"
-      v-model:file-list="_fileList"
       :multiple="true"
       :disabled="self_disabled"
       :limit="limit"
@@ -29,7 +29,7 @@
             <el-icon><ZoomIn /></el-icon>
             <span>查看</span>
           </div>
-          <div class="handle-icon" @click="handleRemove(file)" v-if="!self_disabled">
+          <div v-if="!self_disabled" class="handle-icon" @click="handleRemove(file)">
             <el-icon><Delete /></el-icon>
             <span>删除</span>
           </div>
@@ -39,7 +39,7 @@
     <div class="el-upload__tip">
       <slot name="tip"></slot>
     </div>
-    <el-image-viewer v-if="imgViewVisible" @close="imgViewVisible = false" :url-list="[viewImageUrl]" />
+    <el-image-viewer v-if="imgViewVisible" :url-list="[viewImageUrl]" @close="imgViewVisible = false" />
   </div>
 </template>
 

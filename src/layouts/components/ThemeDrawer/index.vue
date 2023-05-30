@@ -13,7 +13,9 @@
             <div class="layout-light"></div>
             <div class="layout-content"></div>
           </div>
-          <el-icon v-if="layout == 'vertical'"><CircleCheckFilled /></el-icon>
+          <el-icon v-if="layout == 'vertical'">
+            <CircleCheckFilled />
+          </el-icon>
         </div>
       </el-tooltip>
       <el-tooltip effect="dark" content="经典" placement="top" :show-after="200">
@@ -23,14 +25,18 @@
             <div class="layout-light"></div>
             <div class="layout-content"></div>
           </div>
-          <el-icon v-if="layout == 'classic'"><CircleCheckFilled /></el-icon>
+          <el-icon v-if="layout == 'classic'">
+            <CircleCheckFilled />
+          </el-icon>
         </div>
       </el-tooltip>
       <el-tooltip effect="dark" content="横向" placement="top" :show-after="200">
         <div :class="['layout-item layout-transverse', { 'is-active': layout == 'transverse' }]" @click="setLayout('transverse')">
           <div class="layout-dark"></div>
           <div class="layout-content"></div>
-          <el-icon v-if="layout == 'transverse'"><CircleCheckFilled /></el-icon>
+          <el-icon v-if="layout == 'transverse'">
+            <CircleCheckFilled />
+          </el-icon>
         </div>
       </el-tooltip>
       <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
@@ -38,7 +44,9 @@
           <div class="layout-dark"></div>
           <div class="layout-light"></div>
           <div class="layout-content"></div>
-          <el-icon v-if="layout == 'columns'"><CircleCheckFilled /></el-icon>
+          <el-icon v-if="layout == 'columns'">
+            <CircleCheckFilled />
+          </el-icon>
         </div>
       </el-tooltip>
     </div>
@@ -67,11 +75,11 @@
     <div class="theme-item mb40">
       <span>
         侧边栏反转色
-        <el-tooltip effect="dark" content="该属性目前只在纵向布局模式下生效" placement="top">
+        <el-tooltip effect="dark" content="该属性目前只在纵向、经典布局模式下生效" placement="top">
           <el-icon><QuestionFilled /></el-icon>
         </el-tooltip>
       </span>
-      <el-switch v-model="asideInverted" :disabled="layout !== 'vertical'" @change="setAsideTheme" />
+      <el-switch v-model="asideInverted" :disabled="!['vertical', 'classic'].includes(layout)" @change="setAsideTheme" />
     </div>
 
     <!-- 界面设置 -->

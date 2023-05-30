@@ -1,6 +1,6 @@
 <template>
   <div class="dataScreen-container">
-    <div class="dataScreen" ref="dataScreenRef">
+    <div ref="dataScreenRef" class="dataScreen">
       <div class="dataScreen-header">
         <div class="header-lf">
           <span class="header-screening" @click="router.push(HOME_URL)">首页</span>

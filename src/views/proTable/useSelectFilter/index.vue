@@ -22,21 +22,23 @@
       >
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
-          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
-          <el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
-          <el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
-          <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第四行</el-button>
+          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
+          <el-button type="primary" :icon="Upload" plain @click="batchAdd"> 批量添加用户 </el-button>
+          <el-button type="primary" :icon="Download" plain @click="downloadFile"> 导出用户数据 </el-button>
+          <el-button type="primary" :icon="Pointer" plain @click="setCurrent"> 选中第四行 </el-button>
         </template>
         <!-- 单选 -->
         <template #radio="scope">
-          <el-radio :label="scope.row.id" v-model="radio"><i></i></el-radio>
+          <el-radio v-model="radio" :label="scope.row.id">
+            <i></i>
+          </el-radio>
         </template>
         <!-- 表格操作 -->
         <template #operation="scope">
-          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-          <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
-          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)"> 查看 </el-button>
+          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)"> 编辑 </el-button>
+          <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)"> 重置密码 </el-button>
+          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)"> 删除 </el-button>
         </template>
       </ProTable>
       <UserDrawer ref="drawerRef" />

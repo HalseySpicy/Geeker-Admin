@@ -9,16 +9,16 @@
       <el-menu mode="horizontal" :default-active="activeMenu" :router="false" :unique-opened="true">
         <!-- 不能直接使用 SubMenu 组件，无法触发 el-menu 隐藏省略功能 -->
         <template v-for="subItem in menuList" :key="subItem.path">
-          <el-sub-menu v-if="subItem.children?.length" :index="subItem.path + 'el-sub-menu'" :key="subItem.path">
+          <el-sub-menu v-if="subItem.children?.length" :key="subItem.path" :index="subItem.path + 'el-sub-menu'">
             <template #title>
               <el-icon>
                 <component :is="subItem.meta.icon"></component>
               </el-icon>
               <span>{{ subItem.meta.title }}</span>
             </template>
-            <SubMenu :menuList="subItem.children" />
+            <SubMenu :menu-list="subItem.children" />
           </el-sub-menu>
-          <el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
+          <el-menu-item v-else :key="subItem.path + 'el-menu-item'" :index="subItem.path" @click="handleClickMenu(subItem)">
             <el-icon>
               <component :is="subItem.meta.icon"></component>
             </el-icon>

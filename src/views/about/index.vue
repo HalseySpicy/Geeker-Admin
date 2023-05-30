@@ -19,32 +19,36 @@
           <el-tag>{{ lastBuildTime }}</el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="Gitee" label-align="left">
-          <el-link type="primary" href="https://gitee.com/HalseySpicy/Geeker-Admin" target="_blank">Gitee</el-link>
+          <el-link type="primary" href="https://gitee.com/HalseySpicy/Geeker-Admin" target="_blank"> Gitee </el-link>
         </el-descriptions-item>
         <el-descriptions-item label="Github" label-align="left">
-          <el-link type="primary" href="https://github.com/HalseySpicy/Geeker-Admin" target="_blank">Github</el-link>
+          <el-link type="primary" href="https://github.com/HalseySpicy/Geeker-Admin" target="_blank"> Github </el-link>
         </el-descriptions-item>
         <el-descriptions-item label="文档地址" label-align="left">
-          <el-link type="primary" href="https://docs.spicyboy.cn" target="_blank">文档地址</el-link>
+          <el-link type="primary" href="https://docs.spicyboy.cn" target="_blank"> 文档地址 </el-link>
         </el-descriptions-item>
         <el-descriptions-item label="预览地址" label-align="left">
-          <el-link type="primary" href="https://admin.spicyboy.cn" target="_blank">预览地址</el-link>
+          <el-link type="primary" href="https://admin.spicyboy.cn" target="_blank"> 预览地址 </el-link>
         </el-descriptions-item>
       </el-descriptions>
     </div>
     <div class="card mb10">
       <h4 class="title">生产环境依赖</h4>
       <el-descriptions :column="3" border>
-        <el-descriptions-item width="400px" :label="key" v-for="(value, key) in dependencies" :key="key">
-          <el-tag type="info">{{ value }}</el-tag>
+        <el-descriptions-item v-for="(value, key) in dependencies" :key="key" width="400px" :label="key">
+          <el-tag type="info">
+            {{ value }}
+          </el-tag>
         </el-descriptions-item>
       </el-descriptions>
     </div>
     <div class="card">
       <h4 class="title">开发环境依赖</h4>
       <el-descriptions :column="3" border>
-        <el-descriptions-item width="400px" :label="key" v-for="(value, key) in devDependencies" :key="key">
-          <el-tag type="info">{{ value }}</el-tag>
+        <el-descriptions-item v-for="(value, key) in devDependencies" :key="key" width="400px" :label="key">
+          <el-tag type="info">
+            {{ value }}
+          </el-tag>
         </el-descriptions-item>
       </el-descriptions>
     </div>

@@ -11,7 +11,7 @@
         <el-dropdown-item @click="openDialog('passwordRef')">
           <el-icon><Edit /></el-icon>{{ $t("header.changePassword") }}
         </el-dropdown-item>
-        <el-dropdown-item @click="logout" divided>
+        <el-dropdown-item divided @click="logout">
           <el-icon><SwitchButton /></el-icon>{{ $t("header.logout") }}
         </el-dropdown-item>
       </el-dropdown-menu>

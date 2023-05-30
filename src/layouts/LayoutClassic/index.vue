@@ -24,7 +24,7 @@
               :collapse-transition="false"
               :unique-opened="true"
             >
-              <SubMenu :menuList="menuList" />
+              <SubMenu :menu-list="menuList" />
             </el-menu>
           </el-scrollbar>
         </div>

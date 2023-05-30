@@ -1,6 +1,6 @@
 <template>
   <!-- 年龄比例 -->
-  <div class="echarts" id="AgeRatioChart"></div>
+  <div id="AgeRatioChart" class="echarts"></div>
 </template>
 
 <script setup lang="ts">

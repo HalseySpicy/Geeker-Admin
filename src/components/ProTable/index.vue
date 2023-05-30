@@ -3,12 +3,12 @@
 <template>
   <!-- 查询表单 card -->
   <SearchForm
+    v-show="isShowSearch"
     :search="search"
     :reset="reset"
     :columns="searchColumns"
     :search-param="searchParam"
     :search-col="searchCol"
-    v-show="isShowSearch"
   />
 
   <!-- 表格内容 card -->
@@ -16,14 +16,14 @@
     <!-- 表格头部 操作按钮 -->
     <div class="table-header">
       <div class="header-button-lf">
-        <slot name="tableHeader" :selectedListIds="selectedListIds" :selectedList="selectedList" :isSelected="isSelected" />
+        <slot name="tableHeader" :selected-list-ids="selectedListIds" :selected-list="selectedList" :is-selected="isSelected" />
       </div>
-      <div class="header-button-ri" v-if="toolButton">
+      <div v-if="toolButton" class="header-button-ri">
         <slot name="toolButton">
           <el-button :icon="Refresh" circle @click="getTableList" />
-          <el-button :icon="Printer" circle v-if="columns.length" @click="print" />
-          <el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting" />
-          <el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch" />
+          <el-button v-if="columns.length" :icon="Printer" circle @click="print" />
+          <el-button v-if="columns.length" :icon="Operation" circle @click="openColSetting" />
+          <el-button v-if="searchColumns.length" :icon="Search" circle @click="isShowSearch = !isShowSearch" />
         </slot>
       </div>
     </div>
@@ -41,14 +41,14 @@
       <template v-for="item in tableColumns" :key="item">
         <!-- selection || index || expand -->
         <el-table-column
+          v-if="item.type && ['selection', 'index', 'expand'].includes(item.type)"
           v-bind="item"
           :align="item.align ?? 'center'"
           :reserve-selection="item.type == 'selection'"
-          v-if="item.type && ['selection', 'index', 'expand'].includes(item.type)"
         >
-          <template #default="scope" v-if="item.type == 'expand'">
+          <template v-if="item.type == 'expand'" #default="scope">
             <component :is="item.render" v-bind="scope" v-if="item.render"> </component>
-            <slot :name="item.type" v-bind="scope" v-else></slot>
+            <slot v-else :name="item.type" v-bind="scope"></slot>
           </template>
         </el-table-column>
         <!-- other -->

@@ -9,14 +9,14 @@
             <el-icon><Picture /></el-icon>
             <span>请上传照片</span>
           </template>
-          <template #tip> 圆形组件，图片最大为 5M（禁止拖拽上传）</template>
+          <template #tip> 圆形组件，图片最大为 5M（禁止拖拽上传） </template>
         </UploadImgs>
         <UploadImgs v-model:file-list="fileList1" width="250px">
           <template #empty>
             <el-icon><Picture /></el-icon>
             <span>请上传照片</span>
           </template>
-          <template #tip> 长方形组件（可拖拽上传）</template>
+          <template #tip> 长方形组件（可拖拽上传） </template>
         </UploadImgs>
       </div>
       <el-descriptions title="配置项 📚（其它参数和单图上传组件相同）" :column="1" border>
