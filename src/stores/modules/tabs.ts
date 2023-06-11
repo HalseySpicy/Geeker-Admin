@@ -40,7 +40,7 @@ export const useTabsStore = defineStore({
     },
     // Set Tabs Title
     async setTabsTitle(title: string) {
-      const nowFullPath = location.hash.substring(1);
+			const nowFullPath = location.hash.substring(1, location.hash.indexOf("?"));
       this.tabsMenuList.forEach(item => {
         if (item.path == nowFullPath) item.title = title;
       });
