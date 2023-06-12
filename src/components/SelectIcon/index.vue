@@ -10,7 +10,7 @@
       @click="openDialog"
     >
       <template #append>
-        <el-button :icon="customIcons[iconValue]" />
+        <el-button :icon="customIcons[iconValue]" :disabled="!!$attrs.disabled" @click="openDialog" />
       </template>
     </el-input>
     <el-dialog v-model="dialogVisible" :title="placeholder" top="50px" width="66%">
@@ -46,8 +46,12 @@ const props = withDefaults(defineProps<SelectIconProps>(), {
   placeholder: "请选择图标"
 });
 
-// 重新接收一下，防止打包后 clearable 报错
-const valueIcon = ref(props.iconValue);
+const valueIcon = computed({
+  get: () => props.iconValue,
+  set: val => {
+    emit("update:iconValue", val);
+  }
+});
 
 // open Dialog
 const dialogVisible = ref(false);
@@ -58,7 +62,6 @@ const emit = defineEmits(["update:iconValue"]);
 const selectIcon = (item: any) => {
   dialogVisible.value = false;
   valueIcon.value = item.name;
-  emit("update:iconValue", item.name);
   setTimeout(() => inputRef.value.blur(), 0);
 };
 
@@ -66,7 +69,6 @@ const selectIcon = (item: any) => {
 const inputRef = ref();
 const clearIcon = () => {
   valueIcon.value = "";
-  emit("update:iconValue", "");
   setTimeout(() => inputRef.value.blur(), 0);
 };
 
