@@ -2,23 +2,29 @@ import { AMAP_MAP_KEY } from "@/config/index";
 import AMapLoader from "@amap/amap-jsapi-loader";
 
 /**
- * @description 使用 高德地图 (只是为了添加图表响应式)
+ * @description 使用高德地图
  * @param {Element} id 实例化dom元素的id (必传)
  * @param {Object} options 绘制map的参数 (必传)
  * */
 
-interface AmapOption {
-  zoom?: Number;
-  center?: Array<number> | Object;
-}
-
-export const useAmap = (id: string, options: AmapOption) => {
+export const useAmap = (id: string, options: AMap.MapOptions): Promise<any> => {
   return new Promise((resolve, reject) => {
     const key = AMAP_MAP_KEY;
     AMapLoader.load({
       key: key, // 申请好的Web端开发者Key，首次调用 load 时必填
       version: "", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
-      plugins: [], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+      plugins: [
+        "AMap.Autocomplete",
+        "AMap.PlaceSearch",
+        "AMap.Scale",
+        "AMap.OverView",
+        "AMap.ToolBar",
+        "AMap.MapType",
+        "AMap.PolyEditor",
+        "AMap.CircleEditor",
+        "AMap.Geocoder",
+        "AMap.Geolocation"
+      ], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       AMapUI: {
         // 是否加载 AMapUI，缺省不加载
         version: "1.1", // AMapUI 版本

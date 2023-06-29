@@ -33,6 +33,9 @@ import pinia from "@/stores";
 // errorHandler
 import errorHandler from "@/utils/errorHandler";
 
+/** 部分AMap typescript的类型 */
+import "@amap/amap-jsapi-types";
+
 const app = createApp(App);
 
 app.config.errorHandler = errorHandler;
