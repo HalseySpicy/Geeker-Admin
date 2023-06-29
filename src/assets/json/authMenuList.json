@@ -937,6 +937,20 @@
             "isAffix": false,
             "isKeepAlive": true
           }
+        },
+        {
+          "path": "/system/realTimeRoadMap",
+          "name": "realTimeRoadMap",
+          "component": "/system/realTimeRoadMap/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "实时路况信息",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
         }
       ]
     },

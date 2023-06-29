@@ -35,6 +35,7 @@
     "commit": "git add -A && czg && git push"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@element-plus/icons-vue": "^2.1.0",
     "@vueuse/core": "^10.1.2",
     "@wangeditor/editor": "^5.1.23",

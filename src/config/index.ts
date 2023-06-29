@@ -13,7 +13,7 @@ export const DEFAULT_PRIMARY: string = "#009688";
 export const ROUTER_WHITE_LIST: string[] = ["/500"];
 
 // 高德地图 key
-export const AMAP_MAP_KEY: string = "";
+export const AMAP_MAP_KEY: string = "1025e41311c2675d646c2c5cd77c49a8";
 
 // 百度地图 key
 export const BAIDU_MAP_KEY: string = "";
