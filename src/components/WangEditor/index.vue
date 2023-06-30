@@ -1,11 +1,11 @@
 <template>
   <div :class="['editor-box', self_disabled ? 'editor-disabled' : '']">
-    <Toolbar class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" :mode="mode" v-if="!hideToolBar" />
+    <Toolbar v-if="!hideToolBar" class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" :mode="mode" />
     <Editor
+      v-model="valueHtml"
       class="editor-content'"
       :style="{ height }"
       :mode="mode"
-      v-model="valueHtml"
       :default-config="editorConfig"
       @on-created="handleCreated"
       @on-blur="handleBlur"

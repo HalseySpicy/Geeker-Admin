@@ -1,6 +1,8 @@
 <template>
   <div class="card filter">
-    <h4 class="title sle" v-if="title">{{ title }}</h4>
+    <h4 v-if="title" class="title sle">
+      {{ title }}
+    </h4>
     <el-input v-model="filterText" placeholder="输入关键字进行过滤" clearable />
     <el-scrollbar :style="{ height: title ? `calc(100% - 95px)` : `calc(100% - 56px)` }">
       <el-tree

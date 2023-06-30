@@ -1,12 +1,12 @@
 <template>
   <component
     :is="column.search?.render ?? `el-${column.search?.el}`"
-    v-bind="{ ...handleSearchProps, ...placeholder, searchParam, clearable }"
-    v-model.trim="searchParam[column.search?.key ?? handleProp(column.prop!)]"
+    v-bind="{ ...handleSearchProps, ...placeholder, searchParam: _searchParam, clearable }"
+    v-model.trim="_searchParam[column.search?.key ?? handleProp(column.prop!)]"
     :data="column.search?.el === 'tree-select' ? columnEnum : []"
     :options="['cascader', 'select-v2'].includes(column.search?.el!) ? columnEnum : []"
   >
-    <template #default="{ data }" v-if="column.search?.el === 'cascader'">
+    <template v-if="column.search?.el === 'cascader'" #default="{ data }">
       <span>{{ data[fieldNames.label] }}</span>
     </template>
     <template v-if="column.search?.el === 'select'">
@@ -32,6 +32,9 @@ interface SearchFormItem {
   searchParam: { [key: string]: any };
 }
 const props = defineProps<SearchFormItem>();
+
+// Re receive SearchParam
+const _searchParam = computed(() => props.searchParam);
 
 // 判断 fieldNames 设置 label && value && children 的 key 值
 const fieldNames = computed(() => {

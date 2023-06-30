@@ -46,8 +46,8 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="drawerVisible = false">取消</el-button>
-      <el-button type="primary" v-show="!drawerProps.isView" @click="handleSubmit">确定</el-button>
+      <el-button @click="drawerVisible = false"> 取消 </el-button>
+      <el-button v-show="!drawerProps.isView" type="primary" @click="handleSubmit"> 确定 </el-button>
     </template>
   </el-drawer>
 </template>

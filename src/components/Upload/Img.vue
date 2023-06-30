@@ -1,8 +1,8 @@
 <template>
   <div class="upload-box">
     <el-upload
-      action="#"
       :id="uuid"
+      action="#"
       :class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '']"
       :multiple="false"
       :disabled="self_disabled"
@@ -17,7 +17,7 @@
       <template v-if="imageUrl">
         <img :src="imageUrl" class="upload-image" />
         <div class="upload-handle" @click.stop>
-          <div class="handle-icon" @click="editImg" v-if="!self_disabled">
+          <div v-if="!self_disabled" class="handle-icon" @click="editImg">
             <el-icon><Edit /></el-icon>
             <span>编辑</span>
           </div>
@@ -25,7 +25,7 @@
             <el-icon><ZoomIn /></el-icon>
             <span>查看</span>
           </div>
-          <div class="handle-icon" @click="deleteImg" v-if="!self_disabled">
+          <div v-if="!self_disabled" class="handle-icon" @click="deleteImg">
             <el-icon><Delete /></el-icon>
             <span>删除</span>
           </div>
@@ -43,7 +43,7 @@
     <div class="el-upload__tip">
       <slot name="tip"></slot>
     </div>
-    <el-image-viewer v-if="imgViewVisible" @close="imgViewVisible = false" :url-list="[imageUrl]" />
+    <el-image-viewer v-if="imgViewVisible" :url-list="[imageUrl]" @close="imgViewVisible = false" />
   </div>
 </template>
 

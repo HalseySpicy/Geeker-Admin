@@ -2,7 +2,7 @@
   <el-dialog v-model="dialogVisible" :title="`批量添加${parameter.title}`" :destroy-on-close="true" width="580px" draggable>
     <el-form class="drawer-multiColumn-form" label-width="100px">
       <el-form-item label="模板下载 :">
-        <el-button type="primary" :icon="Download" @click="downloadTemp">点击下载</el-button>
+        <el-button type="primary" :icon="Download" @click="downloadTemp"> 点击下载 </el-button>
       </el-form-item>
       <el-form-item label="文件上传 :">
         <el-upload
@@ -20,7 +20,9 @@
           :accept="parameter.fileType!.join(',')"
         >
           <slot name="empty">
-            <el-icon class="el-icon--upload"><upload-filled /></el-icon>
+            <el-icon class="el-icon--upload">
+              <upload-filled />
+            </el-icon>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </slot>
           <template #tip>

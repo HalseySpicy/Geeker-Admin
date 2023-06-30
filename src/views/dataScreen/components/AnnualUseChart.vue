@@ -1,6 +1,6 @@
 <template>
   <!-- 年度使用 -->
-  <div class="echarts" id="AnnualUseChart"></div>
+  <div id="AnnualUseChart" class="echarts"></div>
 </template>
 
 <script setup lang="ts">

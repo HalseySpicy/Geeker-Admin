@@ -1,10 +1,10 @@
 <template>
   <div class="upload-box">
     <el-upload
+      v-model:file-list="_fileList"
       action="#"
       list-type="picture-card"
       :class="['upload', self_disabled ? 'disabled' : '', drag ? 'no-border' : '']"
-      v-model:file-list="fileList"
       :multiple="true"
       :disabled="self_disabled"
       :limit="limit"
@@ -29,7 +29,7 @@
             <el-icon><ZoomIn /></el-icon>
             <span>查看</span>
           </div>
-          <div class="handle-icon" @click="handleRemove(file)" v-if="!self_disabled">
+          <div v-if="!self_disabled" class="handle-icon" @click="handleRemove(file)">
             <el-icon><Delete /></el-icon>
             <span>删除</span>
           </div>
@@ -39,7 +39,7 @@
     <div class="el-upload__tip">
       <slot name="tip"></slot>
     </div>
-    <el-image-viewer v-if="imgViewVisible" @close="imgViewVisible = false" :url-list="[viewImageUrl]" />
+    <el-image-viewer v-if="imgViewVisible" :url-list="[viewImageUrl]" @close="imgViewVisible = false" />
   </div>
 </template>
 
@@ -84,13 +84,13 @@ const self_disabled = computed(() => {
   return props.disabled || formContext?.disabled;
 });
 
-const fileList = ref<UploadUserFile[]>(props.fileList);
+const _fileList = ref<UploadUserFile[]>(props.fileList);
 
 // 监听 props.fileList 列表默认值改变
 watch(
   () => props.fileList,
   (n: UploadUserFile[]) => {
-    fileList.value = n;
+    _fileList.value = n;
   }
 );
 
@@ -146,7 +146,7 @@ const emit = defineEmits<UploadEmits>();
 const uploadSuccess = (response: { fileUrl: string } | undefined, uploadFile: UploadFile) => {
   if (!response) return;
   uploadFile.url = response.fileUrl;
-  emit("update:fileList", fileList.value);
+  emit("update:fileList", _fileList.value);
   // 调用 el-form 内部的校验方法（可自动校验）
   formItemContext?.prop && formContext?.validateField([formItemContext.prop as string]);
   ElNotification({
@@ -161,8 +161,8 @@ const uploadSuccess = (response: { fileUrl: string } | undefined, uploadFile: Up
  * @param file 删除的文件
  * */
 const handleRemove = (file: UploadFile) => {
-  fileList.value = fileList.value.filter(item => item.url !== file.url || item.name !== file.name);
-  emit("update:fileList", fileList.value);
+  _fileList.value = _fileList.value.filter(item => item.url !== file.url || item.name !== file.name);
+  emit("update:fileList", _fileList.value);
 };
 
 /**

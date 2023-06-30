@@ -1,7 +1,7 @@
 <template>
   <div class="card content-box">
     <span class="text">批量添加数据 🍓🍇🍈🍉</span>
-    <el-button type="primary" :icon="Upload" @click="batchAdd">批量添加数据</el-button>
+    <el-button type="primary" :icon="Upload" @click="batchAdd"> 批量添加数据 </el-button>
     <ImportExcel ref="importRef" />
     <el-descriptions title="配置项（通过 ref 传递） 📚" :column="1" border>
       <el-descriptions-item label="title"> 组件显示标题 && 上传成功之后提示信息 </el-descriptions-item>

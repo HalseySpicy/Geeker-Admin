@@ -3,7 +3,7 @@
     <ProTable ref="proTable" title="菜单列表" row-key="path" :indent="30" :columns="columns" :data="menuData" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader>
-        <el-button type="primary" :icon="CirclePlus">新增菜单</el-button>
+        <el-button type="primary" :icon="CirclePlus">新增菜单 </el-button>
       </template>
       <!-- 菜单图标 -->
       <template #icon="scope">
@@ -13,8 +13,8 @@
       </template>
       <!-- 菜单操作 -->
       <template #operation>
-        <el-button type="primary" link :icon="EditPen">编辑</el-button>
-        <el-button type="primary" link :icon="Delete">删除</el-button>
+        <el-button type="primary" link :icon="EditPen"> 编辑 </el-button>
+        <el-button type="primary" link :icon="Delete"> 删除 </el-button>
       </template>
     </ProTable>
   </div>

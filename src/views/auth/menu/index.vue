@@ -6,7 +6,7 @@
       type="success"
       :closable="false"
     />
-    <el-button class="mt20" type="primary" :icon="Promotion" @click="handleToLogin">登录其他账号</el-button>
+    <el-button class="mt20" type="primary" :icon="Promotion" @click="handleToLogin"> 登录其他账号 </el-button>
   </div>
 </template>
 

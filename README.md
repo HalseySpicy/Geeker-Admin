@@ -2,7 +2,7 @@
 
 ### 介绍 📖
 
-Geeker-Admin 一款基于 Vue3.2、TypeScript、Vite4、Pinia、Element-Plus 开源的后台管理框架，使用目前最新技术栈开发。项目提供强大的 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，在一定程度上节省您的开发效率。另外本项目还封装了一些常用组件、Hooks、指令、动态路由、按钮级别权限控制等功能。
+Geeker-Admin 一款基于 Vue3.3、TypeScript、Vite4、Pinia、Element-Plus 开源的后台管理框架，使用目前最新技术栈开发。项目提供强大的 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，在一定程度上节省您的开发效率。另外本项目还封装了一些常用组件、Hooks、指令、动态路由、按钮级别权限控制等功能。
 
 ### 在线预览 👀
 
@@ -21,7 +21,7 @@ Geeker-Admin 一款基于 Vue3.2、TypeScript、Vite4、Pinia、Element-Plus 开
 
 ### 项目功能 🔨
 
-- 使用 Vue3.2 + TypeScript 开发，单文件组件**＜ script setup ＞**
+- 使用 Vue3.3 + TypeScript 开发，单文件组件**＜ script setup ＞**
 - 采用 Vite4 作为项目开发、打包工具（配置 Gzip 打包、TSX 语法、跨域代理…）
 - 使用 Pinia 替代 Vuex，轻量、简单、易用，集成 Pinia 持久化插件
 - 使用 TypeScript 对 Axios 整个二次封装（请求拦截、取消、常用请求封装…）
@@ -188,7 +188,7 @@ Geeker-Admin
 
 ### 微信交流群 👨‍👨‍👦‍👦
 
-微信一群、二群已满，三群已超过 200 人，需要加微信好友，拉大家进群 🤪
+微信一群、二群、三群已满，扫描二维码添加作者微信，拉大家进入四群 🤪
 
 |                           微信二维码                           |
 | :------------------------------------------------------------: |

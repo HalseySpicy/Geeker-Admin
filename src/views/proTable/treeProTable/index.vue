@@ -21,13 +21,13 @@
       >
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
-          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
         </template>
         <!-- 表格操作 -->
         <template #operation="scope">
-          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
-          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
-          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)"> 查看 </el-button>
+          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)"> 编辑 </el-button>
+          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)"> 删除 </el-button>
         </template>
       </ProTable>
       <UserDrawer ref="drawerRef" />
@@ -38,16 +38,16 @@
 
 <script setup lang="tsx" name="treeProTable">
 import { onMounted, reactive, ref } from "vue";
-import { ElMessage, ElNotification } from "element-plus";
 import { User } from "@/api/interface";
-import { ColumnProps } from "@/components/ProTable/interface";
-import { useHandleData } from "@/hooks/useHandleData";
 import { genderType } from "@/utils/serviceDict";
+import { useHandleData } from "@/hooks/useHandleData";
+import { ElMessage, ElNotification } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
 import TreeFilter from "@/components/TreeFilter/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
 import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import { CirclePlus, Delete, EditPen, View } from "@element-plus/icons-vue";
+import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { getUserTreeList, deleteUser, editUser, addUser, getUserStatus, getUserDepartment } from "@/api/modules/user";
 
 onMounted(() => {
@@ -69,7 +69,7 @@ onMounted(() => {
 });
 
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
-const proTable = ref();
+const proTable = ref<ProTableInstance>();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({ departmentId: "" });
@@ -86,7 +86,7 @@ const getTreeFilter = async () => {
 // 树形筛选切换
 const changeTreeFilter = (val: string) => {
   ElMessage.success("请注意查看请求参数变化 🤔");
-  proTable.value.pageable.pageNum = 1;
+  proTable.value!.pageable.pageNum = 1;
   initParam.departmentId = val;
 };
 
@@ -138,7 +138,7 @@ const columns: ColumnProps<User.ResUserList>[] = [
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {
   await useHandleData(deleteUser, { id: [params.id] }, `删除【${params.username}】用户`);
-  proTable.value.getTableList();
+  proTable.value?.getTableList();
 };
 
 // 打开 drawer(新增、查看、编辑)
@@ -149,7 +149,7 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     row: { ...row },
     isView: title === "查看",
     api: title === "新增" ? addUser : title === "编辑" ? editUser : undefined,
-    getTableList: proTable.value.getTableList
+    getTableList: proTable.value?.getTableList
   };
   drawerRef.value?.acceptParams(params);
 };

@@ -1,7 +1,7 @@
 <template>
   <!-- 中国地图 -->
   <div class="map-ball"></div>
-  <div class="echarts" id="mapChart"></div>
+  <div id="mapChart" class="echarts"></div>
 </template>
 
 <script setup lang="ts">

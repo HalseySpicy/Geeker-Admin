@@ -49,6 +49,7 @@ declare interface ViteEnv {
   VITE_BUILD_COMPRESS: "gzip" | "brotli" | "gzip,brotli" | "none";
   VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
   VITE_DROP_CONSOLE: boolean;
+  VITE_PWA: boolean;
   VITE_PUBLIC_PATH: string;
   VITE_API_URL: string;
   VITE_PROXY: [string, string][];

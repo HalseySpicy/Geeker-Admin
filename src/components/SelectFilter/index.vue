@@ -18,7 +18,9 @@
             @click="select(item, option)"
           >
             <slot :row="option">
-              <el-icon v-if="option.icon"><component :is="option.icon" /></el-icon>
+              <el-icon v-if="option.icon">
+                <component :is="option.icon" />
+              </el-icon>
               <span>{{ option.label }}</span>
             </slot>
           </li>

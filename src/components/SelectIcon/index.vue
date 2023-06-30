@@ -23,7 +23,7 @@
           </div>
         </div>
       </el-scrollbar>
-      <el-empty description="未搜索到您要找的图标~" v-else />
+      <el-empty v-else description="未搜索到您要找的图标~" />
     </el-dialog>
   </div>
 </template>

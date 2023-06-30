@@ -1,5 +1,6 @@
 import { resolve } from "path";
 import { PluginOption } from "vite";
+import { VitePWA } from "vite-plugin-pwa";
 import { visualizer } from "rollup-plugin-visualizer";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
@@ -14,6 +15,7 @@ import vueSetupExtend from "unplugin-vue-setup-extend-plus/vite";
  * @param viteEnv
  */
 export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOption[])[] => {
+  const { VITE_GLOB_APP_TITLE, VITE_REPORT, VITE_PWA } = viteEnv;
   return [
     vue(),
     // vue 可以使用 jsx/tsx 语法
@@ -27,7 +29,7 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
     // 注入变量到 html 文件
     createHtmlPlugin({
       inject: {
-        data: { title: viteEnv.VITE_GLOB_APP_TITLE }
+        data: { title: VITE_GLOB_APP_TITLE }
       }
     }),
     // 使用 svg 图标
@@ -35,20 +37,21 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
       iconDirs: [resolve(process.cwd(), "src/assets/icons")],
       symbolId: "icon-[dir]-[name]"
     }),
+    // vitePWA
+    VITE_PWA && createVitePwa(viteEnv),
     // 是否生成包预览，分析依赖包大小做优化处理
-    viteEnv.VITE_REPORT && (visualizer({ filename: "stats.html", gzipSize: true, brotliSize: true }) as PluginOption)
+    VITE_REPORT && (visualizer({ filename: "stats.html", gzipSize: true, brotliSize: true }) as PluginOption)
   ];
 };
 
 /**
- * 根据 compress 配置，生成不同的压缩规则
+ * @description 根据 compress 配置，生成不同的压缩规则
  * @param viteEnv
  */
 const createCompression = (viteEnv: ViteEnv): PluginOption | PluginOption[] => {
   const { VITE_BUILD_COMPRESS = "none", VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv;
   const compressList = VITE_BUILD_COMPRESS.split(",");
   const plugins: PluginOption[] = [];
-
   if (compressList.includes("gzip")) {
     plugins.push(
       viteCompression({
@@ -67,6 +70,39 @@ const createCompression = (viteEnv: ViteEnv): PluginOption | PluginOption[] => {
       })
     );
   }
-
   return plugins;
+};
+
+/**
+ * @description VitePwa
+ * @param viteEnv
+ */
+const createVitePwa = (viteEnv: ViteEnv): PluginOption | PluginOption[] => {
+  const { VITE_GLOB_APP_TITLE } = viteEnv;
+  return VitePWA({
+    registerType: "autoUpdate",
+    manifest: {
+      name: VITE_GLOB_APP_TITLE,
+      short_name: VITE_GLOB_APP_TITLE,
+      theme_color: "#ffffff",
+      icons: [
+        {
+          src: "/logo.png",
+          sizes: "192x192",
+          type: "image/png"
+        },
+        {
+          src: "/logo.png",
+          sizes: "512x512",
+          type: "image/png"
+        },
+        {
+          src: "/logo.png",
+          sizes: "512x512",
+          type: "image/png",
+          purpose: "any maskable"
+        }
+      ]
+    }
+  });
 };

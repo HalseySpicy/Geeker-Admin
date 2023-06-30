@@ -4,7 +4,7 @@
       <el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @tab-remove="tabRemove">
         <el-tab-pane v-for="item in tabsMenuList" :key="item.path" :label="item.title" :name="item.path" :closable="item.close">
           <template #label>
-            <el-icon class="tabs-icon" v-show="item.icon && tabsIcon">
+            <el-icon v-show="item.icon && tabsIcon" class="tabs-icon">
               <component :is="item.icon"></component>
             </el-icon>
             {{ item.title }}

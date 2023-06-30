@@ -1,7 +1,7 @@
 <template>
   <div class="tool-bar-lf">
     <CollapseIcon id="collapseIcon" />
-    <Breadcrumb id="breadcrumb" v-if="globalStore.breadcrumb" />
+    <Breadcrumb v-if="globalStore.breadcrumb" id="breadcrumb" />
   </div>
 </template>
 

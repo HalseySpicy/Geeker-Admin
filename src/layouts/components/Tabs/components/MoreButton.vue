@@ -2,7 +2,9 @@
   <el-dropdown trigger="click" :teleported="false">
     <el-button size="small" type="primary">
       <span>{{ $t("tabs.more") }}</span>
-      <el-icon class="el-icon--right"><arrow-down /></el-icon>
+      <el-icon class="el-icon--right">
+        <arrow-down />
+      </el-icon>
     </el-button>
     <template #dropdown>
       <el-dropdown-menu>
