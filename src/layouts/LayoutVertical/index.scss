@@ -4,7 +4,7 @@
   :deep(.el-aside) {
     width: auto;
     background-color: var(--el-menu-bg-color);
-    border-right: 1px solid var(--el-border-color-light);
+    border-right: 1px solid var(--el-aside-border-color);
     .aside-box {
       display: flex;
       flex-direction: column;
@@ -29,7 +29,7 @@
         .logo-text {
           font-size: 21.5px;
           font-weight: bold;
-          color: var(--el-logo-text-color);
+          color: var(--el-aside-logo-text-color);
           white-space: nowrap;
         }
       }
@@ -42,13 +42,7 @@
     justify-content: space-between;
     height: 55px;
     padding: 0 15px;
-    background-color: var(--el-bg-color);
-    border-bottom: 1px solid var(--el-border-color-light);
-    :deep(.tool-bar-ri) {
-      .toolBar-icon,
-      .username {
-        color: var(--el-text-color-primary);
-      }
-    }
+    background-color: var(--el-header-bg-color);
+    border-bottom: 1px solid var(--el-header-border-color);
   }
 }

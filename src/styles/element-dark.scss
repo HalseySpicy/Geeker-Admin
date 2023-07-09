@@ -5,7 +5,12 @@ html.dark {
   --w-e-toolbar-bg-color: #141414;
   --w-e-textarea-bg-color: #141414;
   --w-e-textarea-color: #eeeeee;
+  --w-e-toolbar-active-bg-color: #464646;
   --w-e-toolbar-border-color: var(--el-border-color-darker);
+  .w-e-bar-item button:hover,
+  .w-e-menu-tooltip-v5::before {
+    color: #eeeeee;
+  }
 
   /* login */
   .login-container {
@@ -18,20 +23,6 @@ html.dark {
           color: var(--el-text-color-primary) !important;
         }
       }
-    }
-  }
-
-  /* layout */
-  .el-container {
-    // columns layout
-    .aside-split {
-      background-color: var(--el-bg-color) !important;
-      .logo {
-        border-bottom: 1px solid var(--el-border-color-light) !important;
-      }
-    }
-    .el-header {
-      background-color: var(--el-bg-color) !important;
     }
   }
 }

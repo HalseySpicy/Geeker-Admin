@@ -1,6 +1,6 @@
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="菜单列表" row-key="path" :indent="30" :columns="columns" :data="menuData" :pagination="false">
+    <ProTable ref="proTable" title="菜单列表" row-key="path" :indent="20" :columns="columns" :data="menuData" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader>
         <el-button type="primary" :icon="CirclePlus">新增菜单 </el-button>
@@ -36,7 +36,7 @@ const columns: ColumnProps[] = [
   { type: "index", label: "#", width: 150 },
   { prop: "meta.title", label: "菜单名称", align: "left", search: { el: "input" } },
   { prop: "meta.icon", label: "菜单图标" },
-  { prop: "name", label: "菜单 name" },
+  { prop: "name", label: "菜单 name", search: { el: "input" } },
   { prop: "path", label: "菜单路径", width: 300, search: { el: "input" } },
   { prop: "component", label: "组件路径", width: 300 },
   { prop: "operation", label: "操作", width: 250, fixed: "right" }

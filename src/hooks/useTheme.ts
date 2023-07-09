@@ -4,22 +4,25 @@ import { ElMessage } from "element-plus";
 import { DEFAULT_PRIMARY } from "@/config";
 import { useGlobalStore } from "@/stores/modules/global";
 import { getLightColor, getDarkColor } from "@/utils/color";
-import { asideTheme, AsideThemeType } from "@/styles/theme/aside";
+import { menuTheme } from "@/styles/theme/menu";
+import { asideTheme } from "@/styles/theme/aside";
+import { headerTheme } from "@/styles/theme/header";
 
 /**
  * @description 全局主题 hooks
  * */
 export const useTheme = () => {
   const globalStore = useGlobalStore();
-  const { primary, isDark, isGrey, isWeak, asideInverted, layout } = storeToRefs(globalStore);
+  const { primary, isDark, isGrey, isWeak, layout, asideInverted, headerInverted } = storeToRefs(globalStore);
 
-  // 切换暗黑模式 ==> 并带修改主题颜色、侧边栏颜色
+  // 切换暗黑模式 ==> 并带修改主题颜色、侧边栏、头部颜色
   const switchDark = () => {
     const html = document.documentElement as HTMLElement;
     if (isDark.value) html.setAttribute("class", "dark");
     else html.setAttribute("class", "");
     changePrimary(primary.value);
     setAsideTheme();
+    setHeaderTheme();
   };
 
   // 修改主题颜色
@@ -54,20 +57,40 @@ export const useTheme = () => {
     globalStore.setGlobalState(propName, false);
   };
 
-  // 设置侧边栏样式 ==> light、inverted、dark
-  const setAsideTheme = () => {
-    // 默认所有侧边栏为 light 模式
-    let type: AsideThemeType = "light";
-    // 侧边栏反转色目前只支持在 vertical、classic 布局模式下生效 || transverse 布局下菜单栏默认为 inverted 模式
-    if ((["vertical", "classic"].includes(layout.value) && asideInverted.value) || layout.value == "transverse") {
-      type = "inverted";
+  // 设置菜单样式
+  const setMenuTheme = () => {
+    let type: Theme.ThemeType = "light";
+    if (layout.value === "transverse" && headerInverted.value) type = "inverted";
+    if (layout.value !== "transverse" && asideInverted.value) type = "inverted";
+    if (isDark.value) type = "dark";
+    const theme = menuTheme[type!];
+    for (const [key, value] of Object.entries(theme)) {
+      document.documentElement.style.setProperty(key, value);
     }
-    // 侧边栏 dark 模式
+  };
+
+  // 设置侧边栏样式
+  const setAsideTheme = () => {
+    let type: Theme.ThemeType = "light";
+    if (asideInverted.value) type = "inverted";
     if (isDark.value) type = "dark";
     const theme = asideTheme[type!];
     for (const [key, value] of Object.entries(theme)) {
       document.documentElement.style.setProperty(key, value);
     }
+    setMenuTheme();
+  };
+
+  // 设置头部样式
+  const setHeaderTheme = () => {
+    let type: Theme.ThemeType = "light";
+    if (headerInverted.value) type = "inverted";
+    if (isDark.value) type = "dark";
+    const theme = headerTheme[type!];
+    for (const [key, value] of Object.entries(theme)) {
+      document.documentElement.style.setProperty(key, value);
+    }
+    setMenuTheme();
   };
 
   // init theme
@@ -82,6 +105,7 @@ export const useTheme = () => {
     switchDark,
     changePrimary,
     changeGreyOrWeak,
-    setAsideTheme
+    setAsideTheme,
+    setHeaderTheme
   };
 };

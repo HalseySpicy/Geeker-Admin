@@ -8,8 +8,8 @@
     justify-content: space-between;
     height: 55px;
     padding: 0 15px 0 0;
-    background-color: #191a20;
-    border-bottom: 1px solid #414243;
+    background-color: var(--el-header-bg-color);
+    border-bottom: 1px solid var(--el-header-border-color);
     .header-lf {
       display: flex;
       align-items: center;
@@ -27,31 +27,8 @@
         .logo-text {
           font-size: 21.5px;
           font-weight: bold;
-          color: #dadada;
+          color: var(--el-header-logo-text-color);
           white-space: nowrap;
-        }
-      }
-      .tool-bar-lf {
-        .collapse-icon {
-          color: #e5eaf3;
-        }
-        .el-breadcrumb__inner.is-link {
-          color: #e5eaf3;
-          &:hover {
-            color: var(--el-color-primary);
-          }
-        }
-        .el-breadcrumb__item:last-child .el-breadcrumb__inner,
-        .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
-          color: #cfd3dc;
-        }
-      }
-    }
-    .header-ri {
-      .tool-bar-ri {
-        .toolBar-icon,
-        .username {
-          color: #e5eaf3;
         }
       }
     }
@@ -62,7 +39,7 @@
     :deep(.el-aside) {
       width: auto;
       background-color: var(--el-menu-bg-color);
-      border-right: 1px solid var(--el-border-color-light);
+      border-right: 1px solid var(--el-aside-border-color);
       .aside-box {
         display: flex;
         flex-direction: column;

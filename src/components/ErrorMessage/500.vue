@@ -4,13 +4,12 @@
     <div class="not-detail">
       <h2>500</h2>
       <h4>抱歉，您的网络不见了~🤦‍♂️🤦‍♀️</h4>
-      <el-button type="primary" @click="router.push(HOME_URL)"> 返回首页 </el-button>
+      <el-button type="primary" @click="router.back"> 返回上一页 </el-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="500">
-import { HOME_URL } from "@/config";
 import { useRouter } from "vue-router";
 const router = useRouter();
 </script>

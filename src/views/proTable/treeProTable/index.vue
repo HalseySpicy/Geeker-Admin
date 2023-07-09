@@ -12,7 +12,7 @@
         ref="proTable"
         title="用户列表"
         row-key="id"
-        :indent="30"
+        :indent="20"
         :columns="columns"
         :request-api="getUserTreeList"
         :request-auto="false"

@@ -7,12 +7,11 @@
     flex-shrink: 0;
     width: 70px;
     height: 100%;
-    background-color: #191a20;
-    border-right: 1px solid var(--el-border-color-light);
+    background-color: var(--el-menu-bg-color);
+    border-right: 1px solid var(--el-aside-border-color);
     .logo {
       box-sizing: border-box;
       height: 55px;
-      border-bottom: 1px solid #282a35;
       .logo-img {
         width: 32px;
         object-fit: contain;
@@ -30,11 +29,8 @@
           height: 70px;
           cursor: pointer;
           transition: all 0.3s ease;
-          &:hover {
-            background-color: #292b35;
-          }
           .el-icon {
-            font-size: 21px;
+            font-size: 20px;
           }
           .title {
             margin-top: 6px;
@@ -42,7 +38,7 @@
           }
           .el-icon,
           .title {
-            color: #e5eaf3;
+            color: var(--el-menu-text-color);
           }
         }
         .split-active {
@@ -65,7 +61,7 @@
     height: 100%;
     overflow: hidden;
     background-color: var(--el-menu-bg-color);
-    border-right: 1px solid var(--el-border-color-light);
+    border-right: 1px solid var(--el-aside-border-color);
     transition: width 0.3s ease;
     .el-scrollbar {
       height: calc(100% - 55px);
@@ -78,11 +74,10 @@
     .logo {
       box-sizing: border-box;
       height: 55px;
-      border-bottom: 1px solid var(--el-border-color-light);
       .logo-text {
         font-size: 24px;
         font-weight: bold;
-        color: var(--el-menu-text-color);
+        color: var(--el-aside-logo-text-color);
         white-space: nowrap;
       }
     }
@@ -94,13 +89,7 @@
     justify-content: space-between;
     height: 55px;
     padding: 0 15px;
-    background-color: #ffffff;
+    background-color: var(--el-header-bg-color);
     border-bottom: 1px solid var(--el-border-color-light);
-    :deep(.tool-bar-ri) {
-      .toolBar-icon,
-      .username {
-        color: var(--el-text-color-primary);
-      }
-    }
   }
 }

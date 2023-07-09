@@ -20,6 +20,12 @@
   }
 }
 
+/* mask image */
+.mask-image {
+  padding-right: 50px;
+  mask-image: linear-gradient(90deg, #000000 0%, #000000 calc(100% - 50px), transparent);
+}
+
 /* custom card */
 .card {
   box-sizing: border-box;
@@ -143,9 +149,6 @@
     .el-table__row {
       height: 45px;
       font-size: 14px;
-      .el-table__placeholder {
-        display: inline;
-      }
     }
 
     // 设置 el-table 中 header 文字不换行，并省略

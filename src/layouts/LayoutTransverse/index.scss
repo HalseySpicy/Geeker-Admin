@@ -8,8 +8,8 @@
     justify-content: space-between;
     height: 55px;
     padding: 0 15px 0 0;
-    background-color: #191a20;
-    border-bottom: 1px solid var(--el-border-color-light);
+    background-color: var(--el-header-bg-color);
+    border-bottom: 1px solid var(--el-header-border-color);
     .logo {
       width: 210px;
       margin-right: 30px;
@@ -21,7 +21,7 @@
       .logo-text {
         font-size: 21.5px;
         font-weight: bold;
-        color: #dadada;
+        color: var(--el-header-logo-text-color);
         white-space: nowrap;
       }
     }
@@ -34,6 +34,9 @@
         width: 65px;
         height: 55px;
       }
+      .el-menu-item.is-active {
+        color: #ffffff !important;
+      }
       .is-active {
         background-color: var(--el-color-primary) !important;
         border-bottom-color: var(--el-color-primary) !important;
@@ -41,16 +44,17 @@
           width: 0;
         }
         .el-sub-menu__title {
+          color: #ffffff !important;
           background-color: var(--el-color-primary) !important;
           border-bottom-color: var(--el-color-primary) !important;
         }
       }
     }
-    .tool-bar-ri {
-      .toolBar-icon,
-      .username {
-        color: #e5eaf3;
-      }
+  }
+
+  @media screen and (width <= 730px) {
+    .logo {
+      display: none !important;
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['breadcrumb-box', !globalStore.breadcrumbIcon && 'no-icon']">
+  <div :class="['breadcrumb-box mask-image', !globalStore.breadcrumbIcon && 'no-icon']">
     <el-breadcrumb :separator-icon="ArrowRight">
       <transition-group name="breadcrumb">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
@@ -47,9 +47,7 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 .breadcrumb-box {
   display: flex;
   align-items: center;
-  padding-right: 50px;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, #000000 0%, #000000 calc(100% - 50px), transparent);
   .el-breadcrumb {
     white-space: nowrap;
     .el-breadcrumb__item {
@@ -58,6 +56,12 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
       float: none;
       .el-breadcrumb__inner {
         display: inline-flex;
+        &.is-link {
+          color: var(--el-header-text-color);
+          &:hover {
+            color: var(--el-color-primary);
+          }
+        }
         .breadcrumb-icon {
           margin-top: 2px;
           margin-right: 6px;
@@ -66,6 +70,10 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
         .breadcrumb-title {
           margin-top: 3px;
         }
+      }
+      &:last-child .el-breadcrumb__inner,
+      &:last-child .el-breadcrumb__inner:hover {
+        color: var(--el-header-text-color-regular);
       }
       :deep(.el-breadcrumb__separator) {
         position: relative;

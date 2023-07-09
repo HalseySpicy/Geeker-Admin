@@ -93,7 +93,7 @@
 }
 
 /* 外边距、内边距全局样式 */
-@for $i from 0 through 40 {
+@for $i from 0 through 100 {
   .mt#{$i} {
     margin-top: #{$i}px !important;
   }
