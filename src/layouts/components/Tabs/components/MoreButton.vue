@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" :teleported="false">
     <el-button size="small" type="primary">
-      <span>{{ $t("tabs.more") }}</span>
+      <span>更多</span>
       <el-icon class="el-icon--right">
         <arrow-down />
       </el-icon>
@@ -9,19 +9,19 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item @click="refresh">
-          <el-icon><Refresh /></el-icon>{{ $t("tabs.refresh") }}
+          <el-icon><Refresh /></el-icon>刷新
         </el-dropdown-item>
         <el-dropdown-item @click="maximize">
-          <el-icon><FullScreen /></el-icon>{{ $t("tabs.maximize") }}
+          <el-icon><FullScreen /></el-icon>最大化
         </el-dropdown-item>
         <el-dropdown-item divided @click="closeCurrentTab">
-          <el-icon><Remove /></el-icon>{{ $t("tabs.closeCurrent") }}
+          <el-icon><Remove /></el-icon>关闭当前
         </el-dropdown-item>
         <el-dropdown-item @click="closeOtherTab">
-          <el-icon><CircleClose /></el-icon>{{ $t("tabs.closeOther") }}
+          <el-icon><CircleClose /></el-icon>关闭其它
         </el-dropdown-item>
         <el-dropdown-item @click="closeAllTab">
-          <el-icon><FolderDelete /></el-icon>{{ $t("tabs.closeAll") }}
+          <el-icon><FolderDelete /></el-icon>关闭所有
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
