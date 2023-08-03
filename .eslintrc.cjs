@@ -55,6 +55,7 @@ module.exports = {
     "vue/attributes-order": "off", // vue api使用顺序，强制执行属性顺序
     "vue/no-v-html": "off", // 禁止使用 v-html
     "vue/require-default-prop": "off", // 此规则要求为每个 prop 为必填时，必须提供默认值
-    "vue/multi-word-component-names": "off" // 要求组件名称始终为 “-” 链接的单词
+    "vue/multi-word-component-names": "off", // 要求组件名称始终为 “-” 链接的单词
+    "vue/no-setup-props-destructure": "off" // 禁止解构 props 传递给 setup
   }
 };
