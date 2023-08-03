@@ -1,14 +1,10 @@
 export type LayoutType = "vertical" | "classic" | "transverse" | "columns";
 
 export type AssemblySizeType = "large" | "default" | "small";
-
-export type LanguageType = "zh" | "en" | null;
-
 /* GlobalState */
 export interface GlobalState {
   layout: LayoutType;
   assemblySize: AssemblySizeType;
-  language: LanguageType;
   maximize: boolean;
   primary: string;
   isDark: boolean;
