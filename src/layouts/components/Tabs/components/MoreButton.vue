@@ -1,11 +1,8 @@
 <template>
   <el-dropdown trigger="click" :teleported="false">
-    <el-button size="small" type="primary">
-      <span>更多</span>
-      <el-icon class="el-icon--right">
-        <arrow-down />
-      </el-icon>
-    </el-button>
+    <div class="more-button">
+      <i :class="'iconfont icon-xiala'"></i>
+    </div>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item @click="refresh">
@@ -16,6 +13,12 @@
         </el-dropdown-item>
         <el-dropdown-item divided @click="closeCurrentTab">
           <el-icon><Remove /></el-icon>关闭当前
+        </el-dropdown-item>
+        <el-dropdown-item @click="tabStore.closeTabsOnSide(route.fullPath, 'left')">
+          <el-icon><DArrowLeft /></el-icon>关闭左侧
+        </el-dropdown-item>
+        <el-dropdown-item @click="tabStore.closeTabsOnSide(route.fullPath, 'right')">
+          <el-icon><DArrowRight /></el-icon>关闭右侧
         </el-dropdown-item>
         <el-dropdown-item @click="closeOtherTab">
           <el-icon><CircleClose /></el-icon>关闭其它
@@ -70,13 +73,11 @@ const closeCurrentTab = () => {
 // Close Other
 const closeOtherTab = () => {
   tabStore.closeMultipleTab(route.fullPath);
-  keepAliveStore.setKeepAliveName([route.name] as string[]);
 };
 
 // Close All
 const closeAllTab = () => {
   tabStore.closeMultipleTab();
-  keepAliveStore.setKeepAliveName();
   router.push(HOME_URL);
 };
 </script>

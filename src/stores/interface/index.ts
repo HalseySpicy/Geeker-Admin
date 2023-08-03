@@ -8,6 +8,7 @@ export type LanguageType = "zh" | "en" | null;
 export interface GlobalState {
   layout: LayoutType;
   assemblySize: AssemblySizeType;
+  language: LanguageType;
   maximize: boolean;
   primary: string;
   isDark: boolean;
@@ -16,6 +17,7 @@ export interface GlobalState {
   asideInverted: boolean;
   headerInverted: boolean;
   isCollapse: boolean;
+  accordion: boolean;
   breadcrumb: boolean;
   breadcrumbIcon: boolean;
   tabs: boolean;

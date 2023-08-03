@@ -2,6 +2,9 @@ import router from "@/routers";
 import { defineStore } from "pinia";
 import { TabsState, TabsMenuProps } from "@/stores/interface";
 import piniaPersistConfig from "@/config/piniaPersist";
+import { useKeepAliveStore } from "./keepAlive";
+
+const keepAliveStore = useKeepAliveStore();
 
 export const useTabsStore = defineStore({
   id: "geeker-tabs",
@@ -28,11 +31,23 @@ export const useTabsStore = defineStore({
       }
       this.tabsMenuList = tabsMenuList.filter(item => item.path !== tabPath);
     },
+    // Close Tabs On Side
+    async closeTabsOnSide(path: string, type: "left" | "right") {
+      const currentIndex = this.tabsMenuList.findIndex(item => item.path === path);
+      if (currentIndex !== -1) {
+        const range = type === "left" ? [0, currentIndex] : [currentIndex + 1, this.tabsMenuList.length];
+        this.tabsMenuList = this.tabsMenuList.filter((item, index) => {
+          return index < range[0] || index >= range[1] || !item.close;
+        });
+      }
+      keepAliveStore.setKeepAliveName(this.tabsMenuList.map(item => item.name));
+    },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
       this.tabsMenuList = this.tabsMenuList.filter(item => {
         return item.path === tabsMenuValue || !item.close;
       });
+      keepAliveStore.setKeepAliveName(this.tabsMenuList.map(item => item.name));
     },
     // Set Tabs
     async setTabs(tabsMenuList: TabsMenuProps[]) {

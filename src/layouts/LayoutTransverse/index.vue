@@ -6,7 +6,7 @@
         <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" />
         <span class="logo-text">{{ title }}</span>
       </div>
-      <el-menu mode="horizontal" :default-active="activeMenu" :router="false" :unique-opened="true">
+      <el-menu mode="horizontal" :router="false" :default-active="activeMenu">
         <!-- 不能直接使用 SubMenu 组件，无法触发 el-menu 隐藏省略功能 -->
         <template v-for="subItem in menuList" :key="subItem.path">
           <el-sub-menu v-if="subItem.children?.length" :key="subItem.path" :index="subItem.path + 'el-sub-menu'">

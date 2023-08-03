@@ -11,6 +11,8 @@ export const useGlobalStore = defineStore({
     layout: "vertical",
     // element 组件大小
     assemblySize: "default",
+    // 当前系统语言
+    language: null,
     // 当前页面是否全屏
     maximize: false,
     // 主题颜色
@@ -27,6 +29,8 @@ export const useGlobalStore = defineStore({
     headerInverted: false,
     // 折叠菜单
     isCollapse: false,
+    // 菜单手风琴
+    accordion: false,
     // 面包屑导航
     breadcrumb: true,
     // 面包屑导航图标
