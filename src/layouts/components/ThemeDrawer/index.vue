@@ -97,8 +97,12 @@
       界面设置
     </el-divider>
     <div class="theme-item">
-      <span>折叠菜单</span>
+      <span>菜单折叠</span>
       <el-switch v-model="isCollapse" />
+    </div>
+    <div class="theme-item">
+      <span>菜单手风琴</span>
+      <el-switch v-model="accordion" />
     </div>
     <div class="theme-item">
       <span>面包屑</span>
@@ -144,6 +148,7 @@ const {
   asideInverted,
   headerInverted,
   isCollapse,
+  accordion,
   breadcrumb,
   breadcrumbIcon,
   tabs,

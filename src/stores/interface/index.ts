@@ -17,6 +17,7 @@ export interface GlobalState {
   asideInverted: boolean;
   headerInverted: boolean;
   isCollapse: boolean;
+  accordion: boolean;
   breadcrumb: boolean;
   breadcrumbIcon: boolean;
   tabs: boolean;

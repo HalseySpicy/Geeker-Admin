@@ -29,6 +29,8 @@ export const useGlobalStore = defineStore({
     headerInverted: false,
     // 折叠菜单
     isCollapse: false,
+    // 菜单手风琴
+    accordion: false,
     // 面包屑导航
     breadcrumb: true,
     // 面包屑导航图标
