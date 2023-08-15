@@ -92,6 +92,7 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
 .no-icon {
   .el-breadcrumb {
     .el-breadcrumb__item {
+      float: left;
       top: -2px;
       :deep(.el-breadcrumb__separator) {
         top: 2px;
