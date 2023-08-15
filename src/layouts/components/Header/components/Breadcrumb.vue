@@ -3,7 +3,11 @@
     <el-breadcrumb :separator-icon="ArrowRight">
       <transition-group name="breadcrumb">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
-          <div class="el-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
+          <div
+            class="el-breadcrumb__inner is-link"
+            :class="{ 'no-icon': !item.meta.icon }"
+            @click="onBreadcrumbClick(item, index)"
+          >
             <el-icon v-show="item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
               <component :is="item.meta.icon"></component>
             </el-icon>
@@ -54,6 +58,9 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
       position: relative;
       display: inline-block;
       float: none;
+      .no-icon {
+        float: inline-end;
+      }
       .el-breadcrumb__inner {
         display: inline-flex;
         &.is-link {
