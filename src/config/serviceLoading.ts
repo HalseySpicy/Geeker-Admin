@@ -26,17 +26,24 @@ const endLoading = () => {
  * @description 显示全屏加载
  * */
 let needLoadingRequestCount = 0;
+let needLoading = false;
 export const showFullScreenLoading = () => {
-  if (needLoadingRequestCount === 0) {
-    startLoading();
-  }
-  needLoadingRequestCount++;
+  needLoading = true;
+  setTimeout(() => {
+    if (needLoading) {
+      if (needLoadingRequestCount === 0) {
+        startLoading();
+      }
+      needLoadingRequestCount++;
+    }
+  }, 100);
 };
 
 /**
  * @description 隐藏全屏加载
  * */
 export const tryHideFullScreenLoading = () => {
+  needLoading = false;
   if (needLoadingRequestCount <= 0) return;
   needLoadingRequestCount--;
   if (needLoadingRequestCount === 0) {
