@@ -46,7 +46,7 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off", // 不允许使用后缀运算符的非空断言(!)
 
     // vue (https://eslint.vuejs.org/rules)
-    "vue/script-setup-uses-vars": "error", // 防止<script setup>使用的变量<template>被标记为未使用，此规则仅在启用该no-unused-vars规则时有效
+    "vue/script-setup-uses-vars": "error", // 防止<script setup>使用的变量<template>被标记为未使用，此规则仅在启用该 no-unused-vars 规则时有效
     "vue/v-slot-style": "error", // 强制执行 v-slot 指令样式
     "vue/no-mutating-props": "error", // 不允许改变组件 prop
     "vue/custom-event-name-casing": "error", // 为自定义事件名称强制使用特定大小写

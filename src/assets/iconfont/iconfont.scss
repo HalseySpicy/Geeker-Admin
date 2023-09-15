@@ -1,6 +1,6 @@
 @font-face {
   font-family: iconfont; /* Project id 2667653 */
-  src: url("iconfont.ttf?t=1691032190261") format("truetype");
+  src: url("iconfont.ttf?t=1694681005434") format("truetype");
 }
 .iconfont {
   font-family: iconfont !important;
@@ -9,6 +9,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
+}
+.icon-yiwen::before {
+  font-size: 15px;
+  content: "\e693";
 }
 .icon-xiala::before {
   content: "\e62b";

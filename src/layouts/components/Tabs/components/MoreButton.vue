@@ -20,7 +20,7 @@
         <el-dropdown-item @click="tabStore.closeTabsOnSide(route.fullPath, 'right')">
           <el-icon><DArrowRight /></el-icon>关闭右侧
         </el-dropdown-item>
-        <el-dropdown-item @click="closeOtherTab">
+        <el-dropdown-item divided @click="tabStore.closeMultipleTab(route.fullPath)">
           <el-icon><CircleClose /></el-icon>关闭其它
         </el-dropdown-item>
         <el-dropdown-item @click="closeAllTab">
@@ -67,12 +67,6 @@ const maximize = () => {
 const closeCurrentTab = () => {
   if (route.meta.isAffix) return;
   tabStore.removeTabs(route.fullPath);
-  keepAliveStore.removeKeepAliveName(route.name as string);
-};
-
-// Close Other
-const closeOtherTab = () => {
-  tabStore.closeMultipleTab(route.fullPath);
 };
 
 // Close All

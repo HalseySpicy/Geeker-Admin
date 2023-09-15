@@ -1,8 +1,9 @@
 import router from "@/routers";
 import { defineStore } from "pinia";
-import { TabsState, TabsMenuProps } from "@/stores/interface";
-import piniaPersistConfig from "@/config/piniaPersist";
+import { getUrlWithParams } from "@/utils";
 import { useKeepAliveStore } from "./keepAlive";
+import { TabsState, TabsMenuProps } from "@/stores/interface";
+import piniaPersistConfig from "@/stores/helper/persist";
 
 const keepAliveStore = useKeepAliveStore();
 
@@ -17,19 +18,24 @@ export const useTabsStore = defineStore({
       if (this.tabsMenuList.every(item => item.path !== tabItem.path)) {
         this.tabsMenuList.push(tabItem);
       }
+      if (!keepAliveStore.keepAliveName.includes(tabItem.name) && tabItem.isKeepAlive) {
+        keepAliveStore.addKeepAliveName(tabItem.name);
+      }
     },
     // Remove Tabs
     async removeTabs(tabPath: string, isCurrent: boolean = true) {
-      const tabsMenuList = this.tabsMenuList;
       if (isCurrent) {
-        tabsMenuList.forEach((item, index) => {
+        this.tabsMenuList.forEach((item, index) => {
           if (item.path !== tabPath) return;
-          const nextTab = tabsMenuList[index + 1] || tabsMenuList[index - 1];
+          const nextTab = this.tabsMenuList[index + 1] || this.tabsMenuList[index - 1];
           if (!nextTab) return;
           router.push(nextTab.path);
         });
       }
-      this.tabsMenuList = tabsMenuList.filter(item => item.path !== tabPath);
+      this.tabsMenuList = this.tabsMenuList.filter(item => item.path !== tabPath);
+      // remove keepalive
+      const tabItem = this.tabsMenuList.find(item => item.path === tabPath);
+      tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.name);
     },
     // Close Tabs On Side
     async closeTabsOnSide(path: string, type: "left" | "right") {
@@ -40,14 +46,18 @@ export const useTabsStore = defineStore({
           return index < range[0] || index >= range[1] || !item.close;
         });
       }
-      keepAliveStore.setKeepAliveName(this.tabsMenuList.map(item => item.name));
+      // set keepalive
+      const KeepAliveList = this.tabsMenuList.filter(item => item.isKeepAlive);
+      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.name));
     },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
       this.tabsMenuList = this.tabsMenuList.filter(item => {
         return item.path === tabsMenuValue || !item.close;
       });
-      keepAliveStore.setKeepAliveName(this.tabsMenuList.map(item => item.name));
+      // set keepalive
+      const KeepAliveList = this.tabsMenuList.filter(item => item.isKeepAlive);
+      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.name));
     },
     // Set Tabs
     async setTabs(tabsMenuList: TabsMenuProps[]) {
@@ -55,9 +65,8 @@ export const useTabsStore = defineStore({
     },
     // Set Tabs Title
     async setTabsTitle(title: string) {
-      const nowFullPath = location.hash.substring(1);
       this.tabsMenuList.forEach(item => {
-        if (item.path == nowFullPath) item.title = title;
+        if (item.path == getUrlWithParams()) item.title = title;
       });
     }
   },

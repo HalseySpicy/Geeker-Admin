@@ -3,7 +3,6 @@
     <div class="header-icon">
       <AssemblySize id="assemblySize" />
       <ThemeSetting id="themeSetting" />
-      <Message id="message" />
       <Fullscreen id="fullscreen" />
     </div>
     <span class="username">{{ username }}</span>
@@ -16,7 +15,6 @@ import { computed } from "vue";
 import { useUserStore } from "@/stores/modules/user";
 import AssemblySize from "./components/AssemblySize.vue";
 import ThemeSetting from "./components/ThemeSetting.vue";
-import Message from "./components/Message.vue";
 import Fullscreen from "./components/Fullscreen.vue";
 import Avatar from "./components/Avatar.vue";
 
