@@ -28,11 +28,11 @@
       </div>
       <el-scrollbar>
         <el-menu
-          :default-active="activeMenu"
           :router="false"
+          :default-active="activeMenu"
           :collapse="isCollapse"
+          :unique-opened="accordion"
           :collapse-transition="false"
-          :unique-opened="true"
         >
           <SubMenu :menu-list="subMenuList" />
         </el-menu>
@@ -64,6 +64,7 @@ const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 const globalStore = useGlobalStore();
+const accordion = computed(() => globalStore.accordion);
 const isCollapse = computed(() => globalStore.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
 const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string);

@@ -1,6 +1,8 @@
 import { isArray } from "@/utils/is";
 import { FieldNamesProps } from "@/components/ProTable/interface";
 
+const mode = import.meta.env.VITE_ROUTER_MODE;
+
 /**
  * @description 获取localStorage
  * @param {String} key Storage名称
@@ -133,6 +135,18 @@ export function getBrowserLang() {
 }
 
 /**
+ * @description 获取不同路由模式所对应的 url + params
+ * @returns {String}
+ */
+export function getUrlWithParams() {
+  const url = {
+    hash: location.hash.substring(1),
+    history: location.pathname + location.search
+  };
+  return url[mode];
+}
+
+/**
  * @description 使用递归扁平化菜单，方便添加动态路由
  * @param {Array} menuList 菜单列表
  * @returns {Array}
@@ -229,7 +243,7 @@ export function formatTableColumn(row: number, col: number, callValue: any) {
 }
 
 /**
- * @description 处理值无数据情况
+ * @description 处理 ProTable 值为数组 || 无数据
  * @param {*} callValue 需要处理的值
  * @returns {String}
  * */

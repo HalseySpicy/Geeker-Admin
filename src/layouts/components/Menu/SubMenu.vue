@@ -82,10 +82,4 @@ const handleClickMenu = (subItem: Menu.MenuOptions) => {
     }
   }
 }
-.classic,
-.transverse {
-  #driver-highlighted-element-stage {
-    background-color: #606266 !important;
-  }
-}
 </style>

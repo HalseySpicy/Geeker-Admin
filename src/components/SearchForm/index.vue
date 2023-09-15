@@ -3,7 +3,16 @@
     <el-form ref="formRef" :model="searchParam">
       <Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="searchCol">
         <GridItem v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
-          <el-form-item :label="`${item.label} :`">
+          <el-form-item>
+            <template #label>
+              <el-space :size="4">
+                <span>{{ `${item.search?.label ?? item.label}` }}</span>
+                <el-tooltip v-if="item.search?.tooltip" effect="dark" :content="item.search?.tooltip" placement="top">
+                  <i :class="'iconfont icon-yiwen'"></i>
+                </el-tooltip>
+              </el-space>
+              <span>:</span>
+            </template>
             <SearchFormItem :column="item" :search-param="searchParam" />
           </el-form-item>
         </GridItem>

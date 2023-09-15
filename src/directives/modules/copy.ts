@@ -22,13 +22,12 @@ const copy: Directive = {
   }
 };
 
-function handleClick(this: any) {
-  const input = document.createElement("input");
-  input.value = this.copyData.toLocaleString();
-  document.body.appendChild(input);
-  input.select();
-  document.execCommand("Copy");
-  document.body.removeChild(input);
+async function handleClick(this: any) {
+  try {
+    await navigator.clipboard.writeText(this.copyData);
+  } catch (err) {
+    console.error("复制操作不被支持或失败: ", err);
+  }
   ElMessage({
     type: "success",
     message: "复制成功"

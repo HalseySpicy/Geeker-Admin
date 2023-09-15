@@ -12,6 +12,6 @@ export const genderType = [
  * @description：用户状态
  */
 export const userStatus = [
-  { label: "启用", value: 1 },
-  { label: "禁用", value: 0 }
+  { label: "启用", value: 1, tagType: "success" },
+  { label: "禁用", value: 0, tagType: "danger" }
 ];

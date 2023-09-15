@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="embedded"></script>
+<script setup lang="ts" name="bing"></script>
 
 <style scoped lang="scss">
 @import "./index.scss";

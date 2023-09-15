@@ -405,20 +405,6 @@
             "isAffix": false,
             "isKeepAlive": true
           }
-        },
-        {
-          "path": "/dashboard/embedded",
-          "name": "embedded",
-          "component": "/dashboard/embedded/index",
-          "meta": {
-            "icon": "Menu",
-            "title": "内嵌页面",
-            "isLink": "",
-            "isHide": false,
-            "isFull": false,
-            "isAffix": false,
-            "isKeepAlive": true
-          }
         }
       ]
     },
@@ -500,7 +486,7 @@
       "redirect": "/echarts/waterChart",
       "meta": {
         "icon": "TrendCharts",
-        "title": "Echarts",
+        "title": "ECharts",
         "isLink": "",
         "isHide": false,
         "isFull": false,
@@ -943,7 +929,7 @@
     {
       "path": "/link",
       "name": "link",
-      "redirect": "/link/gitee",
+      "redirect": "/link/bing",
       "meta": {
         "icon": "Paperclip",
         "title": "外部链接",
@@ -954,6 +940,20 @@
         "isKeepAlive": true
       },
       "children": [
+        {
+          "path": "/link/bing",
+          "name": "bing",
+          "component": "/link/bing/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "Bing 内嵌",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
         {
           "path": "/link/gitee",
           "name": "gitee",
@@ -983,9 +983,9 @@
           }
         },
         {
-          "path": "/link/geekerDocs",
-          "name": "geekerDocs",
-          "component": "/link/geekerDocs/index",
+          "path": "/link/docs",
+          "name": "docs",
+          "component": "/link/docs/index",
           "meta": {
             "icon": "Menu",
             "title": "项目文档",
