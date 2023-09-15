@@ -14,7 +14,6 @@
       </div>
       <ProTable
         ref="proTable"
-        title="用户列表"
         highlight-current-row
         :columns="columns"
         :request-api="getUserList"
@@ -22,23 +21,17 @@
       >
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
-          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
-          <el-button type="primary" :icon="Upload" plain @click="batchAdd"> 批量添加用户 </el-button>
-          <el-button type="primary" :icon="Download" plain @click="downloadFile"> 导出用户数据 </el-button>
-          <el-button type="primary" :icon="Pointer" plain @click="setCurrent"> 选中第四行 </el-button>
-        </template>
-        <!-- 单选 -->
-        <template #radio="scope">
-          <el-radio v-model="radio" :label="scope.row.id">
-            <i></i>
-          </el-radio>
+          <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+          <el-button type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
+          <el-button type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+          <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第四行</el-button>
         </template>
         <!-- 表格操作 -->
         <template #operation="scope">
-          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)"> 查看 </el-button>
-          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)"> 编辑 </el-button>
-          <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)"> 重置密码 </el-button>
-          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)"> 删除 </el-button>
+          <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
+          <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+          <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+          <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
         </template>
       </ProTable>
       <UserDrawer ref="drawerRef" />
@@ -47,12 +40,12 @@
   </div>
 </template>
 <script setup lang="ts" name="useSelectFilter">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import { User } from "@/api/interface";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
-import { genderType, userStatus } from "@/utils/serviceDict";
+import { genderType, userStatus } from "@/utils/dict";
 import ProTable from "@/components/ProTable/index.vue";
 import TreeFilter from "@/components/TreeFilter/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
@@ -72,15 +65,12 @@ import {
   getUserRole
 } from "@/api/modules/user";
 
-// 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
+// ProTable 实例
 const proTable = ref<ProTableInstance>();
 
-// 单选
-const radio = ref("");
-
 // 表格配置项
-const columns: ColumnProps[] = [
-  { prop: "radio", label: "单选", width: 80 },
+const columns = reactive<ColumnProps<User.ResUserList>[]>([
+  { type: "radio", label: "单选", width: 80 },
   { type: "index", label: "#", width: 80 },
   { prop: "username", label: "用户姓名", width: 120 },
   { prop: "gender", label: "性别", width: 120, sortable: true, enum: genderType },
@@ -90,7 +80,7 @@ const columns: ColumnProps[] = [
   { prop: "status", label: "用户状态", width: 120, sortable: true, tag: true, enum: userStatus },
   { prop: "createTime", label: "创建时间", width: 180, sortable: true },
   { prop: "operation", label: "操作", width: 330, fixed: "right" }
-];
+]);
 
 // selectFilter 数据（用户角色为后台数据）
 const selectFilterData = reactive([
@@ -98,35 +88,12 @@ const selectFilterData = reactive([
     title: "用户状态(单)",
     key: "userStatus",
     options: [
-      {
-        label: "全部",
-        value: ""
-      },
-      {
-        label: "在职",
-        value: "1",
-        icon: "User"
-      },
-      {
-        label: "待培训",
-        value: "2",
-        icon: "Bell"
-      },
-      {
-        label: "待上岗",
-        value: "3",
-        icon: "Clock"
-      },
-      {
-        label: "已离职",
-        value: "4",
-        icon: "CircleClose"
-      },
-      {
-        label: "已退休",
-        value: "5",
-        icon: "CircleCheck"
-      }
+      { label: "全部", value: "" },
+      { label: "在职", value: "1", icon: "User" },
+      { label: "待培训", value: "2", icon: "Bell" },
+      { label: "待上岗", value: "3", icon: "Clock" },
+      { label: "已离职", value: "4", icon: "CircleClose" },
+      { label: "已退休", value: "5", icon: "CircleCheck" }
     ]
   },
   {
@@ -162,9 +129,14 @@ const changeTreeFilter = (val: string[]) => {
 
 // 选择行
 const setCurrent = () => {
+  proTable.value!.radio = proTable.value?.tableData[3].id;
   proTable.value?.element?.setCurrentRow(proTable.value?.tableData[3]);
-  radio.value = proTable.value?.tableData[3].id;
 };
+
+watch(
+  () => proTable.value?.radio,
+  () => proTable.value?.radio && ElMessage.success(`选中 id 为【${proTable.value?.radio}】的数据`)
+);
 
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {

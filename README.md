@@ -4,6 +4,12 @@
 
 Geeker-Admin 一款基于 Vue3.3、TypeScript、Vite4、Pinia、Element-Plus 开源的后台管理框架，使用目前最新技术栈开发。项目提供强大的 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，在一定程度上提高您的开发效率。另外本项目还封装了一些常用组件、Hooks、指令、动态路由、按钮级别权限控制等功能。
 
+### React 版本 🔥
+
+- 有需要请加底部微信了解、购买
+
+- Link：https://pro.spicyboy.cn
+
 ### 在线预览 👀
 
 - Link：https://admin.spicyboy.cn
@@ -21,14 +27,14 @@ Geeker-Admin 一款基于 Vue3.3、TypeScript、Vite4、Pinia、Element-Plus 开
 
 ### 项目功能 🔨
 
-- 使用 Vue3.3 + TypeScript 开发，单文件组件**＜ script setup ＞**
-- 采用 Vite4 作为项目开发、打包工具（配置 Gzip 打包、TSX 语法、跨域代理…）
+- 使用 Vue3.3 + TypeScript 开发，单文件组件**＜script setup＞**
+- 采用 Vite4 作为项目开发、打包工具（配置 gzip/brotli 打包、tsx 语法、跨域代理…）
 - 使用 Pinia 替代 Vuex，轻量、简单、易用，集成 Pinia 持久化插件
 - 使用 TypeScript 对 Axios 整个二次封装（请求拦截、取消、常用请求封装…）
-- 基于 Element 二次封装 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，表格页面全部为配置项 columns
-- 支持 Element 组件大小切换、暗黑模式、i18n 国际化
-- 使用 VueRouter 进行路由权限拦截、页面按钮权限配置、路由懒加载
-- 使用 KeepAlive 对页面进行缓存，支持多级嵌套页面缓存
+- 基于 Element 二次封装 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，表格页面全部为配置项 Columns
+- 支持 Element 组件大小切换、多主题布局、暗黑模式、i18n 国际化
+- 使用 VueRouter 配置动态路由权限拦截、路由懒加载，支持页面按钮权限控制
+- 使用 KeepAlive 对页面进行缓存，支持多级嵌套路由缓存
 - 常用自定义指令开发（权限、复制、水印、拖拽、节流、防抖、长按…）
 - 使用 Prettier 统一格式化代码，集成 ESLint、Stylelint 代码校验规范
 - 使用 husky、lint-staged、commitlint、czg、cz-git 规范提交信息
@@ -188,7 +194,7 @@ Geeker-Admin
 
 ### 微信交流群 👨‍👨‍👦‍👦
 
-微信一群、二群、三群已满，扫描二维码添加作者微信，拉大家进入四群 🤪
+微信一群、二群、三群已满，扫描二维码添加作者微信（支持知识付费），拉大家进入四群🤪
 
 |                           微信二维码                           |
 | :------------------------------------------------------------: |
