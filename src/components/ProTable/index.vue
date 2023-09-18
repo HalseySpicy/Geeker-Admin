@@ -66,7 +66,6 @@
             </el-tag>
           </template>
         </el-table-column>
-
         <!-- other -->
         <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
@@ -241,7 +240,7 @@ const searchColumns = computed(() => {
 
 // 设置 搜索表单默认排序 && 搜索表单项的默认值
 searchColumns.value?.forEach((column, index) => {
-  column.search!.order = column.search?.order ?? index;
+  column.search!.order = column.search?.order ?? index + 2;
   const key = column.search?.key ?? handleProp(column.prop!);
   const defaultValue = column.search?.defaultValue;
   if (defaultValue !== undefined && defaultValue !== null) {
