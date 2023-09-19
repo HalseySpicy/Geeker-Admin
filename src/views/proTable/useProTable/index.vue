@@ -2,18 +2,18 @@
   <div class="table-box">
     <ProTable
       ref="proTable"
-      title="用户列表"
       :columns="columns"
       :request-api="getTableList"
       :init-param="initParam"
       :data-callback="dataCallback"
+      @darg-sort="sortTable"
     >
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
-        <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')"> 新增用户 </el-button>
-        <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd"> 批量添加用户 </el-button>
-        <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile"> 导出用户数据 </el-button>
-        <el-button type="primary" plain @click="toDetail"> To 子集详情页面 </el-button>
+        <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
+        <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
+        <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
+        <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
         <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.selectedListIds)">
           批量删除用户
         </el-button>
@@ -36,10 +36,10 @@
       </template>
       <!-- 表格操作 -->
       <template #operation="scope">
-        <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)"> 查看 </el-button>
-        <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)"> 编辑 </el-button>
-        <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)"> 重置密码 </el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)"> 删除 </el-button>
+        <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
+        <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
+        <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+        <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
       </template>
     </ProTable>
     <UserDrawer ref="drawerRef" />
@@ -80,13 +80,13 @@ const toDetail = () => {
   router.push(`/proTable/useProTable/detail/${Math.random().toFixed(3)}?params=detail-page`);
 };
 
-// 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
+// ProTable 实例
 const proTable = ref<ProTableInstance>();
 
-// 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
+// 如果表格需要初始化请求参数，直接定义传给 ProTable (之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({ type: 1 });
 
-// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total && pageNum && pageSize 这些字段，那么你可以在这里进行处理成这些字段
+// dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total && pageNum && pageSize 这些字段，可以在这里进行处理成这些字段
 // 或者直接去 hooks/useTable.ts 文件中把字段改为你后端对应的就行
 const dataCallback = (data: any) => {
   return {
@@ -120,14 +120,14 @@ const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
 };
 
 // 表格配置项
-const columns: ColumnProps<User.ResUserList>[] = [
-  { type: "selection", fixed: "left", width: 80 },
-  { type: "index", label: "#", width: 80 },
-  { type: "expand", label: "Expand", width: 100 },
+const columns = reactive<ColumnProps<User.ResUserList>[]>([
+  { type: "selection", fixed: "left", width: 70 },
+  { type: "sort", label: "Sort", width: 80 },
+  { type: "expand", label: "Expand", width: 85 },
   {
     prop: "username",
     label: "用户姓名",
-    search: { el: "input" },
+    search: { el: "input", tooltip: "我是搜索提示" },
     render: scope => {
       return (
         <el-button type="primary" link onClick={() => ElMessage.success("我是通过 tsx 语法渲染的内容")}>
@@ -139,7 +139,7 @@ const columns: ColumnProps<User.ResUserList>[] = [
   {
     prop: "gender",
     label: "性别",
-    // 字典数据
+    // 字典数据（本地数据）
     // enum: genderType,
     // 字典请求不带参数
     enum: getUserGender,
@@ -205,7 +205,14 @@ const columns: ColumnProps<User.ResUserList>[] = [
     }
   },
   { prop: "operation", label: "操作", fixed: "right", width: 330 }
-];
+]);
+
+// 表格拖拽排序
+const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: number }) => {
+  console.log(newIndex, oldIndex);
+  console.log(proTable.value?.tableData);
+  ElMessage.success("修改列表排序成功");
+};
 
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {

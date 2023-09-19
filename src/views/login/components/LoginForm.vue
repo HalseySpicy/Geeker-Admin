@@ -41,7 +41,7 @@ import { useKeepAliveStore } from "@/stores/modules/keepAlive";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
-import md5 from "js-md5";
+import md5 from "md5";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -76,8 +76,8 @@ const login = (formEl: FormInstance | undefined) => {
       await initDynamicRouter();
 
       // 3.清空 tabs、keepAlive 数据
-      tabsStore.closeMultipleTab();
-      keepAliveStore.setKeepAliveName();
+      tabsStore.setTabs([]);
+      keepAliveStore.setKeepAliveName([]);
 
       // 4.跳转到首页
       router.push(HOME_URL);

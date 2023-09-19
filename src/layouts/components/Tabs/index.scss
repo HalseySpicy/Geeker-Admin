@@ -5,8 +5,24 @@
     width: 100%;
     .el-dropdown {
       position: absolute;
-      top: 8px;
-      right: 13px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      .more-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 43px;
+        cursor: pointer;
+        border-left: 1px solid var(--el-border-color-light);
+        transition: all 0.3s;
+        &:hover {
+          background-color: var(--el-color-info-light-9);
+        }
+        .iconfont {
+          font-size: 12.5px;
+        }
+      }
     }
     :deep(.el-tabs) {
       .el-tabs__header {
@@ -16,7 +32,7 @@
         margin: 0;
         .el-tabs__nav-wrap {
           position: absolute;
-          width: calc(100% - 110px);
+          width: calc(100% - 70px);
           .el-tabs__nav {
             display: flex;
             border: none;

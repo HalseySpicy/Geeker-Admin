@@ -89,7 +89,9 @@
   border-left-color: var(--el-color-primary) !important;
 }
 #nprogress .peg {
-  box-shadow: 0 0 10px var(--el-color-primary), 0 0 5px var(--el-color-primary) !important;
+  box-shadow:
+    0 0 10px var(--el-color-primary),
+    0 0 5px var(--el-color-primary) !important;
 }
 
 /* 外边距、内边距全局样式 */
