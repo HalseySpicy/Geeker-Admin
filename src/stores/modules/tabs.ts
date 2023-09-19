@@ -32,10 +32,11 @@ export const useTabsStore = defineStore({
           router.push(nextTab.path);
         });
       }
-      this.tabsMenuList = this.tabsMenuList.filter(item => item.path !== tabPath);
       // remove keepalive
       const tabItem = this.tabsMenuList.find(item => item.path === tabPath);
       tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.name);
+      // set tabs
+      this.tabsMenuList = this.tabsMenuList.filter(item => item.path !== tabPath);
     },
     // Close Tabs On Side
     async closeTabsOnSide(path: string, type: "left" | "right") {
