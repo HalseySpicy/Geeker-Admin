@@ -15,7 +15,7 @@ export const useTheme = () => {
   const globalStore = useGlobalStore();
   const { primary, isDark, isGrey, isWeak, layout, asideInverted, headerInverted } = storeToRefs(globalStore);
 
-  // 切换暗黑模式 ==> 并带修改主题颜色、侧边栏、头部颜色
+  // 切换暗黑模式 ==> 同时修改主题颜色、侧边栏、头部颜色
   const switchDark = () => {
     const html = document.documentElement as HTMLElement;
     if (isDark.value) html.setAttribute("class", "dark");

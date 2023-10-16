@@ -14,8 +14,8 @@
     >
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="proTable?.element?.toggleAllSelection"> 全选 / 全不选 </el-button>
-        <el-button type="primary" :icon="Pointer" plain @click="setCurrent"> 选中第五行 </el-button>
+        <el-button type="primary" :icon="CirclePlus" @click="proTable?.element?.toggleAllSelection">全选 / 全不选</el-button>
+        <el-button type="primary" :icon="Pointer" plain @click="setCurrent">选中第五行</el-button>
         <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.selectedListIds)">
           批量删除用户
         </el-button>
@@ -26,8 +26,8 @@
       </template>
       <!-- 表格操作 -->
       <template #operation="scope">
-        <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)"> 重置密码 </el-button>
-        <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)"> 删除 </el-button>
+        <el-button type="primary" link :icon="Refresh" @click="resetPass(scope.row)">重置密码</el-button>
+        <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
       </template>
       <template #append>
         <span style="color: var(--el-color-primary)">我是插入在表格最后的内容。若表格有合计行，该内容会位于合计行之上。</span>
@@ -37,17 +37,17 @@
 </template>
 
 <script setup lang="tsx" name="complexProTable">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { User } from "@/api/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import ProTable from "@/components/ProTable/index.vue";
+import { CirclePlus, Pointer, Delete, Refresh } from "@element-plus/icons-vue";
 import type { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from "@/components/ProTable/interface";
-import { CirclePlus, Pointer, Delete, Refresh } from "@element-plus/icons-vue";
 import { getUserList, deleteUser, resetUserPassWord, getUserStatus, getUserGender } from "@/api/modules/user";
 
-// 获取 ProTable DOM
+// ProTable 实例
 const proTable = ref<ProTableInstance>();
 
 // 自定义渲染表头（使用tsx语法）
@@ -60,7 +60,7 @@ const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
 };
 
 // 表格配置项
-const columns: ColumnProps<User.ResUserList>[] = [
+const columns = reactive<ColumnProps<User.ResUserList>[]>([
   { type: "selection", width: 80 },
   { type: "index", label: "#", width: 80 },
   { type: "expand", label: "Expand", width: 100 },
@@ -98,11 +98,12 @@ const columns: ColumnProps<User.ResUserList>[] = [
   },
   { prop: "createTime", label: "创建时间", width: 200 },
   { prop: "operation", label: "操作", fixed: "right", width: 230 }
-];
+]);
 
 // 选择行
 const setCurrent = () => {
   proTable.value?.element?.setCurrentRow(proTable.value?.tableData[4]);
+  proTable.value?.element?.toggleRowSelection(proTable.value?.tableData[4], true);
 };
 
 // 表尾合计行（自行根据条件计算）

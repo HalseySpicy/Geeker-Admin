@@ -46,15 +46,15 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="drawerVisible = false"> 取消 </el-button>
-      <el-button v-show="!drawerProps.isView" type="primary" @click="handleSubmit"> 确定 </el-button>
+      <el-button @click="drawerVisible = false">取消</el-button>
+      <el-button v-show="!drawerProps.isView" type="primary" @click="handleSubmit">确定</el-button>
     </template>
   </el-drawer>
 </template>
 
 <script setup lang="ts" name="UserDrawer">
 import { ref, reactive } from "vue";
-import { genderType } from "@/utils/serviceDict";
+import { genderType } from "@/utils/dict";
 import { ElMessage, FormInstance } from "element-plus";
 import { User } from "@/api/interface";
 import UploadImg from "@/components/Upload/Img.vue";

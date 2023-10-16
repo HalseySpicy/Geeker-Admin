@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/HalseySpicy/Geeker-Admin/compare/v1.1.0...v1.2.0) (2023-09-15)
+
+
+### Features
+
+* 🚀 update and optimize project content ([17bc017](https://github.com/HalseySpicy/Geeker-Admin/commit/17bc017c5abbd2c87813d6c6f9d587ddf9d57da7))
+* 🚀 upgrade plugins and add tab functionality ([f21a41d](https://github.com/HalseySpicy/Geeker-Admin/commit/f21a41d8df44efe5216dec39bf4abf0ea86a7781))
+
 ## [1.1.0](https://github.com/HalseySpicy/Geeker-Admin/compare/v1.0.0...v1.1.0) (2023-07-09)
 
 ### Features

@@ -46,6 +46,7 @@ declare interface ViteEnv {
   VITE_PORT: number;
   VITE_OPEN: boolean;
   VITE_REPORT: boolean;
+  VITE_ROUTER_MODE: "hash" | "history";
   VITE_BUILD_COMPRESS: "gzip" | "brotli" | "gzip,brotli" | "none";
   VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE: boolean;
   VITE_DROP_CONSOLE: boolean;
@@ -69,12 +70,3 @@ declare const __APP_INFO__: {
   };
   lastBuildTime: string;
 };
-
-/* Generic Tools */
-type ObjToKeyValUnion<T> = {
-  [K in keyof T]: { key: K; value: T[K] };
-}[keyof T];
-
-type ObjToKeyValArray<T> = {
-  [K in keyof T]: [K, T[K]];
-}[keyof T];

@@ -3,7 +3,7 @@
     <Toolbar v-if="!hideToolBar" class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" :mode="mode" />
     <Editor
       v-model="valueHtml"
-      class="editor-content'"
+      class="editor-content"
       :style="{ height }"
       :mode="mode"
       :default-config="editorConfig"
@@ -70,11 +70,10 @@ const self_disabled = computed(() => {
 if (self_disabled.value) nextTick(() => editorRef.value.disable());
 
 // 富文本的内容监听，触发父组件改变，实现双向数据绑定
-type EmitProps = {
-  (e: "update:value", val: string): void;
-  (e: "check-validate"): void;
-};
-const emit = defineEmits<EmitProps>();
+const emit = defineEmits<{
+  "update:value": [value: string];
+  "check-validate": [];
+}>();
 const valueHtml = computed({
   get() {
     return props.value;
