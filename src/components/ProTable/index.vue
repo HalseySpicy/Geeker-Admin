@@ -181,6 +181,7 @@ onMounted(() => {
 // 处理表格数据
 const processTableData = computed(() => {
   if (!props.data) return tableData.value;
+  if (!props.pagination) return props.data;
   return props.data.slice(
     (pageable.value.pageNum - 1) * pageable.value.pageSize,
     pageable.value.pageSize * pageable.value.pageNum
