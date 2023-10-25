@@ -208,9 +208,10 @@ const setEnumMap = async ({ prop, enum: enumValue }: ColumnProps) => {
   // 当前 enum 为静态数据，则直接存储到 enumMap
   if (typeof enumValue !== "function") return enumMap.value.set(prop!, unref(enumValue!));
 
+  enumMap.value.set(prop!, []);
   // 当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
   const { data } = await enumValue();
-  enumMap.value.set(prop!, data);
+  enumMap.value.get(prop!).push(...data);
 };
 
 // 注入 enumMap
