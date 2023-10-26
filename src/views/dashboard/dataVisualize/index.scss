@@ -49,8 +49,7 @@
       .item-center {
         display: flex;
         flex-wrap: wrap;
-        align-content: space-between;
-        justify-content: space-between;
+        place-content: space-between space-between;
         height: 100%;
         .traffic-box {
           box-sizing: border-box;
