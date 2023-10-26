@@ -18,6 +18,7 @@ export const useTabsStore = defineStore({
       if (this.tabsMenuList.every(item => item.path !== tabItem.path)) {
         this.tabsMenuList.push(tabItem);
       }
+      // add keepalive
       if (!keepAliveStore.keepAliveName.includes(tabItem.name) && tabItem.isKeepAlive) {
         keepAliveStore.addKeepAliveName(tabItem.name);
       }
