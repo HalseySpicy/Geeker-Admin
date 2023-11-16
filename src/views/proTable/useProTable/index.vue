@@ -6,6 +6,7 @@
       :request-api="getTableList"
       :init-param="initParam"
       :data-callback="dataCallback"
+      :search-params-call-back="searchParamsCallBack"
       @darg-sort="sortTable"
     >
       <!-- 表格 header 按钮 -->
@@ -94,6 +95,13 @@ const dataCallback = (data: any) => {
     total: data.total,
     pageNum: data.pageNum,
     pageSize: data.pageSize
+  };
+};
+
+// searchParamsCallBack 提供了为搜索的参数进行扩展加工处理的方法
+const searchParamsCallBack = (params: any) => {
+  return {
+    ...params
   };
 };
 
