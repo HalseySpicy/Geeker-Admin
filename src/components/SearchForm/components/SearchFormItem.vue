@@ -78,7 +78,11 @@ const handleSearchProps = computed(() => {
 const placeholder = computed(() => {
   const search = props.column.search;
   if (["datetimerange", "daterange", "monthrange"].includes(search?.props?.type) || search?.props?.isRange) {
-    return { rangeSeparator: "至", startPlaceholder: "开始时间", endPlaceholder: "结束时间" };
+    return { 
+      rangeSeparator: search?.props?.rangeSeparator ?? "至", 
+      startPlaceholder: search?.props?.startPlaceholder ?? "开始时间", 
+      endPlaceholder: search?.props?.endPlaceholder ?? "结束时间" 
+    };
   }
   const placeholder = search?.props?.placeholder ?? (search?.el?.includes("input") ? "请输入" : "请选择");
   return { placeholder };
