@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { PluginOption } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { visualizer } from "rollup-plugin-visualizer";
-import { createHtmlPlugin } from "vite-plugin-html";
+import simpleHtmlPlugin from "vite-plugin-simple-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -27,7 +27,8 @@ export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOptio
     // 创建打包压缩配置
     createCompression(viteEnv),
     // 注入变量到 html 文件
-    createHtmlPlugin({
+    simpleHtmlPlugin({
+      minify: true,
       inject: {
         data: { title: VITE_GLOB_APP_TITLE }
       }

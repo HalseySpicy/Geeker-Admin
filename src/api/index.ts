@@ -5,11 +5,13 @@ import { ElMessage } from "element-plus";
 import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
+import { AxiosCanceler } from "./helper/axiosCancel";
 import { useUserStore } from "@/stores/modules/user";
 import router from "@/routers";
 
 export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   loading?: boolean;
+  cancel?: boolean;
 }
 
 const config = {
@@ -20,6 +22,8 @@ const config = {
   // 跨域时候允许携带凭证
   withCredentials: true
 };
+
+const axiosCanceler = new AxiosCanceler();
 
 class RequestHttp {
   service: AxiosInstance;
@@ -35,6 +39,9 @@ class RequestHttp {
     this.service.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
         const userStore = useUserStore();
+        // 重复请求不需要取消，在 api 服务中通过指定的第三个参数: { cancel: false } 来控制
+        config.cancel ?? (config.cancel = true);
+        config.cancel && axiosCanceler.addPending(config);
         // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { loading: false } 来控制
         config.loading ?? (config.loading = true);
         config.loading && showFullScreenLoading();
@@ -54,10 +61,11 @@ class RequestHttp {
      */
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
-        const { data } = response;
+        const { data, config } = response;
         const userStore = useUserStore();
+        axiosCanceler.removePending(config);
         tryHideFullScreenLoading();
-        // 登陆失效
+        // 登录失效
         if (data.code == ResultEnum.OVERDUE) {
           userStore.setToken("");
           router.replace(LOGIN_URL);
