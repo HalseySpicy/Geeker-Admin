@@ -2,12 +2,12 @@ import { resolve } from "path";
 import { PluginOption } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { visualizer } from "rollup-plugin-visualizer";
-import simpleHtmlPlugin from "vite-plugin-simple-html";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import eslintPlugin from "vite-plugin-eslint";
 import viteCompression from "vite-plugin-compression";
+import simpleHtmlPlugin from "vite-plugin-simple-html";
 import vueSetupExtend from "unplugin-vue-setup-extend-plus/vite";
 
 /**
