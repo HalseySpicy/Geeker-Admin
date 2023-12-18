@@ -1,4 +1,3 @@
-// ? 暂未使用，目前使用全局 Loading 来控制重复请求
 import { CustomAxiosRequestConfig } from "../index";
 import qs from "qs";
 
