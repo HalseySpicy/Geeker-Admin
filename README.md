@@ -2,7 +2,7 @@
 
 ### 介绍 📖
 
-Geeker-Admin 一款基于 Vue3.3、TypeScript、Vite5、Pinia、Element-Plus 开源的后台管理框架，使用目前最新技术栈开发。项目提供强大的 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，在一定程度上提高您的开发效率。另外本项目还封装了一些常用组件、Hooks、指令、动态路由、按钮级别权限控制等功能。
+Geeker-Admin 一款基于 Vue3.4、TypeScript、Vite5、Pinia、Element-Plus 开源的后台管理框架，使用目前最新技术栈开发。项目提供强大的 [ProTable](https://juejin.cn/post/7166068828202336263) 组件，在一定程度上提高您的开发效率。另外本项目还封装了一些常用组件、Hooks、指令、动态路由、按钮级别权限控制等功能。
 
 ### React 版本 🔥
 
@@ -27,7 +27,7 @@ Geeker-Admin 一款基于 Vue3.3、TypeScript、Vite5、Pinia、Element-Plus 开
 
 ### 项目功能 🔨
 
-- 使用 Vue3.3 + TypeScript 开发，单文件组件**＜script setup＞**
+- 使用 Vue3.4 + TypeScript 开发，单文件组件**＜script setup＞**
 - 采用 Vite5 作为项目开发、打包工具（配置 gzip/brotli 打包、tsx 语法、跨域代理…）
 - 使用 Pinia 替代 Vuex，轻量、简单、易用，集成 Pinia 持久化插件
 - 使用 TypeScript 对 Axios 整个二次封装（请求拦截、取消、常用请求封装…）
@@ -196,9 +196,9 @@ Geeker-Admin
 
 微信一群、二群、三群、四群已满，扫描二维码进入五群（支持知识付费）🤪
 
-|                                               微信二维码                                                |
-| :-----------------------------------------------------------------------------------------------------: |
-| <img src="https://pic.ziyuan.wang/user/guest/2023/12/WX20231221-205159@2x_f22f4fb9e8975.png" width=170> |
+|                                      微信二维码                                       |
+| :-----------------------------------------------------------------------------------: |
+| <img src="https://pic.ziyuan.wang/user/guest/2024/01/66_128f4a1d5a4bc.png" width=170> |
 
 ### 捐赠 🍵
 
