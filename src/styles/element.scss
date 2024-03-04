@@ -248,6 +248,7 @@
 
 /* el-dialog */
 .el-dialog {
+  padding: 0;
   .el-dialog__header {
     padding: 15px 20px;
     margin: 0;
@@ -255,5 +256,9 @@
     .el-dialog__title {
       font-size: 17px;
     }
+  }
+  .el-dialog__body,
+  .el-dialog__footer {
+    padding: 15px 20px;
   }
 }

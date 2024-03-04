@@ -40,10 +40,10 @@ class RequestHttp {
       (config: CustomAxiosRequestConfig) => {
         const userStore = useUserStore();
         // 重复请求不需要取消，在 api 服务中通过指定的第三个参数: { cancel: false } 来控制
-        config.cancel ?? (config.cancel = true);
+        config.cancel ??= true;
         config.cancel && axiosCanceler.addPending(config);
         // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { loading: false } 来控制
-        config.loading ?? (config.loading = true);
+        config.loading ??= true;
         config.loading && showFullScreenLoading();
         if (config.headers && typeof config.headers.set === "function") {
           config.headers.set("x-access-token", userStore.token);
@@ -60,11 +60,12 @@ class RequestHttp {
      *  服务器换返回信息 -> [拦截统一处理] -> 客户端JS获取到信息
      */
     this.service.interceptors.response.use(
-      (response: AxiosResponse) => {
+      (response: AxiosResponse & { config: CustomAxiosRequestConfig }) => {
         const { data, config } = response;
+
         const userStore = useUserStore();
         axiosCanceler.removePending(config);
-        tryHideFullScreenLoading();
+        config.loading && tryHideFullScreenLoading();
         // 登录失效
         if (data.code == ResultEnum.OVERDUE) {
           userStore.setToken("");

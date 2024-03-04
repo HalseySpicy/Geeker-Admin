@@ -5,7 +5,7 @@
     <router-view v-slot="{ Component, route }">
       <transition appear name="fade-transform" mode="out-in">
         <keep-alive :include="keepAliveName">
-          <component :is="Component" v-if="isRouterShow" :key="route.fullPath" />
+          <component :is="createComponentWrapper(Component, route)" v-if="isRouterShow" :key="route.fullPath" />
         </keep-alive>
       </transition>
     </router-view>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeUnmount, provide, watch } from "vue";
+import { ref, onBeforeUnmount, provide, watch, h } from "vue";
 import { storeToRefs } from "pinia";
 import { useDebounceFn } from "@vueuse/core";
 import { useGlobalStore } from "@/stores/modules/global";
@@ -35,6 +35,19 @@ const { keepAliveName } = storeToRefs(keepAliveStore);
 const isRouterShow = ref(true);
 const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 provide("refresh", refreshCurrentPage);
+
+// 解决详情页 keep-alive 问题
+const wrapperMap = new Map();
+function createComponentWrapper(component, route) {
+  if (!component) return;
+  const wrapperName = route.fullPath;
+  let wrapper = wrapperMap.get(wrapperName);
+  if (!wrapper) {
+    wrapper = { name: wrapperName, render: () => h(component) };
+    wrapperMap.set(wrapperName, wrapper);
+  }
+  return h(wrapper);
+}
 
 // 监听当前页面是否最大化，动态添加 class
 watch(

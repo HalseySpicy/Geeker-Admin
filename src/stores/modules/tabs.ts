@@ -20,7 +20,7 @@ export const useTabsStore = defineStore({
       }
       // add keepalive
       if (!keepAliveStore.keepAliveName.includes(tabItem.name) && tabItem.isKeepAlive) {
-        keepAliveStore.addKeepAliveName(tabItem.name);
+        keepAliveStore.addKeepAliveName(tabItem.path);
       }
     },
     // Remove Tabs
@@ -35,7 +35,7 @@ export const useTabsStore = defineStore({
       }
       // remove keepalive
       const tabItem = this.tabsMenuList.find(item => item.path === tabPath);
-      tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.name);
+      tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.path);
       // set tabs
       this.tabsMenuList = this.tabsMenuList.filter(item => item.path !== tabPath);
     },
@@ -50,7 +50,7 @@ export const useTabsStore = defineStore({
       }
       // set keepalive
       const KeepAliveList = this.tabsMenuList.filter(item => item.isKeepAlive);
-      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.name));
+      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.path));
     },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
@@ -59,7 +59,7 @@ export const useTabsStore = defineStore({
       });
       // set keepalive
       const KeepAliveList = this.tabsMenuList.filter(item => item.isKeepAlive);
-      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.name));
+      keepAliveStore.setKeepAliveName(KeepAliveList.map(item => item.path));
     },
     // Set Tabs
     async setTabs(tabsMenuList: TabsMenuProps[]) {
