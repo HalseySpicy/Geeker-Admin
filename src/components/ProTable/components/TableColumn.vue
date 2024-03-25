@@ -6,6 +6,7 @@
 import { inject, ref, useSlots } from "vue";
 import { ColumnProps, RenderScope, HeaderRenderScope } from "@/components/ProTable/interface";
 import { filterEnum, formatValue, handleProp, handleRowAccordingToProp } from "@/utils";
+import { isFunction } from "@/utils/is";
 
 defineProps<{ column: ColumnProps }>();
 
@@ -15,6 +16,9 @@ const enumMap = inject("enumMap", ref(new Map()));
 
 // 渲染表格数据
 const renderCellData = (item: ColumnProps, scope: RenderScope<any>) => {
+  if (isFunction(item.formatter)) {
+    return item.formatter(scope.row, scope.column, handleRowAccordingToProp(scope.row, item.prop!), scope.$index);
+  }
   return enumMap.value.get(item.prop) && item.isFilterEnum
     ? filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop)!, item.fieldNames)
     : formatValue(handleRowAccordingToProp(scope.row, item.prop!));
