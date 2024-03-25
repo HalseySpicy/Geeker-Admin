@@ -7,13 +7,15 @@ import { reactive, computed, toRefs } from "vue";
  * @param {Object} initParam 获取数据初始化参数 (非必传，默认为{})
  * @param {Boolean} isPageable 是否有分页 (非必传，默认为true)
  * @param {Function} dataCallBack 对后台返回的数据进行处理的方法 (非必传)
+ * @param {Function} searchParamsCallBack 对搜索参数进行处理的方法 (非必传)
  * */
 export const useTable = (
   api?: (params: any) => Promise<any>,
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: any) => any,
-  requestError?: (error: any) => void
+  requestError?: (error: any) => void,
+  searchParamsCallBack?: (data: any) => any
 ) => {
   const state = reactive<Table.StateProps>({
     // 表格数据
@@ -87,6 +89,7 @@ export const useTable = (
         nowSearchParam[key] = state.searchParam[key];
       }
     }
+    searchParamsCallBack && (nowSearchParam = searchParamsCallBack(nowSearchParam));
     Object.assign(state.totalParam, nowSearchParam, isPageable ? pageParam.value : {});
   };
 
