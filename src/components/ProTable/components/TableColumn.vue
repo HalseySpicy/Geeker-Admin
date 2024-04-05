@@ -22,7 +22,9 @@ const renderCellData = (item: ColumnProps, scope: RenderScope<any>) => {
 
 // 获取 tag 类型
 const getTagType = (item: ColumnProps, scope: RenderScope<any>) => {
-  return filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop), item.fieldNames, "tag");
+  return (
+    filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop), item.fieldNames, "tag") || "primary"
+  );
 };
 
 const RenderTableColumn = (item: ColumnProps) => {

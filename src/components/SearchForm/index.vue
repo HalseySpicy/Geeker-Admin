@@ -11,7 +11,7 @@
                   <i :class="'iconfont icon-yiwen'"></i>
                 </el-tooltip>
               </el-space>
-              <span>:</span>
+              <span>&nbsp;:</span>
             </template>
             <SearchFormItem :column="item" :search-param="searchParam" />
           </el-form-item>

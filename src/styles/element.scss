@@ -1,7 +1,7 @@
 /* 设置 notification、message 层级在 loading 之上 */
 .el-message,
 .el-notification {
-  z-index: 2058 !important;
+  z-index: 2070 !important;
 }
 
 /* el-alert */
@@ -248,6 +248,7 @@
 
 /* el-dialog */
 .el-dialog {
+  padding: 0;
   .el-dialog__header {
     padding: 15px 20px;
     margin: 0;
@@ -255,5 +256,9 @@
     .el-dialog__title {
       font-size: 17px;
     }
+  }
+  .el-dialog__body,
+  .el-dialog__footer {
+    padding: 15px 20px;
   }
 }
