@@ -2,21 +2,23 @@
 <template>
   <suspense>
     <template #default>
-      <component :is="LayoutComponents[layout]" />
+      <component :is="renderComponent" />
     </template>
     <template #fallback>
       <Loading />
     </template>
   </suspense>
-  <ThemeDrawer />
+  <ThemeDrawer v-if="!isLockGet" />
 </template>
 
 <script setup lang="ts" name="layoutAsync">
 import { computed, defineAsyncComponent, type Component } from "vue";
 import { LayoutType } from "@/stores/interface";
 import { useGlobalStore } from "@/stores/modules/global";
+import { useLockStore } from "@/stores/modules/lock";
 import Loading from "@/components/Loading/index.vue";
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
+import LockPage from "./components/LockScreen/LockPage.vue";
 
 const LayoutComponents: Record<LayoutType, Component> = {
   vertical: defineAsyncComponent(() => import("./LayoutVertical/index.vue")),
@@ -26,7 +28,18 @@ const LayoutComponents: Record<LayoutType, Component> = {
 };
 
 const globalStore = useGlobalStore();
+const lockStore = useLockStore();
+
 const layout = computed(() => globalStore.layout);
+const isLockGet = computed(() => lockStore.isLockGet);
+
+const renderComponent = computed(() => {
+  if (isLockGet.value) {
+    return LockPage;
+  } else {
+    return LayoutComponents[layout.value];
+  }
+});
 </script>
 
 <style scoped lang="scss">

@@ -59,3 +59,9 @@ export interface AuthState {
 export interface KeepAliveState {
   keepAliveName: string[];
 }
+
+/* LockState */
+export interface LockState {
+  isLock: boolean;
+  lockPassword: string;
+}
