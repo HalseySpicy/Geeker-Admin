@@ -12,7 +12,7 @@
         <el-avatar :size="64" :src="avatar" />
         <p>{{ username }}</p>
         <el-form-item prop="password">
-          <el-input v-model="form.password" type="password" placeholder="请输入锁屏密码" show-password></el-input>
+          <el-input v-model="form.password" type="password" placeholder="请输入锁屏密码或者用户密码" show-password></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" style="width: 100%" :loading="loading" @click="handleUnlock(formRef)">进入系统</el-button>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, nextTick } from "vue";
+import { ref, computed, reactive, nextTick, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/modules/user";
 import { useLockStore } from "@/stores/modules/lock";
@@ -53,6 +53,7 @@ const rules = reactive<FormRules<RuleForm>>({
   password: [{ required: true, message: "请输入锁屏密码", trigger: "blur" }]
 });
 
+// 锁屏
 const handleLock = () => {
   isLock.value = false;
   form.password = "";
@@ -61,6 +62,7 @@ const handleLock = () => {
   });
 };
 
+// 解锁
 const loading = ref(false);
 const handleUnlock = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
@@ -68,19 +70,14 @@ const handleUnlock = (formEl: FormInstance | undefined) => {
     if (!valid) return;
     loading.value = true;
     try {
-      const res = await lockStore.unLock(form.password);
-      if (res) {
-        // 解锁成功
-        lockStore.resetLock();
-      } else {
-        ElMessage.error("解锁失败，请检查锁屏密码是否正确，或重新登录！");
-      }
+      await lockStore.unLock(form.password);
     } finally {
       loading.value = false;
     }
   });
 };
 
+// 重新登录
 const handleLogin = () => {
   ElMessageBox.confirm("您是否确认重新登录?", "温馨提示", {
     confirmButtonText: "确定",
@@ -101,6 +98,17 @@ const handleLogin = () => {
     ElMessage.success("退出登录成功，请重新登录！");
   });
 };
+
+onMounted(() => {
+  // 监听 enter 事件（调用解锁）
+  document.onkeydown = (e: KeyboardEvent) => {
+    e = (window.event as KeyboardEvent) || e;
+    if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
+      if (loading.value) return;
+      handleUnlock(formRef.value);
+    }
+  };
+});
 </script>
 
 <style scoped lang="scss">

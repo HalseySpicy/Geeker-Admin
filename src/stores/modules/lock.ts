@@ -1,7 +1,10 @@
 import { defineStore } from "pinia";
+import { useUserStore } from "@/stores/modules/user";
 import { LockState } from "@/stores/interface";
 import piniaPersistConfig from "@/stores/helper/persist";
 import md5 from "md5";
+import { loginApi } from "@/api/modules/login";
+// import { ElMessage } from "element-plus";
 
 export const useLockStore = defineStore({
   id: "geeker-lock",
@@ -17,7 +20,7 @@ export const useLockStore = defineStore({
     // 设置锁屏
     setLock(lockPassword: string) {
       this.isLock = true;
-      this.lockPassword = md5(lockPassword);
+      this.lockPassword = lockPassword ? md5(lockPassword) : "";
     },
     // 清除锁屏
     resetLock() {
@@ -27,9 +30,13 @@ export const useLockStore = defineStore({
     // 解锁
     async unLock(password: string) {
       if (this.lockPassword === md5(password)) {
-        return true;
+        this.resetLock();
       } else {
-        return false;
+        const userStore = useUserStore();
+        const username = userStore?.userInfo?.username;
+        const { data } = await loginApi({ username, password: md5(password) });
+        userStore.setToken(data.access_token);
+        this.resetLock();
       }
     }
   },

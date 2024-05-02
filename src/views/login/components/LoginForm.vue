@@ -74,6 +74,14 @@ const login = (formEl: FormInstance | undefined) => {
       const { data } = await loginApi({ ...loginForm, password: md5(loginForm.password) });
       userStore.setToken(data.access_token);
 
+      // 保存用户信息，用于显示头像、用户名、自动锁屏后解锁等
+
+      userStore.setUserInfo({
+        ...data.userInfo,
+        name: loginForm.username,
+        username: loginForm.username
+      });
+
       // 清除锁屏
       lockStore.resetLock();
 
