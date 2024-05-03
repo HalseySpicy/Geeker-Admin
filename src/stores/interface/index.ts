@@ -16,6 +16,7 @@ export interface GlobalState {
   isWeak: boolean;
   asideInverted: boolean;
   headerInverted: boolean;
+  lockTime: number;
   isCollapse: boolean;
   accordion: boolean;
   breadcrumb: boolean;

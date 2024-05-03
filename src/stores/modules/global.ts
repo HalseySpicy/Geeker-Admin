@@ -27,6 +27,8 @@ export const useGlobalStore = defineStore({
     asideInverted: false,
     // 头部反转
     headerInverted: false,
+    // 自动锁屏
+    lockTime: 0,
     // 折叠菜单
     isCollapse: false,
     // 菜单手风琴

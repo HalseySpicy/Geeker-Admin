@@ -18,7 +18,7 @@ export const useLockStore = defineStore({
   },
   actions: {
     // 设置锁屏
-    setLock(lockPassword: string) {
+    setLock(lockPassword: string = "") {
       this.isLock = true;
       this.lockPassword = lockPassword ? md5(lockPassword) : "";
     },

@@ -2,12 +2,12 @@
   <div class="lock-page">
     <div class="lock flx-center">
       <div>翻页时钟</div>
-      <div class="unlock-btn flx-center" @click="handleLock">
+      <div class="unlock-btn flx-center common" @click="handleLock">
         <el-icon><Lock /></el-icon>
         <p>点击屏幕解锁</p>
       </div>
     </div>
-    <div v-show="!isLock" class="unlock flx-center" @click="isLock = true">
+    <div v-show="!isLock" class="unlock flx-center common" @click="isLock = true">
       <el-form :model="form" ref="formRef" :rules="rules" class="flx-center" @click.stop="">
         <el-avatar :size="64" :src="avatar" />
         <p>{{ username }}</p>
@@ -35,6 +35,7 @@ import defaultAvatar from "@/assets/images/avatar.gif";
 import { logoutApi } from "@/api/modules/login";
 import { LOGIN_URL } from "@/config";
 import { ElMessageBox, ElMessage } from "element-plus";
+import type { FormInstance, FormRules } from "element-plus";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -42,14 +43,14 @@ const lockStore = useLockStore();
 
 const isLock = ref(true);
 
-const avatar = computed(() => userStore.userInfo.avatar || defaultAvatar);
-const username = computed(() => userStore.userInfo.name);
+const avatar = computed(() => userStore?.userInfo?.avatar || defaultAvatar);
+const username = computed(() => userStore?.userInfo.name);
 
 const formRef = ref<FormInstance>();
 const form = reactive({
   password: ""
 });
-const rules = reactive<FormRules<RuleForm>>({
+const rules = reactive<FormRules<typeof form>>({
   password: [{ required: true, message: "请输入锁屏密码", trigger: "blur" }]
 });
 
@@ -123,14 +124,6 @@ onMounted(() => {
       }
     }
     .unlock-btn {
-      position: absolute;
-      top: 0;
-      left: 0;
-      flex-direction: column;
-      width: 100%;
-      height: 100%;
-      background-color: rgb(0 0 0 / 50%);
-      backdrop-filter: blur(8px);
       opacity: 0;
       .el-icon {
         font-size: 50px;
@@ -138,13 +131,6 @@ onMounted(() => {
     }
   }
   .unlock {
-    position: absolute;
-    top: 0;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0 0 0 / 50%);
     backdrop-filter: blur(8px);
     .el-form {
       flex-direction: column;
@@ -160,6 +146,15 @@ onMounted(() => {
         }
       }
     }
+  }
+  .common {
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 50%);
   }
 }
 </style>

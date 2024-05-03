@@ -97,6 +97,12 @@
       界面设置
     </el-divider>
     <div class="theme-item">
+      <span>自动锁屏</span>
+      <el-select v-model="lockTime" placeholder="Select" style="width: 130px">
+        <el-option v-for="item in lockTimeOptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+    </div>
+    <div class="theme-item">
       <span>菜单折叠</span>
       <el-switch v-model="isCollapse" />
     </div>
@@ -147,6 +153,7 @@ const {
   isWeak,
   asideInverted,
   headerInverted,
+  lockTime,
   isCollapse,
   accordion,
   breadcrumb,
@@ -179,6 +186,16 @@ const setLayout = (val: LayoutType) => {
 // 打开主题设置
 const drawerVisible = ref(false);
 mittBus.on("openThemeDrawer", () => (drawerVisible.value = true));
+
+// 锁屏时间选项
+const lockTimeOptions = [
+  { label: "不自动锁屏", value: 0 },
+  { label: "1分钟", value: 1 },
+  { label: "5分钟", value: 5 },
+  { label: "10分钟", value: 10 },
+  { label: "30分钟", value: 30 },
+  { label: "1小时", value: 60 }
+];
 </script>
 
 <style scoped lang="scss">
