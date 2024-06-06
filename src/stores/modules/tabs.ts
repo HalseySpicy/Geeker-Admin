@@ -20,7 +20,7 @@ export const useTabsStore = defineStore({
       }
       // add keepalive
       if (!keepAliveStore.keepAliveName.includes(tabItem.name) && tabItem.isKeepAlive) {
-        keepAliveStore.addKeepAliveName(tabItem.path);
+        keepAliveStore.addKeepAliveName(tabItem.name);
       }
     },
     // Remove Tabs

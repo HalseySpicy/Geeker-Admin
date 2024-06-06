@@ -37,7 +37,9 @@ export const initDynamicRouter = async () => {
     authStore.flatMenuListGet.forEach(item => {
       item.children && delete item.children;
       if (item.component && typeof item.component == "string") {
-        item.component = modules["/src/views" + item.component + ".vue"];
+        const component = modules["/src/views" + item.component + ".vue"];
+        // 动态加载组建的name，配合keep-aliva缓存页面，确保切换标签时，页面内容不变（解决编辑，新增页面公用同一组件的情况）
+        item.component = () => component().then((com: any) => ({ ...com.default, name: item.name }));
       }
       if (item.meta.isFull) {
         router.addRoute(item as unknown as RouteRecordRaw);
