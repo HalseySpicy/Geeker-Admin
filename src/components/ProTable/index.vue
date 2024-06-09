@@ -67,7 +67,7 @@
           </template>
         </el-table-column>
         <!-- other -->
-        <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
+        <TableColumn v-else :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" v-bind="scope" />
           </template>
