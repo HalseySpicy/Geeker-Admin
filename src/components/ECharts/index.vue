@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts" name="ECharts">
-import { ref, onMounted, onBeforeUnmount, watch, computed, markRaw, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch, computed, markRaw, nextTick, onActivated } from "vue";
 import { EChartsType, ECElementEvent } from "echarts/core";
 import echarts, { ECOption } from "./config";
 import { useDebounceFn } from "@vueuse/core";
@@ -83,6 +83,12 @@ watch(
 onMounted(() => {
   nextTick(() => init());
   window.addEventListener("resize", debouncedResize);
+});
+
+onActivated(() => {
+  if (chartInstance.value) {
+    chartInstance.value.resize();
+  }
 });
 
 onBeforeUnmount(() => {
