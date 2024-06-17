@@ -5,8 +5,11 @@ import qs from "qs";
 let pendingMap = new Map<string, AbortController>();
 
 // 序列化参数
-export const getPendingUrl = (config: CustomAxiosRequestConfig) =>
-  [config.method, config.url, qs.stringify(config.data), qs.stringify(config.params)].join("&");
+export const getPendingUrl = (config: CustomAxiosRequestConfig) => {
+  let data = config.data;
+  if (typeof data === "string") data = JSON.parse(data);
+  return [config.method, config.url, qs.stringify(data), qs.stringify(config.params)].join("&");
+};
 
 export class AxiosCanceler {
   /**
