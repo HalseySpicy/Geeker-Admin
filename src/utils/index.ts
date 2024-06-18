@@ -266,6 +266,26 @@ export function handleRowAccordingToProp(row: { [key: string]: any }, prop: stri
 }
 
 /**
+ * 处理 prop 为多级嵌套的情况，设置值 (列如: prop: user.name)
+ * @param {Object} row 当前行数据
+ * @param {String} prop 当前 prop
+ * @param {any} value  要设置的值
+ * @returns
+ */
+export function sethandleRowAccordingToProp(row: { [key: string]: any }, prop: string, value: any) {
+  if (!prop.includes(".")) {
+    row[prop] = value;
+  }
+  const list = prop.split(".");
+  const lastProp = list.pop();
+  let tmpRow = row;
+  for (let i = 0; i < list.length; i++) {
+    tmpRow = tmpRow[list[i]];
+  }
+  if (lastProp) tmpRow[lastProp] = value;
+}
+
+/**
  * @description 处理 prop，当 prop 为多级嵌套时 ==> 返回最后一级 prop
  * @param {String} prop 当前 prop
  * @returns {String}
