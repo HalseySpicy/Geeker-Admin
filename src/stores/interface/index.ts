@@ -16,6 +16,7 @@ export interface GlobalState {
   isWeak: boolean;
   asideInverted: boolean;
   headerInverted: boolean;
+  lockTime: number;
   isCollapse: boolean;
   accordion: boolean;
   breadcrumb: boolean;
@@ -28,7 +29,10 @@ export interface GlobalState {
 /* UserState */
 export interface UserState {
   token: string;
-  userInfo: { name: string };
+  userInfo: {
+    username: string;
+    name: string;
+  };
 }
 
 /* tabsMenuProps */
@@ -58,4 +62,10 @@ export interface AuthState {
 /* KeepAliveState */
 export interface KeepAliveState {
   keepAliveName: string[];
+}
+
+/* LockState */
+export interface LockState {
+  isLock: boolean;
+  lockPassword: string;
 }

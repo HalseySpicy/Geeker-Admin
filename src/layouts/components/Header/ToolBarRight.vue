@@ -7,6 +7,7 @@
       <ThemeSetting id="themeSetting" />
       <Message id="message" />
       <Fullscreen id="fullscreen" />
+      <LockScreen id="lockScreen" />
     </div>
     <span class="username">{{ username }}</span>
     <Avatar />
@@ -22,6 +23,7 @@ import SearchMenu from "./components/SearchMenu.vue";
 import ThemeSetting from "./components/ThemeSetting.vue";
 import Message from "./components/Message.vue";
 import Fullscreen from "./components/Fullscreen.vue";
+import LockScreen from "../LockScreen/index.vue";
 import Avatar from "./components/Avatar.vue";
 
 const userStore = useUserStore();
