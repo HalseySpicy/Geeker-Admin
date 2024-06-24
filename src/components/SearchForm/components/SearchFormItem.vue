@@ -66,10 +66,10 @@ const handleSearchProps = computed(() => {
   const searchEl = props.column.search?.el;
   let searchProps = props.column.search?.props ?? {};
   if (searchEl === "tree-select") {
-    searchProps = { ...searchProps, props: { ...searchProps.props, label, children }, nodeKey: value };
+    searchProps = { ...searchProps, props: { ...searchProps, label, children }, nodeKey: value };
   }
   if (searchEl === "cascader") {
-    searchProps = { ...searchProps, props: { ...searchProps.props, label, value, children } };
+    searchProps = { ...searchProps, props: { ...searchProps, label, value, children } };
   }
   return searchProps;
 });

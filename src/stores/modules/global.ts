@@ -31,6 +31,8 @@ export const useGlobalStore = defineStore({
     isCollapse: false,
     // 菜单手风琴
     accordion: true,
+    // 页面水印
+    watermark: false,
     // 面包屑导航
     breadcrumb: true,
     // 面包屑导航图标

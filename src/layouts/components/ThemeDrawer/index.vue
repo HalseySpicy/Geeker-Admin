@@ -105,6 +105,10 @@
       <el-switch v-model="accordion" />
     </div>
     <div class="theme-item">
+      <span>水印</span>
+      <el-switch v-model="watermark" />
+    </div>
+    <div class="theme-item">
       <span>面包屑</span>
       <el-switch v-model="breadcrumb" />
     </div>
@@ -149,6 +153,7 @@ const {
   headerInverted,
   isCollapse,
   accordion,
+  watermark,
   breadcrumb,
   breadcrumbIcon,
   tabs,
