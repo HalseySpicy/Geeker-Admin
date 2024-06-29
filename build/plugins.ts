@@ -16,16 +16,13 @@ import NextDevTools from "vite-plugin-vue-devtools";
  * @param viteEnv
  */
 export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOption[])[] => {
-  const { VITE_GLOB_APP_TITLE, VITE_REPORT, VITE_PWA } = viteEnv;
+  const { VITE_GLOB_APP_TITLE, VITE_REPORT, VITE_DEVTOOLS, VITE_PWA } = viteEnv;
   return [
-    NextDevTools({
-      // 点击文件使用哪个开发工具打开
-      launchEditor: "code"
-    }),
-    // 添加Vue Dev Tools调试工具
     vue(),
     // vue 可以使用 jsx/tsx 语法
     vueJsx(),
+    // devTools
+    VITE_DEVTOOLS && NextDevTools({ launchEditor: "code" }),
     // esLint 报错信息显示在浏览器界面上
     eslintPlugin(),
     // name 可以写在 script 标签上

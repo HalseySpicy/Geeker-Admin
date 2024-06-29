@@ -92,6 +92,5 @@
     "yiwen",
     "zhongyingwen",
     "zhuti"
-  ],
-  "i18n-ally.localesPaths": ["src/languages"]
+  ]
 }
