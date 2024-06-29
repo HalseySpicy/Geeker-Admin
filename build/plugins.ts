@@ -9,6 +9,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import eslintPlugin from "vite-plugin-eslint";
 import viteCompression from "vite-plugin-compression";
 import vueSetupExtend from "unplugin-vue-setup-extend-plus/vite";
+import NextDevTools from "vite-plugin-vue-devtools";
 
 /**
  * 创建 vite 插件
@@ -17,6 +18,11 @@ import vueSetupExtend from "unplugin-vue-setup-extend-plus/vite";
 export const createVitePlugins = (viteEnv: ViteEnv): (PluginOption | PluginOption[])[] => {
   const { VITE_GLOB_APP_TITLE, VITE_REPORT, VITE_PWA } = viteEnv;
   return [
+    NextDevTools({
+      // 点击文件使用哪个开发工具打开
+      launchEditor: "code"
+    }),
+    // 添加Vue Dev Tools调试工具
     vue(),
     // vue 可以使用 jsx/tsx 语法
     vueJsx(),

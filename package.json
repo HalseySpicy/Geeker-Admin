@@ -99,6 +99,7 @@
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-pwa": "^0.20.0",
     "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-vue-devtools": "^7.3.4",
     "vue-tsc": "^2.0.22"
   },
   "engines": {
