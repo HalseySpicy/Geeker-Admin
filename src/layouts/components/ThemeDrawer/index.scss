@@ -134,4 +134,25 @@
       width: 55%;
     }
   }
+  .layout-mixed {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .layout-light {
+      width: 20%;
+      height: 100%;
+    }
+    .layout-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 72%;
+      .layout-dark {
+        height: 20%;
+      }
+      .layout-content {
+        height: 67%;
+      }
+    }
+  }
 }

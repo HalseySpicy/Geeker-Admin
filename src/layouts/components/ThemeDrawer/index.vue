@@ -49,6 +49,18 @@
           </el-icon>
         </div>
       </el-tooltip>
+      <el-tooltip effect="dark" content="混合" placement="top" :show-after="200">
+        <div :class="['layout-item layout-mixed', { 'is-active': layout == 'mixed' }]" @click="setLayout('mixed')">
+          <div class="layout-light"></div>
+          <div class="layout-container">
+            <div class="layout-dark"></div>
+            <div class="layout-content"></div>
+          </div>
+          <el-icon v-if="layout == 'mixed'">
+            <CircleCheckFilled />
+          </el-icon>
+        </div>
+      </el-tooltip>
     </div>
     <div class="theme-item">
       <span>
