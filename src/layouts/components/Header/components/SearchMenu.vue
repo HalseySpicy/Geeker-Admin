@@ -20,7 +20,7 @@
             <el-icon class="menu-icon">
               <component :is="item.meta.icon"></component>
             </el-icon>
-            <span class="menu-title">{{ item.meta.title }}</span>
+            <span class="menu-title">{{ item.meta.customTitle }}</span>
           </div>
           <i :class="'iconfont icon-huiche'" class="menu-enter" @click="handleOpen"></i>
         </div>
@@ -37,9 +37,10 @@ import { Search } from "@element-plus/icons-vue";
 import { useAuthStore } from "@/stores/modules/auth";
 import { useRouter } from "vue-router";
 import { useDebounceFn } from "@vueuse/core";
-
+import { findParents } from "@/utils/index";
 const router = useRouter();
 const authStore = useAuthStore();
+const authMenuList = computed(() => authStore.authMenuListGet);
 const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
 
 onMounted(() => {
@@ -70,12 +71,20 @@ const handleOpen = () => {
 const searchList = ref<Menu.MenuOptions[]>([]);
 const updateSearchList = () => {
   searchList.value = searchMenu.value
-    ? menuList.value.filter(
-        item =>
-          (item.path.toLowerCase().includes(searchMenu.value.toLowerCase()) ||
-            item.meta.title.toLowerCase().includes(searchMenu.value.toLowerCase())) &&
-          !item.meta?.isHide
-      )
+    ? menuList.value.filter(item => {
+        if (
+          item.path.toLowerCase().includes(searchMenu.value.toLowerCase()) ||
+          item.meta.title.toLowerCase().includes(searchMenu.value.toLowerCase())
+        ) {
+          if (!item.meta?.isHide && item.path && item.component) {
+            let titleList = findParents(authMenuList.value, item).map((item: Menu.MenuOptions) => item.meta.title);
+            if (titleList.length > 0) {
+              item.meta.customTitle = titleList.join(" / ");
+            }
+            return item;
+          }
+        }
+      })
     : [];
   activePath.value = searchList.value.length ? searchList.value[0].path : "";
 };

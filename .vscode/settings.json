@@ -44,6 +44,7 @@
     "Biao",
     "brotli",
     "cascader",
+    "columnconstcolumn",
     "commitlint",
     "contentleft",
     "contentright",
@@ -55,7 +56,6 @@
     "geeker",
     "Gitee",
     "hexs",
-    "huiche",
     "iconfont",
     "juejin",
     "liquidfill",
@@ -94,5 +94,11 @@
     "zhongyingwen",
     "zhuti"
   ],
-  "i18n-ally.localesPaths": ["src/languages"]
+  "i18n-ally.localesPaths": ["src/languages"],
+  "vue.format.script.initialIndent": true,
+  "vue.format.style.initialIndent": true,
+  "vue.inlayHints.inlineHandlerLeading": false,
+  "vue.inlayHints.missingProps": true,
+  "vue.inlayHints.optionsWrapper": true,
+  "vue.inlayHints.vBindShorthand": true
 }
