@@ -7,8 +7,7 @@
           v-for="item in languageList"
           :key="item.value"
           :command="item.value"
-          :disabled="language === item.value"
-        >
+          :disabled="language === item.value">
           {{ item.label }}
         </el-dropdown-item>
       </el-dropdown-menu>

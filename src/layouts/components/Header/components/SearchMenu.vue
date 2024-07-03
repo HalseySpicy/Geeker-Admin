@@ -8,16 +8,14 @@
         placeholder="菜单搜索：支持菜单名称、路径"
         size="large"
         clearable
-        :prefix-icon="Search"
-      ></el-input>
+        :prefix-icon="Search"></el-input>
       <div v-if="searchList.length" class="menu-list" ref="menuListRef">
         <div
           v-for="item in searchList"
           :key="item.path"
           :class="['menu-item', { 'menu-active': item.path === activePath }]"
           @mouseenter="mouseoverMenuItem(item)"
-          @click="handleClickMenu()"
-        >
+          @click="handleClickMenu()">
           <div class="menu-lf">
             <el-icon class="menu-icon">
               <component :is="item.meta.icon"></component>

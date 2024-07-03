@@ -13,8 +13,7 @@
             :default-active="activeMenu"
             :collapse="isCollapse"
             :unique-opened="accordion"
-            :collapse-transition="false"
-          >
+            :collapse-transition="false">
             <SubMenu :menu-list="menuList" />
           </el-menu>
         </el-scrollbar>

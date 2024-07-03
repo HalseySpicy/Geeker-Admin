@@ -5,16 +5,14 @@
       title="部门列表(单选)"
       :request-api="getUserDepartment"
       :default-value="initParam.departmentId"
-      @change="changeTreeFilter"
-    />
+      @change="changeTreeFilter" />
     <div class="table-box">
       <ProTable
         ref="proTable"
         :columns="columns"
         :request-api="getUserList"
         :init-param="initParam"
-        :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
-      >
+        :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }">
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
           <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
