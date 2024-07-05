@@ -1,4 +1,4 @@
-# Geeker-Admin
+# Geeker-Admin [🇨🇳](/README.md)  [🇯🇵](/README_JA.md)
 
 ### 介绍 📖
 
