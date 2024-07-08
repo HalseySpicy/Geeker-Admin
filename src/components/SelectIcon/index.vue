@@ -23,13 +23,13 @@
           </div>
         </div>
       </el-scrollbar>
-      <el-empty v-else description="未搜索到您要找的图标~" />
+      <el-empty description="未搜索到您要找的图标~" v-else />
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts" name="SelectIcon">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import * as Icons from "@element-plus/icons-vue";
 
 interface SelectIconProps {
@@ -48,7 +48,10 @@ const props = withDefaults(defineProps<SelectIconProps>(), {
 
 // 重新接收一下，防止打包后 clearable 报错
 const valueIcon = ref(props.iconValue);
-
+watch(props, newValue => {
+  console.log("iconValue change", newValue);
+  valueIcon.value = newValue.iconValue;
+});
 // open Dialog
 const dialogVisible = ref(false);
 const openDialog = () => (dialogVisible.value = true);
