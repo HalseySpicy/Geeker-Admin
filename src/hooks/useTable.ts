@@ -1,5 +1,5 @@
 import { Table } from "./interface";
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, ref, Ref } from "vue";
 
 /**
  * @description table 页面操作方法封装
@@ -35,6 +35,9 @@ export const useTable = (
     totalParam: {}
   });
 
+  // 数据是否为树形结构
+  const isTreeData: Ref<boolean> = ref(false);
+
   /**
    * @description 分页查询参数(只包括分页和表格字段排序,其他排序方式可自行配置)
    * */
@@ -60,6 +63,10 @@ export const useTable = (
       // 先把初始化参数和分页参数放到总参数里面
       Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
       let { data } = await api({ ...state.searchInitParam, ...state.totalParam });
+      // 简单判断data是否树结构
+      data.list?.map(item => {
+        if (item.children || item.child || item._children) isTreeData.value = true;
+      });
       dataCallBack && (data = dataCallBack(data));
       state.tableData = isPageable ? data.list : data;
       // 解构后台返回的分页数据 (如果有分页更新分页信息)
@@ -134,6 +141,7 @@ export const useTable = (
 
   return {
     ...toRefs(state),
+    isTreeData,
     getTableList,
     search,
     reset,

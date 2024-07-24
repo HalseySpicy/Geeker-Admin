@@ -17,6 +17,8 @@
         :request-auto="false"
         :init-param="initParam"
         :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
+        @update-action="updateAction"
+        @detail-action="detailAction"
       >
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
@@ -51,20 +53,23 @@ import { getUserTreeList, deleteUser, editUser, addUser, getUserStatus, getUserD
 
 onMounted(() => {
   getTreeFilter();
-  ElNotification({
-    title: "温馨提示",
-    message: "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
-    type: "info",
-    duration: 10000
+
+  const msg = [
+    "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
+    "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
+    "该页面可切换为图谱展示，详情可查看代码。"
+  ];
+
+  msg.map(item => {
+    setTimeout(() => {
+      ElNotification({
+        title: "提示",
+        message: item,
+        type: "info",
+        duration: 10000
+      });
+    }, 100);
   });
-  setTimeout(() => {
-    ElNotification({
-      title: "温馨提示",
-      message: "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
-      type: "info",
-      duration: 10000
-    });
-  }, 0);
 });
 
 // ProTable 实例
@@ -151,5 +156,12 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     getTableList: proTable.value?.getTableList
   };
   drawerRef.value?.acceptParams(params);
+};
+
+const updateAction = (data: any) => {
+  console.log("点击了编辑按钮", data);
+};
+const detailAction = (data: any) => {
+  console.log({ data });
 };
 </script>

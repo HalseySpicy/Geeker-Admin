@@ -27,6 +27,26 @@ export function localSet(key: string, value: any) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
+// 判断是否数结构
+export function hasTreeStructure(arr: any[], childrenKey: string = "children") {
+  if (!Array.isArray(arr)) {
+    return false;
+  }
+
+  for (const item of arr) {
+    if (typeof item === "object" && item !== null) {
+      if (Array.isArray(item[childrenKey])) {
+        return true;
+      }
+      // Recursively check for nested structures
+      if (hasTreeStructure(item[childrenKey], childrenKey)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /**
  * @description 清除localStorage
  * @param {String} key Storage名称

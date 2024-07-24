@@ -51,6 +51,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "qs": "^6.12.1",
+    "relation-graph-vue3": "^2.2.2",
     "screenfull": "^6.0.2",
     "sortablejs": "^1.15.2",
     "vue": "^3.4.31",

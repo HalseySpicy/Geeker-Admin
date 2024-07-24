@@ -20,19 +20,29 @@
       </div>
       <div v-if="toolButton" class="header-button-ri">
         <slot name="toolButton">
-          <el-button v-if="showToolButton('refresh')" :icon="Refresh" circle @click="getTableList" />
-          <el-button v-if="showToolButton('setting') && columns.length" :icon="Operation" circle @click="openColSetting" />
-          <el-button
-            v-if="showToolButton('search') && searchColumns?.length"
-            :icon="Search"
-            circle
-            @click="isShowSearch = !isShowSearch"
-          />
+          <el-tooltip content="刷新" placement="top">
+            <el-button v-if="showToolButton('refresh')" :icon="Refresh" circle @click="getTableList" />
+          </el-tooltip>
+          <el-tooltip content="列设置" placement="top">
+            <el-button v-if="showToolButton('setting') && columns.length" :icon="Operation" circle @click="openColSetting" />
+          </el-tooltip>
+          <el-tooltip content="开/关搜索" placement="top">
+            <el-button
+              v-if="showToolButton('search') && searchColumns?.length"
+              :icon="Search"
+              circle
+              @click="isShowSearch = !isShowSearch"
+            />
+          </el-tooltip>
+          <el-tooltip content="开/关图谱" placement="top">
+            <el-button v-if="isTreeData" :icon="Share" circle @click="isShowGraph = !isShowGraph" />
+          </el-tooltip>
         </slot>
       </div>
     </div>
     <!-- 表格主体 -->
     <el-table
+      v-if="!isShowGraph"
       ref="tableRef"
       v-bind="$attrs"
       :id="uuid"
@@ -88,6 +98,21 @@
         </div>
       </template>
     </el-table>
+    <!-- 图谱组件 -->
+    <Graph
+      v-if="tableData && isShowGraph"
+      :tree-data="tableData"
+      children-name="children"
+      label-name="username"
+      label-key="id"
+      @update-action="updateAction"
+      @detail-action="detailAction"
+      @delete-action="deleteAction"
+    >
+      <template #action="{ nodeObject }">
+        <slot name="graphAction" :node-object="nodeObject"></slot>
+      </template>
+    </Graph>
     <!-- 分页组件 -->
     <slot name="pagination">
       <Pagination
@@ -103,18 +128,19 @@
 </template>
 
 <script setup lang="ts" name="ProTable">
-import { ref, watch, provide, onMounted, unref, computed, reactive } from "vue";
+import { ref, watch, provide, onMounted, unref, computed, reactive, Ref } from "vue";
 import { ElTable } from "element-plus";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps, TypeProps } from "@/components/ProTable/interface";
-import { Refresh, Operation, Search } from "@element-plus/icons-vue";
-import { generateUUID, handleProp } from "@/utils";
+import { Refresh, Operation, Search, Share } from "@element-plus/icons-vue";
+import { generateUUID, handleProp, hasTreeStructure } from "@/utils";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
+import Graph from "./components/Graph.vue";
 import Sortable from "sortablejs";
 
 export interface ProTableProps {
@@ -157,6 +183,9 @@ const columnTypes: TypeProps[] = ["selection", "radio", "index", "expand", "sort
 // 是否显示搜索模块
 const isShowSearch = ref(true);
 
+// 是否展示图谱
+const isShowGraph: Ref<boolean> = ref(false);
+
 // 控制 ToolButton 显示
 const showToolButton = (key: "refresh" | "setting" | "search") => {
   return Array.isArray(props.toolButton) ? props.toolButton.includes(key) : props.toolButton;
@@ -169,8 +198,23 @@ const radio = ref("");
 const { selectionChange, selectedList, selectedListIds, isSelected } = useSelection(props.rowKey);
 
 // 表格操作 Hooks
-const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
-  useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
+const {
+  isTreeData,
+  tableData,
+  pageable,
+  searchParam,
+  searchInitParam,
+  getTableList,
+  search,
+  reset,
+  handleSizeChange,
+  handleCurrentChange
+} = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
+// console.log({ isTreeData });
+
+if (props.data) {
+  isTreeData.value = hasTreeStructure(props.data, "children");
+}
 
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
@@ -271,6 +315,9 @@ const emit = defineEmits<{
   search: [];
   reset: [];
   dragSort: [{ newIndex?: number; oldIndex?: number }];
+  updateAction: [data: any];
+  detailAction: [data: any];
+  deleteAction: [data: any];
 }>();
 
 const _search = () => {
@@ -295,6 +342,18 @@ const dragSort = () => {
       emit("dragSort", { newIndex, oldIndex });
     }
   });
+};
+
+const updateAction = (data: any) => {
+  emit("updateAction", data);
+};
+
+const detailAction = (data: any) => {
+  emit("detailAction", data);
+};
+
+const deleteAction = (data: any) => {
+  emit("deleteAction", data);
 };
 
 // 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
