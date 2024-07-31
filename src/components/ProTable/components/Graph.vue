@@ -32,9 +32,10 @@
       }"
     >
       <el-space :direction="'vertical'">
-        <el-button type="primary" :icon="View" @click.stop="doAction('detail')">查 看</el-button>
-        <el-button type="primary" :icon="EditPen" @click.stop="doAction('update')">编 辑</el-button>
-        <el-button type="primary" :icon="Delete" @click.stop="doAction('delete')">删 除</el-button>
+        <slot name="preAction" :node-object="currentNode?.data"></slot>
+        <el-button type="primary" :icon="View" @click.stop="doAction('查看')">查 看</el-button>
+        <el-button type="primary" :icon="EditPen" @click.stop="doAction('编辑')">编 辑</el-button>
+        <el-button type="primary" :icon="Delete" @click.stop="doAction('删除')">删 除</el-button>
         <slot name="action" :node-object="currentNode?.data"></slot>
       </el-space>
     </div>
@@ -89,7 +90,7 @@ const props = withDefaults(
   }
 );
 
-const emit = defineEmits(["updateAction", "detailAction", "deleteAction"]);
+const emit = defineEmits(["action"]);
 
 const page = ref();
 // 图谱实例
@@ -234,21 +235,7 @@ const showNodeMenus = (nodeObject: RGNode, $event: MouseEvent) => {
 
 // 节点菜单操作
 const doAction = (actionName: string) => {
-  ElNotification({
-    title: "Tip",
-    message: "您点击了" + actionName + " 操作: " + currentNode.value?.text,
-    type: "success"
-  });
-  switch (actionName) {
-    case "update":
-      emit("updateAction", currentNode.value?.data);
-      break;
-    case "detail":
-      emit("detailAction", currentNode.value?.data);
-      break;
-    default:
-      emit("deleteAction", currentNode.value?.data);
-  }
+  emit("action", actionName, currentNode.value?.data);
   isShowNodeMenuPanel.value = false;
 };
 
@@ -312,7 +299,7 @@ const beforeCreateLine = (rgActionParams: any, setEventReturnValue: (customRetur
       setEventReturnValue(true);
       replyLine();
       ElNotification({
-        title: "提示",
+        title: "警告",
         message: "禁止跨父节点连线",
         type: "warning"
       });
@@ -335,8 +322,13 @@ const beforeCreateLine = (rgActionParams: any, setEventReturnValue: (customRetur
   });
 };
 
+const focusOnNode = (node: any) => {
+  graphInstance.value.focusNodeById(node);
+};
+
 defineExpose({
-  jsonData: jsonData.value
+  jsonData: jsonData.value,
+  focusOnNode
 });
 </script>
 

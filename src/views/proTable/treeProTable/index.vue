@@ -18,9 +18,8 @@
         :init-param="initParam"
         :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
         :enable-cross-parents="true"
-        @update-action="updateAction"
-        @detail-action="detailAction"
-        label-key="username"
+        @action="openDrawer"
+        @delete-action="deleteAccount"
         label-name="username"
       >
         <!-- 表格 header 按钮 -->
@@ -32,6 +31,9 @@
           <el-button type="primary" link :icon="View" @click="openDrawer('查看', scope.row)">查看</el-button>
           <el-button type="primary" link :icon="EditPen" @click="openDrawer('编辑', scope.row)">编辑</el-button>
           <el-button type="primary" link :icon="Delete" @click="deleteAccount(scope.row)">删除</el-button>
+        </template>
+        <template #graphPreAction="scope">
+          <el-button type="primary" :icon="View" @click="openDrawer('新增', scope.row)">新增</el-button>
         </template>
       </ProTable>
       <UserDrawer ref="drawerRef" />
@@ -57,26 +59,29 @@ import { getUserTreeList, deleteUser, editUser, addUser, getUserStatus, getUserD
 onMounted(() => {
   getTreeFilter();
 
-  // const msg = [
-  //   "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
-  //   "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
-  //   "该页面可切换为图谱展示，详情可查看代码。"
-  // ];
+  const msg = [
+    "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
+    "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
+    "该页面可切换为图谱展示，详情可查看代码。"
+  ];
 
-  // msg.map(item => {
-  //   setTimeout(() => {
-  //     ElNotification({
-  //       title: "提示",
-  //       message: item,
-  //       type: "info",
-  //       duration: 10000
-  //     });
-  //   }, 100);
-  // });
+  msg.map(item => {
+    setTimeout(() => {
+      ElNotification({
+        title: "提示",
+        message: item,
+        type: "info",
+        duration: 10000
+      });
+    }, 100);
+  });
 });
 
 // ProTable 实例
 const proTable = ref<ProTableInstance>();
+
+// 图谱中被选择的节点
+const graphSelectedNode = ref<any>(null);
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({ departmentId: "" });
@@ -92,6 +97,7 @@ const getTreeFilter = async () => {
 
 // 树形筛选切换
 const changeTreeFilter = (val: string) => {
+  console.log("树形筛选切换", val);
   ElMessage.success("请注意查看请求参数变化 🤔");
   proTable.value!.pageable.pageNum = 1;
   initParam.departmentId = val;
@@ -113,7 +119,14 @@ const remoteMethod = (query: string) => {
 // 表格配置项
 const columns = reactive<ColumnProps<User.ResUserList>[]>([
   { type: "index", label: "#", width: 80 },
-  { prop: "username", label: "用户姓名" },
+  {
+    prop: "username",
+    label: "用户姓名",
+    search: {
+      el: "input",
+      props: { placeholder: "请输入用户姓名查询" }
+    }
+  },
   {
     prop: "gender",
     label: "性别",
@@ -159,12 +172,6 @@ const openDrawer = (title: string, row: Partial<User.ResUserList> = {}) => {
     getTableList: proTable.value?.getTableList
   };
   drawerRef.value?.acceptParams(params);
-};
-
-const updateAction = (data: any) => {
-  console.log("点击了编辑按钮", data);
-};
-const detailAction = (data: any) => {
-  console.log({ data });
+  graphSelectedNode.value = row;
 };
 </script>

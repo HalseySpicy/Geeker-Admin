@@ -107,12 +107,13 @@
       :label-name="labelName"
       :label-key="labelKey"
       :enable-cross-parents="enableCrossParents"
-      @update-action="updateAction"
-      @detail-action="detailAction"
-      @delete-action="deleteAction"
+      @action="action"
     >
       <template #action="{ nodeObject }">
         <slot name="graphAction" :node-object="nodeObject"></slot>
+      </template>
+      <template #preAction="{ nodeObject }">
+        <slot name="graphPreAction" :node-object="nodeObject"></slot>
       </template>
     </Graph>
     <!-- 分页组件 -->
@@ -220,7 +221,6 @@ const {
   handleSizeChange,
   handleCurrentChange
 } = useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback, props.requestError);
-// console.log({ isTreeData });
 
 if (props.data) {
   isTreeData.value = hasTreeStructure(props.data, "children");
@@ -326,13 +326,17 @@ const emit = defineEmits<{
   reset: [];
   dragSort: [{ newIndex?: number; oldIndex?: number }];
   updateAction: [data: any];
-  detailAction: [data: any];
+  action: [actionStr: string, data: any];
   deleteAction: [data: any];
   staticDataChange: [data: any];
 }>();
 
 const _search = () => {
-  search();
+  if (!isShowGraph.value) search();
+  else {
+    console.log({ searchParam });
+    relationGraph.value.focusOnNode(searchParam.value[props.labelName]);
+  }
   emit("search");
 };
 
@@ -355,16 +359,11 @@ const dragSort = () => {
   });
 };
 
-const updateAction = (data: any) => {
-  emit("updateAction", data);
-};
-
-const detailAction = (data: any) => {
-  emit("detailAction", data);
-};
-
-const deleteAction = (data: any) => {
-  emit("deleteAction", data);
+const action = (actionStr: string, data: any) => {
+  if (actionStr === "删除") {
+    return emit("deleteAction", data);
+  }
+  emit("action", actionStr, data);
 };
 
 // 表格/图谱切换
