@@ -1,6 +1,17 @@
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="菜单列表" row-key="path" :indent="20" :columns="columns" :data="menuData">
+    <ProTable
+      ref="proTable"
+      title="菜单列表"
+      row-key="path"
+      :indent="20"
+      :columns="columns"
+      :data="menuData"
+      :request-auto="false"
+      :enable-cross-parents="true"
+      label-name="meta.title"
+      @static-data-change="staticDataChange"
+    >
       <!-- 表格 header 按钮 -->
       <template #tableHeader>
         <el-button type="primary" :icon="CirclePlus">新增菜单 </el-button>
@@ -40,4 +51,9 @@ const columns: ColumnProps[] = [
   { prop: "component", label: "组件路径", width: 300 },
   { prop: "operation", label: "操作", width: 250, fixed: "right" }
 ];
+
+const staticDataChange = (data: any) => {
+  console.log(data);
+  menuData.value = data;
+};
 </script>

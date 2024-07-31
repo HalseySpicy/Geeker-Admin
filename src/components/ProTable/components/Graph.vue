@@ -7,11 +7,17 @@
         :options="options"
         :on-node-click="onNodeClick"
         :on-line-click="onLineClick"
+        :on-canvas-click="onCanvasClick"
+        @before-create-line="beforeCreateLine"
       >
         <template #node="{ node }">
           <div class="line-text" @click="showNodeMenus(node, $event)" @contextmenu.prevent.stop="showNodeMenus(node, $event)">
             {{ node.text }}
           </div>
+        </template>
+        <template #graph-plug>
+          <RGEditingConnectController />
+          <RGEditingLineController />
         </template>
       </RelationGraph>
     </div>
@@ -37,7 +43,15 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, Ref, ref, watch } from "vue";
-import RelationGraph, { RGNode } from "relation-graph-vue3";
+import RelationGraph, {
+  RelationGraphComponent,
+  RelationGraphInstance,
+  RGLine,
+  RGLink,
+  RGNode,
+  RGEditingConnectController,
+  RGEditingLineController
+} from "relation-graph-vue3";
 import { Delete, EditPen, View } from "@element-plus/icons-vue";
 import { ElNotification } from "element-plus";
 
@@ -60,16 +74,18 @@ interface JsonData {
 const props = withDefaults(
   defineProps<{
     treeData: any[] | null;
-    labelKey: string;
-    labelName?: string;
+    labelKey?: string;
+    labelName: string;
     childrenName?: string;
+    enableCrossParents?: boolean;
   }>(),
   {
     // eslint-disable-next-line vue/require-valid-default-prop
     treeData: null,
     labelKey: "id",
     labelName: "name",
-    childrenName: "children"
+    childrenName: "children",
+    enableCrossParents: false
   }
 );
 
@@ -77,13 +93,18 @@ const emit = defineEmits(["updateAction", "detailAction", "deleteAction"]);
 
 const page = ref();
 // 图谱实例
-const relationGraph$ = ref("relationGraph$");
+const relationGraph$ = ref<RelationGraphComponent>();
 // 是否展示节点菜单
 const isShowNodeMenuPanel = ref(false);
 // 节点菜单定位
 const nodeMenuPanelPosition = ref({ x: 0, y: 0 });
 // 当前选择的节点
 const currentNode: Ref<RGNode | null> = ref(null);
+// 被操作的原节点
+const originalLine = ref<RGLine>({
+  from: "",
+  to: ""
+});
 
 const options = ref({
   defaultExpandHolderPosition: "right",
@@ -109,8 +130,8 @@ const options = ref({
       allowSwitchLineShape: true,
       zoomToFitWhenRefresh: true,
       checkedLineColor: "#ff0000",
-      force_node_repulsion: 0.2,
-      force_line_elastic: 0.2
+      force_node_repulsion: 0.3,
+      force_line_elastic: 0.8
     }
   ]
 });
@@ -122,11 +143,16 @@ const jsonData: Ref<JsonData> = ref({
   lines: []
 });
 
+const graphInstance = computed<RelationGraphInstance>(() => relationGraph$.value?.getInstance());
+
 // 设置跟节点
 const setRootNode = (data: any[] | null) => {
   jsonData.value.nodes.push({ id: "表格", text: "表格" });
   data?.map((item: any) => {
-    jsonData.value.lines.push({ from: "表格", to: item[props.labelKey] });
+    jsonData.value.lines.push({
+      from: "表格",
+      to: props.labelName.split(".").reduce((acc: any, part: string) => acc && acc[part], item)
+    });
   });
 };
 
@@ -135,15 +161,18 @@ const processGraphData = (data: any[] | null) => {
   data?.map((item: any) => {
     // 节点数据
     jsonData.value.nodes.push({
-      id: item[props.labelKey],
-      text: item[props.labelName],
+      id: props.labelName.split(".").reduce((acc: any, part: string) => acc && acc[part], item),
+      text: props.labelName.split(".").reduce((acc: any, part: string) => acc && acc[part], item),
       data: item
     });
     if (item?.[props.childrenName] && item?.[props.childrenName].length > 0) {
-      item[props.childrenName].map((child: any[]) => {
-        jsonData.value.lines.push({ from: item[props.labelKey], to: child[props.labelKey] });
+      item?.[props.childrenName].map((child: any[]) => {
+        jsonData.value.lines.push({
+          from: props.labelName.split(".").reduce((acc: any, part: string) => acc && acc[part], item),
+          to: props.labelName.split(".").reduce((acc: any, part: string) => acc && acc[part], child)
+        });
       });
-      processGraphData(item[props.childrenName]);
+      processGraphData(item?.[props.childrenName]);
     }
   });
 };
@@ -151,20 +180,17 @@ const processGraphData = (data: any[] | null) => {
 // 监听外部数据变化，重新渲染图谱
 watch(
   () => props.treeData,
-  () => {
-    renderGraph();
-  },
+  () => renderGraph(),
   { deep: true }
 );
 
 // 重置图谱位置
 const resetPosition = () => {
-  const graphInstance = relationGraph$.value.getInstance();
-  graphInstance.setJsonData(jsonData.value);
+  graphInstance.value.setJsonData(jsonData.value);
   setTimeout(async () => {
-    await graphInstance.setZoom(100);
-    await graphInstance.moveToCenter();
-    await graphInstance.zoomToFit();
+    graphInstance.value.setZoom(100);
+    await graphInstance.value.moveToCenter();
+    await graphInstance.value.zoomToFit();
   }, time.value);
 };
 
@@ -172,24 +198,24 @@ const resetPosition = () => {
 const renderGraph = () => {
   jsonData.value.nodes = [];
   jsonData.value.lines = [];
-  console.log("renderGraph:", props.treeData);
+  console.log({ props });
   setRootNode(props?.treeData);
   processGraphData(props?.treeData);
   resetPosition();
 };
 
 // 组件高度变化时重新定位图谱位置
-const resizeObserver = new ResizeObserver(() => {
-  resetPosition();
-});
+// const resizeObserver = new ResizeObserver(() => {
+//   resetPosition();
+// });
 
 onMounted(() => {
   renderGraph();
-  if (page.value) resizeObserver.observe(page.value);
+  // if (page.value) resizeObserver.observe(page.value);
 });
 
 onBeforeUnmount(() => {
-  if (page.value) resizeObserver.unobserve(page.value);
+  // if (page.value) resizeObserver.unobserve(page.value);
 });
 
 // 根据节点数量计算定位时间
@@ -201,8 +227,6 @@ const time = computed(() => {
 const showNodeMenus = (nodeObject: RGNode, $event: MouseEvent) => {
   console.log({ nodeObject });
   currentNode.value = nodeObject;
-  const _base_position = page.value.getBoundingClientRect();
-  console.log("showNodeMenus:", $event.clientX, $event.clientY, _base_position);
   nodeMenuPanelPosition.value.x = $event.clientX;
   nodeMenuPanelPosition.value.y = $event.clientY;
   isShowNodeMenuPanel.value = true;
@@ -231,12 +255,12 @@ const doAction = (actionName: string) => {
 // 节点点击事件
 const onNodeClick = (nodeObject: RGNode) => {
   currentNode.value = nodeObject;
-  const clickedNodeChildrenLines = relationGraph$.value.getLinks();
+  const clickedNodeChildrenLines = graphInstance.value.getLinks();
   clickedNodeChildrenLines.forEach(link => {
     link.relations.forEach(line => {
       line.color = "#b28a60";
       line.fontColor = "#b28a60";
-      line.lineWidth = line.data.originLineWidth;
+      line.lineWidth = line.data!.originLineWidth;
     });
   });
   // 让与{nodeObject}相关的所有连线高亮
@@ -244,9 +268,9 @@ const onNodeClick = (nodeObject: RGNode) => {
     .filter(link => link.fromNode === nodeObject || link.toNode === nodeObject)
     .forEach(link => {
       link.relations.forEach(line => {
-        line.data.orignColor = line.color;
-        line.data.orignFontColor = line.fontColor || line.color;
-        line.data.orignLineWidth = 3;
+        line.data!.orignColor = line.color;
+        line.data!.orignFontColor = line.fontColor || line.color;
+        line.data!.orignLineWidth = 3;
         line.color = "#ff0000";
         line.fontColor = "#ff0000";
         line.lineWidth = 3;
@@ -254,11 +278,66 @@ const onNodeClick = (nodeObject: RGNode) => {
     });
 };
 /** TODO 连线点击事件 */
-const onLineClick = (lineObject, linkObject, $event) => {
-  console.log("======= lineObject ( index.vue ) =======\n", lineObject);
-  console.log("======= linkObject ( index.vue ) =======\n", linkObject);
-  console.log("======= $event ( index.vue ) =======\n", $event);
+const onLineClick = (lineObject: RGLine, linkObject: RGLink) => {
+  console.log({ lineObject, linkObject });
+  originalLine.value = {
+    from: lineObject.from,
+    to: lineObject.to
+  };
+  graphInstance.value.setEditingLine(lineObject, linkObject);
 };
+
+const onCanvasClick = () => {
+  const clickedNodeChildrenLines = graphInstance.value.getLinks();
+  clickedNodeChildrenLines.forEach(link => {
+    link.relations.forEach(line => {
+      line.color = "#b28a60";
+      line.fontColor = "#b28a60";
+      line.lineWidth = line.data!.originLineWidth;
+    });
+  });
+};
+
+// 恢复线条
+const replyLine = () => {
+  graphInstance.value.addLines([originalLine.value]);
+};
+
+const beforeCreateLine = (rgActionParams: any, setEventReturnValue: (customReturnValue: any) => void) => {
+  const fromNode = rgActionParams.fromNode;
+  const toNode = rgActionParams.toNode;
+
+  if (!props.enableCrossParents) {
+    if (fromNode.text != originalLine.value.from) {
+      setEventReturnValue(true);
+      replyLine();
+      ElNotification({
+        title: "提示",
+        message: "禁止跨父节点连线",
+        type: "warning"
+      });
+      return;
+    }
+  }
+
+  jsonData.value.lines.map((item: any, index: number) => {
+    if (item?.to == fromNode?.text) {
+      delete jsonData.value.lines[index];
+      jsonData.value.lines.unshift({
+        from: toNode.text,
+        to: fromNode.text
+      });
+      return;
+    }
+    if (item[props.childrenName] && item[props.childrenName].length > 0) {
+      beforeCreateLine(rgActionParams);
+    }
+  });
+};
+
+defineExpose({
+  jsonData: jsonData.value
+});
 </script>
 
 <style lang="scss" scoped>
@@ -307,5 +386,6 @@ const onLineClick = (lineObject, linkObject, $event) => {
   height: 100%;
   font-size: 23px;
   font-weight: bold;
+  line-height: 24px;
 }
 </style>

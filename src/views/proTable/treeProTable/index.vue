@@ -17,8 +17,11 @@
         :request-auto="false"
         :init-param="initParam"
         :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
+        :enable-cross-parents="true"
         @update-action="updateAction"
         @detail-action="detailAction"
+        label-key="username"
+        label-name="username"
       >
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
@@ -42,7 +45,7 @@ import { onMounted, reactive, ref } from "vue";
 import { User } from "@/api/interface";
 import { genderType } from "@/utils/dict";
 import { useHandleData } from "@/hooks/useHandleData";
-import { ElMessage, ElNotification } from "element-plus";
+import { ElMessage } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
 import TreeFilter from "@/components/TreeFilter/index.vue";
 import ImportExcel from "@/components/ImportExcel/index.vue";
@@ -54,22 +57,22 @@ import { getUserTreeList, deleteUser, editUser, addUser, getUserStatus, getUserD
 onMounted(() => {
   getTreeFilter();
 
-  const msg = [
-    "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
-    "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
-    "该页面可切换为图谱展示，详情可查看代码。"
-  ];
+  // const msg = [
+  //   "该页面 ProTable 数据不会自动请求，需等待 treeFilter 数据请求完成之后，才会触发表格请求。",
+  //   "该页面 ProTable 性别搜索框为远程数据搜索，详情可查看代码。",
+  //   "该页面可切换为图谱展示，详情可查看代码。"
+  // ];
 
-  msg.map(item => {
-    setTimeout(() => {
-      ElNotification({
-        title: "提示",
-        message: item,
-        type: "info",
-        duration: 10000
-      });
-    }, 100);
-  });
+  // msg.map(item => {
+  //   setTimeout(() => {
+  //     ElNotification({
+  //       title: "提示",
+  //       message: item,
+  //       type: "info",
+  //       duration: 10000
+  //     });
+  //   }, 100);
+  // });
 });
 
 // ProTable 实例

@@ -54,8 +54,8 @@ dependencies:
     specifier: ^6.12.1
     version: 6.12.3
   relation-graph-vue3:
-    specifier: ^2.2.2
-    version: 2.2.2
+    specifier: ^2.2.3
+    version: 2.2.3
   screenfull:
     specifier: ^6.0.2
     version: 6.0.2
@@ -7326,8 +7326,8 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /relation-graph-vue3@2.2.2:
-    resolution: {integrity: sha512-mS3wXwnEinLRALjbnKPKJ9m54avdRH1Hne3NHFaiqi4tkJVmECQhIr0/aAF+NNxwnQ+GYXChHmwBGS7KpLNPEg==, tarball: https://registry.npmmirror.com/relation-graph-vue3/-/relation-graph-vue3-2.2.2.tgz}
+  /relation-graph-vue3@2.2.3:
+    resolution: {integrity: sha512-a/NFfFkZf3eQcsQ71X3vM7wQ68JIE2rdyHTD/mhhM6i/oQz7nA+nPvhOqPZZpEtukxtsfNWrPQOEeP+Y1dw8TQ==, tarball: https://registry.npmmirror.com/relation-graph-vue3/-/relation-graph-vue3-2.2.3.tgz}
     dependencies:
       html2canvas: 1.4.1
       screenfull: 5.2.0

@@ -64,9 +64,7 @@ export const useTable = (
       Object.assign(state.totalParam, initParam, isPageable ? pageParam.value : {});
       let { data } = await api({ ...state.searchInitParam, ...state.totalParam });
       // 简单判断data是否树结构
-      data.list?.map(item => {
-        if (item.children || item.child || item._children) isTreeData.value = true;
-      });
+      if (data.list.some(item => item?.children || item?.child || item?._children)) isTreeData.value = true;
       dataCallBack && (data = dataCallBack(data));
       state.tableData = isPageable ? data.list : data;
       // 解构后台返回的分页数据 (如果有分页更新分页信息)

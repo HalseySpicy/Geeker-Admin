@@ -35,7 +35,7 @@
             />
           </el-tooltip>
           <el-tooltip content="开/关图谱" placement="top">
-            <el-button v-if="isTreeData" :icon="Share" circle @click="isShowGraph = !isShowGraph" />
+            <el-button v-if="isTreeData" :icon="Share" circle @click="switchGraphStatus" />
           </el-tooltip>
         </slot>
       </div>
@@ -100,11 +100,13 @@
     </el-table>
     <!-- 图谱组件 -->
     <Graph
+      ref="relationGraph"
       v-if="tableData && isShowGraph"
-      :tree-data="tableData"
-      children-name="children"
-      label-name="username"
-      label-key="id"
+      :tree-data="processTableData"
+      :children-name="childrenName"
+      :label-name="labelName"
+      :label-key="labelKey"
+      :enable-cross-parents="enableCrossParents"
       @update-action="updateAction"
       @detail-action="detailAction"
       @delete-action="deleteAction"
@@ -142,6 +144,7 @@ import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import Graph from "./components/Graph.vue";
 import Sortable from "sortablejs";
+import { RelationGraphInstance } from "relation-graph-vue3";
 
 export interface ProTableProps {
   columns: ColumnProps[]; // 列配置项  ==> 必传
@@ -157,6 +160,10 @@ export interface ProTableProps {
   toolButton?: ("refresh" | "setting" | "search")[] | boolean; // 是否显示表格功能按钮 ==> 非必传（默认为true）
   rowKey?: string; // 行数据的 Key，用来优化 Table 的渲染，当表格数据多选时，所指定的 id ==> 非必传（默认为 id）
   searchCol?: number | Record<BreakPoint, number>; // 表格搜索项 每列占比配置 ==> 非必传 { xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }
+  labelKey?: string; // 节点唯一标识
+  labelName?: string; // 自定义展示字段名 可使用例如：user.username
+  childrenName?: string; // 自定义子节点名称
+  enableCrossParents?: boolean; // 仅对图谱有效，是否允许节点跨级调整
 }
 
 // 接受父组件参数，配置默认值
@@ -168,11 +175,14 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   border: true,
   toolButton: true,
   rowKey: "id",
-  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
+  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
+  childrenName: "children",
+  enableCrossParents: false
 });
 
 // table 实例
 const tableRef = ref<InstanceType<typeof ElTable>>();
+const relationGraph = ref<RelationGraphInstance>();
 
 // 生成组件唯一id
 const uuid = ref("id-" + generateUUID());
@@ -318,6 +328,7 @@ const emit = defineEmits<{
   updateAction: [data: any];
   detailAction: [data: any];
   deleteAction: [data: any];
+  staticDataChange: [data: any];
 }>();
 
 const _search = () => {
@@ -354,6 +365,75 @@ const detailAction = (data: any) => {
 
 const deleteAction = (data: any) => {
   emit("deleteAction", data);
+};
+
+// 表格/图谱切换
+const switchGraphStatus = () => {
+  isShowGraph.value = !isShowGraph.value;
+  if (isShowGraph.value) return;
+  const nodes = relationGraph.value!.jsonData.nodes;
+  const lines = relationGraph.value!.jsonData.lines;
+
+  // 删除表格中仅作为展示的节点
+  nodes.map((item, index) => {
+    if (item.text === "表格") delete nodes[index];
+  });
+  lines.every((line, index) => {
+    if (line.from === "表格") delete lines[index];
+  });
+  console.log({ nodes, lines });
+
+  // 创建树结构
+  let treeStructure: any[] = [];
+
+  // 构建树结构
+  const buildTree = () => {
+    const map = new Map();
+
+    // 初始化每个节点
+    lines.forEach(line => {
+      if (!map.has(line.from)) map.set(line.from, { name: line.from, children: [] });
+      if (!map.has(line.to)) map.set(line.to, { name: line.to, children: [] });
+    });
+
+    // 构建树结构
+    lines.forEach(line => {
+      const parent = map.get(line.from);
+      const child = map.get(line.to);
+      parent.children.push(child);
+    });
+
+    // 获取根节点
+    const rootNames = [...new Set(lines.map(line => line.from))];
+    const childNames = new Set(lines.map(line => line.to));
+    const rootNodes = rootNames.filter(name => !childNames.has(name));
+
+    treeStructure = rootNodes.map(rootName => map.get(rootName));
+  };
+
+  // 将数据嵌入树状结构的函数
+  function embedDataIntoTree(treeArray, nodes) {
+    treeArray.forEach(tree => {
+      // 查找与当前项的 name 匹配的节点
+      const matchingNode = nodes.find(node => node?.text === tree.name);
+      console.log("matchingNode", matchingNode);
+      if (matchingNode) {
+        // 去掉 name 属性
+        delete tree.name;
+        // 如果找到匹配的节点，将其 data 放入树结构中
+        delete matchingNode.data.children;
+        Object.assign(tree, matchingNode.data);
+      }
+      if (tree.children && tree.children.length > 0) embedDataIntoTree(tree.children, nodes);
+    });
+  }
+
+  buildTree();
+  treeStructure = JSON.parse(JSON.stringify(treeStructure, null, 2))[0].children;
+
+  embedDataIntoTree(treeStructure, nodes);
+  tableData.value = treeStructure;
+  emit("staticDataChange", tableData.value);
 };
 
 // 暴露给父组件的参数和方法 (外部需要什么，都可以从这里暴露出去)
