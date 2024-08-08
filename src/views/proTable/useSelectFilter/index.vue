@@ -6,8 +6,7 @@
       label="name"
       :request-api="getUserDepartment"
       :default-value="treeFilterValues.departmentId"
-      @change="changeTreeFilter"
-    />
+      @change="changeTreeFilter" />
     <div class="table-box">
       <div class="card mb10 pt0 pb0">
         <SelectFilter :data="selectFilterData" :default-values="selectFilterValues" @change="changeSelectFilter" />
@@ -17,8 +16,7 @@
         highlight-current-row
         :columns="columns"
         :request-api="getUserList"
-        :init-param="Object.assign(treeFilterValues, selectFilterValues)"
-      >
+        :init-param="Object.assign(treeFilterValues, selectFilterValues)">
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
           <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>

@@ -12,8 +12,7 @@
       :on-success="uploadSuccess"
       :on-error="uploadError"
       :drag="drag"
-      :accept="fileType.join(',')"
-    >
+      :accept="fileType.join(',')">
       <template v-if="imageUrl">
         <img :src="imageUrl" class="upload-image" />
         <div class="upload-handle" @click.stop>

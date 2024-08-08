@@ -5,8 +5,7 @@
     item-key="id"
     animation="300"
     chosen-class="chosen"
-    force-fallback="true"
-  >
+    force-fallback="true">
     <template #item="{ element }">
       <div :class="'item' + ' ' + 'item-' + element.num">
         {{ element.num }}

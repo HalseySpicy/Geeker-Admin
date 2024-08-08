@@ -17,8 +17,7 @@
           :on-exceed="handleExceed"
           :on-success="excelUploadSuccess"
           :on-error="excelUploadError"
-          :accept="parameter.fileType!.join(',')"
-        >
+          :accept="parameter.fileType!.join(',')">
           <slot name="empty">
             <el-icon class="el-icon--upload">
               <upload-filled />

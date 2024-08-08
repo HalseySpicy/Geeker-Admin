@@ -6,8 +6,7 @@
       :request-api="getTableList"
       :init-param="initParam"
       :data-callback="dataCallback"
-      @drag-sort="sortTable"
-    >
+      @drag-sort="sortTable">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>

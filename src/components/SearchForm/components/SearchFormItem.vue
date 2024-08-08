@@ -4,8 +4,7 @@
     v-bind="{ ...handleSearchProps, ...placeholder, searchParam: _searchParam, clearable }"
     v-model.trim="_searchParam[column.search?.key ?? handleProp(column.prop!)]"
     :data="column.search?.el === 'tree-select' ? columnEnum : []"
-    :options="['cascader', 'select-v2'].includes(column.search?.el!) ? columnEnum : []"
-  >
+    :options="['cascader', 'select-v2'].includes(column.search?.el!) ? columnEnum : []">
     <template v-if="column.search?.el === 'cascader'" #default="{ data }">
       <span>{{ data[fieldNames.label] }}</span>
     </template>
@@ -15,8 +14,7 @@
         v-for="(col, index) in columnEnum"
         :key="index"
         :label="col[fieldNames.label]"
-        :value="col[fieldNames.value]"
-      ></component>
+        :value="col[fieldNames.value]"></component>
     </template>
     <slot v-else></slot>
   </component>

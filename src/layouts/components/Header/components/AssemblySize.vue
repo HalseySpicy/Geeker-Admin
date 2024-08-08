@@ -7,8 +7,7 @@
           v-for="item in assemblySizeList"
           :key="item.value"
           :command="item.value"
-          :disabled="assemblySize === item.value"
-        >
+          :disabled="assemblySize === item.value">
           {{ item.label }}
         </el-dropdown-item>
       </el-dropdown-menu>

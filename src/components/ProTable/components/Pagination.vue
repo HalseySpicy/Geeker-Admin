@@ -8,8 +8,7 @@
     :total="pageable.total"
     layout="total, sizes, prev, pager, next, jumper"
     @size-change="handleSizeChange"
-    @current-change="handleCurrentChange"
-  ></el-pagination>
+    @current-change="handleCurrentChange"></el-pagination>
 </template>
 
 <script setup lang="ts" name="Pagination">
