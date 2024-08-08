@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, watch, onMounted, onUnmounted } from "vue";
+import { ref, computed, nextTick, watch } from "vue";
 import { InputInstance } from "element-plus";
 import { Search } from "@element-plus/icons-vue";
 import { useAuthStore } from "@/stores/modules/auth";
@@ -44,14 +44,6 @@ const router = useRouter();
 const authStore = useAuthStore();
 const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
 
-onMounted(() => {
-  document.addEventListener("keydown", keyboardOperation);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", keyboardOperation);
-});
-
 const activePath = ref("");
 const mouseoverMenuItem = (menu: Menu.MenuOptions) => {
   activePath.value = menu.path;
@@ -60,6 +52,15 @@ const mouseoverMenuItem = (menu: Menu.MenuOptions) => {
 const menuInputRef = ref<InputInstance | null>(null);
 const isShowSearch = ref<boolean>(false);
 const searchMenu = ref<string>("");
+
+watch(isShowSearch, val => {
+  if (val) {
+    document.addEventListener("keydown", keyboardOperation);
+  } else {
+    document.removeEventListener("keydown", keyboardOperation);
+  }
+});
+
 const handleOpen = () => {
   isShowSearch.value = true;
   nextTick(() => {
