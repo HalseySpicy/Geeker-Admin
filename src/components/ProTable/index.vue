@@ -35,6 +35,7 @@
     <el-table
       ref="tableRef"
       v-bind="$attrs"
+      :id="uuid"
       :data="processTableData"
       :border="border"
       :row-key="rowKey"
@@ -67,7 +68,7 @@
           </template>
         </el-table-column>
         <!-- other -->
-        <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
+        <TableColumn v-else :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" v-bind="scope" />
           </template>
@@ -109,7 +110,7 @@ import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps, TypeProps } from "@/components/ProTable/interface";
 import { Refresh, Operation, Search } from "@element-plus/icons-vue";
-import { handleProp } from "@/utils";
+import { generateUUID, handleProp } from "@/utils";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
@@ -146,6 +147,9 @@ const props = withDefaults(defineProps<ProTableProps>(), {
 
 // table 实例
 const tableRef = ref<InstanceType<typeof ElTable>>();
+
+// 生成组件唯一id
+const uuid = ref("id-" + generateUUID());
 
 // column 列类型
 const columnTypes: TypeProps[] = ["selection", "radio", "index", "expand", "sort"];
@@ -225,8 +229,9 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
     flatArr.push(col);
 
-    // column 添加默认 isShow && isFilterEnum 属性值
+    // column 添加默认 isShow && isSetting && isFilterEnum 属性值
     col.isShow = col.isShow ?? true;
+    col.isSetting = col.isSetting ?? true;
     col.isFilterEnum = col.isFilterEnum ?? true;
 
     // 设置 enumMap
@@ -248,16 +253,16 @@ searchColumns.value?.forEach((column, index) => {
   const key = column.search?.key ?? handleProp(column.prop!);
   const defaultValue = column.search?.defaultValue;
   if (defaultValue !== undefined && defaultValue !== null) {
-    searchInitParam.value[key] = defaultValue;
     searchParam.value[key] = defaultValue;
+    searchInitParam.value[key] = defaultValue;
   }
 });
 
 // 列设置 ==> 需要过滤掉不需要设置的列
 const colRef = ref();
 const colSetting = tableColumns!.filter(item => {
-  const { type, prop, isShow } = item;
-  return !columnTypes.includes(type!) && prop !== "operation" && isShow;
+  const { type, prop, isSetting } = item;
+  return !columnTypes.includes(type!) && prop !== "operation" && isSetting;
 });
 const openColSetting = () => colRef.value.openColSetting();
 
@@ -265,7 +270,7 @@ const openColSetting = () => colRef.value.openColSetting();
 const emit = defineEmits<{
   search: [];
   reset: [];
-  dargSort: [{ newIndex?: number; oldIndex?: number }];
+  dragSort: [{ newIndex?: number; oldIndex?: number }];
 }>();
 
 const _search = () => {
@@ -278,16 +283,16 @@ const _reset = () => {
   emit("reset");
 };
 
-// 拖拽排序
+// 表格拖拽排序
 const dragSort = () => {
-  const tbody = document.querySelector(".el-table__body-wrapper tbody") as HTMLElement;
+  const tbody = document.querySelector(`#${uuid.value} tbody`) as HTMLElement;
   Sortable.create(tbody, {
     handle: ".move",
     animation: 300,
     onEnd({ newIndex, oldIndex }) {
       const [removedItem] = processTableData.value.splice(oldIndex!, 1);
       processTableData.value.splice(newIndex!, 0, removedItem);
-      emit("dargSort", { newIndex, oldIndex });
+      emit("dragSort", { newIndex, oldIndex });
     }
   });
 };
@@ -300,15 +305,17 @@ defineExpose({
   pageable,
   searchParam,
   searchInitParam,
+  isSelected,
+  selectedList,
+  selectedListIds,
+
+  // 下面为 function
   getTableList,
   search,
   reset,
   handleSizeChange,
   handleCurrentChange,
   clearSelection,
-  enumMap,
-  isSelected,
-  selectedList,
-  selectedListIds
+  enumMap
 });
 </script>

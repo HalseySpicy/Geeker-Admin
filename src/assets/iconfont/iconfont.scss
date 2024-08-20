@@ -1,6 +1,6 @@
 @font-face {
   font-family: iconfont; /* Project id 2667653 */
-  src: url("iconfont.ttf?t=1694681005434") format("truetype");
+  src: url("iconfont.ttf?t=1719667796161") format("truetype");
 }
 .iconfont {
   font-family: iconfont !important;
@@ -45,4 +45,7 @@
 }
 .icon-zhongyingwen::before {
   content: "\e8cb";
+}
+.icon-huiche::before {
+  content: "\e637";
 }

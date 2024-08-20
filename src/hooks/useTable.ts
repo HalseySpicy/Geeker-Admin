@@ -64,8 +64,7 @@ export const useTable = (
       state.tableData = isPageable ? data.list : data;
       // 解构后台返回的分页数据 (如果有分页更新分页信息)
       if (isPageable) {
-        const { pageNum, pageSize, total } = data;
-        updatePageable({ pageNum, pageSize, total });
+        state.pageable.total = data.total;
       }
     } catch (error) {
       requestError && requestError(error);
@@ -87,16 +86,7 @@ export const useTable = (
         nowSearchParam[key] = state.searchParam[key];
       }
     }
-    Object.assign(state.totalParam, nowSearchParam, isPageable ? pageParam.value : {});
-  };
-
-  /**
-   * @description 更新分页信息
-   * @param {Object} pageable 后台返回的分页数据
-   * @return void
-   * */
-  const updatePageable = (pageable: Table.Pageable) => {
-    Object.assign(state.pageable, pageable);
+    Object.assign(state.totalParam, nowSearchParam);
   };
 
   /**

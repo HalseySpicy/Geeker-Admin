@@ -1,9 +1,3 @@
-/* 设置 notification、message 层级在 loading 之上 */
-.el-message,
-.el-notification {
-  z-index: 2070 !important;
-}
-
 /* el-alert */
 .el-alert {
   border: 1px solid;
@@ -82,8 +76,7 @@
   width: 100%;
   height: 100%;
   .table-box {
-    // 这里减去的 230px 是 treeFilter 组件宽度
-    width: calc(100% - 230px);
+    overflow: hidden;
   }
 }
 
@@ -120,14 +113,21 @@
 
   // 表格 header 样式
   .table-header {
+    .header-button-lf,
+    .header-button-ri {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 12px;
+      margin-bottom: 15px;
+      .el-button:not(.el-input .el-button) {
+        margin-left: 0;
+      }
+    }
     .header-button-lf {
       float: left;
     }
     .header-button-ri {
       float: right;
-    }
-    .el-button {
-      margin-bottom: 15px;
     }
   }
 
@@ -166,11 +166,11 @@
     // 解决表格数据为空时样式不居中问题(仅在element-plus中)
     .el-table__empty-block {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       .table-empty {
         line-height: 30px;
+        img {
+          display: inline-flex;
+        }
       }
     }
 

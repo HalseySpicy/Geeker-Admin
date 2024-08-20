@@ -28,10 +28,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
 import { HOME_URL } from "@/config";
-import { getTimeState } from "@/utils";
+// import { getTimeState } from "@/utils";
 import { Login } from "@/api/interface";
 import { ElNotification } from "element-plus";
 import { loginApi } from "@/api/modules/login";
@@ -81,11 +81,18 @@ const login = (formEl: FormInstance | undefined) => {
 
       // 4.跳转到首页
       router.push(HOME_URL);
+      // ElNotification({
+      //   title: getTimeState(),
+      //   message: "欢迎登录 Geeker-Admin",
+      //   type: "success",
+      //   duration: 3000
+      // });
       ElNotification({
-        title: getTimeState(),
-        message: "欢迎登录 Geeker-Admin",
+        title: "React 付费版本 🔥🔥🔥",
+        dangerouslyUseHTMLString: true,
+        message: "预览地址：<a href='https://pro.spicyboy.cn'>https://pro.spicyboy.cn</a>",
         type: "success",
-        duration: 3000
+        duration: 8000
       });
     } finally {
       loading.value = false;
@@ -102,12 +109,15 @@ const resetForm = (formEl: FormInstance | undefined) => {
 onMounted(() => {
   // 监听 enter 事件（调用登录）
   document.onkeydown = (e: KeyboardEvent) => {
-    e = (window.event as KeyboardEvent) || e;
     if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
       if (loading.value) return;
       login(loginFormRef.value);
     }
   };
+});
+
+onBeforeUnmount(() => {
+  document.onkeydown = null;
 });
 </script>
 

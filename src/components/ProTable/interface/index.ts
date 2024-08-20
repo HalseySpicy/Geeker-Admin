@@ -73,6 +73,7 @@ export interface ColumnProps<T = any>
   type?: TypeProps; // 列类型
   tag?: boolean | Ref<boolean>; // 是否是标签展示
   isShow?: boolean | Ref<boolean>; // 是否显示在表格当中
+  isSetting?: boolean | Ref<boolean>; // 是否在 ColSetting 中可配置
   search?: SearchProps | undefined; // 搜索项配置
   enum?: EnumProps[] | Ref<EnumProps[]> | ((params?: any) => Promise<any>); // 枚举字典
   isFilterEnum?: boolean | Ref<boolean>; // 当前单元格值是否根据 enum 格式化（示例：enum 只作为搜索项数据）

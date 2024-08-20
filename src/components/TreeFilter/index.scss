@@ -11,8 +11,14 @@
     color: var(--el-color-info-dark-2);
     letter-spacing: 0.5px;
   }
-  .el-input {
+  .search {
+    display: flex;
+    align-items: center;
     margin: 0 0 15px;
+    .el-icon {
+      cursor: pointer;
+      transform: rotate(90deg) translateY(-8px);
+    }
   }
   .el-scrollbar {
     :deep(.el-tree) {
