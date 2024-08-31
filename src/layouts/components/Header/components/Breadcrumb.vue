@@ -6,8 +6,7 @@
           <div
             class="el-breadcrumb__inner is-link"
             :class="{ 'item-no-icon': !item.meta.icon }"
-            @click="onBreadcrumbClick(item, index)"
-          >
+            @click="onBreadcrumbClick(item, index)">
             <el-icon v-if="item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
               <component :is="item.meta.icon"></component>
             </el-icon>

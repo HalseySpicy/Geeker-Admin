@@ -7,8 +7,7 @@
       :placeholder="placeholder"
       :clearable="clearable"
       @clear="clearIcon"
-      @click="openDialog"
-    >
+      @click="openDialog">
       <template #append>
         <el-button :icon="customIcons[iconValue]" />
       </template>

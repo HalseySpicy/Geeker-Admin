@@ -14,8 +14,7 @@
       :on-success="uploadSuccess"
       :on-error="uploadError"
       :drag="drag"
-      :accept="fileType.join(',')"
-    >
+      :accept="fileType.join(',')">
       <div class="upload-empty">
         <slot name="empty">
           <el-icon><Plus /></el-icon>

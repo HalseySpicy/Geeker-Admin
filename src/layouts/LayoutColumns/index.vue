@@ -12,8 +12,7 @@
             :key="item.path"
             class="split-item"
             :class="{ 'split-active': splitActive === item.path || `/${splitActive.split('/')[1]}` === item.path }"
-            @click="changeSubMenu(item)"
-          >
+            @click="changeSubMenu(item)">
             <el-icon>
               <component :is="item.meta.icon"></component>
             </el-icon>
@@ -32,8 +31,7 @@
           :default-active="activeMenu"
           :collapse="isCollapse"
           :unique-opened="accordion"
-          :collapse-transition="false"
-        >
+          :collapse-transition="false">
           <SubMenu :menu-list="subMenuList" />
         </el-menu>
       </el-scrollbar>

@@ -8,8 +8,7 @@
     :reset="_reset"
     :columns="searchColumns"
     :search-param="searchParam"
-    :search-col="searchCol"
-  />
+    :search-col="searchCol" />
 
   <!-- 表格主体 -->
   <div class="card table-main">
@@ -26,8 +25,7 @@
             v-if="showToolButton('search') && searchColumns?.length"
             :icon="Search"
             circle
-            @click="isShowSearch = !isShowSearch"
-          />
+            @click="isShowSearch = !isShowSearch" />
         </slot>
       </div>
     </div>
@@ -39,8 +37,7 @@
       :data="processTableData"
       :border="border"
       :row-key="rowKey"
-      @selection-change="selectionChange"
-    >
+      @selection-change="selectionChange">
       <!-- 默认插槽 -->
       <slot />
       <template v-for="item in tableColumns" :key="item">
@@ -49,8 +46,7 @@
           v-if="item.type && columnTypes.includes(item.type)"
           v-bind="item"
           :align="item.align ?? 'center'"
-          :reserve-selection="item.type == 'selection'"
-        >
+          :reserve-selection="item.type == 'selection'">
           <template #default="scope">
             <!-- expand -->
             <template v-if="item.type == 'expand'">
@@ -94,8 +90,7 @@
         v-if="pagination"
         :pageable="pageable"
         :handle-size-change="handleSizeChange"
-        :handle-current-change="handleCurrentChange"
-      />
+        :handle-current-change="handleCurrentChange" />
     </slot>
   </div>
   <!-- 列设置 -->

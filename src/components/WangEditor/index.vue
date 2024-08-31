@@ -8,8 +8,7 @@
       :mode="mode"
       :default-config="editorConfig"
       @on-created="handleCreated"
-      @on-blur="handleBlur"
-    />
+      @on-blur="handleBlur" />
   </div>
 </template>
 

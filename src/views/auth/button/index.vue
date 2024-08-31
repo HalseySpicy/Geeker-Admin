@@ -5,8 +5,7 @@
       class="mb20"
       :title="`当前用户按钮权限：${JSON.stringify(Object.keys(BUTTONS))}`"
       type="success"
-      :closable="false"
-    />
+      :closable="false" />
     <el-divider content-position="left"> 使用 Hooks 方式绑定权限 </el-divider>
     <el-row class="mb20">
       <el-button v-if="BUTTONS.add" type="primary" :icon="CirclePlus"> 新增 </el-button>

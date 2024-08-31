@@ -31,8 +31,7 @@
         :filter-node-method="filterNode"
         :default-checked-keys="multiple ? selected : []"
         @node-click="handleNodeClick"
-        @check="handleCheckChange"
-      >
+        @check="handleCheckChange">
         <template #default="scope">
           <span class="el-tree-node__label">
             <slot :row="scope">

@@ -67,6 +67,12 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       chunkSizeWarningLimit: 2000,
       rollupOptions: {
         output: {
+          manualChunks(id) {
+            if (id.includes(".pnpm")) {
+              // 替换字符串
+              return id.toString().split(".pnpm/")[1].split("/")[0].toString();
+            }
+          },
           // Static resource classification and packaging
           chunkFileNames: "assets/js/[name]-[hash].js",
           entryFileNames: "assets/js/[name]-[hash].js",

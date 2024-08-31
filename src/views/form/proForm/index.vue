@@ -3,8 +3,7 @@
     <el-alert
       title="通过 component :is 组件属性 && v-bind 属性透传，可以将 template 中的 html 代码全部改变为 columns 配置项，具体配置请看代码。"
       type="warning"
-      :closable="false"
-    />
+      :closable="false" />
     <component :is="'el-form'" v-bind="options.form" ref="proFormRef" :model="model">
       <template v-for="item in options.columns" :key="item.prop">
         <component :is="'el-form-item'" v-bind="item.formItem">

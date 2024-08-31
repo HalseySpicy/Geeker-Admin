@@ -15,8 +15,7 @@
                 option.value === selected[item.key] ||
                 (Array.isArray(selected[item.key]) && selected[item.key].includes(option.value))
             }"
-            @click="select(item, option)"
-          >
+            @click="select(item, option)">
             <slot :row="option">
               <el-icon v-if="option.icon">
                 <component :is="option.icon" />
