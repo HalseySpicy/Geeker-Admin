@@ -234,6 +234,20 @@
           }
         },
         {
+          "path": "/assembly/dialog/useDialog",
+          "name": "useDialog",
+          "component": "/assembly/dialog/useDialog/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "useDialog弹窗操作",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
           "path": "/assembly/tabs",
           "name": "tabs",
           "component": "/assembly/tabs/index",
