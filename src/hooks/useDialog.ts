@@ -3,8 +3,9 @@ import type { ComponentInternalInstance, Ref } from "vue";
 import { getCurrentInstance, h, isRef, onUnmounted, render } from "vue";
 import { upperFirst } from "lodash";
 import merge from "lodash/merge";
+import type { JSX } from "vue/jsx-runtime";
 
-type Content = Parameters<typeof h>[0] | string | JSX.Element;
+type Content = Parameters<typeof h>[0] | string | Object | JSX.Element;
 // 使用 InstanceType 获取 ElDialog 组件实例的类型
 type ElDialogInstance = InstanceType<typeof ElDialog>;
 
@@ -22,6 +23,7 @@ interface Options<P> {
   dialogProps?: DialogProps;
   dialogSlots?: ElDialogSlots;
   contentProps?: P;
+  callBack?: Function;
   closeEventName?: string;
 }
 
@@ -46,7 +48,7 @@ export function useDialog<P = any>(content: Content, options?: Ref<Options<P>> |
   };
 
   // 关闭对话框
-  function closeDialog() {
+  async function closeDialog() {
     if (dialogInstance) dialogInstance.props.modelValue = false;
   }
 
@@ -103,6 +105,11 @@ export function useDialog<P = any>(content: Content, options?: Ref<Options<P>> |
             : h(content as any, {
                 ...contentProps,
                 [closeEventName]: closeDialog, // 监听自定义关闭事件，并执行关闭
+                // 监听自定义回调事件，并执行关闭
+                callBack: (data: any) => {
+                  if (_options.callBack) _options.callBack(data);
+                  closeDialog();
+                },
                 beforeCloseDialog: (fn: () => boolean | void) => {
                   // 把`beforeCloseDialog`传递给`content`，当组件内部使用`props.beforeCloseDialog(fn)`时，会把fn传递给`onBeforeClose`
                   onBeforeClose = fn;
@@ -112,6 +119,7 @@ export function useDialog<P = any>(content: Content, options?: Ref<Options<P>> |
         ..._options.dialogSlots
       }
     );
+
     // 设置当前的上下文为使用者的上下文
     vNode.appContext = instance?.appContext || null;
     render(vNode, fragment);

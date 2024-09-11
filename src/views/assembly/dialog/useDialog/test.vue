@@ -48,8 +48,22 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
+import { ElMessage } from "element-plus";
 
+const props = defineProps({
+  from: {
+    type: String,
+    default: ""
+  },
+  beforeCloseDialog: {
+    type: Function,
+    default: () => true
+  },
+  callBack: {
+    type: Function
+  }
+});
 const emit = defineEmits(["closeDialog"]);
 
 // do not use same name with ref
@@ -64,10 +78,22 @@ const form = reactive({
   desc: ""
 });
 
+props.beforeCloseDialog(() => {
+  console.log(props.from, "value");
+  // 假如value 为 空字符串不能关闭
+  return !props.from;
+});
+
 const onSubmit = () => {
-  alert("submit");
+  ElMessage.success("submit!");
+  props.callBack(form);
 };
 
 // 关闭dialog
 const onClose = () => emit("closeDialog");
+
+onMounted(() => {
+  // 赋值
+  form.name = props.from;
+});
 </script>

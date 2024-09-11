@@ -4,6 +4,8 @@
 
     <el-button type="primary" @click="openDialog">打开弹框</el-button>
 
+    <test />
+
     <div>
       <span class="title">useDialog hooks介绍 📚</span>
       <p>
@@ -39,6 +41,13 @@ const { openDialog } = useDialog(test, {
   dialogProps: {
     title: "测试弹窗",
     width: "800px"
+  },
+  contentProps: {
+    from: "测试弹窗"
+  },
+  callBack: (data: any) => {
+    // ElMessage.success("回调事件", data.from.value);
+    console.log(data, "data");
   }
 });
 </script>
