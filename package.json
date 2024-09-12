@@ -45,6 +45,7 @@
     "echarts": "^5.5.1",
     "echarts-liquidfill": "^3.1.0",
     "element-plus": "^2.7.6",
+    "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
     "nprogress": "^0.2.0",
