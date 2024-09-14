@@ -29,8 +29,8 @@
       </el-form-item>
       <el-form-item label="Resources" prop="resource">
         <el-radio-group v-model="ruleForm.resource">
-          <el-radio label="Sponsorship" />
-          <el-radio label="Venue" />
+          <el-radio value="Sponsorship" />
+          <el-radio value="Venue" />
         </el-radio-group>
       </el-form-item>
       <el-form-item label="Activity form" prop="desc">
