@@ -4,8 +4,6 @@
 
     <el-button type="primary" @click="openDialog">打开弹框</el-button>
 
-    <test />
-
     <div>
       <span class="title">useDialog hooks介绍 📚</span>
       <p>
