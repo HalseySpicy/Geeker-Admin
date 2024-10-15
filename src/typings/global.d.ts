@@ -55,6 +55,7 @@ declare interface ViteEnv {
   VITE_PUBLIC_PATH: string;
   VITE_API_URL: string;
   VITE_PROXY: [string, string][];
+  VITE_CODEINSPECTOR: boolean;
 }
 
 interface ImportMetaEnv extends ViteEnv {
