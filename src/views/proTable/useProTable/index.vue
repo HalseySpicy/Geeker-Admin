@@ -163,7 +163,24 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
       }
     }
   },
-  { prop: "idCard", label: "身份证号", search: { el: "input" } },
+  {
+    prop: "idCard",
+    label: "综合搜索",
+    search: {
+      el: "input",
+      prependSelect: true,
+      prependSelectOptions: [
+        {
+          label: "身份证号",
+          value: "idCard"
+        },
+        {
+          label: "邮箱",
+          value: "email"
+        }
+      ]
+    }
+  },
   { prop: "email", label: "邮箱" },
   { prop: "address", label: "居住地址" },
   {

@@ -1,6 +1,6 @@
 import { VNode, ComponentPublicInstance, Ref } from "vue";
 import { BreakPoint, Responsive } from "@/components/Grid/interface";
-import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+import type { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { ProTableProps } from "@/components/ProTable/index.vue";
 import ProTable from "@/components/ProTable/index.vue";
 
@@ -47,6 +47,8 @@ export type SearchProps = {
   offset?: number; // 搜索字段左侧偏移列数
   defaultValue?: string | number | boolean | any[] | Ref<any>; // 搜索项默认值
   render?: (scope: SearchRenderScope) => VNode; // 自定义搜索内容渲染（tsx语法）
+  prependSelect?: boolean; // 搜索项前置选择框，默认为 false
+  prependSelectOptions?: EnumProps[]; // 搜索项前置选择框数据源，默认为 []
 } & Partial<Record<BreakPoint, Responsive>>;
 
 export type FieldNamesProps = {
