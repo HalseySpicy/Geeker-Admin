@@ -58,5 +58,5 @@ const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

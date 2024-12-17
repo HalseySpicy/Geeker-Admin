@@ -10,5 +10,5 @@
 <script setup lang="ts" name="github"></script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

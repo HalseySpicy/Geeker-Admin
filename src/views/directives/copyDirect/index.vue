@@ -18,5 +18,5 @@ const data = ref<string>("我是被复制的内容 🍒 🍉 🍊");
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

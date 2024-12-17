@@ -8,5 +8,5 @@
 <script setup lang="ts" name="dragDirect"></script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

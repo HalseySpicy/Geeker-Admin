@@ -18,5 +18,5 @@ const iconValue = ref("");
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

@@ -50,5 +50,5 @@ const changeTreeFilter1 = (val: string[]) => {
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>
