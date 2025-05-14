@@ -93,5 +93,7 @@
     "yiwen",
     "zhongyingwen",
     "zhuti"
-  ]
+  ],
+  "vue-i18n.i18nPaths": "",
+  "i18n-ally.localesPaths": ["src/languages"]
 }

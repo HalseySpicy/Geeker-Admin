@@ -13,7 +13,8 @@ export const useTable = (
   initParam: object = {},
   isPageable: boolean = true,
   dataCallBack?: (data: any) => any,
-  requestError?: (error: any) => void
+  requestError?: (error: any) => void,
+  onReset?: () => any
 ) => {
   const state = reactive<Table.StateProps>({
     // 表格数据
@@ -107,6 +108,7 @@ export const useTable = (
     state.pageable.pageNum = 1;
     // 重置搜索表单的时，如果有默认搜索参数，则重置默认的搜索参数
     state.searchParam = { ...state.searchInitParam };
+    onReset && onReset();
     updatedTotalParam();
     getTableList();
   };

@@ -47,6 +47,7 @@ export type SearchProps = {
   offset?: number; // 搜索字段左侧偏移列数
   defaultValue?: string | number | boolean | any[] | Ref<any>; // 搜索项默认值
   render?: (scope: SearchRenderScope) => VNode; // 自定义搜索内容渲染（tsx语法）
+  change?: (val: string) => void; // 搜索项值改变时触发
 } & Partial<Record<BreakPoint, Responsive>>;
 
 export type FieldNamesProps = {

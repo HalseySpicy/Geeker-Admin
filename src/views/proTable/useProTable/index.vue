@@ -7,6 +7,7 @@
       :init-param="initParam"
       :data-callback="dataCallback"
       @drag-sort="sortTable"
+      :on-reset="handleReset"
     >
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
@@ -117,6 +118,10 @@ const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
   );
 };
 
+const handleGenderChange = val => {
+  console.log(val);
+};
+
 // 表格配置项
 const columns = reactive<ColumnProps<User.ResUserList>[]>([
   { type: "selection", fixed: "left", width: 70 },
@@ -143,7 +148,7 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     enum: getUserGender,
     // 字典请求携带参数
     // enum: () => getUserGender({ id: 1 }),
-    search: { el: "select", props: { filterable: true } },
+    search: { el: "select", props: { filterable: true }, change: handleGenderChange },
     fieldNames: { label: "genderLabel", value: "genderValue" }
   },
   {
@@ -204,7 +209,9 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
   },
   { prop: "operation", label: "操作", fixed: "right", width: 330 }
 ]);
-
+const handleReset = () => {
+  console.log("reset");
+};
 // 表格拖拽排序
 const sortTable = ({ newIndex, oldIndex }: { newIndex?: number; oldIndex?: number }) => {
   console.log(newIndex, oldIndex);
