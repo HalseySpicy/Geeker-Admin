@@ -1,6 +1,7 @@
 import { VNode, ComponentPublicInstance, Ref } from "vue";
 import { BreakPoint, Responsive } from "@/components/Grid/interface";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
+import { DefaultRow } from "element-plus/es/components/table/src/table/defaults";
 import { ProTableProps } from "@/components/ProTable/index.vue";
 import ProTable from "@/components/ProTable/index.vue";
 
@@ -55,21 +56,21 @@ export type FieldNamesProps = {
   children?: string;
 };
 
-export type RenderScope<T> = {
+export type RenderScope<T = any> = {
   row: T;
   $index: number;
-  column: TableColumnCtx<T>;
+  column: TableColumnCtx<T extends DefaultRow ? T : DefaultRow>;
   [key: string]: any;
 };
 
-export type HeaderRenderScope<T> = {
+export type HeaderRenderScope<T = any> = {
   $index: number;
-  column: TableColumnCtx<T>;
+  column: TableColumnCtx<T extends DefaultRow ? T : DefaultRow>;
   [key: string]: any;
 };
 
 export interface ColumnProps<T = any>
-  extends Partial<Omit<TableColumnCtx<T>, "type" | "children" | "renderCell" | "renderHeader">> {
+  extends Partial<Omit<TableColumnCtx<T extends DefaultRow ? T : DefaultRow>, "type" | "children" | "renderCell" | "renderHeader">> {
   type?: TypeProps; // 列类型
   tag?: boolean | Ref<boolean>; // 是否是标签展示
   isShow?: boolean | Ref<boolean>; // 是否显示在表格当中

@@ -107,7 +107,7 @@ const setCurrent = () => {
 };
 
 // 表尾合计行（自行根据条件计算）
-interface SummaryMethodProps<T = User.ResUserList> {
+interface SummaryMethodProps<T extends Record<PropertyKey, any> = User.ResUserList> {
   columns: TableColumnCtx<T>[];
   data: T[];
 }

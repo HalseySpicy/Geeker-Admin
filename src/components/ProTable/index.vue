@@ -108,6 +108,7 @@ import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps, TypeProps } from "@/components/ProTable/interface";
+import { DefaultRow } from "element-plus/es/components/table/src/table/defaults";
 import { Refresh, Operation, Search } from "@element-plus/icons-vue";
 import { handleProp } from "@/utils";
 import SearchForm from "@/components/SearchForm/index.vue";
@@ -116,8 +117,8 @@ import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import Sortable from "sortablejs";
 
-export interface ProTableProps {
-  columns: ColumnProps[]; // 列配置项  ==> 必传
+export interface ProTableProps<T = any> {
+  columns: ColumnProps<T>[]; // 列配置项  ==> 必传
   data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
   requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
   requestAuto?: boolean; // 是否自动执行请求 api ==> 非必传（默认为true）
