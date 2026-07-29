@@ -102,7 +102,7 @@
   <ColSetting v-if="toolButton" ref="colRef" v-model:col-setting="colSetting" />
 </template>
 
-<script setup lang="ts" name="ProTable">
+<script setup lang="ts" name="ProTable" generic="T">
 import { ref, watch, provide, onMounted, unref, computed, reactive } from "vue";
 import { ElTable } from "element-plus";
 import { useTable } from "@/hooks/useTable";
@@ -111,16 +111,17 @@ import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps, TypeProps } from "@/components/ProTable/interface";
 import { Refresh, Operation, Search } from "@element-plus/icons-vue";
 import { generateUUID, handleProp } from "@/utils";
+import { ResultData, ResPage } from "@/api/interface";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
 import TableColumn from "./components/TableColumn.vue";
 import Sortable from "sortablejs";
 
-export interface ProTableProps {
+export interface ProTableProps<T> {
   columns: ColumnProps[]; // 列配置项  ==> 必传
-  data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
-  requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
+  data?: T[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
+  requestApi?: (params: any) => Promise<T>; // 请求表格数据的 api ==> 非必传
   requestAuto?: boolean; // 是否自动执行请求 api ==> 非必传（默认为true）
   requestError?: (params: any) => void; // 表格 api 请求错误监听 ==> 非必传
   dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数据进行处理 ==> 非必传
@@ -134,7 +135,7 @@ export interface ProTableProps {
 }
 
 // 接受父组件参数，配置默认值
-const props = withDefaults(defineProps<ProTableProps>(), {
+const props = withDefaults(defineProps<ProTableProps<T>>(), {
   columns: () => [],
   requestAuto: true,
   pagination: true,
@@ -144,6 +145,14 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   rowKey: "id",
   searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
+
+// 定义slot的类型，支持泛型推断
+const slots = defineSlots<{
+  [key in keyof typeof slots]: (scope: {
+    row: T extends ResultData<ResPage<any>> ? T["data"]["list"][number] : T extends ResultData ? T["data"] : T;
+    $index: number;
+  }) => any;
+}>();
 
 // table 实例
 const tableRef = ref<InstanceType<typeof ElTable>>();

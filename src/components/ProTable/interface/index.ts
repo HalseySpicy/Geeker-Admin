@@ -83,4 +83,14 @@ export interface ColumnProps<T = any>
   _children?: ColumnProps<T>[]; // 多级表头
 }
 
-export type ProTableInstance = Omit<InstanceType<typeof ProTable>, keyof ComponentPublicInstance | keyof ProTableProps>;
+/**泛型组件出口类型 */
+export type GenericComponentExports<D extends (...p: any[]) => any> =
+  //这里获取组件通用类型
+  ComponentPublicInstance &
+    //这里获取defineExpose暴露的数据类型
+    Parameters<NonNullable<NonNullable<ReturnType<D>["__ctx"]>["expose"]>>[0];
+
+export type ProTableInstance = Omit<
+  GenericComponentExports<typeof ProTable>,
+  keyof ComponentPublicInstance | keyof ProTableProps<any>
+>;
