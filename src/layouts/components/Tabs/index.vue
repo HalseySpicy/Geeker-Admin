@@ -84,6 +84,11 @@ const tabsDrop = () => {
   Sortable.create(document.querySelector(".el-tabs__nav") as HTMLElement, {
     draggable: ".el-tabs__item",
     animation: 300,
+    delay: 50, // 调整为50ms延迟
+    delayOnTouchOnly: true,
+    touchStartThreshold: 3, // 降低触摸移动阈值
+    forceFallback: true, // 强制使用fallback实现
+    fallbackTolerance: 3, // 设置fallback容差
     onEnd({ newIndex, oldIndex }) {
       const tabsList = [...tabStore.tabsMenuList];
       const currRow = tabsList.splice(oldIndex as number, 1)[0];
