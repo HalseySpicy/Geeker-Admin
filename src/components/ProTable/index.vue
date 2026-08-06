@@ -237,9 +237,9 @@ const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) =>
     flatArr.push(col);
 
     // column 添加默认 isShow && isSetting && isFilterEnum 属性值
-    col.isShow = col.isShow ?? true;
-    col.isSetting = col.isSetting ?? true;
-    col.isFilterEnum = col.isFilterEnum ?? true;
+    if (col.isShow === undefined) col.isShow = true;
+    if (col.isSetting === undefined) col.isSetting = true;
+    if (col.isFilterEnum === undefined) col.isFilterEnum = true;
 
     // 设置 enumMap
     await setEnumMap(col);
