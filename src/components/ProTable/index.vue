@@ -120,6 +120,7 @@ import Pagination from "./components/Pagination.vue";
 import TableColumn from "./components/TableColumn.vue";
 
 export interface ProTableProps {
+  uniqueId?: string; // 组件唯一id
   columns: ColumnProps[]; // 列配置项  ==> 必传
   data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
   requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
@@ -202,8 +203,35 @@ const processTableData = computed(() => {
 // 监听页面 initParam 改化，重新获取表格数据
 watch(() => props.initParam, getTableList, { deep: true });
 
+// 如果同一个页面有两个表格则需要传入唯一id来区分, 否则用当前地址栏地址来区分tableColumns key
+const tableColumnUniqueId = props.uniqueId ? `$column-{props.uniqueId}-${window.location.pathname}` : window.location.pathname;
+const savedColumns = localStorage.getItem(tableColumnUniqueId);
+  
 // 接收 columns 并设置为响应式
 const tableColumns = reactive<ColumnProps[]>(props.columns);
+
+// 如果有持久化数据则用持久化数据
+if (savedColumns) {
+  const parsedSavedColumns: ColumnProps[] = JSON.parse(savedColumns);
+
+  // 过滤掉 prop 为 undefined 的情况，并构造 Map
+  const uniqueColumnsMap = new Map<string, ColumnProps>(
+    [...props.columns, ...parsedSavedColumns]
+      .filter(col => col.prop !== undefined) // 确保 prop 不是 undefined
+      .map(col => [col.prop as string, col]) // 断言为 string
+  );
+
+  // 更新 tableColumns，保持响应式
+  tableColumns.splice(0, tableColumns.length, ...(Array.from(uniqueColumnsMap.values()) as any));
+}
+// 监听 columns 变化 持久化存储 columns 数据
+watch(
+  () => tableColumns,
+  val => {
+    localStorage.setItem(tableColumnUniqueId, JSON.stringify(val));
+  },
+  { deep: true }
+);
 
 // 扁平化 columns
 const flatColumns = computed(() => flatColumnsFunc(tableColumns));
