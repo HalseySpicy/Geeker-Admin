@@ -202,8 +202,36 @@ const processTableData = computed(() => {
 // 监听页面 initParam 改化，重新获取表格数据
 watch(() => props.initParam, getTableList, { deep: true });
 
+// 根据当前表格所在的地址获取持久化数据
+const currentPath = window.location.pathname;
+const savedColumns = localStorage.getItem(currentPath);
+  
 // 接收 columns 并设置为响应式
 const tableColumns = reactive<ColumnProps[]>(props.columns);
+
+// 如果持久化数据则用持久化的columns 数据
+if (savedColumns) {
+  const parsedSavedColumns: ColumnProps[] = JSON.parse(savedColumns);
+
+  // 过滤掉 prop 为 undefined 的情况，并构造 Map
+  const uniqueColumnsMap = new Map<string, ColumnProps>(
+    [...props.columns, ...parsedSavedColumns]
+      .filter(col => col.prop !== undefined) // 确保 prop 不是 undefined
+      .map(col => [col.prop as string, col]) // 断言为 string
+  );
+
+  // 更新 tableColumns，保持响应式
+  tableColumns.splice(0, tableColumns.length, ...(Array.from(uniqueColumnsMap.values()) as any));
+}
+// 监听 columns 变化 持久化存储 columns 数据
+watch(
+  () => tableColumns,
+  val => {
+    const currentPath = window.location.pathname; // 只使用路径
+    localStorage.setItem(currentPath, JSON.stringify(val));
+  },
+  { deep: true }
+);
 
 // 扁平化 columns
 const flatColumns = computed(() => flatColumnsFunc(tableColumns));
