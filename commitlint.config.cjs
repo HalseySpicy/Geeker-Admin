@@ -36,7 +36,7 @@ module.exports = {
         "revert",
         "wip",
         "workflow",
-        "types",
+        "type",
         "release"
       ]
     ]
@@ -150,7 +150,7 @@ module.exports = {
       // { value: "chore", name: "其他:   🔨  对构建过程或辅助工具和库的更改（不影响源文件、测试用例）", emoji: "🔨" },
       // { value: "wip", name: "开发:   🕔  正在开发中", emoji: "🕔" },
       // { value: "workflow", name: "工作流:   📋  工作流程改进", emoji: "📋" },
-      // { value: "types", name: "类型:   🔰  类型定义文件修改", emoji: "🔰" }
+      // { value: "type", name: "类型:   🔰  类型定义文件修改", emoji: "🔰" }
     ],
     useEmoji: true,
     scopes: [...scopes],
