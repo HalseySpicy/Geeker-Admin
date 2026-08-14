@@ -2,17 +2,41 @@
   <template v-for="subItem in menuList" :key="subItem.path">
     <el-sub-menu v-if="subItem.children?.length" :index="subItem.path">
       <template #title>
-        <el-icon v-if="subItem.meta.icon">
-          <component :is="subItem.meta.icon"></component>
-        </el-icon>
+        <!-- 处理图标 -->
+        <template v-if="subItem.meta.icon">
+          <template v-if="subItem.meta.icon.startsWith('svg-icon-')">
+            <SvgIcon
+              :name="subItem.meta.icon.replace('svg-icon-', '')"
+              :icon-style="{ width: '18px', height: '18px', marginRight: '5px' }"
+            />
+          </template>
+          <el-icon v-else>
+            <component :is="subItem.meta.icon" />
+          </el-icon>
+        </template>
+        <span v-else class="mr-[18px]"></span>
+        <!-- 标题 -->
         <span class="sle">{{ subItem.meta.title }}</span>
       </template>
       <SubMenu :menu-list="subItem.children" />
     </el-sub-menu>
+
     <el-menu-item v-else :index="subItem.path" @click="handleClickMenu(subItem)">
-      <el-icon v-if="subItem.meta.icon">
-        <component :is="subItem.meta.icon"></component>
-      </el-icon>
+      <!-- 处理图标 -->
+      <template v-if="subItem.meta.icon">
+        <template v-if="subItem.meta.icon.startsWith('svg-icon-')">
+          <SvgIcon
+            :name="subItem.meta.icon.replace('svg-icon-', '')"
+            :icon-style="{ width: '18px', height: '18px', marginRight: '5px' }"
+          />
+        </template>
+        <el-icon v-else>
+          <component :is="subItem.meta.icon" />
+        </el-icon>
+      </template>
+      <span v-else class="mr-[18px]"></span>
+
+      <!-- 标题 -->
       <template #title>
         <span class="sle">{{ subItem.meta.title }}</span>
       </template>
