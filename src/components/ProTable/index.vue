@@ -120,6 +120,7 @@ import Pagination from "./components/Pagination.vue";
 import TableColumn from "./components/TableColumn.vue";
 
 export interface ProTableProps {
+  uniqueId?: string; // 组件唯一id
   columns: ColumnProps[]; // 列配置项  ==> 必传
   data?: any[]; // 静态 table data 数据，若存在则不会使用 requestApi 返回的 data ==> 非必传
   requestApi?: (params: any) => Promise<any>; // 请求表格数据的 api ==> 非必传
@@ -204,6 +205,29 @@ watch(() => props.initParam, getTableList, { deep: true });
 
 // 接收 columns 并设置为响应式
 const tableColumns = reactive<ColumnProps[]>(props.columns);
+
+// 持久化存储 columns 数据 开始
+const tableColumnUniqueId = props.uniqueId ? `$column-{props.uniqueId}-${window.location.pathname}` : window.location.pathname;
+const savedColumns = localStorage.getItem(tableColumnUniqueId);
+if (savedColumns) {
+  const parsedSavedColumns: ColumnProps[] = JSON.parse(savedColumns);
+
+  tableColumns.forEach((column: any) => {
+    const savedColumn = parsedSavedColumns.find(savedColumn => savedColumn.prop === column.prop);
+    if (savedColumn) {
+      column.isShow = savedColumn.isShow;
+    }
+  });
+}
+// 监听 columns 变化 持久化存储 columns 数据
+watch(
+  () => tableColumns,
+  val => {
+    localStorage.setItem(tableColumnUniqueId, JSON.stringify(val));
+  },
+  { deep: true }
+);
+// 持久化存储 columns 数据 结束
 
 // 扁平化 columns
 const flatColumns = computed(() => flatColumnsFunc(tableColumns));
